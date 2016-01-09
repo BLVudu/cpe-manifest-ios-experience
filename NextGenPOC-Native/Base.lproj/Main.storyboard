@@ -115,6 +115,99 @@
             </objects>
             <point key="canvasLocation" x="340" y="362"/>
         </scene>
+        <!--Interior Experience View Controller-->
+        <scene sceneID="BVC-ou-VD6">
+            <objects>
+                <viewController id="2KS-OB-0Ev" customClass="InteriorExperienceViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FRX-EG-0Va"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Aw-WG-9Xa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="76N-G4-UE0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-Pl-Rxu" customClass="TalentTableView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="600"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="FgB-Az-emI"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TalentTableViewCell" id="k45-7h-s3M" customClass="TalentTableViewCell" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="250" height="95"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k45-7h-s3M" id="Mt3-ic-H3Q">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="95"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pAr-vr-j3a" customClass="RoundImageView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="10" width="75" height="75"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="75" id="hh9-E4-jQF"/>
+                                                        <constraint firstAttribute="width" constant="75" id="mVO-Ln-hYj"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="round" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="UBm-xx-Ohe">
+                                                    <rect key="frame" x="100" y="47" width="140" height="20"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cRj-ja-mKw">
+                                                    <rect key="frame" x="100" y="27" width="140" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="QHL-YF-liS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cRj-ja-mKw" firstAttribute="leading" secondItem="pAr-vr-j3a" secondAttribute="trailing" constant="10" id="2Xa-Yb-hwI"/>
+                                                <constraint firstItem="pAr-vr-j3a" firstAttribute="top" secondItem="Mt3-ic-H3Q" secondAttribute="top" constant="10" id="3MI-i3-l3O"/>
+                                                <constraint firstItem="pAr-vr-j3a" firstAttribute="leading" secondItem="Mt3-ic-H3Q" secondAttribute="leading" constant="15" id="OAi-k0-gdm"/>
+                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="width" secondItem="cRj-ja-mKw" secondAttribute="width" id="QfK-IT-Wce"/>
+                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="height" secondItem="cRj-ja-mKw" secondAttribute="height" id="anA-5Q-4Xx"/>
+                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="top" secondItem="cRj-ja-mKw" secondAttribute="bottom" id="hv6-n6-l4x"/>
+                                                <constraint firstAttribute="trailing" secondItem="cRj-ja-mKw" secondAttribute="trailing" constant="10" id="lQv-Oh-WnA"/>
+                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="leading" secondItem="cRj-ja-mKw" secondAttribute="leading" id="sw9-5J-gjy"/>
+                                                <constraint firstAttribute="bottom" secondItem="pAr-vr-j3a" secondAttribute="bottom" constant="10" id="uuE-E3-sjc"/>
+                                                <constraint firstItem="cRj-ja-mKw" firstAttribute="centerY" secondItem="pAr-vr-j3a" secondAttribute="centerY" constant="-10" id="zEo-dQ-r7L"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="talentImageView" destination="pAr-vr-j3a" id="4PN-vB-FDS"/>
+                                            <outlet property="talentNameLabel" destination="cRj-ja-mKw" id="5ul-Oj-eoT"/>
+                                            <outlet property="talentRoleLabel" destination="UBm-xx-Ohe" id="LHf-Rk-n3F"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="tfi-Pl-Rxu" secondAttribute="bottom" id="PGI-fN-ZfU"/>
+                            <constraint firstItem="tfi-Pl-Rxu" firstAttribute="top" secondItem="76N-G4-UE0" secondAttribute="top" id="mCp-yC-1Bj"/>
+                            <constraint firstItem="tfi-Pl-Rxu" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leading" id="px0-3Q-0Ha"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="talentTableView" destination="tfi-Pl-Rxu" id="c6b-Hu-Nhd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jVa-ua-FD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="340" y="1061"/>
+        </scene>
         <!--Extras View Controller-->
         <scene sceneID="Hug-N3-W5M">
             <objects>

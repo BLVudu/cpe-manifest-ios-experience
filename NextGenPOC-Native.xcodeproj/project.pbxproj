@@ -35,6 +35,11 @@
 		4921D9D91C4068C900ED2AA6 /* extras_scenes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9D01C4068C900ED2AA6 /* extras_scenes.jpg */; };
 		4921D9DA1C4068C900ED2AA6 /* extras_shopping.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9D11C4068C900ED2AA6 /* extras_shopping.jpg */; };
 		4921D9DB1C4068C900ED2AA6 /* extras_universe.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9D21C4068C900ED2AA6 /* extras_universe.jpg */; };
+		707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E107E1C4076EC00FCF81C /* TalentTableView.swift */; };
+		707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10801C40770D00FCF81C /* TalentTableViewCell.swift */; };
+		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
+		707E10871C407F6600FCF81C /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */; };
+		707E108A1C40820500FCF81C /* Talent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10891C40820500FCF81C /* Talent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +94,11 @@
 		4921D9D01C4068C900ED2AA6 /* extras_scenes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_scenes.jpg; sourceTree = "<group>"; };
 		4921D9D11C4068C900ED2AA6 /* extras_shopping.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_shopping.jpg; sourceTree = "<group>"; };
 		4921D9D21C4068C900ED2AA6 /* extras_universe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_universe.jpg; sourceTree = "<group>"; };
+		707E107E1C4076EC00FCF81C /* TalentTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableView.swift; sourceTree = "<group>"; };
+		707E10801C40770D00FCF81C /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
+		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
+		707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
+		707E10891C40820500FCF81C /* Talent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +150,9 @@
 		4921D9751C3EFD0B00ED2AA6 /* NextGenPOC-Native */ = {
 			isa = PBXGroup;
 			children = (
+				707E107D1C4076BF00FCF81C /* Interior Experience */,
+				707E10831C40796000FCF81C /* Shared Views */,
+				707E10881C4081F700FCF81C /* Models */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
 				4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */,
 				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
@@ -210,6 +223,32 @@
 				4921D9D21C4068C900ED2AA6 /* extras_universe.jpg */,
 			);
 			name = Extras;
+			sourceTree = "<group>";
+		};
+		707E107D1C4076BF00FCF81C /* Interior Experience */ = {
+			isa = PBXGroup;
+			children = (
+				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
+				707E10801C40770D00FCF81C /* TalentTableViewCell.swift */,
+				707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */,
+			);
+			path = "Interior Experience";
+			sourceTree = "<group>";
+		};
+		707E10831C40796000FCF81C /* Shared Views */ = {
+			isa = PBXGroup;
+			children = (
+				707E10841C40797400FCF81C /* RoundImageView.swift */,
+			);
+			path = "Shared Views";
+			sourceTree = "<group>";
+		};
+		707E10881C4081F700FCF81C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				707E10891C40820500FCF81C /* Talent.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,7 +404,12 @@
 				4921D9791C3EFD0B00ED2AA6 /* ViewController.swift in Sources */,
 				4921D97F1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
+				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
+				707E10871C407F6600FCF81C /* InteriorExperienceViewController.swift in Sources */,
+				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
+				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
+				707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +636,7 @@
 				4921D9A01C3EFD0B00ED2AA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4921D9A11C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-NativeTests" */ = {
 			isa = XCConfigurationList;
@@ -600,6 +645,7 @@
 				4921D9A31C3EFD0B00ED2AA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4921D9A41C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-NativeUITests" */ = {
 			isa = XCConfigurationList;
@@ -608,6 +654,7 @@
 				4921D9A61C3EFD0B00ED2AA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
