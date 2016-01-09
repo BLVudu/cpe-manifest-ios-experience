@@ -40,6 +40,10 @@
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
 		707E10871C407F6600FCF81C /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */; };
 		707E108A1C40820500FCF81C /* Talent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10891C40820500FCF81C /* Talent.swift */; };
+		707E108C1C408F8E00FCF81C /* TalentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E108B1C408F8E00FCF81C /* TalentDetailView.swift */; };
+		707E10911C4097C500FCF81C /* cavill_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E108F1C4097C500FCF81C /* cavill_full.jpg */; };
+		707E10921C4097C500FCF81C /* cavill_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10901C4097C500FCF81C /* cavill_thumb.jpg */; };
+		707E10941C40996200FCF81C /* adams.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10931C40996200FCF81C /* adams.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +103,10 @@
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
 		707E10891C40820500FCF81C /* Talent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talent.swift; sourceTree = "<group>"; };
+		707E108B1C408F8E00FCF81C /* TalentDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailView.swift; sourceTree = "<group>"; };
+		707E108F1C4097C500FCF81C /* cavill_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cavill_full.jpg; sourceTree = "<group>"; };
+		707E10901C4097C500FCF81C /* cavill_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cavill_thumb.jpg; sourceTree = "<group>"; };
+		707E10931C40996200FCF81C /* adams.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = adams.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,8 +196,10 @@
 			children = (
 				4921D9C61C40508D00ED2AA6 /* Home Screen */,
 				4921D9C71C4050A100ED2AA6 /* Extras */,
+				707E108E1C4097BD00FCF81C /* Talent */,
 			);
 			name = Resources;
+			path = "NextGenPOC-Native/Resources";
 			sourceTree = "<group>";
 		};
 		4921D9C61C40508D00ED2AA6 /* Home Screen */ = {
@@ -206,7 +216,7 @@
 				4921D9B91C3F04E400ED2AA6 /* nav_home.jpg */,
 				4921D9BA1C3F04E400ED2AA6 /* nav_scenes.jpg */,
 			);
-			name = "Home Screen";
+			path = "Home Screen";
 			sourceTree = "<group>";
 		};
 		4921D9C71C4050A100ED2AA6 /* Extras */ = {
@@ -222,7 +232,7 @@
 				4921D9D11C4068C900ED2AA6 /* extras_shopping.jpg */,
 				4921D9D21C4068C900ED2AA6 /* extras_universe.jpg */,
 			);
-			name = Extras;
+			path = Extras;
 			sourceTree = "<group>";
 		};
 		707E107D1C4076BF00FCF81C /* Interior Experience */ = {
@@ -231,6 +241,7 @@
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
 				707E10801C40770D00FCF81C /* TalentTableViewCell.swift */,
 				707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */,
+				707E108B1C408F8E00FCF81C /* TalentDetailView.swift */,
 			);
 			path = "Interior Experience";
 			sourceTree = "<group>";
@@ -249,6 +260,16 @@
 				707E10891C40820500FCF81C /* Talent.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		707E108E1C4097BD00FCF81C /* Talent */ = {
+			isa = PBXGroup;
+			children = (
+				707E108F1C4097C500FCF81C /* cavill_full.jpg */,
+				707E10901C4097C500FCF81C /* cavill_thumb.jpg */,
+				707E10931C40996200FCF81C /* adams.jpg */,
+			);
+			path = Talent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +393,9 @@
 				4921D9BB1C3F04E400ED2AA6 /* home_bg.jpg in Resources */,
 				4921D9BE1C3F04E400ED2AA6 /* home_extras_cast.jpg in Resources */,
 				4921D9D91C4068C900ED2AA6 /* extras_scenes.jpg in Resources */,
+				707E10941C40996200FCF81C /* adams.jpg in Resources */,
+				707E10921C4097C500FCF81C /* cavill_thumb.jpg in Resources */,
+				707E10911C4097C500FCF81C /* cavill_full.jpg in Resources */,
 				4921D9DA1C4068C900ED2AA6 /* extras_shopping.jpg in Resources */,
 				4921D9BD1C3F04E400ED2AA6 /* home_extras_bts.jpg in Resources */,
 				4921D9D81C4068C900ED2AA6 /* extras_places.jpg in Resources */,
@@ -408,6 +432,7 @@
 				707E10871C407F6600FCF81C /* InteriorExperienceViewController.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
+				707E108C1C408F8E00FCF81C /* TalentDetailView.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 				707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */,
 			);

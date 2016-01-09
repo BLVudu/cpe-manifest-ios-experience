@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2KS-OB-0Ev">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -141,7 +143,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pAr-vr-j3a" customClass="RoundImageView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pAr-vr-j3a" customClass="RoundImageView" customModule="NextGenPOC_Native" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="10" width="75" height="75"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -190,17 +192,66 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsT-kp-GWZ" customClass="TalentDetailView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                <rect key="frame" x="260" y="0.0" width="340" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-uG-Y1Z" userLabel="Talent Name Container">
+                                        <rect key="frame" x="10" y="30" width="221" height="144"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="39T-MN-HAO">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="144"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="39T-MN-HAO" secondAttribute="height" multiplier="55:72" id="YBa-Je-RfY"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRc-hm-tkv">
+                                                <rect key="frame" x="130" y="0.0" width="91" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="UnC-LC-Dhi"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="tRc-hm-tkv" firstAttribute="top" secondItem="n9R-uG-Y1Z" secondAttribute="top" id="N7A-Al-Mzo"/>
+                                            <constraint firstAttribute="bottom" secondItem="39T-MN-HAO" secondAttribute="bottom" id="cXG-hy-eVS"/>
+                                            <constraint firstAttribute="trailing" secondItem="tRc-hm-tkv" secondAttribute="trailing" id="e0j-ZU-izE"/>
+                                            <constraint firstItem="39T-MN-HAO" firstAttribute="top" secondItem="n9R-uG-Y1Z" secondAttribute="top" id="hf7-uZ-sec"/>
+                                            <constraint firstItem="39T-MN-HAO" firstAttribute="leading" secondItem="n9R-uG-Y1Z" secondAttribute="leading" id="mKx-wr-qXw"/>
+                                            <constraint firstAttribute="width" secondItem="n9R-uG-Y1Z" secondAttribute="height" multiplier="221:144" id="sKa-2D-NL4"/>
+                                            <constraint firstItem="tRc-hm-tkv" firstAttribute="leading" secondItem="39T-MN-HAO" secondAttribute="trailing" constant="20" id="vku-wX-2FI"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="n9R-uG-Y1Z" firstAttribute="top" secondItem="zsT-kp-GWZ" secondAttribute="top" constant="30" id="UYU-ef-mnX"/>
+                                    <constraint firstItem="n9R-uG-Y1Z" firstAttribute="leading" secondItem="zsT-kp-GWZ" secondAttribute="leading" constant="10" id="nhW-ca-I83"/>
+                                    <constraint firstItem="n9R-uG-Y1Z" firstAttribute="width" secondItem="zsT-kp-GWZ" secondAttribute="width" multiplier="0.65" id="sGb-ZA-9KI"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="talentImageView" destination="39T-MN-HAO" id="Ujw-Uy-4CB"/>
+                                    <outlet property="talentNameLabel" destination="tRc-hm-tkv" id="vWX-6L-opT"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zsT-kp-GWZ" firstAttribute="leading" secondItem="tfi-Pl-Rxu" secondAttribute="trailing" constant="10" id="O6c-sX-Xab"/>
                             <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="tfi-Pl-Rxu" secondAttribute="bottom" id="PGI-fN-ZfU"/>
+                            <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="zsT-kp-GWZ" secondAttribute="bottom" id="QYy-28-9ST"/>
+                            <constraint firstAttribute="trailing" secondItem="zsT-kp-GWZ" secondAttribute="trailing" id="hb7-A3-eeZ"/>
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="top" secondItem="76N-G4-UE0" secondAttribute="top" id="mCp-yC-1Bj"/>
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leading" id="px0-3Q-0Ha"/>
+                            <constraint firstItem="zsT-kp-GWZ" firstAttribute="top" secondItem="76N-G4-UE0" secondAttribute="top" id="zOj-Th-usx"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="talentDetailView" destination="zsT-kp-GWZ" id="3JR-T9-Zq0"/>
                         <outlet property="talentTableView" destination="tfi-Pl-Rxu" id="c6b-Hu-Nhd"/>
                     </connections>
                 </viewController>

@@ -10,12 +10,14 @@ import UIKit
 
 class Talent: NSObject {
     
-    var image: String?
+    var thumbnailImage: String?
+    var fullImage: String?
     var name: String!
     var role: String!
     
     required init(info: [String: String]) {
-        image = info["image"]
+        thumbnailImage = info["thumbnailImage"]
+        fullImage = info["fullImage"]
         name = info["name"]
         role = info["role"]
     }

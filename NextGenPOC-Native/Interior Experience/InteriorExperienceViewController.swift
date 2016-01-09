@@ -12,11 +12,22 @@ let TalentTableViewCellIdentifier = "TalentTableViewCell"
 
 class InteriorExperienceViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var talentTableView: UITableView!
+    @IBOutlet weak var talentTableView: TalentTableView!
+    @IBOutlet weak var talentDetailView: TalentDetailView!
     
     var talentData = [
-        ["name": "Henry Cavill", "role": "Clark Kent/Kal-El"],
-        ["name": "Amy Adams", "role": "Lois Lane"],
+        [
+            "thumbnailImage": "cavill_thumb.jpg",
+            "fullImage": "cavill_full.jpg",
+            "name": "Henry Cavill",
+            "role": "Clark Kent/Kal-El"
+        ],
+        [
+            "thumbnailImage": "adams.jpg",
+            "fullImage": "adams.jpg",
+            "name": "Amy Adams",
+            "role": "Lois Lane"
+        ],
         ["name": "Michael Shannon", "role": "General Zod"],
         ["name": "Diane Lane", "role": "Martha Kent"],
         ["name": "Russell Crowe", "role": "Jor-El"],
@@ -61,6 +72,11 @@ class InteriorExperienceViewController: UIViewController, UITableViewDataSource,
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.whiteColor()
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        talentDetailView.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
+        talentDetailView.hidden = false
     }
 
 }

@@ -18,11 +18,33 @@ class TalentTableViewCell: UITableViewCell {
         didSet {
             talentNameLabel.text = talent?.name
             talentRoleLabel.text = talent?.role
+            if talent?.thumbnailImage != nil {
+                talentImageView.image = UIImage(named: talent!.thumbnailImage!)
+            }
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        talentImageView.image = nil
+    }
+    
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         self.backgroundColor = UIColor.clearColor()
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        if selected {
+            talentImageView.layer.borderWidth = 2
+            talentImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        } else {
+            talentImageView.layer.borderWidth = 0
+        }
     }
 
 }
