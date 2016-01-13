@@ -1,0 +1,18 @@
+//
+//  WBVideoPlayerPlaybackView.h
+//  Flixster
+//
+//  Fork of Apple's AVPlayerDemoPlaybackView.h
+//
+
+@import UIKit;
+@import AVFoundation;
+
+@interface WBVideoPlayerPlaybackView : UIView
+
+@property (nonatomic, strong) AVPlayer* player;
+
+- (void)setPlayer:(AVPlayer*)player;
+- (void)setVideoFillMode:(NSString *)fillMode;
+
+@end
