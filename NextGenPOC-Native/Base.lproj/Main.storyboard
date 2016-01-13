@@ -352,14 +352,14 @@
                                         <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGenPOC_Native" customModuleProvider="target"/>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="0.0" width="325" height="300"/>
+                                                <rect key="frame" x="18" y="0.0" width="325" height="250"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="300"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="250"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-ch-Vpd">
-                                                            <rect key="frame" x="0.0" y="44" width="325" height="256"/>
+                                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-ch-Vpd">
+                                                            <rect key="frame" x="0.0" y="44" width="325" height="206"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICg-dJ-Y0x">
                                                             <rect key="frame" x="8" y="17" width="309" height="21"/>
@@ -377,9 +377,10 @@
                                                     <constraint firstAttribute="bottom" secondItem="wFL-ch-Vpd" secondAttribute="bottom" id="JRf-tS-Xbs"/>
                                                     <constraint firstItem="wFL-ch-Vpd" firstAttribute="top" secondItem="cbd-U8-pcw" secondAttribute="top" constant="44" id="S3X-OB-NcX"/>
                                                 </constraints>
-                                                <size key="customSize" width="325" height="300"/>
+                                                <size key="customSize" width="325" height="250"/>
                                                 <connections>
                                                     <outlet property="extraImg" destination="wFL-ch-Vpd" id="IrI-jj-wtW"/>
+                                                    <outlet property="extrasTitle" destination="ICg-dJ-Y0x" id="xmb-fl-Dzv"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
