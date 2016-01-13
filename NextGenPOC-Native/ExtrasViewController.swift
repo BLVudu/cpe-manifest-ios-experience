@@ -43,7 +43,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var actorsView: UITableView!
     
     let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
-    //let extras
+    let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Scenes","Shopping", "DC Universe"]
     
     let actorImgs = ["henry.jpg","adams.jpg","micheal.jpg","russell.jpg","diane.jpg","kevin.jpg"]
     
@@ -100,6 +100,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("extrasItem", forIndexPath: indexPath)as! ExtrasCell
         
         cell.extraImg.image = UIImage (named: self.extraImages[indexPath.row])
+        cell.extrasTitle.text = self.extrasCaption[indexPath.row]
         
         
         
