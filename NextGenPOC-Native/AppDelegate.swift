@@ -43,26 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
-    
-    
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
-        
-        if self.window?.rootViewController?.presentedViewController is ExtrasViewController {
-            
-            let secondController = self.window!.rootViewController!.presentedViewController as! ExtrasViewController
-            
-            if secondController.isPresented {
-                return UIInterfaceOrientationMask.Landscape;
-            }else {
-                return UIInterfaceOrientationMask.All;
-            }
-        } else {
-            return UIInterfaceOrientationMask.All;
-            
-        }
-        
-        
-    }
 
 
     // MARK: - Core Data stack

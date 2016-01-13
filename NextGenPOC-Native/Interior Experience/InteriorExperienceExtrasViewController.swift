@@ -87,9 +87,9 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
+        /*talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
         talentDetailView.hidden = false
-        sceneDetailView.hidden = true
+        sceneDetailView.hidden = true*/
     }
 
 }

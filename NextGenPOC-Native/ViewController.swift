@@ -20,13 +20,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     
     let navImages = ["nav_extras.jpg","nav_home.jpg","nav_scenes.jpg"]
-    let rightCellPadding:CGFloat = 50.0
-    let leftCellPadding:CGFloat = 50.0
-    let topSpacePadding:CGFloat = 300.0
-    let cellSpacing:CGFloat = 5.0
-    
-    var width: CGFloat = 0.0
-    var height: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,60 +27,12 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         self.LtoR.direction = UISwipeGestureRecognizerDirection.Right
         self.RtoL.direction = UISwipeGestureRecognizerDirection.Left
         
+        self.extView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
+        
         self.slideOutMenu.hidden = true
-        
-        
-        
-        let extraBG = UIImageView(image: UIImage(named: "home_extras_bg.jpg")!)
-        
-        let extraBTS = UIImageView(image: UIImage(named: "home_extras_bts.jpg")!)
-        let extraCast = UIImageView(image: UIImage(named: "home_extras_cast.jpg")!)
-        let extraMaps = UIImageView(image: UIImage(named: "home_extras_maps.jpg")!)
-        let extraShop = UIImageView(image: UIImage(named: "home_extras_shop.jpg")!)
-        
-        
-        if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight)
-        {
-            
-            self.extView.hidden = true
-            extraBG.frame = CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.height, (UIScreen.mainScreen().bounds.width)/2)
-            
-        }else {
-            
-            extraBG.frame = CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.width, (UIScreen.mainScreen().bounds.height)/2)
-            self.width = (UIScreen.mainScreen().bounds.width -
-                (rightCellPadding + leftCellPadding + cellSpacing))/2
-            print(self.width)
-            self.height = ((UIScreen.mainScreen().bounds.height)/2) -
-                (topSpacePadding+cellSpacing)
-            print(self.height)
-            
-        }
-        
-        
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: "detectRotation", name: UIApplicationDidChangeStatusBarOrientationNotification, object: nil)
-        
-        
-        //CGRects for the extra images are hard coded based on the screen size
-        
-        extraBTS.frame = CGRectMake(rightCellPadding, 50, self.width, self.height)
-        extraMaps.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, 50, self.width, self.height)
-        extraCast.frame = CGRectMake(rightCellPadding, topSpacePadding-25, self.width, self.height)
-        extraShop.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, topSpacePadding-25, self.width, self.height)
-        
-        self.extView.addSubview(extraBG)
-        self.extView.addSubview(extraBTS)
-        self.extView.addSubview(extraCast)
-        self.extView.addSubview(extraMaps)
-        self.extView.addSubview(extraShop)
-        
-        
         self.slideOutMenu.delegate = self
         self.slideOutMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuItem")
         self.slideOutMenu.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,9 +44,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         return true;
     }
     
-    
-    
-    
     @IBAction func slideMenu(recognizer: UISwipeGestureRecognizer) {
         
         if(recognizer.direction == UISwipeGestureRecognizerDirection.Right){
@@ -112,23 +54,8 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    
-    func detectRotation(){
-        
-        
-        if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight)
-        {
-            self.extView.hidden = true
-            
-            
-        }else if (UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.Portrait || UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.PortraitUpsideDown)
-        {
-            self.extView.hidden = false
-            
-            
-        }
-        
-        
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.extView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
     }
     
     

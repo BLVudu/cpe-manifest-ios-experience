@@ -118,6 +118,10 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Landscape
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
