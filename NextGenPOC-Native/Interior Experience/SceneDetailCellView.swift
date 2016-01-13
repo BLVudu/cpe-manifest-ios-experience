@@ -7,11 +7,20 @@
 //
 
 import UIKit
+import MapKit
+
+enum SceneDetailCellViewType {
+    case Detail
+    case Image
+    case Map
+    case Shop
+}
 
 @IBDesignable class SceneDetailCellView: UIView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var detailLabel: UILabel!
     
     private func setup() {
@@ -30,6 +39,46 @@ import UIKit
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
+    }
+    
+    var viewType: SceneDetailCellViewType = .Detail {
+        didSet {
+            switch viewType {
+            case .Detail:
+                mapView?.removeFromSuperview()
+                
+            case .Image:
+                detailLabel.removeFromSuperview()
+                mapView?.removeFromSuperview()
+                break;
+                
+            case .Shop:
+                mapView?.removeFromSuperview()
+                
+            default:
+                break;
+            }
+        }
+    }
+    
+    @IBInspectable var title : String = "" {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+    
+    @IBInspectable var detailText : String = "" {
+        didSet {
+            detailLabel.text = detailText
+        }
+    }
+    
+    @IBInspectable var isMap : Bool = false {
+        didSet {
+            if !isMap {
+                mapView.removeFromSuperview()
+            }
+        }
     }
 
 }

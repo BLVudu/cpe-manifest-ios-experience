@@ -4,63 +4,83 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
             <connections>
                 <outlet property="detailLabel" destination="xTP-or-X52" id="fD2-gE-alk"/>
                 <outlet property="imageView" destination="hWw-Rg-Atf" id="3sy-Gd-nM4"/>
+                <outlet property="mapView" destination="Tol-fZ-mxs" id="LFg-R3-Q6o"/>
                 <outlet property="titleLabel" destination="wmK-nG-DBC" id="c56-Hn-0tC"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="bPK-hs-2vZ" userLabel="Scene Detail Cell View">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="500" height="422"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCENE TRIVIA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmK-nG-DBC" userLabel="Title Label">
-                    <rect key="frame" x="15" y="15" width="270" height="25"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCENE TRIVIA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmK-nG-DBC" userLabel="Title Label">
+                    <rect key="frame" x="10" y="10" width="480" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="5go-v8-LrA"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                    <color key="textColor" red="0.61960784313725492" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cornfield.png" translatesAutoresizingMaskIntoConstraints="NO" id="hWw-Rg-Atf" userLabel="Scene Image View">
-                    <rect key="frame" x="15" y="45" width="270" height="152"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xot-si-aiq" userLabel="Image Container">
+                    <rect key="frame" x="10" y="40" width="480" height="270"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hWw-Rg-Atf" userLabel="Scene Image View">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="270"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </imageView>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tol-fZ-mxs">
+                            <rect key="frame" x="240" y="0.0" width="240" height="270"/>
+                        </mapView>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="hWw-Rg-Atf" secondAttribute="height" multiplier="16:9" id="DEh-a4-EFL"/>
+                        <constraint firstAttribute="width" secondItem="xot-si-aiq" secondAttribute="height" multiplier="16:9" id="5tL-IK-qHg"/>
+                        <constraint firstAttribute="bottom" secondItem="Tol-fZ-mxs" secondAttribute="bottom" id="Bbi-ng-GdV"/>
+                        <constraint firstAttribute="bottom" secondItem="hWw-Rg-Atf" secondAttribute="bottom" id="Llu-ds-cdy"/>
+                        <constraint firstItem="hWw-Rg-Atf" firstAttribute="top" secondItem="xot-si-aiq" secondAttribute="top" id="Ov1-Lk-GBI"/>
+                        <constraint firstItem="Tol-fZ-mxs" firstAttribute="leading" secondItem="hWw-Rg-Atf" secondAttribute="trailing" id="W9K-g7-3nt"/>
+                        <constraint firstItem="Tol-fZ-mxs" firstAttribute="top" secondItem="xot-si-aiq" secondAttribute="top" id="Xh0-KX-DVz"/>
+                        <constraint firstItem="Tol-fZ-mxs" firstAttribute="width" secondItem="xot-si-aiq" secondAttribute="width" multiplier="0.5" id="cug-3t-wPM"/>
+                        <constraint firstAttribute="trailing" secondItem="hWw-Rg-Atf" secondAttribute="trailing" priority="750" id="hhb-wx-dNn"/>
+                        <constraint firstItem="hWw-Rg-Atf" firstAttribute="top" secondItem="xot-si-aiq" secondAttribute="top" id="j6x-Oq-G5Q"/>
+                        <constraint firstAttribute="trailing" secondItem="Tol-fZ-mxs" secondAttribute="trailing" id="tZr-Bv-Hto"/>
+                        <constraint firstItem="hWw-Rg-Atf" firstAttribute="leading" secondItem="xot-si-aiq" secondAttribute="leading" id="vId-K6-wCc"/>
+                        <constraint firstItem="hWw-Rg-Atf" firstAttribute="leading" secondItem="xot-si-aiq" secondAttribute="leading" id="xWV-DU-P3U"/>
+                        <constraint firstAttribute="bottom" secondItem="hWw-Rg-Atf" secondAttribute="bottom" id="xYO-H4-z6q"/>
                     </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kryptonian plasma is left on Earth when the escape pod crashes in the cornfield." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTP-or-X52" userLabel="Info Label">
-                    <rect key="frame" x="15" y="205" width="270" height="80"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kryptonian plasma is left on Earth when the escape pod crashes in the cornfield." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xTP-or-X52" userLabel="Info Label">
+                    <rect key="frame" x="10" y="318" width="480" height="94"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="hWw-Rg-Atf" secondAttribute="trailing" constant="15" id="0di-zI-3hY"/>
-                <constraint firstAttribute="trailing" secondItem="xTP-or-X52" secondAttribute="trailing" constant="15" id="9iJ-7U-SSK"/>
-                <constraint firstItem="hWw-Rg-Atf" firstAttribute="leading" secondItem="bPK-hs-2vZ" secondAttribute="leading" constant="15" id="DZ6-dq-OzK"/>
-                <constraint firstItem="wmK-nG-DBC" firstAttribute="leading" secondItem="bPK-hs-2vZ" secondAttribute="leading" constant="15" id="ZAS-lg-MQB"/>
-                <constraint firstItem="xTP-or-X52" firstAttribute="leading" secondItem="bPK-hs-2vZ" secondAttribute="leading" constant="15" id="Zr4-It-Qdz"/>
-                <constraint firstAttribute="trailing" secondItem="wmK-nG-DBC" secondAttribute="trailing" constant="15" id="c59-pI-Y8a"/>
-                <constraint firstItem="wmK-nG-DBC" firstAttribute="top" secondItem="bPK-hs-2vZ" secondAttribute="top" constant="15" id="hGT-rr-Oop"/>
-                <constraint firstItem="xTP-or-X52" firstAttribute="top" secondItem="hWw-Rg-Atf" secondAttribute="bottom" constant="8" id="jq5-A0-uzc"/>
-                <constraint firstItem="hWw-Rg-Atf" firstAttribute="top" secondItem="wmK-nG-DBC" secondAttribute="bottom" constant="5" id="kMo-11-rpe"/>
-                <constraint firstAttribute="bottom" secondItem="xTP-or-X52" secondAttribute="bottom" constant="15" id="pYq-Bz-Aay"/>
+                <constraint firstAttribute="bottom" secondItem="xTP-or-X52" secondAttribute="bottom" constant="10" id="2Xc-fe-THx"/>
+                <constraint firstItem="xTP-or-X52" firstAttribute="leading" secondItem="bPK-hs-2vZ" secondAttribute="leading" constant="10" id="3Hm-Dk-P3c"/>
+                <constraint firstItem="xot-si-aiq" firstAttribute="top" secondItem="wmK-nG-DBC" secondAttribute="bottom" constant="5" id="7NA-om-SZR"/>
+                <constraint firstAttribute="trailing" secondItem="xot-si-aiq" secondAttribute="trailing" constant="10" id="FVk-aH-7gi"/>
+                <constraint firstItem="xot-si-aiq" firstAttribute="leading" secondItem="bPK-hs-2vZ" secondAttribute="leading" constant="10" id="SLb-Tn-WYp"/>
+                <constraint firstItem="wmK-nG-DBC" firstAttribute="top" secondItem="bPK-hs-2vZ" secondAttribute="top" constant="10" id="ZFj-wF-5qD"/>
+                <constraint firstAttribute="trailing" secondItem="xTP-or-X52" secondAttribute="trailing" constant="10" id="dog-XN-5Yl"/>
+                <constraint firstItem="wmK-nG-DBC" firstAttribute="leading" secondItem="bPK-hs-2vZ" secondAttribute="leading" constant="10" id="m23-3e-8mq"/>
+                <constraint firstItem="xTP-or-X52" firstAttribute="top" secondItem="xot-si-aiq" secondAttribute="bottom" constant="8" id="seA-f6-jQL"/>
+                <constraint firstAttribute="trailing" secondItem="wmK-nG-DBC" secondAttribute="trailing" constant="10" id="tMt-Es-upB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="496" y="-30"/>
+            <point key="canvasLocation" x="496" y="41"/>
         </view>
     </objects>
-    <resources>
-        <image name="cornfield.png" width="518" height="294"/>
-    </resources>
 </document>

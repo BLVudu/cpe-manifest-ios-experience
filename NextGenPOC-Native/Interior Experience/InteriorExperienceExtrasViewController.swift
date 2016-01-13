@@ -14,7 +14,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     
     @IBOutlet weak var talentTableView: TalentTableView!
     @IBOutlet weak var talentDetailView: TalentDetailView!
-    @IBOutlet weak var sceneDetailView: UIView!
+    @IBOutlet weak var sceneDetailView: SceneDetailView!
     
     var talentData = [
         [

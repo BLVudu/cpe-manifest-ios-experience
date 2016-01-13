@@ -179,17 +179,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-Pl-Rxu" customClass="TalentTableView" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="105" height="600"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="FgB-Az-emI"/>
+                                    <constraint firstAttribute="width" constant="105" id="FgB-Az-emI"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TalentTableViewCell" id="k45-7h-s3M" customClass="TalentTableViewCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="250" height="95"/>
+                                        <rect key="frame" x="0.0" y="65.5" width="105" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k45-7h-s3M" id="Mt3-ic-H3Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pAr-vr-j3a" customClass="RoundImageView" customModule="NextGenPOC_Native" customModuleProvider="target">
@@ -203,52 +203,29 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="round" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="UBm-xx-Ohe">
-                                                    <rect key="frame" x="100" y="47" width="140" height="20"/>
-                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cRj-ja-mKw">
-                                                    <rect key="frame" x="100" y="27" width="140" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="QHL-YF-liS"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cRj-ja-mKw" firstAttribute="leading" secondItem="pAr-vr-j3a" secondAttribute="trailing" constant="10" id="2Xa-Yb-hwI"/>
                                                 <constraint firstItem="pAr-vr-j3a" firstAttribute="top" secondItem="Mt3-ic-H3Q" secondAttribute="top" constant="10" id="3MI-i3-l3O"/>
+                                                <constraint firstAttribute="trailing" secondItem="pAr-vr-j3a" secondAttribute="trailing" constant="15" id="9B2-c0-SJ3"/>
                                                 <constraint firstItem="pAr-vr-j3a" firstAttribute="leading" secondItem="Mt3-ic-H3Q" secondAttribute="leading" constant="15" id="OAi-k0-gdm"/>
-                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="width" secondItem="cRj-ja-mKw" secondAttribute="width" id="QfK-IT-Wce"/>
-                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="height" secondItem="cRj-ja-mKw" secondAttribute="height" id="anA-5Q-4Xx"/>
-                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="top" secondItem="cRj-ja-mKw" secondAttribute="bottom" id="hv6-n6-l4x"/>
-                                                <constraint firstAttribute="trailing" secondItem="cRj-ja-mKw" secondAttribute="trailing" constant="10" id="lQv-Oh-WnA"/>
-                                                <constraint firstItem="UBm-xx-Ohe" firstAttribute="leading" secondItem="cRj-ja-mKw" secondAttribute="leading" id="sw9-5J-gjy"/>
                                                 <constraint firstAttribute="bottom" secondItem="pAr-vr-j3a" secondAttribute="bottom" constant="10" id="uuE-E3-sjc"/>
-                                                <constraint firstItem="cRj-ja-mKw" firstAttribute="centerY" secondItem="pAr-vr-j3a" secondAttribute="centerY" constant="-10" id="zEo-dQ-r7L"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="talentImageView" destination="pAr-vr-j3a" id="4PN-vB-FDS"/>
-                                            <outlet property="talentNameLabel" destination="cRj-ja-mKw" id="5ul-Oj-eoT"/>
-                                            <outlet property="talentRoleLabel" destination="UBm-xx-Ohe" id="LHf-Rk-n3F"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsT-kp-GWZ" customClass="TalentDetailView" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                <rect key="frame" x="260" y="0.0" width="340" height="600"/>
+                                <rect key="frame" x="115" y="0.0" width="485" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-uG-Y1Z" userLabel="Talent Name Container">
-                                        <rect key="frame" x="10" y="30" width="221" height="144"/>
+                                        <rect key="frame" x="10" y="30" width="315.5" height="205.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="39T-MN-HAO">
-                                                <rect key="frame" x="0.0" y="0.0" width="110" height="144"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="157" height="205.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="39T-MN-HAO" secondAttribute="height" multiplier="55:72" id="YBa-Je-RfY"/>
@@ -285,39 +262,58 @@
                                     <outlet property="talentNameLabel" destination="tRc-hm-tkv" id="vWX-6L-opT"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssa-S6-wx0" userLabel="Scene Detail View">
-                                <rect key="frame" x="260" y="0.0" width="340" height="600"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssa-S6-wx0" userLabel="Scene Detail View" customClass="SceneDetailView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                <rect key="frame" x="115" y="0.0" width="485" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIu-YJ-hzg" userLabel="Scene Detail Cell Container">
-                                        <rect key="frame" x="0.0" y="30" width="340" height="570"/>
+                                        <rect key="frame" x="0.0" y="30" width="485" height="570"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAr-0q-DeK" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="167" height="280"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="189" height="280"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE TRIVIA"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXL-yz-p7D" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="173" y="0.0" width="167" height="280"/>
+                                                <rect key="frame" x="199" y="0.0" width="286" height="280"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE LOCATION"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Kent family farm"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scW-Hs-Aa1" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="290" width="167" height="280"/>
+                                                <rect key="frame" x="0.0" y="290" width="310.5" height="280"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE GALLERY"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="detailText" value=" "/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xiX-b1-vmp" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="173" y="290" width="167" height="280"/>
+                                                <rect key="frame" x="320" y="290" width="165" height="280"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="SHOP THIS SCENE"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Dolce &amp; Gabbana"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="zAr-0q-DeK" firstAttribute="leading" secondItem="cIu-YJ-hzg" secondAttribute="leading" id="JgU-J8-uFC"/>
-                                            <constraint firstItem="zAr-0q-DeK" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.49" id="Lsz-9A-DOl"/>
+                                            <constraint firstItem="zAr-0q-DeK" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.39" id="Lsz-9A-DOl"/>
                                             <constraint firstItem="zAr-0q-DeK" firstAttribute="height" secondItem="cIu-YJ-hzg" secondAttribute="height" multiplier="0.49" id="XZj-uc-a2j"/>
                                             <constraint firstItem="qXL-yz-p7D" firstAttribute="top" secondItem="cIu-YJ-hzg" secondAttribute="top" id="aOg-PF-7B0"/>
                                             <constraint firstItem="qXL-yz-p7D" firstAttribute="height" secondItem="cIu-YJ-hzg" secondAttribute="height" multiplier="0.49" id="akr-Dt-p51"/>
                                             <constraint firstItem="scW-Hs-Aa1" firstAttribute="leading" secondItem="cIu-YJ-hzg" secondAttribute="leading" id="axL-46-ToD"/>
-                                            <constraint firstItem="scW-Hs-Aa1" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.49" id="fTd-kz-LK4"/>
+                                            <constraint firstItem="scW-Hs-Aa1" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.64" id="fTd-kz-LK4"/>
                                             <constraint firstAttribute="trailing" secondItem="qXL-yz-p7D" secondAttribute="trailing" id="fc5-Dk-5Hd"/>
-                                            <constraint firstItem="xiX-b1-vmp" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.49" id="hTO-pl-85t"/>
+                                            <constraint firstItem="xiX-b1-vmp" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.34" id="hTO-pl-85t"/>
                                             <constraint firstItem="scW-Hs-Aa1" firstAttribute="height" secondItem="cIu-YJ-hzg" secondAttribute="height" multiplier="0.49" id="huu-hF-lY3"/>
                                             <constraint firstAttribute="bottom" secondItem="scW-Hs-Aa1" secondAttribute="bottom" id="jL0-Cl-dFQ"/>
                                             <constraint firstItem="zAr-0q-DeK" firstAttribute="top" secondItem="cIu-YJ-hzg" secondAttribute="top" id="l8w-xF-UdE"/>
-                                            <constraint firstItem="qXL-yz-p7D" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.49" id="pc0-k3-GhY"/>
+                                            <constraint firstItem="qXL-yz-p7D" firstAttribute="width" secondItem="cIu-YJ-hzg" secondAttribute="width" multiplier="0.59" id="pc0-k3-GhY"/>
                                             <constraint firstAttribute="trailing" secondItem="xiX-b1-vmp" secondAttribute="trailing" id="sBQ-xd-35X"/>
                                             <constraint firstAttribute="bottom" secondItem="xiX-b1-vmp" secondAttribute="bottom" id="sfK-1E-waz"/>
                                             <constraint firstItem="xiX-b1-vmp" firstAttribute="height" secondItem="cIu-YJ-hzg" secondAttribute="height" multiplier="0.49" id="shC-I1-d6j"/>
@@ -330,6 +326,12 @@
                                     <constraint firstAttribute="trailing" secondItem="cIu-YJ-hzg" secondAttribute="trailing" id="qBI-hK-E9A"/>
                                     <constraint firstItem="cIu-YJ-hzg" firstAttribute="top" secondItem="ssa-S6-wx0" secondAttribute="top" constant="30" id="t2F-1y-69C"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="galleryCellView" destination="scW-Hs-Aa1" id="kLg-GF-fxS"/>
+                                    <outlet property="mapCellView" destination="qXL-yz-p7D" id="R12-G0-aBP"/>
+                                    <outlet property="shopCellView" destination="xiX-b1-vmp" id="Yaq-lc-Imu"/>
+                                    <outlet property="triviaCellView" destination="zAr-0q-DeK" id="bwh-Zy-rs4"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -633,7 +635,7 @@
     </scenes>
     <resources>
         <image name="Back" width="32" height="32"/>
-        <image name="Google-Cast-CC" width="32" height="32"/>
+        <image name="Google-Cast-CC" width="518" height="294"/>
         <image name="Pause Button" width="32" height="32"/>
         <image name="Play Button" width="32" height="32"/>
     </resources>
