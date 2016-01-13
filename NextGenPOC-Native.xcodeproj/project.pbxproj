@@ -59,6 +59,8 @@
 		707E10921C4097C500FCF81C /* cavill_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10901C4097C500FCF81C /* cavill_thumb.jpg */; };
 		707E10941C40996200FCF81C /* adams.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10931C40996200FCF81C /* adams.jpg */; };
 		70B1E24A1C460DF50044FFD3 /* SceneDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */; };
+		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
+		70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B21C46CECE002D3B5A /* Video.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +142,8 @@
 		707E10901C4097C500FCF81C /* cavill_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cavill_thumb.jpg; sourceTree = "<group>"; };
 		707E10931C40996200FCF81C /* adams.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = adams.jpg; sourceTree = "<group>"; };
 		70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailView.swift; sourceTree = "<group>"; };
+		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		70C9E0B21C46CECE002D3B5A /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +290,7 @@
 				701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */,
 				701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */,
 				701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */,
+				70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				707E10891C40820500FCF81C /* Talent.swift */,
+				70C9E0B21C46CECE002D3B5A /* Video.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -510,10 +516,12 @@
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
+				70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
 				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
 				70B1E24A1C460DF50044FFD3 /* SceneDetailView.swift in Sources */,
+				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				707E108C1C408F8E00FCF81C /* TalentDetailView.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 				707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */,

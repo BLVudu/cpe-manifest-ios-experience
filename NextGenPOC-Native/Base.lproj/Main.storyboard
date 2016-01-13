@@ -52,6 +52,9 @@
                                                         <state key="normal" title="Play Movie">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <segue destination="UvH-hR-t5e" kind="show" id="aeM-3y-kH4"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
                                                         <rect key="frame" x="154" y="168" width="43" height="30"/>
@@ -465,7 +468,7 @@
         <!--Video Player View Controller-->
         <scene sceneID="fcf-Td-6zT">
             <objects>
-                <viewController id="FsK-dw-pgC" customClass="WBVideoPlayerViewController" sceneMemberID="viewController">
+                <viewController id="FsK-dw-pgC" customClass="VideoPlayerViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fH4-Gq-ae8"/>
                         <viewControllerLayoutGuide type="bottom" id="hPT-Z4-V6I"/>
