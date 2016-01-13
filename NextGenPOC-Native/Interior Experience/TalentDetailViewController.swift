@@ -1,15 +1,15 @@
 //
-//  TalentDetailView.swift
+//  TalentDetailViewController.swift
 //  NextGenPOC-Native
 //
-//  Created by Alec Ananian on 1/8/16.
+//  Created by Alec Ananian on 1/13/16.
 //  Copyright © 2016 Sedinam Gadzekpo. All rights reserved.
 //
 
 import UIKit
 
-class TalentDetailView: UIView {
-
+class TalentDetailViewController: UIViewController {
+    
     @IBOutlet weak var talentImageView: UIImageView!
     @IBOutlet weak var talentNameLabel: UILabel!
     
@@ -18,6 +18,12 @@ class TalentDetailView: UIView {
             talentNameLabel.text = talent?.name
             talentImageView.image = talent?.fullImage != nil ? UIImage(named: talent!.fullImage!) : nil
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
 
 }

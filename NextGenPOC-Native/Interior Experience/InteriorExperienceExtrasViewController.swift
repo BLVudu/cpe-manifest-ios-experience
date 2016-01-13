@@ -13,8 +13,8 @@ let TalentTableViewCellIdentifier = "TalentTableViewCell"
 class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var talentTableView: TalentTableView!
-    @IBOutlet weak var talentDetailView: TalentDetailView!
-    @IBOutlet weak var sceneDetailView: SceneDetailView!
+    @IBOutlet weak var talentDetailView: UIView!
+    @IBOutlet weak var sceneDetailView: UIView!
     
     var talentData = [
         [
@@ -54,6 +54,26 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
+    func talentDetailViewController() -> TalentDetailViewController? {
+        for viewController in self.childViewControllers {
+            if viewController is TalentDetailViewController {
+                return viewController as? TalentDetailViewController
+            }
+        }
+        
+        return nil
+    }
+    
+    func sceneDetailViewController() -> SceneDetailViewController? {
+        for viewController in self.childViewControllers {
+            if viewController is SceneDetailViewController {
+                return viewController as? SceneDetailViewController
+            }
+        }
+        
+        return nil
+    }
+    
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return talentData.count
@@ -76,7 +96,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        talentDetailView.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
+        talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
         talentDetailView.hidden = false
         sceneDetailView.hidden = true
     }
