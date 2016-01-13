@@ -110,16 +110,11 @@ class ExtrasLayout: UICollectionViewLayout {
     }
     
     override func collectionViewContentSize() -> CGSize {
+        
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
-    /*
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool{
-        
-        numberOfColumns = 1
-        return true
-    }
-    */
+  
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()

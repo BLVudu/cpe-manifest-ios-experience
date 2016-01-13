@@ -62,16 +62,18 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
             
             self.extView.hidden = true
             extraBG.frame = CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.height, (UIScreen.mainScreen().bounds.width)/2)
+            self.width = (UIScreen.mainScreen().bounds.height -
+                (rightCellPadding + leftCellPadding + cellSpacing))/2
+            self.height = (UIScreen.mainScreen().bounds.width -
+                (topSpacePadding+cellSpacing))/4
             
         }else {
             
             extraBG.frame = CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.width, (UIScreen.mainScreen().bounds.height)/2)
             self.width = (UIScreen.mainScreen().bounds.width -
                 (rightCellPadding + leftCellPadding + cellSpacing))/2
-            print(self.width)
             self.height = (UIScreen.mainScreen().bounds.height -
                 (topSpacePadding+cellSpacing))/4
-            print(self.height)
             
         }
         
