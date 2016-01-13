@@ -21,22 +21,10 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     let navImages = ["nav_extras.jpg","nav_home.jpg","nav_scenes.jpg"]
     
-    let rightCellPadding:CGFloat = 50.0
-    let leftCellPadding:CGFloat = 50.0
-    let topSpacePadding:CGFloat = 300.0
-    let cellSpacing:CGFloat = 5.0
-    
-    var width: CGFloat = 0.0
-    var height: CGFloat = 0.0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        
-       
-        
         self.LtoR.direction = UISwipeGestureRecognizerDirection.Right
         self.RtoL.direction = UISwipeGestureRecognizerDirection.Left
         
@@ -56,18 +44,11 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         {
             
             self.extView.hidden = true
-            
             extraBG.frame = CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.height, (UIScreen.mainScreen().bounds.width)/2)
             
         }else {
             
             extraBG.frame = CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.width, (UIScreen.mainScreen().bounds.height)/2)
-            self.width = (UIScreen.mainScreen().bounds.width -
-                (rightCellPadding + leftCellPadding + cellSpacing))/2
-            print(self.width)
-            self.height = ((UIScreen.mainScreen().bounds.height)/2) -
-                (topSpacePadding+cellSpacing)
-            print(self.height)
             
         }
         
@@ -76,19 +57,12 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         notificationCenter.addObserver(self, selector: "detectRotation", name: UIApplicationDidChangeStatusBarOrientationNotification, object: nil)
         
         
-        self.playerView.backgroundColor = UIColor (patternImage: UIImage(named: "home_bg.jpg")!)
+        //CGRects for the extra images are hard coded for now
         
-        
-        
-        //CGRects for the extra images are calculated based on screen size.
-        
-     
-        
-        
-        extraBTS.frame = CGRectMake(rightCellPadding, 50, self.width, self.height)
-        extraMaps.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, 50, self.width, self.height)
-        extraCast.frame = CGRectMake(rightCellPadding, topSpacePadding-25, self.width, self.height)
-        extraShop.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, topSpacePadding-25, self.width, self.height)
+        extraBTS.frame = CGRectMake(50, 80, 400.0, 300.0)
+        extraMaps.frame = CGRectMake(570, 80, 400.0, 300.0)
+        extraCast.frame = CGRectMake(50, 370, 400.0, 300.0)
+        extraShop.frame = CGRectMake(570, 370, 400.0, 300.0)
         
         self.extView.addSubview(extraBG)
         self.extView.addSubview(extraBTS)

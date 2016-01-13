@@ -49,16 +49,18 @@
 		701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */; };
 		701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */; };
 		701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */; };
+		7065F5421C46DA7B00A2C74E /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */; };
+		7065F5441C46DC6800A2C74E /* SceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */; };
 		707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E107E1C4076EC00FCF81C /* TalentTableView.swift */; };
 		707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10801C40770D00FCF81C /* TalentTableViewCell.swift */; };
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
 		707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */; };
 		707E108A1C40820500FCF81C /* Talent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10891C40820500FCF81C /* Talent.swift */; };
-		707E108C1C408F8E00FCF81C /* TalentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E108B1C408F8E00FCF81C /* TalentDetailView.swift */; };
 		707E10911C4097C500FCF81C /* cavill_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E108F1C4097C500FCF81C /* cavill_full.jpg */; };
 		707E10921C4097C500FCF81C /* cavill_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10901C4097C500FCF81C /* cavill_thumb.jpg */; };
 		707E10941C40996200FCF81C /* adams.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10931C40996200FCF81C /* adams.jpg */; };
-		70B1E24A1C460DF50044FFD3 /* SceneDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */; };
+		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
+		70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B21C46CECE002D3B5A /* Video.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,16 +132,18 @@
 		701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBVideoPlayerViewController.h; sourceTree = "<group>"; };
 		701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBVideoPlayerViewController.m; sourceTree = "<group>"; };
 		701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NextGen-Bridging-Header.h"; sourceTree = "<group>"; };
+		7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailViewController.swift; sourceTree = "<group>"; };
+		7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailViewController.swift; sourceTree = "<group>"; };
 		707E107E1C4076EC00FCF81C /* TalentTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableView.swift; sourceTree = "<group>"; };
 		707E10801C40770D00FCF81C /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceExtrasViewController.swift; sourceTree = "<group>"; };
 		707E10891C40820500FCF81C /* Talent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talent.swift; sourceTree = "<group>"; };
-		707E108B1C408F8E00FCF81C /* TalentDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailView.swift; sourceTree = "<group>"; };
 		707E108F1C4097C500FCF81C /* cavill_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cavill_full.jpg; sourceTree = "<group>"; };
 		707E10901C4097C500FCF81C /* cavill_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cavill_thumb.jpg; sourceTree = "<group>"; };
 		707E10931C40996200FCF81C /* adams.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = adams.jpg; sourceTree = "<group>"; };
-		70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailView.swift; sourceTree = "<group>"; };
+		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		70C9E0B21C46CECE002D3B5A /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +290,7 @@
 				701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */,
 				701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */,
 				701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */,
+				70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -300,10 +305,10 @@
 				701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */,
 				701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */,
 				701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */,
-				70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */,
-				707E108B1C408F8E00FCF81C /* TalentDetailView.swift */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
 				707E10801C40770D00FCF81C /* TalentTableViewCell.swift */,
+				7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */,
+				7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */,
 			);
 			path = "Interior Experience";
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				707E10891C40820500FCF81C /* Talent.swift */,
+				70C9E0B21C46CECE002D3B5A /* Video.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -506,15 +512,17 @@
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
 				701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */,
 				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
+				7065F5421C46DA7B00A2C74E /* TalentDetailViewController.swift in Sources */,
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
+				70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
+				7065F5441C46DC6800A2C74E /* SceneDetailViewController.swift in Sources */,
 				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
-				70B1E24A1C460DF50044FFD3 /* SceneDetailView.swift in Sources */,
-				707E108C1C408F8E00FCF81C /* TalentDetailView.swift in Sources */,
+				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 				707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */,
 			);
