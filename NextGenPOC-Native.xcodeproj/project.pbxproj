@@ -294,6 +294,8 @@
 			isa = PBXGroup;
 			children = (
 				701B02711C45C8990020DCD1 /* Player */,
+				4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */,
+				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
 				707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */,
 				701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */,
 				701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */,
@@ -302,10 +304,6 @@
 				707E108B1C408F8E00FCF81C /* TalentDetailView.swift */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
 				707E10801C40770D00FCF81C /* TalentTableViewCell.swift */,
-				707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */,
-				707E108B1C408F8E00FCF81C /* TalentDetailView.swift */,
-				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
-				4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */,
 			);
 			path = "Interior Experience";
 			sourceTree = "<group>";
@@ -511,7 +509,6 @@
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
-				707E10871C407F6600FCF81C /* InteriorExperienceViewController.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
