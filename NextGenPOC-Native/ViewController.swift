@@ -27,12 +27,14 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         self.LtoR.direction = UISwipeGestureRecognizerDirection.Right
         self.RtoL.direction = UISwipeGestureRecognizerDirection.Left
         
-        self.extView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
-        
         self.slideOutMenu.hidden = true
         self.slideOutMenu.delegate = self
         self.slideOutMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuItem")
         self.slideOutMenu.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.extView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,13 +47,12 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     @IBAction func slideMenu(recognizer: UISwipeGestureRecognizer) {
-        
-        if(recognizer.direction == UISwipeGestureRecognizerDirection.Right){
+        /*if(recognizer.direction == UISwipeGestureRecognizerDirection.Right){
             
             self.slideOutMenu.hidden = false
         } else if (recognizer.direction == UISwipeGestureRecognizerDirection.Left) {
             self.slideOutMenu.hidden = true
-        }
+        }*/
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
