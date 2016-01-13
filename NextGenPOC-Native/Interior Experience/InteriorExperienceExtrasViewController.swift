@@ -28,25 +28,14 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
             "fullImage": "adams.jpg",
             "name": "Amy Adams",
             "role": "Lois Lane"
-        ],
-        ["name": "Michael Shannon", "role": "General Zod"],
-        ["name": "Diane Lane", "role": "Martha Kent"],
-        ["name": "Russell Crowe", "role": "Jor-El"],
-        ["name": "Antje Traue", "role": "Faora-Ul"],
-        ["name": "Harry Lennix", "role": "General Swanwick"],
-        ["name": "Richard Schiff", "role": "Dr. Emil Hamilton"],
-        ["name": "Christopher Meloni", "role": "Colonel Nathan Hardy"],
-        ["name": "Kevin Costner", "role": "Jonathan Kent"],
-        ["name": "Ayelet Zurer", "role": "Lara Lor-Van"],
-        ["name": "Laurence Fishburne", "role": "Perry White"]
+        ]
     ]
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        talentTableView.dataSource = self
-        talentTableView.delegate = self
+        talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,6 +71,8 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
         cell.talent = Talent(info: talentData[indexPath.row])
+        cell.nameLabel?.removeFromSuperview()
+        cell.roleLabel?.removeFromSuperview()
         return cell
     }
     

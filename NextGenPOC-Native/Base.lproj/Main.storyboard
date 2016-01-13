@@ -223,39 +223,10 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="FgB-Az-emI"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TalentTableViewCell" id="k45-7h-s3M" customClass="TalentTableViewCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="65.5" width="105" height="95"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k45-7h-s3M" id="Mt3-ic-H3Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="105" height="95"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pAr-vr-j3a" customClass="RoundImageView" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="10" width="75" height="75"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="75" id="hh9-E4-jQF"/>
-                                                        <constraint firstAttribute="width" constant="75" id="mVO-Ln-hYj"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="round" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="pAr-vr-j3a" firstAttribute="top" secondItem="Mt3-ic-H3Q" secondAttribute="top" constant="10" id="3MI-i3-l3O"/>
-                                                <constraint firstAttribute="trailing" secondItem="pAr-vr-j3a" secondAttribute="trailing" constant="15" id="9B2-c0-SJ3"/>
-                                                <constraint firstItem="pAr-vr-j3a" firstAttribute="leading" secondItem="Mt3-ic-H3Q" secondAttribute="leading" constant="15" id="OAi-k0-gdm"/>
-                                                <constraint firstAttribute="bottom" secondItem="pAr-vr-j3a" secondAttribute="bottom" constant="10" id="uuE-E3-sjc"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="talentImageView" destination="pAr-vr-j3a" id="4PN-vB-FDS"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="2KS-OB-0Ev" id="04l-vT-u51"/>
+                                    <outlet property="delegate" destination="2KS-OB-0Ev" id="MDj-GC-Waw"/>
+                                </connections>
                             </tableView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCG-Ov-C0t" userLabel="Talent Detail Container View">
                                 <rect key="frame" x="115" y="0.0" width="485" height="600"/>
@@ -350,40 +321,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ov-84-EDm">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVa-vd-Vri">
-                                        <rect key="frame" x="8" y="30" width="130" height="32"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <state key="normal" title="&lt; Back">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="dismissExtras:" destination="0Ub-1E-w0a" eventType="touchUpInside" id="K0Z-nH-Cjl"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVa-vd-Vri">
+                                <rect key="frame" x="10" y="10" width="60" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="9Ig-gB-aZM"/>
+                                    <constraint firstAttribute="height" constant="25" id="nas-Th-UBq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissExtras:" destination="0Ub-1E-w0a" eventType="touchUpInside" id="K0Z-nH-Cjl"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YY0-2g-OVu">
-                                <rect key="frame" x="0.0" y="69" width="600" height="531"/>
+                                <rect key="frame" x="0.0" y="40" width="600" height="560"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-lf-5Cb">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="531"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-lf-5Cb" customClass="TalentTableView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="560"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="0Ub-1E-w0a" id="lYU-VV-QeJ"/>
                                             <outlet property="delegate" destination="0Ub-1E-w0a" id="3dK-Vn-tpl"/>
                                         </connections>
                                     </tableView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-Cb-zKQ">
-                                        <rect key="frame" x="240" y="0.0" width="360" height="531"/>
+                                        <rect key="frame" x="240" y="0.0" width="360" height="560"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGenPOC_Native" customModuleProvider="target"/>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="17.5" y="0.0" width="325" height="300"/>
+                                                <rect key="frame" x="18" y="0.0" width="325" height="300"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="300"/>
@@ -422,23 +391,21 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="1ov-84-EDm" secondAttribute="bottom" constant="530" id="0Ms-H2-8nl"/>
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="width" secondItem="7Nn-Gk-Fn3" secondAttribute="height" multiplier="2:5" id="DZ3-KM-tCS"/>
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="leading" secondItem="7Nn-Gk-Fn3" secondAttribute="leadingMargin" constant="-20" id="H9r-BH-wEw"/>
-                            <constraint firstItem="1ov-84-EDm" firstAttribute="top" secondItem="1Qn-Pd-QBx" secondAttribute="bottom" constant="-20" id="TXe-VA-EGn"/>
-                            <constraint firstItem="YY0-2g-OVu" firstAttribute="centerY" secondItem="7Nn-Gk-Fn3" secondAttribute="centerY" constant="34.5" id="XcA-eK-Z2m"/>
+                            <constraint firstItem="bVa-vd-Vri" firstAttribute="top" secondItem="7Nn-Gk-Fn3" secondAttribute="top" constant="10" id="JKQ-i6-cMZ"/>
+                            <constraint firstItem="bVa-vd-Vri" firstAttribute="leading" secondItem="7Nn-Gk-Fn3" secondAttribute="leading" constant="10" id="VjX-2g-0C1"/>
+                            <constraint firstItem="YY0-2g-OVu" firstAttribute="centerY" secondItem="7Nn-Gk-Fn3" secondAttribute="centerY" constant="20" id="XcA-eK-Z2m"/>
                             <constraint firstItem="YY0-2g-OVu" firstAttribute="leading" secondItem="7Nn-Gk-Fn3" secondAttribute="leading" id="ZDz-9x-FdE"/>
-                            <constraint firstItem="1ov-84-EDm" firstAttribute="leading" secondItem="YY0-2g-OVu" secondAttribute="leading" id="Zdm-VE-wgE"/>
-                            <constraint firstItem="1ov-84-EDm" firstAttribute="trailing" secondItem="YY0-2g-OVu" secondAttribute="trailing" id="mBx-od-rnf"/>
                             <constraint firstItem="YY0-2g-OVu" firstAttribute="bottom" secondItem="JqG-I8-Xjt" secondAttribute="top" id="nUu-Q1-r5O"/>
                             <constraint firstItem="YY0-2g-OVu" firstAttribute="centerX" secondItem="7Nn-Gk-Fn3" secondAttribute="centerX" id="nb2-VX-nqT"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="actorsView" destination="nfb-lf-5Cb" id="S55-Ax-dKA"/>
                         <outlet property="extrasView" destination="5xC-Cb-zKQ" id="Adl-mG-9Df"/>
+                        <outlet property="talentTableView" destination="nfb-lf-5Cb" id="fkG-uc-1N7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxE-Et-E7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -475,7 +442,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="Ga0-Ve-Kcg"/>
                                         </constraints>
-                                        <state key="normal" title="Done"/>
+                                        <state key="normal" title="Home"/>
                                         <connections>
                                             <action selector="done:" destination="FsK-dw-pgC" eventType="touchUpInside" id="c8M-tS-dSn"/>
                                         </connections>

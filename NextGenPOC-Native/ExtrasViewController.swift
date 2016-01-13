@@ -17,62 +17,104 @@ class ExtrasCell: UICollectionViewCell {
     @IBOutlet weak var extrasTitle: UILabel!
 }
 
-
-class ActorsCell: UITableViewCell {
-    
-    @IBOutlet var actorImg: UIImageView!
-    @IBOutlet var actorName: UILabel!
-    @IBOutlet var actorCharacter: UILabel!
-    
-    override func layoutSubviews() {
-        actorImg.layer.cornerRadius = actorImg.bounds.height / 2
-        actorImg.clipsToBounds = true
-    }
-    
-    
-}
-
-
-class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UITableViewDelegate, UITableViewDataSource{
+class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     var isPresented = true
     
     
     @IBOutlet var extrasView: UICollectionView!
     @IBOutlet weak var bannerView: UIView!
-    @IBOutlet weak var actorsView: UITableView!
+    @IBOutlet weak var talentTableView: TalentTableView!
     
     let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
-    //let extras
     
-    let actorImgs = ["henry.jpg","adams.jpg","micheal.jpg","russell.jpg","diane.jpg","kevin.jpg"]
-    
-    let actorNames = ["Henry Cavill","Amy Adams","Micheal Shannon","Russell Crowe","Diane Lane","Kevin Costner"]
-    
-    let actorCharacters = ["ClarkKent/Kal-El","Lois Lane","General Zod","Jor-El","Martha Kent","Jonathan Kent"]
+    var talentData = [
+        [
+            "thumbnailImage": "cavill_thumb.jpg",
+            "fullImage": "cavill_full.jpg",
+            "name": "Henry Cavill",
+            "role": "Clark Kent/Kal-El"
+        ],
+        [
+            "thumbnailImage": "adams.jpg",
+            "fullImage": "adams.jpg",
+            "name": "Amy Adams",
+            "role": "Lois Lane"
+        ],
+        [
+            "thumbnailImage": "shannon_thumb.jpg",
+            "fullImage": "shannon_full.jpg",
+            "name": "Michael Shannon",
+            "role": "General Zod"
+        ],
+        [
+            "thumbnailImage": "lane_thumb.jpg",
+            "fullImage": "lane_full.jpg",
+            "name": "Diane Lane",
+            "role": "Martha Kent"
+        ],
+        [
+            "thumbnailImage": "crowe_thumb.jpg",
+            "fullImage": "crowe_full.jpg",
+            "name": "Russell Crowe",
+            "role": "Jor-El"
+        ],
+        [
+            "thumbnailImage": "traue_thumb.jpg",
+            "fullImage": "traue_full.jpg",
+            "name": "Antje Traue",
+            "role": "Faora-Ul"
+        ],
+        [
+            "thumbnailImage": "lennix_thumb.jpg",
+            "fullImage": "lennix_full.jpg",
+            "name": "Harry Lennix",
+            "role": "General Swanwick"
+        ],
+        [
+            "thumbnailImage": "schiff_thumb.jpg",
+            "fullImage": "schiff_full.jpg",
+            "name": "Richard Schiff",
+            "role": "Dr. Emil Hamilton"
+        ],
+        [
+            "thumbnailImage": "meloni_thumb.jpg",
+            "fullImage": "meloni_full.jpg",
+            "name": "Christopher Meloni",
+            "role": "Colonel Nathan Hardy"
+        ],
+        [
+            "thumbnailImage": "costner_thumb.jpg",
+            "fullImage": "costner_full.jpg",
+            "name": "Kevin Costner",
+            "role": "Jonathan Kent"
+        ],
+        [
+            "thumbnailImage": "zurer_thumb.jpg",
+            "fullImage": "zurer_full.jpg",
+            "name": "Ayelet Zurer",
+            "role": "Lara Lor-Van"
+        ],
+        [
+            "thumbnailImage": "fishburne_thumb.jpg",
+            "fullImage": "fishburne_full.jpg",
+            "name": "Laurence Fishburne",
+            "role": "Perry White"
+        ]
+    ]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         self.extrasView.delegate = self
         self.extrasView.dataSource = self
         
-        let nib = UINib(nibName: "ActorsCell", bundle: nil)
-        
-        self.actorsView.delegate = self
-        self.actorsView.registerNib(nib, forCellReuseIdentifier: "actors")
-        self.actorsView.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
-        
+        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         
         if let layout = extrasView?.collectionViewLayout as? ExtrasLayout {
             layout.delegate = self
         }
-        
-        
-        
     }
     
     
@@ -109,31 +151,31 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         
     }
     
+    // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.actorCharacters.count
+        return talentData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell:ActorsCell = self.actorsView.dequeueReusableCellWithIdentifier("actors") as! ActorsCell
-        
-        
-
-        
-        cell.actorImg.image = UIImage(named: self.actorImgs[indexPath.row])
-        cell.actorName.text = self.actorNames[indexPath.row]
-        cell.actorCharacter.text = self.actorCharacters[indexPath.row]
-        
-        
-        cell.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
-
-        
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
+        cell.talent = Talent(info: talentData[indexPath.row])
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200.0
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "ACTORS"
+    }
+    
+    // MARK: UITableViewDelegate
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.whiteColor()
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        /*talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
+        talentDetailView.hidden = false
+        sceneDetailView.hidden = true*/
     }
     
 }

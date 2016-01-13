@@ -36,12 +36,6 @@
 		4921D9DA1C4068C900ED2AA6 /* extras_shopping.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9D11C4068C900ED2AA6 /* extras_shopping.jpg */; };
 		4921D9DB1C4068C900ED2AA6 /* extras_universe.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9D21C4068C900ED2AA6 /* extras_universe.jpg */; };
 		4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */; };
-		4921D9F51C45EF0A00ED2AA6 /* ActorsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9F41C45EF0A00ED2AA6 /* ActorsCell.xib */; };
-		4921D9FB1C45F12000ED2AA6 /* diane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9F61C45F12000ED2AA6 /* diane.jpg */; };
-		4921D9FC1C45F12000ED2AA6 /* henry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9F71C45F12000ED2AA6 /* henry.jpg */; };
-		4921D9FD1C45F12000ED2AA6 /* kevin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9F81C45F12000ED2AA6 /* kevin.jpg */; };
-		4921D9FE1C45F12000ED2AA6 /* micheal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9F91C45F12000ED2AA6 /* micheal.jpg */; };
-		4921D9FF1C45F12000ED2AA6 /* russell.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9FA1C45F12000ED2AA6 /* russell.jpg */; };
 		701B02681C45A28A0020DCD1 /* cornfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 701B02671C45A28A0020DCD1 /* cornfield.png */; };
 		701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */; };
 		701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */; };
@@ -51,8 +45,29 @@
 		701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */; };
 		7065F5421C46DA7B00A2C74E /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */; };
 		7065F5441C46DC6800A2C74E /* SceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */; };
+		7065F5461C46FCC500A2C74E /* TalentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */; };
+		7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5471C47004100A2C74E /* TalentTableViewCell.swift */; };
+		7065F55D1C4706C200A2C74E /* costner_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5491C4706C200A2C74E /* costner_full.jpg */; };
+		7065F55E1C4706C200A2C74E /* costner_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F54A1C4706C200A2C74E /* costner_thumb.jpg */; };
+		7065F55F1C4706C200A2C74E /* crowe_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F54B1C4706C200A2C74E /* crowe_full.jpg */; };
+		7065F5601C4706C200A2C74E /* crowe_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F54C1C4706C200A2C74E /* crowe_thumb.jpg */; };
+		7065F5611C4706C200A2C74E /* fishburne_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F54D1C4706C200A2C74E /* fishburne_full.jpg */; };
+		7065F5621C4706C200A2C74E /* fishburne_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F54E1C4706C200A2C74E /* fishburne_thumb.jpg */; };
+		7065F5631C4706C200A2C74E /* lane_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F54F1C4706C200A2C74E /* lane_full.jpg */; };
+		7065F5641C4706C200A2C74E /* lane_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5501C4706C200A2C74E /* lane_thumb.jpg */; };
+		7065F5651C4706C200A2C74E /* lennix_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5511C4706C200A2C74E /* lennix_full.jpg */; };
+		7065F5661C4706C200A2C74E /* lennix_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5521C4706C200A2C74E /* lennix_thumb.jpg */; };
+		7065F5671C4706C200A2C74E /* meloni_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5531C4706C200A2C74E /* meloni_full.jpg */; };
+		7065F5681C4706C200A2C74E /* meloni_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5541C4706C200A2C74E /* meloni_thumb.jpg */; };
+		7065F5691C4706C200A2C74E /* schiff_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5551C4706C200A2C74E /* schiff_full.jpg */; };
+		7065F56A1C4706C200A2C74E /* schiff_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5561C4706C200A2C74E /* schiff_thumb.jpg */; };
+		7065F56B1C4706C200A2C74E /* shannon_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5571C4706C200A2C74E /* shannon_full.jpg */; };
+		7065F56C1C4706C200A2C74E /* shannon_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5581C4706C200A2C74E /* shannon_thumb.jpg */; };
+		7065F56D1C4706C200A2C74E /* traue_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5591C4706C200A2C74E /* traue_full.jpg */; };
+		7065F56E1C4706C200A2C74E /* traue_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F55A1C4706C200A2C74E /* traue_thumb.jpg */; };
+		7065F56F1C4706C200A2C74E /* zurer_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F55B1C4706C200A2C74E /* zurer_full.jpg */; };
+		7065F5701C4706C200A2C74E /* zurer_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7065F55C1C4706C200A2C74E /* zurer_thumb.jpg */; };
 		707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E107E1C4076EC00FCF81C /* TalentTableView.swift */; };
-		707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10801C40770D00FCF81C /* TalentTableViewCell.swift */; };
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
 		707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */; };
 		707E108A1C40820500FCF81C /* Talent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10891C40820500FCF81C /* Talent.swift */; };
@@ -116,12 +131,6 @@
 		4921D9D11C4068C900ED2AA6 /* extras_shopping.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_shopping.jpg; sourceTree = "<group>"; };
 		4921D9D21C4068C900ED2AA6 /* extras_universe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_universe.jpg; sourceTree = "<group>"; };
 		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = ../ExtrasLayout.swift; sourceTree = "<group>"; };
-		4921D9F41C45EF0A00ED2AA6 /* ActorsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActorsCell.xib; sourceTree = "<group>"; };
-		4921D9F61C45F12000ED2AA6 /* diane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = diane.jpg; sourceTree = "<group>"; };
-		4921D9F71C45F12000ED2AA6 /* henry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = henry.jpg; sourceTree = "<group>"; };
-		4921D9F81C45F12000ED2AA6 /* kevin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kevin.jpg; sourceTree = "<group>"; };
-		4921D9F91C45F12000ED2AA6 /* micheal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = micheal.jpg; sourceTree = "<group>"; };
-		4921D9FA1C45F12000ED2AA6 /* russell.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = russell.jpg; sourceTree = "<group>"; };
 		701B02671C45A28A0020DCD1 /* cornfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cornfield.png; sourceTree = "<group>"; };
 		701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCellView.swift; sourceTree = "<group>"; };
 		701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SceneDetailCellView.xib; sourceTree = "<group>"; };
@@ -134,8 +143,29 @@
 		701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NextGen-Bridging-Header.h"; sourceTree = "<group>"; };
 		7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailViewController.swift; sourceTree = "<group>"; };
 		7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailViewController.swift; sourceTree = "<group>"; };
+		7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalentTableViewCell.xib; sourceTree = "<group>"; };
+		7065F5471C47004100A2C74E /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
+		7065F5491C4706C200A2C74E /* costner_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = costner_full.jpg; sourceTree = "<group>"; };
+		7065F54A1C4706C200A2C74E /* costner_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = costner_thumb.jpg; sourceTree = "<group>"; };
+		7065F54B1C4706C200A2C74E /* crowe_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crowe_full.jpg; sourceTree = "<group>"; };
+		7065F54C1C4706C200A2C74E /* crowe_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crowe_thumb.jpg; sourceTree = "<group>"; };
+		7065F54D1C4706C200A2C74E /* fishburne_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fishburne_full.jpg; sourceTree = "<group>"; };
+		7065F54E1C4706C200A2C74E /* fishburne_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fishburne_thumb.jpg; sourceTree = "<group>"; };
+		7065F54F1C4706C200A2C74E /* lane_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lane_full.jpg; sourceTree = "<group>"; };
+		7065F5501C4706C200A2C74E /* lane_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lane_thumb.jpg; sourceTree = "<group>"; };
+		7065F5511C4706C200A2C74E /* lennix_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lennix_full.jpg; sourceTree = "<group>"; };
+		7065F5521C4706C200A2C74E /* lennix_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lennix_thumb.jpg; sourceTree = "<group>"; };
+		7065F5531C4706C200A2C74E /* meloni_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meloni_full.jpg; sourceTree = "<group>"; };
+		7065F5541C4706C200A2C74E /* meloni_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meloni_thumb.jpg; sourceTree = "<group>"; };
+		7065F5551C4706C200A2C74E /* schiff_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = schiff_full.jpg; sourceTree = "<group>"; };
+		7065F5561C4706C200A2C74E /* schiff_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = schiff_thumb.jpg; sourceTree = "<group>"; };
+		7065F5571C4706C200A2C74E /* shannon_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shannon_full.jpg; sourceTree = "<group>"; };
+		7065F5581C4706C200A2C74E /* shannon_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shannon_thumb.jpg; sourceTree = "<group>"; };
+		7065F5591C4706C200A2C74E /* traue_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = traue_full.jpg; sourceTree = "<group>"; };
+		7065F55A1C4706C200A2C74E /* traue_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = traue_thumb.jpg; sourceTree = "<group>"; };
+		7065F55B1C4706C200A2C74E /* zurer_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zurer_full.jpg; sourceTree = "<group>"; };
+		7065F55C1C4706C200A2C74E /* zurer_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zurer_thumb.jpg; sourceTree = "<group>"; };
 		707E107E1C4076EC00FCF81C /* TalentTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableView.swift; sourceTree = "<group>"; };
-		707E10801C40770D00FCF81C /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceExtrasViewController.swift; sourceTree = "<group>"; };
 		707E10891C40820500FCF81C /* Talent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talent.swift; sourceTree = "<group>"; };
@@ -199,7 +229,6 @@
 				707E10831C40796000FCF81C /* Shared Views */,
 				707E10881C4081F700FCF81C /* Models */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
-				4921D9F41C45EF0A00ED2AA6 /* ActorsCell.xib */,
 				4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
@@ -306,7 +335,6 @@
 				701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */,
 				701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
-				707E10801C40770D00FCF81C /* TalentTableViewCell.swift */,
 				7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */,
 				7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */,
 			);
@@ -316,7 +344,9 @@
 		707E10831C40796000FCF81C /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
+				7065F5471C47004100A2C74E /* TalentTableViewCell.swift */,
 				707E10841C40797400FCF81C /* RoundImageView.swift */,
+				7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -333,14 +363,29 @@
 		707E108E1C4097BD00FCF81C /* Talent */ = {
 			isa = PBXGroup;
 			children = (
-				4921D9F61C45F12000ED2AA6 /* diane.jpg */,
-				4921D9F71C45F12000ED2AA6 /* henry.jpg */,
-				4921D9F81C45F12000ED2AA6 /* kevin.jpg */,
-				4921D9F91C45F12000ED2AA6 /* micheal.jpg */,
-				4921D9FA1C45F12000ED2AA6 /* russell.jpg */,
 				707E108F1C4097C500FCF81C /* cavill_full.jpg */,
 				707E10901C4097C500FCF81C /* cavill_thumb.jpg */,
 				707E10931C40996200FCF81C /* adams.jpg */,
+				7065F5491C4706C200A2C74E /* costner_full.jpg */,
+				7065F54A1C4706C200A2C74E /* costner_thumb.jpg */,
+				7065F54B1C4706C200A2C74E /* crowe_full.jpg */,
+				7065F54C1C4706C200A2C74E /* crowe_thumb.jpg */,
+				7065F54D1C4706C200A2C74E /* fishburne_full.jpg */,
+				7065F54E1C4706C200A2C74E /* fishburne_thumb.jpg */,
+				7065F54F1C4706C200A2C74E /* lane_full.jpg */,
+				7065F5501C4706C200A2C74E /* lane_thumb.jpg */,
+				7065F5511C4706C200A2C74E /* lennix_full.jpg */,
+				7065F5521C4706C200A2C74E /* lennix_thumb.jpg */,
+				7065F5531C4706C200A2C74E /* meloni_full.jpg */,
+				7065F5541C4706C200A2C74E /* meloni_thumb.jpg */,
+				7065F5551C4706C200A2C74E /* schiff_full.jpg */,
+				7065F5561C4706C200A2C74E /* schiff_thumb.jpg */,
+				7065F5571C4706C200A2C74E /* shannon_full.jpg */,
+				7065F5581C4706C200A2C74E /* shannon_thumb.jpg */,
+				7065F5591C4706C200A2C74E /* traue_full.jpg */,
+				7065F55A1C4706C200A2C74E /* traue_thumb.jpg */,
+				7065F55B1C4706C200A2C74E /* zurer_full.jpg */,
+				7065F55C1C4706C200A2C74E /* zurer_thumb.jpg */,
 			);
 			path = Talent;
 			sourceTree = "<group>";
@@ -450,26 +495,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				4921D9BC1C3F04E400ED2AA6 /* home_extras_bg.jpg in Resources */,
-				4921D9F51C45EF0A00ED2AA6 /* ActorsCell.xib in Resources */,
 				4921D9D71C4068C900ED2AA6 /* extras_legacy.jpg in Resources */,
+				7065F56A1C4706C200A2C74E /* schiff_thumb.jpg in Resources */,
+				7065F5601C4706C200A2C74E /* crowe_thumb.jpg in Resources */,
 				4921D9D51C4068C900ED2AA6 /* extras_galleries.jpg in Resources */,
 				4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */,
+				7065F56F1C4706C200A2C74E /* zurer_full.jpg in Resources */,
+				7065F5651C4706C200A2C74E /* lennix_full.jpg in Resources */,
 				701B02681C45A28A0020DCD1 /* cornfield.png in Resources */,
 				4921D9C01C3F04E400ED2AA6 /* home_extras_shop.jpg in Resources */,
+				7065F5691C4706C200A2C74E /* schiff_full.jpg in Resources */,
 				4921D9D61C4068C900ED2AA6 /* extras_krypton.jpg in Resources */,
+				7065F56C1C4706C200A2C74E /* shannon_thumb.jpg in Resources */,
 				4921D9C11C3F04E400ED2AA6 /* menu_bg.jpg in Resources */,
 				4921D9BF1C3F04E400ED2AA6 /* home_extras_maps.jpg in Resources */,
-				4921D9FD1C45F12000ED2AA6 /* kevin.jpg in Resources */,
 				701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */,
+				7065F5621C4706C200A2C74E /* fishburne_thumb.jpg in Resources */,
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
 				4921D9D31C4068C900ED2AA6 /* extras_actors.jpg in Resources */,
+				7065F55E1C4706C200A2C74E /* costner_thumb.jpg in Resources */,
 				4921D97C1C3EFD0B00ED2AA6 /* Main.storyboard in Resources */,
+				7065F55F1C4706C200A2C74E /* crowe_full.jpg in Resources */,
+				7065F5611C4706C200A2C74E /* fishburne_full.jpg in Resources */,
+				7065F5681C4706C200A2C74E /* meloni_thumb.jpg in Resources */,
 				4921D9DB1C4068C900ED2AA6 /* extras_universe.jpg in Resources */,
 				4921D9C21C3F04E400ED2AA6 /* nav_extras.jpg in Resources */,
+				7065F56D1C4706C200A2C74E /* traue_full.jpg in Resources */,
 				4921D9C31C3F04E400ED2AA6 /* nav_home.jpg in Resources */,
 				4921D9BB1C3F04E400ED2AA6 /* home_bg.jpg in Resources */,
-				4921D9FB1C45F12000ED2AA6 /* diane.jpg in Resources */,
 				4921D9BE1C3F04E400ED2AA6 /* home_extras_cast.jpg in Resources */,
+				7065F55D1C4706C200A2C74E /* costner_full.jpg in Resources */,
+				7065F5641C4706C200A2C74E /* lane_thumb.jpg in Resources */,
 				4921D9D91C4068C900ED2AA6 /* extras_scenes.jpg in Resources */,
 				707E10941C40996200FCF81C /* adams.jpg in Resources */,
 				707E10921C4097C500FCF81C /* cavill_thumb.jpg in Resources */,
@@ -478,10 +534,14 @@
 				4921D9BD1C3F04E400ED2AA6 /* home_extras_bts.jpg in Resources */,
 				4921D9D81C4068C900ED2AA6 /* extras_places.jpg in Resources */,
 				4921D9D41C4068C900ED2AA6 /* extras_bts.jpg in Resources */,
-				4921D9FE1C45F12000ED2AA6 /* micheal.jpg in Resources */,
-				4921D9FC1C45F12000ED2AA6 /* henry.jpg in Resources */,
+				7065F5461C46FCC500A2C74E /* TalentTableViewCell.xib in Resources */,
+				7065F5671C4706C200A2C74E /* meloni_full.jpg in Resources */,
+				7065F56E1C4706C200A2C74E /* traue_thumb.jpg in Resources */,
+				7065F5701C4706C200A2C74E /* zurer_thumb.jpg in Resources */,
+				7065F5631C4706C200A2C74E /* lane_full.jpg in Resources */,
 				4921D9C41C3F04E400ED2AA6 /* nav_scenes.jpg in Resources */,
-				4921D9FF1C45F12000ED2AA6 /* russell.jpg in Resources */,
+				7065F56B1C4706C200A2C74E /* shannon_full.jpg in Resources */,
+				7065F5661C4706C200A2C74E /* lennix_thumb.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +577,7 @@
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
+				7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */,
 				70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
@@ -524,7 +585,6 @@
 				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
-				707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

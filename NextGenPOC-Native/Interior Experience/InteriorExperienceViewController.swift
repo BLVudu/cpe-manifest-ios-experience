@@ -14,11 +14,20 @@ class InteriorExperienceViewController: UIViewController {
     @IBOutlet weak var extrasContainerView: UIView!
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
+    
+    override func viewDidLoad() {
+        extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
+        updatePlayerConstraints()
+    }
+    
+    func updatePlayerConstraints() {
+        playerToExtrasConstarint.active = !extrasContainerView.hidden
+        playerToSuperviewConstraint.active = !playerToExtrasConstarint.active
+    }
 
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
-        playerToExtrasConstarint.active = !extrasContainerView.hidden
-        playerToSuperviewConstraint.active = !playerToExtrasConstarint.active
+        updatePlayerConstraints()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
