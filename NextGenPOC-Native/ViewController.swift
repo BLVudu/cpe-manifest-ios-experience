@@ -24,6 +24,9 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     let leftCellPadding:CGFloat = 50.0
     let topSpacePadding:CGFloat = 300.0
     let cellSpacing:CGFloat = 5.0
+    var yOffset: CGFloat = 0
+    
+    var isPro: Bool = false
     
     var width: CGFloat = 0.0
     var height: CGFloat = 0.0
@@ -45,6 +48,14 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         let extraMaps = UIImageView(image: UIImage(named: "home_extras_maps.jpg")!)
         let extraShop = UIImageView(image: UIImage(named: "home_extras_shop.jpg")!)
         
+        if ((UIDevice.currentDevice().userInterfaceIdiom == .Pad && (UIScreen.mainScreen().bounds.height == 1366 || UIScreen.mainScreen().bounds.width == 1366))) {
+            self.isPro = true
+            self.yOffset = 100.0
+            
+        } else {
+            self.yOffset = -25.0
+        }
+        
         
         if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeLeft || UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight)
         {
@@ -58,8 +69,8 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
             self.width = (UIScreen.mainScreen().bounds.width -
                 (rightCellPadding + leftCellPadding + cellSpacing))/2
             print(self.width)
-            self.height = ((UIScreen.mainScreen().bounds.height)/2) -
-                (topSpacePadding+cellSpacing)
+            self.height = (UIScreen.mainScreen().bounds.height -
+                (topSpacePadding+cellSpacing))/4
             print(self.height)
             
         }
@@ -71,10 +82,10 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         //CGRects for the extra images are hard coded based on the screen size
         
-        extraBTS.frame = CGRectMake(rightCellPadding, 50, self.width, self.height)
-        extraMaps.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, 50, self.width, self.height)
-        extraCast.frame = CGRectMake(rightCellPadding, topSpacePadding-25, self.width, self.height)
-        extraShop.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, topSpacePadding-25, self.width, self.height)
+        extraBTS.frame = CGRectMake(rightCellPadding, 80, self.width, self.height)
+        extraMaps.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, 80, self.width, self.height)
+        extraCast.frame = CGRectMake(rightCellPadding, (topSpacePadding+self.yOffset), self.width, self.height)
+        extraShop.frame = CGRectMake(rightCellPadding+self.width+cellSpacing, (topSpacePadding+self.yOffset), self.width, self.height)
         
         self.extView.addSubview(extraBG)
         self.extView.addSubview(extraBTS)
