@@ -14,6 +14,7 @@ class ExtrasCell: UICollectionViewCell {
     
     @IBOutlet var extraImg: UIImageView!
     
+    @IBOutlet weak var extrasTitle: UILabel!
 }
 
 
@@ -42,6 +43,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var actorsView: UITableView!
     
     let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
+    //let extras
     
     let actorImgs = ["henry.jpg","adams.jpg","micheal.jpg","russell.jpg","diane.jpg","kevin.jpg"]
     
@@ -142,6 +144,12 @@ extension ExtrasViewController: ExtrasLayoutDelegate{
         withWidth width: CGFloat) -> CGFloat {
             
             return 500.0
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+    heightForLabelAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
+    {
+        return 100.0
     }
     
     

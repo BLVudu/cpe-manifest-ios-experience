@@ -73,7 +73,30 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07z-m2-idw">
                                                 <rect key="frame" x="0.0" y="290" width="351" height="290"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dyi-W9-yh4">
+                                                        <rect key="frame" x="0.0" y="0.0" width="351" height="290"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SgL-pC-zGA">
+                                                        <rect key="frame" x="8" y="162" width="150" height="130"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eu0-h5-8Wd">
+                                                        <rect key="frame" x="191" y="162" width="160" height="130"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I75-yq-PQb">
+                                                        <rect key="frame" x="8" y="26" width="150" height="130"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gy6-CR-AAk">
+                                                        <rect key="frame" x="191" y="26" width="160" height="130"/>
+                                                    </imageView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="dyi-W9-yh4" firstAttribute="top" secondItem="07z-m2-idw" secondAttribute="top" id="Tjh-Rf-H7Y"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dyi-W9-yh4" secondAttribute="bottom" id="WYo-zF-Fq8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dyi-W9-yh4" secondAttribute="trailing" id="XQD-qy-MHE"/>
+                                                    <constraint firstItem="dyi-W9-yh4" firstAttribute="leading" secondItem="07z-m2-idw" secondAttribute="leading" id="jbR-ST-hPg"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -186,7 +209,7 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TalentTableViewCell" id="k45-7h-s3M" customClass="TalentTableViewCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="66" width="105" height="95"/>
+                                        <rect key="frame" x="0.0" y="65.5" width="105" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k45-7h-s3M" id="Mt3-ic-H3Q">
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="95"/>
@@ -406,15 +429,21 @@
                                         <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGenPOC_Native" customModuleProvider="target"/>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="0.0" width="325" height="300"/>
+                                                <rect key="frame" x="17.5" y="0.0" width="325" height="300"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="300"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-ch-Vpd">
-                                                            <rect key="frame" x="0.0" y="0.0" width="325" height="300"/>
+                                                            <rect key="frame" x="0.0" y="44" width="325" height="256"/>
                                                         </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICg-dJ-Y0x">
+                                                            <rect key="frame" x="8" y="17" width="309" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -423,7 +452,7 @@
                                                     <constraint firstItem="wFL-ch-Vpd" firstAttribute="leading" secondItem="cbd-U8-pcw" secondAttribute="leading" id="43O-24-9sy"/>
                                                     <constraint firstAttribute="trailingMargin" secondItem="wFL-ch-Vpd" secondAttribute="trailing" constant="-8" id="Gs7-om-1Or"/>
                                                     <constraint firstAttribute="bottom" secondItem="wFL-ch-Vpd" secondAttribute="bottom" id="JRf-tS-Xbs"/>
-                                                    <constraint firstItem="wFL-ch-Vpd" firstAttribute="top" secondItem="cbd-U8-pcw" secondAttribute="top" id="S3X-OB-NcX"/>
+                                                    <constraint firstItem="wFL-ch-Vpd" firstAttribute="top" secondItem="cbd-U8-pcw" secondAttribute="top" constant="44" id="S3X-OB-NcX"/>
                                                 </constraints>
                                                 <size key="customSize" width="325" height="300"/>
                                                 <connections>

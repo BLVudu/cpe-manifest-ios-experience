@@ -14,6 +14,9 @@ protocol ExtrasLayoutDelegate {
 
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath:NSIndexPath , withWidth:CGFloat) -> CGFloat
     
+    func collectionView(collectionView: UICollectionView,
+        heightForLabelAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
+    
 }
 
 class ExtrasLayoutAttributes:UICollectionViewLayoutAttributes {
@@ -73,7 +76,6 @@ class ExtrasLayout: UICollectionViewLayout {
             
            
             let columnWidth = contentWidth / CGFloat(numberOfColumns)
-            print (contentWidth)
             var xOffset = [CGFloat]()
             for column in 0 ..< numberOfColumns {
                 xOffset.append(CGFloat(column) * columnWidth )
@@ -87,6 +89,8 @@ class ExtrasLayout: UICollectionViewLayout {
                  
                 let width = columnWidth - cellPadding*2
                 let photoHeight = delegate.collectionView(collectionView!, heightForPhotoAtIndexPath: indexPath , withWidth:width)
+                let annotationHeight = delegate.collectionView(collectionView!,
+                    heightForLabelAtIndexPath: indexPath, withWidth: width)
                 let height = cellPadding +  photoHeight +  cellPadding
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = CGRectInset(frame, cellPadding, cellPadding)
