@@ -11,13 +11,9 @@ import UIKit
 class TalentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var talentImageView: RoundImageView!
-    @IBOutlet weak var talentNameLabel: UILabel!
-    @IBOutlet weak var talentRoleLabel: UILabel!
     
     var talent: Talent? = nil {
         didSet {
-            talentNameLabel.text = talent?.name
-            talentRoleLabel.text = talent?.role
             if talent?.thumbnailImage != nil {
                 talentImageView.image = UIImage(named: talent!.thumbnailImage!)
             }

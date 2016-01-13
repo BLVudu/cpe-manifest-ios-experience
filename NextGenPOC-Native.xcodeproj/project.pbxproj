@@ -42,15 +42,23 @@
 		4921D9FD1C45F12000ED2AA6 /* kevin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9F81C45F12000ED2AA6 /* kevin.jpg */; };
 		4921D9FE1C45F12000ED2AA6 /* micheal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9F91C45F12000ED2AA6 /* micheal.jpg */; };
 		4921D9FF1C45F12000ED2AA6 /* russell.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9FA1C45F12000ED2AA6 /* russell.jpg */; };
+		701B02681C45A28A0020DCD1 /* cornfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 701B02671C45A28A0020DCD1 /* cornfield.png */; };
+		701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */; };
+		701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */; };
+		701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */; };
+		701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */; };
+		701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */; };
+		701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */; };
 		707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E107E1C4076EC00FCF81C /* TalentTableView.swift */; };
 		707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10801C40770D00FCF81C /* TalentTableViewCell.swift */; };
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
-		707E10871C407F6600FCF81C /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */; };
+		707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */; };
 		707E108A1C40820500FCF81C /* Talent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10891C40820500FCF81C /* Talent.swift */; };
 		707E108C1C408F8E00FCF81C /* TalentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E108B1C408F8E00FCF81C /* TalentDetailView.swift */; };
 		707E10911C4097C500FCF81C /* cavill_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E108F1C4097C500FCF81C /* cavill_full.jpg */; };
 		707E10921C4097C500FCF81C /* cavill_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10901C4097C500FCF81C /* cavill_thumb.jpg */; };
 		707E10941C40996200FCF81C /* adams.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707E10931C40996200FCF81C /* adams.jpg */; };
+		70B1E24A1C460DF50044FFD3 /* SceneDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,15 +120,26 @@
 		4921D9F81C45F12000ED2AA6 /* kevin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kevin.jpg; sourceTree = "<group>"; };
 		4921D9F91C45F12000ED2AA6 /* micheal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = micheal.jpg; sourceTree = "<group>"; };
 		4921D9FA1C45F12000ED2AA6 /* russell.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = russell.jpg; sourceTree = "<group>"; };
+		701B02671C45A28A0020DCD1 /* cornfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cornfield.png; sourceTree = "<group>"; };
+		701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCellView.swift; sourceTree = "<group>"; };
+		701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SceneDetailCellView.xib; sourceTree = "<group>"; };
+		701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
+		701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WBVideoPlayerExtensions.swift; sourceTree = "<group>"; };
+		701B028C1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBVideoPlayerPlaybackView.h; sourceTree = "<group>"; };
+		701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBVideoPlayerPlaybackView.m; sourceTree = "<group>"; };
+		701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBVideoPlayerViewController.h; sourceTree = "<group>"; };
+		701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBVideoPlayerViewController.m; sourceTree = "<group>"; };
+		701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NextGen-Bridging-Header.h"; sourceTree = "<group>"; };
 		707E107E1C4076EC00FCF81C /* TalentTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableView.swift; sourceTree = "<group>"; };
 		707E10801C40770D00FCF81C /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
-		707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
+		707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceExtrasViewController.swift; sourceTree = "<group>"; };
 		707E10891C40820500FCF81C /* Talent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talent.swift; sourceTree = "<group>"; };
 		707E108B1C408F8E00FCF81C /* TalentDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailView.swift; sourceTree = "<group>"; };
 		707E108F1C4097C500FCF81C /* cavill_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cavill_full.jpg; sourceTree = "<group>"; };
 		707E10901C4097C500FCF81C /* cavill_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cavill_thumb.jpg; sourceTree = "<group>"; };
 		707E10931C40996200FCF81C /* adams.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = adams.jpg; sourceTree = "<group>"; };
+		70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +202,7 @@
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
 				4921D97D1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld */,
+				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
 			);
 			path = "NextGenPOC-Native";
 			sourceTree = "<group>";
@@ -211,6 +231,7 @@
 				4921D9C61C40508D00ED2AA6 /* Home Screen */,
 				4921D9C71C4050A100ED2AA6 /* Extras */,
 				707E108E1C4097BD00FCF81C /* Talent */,
+				701B02661C45A27D0020DCD1 /* Scene */,
 			);
 			name = Resources;
 			path = "NextGenPOC-Native/Resources";
@@ -249,9 +270,36 @@
 			path = Extras;
 			sourceTree = "<group>";
 		};
+		701B02661C45A27D0020DCD1 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				701B02671C45A28A0020DCD1 /* cornfield.png */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		701B02711C45C8990020DCD1 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */,
+				701B028C1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.h */,
+				701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */,
+				701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */,
+				701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		707E107D1C4076BF00FCF81C /* Interior Experience */ = {
 			isa = PBXGroup;
 			children = (
+				701B02711C45C8990020DCD1 /* Player */,
+				707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */,
+				701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */,
+				701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */,
+				701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */,
+				70B1E2491C460DF50044FFD3 /* SceneDetailView.swift */,
+				707E108B1C408F8E00FCF81C /* TalentDetailView.swift */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
 				707E10801C40770D00FCF81C /* TalentTableViewCell.swift */,
 				707E10861C407F6600FCF81C /* InteriorExperienceViewController.swift */,
@@ -402,11 +450,13 @@
 				4921D9D71C4068C900ED2AA6 /* extras_legacy.jpg in Resources */,
 				4921D9D51C4068C900ED2AA6 /* extras_galleries.jpg in Resources */,
 				4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */,
+				701B02681C45A28A0020DCD1 /* cornfield.png in Resources */,
 				4921D9C01C3F04E400ED2AA6 /* home_extras_shop.jpg in Resources */,
 				4921D9D61C4068C900ED2AA6 /* extras_krypton.jpg in Resources */,
 				4921D9C11C3F04E400ED2AA6 /* menu_bg.jpg in Resources */,
 				4921D9BF1C3F04E400ED2AA6 /* home_extras_maps.jpg in Resources */,
 				4921D9FD1C45F12000ED2AA6 /* kevin.jpg in Resources */,
+				701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */,
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
 				4921D9D31C4068C900ED2AA6 /* extras_actors.jpg in Resources */,
 				4921D97C1C3EFD0B00ED2AA6 /* Main.storyboard in Resources */,
@@ -454,12 +504,19 @@
 			files = (
 				4921D9791C3EFD0B00ED2AA6 /* ViewController.swift in Sources */,
 				4921D97F1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld in Sources */,
+				701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
+				701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */,
+				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
+				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceViewController.swift in Sources */,
+				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
+				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
+				70B1E24A1C460DF50044FFD3 /* SceneDetailView.swift in Sources */,
 				707E108C1C408F8E00FCF81C /* TalentDetailView.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 				707E10811C40770D00FCF81C /* TalentTableViewCell.swift in Sources */,
@@ -608,6 +665,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-Native";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextGenPOC-Native/NextGen-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -619,6 +677,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-Native";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextGenPOC-Native/NextGen-Bridging-Header.h";
 			};
 			name = Release;
 		};
