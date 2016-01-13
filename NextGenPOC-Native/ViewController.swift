@@ -57,10 +57,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         notificationCenter.addObserver(self, selector: "detectRotation", name: UIApplicationDidChangeStatusBarOrientationNotification, object: nil)
         
         
-        self.playerView.backgroundColor = UIColor (patternImage: UIImage(named: "home_bg.jpg")!)
-        
-        
-        
         //CGRects for the extra images are hard coded for now
         
         extraBTS.frame = CGRectMake(50, 80, 400.0, 300.0)

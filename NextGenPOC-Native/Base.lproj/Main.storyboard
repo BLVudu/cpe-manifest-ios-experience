@@ -46,20 +46,29 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKy-zB-UIg">
                                                 <rect key="frame" x="0.0" y="0.0" width="351" height="290"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-Mu-C6w">
-                                                        <rect key="frame" x="138" y="130" width="74" height="30"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                                        <state key="normal" title="Play Movie">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-16-mAf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="351" height="290"/>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-Mu-C6w">
+                                                        <rect key="frame" x="25" y="118" width="300" height="55"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="300" id="S71-xH-vzM"/>
+                                                            <constraint firstAttribute="height" constant="55" id="nar-8f-A9w"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Play Movie">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <segue destination="UvH-hR-t5e" kind="show" id="aeM-3y-kH4"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
-                                                        <rect key="frame" x="154" y="168" width="43" height="30"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                        <state key="normal" title="Extras">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
+                                                        <rect key="frame" x="75" y="183" width="200" height="45"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="OQ3-6Y-Yg6"/>
+                                                            <constraint firstAttribute="width" constant="200" id="XIa-PZ-GwT"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Extras">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
@@ -68,10 +77,14 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="centerY" secondItem="gKy-zB-UIg" secondAttribute="centerY" id="0Wl-43-JGE"/>
-                                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="centerX" secondItem="oBy-bL-9Wq" secondAttribute="centerX" id="Ap9-rW-84H"/>
-                                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="top" secondItem="D1l-Mu-C6w" secondAttribute="bottom" constant="8" symbolic="YES" id="H6m-wO-Ce5"/>
-                                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" constant="300" id="XWg-6U-SLV"/>
+                                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="top" secondItem="D1l-Mu-C6w" secondAttribute="bottom" constant="10" id="9NM-5v-OWw"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gA2-16-mAf" secondAttribute="bottom" id="LlW-y3-uxX"/>
+                                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="centerY" secondItem="gKy-zB-UIg" secondAttribute="centerY" id="MJC-wk-rjq"/>
+                                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="centerX" secondItem="D1l-Mu-C6w" secondAttribute="centerX" id="Upn-rc-DH1"/>
+                                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="centerX" secondItem="gKy-zB-UIg" secondAttribute="centerX" id="cSe-eK-Knp"/>
+                                                    <constraint firstItem="gA2-16-mAf" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" id="g7X-UE-nZc"/>
+                                                    <constraint firstItem="gA2-16-mAf" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="top" id="ucS-G1-kBG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gA2-16-mAf" secondAttribute="trailing" id="vTz-ex-Wiv"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07z-m2-idw">
@@ -167,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NPj-Ec-ilL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="340" y="1052"/>
+            <point key="canvasLocation" x="340" y="1065"/>
         </scene>
         <!--Interior Experience Extras View Controller-->
         <scene sceneID="BVC-ou-VD6">
@@ -362,7 +375,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVa-ua-FD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="340" y="1798"/>
+            <point key="canvasLocation" x="340" y="1820"/>
         </scene>
         <!--Extras View Controller-->
         <scene sceneID="dfS-i7-SlG">
@@ -678,8 +691,11 @@
     </scenes>
     <resources>
         <image name="Back" width="32" height="32"/>
+        <image name="Extras" width="489" height="118"/>
         <image name="Google-Cast-CC" width="518" height="294"/>
         <image name="Pause Button" width="32" height="32"/>
         <image name="Play Button" width="32" height="32"/>
+        <image name="Play Movie" width="1007" height="196"/>
+        <image name="home_bg.jpg" width="1024" height="768"/>
     </resources>
 </document>
