@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -11,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -24,10 +23,10 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fwR-Rc-p7j">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="580"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="580"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="400" id="DF8-Zv-Qc8"/>
+                                            <constraint firstAttribute="width" constant="250" id="DF8-Zv-Qc8"/>
                                             <constraint firstAttribute="width" constant="240" id="aj4-Eh-uP9"/>
                                         </constraints>
                                         <variation key="default">
@@ -41,16 +40,16 @@
                                         </connections>
                                     </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fkQ-3C-KOh">
-                                        <rect key="frame" x="399" y="0.0" width="201" height="580"/>
+                                        <rect key="frame" x="249" y="0.0" width="351" height="580"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKy-zB-UIg">
-                                                <rect key="frame" x="0.0" y="0.0" width="201" height="290"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="351" height="290"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-16-mAf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="201" height="290"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="351" height="290"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-Mu-C6w">
-                                                        <rect key="frame" x="-50" y="118" width="300" height="55"/>
+                                                        <rect key="frame" x="25" y="118" width="300" height="55"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="300" id="S71-xH-vzM"/>
                                                             <constraint firstAttribute="height" constant="55" id="nar-8f-A9w"/>
@@ -63,7 +62,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
-                                                        <rect key="frame" x="0.0" y="183" width="200" height="45"/>
+                                                        <rect key="frame" x="75" y="183" width="200" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="OQ3-6Y-Yg6"/>
                                                             <constraint firstAttribute="width" constant="200" id="XIa-PZ-GwT"/>
@@ -87,7 +86,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="gA2-16-mAf" secondAttribute="trailing" id="vTz-ex-Wiv"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07z-m2-idw">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07z-m2-idw">
                                                 <rect key="frame" x="0.0" y="290" width="351" height="290"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_extras_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dyi-W9-yh4">
@@ -186,7 +185,7 @@
         <!--Interior Experience View Controller-->
         <scene sceneID="WtI-vT-Rth">
             <objects>
-                <viewController id="UvH-hR-t5e" customClass="InteriorExperienceViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UvH-hR-t5e" customClass="InteriorExperienceViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s8l-t7-E5d"/>
                         <viewControllerLayoutGuide type="bottom" id="n6B-Cb-k4k"/>
@@ -235,7 +234,7 @@
         <!--Interior Experience Extras View Controller-->
         <scene sceneID="BVC-ou-VD6">
             <objects>
-                <viewController id="2KS-OB-0Ev" customClass="InteriorExperienceExtrasViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2KS-OB-0Ev" customClass="InteriorExperienceExtrasViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FRX-EG-0Va"/>
                         <viewControllerLayoutGuide type="bottom" id="6Aw-WG-9Xa"/>
@@ -244,7 +243,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-Pl-Rxu" customClass="TalentTableView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-Pl-Rxu" customClass="TalentTableView" customModule="NextGen" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="105" height="600"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -298,7 +297,7 @@
         <!--Talent Detail View Controller-->
         <scene sceneID="1uV-mF-x4a">
             <objects>
-                <viewController id="enc-ld-Xnm" customClass="TalentDetailViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="enc-ld-Xnm" customClass="TalentDetailViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lb3-lE-FP4"/>
                         <viewControllerLayoutGuide type="bottom" id="N4I-TR-RTK"/>
@@ -339,7 +338,7 @@
         <!--Extras View Controller-->
         <scene sceneID="dfS-i7-SlG">
             <objects>
-                <viewController id="0Ub-1E-w0a" customClass="ExtrasViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0Ub-1E-w0a" customClass="ExtrasViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1Qn-Pd-QBx"/>
                         <viewControllerLayoutGuide type="bottom" id="JqG-I8-Xjt"/>
@@ -365,7 +364,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YY0-2g-OVu">
                                 <rect key="frame" x="0.0" y="40" width="600" height="560"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-lf-5Cb" customClass="TalentTableView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-lf-5Cb" customClass="TalentTableView" customModule="NextGen" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="560"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <connections>
@@ -376,10 +375,10 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-Cb-zKQ">
                                         <rect key="frame" x="240" y="0.0" width="360" height="560"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGenPOC_Native" customModuleProvider="target"/>
+                                        <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGen" customModuleProvider="target"/>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="17.5" y="0.0" width="325" height="250"/>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGen" customModuleProvider="target">
+                                                <rect key="frame" x="18" y="0.0" width="325" height="250"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="250"/>
@@ -449,7 +448,7 @@
         <!--Video Player View Controller-->
         <scene sceneID="fcf-Td-6zT">
             <objects>
-                <viewController id="FsK-dw-pgC" customClass="VideoPlayerViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FsK-dw-pgC" customClass="VideoPlayerViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fH4-Gq-ae8"/>
                         <viewControllerLayoutGuide type="bottom" id="hPT-Z4-V6I"/>
@@ -659,7 +658,7 @@
         <!--Scene Detail View Controller-->
         <scene sceneID="cmR-TS-D57">
             <objects>
-                <viewController id="8tB-3R-mpH" customClass="SceneDetailViewController" customModule="NextGenPOC_Native" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8tB-3R-mpH" customClass="SceneDetailViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ErQ-eT-hkd"/>
                         <viewControllerLayoutGuide type="bottom" id="C1R-wk-tIU"/>
@@ -671,14 +670,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhY-e7-orR" userLabel="Scene Detail Cell Container">
                                 <rect key="frame" x="0.0" y="30" width="485" height="570"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-Y2-5g4" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-Y2-5g4" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="189" height="280"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE TRIVIA"/>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dq-CQ-RGU" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dq-CQ-RGU" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="290" width="311" height="280"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE GALLERY"/>
@@ -686,7 +685,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cV-Hg-Ist" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cV-Hg-Ist" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
                                         <rect key="frame" x="320" y="290" width="165" height="280"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SHOP THIS SCENE"/>
@@ -694,7 +693,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNJ-8r-bZx" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGenPOC_Native" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNJ-8r-bZx" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
                                         <rect key="frame" x="199" y="-12" width="286" height="292"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE LOCATION"/>

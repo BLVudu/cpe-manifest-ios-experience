@@ -95,7 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4921D9731C3EFD0B00ED2AA6 /* NextGenPOC-Native.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NextGenPOC-Native.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4921D9731C3EFD0B00ED2AA6 /* NextGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4921D97B1C3EFD0B00ED2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,10 +103,10 @@
 		4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4921D9831C3EFD0B00ED2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4921D9851C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4921D98A1C3EFD0B00ED2AA6 /* NextGenPOC-NativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NextGenPOC-NativeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4921D98A1C3EFD0B00ED2AA6 /* NextGen.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextGen.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D98E1C3EFD0B00ED2AA6 /* NextGenPOC_NativeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGenPOC_NativeTests.swift; sourceTree = "<group>"; };
 		4921D9901C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4921D9951C3EFD0B00ED2AA6 /* NextGenPOC-NativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NextGenPOC-NativeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4921D9951C3EFD0B00ED2AA6 /* NextGen.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextGen.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D9991C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGenPOC_NativeUITests.swift; sourceTree = "<group>"; };
 		4921D99B1C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4921D9B11C3F04E400ED2AA6 /* home_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_bg.jpg; sourceTree = "<group>"; };
@@ -213,9 +213,9 @@
 		4921D9741C3EFD0B00ED2AA6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4921D9731C3EFD0B00ED2AA6 /* NextGenPOC-Native.app */,
-				4921D98A1C3EFD0B00ED2AA6 /* NextGenPOC-NativeTests.xctest */,
-				4921D9951C3EFD0B00ED2AA6 /* NextGenPOC-NativeUITests.xctest */,
+				4921D9731C3EFD0B00ED2AA6 /* NextGen.app */,
+				4921D98A1C3EFD0B00ED2AA6 /* NextGen.xctest */,
+				4921D9951C3EFD0B00ED2AA6 /* NextGen.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -390,9 +390,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4921D9721C3EFD0B00ED2AA6 /* NextGenPOC-Native */ = {
+		4921D9721C3EFD0B00ED2AA6 /* NextGen */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4921D99E1C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-Native" */;
+			buildConfigurationList = 4921D99E1C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGen" */;
 			buildPhases = (
 				4921D96F1C3EFD0B00ED2AA6 /* Sources */,
 				4921D9701C3EFD0B00ED2AA6 /* Frameworks */,
@@ -402,14 +402,14 @@
 			);
 			dependencies = (
 			);
-			name = "NextGenPOC-Native";
+			name = NextGen;
 			productName = "NextGenPOC-Native";
-			productReference = 4921D9731C3EFD0B00ED2AA6 /* NextGenPOC-Native.app */;
+			productReference = 4921D9731C3EFD0B00ED2AA6 /* NextGen.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4921D9891C3EFD0B00ED2AA6 /* NextGenPOC-NativeTests */ = {
+		4921D9891C3EFD0B00ED2AA6 /* NextGenTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4921D9A11C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-NativeTests" */;
+			buildConfigurationList = 4921D9A11C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenTests" */;
 			buildPhases = (
 				4921D9861C3EFD0B00ED2AA6 /* Sources */,
 				4921D9871C3EFD0B00ED2AA6 /* Frameworks */,
@@ -420,14 +420,14 @@
 			dependencies = (
 				4921D98C1C3EFD0B00ED2AA6 /* PBXTargetDependency */,
 			);
-			name = "NextGenPOC-NativeTests";
+			name = NextGenTests;
 			productName = "NextGenPOC-NativeTests";
-			productReference = 4921D98A1C3EFD0B00ED2AA6 /* NextGenPOC-NativeTests.xctest */;
+			productReference = 4921D98A1C3EFD0B00ED2AA6 /* NextGen.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4921D9941C3EFD0B00ED2AA6 /* NextGenPOC-NativeUITests */ = {
+		4921D9941C3EFD0B00ED2AA6 /* NextGenUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4921D9A41C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-NativeUITests" */;
+			buildConfigurationList = 4921D9A41C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenUITests" */;
 			buildPhases = (
 				4921D9911C3EFD0B00ED2AA6 /* Sources */,
 				4921D9921C3EFD0B00ED2AA6 /* Frameworks */,
@@ -438,9 +438,9 @@
 			dependencies = (
 				4921D9971C3EFD0B00ED2AA6 /* PBXTargetDependency */,
 			);
-			name = "NextGenPOC-NativeUITests";
+			name = NextGenUITests;
 			productName = "NextGenPOC-NativeUITests";
-			productReference = 4921D9951C3EFD0B00ED2AA6 /* NextGenPOC-NativeUITests.xctest */;
+			productReference = 4921D9951C3EFD0B00ED2AA6 /* NextGen.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -466,7 +466,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4921D96E1C3EFD0B00ED2AA6 /* Build configuration list for PBXProject "NextGenPOC-Native" */;
+			buildConfigurationList = 4921D96E1C3EFD0B00ED2AA6 /* Build configuration list for PBXProject "NextGen" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -479,9 +479,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4921D9721C3EFD0B00ED2AA6 /* NextGenPOC-Native */,
-				4921D9891C3EFD0B00ED2AA6 /* NextGenPOC-NativeTests */,
-				4921D9941C3EFD0B00ED2AA6 /* NextGenPOC-NativeUITests */,
+				4921D9721C3EFD0B00ED2AA6 /* NextGen */,
+				4921D9891C3EFD0B00ED2AA6 /* NextGenTests */,
+				4921D9941C3EFD0B00ED2AA6 /* NextGenUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -605,12 +605,12 @@
 /* Begin PBXTargetDependency section */
 		4921D98C1C3EFD0B00ED2AA6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4921D9721C3EFD0B00ED2AA6 /* NextGenPOC-Native */;
+			target = 4921D9721C3EFD0B00ED2AA6 /* NextGen */;
 			targetProxy = 4921D98B1C3EFD0B00ED2AA6 /* PBXContainerItemProxy */;
 		};
 		4921D9971C3EFD0B00ED2AA6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4921D9721C3EFD0B00ED2AA6 /* NextGenPOC-Native */;
+			target = 4921D9721C3EFD0B00ED2AA6 /* NextGen */;
 			targetProxy = 4921D9961C3EFD0B00ED2AA6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -671,9 +671,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -710,8 +711,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -722,10 +724,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NextGen;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NextGenPOC-Native/NextGen-Bridging-Header.h";
 			};
 			name = Debug;
@@ -734,10 +738,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NextGen;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NextGenPOC-Native/NextGen-Bridging-Header.h";
 			};
 			name = Release;
@@ -749,8 +755,8 @@
 				INFOPLIST_FILE = "NextGenPOC-NativeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextGenPOC-Native.app/NextGenPOC-Native";
+				PRODUCT_NAME = NextGen;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextGen.app/NextGen";
 			};
 			name = Debug;
 		};
@@ -761,8 +767,8 @@
 				INFOPLIST_FILE = "NextGenPOC-NativeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextGenPOC-Native.app/NextGenPOC-Native";
+				PRODUCT_NAME = NextGen;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextGen.app/NextGen";
 			};
 			name = Release;
 		};
@@ -772,7 +778,7 @@
 				INFOPLIST_FILE = "NextGenPOC-NativeUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NextGen;
 				TEST_TARGET_NAME = "NextGenPOC-Native";
 				USES_XCTRUNNER = YES;
 			};
@@ -784,7 +790,7 @@
 				INFOPLIST_FILE = "NextGenPOC-NativeUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NextGen;
 				TEST_TARGET_NAME = "NextGenPOC-Native";
 				USES_XCTRUNNER = YES;
 			};
@@ -793,7 +799,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4921D96E1C3EFD0B00ED2AA6 /* Build configuration list for PBXProject "NextGenPOC-Native" */ = {
+		4921D96E1C3EFD0B00ED2AA6 /* Build configuration list for PBXProject "NextGen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4921D99C1C3EFD0B00ED2AA6 /* Debug */,
@@ -802,7 +808,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4921D99E1C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-Native" */ = {
+		4921D99E1C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4921D99F1C3EFD0B00ED2AA6 /* Debug */,
@@ -811,7 +817,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4921D9A11C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-NativeTests" */ = {
+		4921D9A11C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4921D9A21C3EFD0B00ED2AA6 /* Debug */,
@@ -820,7 +826,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4921D9A41C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenPOC-NativeUITests" */ = {
+		4921D9A41C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4921D9A51C3EFD0B00ED2AA6 /* Debug */,
