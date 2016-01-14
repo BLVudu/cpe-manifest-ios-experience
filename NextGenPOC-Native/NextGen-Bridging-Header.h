@@ -7,3 +7,5 @@
 //
 
 #import "WBVideoPlayerViewController.h"
+
+#import "SWRevealViewController.h"
