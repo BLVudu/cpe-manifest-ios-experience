@@ -191,7 +191,7 @@ extension ExtrasViewController: ExtrasLayoutDelegate{
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath,
         withWidth width: CGFloat) -> CGFloat {
             
-            return 500.0
+            return 250.0
     }
     
     func collectionView(collectionView: UICollectionView,

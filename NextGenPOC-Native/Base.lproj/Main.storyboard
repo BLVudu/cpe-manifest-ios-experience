@@ -24,10 +24,10 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fwR-Rc-p7j">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="580"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="580"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="DF8-Zv-Qc8"/>
+                                            <constraint firstAttribute="width" constant="400" id="DF8-Zv-Qc8"/>
                                             <constraint firstAttribute="width" constant="240" id="aj4-Eh-uP9"/>
                                         </constraints>
                                         <variation key="default">
@@ -41,16 +41,16 @@
                                         </connections>
                                     </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fkQ-3C-KOh">
-                                        <rect key="frame" x="249" y="0.0" width="351" height="580"/>
+                                        <rect key="frame" x="399" y="0.0" width="201" height="580"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKy-zB-UIg">
-                                                <rect key="frame" x="0.0" y="0.0" width="351" height="290"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="201" height="290"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-16-mAf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="351" height="290"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="201" height="290"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-Mu-C6w">
-                                                        <rect key="frame" x="25" y="118" width="300" height="55"/>
+                                                        <rect key="frame" x="-50" y="118" width="300" height="55"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="300" id="S71-xH-vzM"/>
                                                             <constraint firstAttribute="height" constant="55" id="nar-8f-A9w"/>
@@ -63,7 +63,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
-                                                        <rect key="frame" x="75" y="183" width="200" height="45"/>
+                                                        <rect key="frame" x="0.0" y="183" width="200" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="45" id="OQ3-6Y-Yg6"/>
                                                             <constraint firstAttribute="width" constant="200" id="XIa-PZ-GwT"/>
@@ -379,7 +379,7 @@
                                         <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGenPOC_Native" customModuleProvider="target"/>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGenPOC_Native" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="0.0" width="325" height="250"/>
+                                                <rect key="frame" x="17.5" y="0.0" width="325" height="250"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="250"/>
@@ -403,8 +403,14 @@
                                                     <constraint firstAttribute="trailingMargin" secondItem="wFL-ch-Vpd" secondAttribute="trailing" constant="-8" id="Gs7-om-1Or"/>
                                                     <constraint firstAttribute="bottom" secondItem="wFL-ch-Vpd" secondAttribute="bottom" id="JRf-tS-Xbs"/>
                                                     <constraint firstItem="wFL-ch-Vpd" firstAttribute="top" secondItem="cbd-U8-pcw" secondAttribute="top" constant="44" id="S3X-OB-NcX"/>
+                                                    <constraint firstItem="wFL-ch-Vpd" firstAttribute="width" secondItem="cbd-U8-pcw" secondAttribute="height" multiplier="16:9" constant="-119.4444444444444" id="iMb-29-USG"/>
                                                 </constraints>
                                                 <size key="customSize" width="325" height="250"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="Gs7-om-1Or"/>
+                                                    </mask>
+                                                </variation>
                                                 <connections>
                                                     <outlet property="extraImg" destination="wFL-ch-Vpd" id="IrI-jj-wtW"/>
                                                     <outlet property="extrasTitle" destination="ICg-dJ-Y0x" id="xmb-fl-Dzv"/>
