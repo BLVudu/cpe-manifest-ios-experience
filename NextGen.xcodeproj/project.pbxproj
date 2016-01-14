@@ -42,7 +42,12 @@
 		701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */; };
 		701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */; };
 		701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */; };
-		7065F5421C46DA7B00A2C74E /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */; };
+		701D69C11C48205B0047A67A /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C01C48205B0047A67A /* TalentDetailViewController.swift */; };
+		701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */; };
+		701D69C51C4824070047A67A /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C41C4824070047A67A /* Film.swift */; };
+		701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C71C482AF70047A67A /* NSURL+Utils.swift */; };
+		701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C91C482C210047A67A /* UIAlertController+Utils.swift */; };
+		701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69CB1C482E060047A67A /* UIImageView+Utils.swift */; };
 		7065F5441C46DC6800A2C74E /* SceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */; };
 		7065F5461C46FCC500A2C74E /* TalentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */; };
 		7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5471C47004100A2C74E /* TalentTableViewCell.swift */; };
@@ -141,7 +146,12 @@
 		701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBVideoPlayerViewController.h; sourceTree = "<group>"; };
 		701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBVideoPlayerViewController.m; sourceTree = "<group>"; };
 		701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NextGen-Bridging-Header.h"; sourceTree = "<group>"; };
-		7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailViewController.swift; sourceTree = "<group>"; };
+		701D69C01C48205B0047A67A /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailViewController.swift; sourceTree = "<group>"; };
+		701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmCollectionViewCell.swift; sourceTree = "<group>"; };
+		701D69C41C4824070047A67A /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		701D69C71C482AF70047A67A /* NSURL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Utils.swift"; sourceTree = "<group>"; };
+		701D69C91C482C210047A67A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utils.swift"; sourceTree = "<group>"; };
+		701D69CB1C482E060047A67A /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailViewController.swift; sourceTree = "<group>"; };
 		7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalentTableViewCell.xib; sourceTree = "<group>"; };
 		7065F5471C47004100A2C74E /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
@@ -232,7 +242,9 @@
 			children = (
 				707E107D1C4076BF00FCF81C /* Interior Experience */,
 				707E10831C40796000FCF81C /* Shared Views */,
+				701D69BF1C48205B0047A67A /* Shared Controllers */,
 				707E10881C4081F700FCF81C /* Models */,
+				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
 				4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
@@ -336,6 +348,24 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		701D69BF1C48205B0047A67A /* Shared Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				701D69C01C48205B0047A67A /* TalentDetailViewController.swift */,
+			);
+			path = "Shared Controllers";
+			sourceTree = "<group>";
+		};
+		701D69C61C482A900047A67A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				701D69C71C482AF70047A67A /* NSURL+Utils.swift */,
+				701D69C91C482C210047A67A /* UIAlertController+Utils.swift */,
+				701D69CB1C482E060047A67A /* UIImageView+Utils.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		707E107D1C4076BF00FCF81C /* Interior Experience */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,7 +377,6 @@
 				701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */,
 				701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
-				7065F5411C46DA7B00A2C74E /* TalentDetailViewController.swift */,
 				7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */,
 			);
 			path = "Interior Experience";
@@ -359,6 +388,7 @@
 				7065F5471C47004100A2C74E /* TalentTableViewCell.swift */,
 				707E10841C40797400FCF81C /* RoundImageView.swift */,
 				7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */,
+				701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -368,6 +398,7 @@
 			children = (
 				707E10891C40820500FCF81C /* Talent.swift */,
 				70C9E0B21C46CECE002D3B5A /* Video.swift */,
+				701D69C41C4824070047A67A /* Film.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -621,22 +652,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */,
 				4921D9791C3EFD0B00ED2AA6 /* ViewController.swift in Sources */,
 				4921D97F1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld in Sources */,
 				701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
 				701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */,
 				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
-				7065F5421C46DA7B00A2C74E /* TalentDetailViewController.swift in Sources */,
+				701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */,
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
+				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
+				701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
 				7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */,
 				70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */,
+				701D69C51C4824070047A67A /* Film.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
 				7065F5441C46DC6800A2C74E /* SceneDetailViewController.swift in Sources */,
+				701D69C11C48205B0047A67A /* TalentDetailViewController.swift in Sources */,
 				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,

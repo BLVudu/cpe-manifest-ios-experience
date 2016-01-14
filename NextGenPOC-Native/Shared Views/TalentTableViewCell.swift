@@ -20,6 +20,8 @@ class TalentTableViewCell: UITableViewCell {
             roleLabel?.text = talent?.role
             if talent?.thumbnailImage != nil {
                 talentImageView.image = UIImage(named: talent!.thumbnailImage!)
+            } else {
+                talentImageView.image = nil
             }
         }
     }
@@ -27,9 +29,7 @@ class TalentTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        talentImageView.image = nil
-        nameLabel?.text = ""
-        roleLabel?.text = ""
+        talent = nil
     }
     
     override func layoutSubviews() {
