@@ -10,11 +10,13 @@ import UIKit
 
 let TalentTableViewCellIdentifier = "TalentTableViewCell"
 
-class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TalentDetailViewPresenter {
     
     @IBOutlet weak var talentTableView: TalentTableView!
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet weak var sceneDetailView: UIView!
+    
+    var selectedIndexPath: NSIndexPath?
     
     var talentData = [
         [
@@ -63,6 +65,37 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         return nil
     }
     
+    func showTalentDetailView() {
+        if talentDetailView.hidden {
+            talentDetailView.alpha = 0
+            talentDetailView.hidden = false
+            
+            UIView.animateWithDuration(0.25, animations: {
+                self.talentDetailView.alpha = 1
+                self.sceneDetailView.alpha = 0
+            }, completion: { (Bool) -> Void in
+                self.sceneDetailView.hidden = true
+            })
+        }
+    }
+    
+    func hideTalentDetailView() {
+        if selectedIndexPath != nil {
+            talentTableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
+            selectedIndexPath = nil
+        }
+        
+        sceneDetailView.alpha = 0
+        sceneDetailView.hidden = false
+        
+        UIView.animateWithDuration(0.25, animations: {
+            self.talentDetailView.alpha = 0
+            self.sceneDetailView.alpha = 1
+            }, completion: { (Bool) -> Void in
+                self.talentDetailView.hidden = true
+        })
+    }
+    
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return talentData.count
@@ -86,10 +119,24 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         header.textLabel?.textColor = UIColor.whiteColor()
     }
     
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if indexPath == selectedIndexPath {
+            hideTalentDetailView()
+            return nil
+        }
+        
+        return indexPath
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
-        talentDetailView.hidden = false
-        sceneDetailView.hidden = true*/
+        selectedIndexPath = indexPath
+        talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
+        showTalentDetailView()
+    }
+    
+    // MARK: TalentDetailViewPresenter
+    func talentDetailViewShouldClose() {
+        hideTalentDetailView()
     }
 
 }
