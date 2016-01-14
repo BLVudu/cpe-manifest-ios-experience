@@ -3,7 +3,7 @@
 //  NextGenPOC-NativeTests
 //
 //  Created by Sedinam Gadzekpo on 1/7/16.
-//  Copyright © 2016 Sedinam Gadzekpo. All rights reserved.
+//  Copyright © 2016 Warner Bros. Entertainment, Inc.. All rights reserved.
 //
 
 import XCTest

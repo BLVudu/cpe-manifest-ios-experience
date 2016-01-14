@@ -3,7 +3,7 @@
 //  NextGenPOC-Native
 //
 //  Created by Sedinam Gadzekpo on 1/11/16.
-//  Copyright © 2016 Sedinam Gadzekpo. All rights reserved.
+//  Copyright © 2016 Warner Bros. Entertainment, Inc.. All rights reserved.
 //
 
 import UIKit

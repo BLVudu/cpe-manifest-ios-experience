@@ -451,7 +451,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "Sedinam Gadzekpo";
+				ORGANIZATIONNAME = "Warner Bros. Entertainment, Inc.";
 				TargetAttributes = {
 					4921D9721C3EFD0B00ED2AA6 = {
 						CreatedOnToolsVersion = 7.2;
