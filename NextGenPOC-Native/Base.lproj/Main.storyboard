@@ -366,7 +366,7 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="nfb-lf-5Cb" customClass="TalentTableView" customModule="NextGen" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="560"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="dataSource" destination="0Ub-1E-w0a" id="lYU-VV-QeJ"/>
                                             <outlet property="delegate" destination="0Ub-1E-w0a" id="3dK-Vn-tpl"/>
@@ -378,7 +378,7 @@
                                         <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGen" customModuleProvider="target"/>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGen" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="0.0" width="325" height="250"/>
+                                                <rect key="frame" x="17.5" y="0.0" width="325" height="250"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="250"/>
