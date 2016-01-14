@@ -15,9 +15,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var extView: UIView!
     @IBOutlet weak var playMovie: UIButton!
     @IBOutlet weak var extras: UIButton!
-    
-    @IBOutlet weak var menuButton: UIButton!
-    
     @IBOutlet var LtoR: UISwipeGestureRecognizer!
     @IBOutlet var RtoL: UISwipeGestureRecognizer!
     
@@ -30,16 +27,10 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         self.LtoR.direction = UISwipeGestureRecognizerDirection.Right
         self.RtoL.direction = UISwipeGestureRecognizerDirection.Left
         
-        
-        
-        if self.revealViewController() != nil {
-            self.menuButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents:UIControlEvents.TouchUpInside)
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
-        self.revealViewController().rearViewRevealWidth = 400
-        
-        
+        self.slideOutMenu.hidden = true
+        self.slideOutMenu.delegate = self
+        self.slideOutMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuItem")
+        self.slideOutMenu.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -84,6 +75,5 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-   
 }
 
