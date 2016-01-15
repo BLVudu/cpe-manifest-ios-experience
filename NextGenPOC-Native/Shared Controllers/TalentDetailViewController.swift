@@ -79,7 +79,7 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     // MARK: UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let film = (collectionView.cellForItemAtIndexPath(indexPath) as! FilmCollectionViewCell).film
         if film?.externalURL != nil {
             film!.externalURL!.promptLaunchBrowser()
