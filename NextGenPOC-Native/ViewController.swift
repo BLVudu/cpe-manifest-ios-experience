@@ -19,6 +19,7 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
     @IBOutlet var RtoL: UISwipeGestureRecognizer!
     
     
+    @IBOutlet weak var menuButton: UIButton!
     let navImages = ["nav_extras.jpg","nav_home.jpg","nav_scenes.jpg"]
     
     override func viewDidLoad() {
@@ -27,10 +28,21 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         self.LtoR.direction = UISwipeGestureRecognizerDirection.Right
         self.RtoL.direction = UISwipeGestureRecognizerDirection.Left
         
+        
+        if self.revealViewController() != nil {
+            self.menuButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
+        
+        self.revealViewController().rearViewRevealWidth = 300
+        
+        /*
         self.slideOutMenu.hidden = true
         self.slideOutMenu.delegate = self
         self.slideOutMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuItem")
         self.slideOutMenu.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
+*/
     }
     
     override func viewWillAppear(animated: Bool) {
