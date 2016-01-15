@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4903F9A91C48675100701479 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4903F9A81C48675100701479 /* menu.png */; };
+		4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */; };
 		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
 		4921D9791C3EFD0B00ED2AA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */; };
 		4921D97C1C3EFD0B00ED2AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */; };
@@ -102,6 +104,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4903F9A81C48675100701479 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuViewController.swift; sourceTree = "<group>"; };
 		4921D9731C3EFD0B00ED2AA6 /* NextGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +220,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4903F9A71C48675100701479 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				4903F9A81C48675100701479 /* menu.png */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		4921D96A1C3EFD0B00ED2AA6 = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +261,7 @@
 				707E10881C4081F700FCF81C /* Models */,
 				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
+				4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */,
 				4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
@@ -281,6 +294,7 @@
 		4921D9C51C3F04EE00ED2AA6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4903F9A71C48675100701479 /* Navigation */,
 				4921D9C61C40508D00ED2AA6 /* Home Screen */,
 				4921D9C71C4050A100ED2AA6 /* Extras */,
 				707E108E1C4097BD00FCF81C /* Talent */,
@@ -593,6 +607,7 @@
 				7065F55D1C4706C200A2C74E /* costner_full.jpg in Resources */,
 				7065F5641C4706C200A2C74E /* lane_thumb.jpg in Resources */,
 				4921D9D91C4068C900ED2AA6 /* extras_scenes.jpg in Resources */,
+				4903F9A91C48675100701479 /* menu.png in Resources */,
 				707E10941C40996200FCF81C /* adams.jpg in Resources */,
 				707E10921C4097C500FCF81C /* cavill_thumb.jpg in Resources */,
 				707E10911C4097C500FCF81C /* cavill_full.jpg in Resources */,
@@ -681,6 +696,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */,
+				4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */,
 				4921D9791C3EFD0B00ED2AA6 /* ViewController.swift in Sources */,
 				4921D97F1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld in Sources */,
 				701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */,
