@@ -9,52 +9,34 @@
 import UIKit
 import Darwin
 
-class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
     
-    @IBOutlet weak var slideOutMenu: UITableView!
-    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var backgroundContainerView: UIView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var extView: UIView!
-    @IBOutlet weak var playMovie: UIButton!
-    @IBOutlet weak var extras: UIButton!
     @IBOutlet weak var instructionsImageView: UIImageView!
-    @IBOutlet var LtoR: UISwipeGestureRecognizer!
-    @IBOutlet var RtoL: UISwipeGestureRecognizer!
     
+    @IBOutlet var backgroundContainerBottomConstraint: NSLayoutConstraint!
     @IBOutlet var titleTreatmentTopConstraint: NSLayoutConstraint!
     @IBOutlet var titleTreatmentLeftConstraint: NSLayoutConstraint!
     @IBOutlet var instructionsRightConstraint: NSLayoutConstraint!
     @IBOutlet var instructionsBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var menuButton: UIButton!
-    let navImages = ["nav_extras.jpg","nav_home.jpg","nav_scenes.jpg"]
-    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.LtoR.direction = UISwipeGestureRecognizerDirection.Right
-        self.RtoL.direction = UISwipeGestureRecognizerDirection.Left
-        
-        
+
         if self.revealViewController() != nil {
-            self.menuButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        
-        self.revealViewController().rearViewRevealWidth = 300
-        
-        /*
-        self.slideOutMenu.hidden = true
-        self.slideOutMenu.delegate = self
-        self.slideOutMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuItem")
-        self.slideOutMenu.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
-*/
+        self.revealViewController().rearViewRevealWidth = 250
+        backgroundContainerView.sendSubviewToBack(backgroundImageView)
     }
     
     override func viewWillAppear(animated: Bool) {
-        extView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
-        instructionsImageView.hidden = !extView.hidden
-        startInstructionsRotation()
+        updateExtrasViewVisibility()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,17 +46,23 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         let viewHeight = (extView.hidden ? screenSize.height : (screenSize.height / 2))
         titleTreatmentTopConstraint.constant = viewHeight * 0.4125
         titleTreatmentLeftConstraint.constant = screenSize.width * 0.2
-        instructionsBottomConstraint.constant = viewHeight * 0.1
-        instructionsRightConstraint.constant = screenSize.width * 0.1
+        instructionsBottomConstraint.constant = viewHeight * 0.05
+        instructionsRightConstraint.constant = screenSize.width * 0.05
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        updateExtrasViewVisibilityForInterfaceOrientation(toInterfaceOrientation)
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true;
+    func updateExtrasViewVisibility() {
+        updateExtrasViewVisibilityForInterfaceOrientation(UIApplication.sharedApplication().statusBarOrientation)
+    }
+    
+    func updateExtrasViewVisibilityForInterfaceOrientation(interfaceOrientation: UIInterfaceOrientation) {
+        extView.hidden = UIInterfaceOrientationIsLandscape(interfaceOrientation)
+        backgroundContainerBottomConstraint.active = !extView.hidden
+        instructionsImageView.hidden = !extView.hidden
+        startInstructionsRotation()
     }
     
     // MARK: Animations
@@ -101,37 +89,6 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 instructionsImageView.transform = transformationRotation
             }
         }
-    }
-    
-    @IBAction func slideMenu(recognizer: UISwipeGestureRecognizer) {
-        /*if(recognizer.direction == UISwipeGestureRecognizerDirection.Right){
-            
-            self.slideOutMenu.hidden = false
-        } else if (recognizer.direction == UISwipeGestureRecognizerDirection.Left) {
-            self.slideOutMenu.hidden = true
-        }*/
-    }
-    
-    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        extView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
-        instructionsImageView.hidden = !extView.hidden
-        startInstructionsRotation()
-    }
-    
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.navImages.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("menuItem", forIndexPath: indexPath) as UITableViewCell
-        let row = indexPath.row
-        cell.backgroundColor = UIColor(patternImage: UIImage(named: "menu_bg.jpg")!)
-        cell.imageView?.image = UIImage (named: navImages[row])
-        
-        
-        return cell
     }
     
 }
