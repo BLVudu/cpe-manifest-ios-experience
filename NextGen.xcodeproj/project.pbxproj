@@ -126,7 +126,7 @@
 		4921D9B81C3F04E400ED2AA6 /* nav_extras.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nav_extras.jpg; sourceTree = "<group>"; };
 		4921D9B91C3F04E400ED2AA6 /* nav_home.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nav_home.jpg; sourceTree = "<group>"; };
 		4921D9BA1C3F04E400ED2AA6 /* nav_scenes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nav_scenes.jpg; sourceTree = "<group>"; };
-		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = ../ExtrasViewController.swift; sourceTree = "<group>"; };
+		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGenPOC-Native/Extras/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4921D9CB1C4068C900ED2AA6 /* extras_bts.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_bts.jpg; sourceTree = "<group>"; };
 		4921D9CC1C4068C900ED2AA6 /* extras_galleries.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_galleries.jpg; sourceTree = "<group>"; };
 		4921D9CD1C4068C900ED2AA6 /* extras_krypton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_krypton.jpg; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 		4921D9D01C4068C900ED2AA6 /* extras_scenes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_scenes.jpg; sourceTree = "<group>"; };
 		4921D9D11C4068C900ED2AA6 /* extras_shopping.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_shopping.jpg; sourceTree = "<group>"; };
 		4921D9D21C4068C900ED2AA6 /* extras_universe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_universe.jpg; sourceTree = "<group>"; };
-		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = ../ExtrasLayout.swift; sourceTree = "<group>"; };
+		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = "NextGenPOC-Native/Extras/ExtrasLayout.swift"; sourceTree = SOURCE_ROOT; };
 		6C5BE24AF16D012C46DD45E3 /* Pods-NextGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextGen/Pods-NextGen.release.xcconfig"; sourceTree = "<group>"; };
 		701B02671C45A28A0020DCD1 /* cornfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cornfield.png; sourceTree = "<group>"; };
 		701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCellView.swift; sourceTree = "<group>"; };
@@ -242,6 +242,7 @@
 		4921D9751C3EFD0B00ED2AA6 /* NextGenPOC-Native */ = {
 			isa = PBXGroup;
 			children = (
+				70A1E08B1C486BCD0079779A /* Extras */,
 				707E107D1C4076BF00FCF81C /* Interior Experience */,
 				707E10831C40796000FCF81C /* Shared Views */,
 				701D69BF1C48205B0047A67A /* Shared Controllers */,
@@ -373,8 +374,6 @@
 			isa = PBXGroup;
 			children = (
 				701B02711C45C8990020DCD1 /* Player */,
-				4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */,
-				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
 				707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */,
 				701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */,
 				701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */,
@@ -434,6 +433,15 @@
 				7065F55C1C4706C200A2C74E /* zurer_thumb.jpg */,
 			);
 			path = Talent;
+			sourceTree = "<group>";
+		};
+		70A1E08B1C486BCD0079779A /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */,
+				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
+			);
+			path = Extras;
 			sourceTree = "<group>";
 		};
 		CD91B825F7748A9A9034E7EA /* Pods */ = {

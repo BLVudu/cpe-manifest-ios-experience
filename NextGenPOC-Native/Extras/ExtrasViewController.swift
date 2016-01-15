@@ -17,14 +17,16 @@ class ExtrasCell: UICollectionViewCell {
     @IBOutlet weak var extrasTitle: UILabel!
 }
 
-class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
+class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
     var isPresented = true
     
     
     @IBOutlet var extrasView: UICollectionView!
-    @IBOutlet weak var bannerView: UIView!
+    @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet weak var talentTableView: TalentTableView!
+    
+    var selectedIndexPath: NSIndexPath?
     
     let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
     let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Scenes","Shopping", "DC Universe"]
@@ -128,6 +130,42 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Dispose of any resources that can be recreated.
     }
     
+    func talentDetailViewController() -> TalentDetailViewController? {
+        for viewController in self.childViewControllers {
+            if viewController is TalentDetailViewController {
+                return viewController as? TalentDetailViewController
+            }
+        }
+        
+        return nil
+    }
+    
+    func showTalentDetailView() {
+        if talentDetailView.hidden {
+            talentDetailView.alpha = 0
+            talentDetailView.hidden = false
+            
+            UIView.animateWithDuration(0.25, animations: {
+                self.talentDetailView.alpha = 1
+            }, completion: { (Bool) -> Void in
+                    
+            })
+        }
+    }
+    
+    func hideTalentDetailView() {
+        if selectedIndexPath != nil {
+            talentTableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
+            selectedIndexPath = nil
+        }
+        
+        UIView.animateWithDuration(0.25, animations: {
+            self.talentDetailView.alpha = 0
+        }, completion: { (Bool) -> Void in
+                self.talentDetailView.hidden = true
+        })
+    }
+    
     override func prefersStatusBarHidden() -> Bool {
         return true;
     }
@@ -178,10 +216,24 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         header.textLabel?.textColor = UIColor.whiteColor()
     }
     
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if indexPath == selectedIndexPath {
+            hideTalentDetailView()
+            return nil
+        }
+        
+        return indexPath
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
-        talentDetailView.hidden = false
-        sceneDetailView.hidden = true*/
+        selectedIndexPath = indexPath
+        talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
+        showTalentDetailView()
+    }
+    
+    // MARK: TalentDetailViewPresenter
+    func talentDetailViewShouldClose() {
+        hideTalentDetailView()
     }
     
 }
