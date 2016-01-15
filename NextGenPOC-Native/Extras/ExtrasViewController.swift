@@ -19,9 +19,6 @@ class ExtrasCell: UICollectionViewCell {
 
 class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
-    var isPresented = true
-    
-    
     @IBOutlet var extrasView: UICollectionView!
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet weak var talentTableView: TalentTableView!
@@ -30,82 +27,6 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
     let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Scenes","Shopping", "DC Universe"]
-    
-    var talentData = [
-        [
-            "thumbnailImage": "cavill_thumb.jpg",
-            "fullImage": "cavill_full.jpg",
-            "name": "Henry Cavill",
-            "role": "Clark Kent/Kal-El"
-        ],
-        [
-            "thumbnailImage": "adams.jpg",
-            "fullImage": "adams.jpg",
-            "name": "Amy Adams",
-            "role": "Lois Lane"
-        ],
-        [
-            "thumbnailImage": "shannon_thumb.jpg",
-            "fullImage": "shannon_full.jpg",
-            "name": "Michael Shannon",
-            "role": "General Zod"
-        ],
-        [
-            "thumbnailImage": "lane_thumb.jpg",
-            "fullImage": "lane_full.jpg",
-            "name": "Diane Lane",
-            "role": "Martha Kent"
-        ],
-        [
-            "thumbnailImage": "crowe_thumb.jpg",
-            "fullImage": "crowe_full.jpg",
-            "name": "Russell Crowe",
-            "role": "Jor-El"
-        ],
-        [
-            "thumbnailImage": "traue_thumb.jpg",
-            "fullImage": "traue_full.jpg",
-            "name": "Antje Traue",
-            "role": "Faora-Ul"
-        ],
-        [
-            "thumbnailImage": "lennix_thumb.jpg",
-            "fullImage": "lennix_full.jpg",
-            "name": "Harry Lennix",
-            "role": "General Swanwick"
-        ],
-        [
-            "thumbnailImage": "schiff_thumb.jpg",
-            "fullImage": "schiff_full.jpg",
-            "name": "Richard Schiff",
-            "role": "Dr. Emil Hamilton"
-        ],
-        [
-            "thumbnailImage": "meloni_thumb.jpg",
-            "fullImage": "meloni_full.jpg",
-            "name": "Christopher Meloni",
-            "role": "Colonel Nathan Hardy"
-        ],
-        [
-            "thumbnailImage": "costner_thumb.jpg",
-            "fullImage": "costner_full.jpg",
-            "name": "Kevin Costner",
-            "role": "Jonathan Kent"
-        ],
-        [
-            "thumbnailImage": "zurer_thumb.jpg",
-            "fullImage": "zurer_full.jpg",
-            "name": "Ayelet Zurer",
-            "role": "Lara Lor-Van"
-        ],
-        [
-            "thumbnailImage": "fishburne_thumb.jpg",
-            "fullImage": "fishburne_full.jpg",
-            "name": "Laurence Fishburne",
-            "role": "Perry White"
-        ]
-    ]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +44,6 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -197,12 +117,19 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return talentData.count
+        if let allActors = DataManager.sharedInstance.content?.allActors() {
+            return allActors.count
+        }
+        
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
-        cell.talent = Talent(info: talentData[indexPath.row])
+        if let allActors = DataManager.sharedInstance.content?.allActors() {
+            cell.talent = allActors[indexPath.row]
+        }
+        
         return cell
     }
     

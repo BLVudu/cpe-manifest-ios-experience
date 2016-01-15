@@ -17,21 +17,6 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var sceneDetailView: UIView!
     
     var selectedIndexPath: NSIndexPath?
-    
-    var talentData = [
-        [
-            "thumbnailImage": "cavill_thumb.jpg",
-            "fullImage": "cavill_full.jpg",
-            "name": "Henry Cavill",
-            "role": "Clark Kent/Kal-El"
-        ],
-        [
-            "thumbnailImage": "adams.jpg",
-            "fullImage": "adams.jpg",
-            "name": "Amy Adams",
-            "role": "Lois Lane"
-        ]
-    ]
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -98,12 +83,19 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return talentData.count
+        if let sceneTalent = DataManager.sharedInstance.content?.talentAtSceneTime(0) {
+            return sceneTalent.count
+        }
+        
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
-        cell.talent = Talent(info: talentData[indexPath.row])
+        if let sceneTalent = DataManager.sharedInstance.content?.talentAtSceneTime(0) {
+            cell.talent = sceneTalent[indexPath.row]
+        }
+        
         cell.nameLabel?.removeFromSuperview()
         cell.roleLabel?.removeFromSuperview()
         return cell

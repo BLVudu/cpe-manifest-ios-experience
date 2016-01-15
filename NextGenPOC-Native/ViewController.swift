@@ -31,7 +31,7 @@ class ViewController: UIViewController {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        self.revealViewController().rearViewRevealWidth = 250
+        self.revealViewController().rearViewRevealWidth = 300
         backgroundContainerView.sendSubviewToBack(backgroundImageView)
     }
     

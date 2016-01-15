@@ -16,7 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // Load current film's data file
+        if let path = NSBundle.mainBundle().pathForResource("Data/man_of_steel", ofType: "json") {
+            do {
+                let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: path), options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                DataManager.sharedInstance.loadData(data)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+        
         return true
     }
 

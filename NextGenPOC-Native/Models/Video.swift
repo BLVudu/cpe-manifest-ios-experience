@@ -8,16 +8,21 @@
 
 import UIKit
 
-class Video: NSObject {
+class Video {
     
+    var content: Content!
     var url: NSURL!
-    var title: String!
     var deliveryFormat: String?
     
-    required init(info: [String: String]) {
-        url = NSURL(string: info["url"]!)
-        title = info["title"]
-        deliveryFormat = info["deliveryFormat"]
+    var title: String {
+        get {
+            return content.title
+        }
+    }
+    
+    required init(info: NSDictionary) {
+        url = NSURL(string: info["file_url"] as! String)
+        deliveryFormat = info["delivery_format"] as? String
     }
     
 }
