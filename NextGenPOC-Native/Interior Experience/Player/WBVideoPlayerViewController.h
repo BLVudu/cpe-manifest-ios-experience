@@ -102,6 +102,6 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 - (void)playVideo;
 - (void)pauseVideo;
 - (void)seekPlayerToTime:(CMTime)seekTime;
-
+- (void)syncScrubber;
 
 @end
