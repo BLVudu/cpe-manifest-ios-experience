@@ -11,6 +11,7 @@ import UIKit
 class SettingsItemCell: UITableViewCell{
     
     
+    @IBOutlet weak var switchItem: CustomSwitch!
     @IBOutlet weak var settingsLabel: UILabel!
 }
 
@@ -48,6 +49,16 @@ class SettingsMenuViewController: UITableViewController{
         let cell = tableView.dequeueReusableCellWithIdentifier("settingsItem") as! SettingsItemCell
         cell.backgroundColor = UIColor.blackColor()
         cell.settingsLabel.text = self.settingsItems[indexPath.row]
+        
+        if (indexPath.row == 1){
+            
+            cell.switchItem.hidden = false
+            
+        } else {
+            
+            cell.switchItem.hidden = true
+            
+        }
         
         return cell
     }
