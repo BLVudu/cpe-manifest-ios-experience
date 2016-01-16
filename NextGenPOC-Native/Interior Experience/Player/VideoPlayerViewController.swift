@@ -8,9 +8,12 @@
 
 import UIKit
 
+let kSceneDidChange = "kSceneDidChange"
+
 class VideoPlayerViewController: WBVideoPlayerViewController {
     
     var video: Video!
+    var currentScene: Scene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,18 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         super.done(sender)
         
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func syncScrubber() {
+        super.syncScrubber()
+        
+        if player != nil {
+            let newScene = DataManager.sharedInstance.content?.sceneAtTime(Int(CMTimeGetSeconds(player.currentTime())))
+            if newScene != self.currentScene {
+                currentScene = newScene
+                NSNotificationCenter.defaultCenter().postNotificationName(kSceneDidChange, object: nil, userInfo: ["scene": currentScene!])
+            }
+        }
     }
 
 }

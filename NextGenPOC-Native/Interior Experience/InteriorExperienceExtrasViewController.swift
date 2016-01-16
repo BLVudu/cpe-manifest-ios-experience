@@ -17,12 +17,24 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var sceneDetailView: UIView!
     
     var selectedIndexPath: NSIndexPath?
+    var currentScene: Scene?
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        
+        if let allScenes = DataManager.sharedInstance.content?.scenes {
+            currentScene = allScenes[0]
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(kSceneDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            if let userInfo = notification.userInfo {
+                self.currentScene = userInfo["scene"] as? Scene
+                self.talentTableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +95,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sceneTalent = DataManager.sharedInstance.content?.talentAtSceneTime(0) {
+        if let sceneTalent = currentScene?.talent {
             return sceneTalent.count
         }
         
@@ -92,7 +104,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
-        if let sceneTalent = DataManager.sharedInstance.content?.talentAtSceneTime(0) {
+        if let sceneTalent = currentScene?.talent {
             cell.talent = sceneTalent[indexPath.row]
         }
         

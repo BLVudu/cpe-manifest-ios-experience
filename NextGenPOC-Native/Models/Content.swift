@@ -14,6 +14,7 @@ class Content: NSObject {
     var video: Video!
     var talent = [String: Talent]()
     var scenes = [Int: Scene]()
+    var sceneKeys: [Int]?
     
     required init(info: NSDictionary) {
         super.init()
@@ -43,6 +44,8 @@ class Content: NSObject {
                 }
             }
         }
+        
+        sceneKeys = scenes.keys.sort { $0 < $1 }
     }
     
     func allActors() -> [Talent] {
@@ -57,22 +60,22 @@ class Content: NSObject {
             }
         }
         
-        return allTalent.sort({ (talent1, talent2) -> Bool in
-            return talent1.billingOrder < talent2.billingOrder
-        })
+        return allTalent.sort { $0.billingOrder < $1.billingOrder }
     }
     
-    func talentAtSceneTime(time: Int) -> [Talent] {
-        var scene: Scene?
-        for (startTime, sceneObj) in scenes {
-            if startTime > time {
-                break
+    func sceneAtTime(time: Int) -> Scene? {
+        var closestSceneTime = -1
+        if sceneKeys != nil {
+            for sceneTime in sceneKeys! {
+                if sceneTime > time {
+                    break
+                }
+                
+                closestSceneTime = sceneTime
             }
-            
-            scene = sceneObj
         }
         
-        return (scene != nil ? scene!.talent : [Talent]())
+        return (closestSceneTime >= 0 ? scenes[closestSceneTime] : nil)
     }
     
 }
