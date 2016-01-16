@@ -80,22 +80,27 @@
         "filmography": [
           {
             "title": "Batman v Superman",
-            "poster_image": "http://orig00.deviantart.net/b7c2/f/2014/209/b/f/batman_v_superman_dawn_of_justice___trinity_poster_by_lamboman7-d7sesun.png",
+            "poster_image": "http://resizing.flixster.com/Jj6wWGt6lyF3lvez2mPrgekAjpA=/320x474/dkpu1ddg7pbsk.cloudfront.net/movie/11/19/11/11191102_ori.jpg",
             "external_url": "http://www.flixster.com/movie/batman-v-superman-dawn-of-justice/"
           },
           {
             "title": "The Man From U.N.C.L.E.",
-            "poster_image": "http://cdn1-www.superherohype.com/assets/uploads/gallery/the-man-from-uncle/manfromuncleposterlarge.jpg",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/2083346825265035E05314345B0AD4F9",
             "external_url": "https://video.flixster.com/movies/the-man-from-u-n-c-l-e/urn:dece:cid:eidr-s:AA29-CCC8-B64E-9647-6627-N"
           },
           {
+            "title": "Immortals",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/1007F33E67B6A988E05315345B0A63A6",
+            "external_url": "https://video.flixster.com/movies/immortals/urn:dece:cid:org:relativitymedia:Immortals_2012"
+          },
+          {
             "title": "Whatever Works",
-            "poster_image": "http://i.jeded.com/i/whatever-works.9213.jpg",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/02933A178B3F8076E0505A0A15346353",
             "external_url": "https://video.flixster.com/movies/whatever-works/urn:dece:cid:eidr-s:2653-F7B7-1F65-BE16-306C-S"
           },
           {
             "title": "Stardust",
-            "poster_image": "http://goldbergblog.com/movies/posters/stardust.jpg",
+            "poster_image": "https://resizing.flixster.com/lhmSvFu-P5Gdkjeg15aAkHe2adE=/180x240/dkpu1ddg7pbsk.cloudfront.net/movie/11/37/75/11377594_ori.jpg",
             "external_url": "https://video.flixster.com/movies/stardust/urn:dece:cid:org:ppc:000003475600100003753"
           }
         ]
@@ -107,7 +112,39 @@
         "character": "Lois Lane",
         "name": "Amy Adams",
         "thumbnail_image": "adams.jpg",
-        "full_image": "adams.jpg"
+        "full_image": "adams.jpg",
+        "filmography": [
+          {
+            "title": "Big Eyes",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/0EEE085300B4500DE05316345B0AC788",
+            "external_url": "https://video.flixster.com/movies/big-eyes/urn:dece:cid:org:anchorbayent:BIGEYES_M"
+          },
+          {
+            "title": "Lullaby",
+            "poster_image": "http://resizing.flixster.com/ODlGkWWCpHly5admqQ5cH1eR5KM=/320x474/dkpu1ddg7pbsk.cloudfront.net/movie/11/17/82/11178252_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/lullaby-2013/"
+          },
+          {
+            "title": "American Hustle",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/F8DA72E80E8023DEE0405B0A163458D2",
+            "external_url": "https://video.flixster.com/movies/american-hustle/urn:dece:cid:eidr-s:626A-A431-E3A8-EE6D-0668-3"
+          },
+          {
+            "title": "Her",
+            "poster_image": "https://content6.flixster.com/movie/11/17/76/11177656_det.jpg",
+            "external_url": "https://video.flixster.com/movies/her/urn:dece:cid:eidr-s:3F2E-E412-9650-B898-A52B-J"
+          },
+          {
+            "title": "Trouble with the Curve",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/EB7D421B9C5CDEE3E0405A0A153401E9",
+            "external_url": "https://video.flixster.com/movies/trouble-with-the-curve/urn:dece:cid:org:WB:2059722x6000075956"
+          },
+          {
+            "title": "The Master",
+            "poster_image": "https://resizing.flixster.com/e8EFfuzJ8k6ePyPYMaScRHfOcWM=/180x270/dkpu1ddg7pbsk.cloudfront.net/movie/11/17/64/11176490_ori.jpg",
+            "external_url": "https://video.flixster.com/movies/the-master/urn:dece:cid:org:anchorbayent:MASTER_M"
+          }
+        ]
       },
       {
         "id": "nge:actor-shannon",
@@ -116,7 +153,39 @@
         "character": "General Zod",
         "name": "Michael Shannon",
         "thumbnail_image": "shannon_thumb.jpg",
-        "full_image": "shannon_full.jpg"
+        "full_image": "shannon_full.jpg",
+        "filmography": [
+          {
+            "title": "99 Homes",
+            "poster_image": "http://resizing.flixster.com/_F1zapdRleMM6p__hLZCztRFZvI=/320x473/dkpu1ddg7pbsk.cloudfront.net/movie/11/20/22/11202259_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/99-homes/"
+          },
+          {
+            "title": "The Harvest",
+            "poster_image": "http://resizing.flixster.com/szj7pQh9ou9_OxcVV0Yr5ivqGQo=/284x405/dkpu1ddg7pbsk.cloudfront.net/movie/11/19/10/11191024_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/the-harvest-2015/"
+          },
+          {
+            "title": "The Iceman",
+            "poster_image": "http://resizing.flixster.com/ehhRBRBQyi-CZCsz4eL-ZXJftdU=/320x474/dkpu1ddg7pbsk.cloudfront.net/movie/11/16/41/11164167_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/the-iceman-2013/"
+          },
+          {
+            "title": "Premium Rush",
+            "poster_image": "http://resizing.flixster.com/UOuJr48sD4Xo92EICRy3axFF9Jw=/320x480/dkpu1ddg7pbsk.cloudfront.net/movie/11/16/80/11168079_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/premium-rush/"
+          },
+          {
+            "title": "Mud",
+            "poster_image": "https://resizing.flixster.com/3M9mwbxhlX3nTCBEUDmvo_tx_ZQ=/180x270/dkpu1ddg7pbsk.cloudfront.net/movie/11/17/24/11172428_ori.jpg",
+            "external_url": "https://video.flixster.com/movies/mud/urn:dece:cid:org:lionsgate:9382598"
+          },
+          {
+            "title": "Take Shelter",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/0090D4C00DC4F2CDE0505A0A1634200C",
+            "external_url": "https://video.flixster.com/movies/take-shelter/urn:dece:cid:eidr-s:434A-A49F-7A23-DE2D-537B-Z"
+          }
+        ]
       },
       {
         "id": "nge:actor-lane",

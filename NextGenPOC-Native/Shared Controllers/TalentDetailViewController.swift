@@ -18,6 +18,7 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     @IBOutlet weak var talentNameLabel: UILabel!
     @IBOutlet weak var talentRoleLabel: UILabel!
     
+    @IBOutlet weak var filmographyContainerView: UIView!
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
     var talent: Talent? = nil {
@@ -25,7 +26,13 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
             talentNameLabel.text = talent?.name
             talentRoleLabel.text = talent?.role
             talentImageView.image = talent?.fullImage != nil ? UIImage(named: talent!.fullImage!) : nil
-            filmographyCollectionView.reloadData()
+            
+            if talent != nil && talent!.films.count > 0 {
+                filmographyContainerView.hidden = false
+                filmographyCollectionView.reloadData()
+            } else {
+                filmographyContainerView.hidden = true
+            }
         }
     }
     

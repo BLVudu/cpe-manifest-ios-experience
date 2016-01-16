@@ -15,11 +15,12 @@ extension UIAlertController {
     }
     
     func show(animated: Bool) {
-        let alertWidow = UIWindow(frame: UIScreen.mainScreen().bounds)
-        alertWidow.rootViewController = UIViewController()
-        alertWidow.windowLevel = UIWindowLevelAlert + 1;
-        alertWidow.makeKeyAndVisible()
-        alertWidow.rootViewController?.presentViewController(self, animated: animated, completion: nil)
+        var topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+        while topViewController!.presentedViewController != nil {
+            topViewController = topViewController!.presentedViewController
+        }
+        
+        topViewController?.presentViewController(self, animated: animated, completion: nil)
     }
     
 }
