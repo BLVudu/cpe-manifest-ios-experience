@@ -15,6 +15,23 @@ class ExtrasCell: UICollectionViewCell {
     @IBOutlet var extraImg: UIImageView!
     
     @IBOutlet weak var extrasTitle: UILabel!
+    
+    override var selected:Bool{
+        get {
+            return super.selected
+        }
+        
+        set{
+            if newValue{
+                self.layer.borderWidth = 2
+                self.layer.borderColor = UIColor.whiteColor().CGColor
+            } else{
+                self.layer.borderWidth = 0
+            }
+            
+        }
+    }
+
 }
 
 class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
@@ -86,19 +103,14 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         })
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true;
-    }
+ 
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
         return self.extraImages.count
     }
-    
-    
-    
-    
+
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         
@@ -110,10 +122,14 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         
         return cell
+     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         
-        
+
     }
+    
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -170,7 +186,8 @@ extension ExtrasViewController: ExtrasLayoutDelegate{
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath,
         withWidth width: CGFloat) -> CGFloat {
             
-            return 250.0
+            
+            return collectionView.frame.height/3
     }
     
     func collectionView(collectionView: UICollectionView,

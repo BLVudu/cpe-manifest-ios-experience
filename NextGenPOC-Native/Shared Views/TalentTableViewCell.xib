@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="250" height="96"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZFg-U0-fjg" id="Rb8-s1-zKI">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="95"/>
+                <rect key="frame" x="0.0" y="0.0" width="250" height="95.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-D7-49Z" customClass="RoundImageView" customModule="NextGen" customModuleProvider="target">

@@ -487,15 +487,15 @@
                                 </connections>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-Cb-zKQ">
-                                <rect key="frame" x="315" y="30" width="709" height="738"/>
+                                <rect key="frame" x="315" y="69" width="709" height="699"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGen" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extrasItem" id="cbd-U8-pcw" customClass="ExtrasCell" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="325" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="326" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-ch-Vpd">
@@ -522,7 +522,7 @@
                                             <constraint firstItem="wFL-ch-Vpd" firstAttribute="width" secondItem="cbd-U8-pcw" secondAttribute="height" multiplier="16:9" constant="-119.4444444444444" id="iMb-29-USG"/>
                                             <constraint firstItem="wFL-ch-Vpd" firstAttribute="top" secondItem="ICg-dJ-Y0x" secondAttribute="bottom" constant="6" id="kxa-C9-s4i"/>
                                         </constraints>
-                                        <size key="customSize" width="325" height="250"/>
+                                        <size key="customSize" width="326" height="250"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="Gs7-om-1Or"/>
@@ -531,6 +531,7 @@
                                         <connections>
                                             <outlet property="extraImg" destination="wFL-ch-Vpd" id="IrI-jj-wtW"/>
                                             <outlet property="extrasTitle" destination="ICg-dJ-Y0x" id="xmb-fl-Dzv"/>
+                                            <segue destination="DcN-FU-Qa8" kind="show" id="IUQ-bO-Znp"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -541,16 +542,13 @@
                             </collectionView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBH-gG-bSP">
                                 <rect key="frame" x="315" y="30" width="709" height="738"/>
-                                <connections>
-                                    <segue destination="enc-ld-Xnm" kind="embed" id="6NW-2J-OBS"/>
-                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SBH-gG-bSP" firstAttribute="top" secondItem="7Nn-Gk-Fn3" secondAttribute="topMargin" constant="30" id="6x1-cR-3H6"/>
                             <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="SBH-gG-bSP" secondAttribute="bottom" id="AEe-T1-SeU"/>
-                            <constraint firstItem="5xC-Cb-zKQ" firstAttribute="top" secondItem="7Nn-Gk-Fn3" secondAttribute="topMargin" constant="30" id="KoP-bc-zr9"/>
+                            <constraint firstItem="5xC-Cb-zKQ" firstAttribute="top" secondItem="7Nn-Gk-Fn3" secondAttribute="topMargin" constant="69" id="KoP-bc-zr9"/>
                             <constraint firstAttribute="trailing" secondItem="5xC-Cb-zKQ" secondAttribute="trailing" id="W3c-GQ-ueg"/>
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="leading" secondItem="7Nn-Gk-Fn3" secondAttribute="leading" id="ZmJ-vN-5RR"/>
                             <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="bottom" id="crn-yw-kQL"/>
@@ -579,6 +577,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxE-Et-E7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1469" y="921"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="WSd-L7-fcD">
+            <objects>
+                <viewController id="DcN-FU-Qa8" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9uT-3p-39w"/>
+                        <viewControllerLayoutGuide type="bottom" id="TAg-xj-iBB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ra9-Za-8rC">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzb-w6-V1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2689" y="921"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="fLH-oi-LTw">
@@ -953,6 +969,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="QmC-wg-ojn">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="0Ub-1E-w0a" kind="relationship" relationship="rootViewController" id="I5Z-Vy-SsJ"/>
                     </connections>
@@ -980,7 +1000,4 @@
         <image name="iPad Air" width="400" height="592"/>
         <image name="menu.png" width="22" height="22"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="6NW-2J-OBS"/>
-    </inferredMetricsTieBreakers>
 </document>
