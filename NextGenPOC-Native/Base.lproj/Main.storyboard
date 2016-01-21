@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NWX-a1-PHC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NWX-a1-PHC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -531,7 +531,7 @@
                                         <connections>
                                             <outlet property="extraImg" destination="wFL-ch-Vpd" id="IrI-jj-wtW"/>
                                             <outlet property="extrasTitle" destination="ICg-dJ-Y0x" id="xmb-fl-Dzv"/>
-                                            <segue destination="DcN-FU-Qa8" kind="show" id="IUQ-bO-Znp"/>
+                                            <segue destination="WZw-ay-hb5" kind="show" id="NKM-lo-6Kh"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -578,23 +578,51 @@
             </objects>
             <point key="canvasLocation" x="1469" y="921"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="WSd-L7-fcD">
+        <!--Extras Content View Controller-->
+        <scene sceneID="vyq-gj-OmX">
             <objects>
-                <viewController id="DcN-FU-Qa8" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9uT-3p-39w"/>
-                        <viewControllerLayoutGuide type="bottom" id="TAg-xj-iBB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ra9-Za-8rC">
+                <collectionViewController id="WZw-ay-hb5" customClass="ExtrasContentViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="9zq-e3-pyP">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lzb-w6-V1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewLayout key="collectionViewLayout" id="SEc-ha-bQX" customClass="ContentLayout" customModule="NextGen" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="7bc-jG-5JT" customClass="ExtrasContentCell" customModule="NextGen" customModuleProvider="target">
+                                <rect key="frame" x="-0.5" y="44" width="1025" height="523"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="1025" height="523"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oFo-EY-aH2">
+                                            <rect key="frame" x="0.0" y="0.0" width="1025" height="523"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="oFo-EY-aH2" firstAttribute="top" secondItem="7bc-jG-5JT" secondAttribute="topMargin" constant="-8" id="Gsz-Rr-iRQ"/>
+                                    <constraint firstItem="oFo-EY-aH2" firstAttribute="leading" secondItem="7bc-jG-5JT" secondAttribute="leadingMargin" constant="-8" id="R60-qu-Gn0"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="oFo-EY-aH2" secondAttribute="trailing" constant="-8" id="hEd-lA-u4Q"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="oFo-EY-aH2" secondAttribute="bottom" constant="-8" id="iuD-fK-DeU"/>
+                                </constraints>
+                                <size key="customSize" width="1025" height="523"/>
+                                <connections>
+                                    <outlet property="extCont" destination="oFo-EY-aH2" id="hNG-O5-xap"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="WZw-ay-hb5" id="dxA-Lc-RaM"/>
+                            <outlet property="delegate" destination="WZw-ay-hb5" id="VTh-z0-gey"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yC9-kn-wsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2689" y="921"/>
+            <point key="canvasLocation" x="2585" y="815"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="fLH-oi-LTw">

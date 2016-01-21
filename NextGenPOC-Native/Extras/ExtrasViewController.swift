@@ -10,29 +10,7 @@
 import UIKit
 import AVFoundation
 
-class ExtrasCell: UICollectionViewCell {
-    
-    @IBOutlet var extraImg: UIImageView!
-    
-    @IBOutlet weak var extrasTitle: UILabel!
-    
-    override var selected:Bool{
-        get {
-            return super.selected
-        }
-        
-        set{
-            if newValue{
-                self.layer.borderWidth = 2
-                self.layer.borderColor = UIColor.whiteColor().CGColor
-            } else{
-                self.layer.borderWidth = 0
-            }
-            
-        }
-    }
 
-}
 
 class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
@@ -124,10 +102,10 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         return cell
      }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+     
         
-
     }
     
     
@@ -187,7 +165,7 @@ extension ExtrasViewController: ExtrasLayoutDelegate{
         withWidth width: CGFloat) -> CGFloat {
             
             
-            return collectionView.frame.height/3
+            return collectionView.frame.height/2.8
     }
     
     func collectionView(collectionView: UICollectionView,

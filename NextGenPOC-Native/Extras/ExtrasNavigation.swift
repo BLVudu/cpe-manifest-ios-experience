@@ -21,7 +21,6 @@ class ExtrasNavigation: UINavigationController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationBar.barTintColor = UIColor.clearColor()
         self.navigationBar.barTintColor = UIColor.blackColor()
         self.navigationBar.tintColor = UIColor.whiteColor()
         let logo = UIImageView(image:UIImage(named: "home_logo.png"))

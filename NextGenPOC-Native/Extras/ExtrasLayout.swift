@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-import UIKit
 protocol ExtrasLayoutDelegate {
 
     func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath:NSIndexPath , withWidth:CGFloat) -> CGFloat
