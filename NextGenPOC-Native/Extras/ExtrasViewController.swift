@@ -23,6 +23,8 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
     let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Scenes","Shopping", "DC Universe"]
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +32,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.extrasView.dataSource = self
         
         self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        self.extrasView.registerNib(UINib(nibName: "ContentCell", bundle: nil), forCellWithReuseIdentifier: "content")
         
         if let layout = extrasView?.collectionViewLayout as? ExtrasLayout {
             layout.delegate = self
@@ -92,20 +95,49 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("extrasItem", forIndexPath: indexPath)as! ExtrasCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
         
         cell.extraImg.image = UIImage (named: self.extraImages[indexPath.row])
         cell.extrasTitle.text = self.extrasCaption[indexPath.row]
-        
-        
-        
+
         return cell
      }
     
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        
+       
+        if(indexPath.row%2 == 1){
+            
+        
+        self.performSegueWithIdentifier("moreContent", sender: self)
+        
+        }else {
+            
+            self.performSegueWithIdentifier("secondContent", sender: self)
+            
+        }
+        
+        
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-     
         
+        if (segue.identifier == "moreContent"){
+            
+        
+        
+        let destinationVC = segue.destinationViewController as? ExtrasContentViewController
+        
+     
+        } else if (segue.identifier == "secondContent"){
+            
+            let destinationVC = segue.destinationViewController as? SecondTemplateViewController
+            
+        }
     }
     
     

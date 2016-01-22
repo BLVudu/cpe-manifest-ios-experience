@@ -28,6 +28,10 @@ class ExtrasContentViewController: UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        self.collectionView?.registerNib(UINib(nibName: "ContentCell", bundle: nil), forCellWithReuseIdentifier: "content")
+        
         if let layout = self.collectionView?.collectionViewLayout as? ContentLayout {
             layout.delegate = self
             
@@ -56,9 +60,9 @@ class ExtrasContentViewController: UICollectionViewController{
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ExtrasContentCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
         
-        cell.extCont.image = UIImage(named: self.extraImages[indexPath.row])
+        cell.extraImg.image = UIImage (named: self.extraImages[indexPath.row])
 
         
         return cell
@@ -70,10 +74,9 @@ class ExtrasContentViewController: UICollectionViewController{
         func collectionView(collectionView:UICollectionView, widthForPhotoAtIndexPath indexPath: NSIndexPath,
             withHeight width: CGFloat) -> CGFloat {
                 
-                print(self.collectionView?.frame.width)
                 
                 
-                return 950
+                return ((self.collectionView?.frame.width)!/1.05)
         }
     
     

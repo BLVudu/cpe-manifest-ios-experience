@@ -18,11 +18,15 @@
 		4921D99A1C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9991C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift */; };
 		4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */; };
 		4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */; };
-		4954E8651C4FFDF0006AA799 /* ExtrasCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4954E8641C4FFDF0006AA799 /* ExtrasCell.swift */; };
 		49656F231C49C676001DB9C0 /* ExtrasNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F221C49C676001DB9C0 /* ExtrasNavigation.swift */; };
 		49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F241C49C73E001DB9C0 /* CustomSwitch.swift */; };
 		49F3EACF1C50125200E09484 /* ExtrasContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
+		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
+		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
+		49F3EADB1C517ADA00E09484 /* SecondTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */; };
+		49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EADC1C51890A00E09484 /* VideoCell.xib */; };
+		49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADE1C518ABE00E09484 /* VideoCell.swift */; };
 		701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */; };
 		701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */; };
 		701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */; };
@@ -134,11 +138,15 @@
 		4921D99B1C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGenPOC-Native/Extras/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = "NextGenPOC-Native/Extras/ExtrasLayout.swift"; sourceTree = SOURCE_ROOT; };
-		4954E8641C4FFDF0006AA799 /* ExtrasCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasCell.swift; sourceTree = "<group>"; };
 		49656F221C49C676001DB9C0 /* ExtrasNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasNavigation.swift; sourceTree = "<group>"; };
 		49656F241C49C73E001DB9C0 /* CustomSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
-		49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasContentViewController.swift; path = Utilities/ExtrasContentViewController.swift; sourceTree = "<group>"; };
+		49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasContentViewController.swift; path = ../Utilities/ExtrasContentViewController.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
+		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
+		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
+		49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondTemplateViewController.swift; path = ../SecondTemplateViewController.swift; sourceTree = "<group>"; };
+		49F3EADC1C51890A00E09484 /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
+		49F3EADE1C518ABE00E09484 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		6C5BE24AF16D012C46DD45E3 /* Pods-NextGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextGen/Pods-NextGen.release.xcconfig"; sourceTree = "<group>"; };
 		701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCellView.swift; sourceTree = "<group>"; };
 		701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SceneDetailCellView.xib; sourceTree = "<group>"; };
@@ -281,7 +289,6 @@
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
 				49F3EAD01C50200A00E09484 /* ContentLayout.swift */,
 				4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */,
-				49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */,
 				4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
@@ -477,6 +484,10 @@
 				707E10841C40797400FCF81C /* RoundImageView.swift */,
 				7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */,
 				701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */,
+				49F3EAD21C515B3100E09484 /* ContentCell.xib */,
+				49F3EAD41C51639700E09484 /* ContentCell.swift */,
+				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
+				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -500,7 +511,8 @@
 				4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */,
 				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
 				49656F221C49C676001DB9C0 /* ExtrasNavigation.swift */,
-				4954E8641C4FFDF0006AA799 /* ExtrasCell.swift */,
+				49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */,
+				49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -626,6 +638,7 @@
 				7077A3681C4989C200843782 /* lane_full.jpg in Resources */,
 				7077A3521C4989C200843782 /* home_bg.jpg in Resources */,
 				7077A3871C49C66F00843782 /* timberline_thumb.jpg in Resources */,
+				49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */,
 				7077A35F1C4989C200843782 /* adams.jpg in Resources */,
 				7077A3601C4989C200843782 /* cavill_full.jpg in Resources */,
 				7077A35E1C4989C200843782 /* cornfield.png in Resources */,
@@ -656,6 +669,7 @@
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
 				7077A3731C4989C200843782 /* traue_thumb.jpg in Resources */,
 				7077A35D1C4989C200843782 /* menu.png in Resources */,
+				49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */,
 				7077A35A1C4989C200843782 /* nav_extras.jpg in Resources */,
 				7077A36E1C4989C200843782 /* schiff_full.jpg in Resources */,
 				7077A3851C49C66F00843782 /* sprayberry_thumb.jpg in Resources */,
@@ -742,11 +756,11 @@
 				7077A37B1C49A4D800843782 /* Content.swift in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
 				701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */,
-				4954E8651C4FFDF0006AA799 /* ExtrasCell.swift in Sources */,
 				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
 				701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */,
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
+				49F3EADB1C517ADA00E09484 /* SecondTemplateViewController.swift in Sources */,
 				7077A3771C4989DC00843782 /* DataManager.swift in Sources */,
 				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
 				701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */,
@@ -759,9 +773,11 @@
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
 				7065F5441C46DC6800A2C74E /* SceneDetailViewController.swift in Sources */,
 				701D69C11C48205B0047A67A /* TalentDetailViewController.swift in Sources */,
+				49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */,
 				49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */,
 				49656F231C49C676001DB9C0 /* ExtrasNavigation.swift in Sources */,
 				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
+				49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 			);
