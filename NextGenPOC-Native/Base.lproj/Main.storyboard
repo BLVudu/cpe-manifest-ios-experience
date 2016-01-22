@@ -530,6 +530,7 @@
                         <outlet property="talentTableView" destination="nfb-lf-5Cb" id="fkG-uc-1N7"/>
                         <segue destination="wpZ-Jt-DDC" kind="show" identifier="moreContent" id="hSR-gQ-n9b"/>
                         <segue destination="WZw-ay-hb5" kind="show" identifier="secondContent" id="0zy-IT-Kli"/>
+                        <segue destination="cA1-Z1-n9v" kind="show" identifier="thirdContent" id="eIc-RL-EwC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxE-Et-E7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -549,7 +550,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fGJ-AQ-eTt">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
+                                <rect key="frame" x="0.0" y="-32" width="300" height="632"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="vF3-oj-VuY"/>
@@ -567,7 +568,7 @@
                             <constraint firstItem="qsD-uj-5rq" firstAttribute="top" secondItem="dMS-d4-L6J" secondAttribute="bottom" constant="106" id="XyB-LO-nee"/>
                             <constraint firstItem="dMS-d4-L6J" firstAttribute="top" secondItem="sRb-OQ-3Uc" secondAttribute="bottom" constant="109" id="f2F-ah-aSL"/>
                             <constraint firstItem="dMS-d4-L6J" firstAttribute="leading" secondItem="OB4-DC-Qqz" secondAttribute="leadingMargin" constant="314" id="k4p-V8-aj5"/>
-                            <constraint firstItem="fGJ-AQ-eTt" firstAttribute="top" secondItem="sRb-OQ-3Uc" secondAttribute="bottom" constant="-44" id="tso-D3-BXA"/>
+                            <constraint firstItem="fGJ-AQ-eTt" firstAttribute="top" secondItem="sRb-OQ-3Uc" secondAttribute="bottom" constant="-76" id="tso-D3-BXA"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -579,7 +580,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcg-tj-b2S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2504" y="1047"/>
+            <point key="canvasLocation" x="2182" y="1825"/>
+        </scene>
+        <!--Third Template View Controller-->
+        <scene sceneID="bhP-9J-X2D">
+            <objects>
+                <viewController id="cA1-Z1-n9v" customClass="ThirdTemplateViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ofg-zb-Kaa"/>
+                        <viewControllerLayoutGuide type="bottom" id="VX5-Dv-4ja"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mkJ-qB-fSM">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E8A-9H-KwR">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewLayout key="collectionViewLayout" id="U7F-26-Utq" customClass="ThirdTemplateLayout" customModule="NextGen" customModuleProvider="target"/>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VX5-Dv-4ja" firstAttribute="top" secondItem="E8A-9H-KwR" secondAttribute="bottom" id="43l-BE-CUY"/>
+                            <constraint firstItem="E8A-9H-KwR" firstAttribute="top" secondItem="ofg-zb-Kaa" secondAttribute="bottom" constant="-20" id="9VM-NP-udp"/>
+                            <constraint firstItem="E8A-9H-KwR" firstAttribute="leading" secondItem="mkJ-qB-fSM" secondAttribute="leadingMargin" constant="-20" id="WCJ-2H-KOO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="E8A-9H-KwR" secondAttribute="trailing" constant="-20" id="iEE-Mu-5wB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="thirdView" destination="E8A-9H-KwR" id="rb0-3a-IzZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I0X-6j-6U0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2626" y="997"/>
         </scene>
         <!--Extras Content View Controller-->
         <scene sceneID="vyq-gj-OmX">

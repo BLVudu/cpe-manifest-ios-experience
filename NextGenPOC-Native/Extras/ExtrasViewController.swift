@@ -108,14 +108,18 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         
        
-        if(indexPath.row%2 == 1){
+        if(indexPath.row%3 == 0){
             
         
         self.performSegueWithIdentifier("moreContent", sender: self)
         
-        }else {
+        }else if(indexPath.row%3 == 1) {
             
             self.performSegueWithIdentifier("secondContent", sender: self)
+            
+        } else if (indexPath.row%3 == 2){
+            
+            self.performSegueWithIdentifier("thirdContent", sender: self)
             
         }
         
@@ -127,15 +131,17 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         
         if (segue.identifier == "moreContent"){
-            
-        
-        
-        let destinationVC = segue.destinationViewController as? ExtrasContentViewController
+  
+            let destinationVC = segue.destinationViewController as? ExtrasContentViewController
         
      
         } else if (segue.identifier == "secondContent"){
             
             let destinationVC = segue.destinationViewController as? SecondTemplateViewController
+            
+        } else if (segue.identifier == "thirdContent"){
+            
+            let destinationVC = segue.destinationViewController as? ThirdTemplateViewController
             
         }
     }

@@ -65,6 +65,8 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
         
     }
     
+
+
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

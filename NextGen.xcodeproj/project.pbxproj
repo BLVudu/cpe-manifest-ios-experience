@@ -27,6 +27,8 @@
 		49F3EADB1C517ADA00E09484 /* SecondTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */; };
 		49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EADC1C51890A00E09484 /* VideoCell.xib */; };
 		49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADE1C518ABE00E09484 /* VideoCell.swift */; };
+		49F3EAE11C51B62D00E09484 /* ThirdTemplateLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAE01C51B62D00E09484 /* ThirdTemplateLayout.swift */; };
+		49F3EAE31C51B71100E09484 /* ThirdTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAE21C51B71100E09484 /* ThirdTemplateViewController.swift */; };
 		701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */; };
 		701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */; };
 		701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */; };
@@ -147,6 +149,8 @@
 		49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondTemplateViewController.swift; path = ../SecondTemplateViewController.swift; sourceTree = "<group>"; };
 		49F3EADC1C51890A00E09484 /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		49F3EADE1C518ABE00E09484 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		49F3EAE01C51B62D00E09484 /* ThirdTemplateLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTemplateLayout.swift; sourceTree = "<group>"; };
+		49F3EAE21C51B71100E09484 /* ThirdTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTemplateViewController.swift; sourceTree = "<group>"; };
 		6C5BE24AF16D012C46DD45E3 /* Pods-NextGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextGen/Pods-NextGen.release.xcconfig"; sourceTree = "<group>"; };
 		701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCellView.swift; sourceTree = "<group>"; };
 		701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SceneDetailCellView.xib; sourceTree = "<group>"; };
@@ -513,6 +517,8 @@
 				49656F221C49C676001DB9C0 /* ExtrasNavigation.swift */,
 				49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */,
 				49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */,
+				49F3EAE01C51B62D00E09484 /* ThirdTemplateLayout.swift */,
+				49F3EAE21C51B71100E09484 /* ThirdTemplateViewController.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -746,6 +752,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */,
+				49F3EAE11C51B62D00E09484 /* ThirdTemplateLayout.swift in Sources */,
 				4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */,
 				49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */,
 				4921D9791C3EFD0B00ED2AA6 /* ViewController.swift in Sources */,
@@ -755,6 +762,7 @@
 				49F3EACF1C50125200E09484 /* ExtrasContentViewController.swift in Sources */,
 				7077A37B1C49A4D800843782 /* Content.swift in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
+				49F3EAE31C51B71100E09484 /* ThirdTemplateViewController.swift in Sources */,
 				701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */,
 				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
 				701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */,
