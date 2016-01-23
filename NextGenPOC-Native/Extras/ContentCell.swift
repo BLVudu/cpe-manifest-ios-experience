@@ -15,6 +15,7 @@ class ContentCell: UICollectionViewCell {
     
     @IBOutlet weak var extrasTitle: UILabel!
     
+ 
     override var selected:Bool{
         get {
             return super.selected
@@ -30,5 +31,8 @@ class ContentCell: UICollectionViewCell {
             
         }
     }
+
+
+
     
 }

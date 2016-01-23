@@ -14,9 +14,6 @@ class ExtrasContentCell: UICollectionViewCell{
 }
     
 
-    
-       
-
 
 class ExtrasContentViewController: UICollectionViewController{
     

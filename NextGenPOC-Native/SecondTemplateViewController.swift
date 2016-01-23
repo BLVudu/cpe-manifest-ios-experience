@@ -13,9 +13,10 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var videoView: UIImageView!
     
 
+    @IBOutlet weak var imageCaption: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
-    let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Scenes","Shopping", "DC Universe"]
+    let btsImages = ["bts_1.jpg","bts_2.jpg","bts_3.jpg","bts_4.jpg","bts_5.jpg",]
+    let btsCaption =  ["Director Zack Snyder","Zack Snyder and Kevin Costner","Zack Snyder with some members of cast","Zack Snyder on location","Zack Snyder and Christopher Nolan"]
     
     
     
@@ -33,14 +34,16 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("video", forIndexPath: indexPath) as! VideoCell
-        cell.backgroundColor = UIColor.blackColor()
-        cell.thumbnail.image = UIImage(named: self.extraImages[indexPath.row])
+        cell.backgroundColor = UIColor.darkGrayColor()
+        cell.thumbnail.image = UIImage(named: self.btsImages[indexPath.row])
+        cell.caption.text = self.btsCaption[indexPath.row]
+        cell.selectionStyle = .None
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.extraImages.count
+        return self.btsImages.count
     }
     
     
@@ -55,14 +58,20 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
         
   
         let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
-        headerView.backgroundColor = UIColor.blackColor()
-        let title = UILabel(frame: CGRectMake(10, 0, tableView.frame.size.width, 40))
+        headerView.backgroundColor = UIColor.darkGrayColor()
+        let title = UILabel(frame: CGRectMake(10, 20, tableView.frame.size.width, 40))
         title.text = "Behind The Scenes"
         title.textColor = UIColor.whiteColor()
+        title.font = UIFont(name: "Helvetica", size: 25.0)
         headerView.addSubview(title)
         
         return headerView
         
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 50
     }
     
 
@@ -71,8 +80,33 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        self.videoView.hidden = true
+        self.imageCaption.hidden = true
         
-        self.videoView.image = UIImage(named: self.extraImages[indexPath.row])
+        if(self.videoView.hidden == true && self.imageCaption.hidden == true){
+            
+            
+            self.videoView.alpha = 0
+            self.imageCaption.alpha = 0
+            self.videoView.hidden = false
+            self.imageCaption.hidden = false
+            
+            
+        }
+        
+        UIView.animateWithDuration(1.5, animations:{
+            
+            
+            self.videoView.alpha = 1
+            self.imageCaption.alpha = 1
+         }, completion: { (Bool) -> Void in
+            
+             })
+
+        self.videoView.image = UIImage(named: self.btsImages[indexPath.row])
+        self.imageCaption.text = self.btsCaption[indexPath.row]
+        
     }
+    
     
 }

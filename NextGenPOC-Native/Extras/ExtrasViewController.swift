@@ -103,48 +103,15 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         return cell
      }
     
-    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
         
         
-       
-        if(indexPath.row%3 == 0){
-            
-        
-        self.performSegueWithIdentifier("moreContent", sender: self)
-        
-        }else if(indexPath.row%3 == 1) {
-            
-            self.performSegueWithIdentifier("secondContent", sender: self)
-            
-        } else if (indexPath.row%3 == 2){
-            
-            self.performSegueWithIdentifier("thirdContent", sender: self)
-            
-        }
-        
-        
-        
+        self.performSegueWithIdentifier("moreContent", sender: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        
-        if (segue.identifier == "moreContent"){
-  
-            let destinationVC = segue.destinationViewController as? ExtrasContentViewController
-        
-     
-        } else if (segue.identifier == "secondContent"){
-            
-            let destinationVC = segue.destinationViewController as? SecondTemplateViewController
-            
-        } else if (segue.identifier == "thirdContent"){
-            
-            let destinationVC = segue.destinationViewController as? ThirdTemplateViewController
-            
-        }
-    }
+    
+
     
     
     // MARK: UITableViewDataSource

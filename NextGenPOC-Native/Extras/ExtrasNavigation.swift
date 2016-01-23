@@ -23,6 +23,7 @@ class ExtrasNavigation: UINavigationController{
         super.viewDidLoad()
         self.navigationBar.barTintColor = UIColor.blackColor()
         self.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationBar.alpha = 1
         let logo = UIImageView(image:UIImage(named: "home_logo.png"))
         let titleImg = UIImageView(image:UIImage(named: "nav_extras.jpg"))
         logo.frame = CGRectMake((self.navigationBar.frame.width/2), 0, 300, 43)
@@ -46,7 +47,6 @@ class ExtrasNavigation: UINavigationController{
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
     }
-    
     
     
 }
