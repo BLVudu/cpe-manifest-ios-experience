@@ -33,9 +33,26 @@ class ExtrasNavigation: UINavigationController{
         self.navigationBar.addSubview(titleImg)
         
 
+
+    }
+    
+    
+    override func popViewControllerAnimated(animated: Bool) -> UIViewController? {
         
-
-
+        
+        if ((self.viewControllers.last?.isKindOfClass(ExtrasViewController)) != nil){
+                     
+            let transition = CATransition()
+            transition.duration = 1
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionFade
+            self.view.layer.addAnimation(transition, forKey: nil)
+            var vc:UIViewController = super.popViewControllerAnimated(false)!
+            return vc;
+        } else {
+            return super.popViewControllerAnimated(true)
+        }
+            
     }
     
     
