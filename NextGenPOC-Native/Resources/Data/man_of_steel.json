@@ -1,0 +1,282 @@
+{
+  "video": {
+    "file_url": "https://d1x310wzaeunai.cloudfront.net/video/man-of-steel-trailer3.mp4",
+    "delivery_format": "HD"
+  },
+  "scenes": [
+    {
+      "startTime": 0,
+      "endTime": 25,
+      "people": [
+        "nge:actor-crowe",
+        "nge:actor-zurer"
+      ]
+    },
+    {
+      "startTime": 34,
+      "endTime": 46,
+      "people": [
+        "nge:actor-timberline"
+      ]
+    },
+    {
+      "startTime": 46,
+      "endTime": 55,
+      "people": [
+        "nge:actor-sprayberry"
+      ]
+    },
+    {
+      "startTime": 55,
+      "endTime": 69,
+      "people": [
+        "nge:actor-costner",
+        "nge:actor-sprayberry"
+      ]
+    },
+    {
+      "startTime": 69,
+      "endTime": 83,
+      "people": [
+        "nge:actor-cavill",
+        "nge:actor-adams"
+      ]
+    },
+    {
+      "startTime": 83,
+      "endTime": 125,
+      "people": [
+        "nge:actor-cavill"
+      ]
+    },
+    {
+      "startTime": 125,
+      "endTime": 153,
+      "people": [
+        "nge:actor-cavill",
+        "nge:actor-shannon"
+      ]
+    },
+    {
+      "startTime": 155,
+      "endTime": 182,
+      "people": [
+        "nge:actor-cavill",
+        "nge:actor-adams"
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "Man of Steel",
+    "people": [
+      {
+        "id": "nge:actor-cavill",
+        "job_function": "Actor",
+        "billing_block_order": 1,
+        "character": "Clark Kent / Kal-El",
+        "name": "Henry Cavill",
+        "thumbnail_image": "cavill_thumb.jpg",
+        "full_image": "cavill_full.jpg",
+        "filmography": [
+          {
+            "title": "Batman v Superman",
+            "poster_image": "http://resizing.flixster.com/Jj6wWGt6lyF3lvez2mPrgekAjpA=/320x474/dkpu1ddg7pbsk.cloudfront.net/movie/11/19/11/11191102_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/batman-v-superman-dawn-of-justice/"
+          },
+          {
+            "title": "The Man From U.N.C.L.E.",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/2083346825265035E05314345B0AD4F9",
+            "external_url": "https://video.flixster.com/movies/the-man-from-u-n-c-l-e/urn:dece:cid:eidr-s:AA29-CCC8-B64E-9647-6627-N"
+          },
+          {
+            "title": "Immortals",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/1007F33E67B6A988E05315345B0A63A6",
+            "external_url": "https://video.flixster.com/movies/immortals/urn:dece:cid:org:relativitymedia:Immortals_2012"
+          },
+          {
+            "title": "Whatever Works",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/02933A178B3F8076E0505A0A15346353",
+            "external_url": "https://video.flixster.com/movies/whatever-works/urn:dece:cid:eidr-s:2653-F7B7-1F65-BE16-306C-S"
+          },
+          {
+            "title": "Stardust",
+            "poster_image": "https://resizing.flixster.com/lhmSvFu-P5Gdkjeg15aAkHe2adE=/180x240/dkpu1ddg7pbsk.cloudfront.net/movie/11/37/75/11377594_ori.jpg",
+            "external_url": "https://video.flixster.com/movies/stardust/urn:dece:cid:org:ppc:000003475600100003753"
+          }
+        ]
+      },
+      {
+        "id": "nge:actor-adams",
+        "job_function": "Actor",
+        "billing_block_order": 2,
+        "character": "Lois Lane",
+        "name": "Amy Adams",
+        "thumbnail_image": "adams.jpg",
+        "full_image": "adams.jpg",
+        "filmography": [
+          {
+            "title": "Big Eyes",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/0EEE085300B4500DE05316345B0AC788",
+            "external_url": "https://video.flixster.com/movies/big-eyes/urn:dece:cid:org:anchorbayent:BIGEYES_M"
+          },
+          {
+            "title": "Lullaby",
+            "poster_image": "http://resizing.flixster.com/ODlGkWWCpHly5admqQ5cH1eR5KM=/320x474/dkpu1ddg7pbsk.cloudfront.net/movie/11/17/82/11178252_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/lullaby-2013/"
+          },
+          {
+            "title": "American Hustle",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/F8DA72E80E8023DEE0405B0A163458D2",
+            "external_url": "https://video.flixster.com/movies/american-hustle/urn:dece:cid:eidr-s:626A-A431-E3A8-EE6D-0668-3"
+          },
+          {
+            "title": "Her",
+            "poster_image": "https://content6.flixster.com/movie/11/17/76/11177656_det.jpg",
+            "external_url": "https://video.flixster.com/movies/her/urn:dece:cid:eidr-s:3F2E-E412-9650-B898-A52B-J"
+          },
+          {
+            "title": "Trouble with the Curve",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/EB7D421B9C5CDEE3E0405A0A153401E9",
+            "external_url": "https://video.flixster.com/movies/trouble-with-the-curve/urn:dece:cid:org:WB:2059722x6000075956"
+          },
+          {
+            "title": "The Master",
+            "poster_image": "https://resizing.flixster.com/e8EFfuzJ8k6ePyPYMaScRHfOcWM=/180x270/dkpu1ddg7pbsk.cloudfront.net/movie/11/17/64/11176490_ori.jpg",
+            "external_url": "https://video.flixster.com/movies/the-master/urn:dece:cid:org:anchorbayent:MASTER_M"
+          }
+        ]
+      },
+      {
+        "id": "nge:actor-shannon",
+        "job_function": "Actor",
+        "billing_block_order": 3,
+        "character": "General Zod",
+        "name": "Michael Shannon",
+        "thumbnail_image": "shannon_thumb.jpg",
+        "full_image": "shannon_full.jpg",
+        "filmography": [
+          {
+            "title": "99 Homes",
+            "poster_image": "http://resizing.flixster.com/_F1zapdRleMM6p__hLZCztRFZvI=/320x473/dkpu1ddg7pbsk.cloudfront.net/movie/11/20/22/11202259_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/99-homes/"
+          },
+          {
+            "title": "The Harvest",
+            "poster_image": "http://resizing.flixster.com/szj7pQh9ou9_OxcVV0Yr5ivqGQo=/284x405/dkpu1ddg7pbsk.cloudfront.net/movie/11/19/10/11191024_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/the-harvest-2015/"
+          },
+          {
+            "title": "The Iceman",
+            "poster_image": "http://resizing.flixster.com/ehhRBRBQyi-CZCsz4eL-ZXJftdU=/320x474/dkpu1ddg7pbsk.cloudfront.net/movie/11/16/41/11164167_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/the-iceman-2013/"
+          },
+          {
+            "title": "Premium Rush",
+            "poster_image": "http://resizing.flixster.com/UOuJr48sD4Xo92EICRy3axFF9Jw=/320x480/dkpu1ddg7pbsk.cloudfront.net/movie/11/16/80/11168079_ori.jpg",
+            "external_url": "http://www.flixster.com/movie/premium-rush/"
+          },
+          {
+            "title": "Mud",
+            "poster_image": "https://resizing.flixster.com/3M9mwbxhlX3nTCBEUDmvo_tx_ZQ=/180x270/dkpu1ddg7pbsk.cloudfront.net/movie/11/17/24/11172428_ori.jpg",
+            "external_url": "https://video.flixster.com/movies/mud/urn:dece:cid:org:lionsgate:9382598"
+          },
+          {
+            "title": "Take Shelter",
+            "poster_image": "https://d19p213wjrwt85.cloudfront.net/uvvu-images/0090D4C00DC4F2CDE0505A0A1634200C",
+            "external_url": "https://video.flixster.com/movies/take-shelter/urn:dece:cid:eidr-s:434A-A49F-7A23-DE2D-537B-Z"
+          }
+        ]
+      },
+      {
+        "id": "nge:actor-lane",
+        "job_function": "Actor",
+        "billing_block_order": 4,
+        "character": "Martha Kent",
+        "name": "Diane Lane",
+        "thumbnail_image": "lane_thumb.jpg",
+        "full_image": "lane_full.jpg"
+      },
+      {
+        "id": "nge:actor-crowe",
+        "job_function": "Actor",
+        "billing_block_order": 5,
+        "character": "Jor-El",
+        "name": "Russel Crowe",
+        "thumbnail_image": "crowe_thumb.jpg",
+        "full_image": "crowe_full.jpg"
+      },
+      {
+        "id": "nge:actor-traue",
+        "job_function": "Actor",
+        "billing_block_order": 6,
+        "character": "Faora-Ul",
+        "name": "Antje Traue",
+        "thumbnail_image": "traue_thumb.jpg",
+        "full_image": "traue_full.jpg"
+      },
+      {
+        "id": "nge:actor-lennix",
+        "job_function": "Actor",
+        "billing_block_order": 7,
+        "character": "General Swanwick",
+        "name": "Harry Lennix",
+        "thumbnail_image": "lennix_thumb.jpg",
+        "full_image": "lennix_full.jpg"
+      },
+      {
+        "id": "nge:actor-schiff",
+        "job_function": "Actor",
+        "billing_block_order": 8,
+        "character": "Dr. Emil Hamilton",
+        "name": "Richard Schiff",
+        "thumbnail_image": "schiff_thumb.jpg",
+        "full_image": "schiff_full.jpg"
+      },
+      {
+        "id": "nge:actor-meloni",
+        "job_function": "Actor",
+        "billing_block_order": 9,
+        "character": "Colonel Nathan Hardy",
+        "name": "Christopher Meloni",
+        "thumbnail_image": "meloni_thumb.jpg",
+        "full_image": "meloni_full.jpg"
+      },
+      {
+        "id": "nge:actor-costner",
+        "job_function": "Actor",
+        "billing_block_order": 10,
+        "character": "Jonathan Kent",
+        "name": "Kevin Costner",
+        "thumbnail_image": "costner_thumb.jpg",
+        "full_image": "costner_full.jpg"
+      },
+      {
+        "id": "nge:actor-zurer",
+        "job_function": "Actor",
+        "billing_block_order": 11,
+        "character": "Lara Lor-Van",
+        "name": "Ayelet Zurer",
+        "thumbnail_image": "zurer_thumb.jpg",
+        "full_image": "zurer_full.jpg"
+      },
+      {
+        "id": "nge:actor-sprayberry",
+        "job_function": "Actor",
+        "billing_block_order": 12,
+        "character": "Clark Kent (13 Years)",
+        "name": "Dylan Sprayberry",
+        "thumbnail_image": "sprayberry_thumb.jpg",
+        "full_image": "sprayberry_full.jpg"
+      },
+      {
+        "id": "nge:actor-timberline",
+        "job_function": "Actor",
+        "billing_block_order": 13,
+        "character": "Clark Kent (9 Years)",
+        "name": "Cooper Timberline",
+        "thumbnail_image": "timberline_thumb.jpg",
+        "full_image": "timberline_full.jpg"
+      }
+    ]
+  }
+}

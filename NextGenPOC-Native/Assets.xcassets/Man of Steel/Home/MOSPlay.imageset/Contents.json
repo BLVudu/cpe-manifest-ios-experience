@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iPad-Air.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "MOSPlay@2x.png",
       "scale" : "2x"
     },
     {

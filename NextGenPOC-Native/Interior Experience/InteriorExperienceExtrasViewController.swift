@@ -17,27 +17,24 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var sceneDetailView: UIView!
     
     var selectedIndexPath: NSIndexPath?
-    
-    var talentData = [
-        [
-            "thumbnailImage": "cavill_thumb.jpg",
-            "fullImage": "cavill_full.jpg",
-            "name": "Henry Cavill",
-            "role": "Clark Kent/Kal-El"
-        ],
-        [
-            "thumbnailImage": "adams.jpg",
-            "fullImage": "adams.jpg",
-            "name": "Amy Adams",
-            "role": "Lois Lane"
-        ]
-    ]
+    var currentScene: Scene?
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        
+        if let allScenes = DataManager.sharedInstance.content?.scenes {
+            currentScene = allScenes[0]
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(kSceneDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            if let userInfo = notification.userInfo {
+                self.currentScene = userInfo["scene"] as? Scene
+                self.talentTableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,12 +95,19 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return talentData.count
+        if let sceneTalent = currentScene?.talent {
+            return sceneTalent.count
+        }
+        
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
-        cell.talent = Talent(info: talentData[indexPath.row])
+        if let sceneTalent = currentScene?.talent {
+            cell.talent = sceneTalent[indexPath.row]
+        }
+        
         cell.nameLabel?.removeFromSuperview()
         cell.roleLabel?.removeFromSuperview()
         return cell

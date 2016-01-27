@@ -14,8 +14,8 @@ class FilmCollectionViewCell: UICollectionViewCell {
     
     var film: Film? = nil {
         didSet {
-            if film?.imageURL != nil {
-                imageView.setImageWithURL(film!.imageURL!)
+            if film?.posterImageURL != nil {
+                imageView.setImageWithURL(film!.posterImageURL!)
             } else {
                 imageView.image = nil
             }

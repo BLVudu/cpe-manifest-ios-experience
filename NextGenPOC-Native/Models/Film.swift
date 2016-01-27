@@ -10,18 +10,21 @@ import UIKit
 
 class Film: NSObject {
     
-    var name: String!
-    var imageURL: NSURL?
+    var title: String!
+    var posterImageURL: NSURL?
     var externalURL: NSURL?
     
-    required init(info: [String: String]) {
-        name = info["name"]
-        if info["imageURL"] != nil {
-            imageURL = NSURL(string: info["imageURL"]!)
+    required init(info: NSDictionary) {
+        super.init()
+        
+        title = info["title"] as! String
+        
+        if let posterImage = info["poster_image"] as? String {
+            posterImageURL = NSURL(string: posterImage)
         }
         
-        if info["externalURL"] != nil {
-            externalURL = NSURL(string: info["externalURL"]!)
+        if let externalURLStr = info["external_url"] as? String {
+            externalURL = NSURL(string: externalURLStr)
         }
     }
 
