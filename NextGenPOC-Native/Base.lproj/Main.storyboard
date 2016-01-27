@@ -530,6 +530,9 @@
                             </collectionView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBH-gG-bSP">
                                 <rect key="frame" x="315" y="30" width="709" height="738"/>
+                                <connections>
+                                    <segue destination="enc-ld-Xnm" kind="embed" id="kSL-ff-FXa"/>
+                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1026,4 +1029,7 @@
         <image name="home_extras_shop.jpg" width="1014" height="620"/>
         <image name="menu.png" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="kSL-ff-FXa"/>
+    </inferredMetricsTieBreakers>
 </document>

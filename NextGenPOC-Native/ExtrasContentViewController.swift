@@ -94,7 +94,7 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
             
         }
         
-        UIView.animateWithDuration(1.5, animations:{
+        UIView.animateWithDuration(0.25, animations:{
             
             
             self.videoView.alpha = 1
