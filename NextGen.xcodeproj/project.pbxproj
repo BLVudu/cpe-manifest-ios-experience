@@ -58,13 +58,11 @@
 		7077A34F1C4989C200843782 /* extras_scenes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A31F1C4989C200843782 /* extras_scenes.jpg */; };
 		7077A3501C4989C200843782 /* extras_shopping.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3201C4989C200843782 /* extras_shopping.jpg */; };
 		7077A3511C4989C200843782 /* extras_universe.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3211C4989C200843782 /* extras_universe.jpg */; };
-		7077A3521C4989C200843782 /* home_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3231C4989C200843782 /* home_bg.jpg */; };
 		7077A3531C4989C200843782 /* home_extras_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3241C4989C200843782 /* home_extras_bg.jpg */; };
 		7077A3541C4989C200843782 /* home_extras_bts.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3251C4989C200843782 /* home_extras_bts.jpg */; };
 		7077A3551C4989C200843782 /* home_extras_cast.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3261C4989C200843782 /* home_extras_cast.jpg */; };
 		7077A3561C4989C200843782 /* home_extras_maps.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3271C4989C200843782 /* home_extras_maps.jpg */; };
 		7077A3571C4989C200843782 /* home_extras_shop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3281C4989C200843782 /* home_extras_shop.jpg */; };
-		7077A3581C4989C200843782 /* home_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3291C4989C200843782 /* home_logo.png */; };
 		7077A3591C4989C200843782 /* menu_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A32A1C4989C200843782 /* menu_bg.jpg */; };
 		7077A35A1C4989C200843782 /* nav_extras.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A32B1C4989C200843782 /* nav_extras.jpg */; };
 		7077A35B1C4989C200843782 /* nav_home.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A32C1C4989C200843782 /* nav_home.jpg */; };
@@ -189,13 +187,11 @@
 		7077A31F1C4989C200843782 /* extras_scenes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_scenes.jpg; sourceTree = "<group>"; };
 		7077A3201C4989C200843782 /* extras_shopping.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_shopping.jpg; sourceTree = "<group>"; };
 		7077A3211C4989C200843782 /* extras_universe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_universe.jpg; sourceTree = "<group>"; };
-		7077A3231C4989C200843782 /* home_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_bg.jpg; sourceTree = "<group>"; };
 		7077A3241C4989C200843782 /* home_extras_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_extras_bg.jpg; sourceTree = "<group>"; };
 		7077A3251C4989C200843782 /* home_extras_bts.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_extras_bts.jpg; sourceTree = "<group>"; };
 		7077A3261C4989C200843782 /* home_extras_cast.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_extras_cast.jpg; sourceTree = "<group>"; };
 		7077A3271C4989C200843782 /* home_extras_maps.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_extras_maps.jpg; sourceTree = "<group>"; };
 		7077A3281C4989C200843782 /* home_extras_shop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_extras_shop.jpg; sourceTree = "<group>"; };
-		7077A3291C4989C200843782 /* home_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_logo.png; sourceTree = "<group>"; };
 		7077A32A1C4989C200843782 /* menu_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = menu_bg.jpg; sourceTree = "<group>"; };
 		7077A32B1C4989C200843782 /* nav_extras.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nav_extras.jpg; sourceTree = "<group>"; };
 		7077A32C1C4989C200843782 /* nav_home.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nav_home.jpg; sourceTree = "<group>"; };
@@ -426,13 +422,11 @@
 		7077A3221C4989C200843782 /* Home Screen */ = {
 			isa = PBXGroup;
 			children = (
-				7077A3231C4989C200843782 /* home_bg.jpg */,
 				7077A3241C4989C200843782 /* home_extras_bg.jpg */,
 				7077A3251C4989C200843782 /* home_extras_bts.jpg */,
 				7077A3261C4989C200843782 /* home_extras_cast.jpg */,
 				7077A3271C4989C200843782 /* home_extras_maps.jpg */,
 				7077A3281C4989C200843782 /* home_extras_shop.jpg */,
-				7077A3291C4989C200843782 /* home_logo.png */,
 				7077A32A1C4989C200843782 /* menu_bg.jpg */,
 				7077A32B1C4989C200843782 /* nav_extras.jpg */,
 				7077A32C1C4989C200843782 /* nav_home.jpg */,
@@ -567,6 +561,7 @@
 				4921D9701C3EFD0B00ED2AA6 /* Frameworks */,
 				4921D9711C3EFD0B00ED2AA6 /* Resources */,
 				98AC9B63610E231325532174 /* Copy Pods Resources */,
+				EB247C0BCDF6B154EACBE2D9 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -666,7 +661,6 @@
 				7077A3651C4989C200843782 /* crowe_thumb.jpg in Resources */,
 				7077A36D1C4989C200843782 /* meloni_thumb.jpg in Resources */,
 				7077A3681C4989C200843782 /* lane_full.jpg in Resources */,
-				7077A3521C4989C200843782 /* home_bg.jpg in Resources */,
 				7077A3871C49C66F00843782 /* timberline_thumb.jpg in Resources */,
 				49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */,
 				7077A35F1C4989C200843782 /* adams.jpg in Resources */,
@@ -709,7 +703,6 @@
 				7077A36E1C4989C200843782 /* schiff_full.jpg in Resources */,
 				7077A3851C49C66F00843782 /* sprayberry_thumb.jpg in Resources */,
 				7077A3661C4989C200843782 /* fishburne_full.jpg in Resources */,
-				7077A3581C4989C200843782 /* home_logo.png in Resources */,
 				7077A35C1C4989C200843782 /* nav_scenes.jpg in Resources */,
 				7077A3571C4989C200843782 /* home_extras_shop.jpg in Resources */,
 				7077A36A1C4989C200843782 /* lennix_full.jpg in Resources */,
@@ -772,6 +765,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB247C0BCDF6B154EACBE2D9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NextGen/Pods-NextGen-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

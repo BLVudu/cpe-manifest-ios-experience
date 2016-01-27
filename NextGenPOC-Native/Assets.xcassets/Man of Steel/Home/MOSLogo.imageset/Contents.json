@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Extras.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "MOSLogo@2x.png",
       "scale" : "2x"
     },
     {
