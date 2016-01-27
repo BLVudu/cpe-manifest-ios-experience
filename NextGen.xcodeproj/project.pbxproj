@@ -18,25 +18,22 @@
 		4921D99A1C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9991C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift */; };
 		4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */; };
 		4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */; };
-		494166E71C52D53A0013B94A /* bts_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494166E21C52D53A0013B94A /* bts_1.jpg */; };
-		494166E81C52D53A0013B94A /* bts_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494166E31C52D53A0013B94A /* bts_2.jpg */; };
-		494166E91C52D53A0013B94A /* bts_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494166E41C52D53A0013B94A /* bts_3.jpg */; };
-		494166EA1C52D53A0013B94A /* bts_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494166E51C52D53A0013B94A /* bts_4.jpg */; };
-		494166EB1C52D53A0013B94A /* bts_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494166E61C52D53A0013B94A /* bts_5.jpg */; };
 		494166EE1C52E8CC0013B94A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166ED1C52E8CC0013B94A /* play.png */; };
 		494166F01C52F8580013B94A /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494166EF1C52F8580013B94A /* CustomSegue.swift */; };
 		494166F21C5306D90013B94A /* Play_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166F11C5306D90013B94A /* Play_Button.png */; };
 		49656F231C49C676001DB9C0 /* ExtrasNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F221C49C676001DB9C0 /* ExtrasNavigation.swift */; };
 		49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F241C49C73E001DB9C0 /* CustomSwitch.swift */; };
-		49F3EACF1C50125200E09484 /* ExtrasContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */; };
+		496FC4F81C583B5900A85AE4 /* bts_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 496FC4F31C583B5900A85AE4 /* bts_1.jpg */; };
+		496FC4F91C583B5900A85AE4 /* bts_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 496FC4F41C583B5900A85AE4 /* bts_2.jpg */; };
+		496FC4FA1C583B5900A85AE4 /* bts_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 496FC4F51C583B5900A85AE4 /* bts_3.jpg */; };
+		496FC4FB1C583B5900A85AE4 /* bts_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 496FC4F61C583B5900A85AE4 /* bts_4.jpg */; };
+		496FC4FC1C583B5900A85AE4 /* bts_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 496FC4F71C583B5900A85AE4 /* bts_5.jpg */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
-		49F3EADB1C517ADA00E09484 /* SecondTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */; };
+		49F3EADB1C517ADA00E09484 /* ExtrasContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADA1C517ADA00E09484 /* ExtrasContentViewController.swift */; };
 		49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EADC1C51890A00E09484 /* VideoCell.xib */; };
 		49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADE1C518ABE00E09484 /* VideoCell.swift */; };
-		49F3EAE11C51B62D00E09484 /* ThirdTemplateLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAE01C51B62D00E09484 /* ThirdTemplateLayout.swift */; };
-		49F3EAE31C51B71100E09484 /* ThirdTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAE21C51B71100E09484 /* ThirdTemplateViewController.swift */; };
 		701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */; };
 		701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */; };
 		701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B026F1C45C0400020DCD1 /* InteriorExperienceViewController.swift */; };
@@ -148,25 +145,22 @@
 		4921D99B1C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGenPOC-Native/Extras/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = "NextGenPOC-Native/Extras/ExtrasLayout.swift"; sourceTree = SOURCE_ROOT; };
-		494166E21C52D53A0013B94A /* bts_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_1.jpg; sourceTree = "<group>"; };
-		494166E31C52D53A0013B94A /* bts_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_2.jpg; sourceTree = "<group>"; };
-		494166E41C52D53A0013B94A /* bts_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_3.jpg; sourceTree = "<group>"; };
-		494166E51C52D53A0013B94A /* bts_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_4.jpg; sourceTree = "<group>"; };
-		494166E61C52D53A0013B94A /* bts_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_5.jpg; sourceTree = "<group>"; };
 		494166ED1C52E8CC0013B94A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		494166EF1C52F8580013B94A /* CustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
 		494166F11C5306D90013B94A /* Play_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_Button.png; path = ../Play_Button.png; sourceTree = "<group>"; };
 		49656F221C49C676001DB9C0 /* ExtrasNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasNavigation.swift; sourceTree = "<group>"; };
 		49656F241C49C73E001DB9C0 /* CustomSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
-		49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasContentViewController.swift; path = ../Utilities/ExtrasContentViewController.swift; sourceTree = "<group>"; };
+		496FC4F31C583B5900A85AE4 /* bts_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_1.jpg; sourceTree = "<group>"; };
+		496FC4F41C583B5900A85AE4 /* bts_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_2.jpg; sourceTree = "<group>"; };
+		496FC4F51C583B5900A85AE4 /* bts_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_3.jpg; sourceTree = "<group>"; };
+		496FC4F61C583B5900A85AE4 /* bts_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_4.jpg; sourceTree = "<group>"; };
+		496FC4F71C583B5900A85AE4 /* bts_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bts_5.jpg; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
-		49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondTemplateViewController.swift; path = ../SecondTemplateViewController.swift; sourceTree = "<group>"; };
+		49F3EADA1C517ADA00E09484 /* ExtrasContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasContentViewController.swift; path = ../ExtrasContentViewController.swift; sourceTree = "<group>"; };
 		49F3EADC1C51890A00E09484 /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		49F3EADE1C518ABE00E09484 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
-		49F3EAE01C51B62D00E09484 /* ThirdTemplateLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTemplateLayout.swift; sourceTree = "<group>"; };
-		49F3EAE21C51B71100E09484 /* ThirdTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTemplateViewController.swift; sourceTree = "<group>"; };
 		6C5BE24AF16D012C46DD45E3 /* Pods-NextGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextGen/Pods-NextGen.release.xcconfig"; sourceTree = "<group>"; };
 		701B02691C45A5350020DCD1 /* SceneDetailCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCellView.swift; sourceTree = "<group>"; };
 		701B026B1C45A5540020DCD1 /* SceneDetailCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SceneDetailCellView.xib; sourceTree = "<group>"; };
@@ -352,11 +346,11 @@
 		494166EC1C52D5450013B94A /* BTS */ = {
 			isa = PBXGroup;
 			children = (
-				494166E21C52D53A0013B94A /* bts_1.jpg */,
-				494166E31C52D53A0013B94A /* bts_2.jpg */,
-				494166E41C52D53A0013B94A /* bts_3.jpg */,
-				494166E51C52D53A0013B94A /* bts_4.jpg */,
-				494166E61C52D53A0013B94A /* bts_5.jpg */,
+				496FC4F31C583B5900A85AE4 /* bts_1.jpg */,
+				496FC4F41C583B5900A85AE4 /* bts_2.jpg */,
+				496FC4F51C583B5900A85AE4 /* bts_3.jpg */,
+				496FC4F61C583B5900A85AE4 /* bts_4.jpg */,
+				496FC4F71C583B5900A85AE4 /* bts_5.jpg */,
 			);
 			name = BTS;
 			sourceTree = "<group>";
@@ -547,10 +541,7 @@
 				4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */,
 				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
 				49656F221C49C676001DB9C0 /* ExtrasNavigation.swift */,
-				49F3EACE1C50125200E09484 /* ExtrasContentViewController.swift */,
-				49F3EADA1C517ADA00E09484 /* SecondTemplateViewController.swift */,
-				49F3EAE01C51B62D00E09484 /* ThirdTemplateLayout.swift */,
-				49F3EAE21C51B71100E09484 /* ThirdTemplateViewController.swift */,
+				49F3EADA1C517ADA00E09484 /* ExtrasContentViewController.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -677,14 +668,11 @@
 				7077A3681C4989C200843782 /* lane_full.jpg in Resources */,
 				7077A3521C4989C200843782 /* home_bg.jpg in Resources */,
 				7077A3871C49C66F00843782 /* timberline_thumb.jpg in Resources */,
-				494166E91C52D53A0013B94A /* bts_3.jpg in Resources */,
-				494166E81C52D53A0013B94A /* bts_2.jpg in Resources */,
 				49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */,
 				7077A35F1C4989C200843782 /* adams.jpg in Resources */,
 				7077A3601C4989C200843782 /* cavill_full.jpg in Resources */,
 				7077A35E1C4989C200843782 /* cornfield.png in Resources */,
 				7077A3611C4989C200843782 /* cavill_thumb.jpg in Resources */,
-				494166EB1C52D53A0013B94A /* bts_5.jpg in Resources */,
 				7077A3841C49C66F00843782 /* sprayberry_full.jpg in Resources */,
 				7077A3561C4989C200843782 /* home_extras_maps.jpg in Resources */,
 				7077A3551C4989C200843782 /* home_extras_cast.jpg in Resources */,
@@ -693,6 +681,7 @@
 				7077A3541C4989C200843782 /* home_extras_bts.jpg in Resources */,
 				4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */,
 				7077A3751C4989C200843782 /* zurer_thumb.jpg in Resources */,
+				496FC4FB1C583B5900A85AE4 /* bts_4.jpg in Resources */,
 				7077A3641C4989C200843782 /* crowe_full.jpg in Resources */,
 				7077A34F1C4989C200843782 /* extras_scenes.jpg in Resources */,
 				7077A35B1C4989C200843782 /* nav_home.jpg in Resources */,
@@ -701,22 +690,24 @@
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
 				7077A3711C4989C200843782 /* shannon_thumb.jpg in Resources */,
 				7077A34A1C4989C200843782 /* extras_bts.jpg in Resources */,
+				496FC4FC1C583B5900A85AE4 /* bts_5.jpg in Resources */,
+				496FC4F81C583B5900A85AE4 /* bts_1.jpg in Resources */,
 				7077A36B1C4989C200843782 /* lennix_thumb.jpg in Resources */,
 				7077A34C1C4989C200843782 /* extras_krypton.jpg in Resources */,
 				7077A3531C4989C200843782 /* home_extras_bg.jpg in Resources */,
 				7077A3511C4989C200843782 /* extras_universe.jpg in Resources */,
 				7077A36C1C4989C200843782 /* meloni_full.jpg in Resources */,
-				494166E71C52D53A0013B94A /* bts_1.jpg in Resources */,
+				496FC4FA1C583B5900A85AE4 /* bts_3.jpg in Resources */,
 				7077A3741C4989C200843782 /* zurer_full.jpg in Resources */,
 				701B026C1C45A5540020DCD1 /* SceneDetailCellView.xib in Resources */,
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
 				7077A3731C4989C200843782 /* traue_thumb.jpg in Resources */,
+				496FC4F91C583B5900A85AE4 /* bts_2.jpg in Resources */,
 				7077A35D1C4989C200843782 /* menu.png in Resources */,
 				49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */,
 				7077A35A1C4989C200843782 /* nav_extras.jpg in Resources */,
 				7077A36E1C4989C200843782 /* schiff_full.jpg in Resources */,
 				7077A3851C49C66F00843782 /* sprayberry_thumb.jpg in Resources */,
-				494166EA1C52D53A0013B94A /* bts_4.jpg in Resources */,
 				7077A3661C4989C200843782 /* fishburne_full.jpg in Resources */,
 				7077A3581C4989C200843782 /* home_logo.png in Resources */,
 				7077A35C1C4989C200843782 /* nav_scenes.jpg in Resources */,
@@ -791,7 +782,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */,
-				49F3EAE11C51B62D00E09484 /* ThirdTemplateLayout.swift in Sources */,
 				4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */,
 				49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */,
 				4921D9791C3EFD0B00ED2AA6 /* ViewController.swift in Sources */,
@@ -799,16 +789,14 @@
 				494166F01C52F8580013B94A /* CustomSegue.swift in Sources */,
 				7077A37F1C49AB8500843782 /* Scene.swift in Sources */,
 				701B026A1C45A5350020DCD1 /* SceneDetailCellView.swift in Sources */,
-				49F3EACF1C50125200E09484 /* ExtrasContentViewController.swift in Sources */,
 				7077A37B1C49A4D800843782 /* Content.swift in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
-				49F3EAE31C51B71100E09484 /* ThirdTemplateViewController.swift in Sources */,
 				701B02701C45C0400020DCD1 /* InteriorExperienceViewController.swift in Sources */,
 				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
 				701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */,
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
-				49F3EADB1C517ADA00E09484 /* SecondTemplateViewController.swift in Sources */,
+				49F3EADB1C517ADA00E09484 /* ExtrasContentViewController.swift in Sources */,
 				7077A3771C4989DC00843782 /* DataManager.swift in Sources */,
 				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
 				701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */,

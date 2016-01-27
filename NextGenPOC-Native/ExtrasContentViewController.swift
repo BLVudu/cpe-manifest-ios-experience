@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var videoView: UIImageView!
     
@@ -36,7 +36,7 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCellWithIdentifier("video", forIndexPath: indexPath) as! VideoCell
         cell.backgroundColor = UIColor.darkGrayColor()
         cell.thumbnail.image = UIImage(named: self.btsImages[indexPath.row])
-        cell.caption.text = self.btsCaption[indexPath.row]
+        //cell.caption.text = self.btsCaption[indexPath.row]
         cell.selectionStyle = .None
         return cell
     }
@@ -59,7 +59,7 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
   
         let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
         headerView.backgroundColor = UIColor.darkGrayColor()
-        let title = UILabel(frame: CGRectMake(10, 20, tableView.frame.size.width, 40))
+        let title = UILabel(frame: CGRectMake(10, 10, tableView.frame.size.width, 40))
         title.text = "Behind The Scenes"
         title.textColor = UIColor.whiteColor()
         title.font = UIFont(name: "Helvetica", size: 25.0)
@@ -104,7 +104,7 @@ class SecondTemplateViewController:UIViewController, UITableViewDataSource, UITa
              })
 
         self.videoView.image = UIImage(named: self.btsImages[indexPath.row])
-        self.imageCaption.text = self.btsCaption[indexPath.row]
+        //self.imageCaption.text = self.btsCaption[indexPath.row]
         
     }
     

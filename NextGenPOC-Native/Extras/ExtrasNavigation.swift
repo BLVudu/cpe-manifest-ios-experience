@@ -25,12 +25,12 @@ class ExtrasNavigation: UINavigationController{
         self.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationBar.alpha = 1
         let logo = UIImageView(image:UIImage(named: "home_logo.png"))
-        let titleImg = UIImageView(image:UIImage(named: "nav_extras.jpg"))
-        logo.frame = CGRectMake((self.navigationBar.frame.width/2), 0, 300, 43)
-        titleImg.frame = CGRectMake((self.navigationBar.frame.width)+75, -15, 200, 55)
+        //let titleImg = UIImageView(image:UIImage(named: "nav_extras.jpg"))
+        logo.frame = CGRectMake((self.navigationBar.frame.width/3), 0, 300, 43)
+        //titleImg.frame = CGRectMake((self.navigationBar.frame.width)+75, -15, 200, 55)
 
         self.navigationBar.addSubview(logo)
-        self.navigationBar.addSubview(titleImg)
+        //self.navigationBar.addSubview(titleImg)
         
 
 

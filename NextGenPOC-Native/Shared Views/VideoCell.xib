@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5TR-li-LKC" id="IzL-Yw-hoz">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="182.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kcr-fA-Eba">
@@ -20,39 +20,26 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zH-1v-tiT">
                         <rect key="frame" x="8" y="146" width="304" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play_Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="1rf-6c-fKM">
-                        <rect key="frame" x="130" y="52" width="60" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="60" id="cIt-8H-H3v"/>
-                            <constraint firstAttribute="width" constant="60" id="mx4-cj-6di"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="kcr-fA-Eba" secondAttribute="bottom" constant="37" id="9wF-pV-Ke1"/>
-                    <constraint firstItem="1rf-6c-fKM" firstAttribute="centerY" secondItem="kcr-fA-Eba" secondAttribute="centerY" id="BZQ-5M-diq"/>
                     <constraint firstAttribute="leadingMargin" secondItem="9zH-1v-tiT" secondAttribute="leading" id="Khg-mh-KAQ"/>
                     <constraint firstAttribute="leadingMargin" secondItem="kcr-fA-Eba" secondAttribute="leading" constant="-17" id="LTG-EX-wDa"/>
                     <constraint firstAttribute="bottomMargin" secondItem="9zH-1v-tiT" secondAttribute="bottom" constant="-21" id="Luu-Xa-t0s"/>
                     <constraint firstAttribute="topMargin" secondItem="kcr-fA-Eba" secondAttribute="top" constant="-17" id="tMX-St-NpH"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kcr-fA-Eba" secondAttribute="trailing" constant="16" id="vbv-VL-3pd"/>
-                    <constraint firstItem="1rf-6c-fKM" firstAttribute="centerX" secondItem="kcr-fA-Eba" secondAttribute="centerX" id="xWg-dV-1Wy"/>
                     <constraint firstItem="9zH-1v-tiT" firstAttribute="top" secondItem="IzL-Yw-hoz" secondAttribute="topMargin" constant="138" id="yGM-vu-KiQ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9zH-1v-tiT" secondAttribute="trailing" id="yaG-CD-yA5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="caption" destination="9zH-1v-tiT" id="YWL-kE-YOp"/>
-                <outlet property="playBtn" destination="1rf-6c-fKM" id="nqO-P9-Sb9"/>
                 <outlet property="thumbnail" destination="kcr-fA-Eba" id="wGm-BR-K5k"/>
             </connections>
             <point key="canvasLocation" x="295" y="321.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="Play_Button.png" width="130" height="130"/>
-    </resources>
 </document>

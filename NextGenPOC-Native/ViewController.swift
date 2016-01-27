@@ -44,8 +44,8 @@ class ViewController: UIViewController {
         
         let screenSize = UIScreen.mainScreen().bounds
         let viewHeight = (extView.hidden ? screenSize.height : (screenSize.height / 2))
-        titleTreatmentTopConstraint.constant = viewHeight * 0.4125
-        titleTreatmentLeftConstraint.constant = screenSize.width * 0.2
+        //titleTreatmentTopConstraint.constant = viewHeight * 0.4125
+        //titleTreatmentLeftConstraint.constant = screenSize.width * 0.2
         instructionsBottomConstraint.constant = viewHeight * 0.05
         instructionsRightConstraint.constant = screenSize.width * 0.05
     }
