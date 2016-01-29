@@ -12,6 +12,7 @@ class Video {
     
     var content: Content!
     var url: NSURL!
+    var interstitialUrl: NSURL?
     var deliveryFormat: String?
     
     var title: String {
@@ -22,6 +23,7 @@ class Video {
     
     required init(info: NSDictionary) {
         url = NSURL(string: info["file_url"] as! String)
+        interstitialUrl = info["interstitial_file_url"] != nil ? NSURL(string: info["interstitial_file_url"] as! String) : nil
         deliveryFormat = info["delivery_format"] as? String
     }
     

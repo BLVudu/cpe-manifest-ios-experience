@@ -21,7 +21,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     var selectedIndexPath: NSIndexPath?
     
     let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
-    let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Scenes","Shopping", "DC Universe"]
+    let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Deleted Scenes","Shopping", "DC Universe"]
     
    
     

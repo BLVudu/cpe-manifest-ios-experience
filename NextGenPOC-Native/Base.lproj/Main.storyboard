@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NWX-a1-PHC">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -478,51 +479,7 @@
                                 <rect key="frame" x="315" y="69" width="709" height="699"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGen" customModuleProvider="target"/>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="content" id="euR-mX-7Nc" customClass="ContentCell" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="326" height="250"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="326" height="250"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N3o-4z-ZrV">
-                                                    <rect key="frame" x="0.0" y="44" width="318" height="206"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIf-CO-jFV">
-                                                    <rect key="frame" x="8" y="17" width="309" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="wIf-CO-jFV" firstAttribute="top" secondItem="euR-mX-7Nc" secondAttribute="topMargin" constant="9" id="Ixs-Lh-dFy"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="N3o-4z-ZrV" secondAttribute="trailing" constant="-8" id="N0k-4R-tPZ"/>
-                                            <constraint firstItem="N3o-4z-ZrV" firstAttribute="top" secondItem="wIf-CO-jFV" secondAttribute="bottom" constant="6" id="dZk-gY-wWm"/>
-                                            <constraint firstItem="N3o-4z-ZrV" firstAttribute="top" secondItem="euR-mX-7Nc" secondAttribute="top" constant="44" id="evq-Po-2wT"/>
-                                            <constraint firstItem="N3o-4z-ZrV" firstAttribute="width" secondItem="euR-mX-7Nc" secondAttribute="height" multiplier="16:9" constant="-126.4444444444444" id="gea-iI-jk9"/>
-                                            <constraint firstItem="N3o-4z-ZrV" firstAttribute="leading" secondItem="euR-mX-7Nc" secondAttribute="leading" id="k15-yU-GyC"/>
-                                            <constraint firstItem="wIf-CO-jFV" firstAttribute="leading" secondItem="euR-mX-7Nc" secondAttribute="leadingMargin" id="mWe-9a-nK8"/>
-                                            <constraint firstItem="wIf-CO-jFV" firstAttribute="centerX" secondItem="N3o-4z-ZrV" secondAttribute="centerX" constant="3.5" id="ouJ-SG-5DC"/>
-                                            <constraint firstAttribute="bottom" secondItem="N3o-4z-ZrV" secondAttribute="bottom" id="v0A-bX-Ljm"/>
-                                        </constraints>
-                                        <size key="customSize" width="326" height="250"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="N0k-4R-tPZ"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <outlet property="extraImg" destination="N3o-4z-ZrV" id="ozP-p6-l7O"/>
-                                            <outlet property="extrasTitle" destination="wIf-CO-jFV" id="QUo-HA-iPb"/>
-                                            <segue destination="wpZ-Jt-DDC" kind="show" identifier="moreContent" customClass="CustomSegue" customModule="NextGen" customModuleProvider="target" id="6rn-7c-1qG"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="0Ub-1E-w0a" id="vJB-BZ-dO1"/>
                                     <outlet property="delegate" destination="0Ub-1E-w0a" id="yJh-lN-iVh"/>
@@ -563,6 +520,7 @@
                         <outlet property="extrasView" destination="5xC-Cb-zKQ" id="Adl-mG-9Df"/>
                         <outlet property="talentDetailView" destination="SBH-gG-bSP" id="Z5R-YU-i3D"/>
                         <outlet property="talentTableView" destination="nfb-lf-5Cb" id="fkG-uc-1N7"/>
+                        <segue destination="wpZ-Jt-DDC" kind="show" identifier="moreContent" customClass="CustomSegue" customModule="NextGen" customModuleProvider="target" id="fyH-om-CiD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxE-Et-E7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -721,6 +679,13 @@
                             <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-Vu-ikZ" userLabel="Top Toolbar">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uk-RH-L9W">
+                                        <rect key="frame" x="950" y="8" width="39" height="36"/>
+                                        <state key="normal" image="commentary.jpg"/>
+                                        <connections>
+                                            <action selector="commentary:" destination="FsK-dw-pgC" eventType="touchUpInside" id="brH-Pq-A4D"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLt-Qu-Yg8" userLabel="Done Button">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
                                         <constraints>
@@ -762,6 +727,7 @@
                                     <constraint firstItem="TNg-uE-mDb" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" id="OUE-5w-0No"/>
                                     <constraint firstAttribute="bottom" secondItem="aLt-Qu-Yg8" secondAttribute="bottom" id="gcv-dM-78f"/>
                                     <constraint firstItem="TNg-uE-mDb" firstAttribute="leading" secondItem="C3G-Ez-RrJ" secondAttribute="trailing" id="jpv-Xe-kVE"/>
+                                    <constraint firstItem="7Uk-RH-L9W" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" constant="8" id="lU2-zC-Hq8"/>
                                 </constraints>
                             </view>
                             <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdq-om-9xU" userLabel="Playback Toolbar">
@@ -865,6 +831,7 @@
                             <constraint firstItem="VY7-Vu-ikZ" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="5Vg-PF-J03"/>
                             <constraint firstAttribute="centerX" secondItem="HZD-oz-ZXg" secondAttribute="centerX" id="7pd-yd-O8a"/>
                             <constraint firstAttribute="bottom" secondItem="HZD-oz-ZXg" secondAttribute="bottom" id="DzX-Ic-rcn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7Uk-RH-L9W" secondAttribute="trailing" constant="15" id="GGo-4O-InA"/>
                             <constraint firstAttribute="centerY" secondItem="HZD-oz-ZXg" secondAttribute="centerY" id="NGJ-V2-Xef"/>
                             <constraint firstAttribute="trailing" secondItem="VY7-Vu-ikZ" secondAttribute="trailing" id="TVX-rr-5DP"/>
                             <constraint firstItem="HZD-oz-ZXg" firstAttribute="top" secondItem="r83-OM-ywG" secondAttribute="top" id="WFQ-gw-au5"/>
@@ -883,6 +850,7 @@
                         <outlet property="activityIndicator" destination="cbz-fT-NUV" id="2GD-nb-I0M"/>
                         <outlet property="backUpButton" destination="sO6-3j-2kn" id="cea-Ua-wga"/>
                         <outlet property="backUpTimeLabel" destination="egg-hA-gCC" id="PWC-cg-3fO"/>
+                        <outlet property="commentaryBtn" destination="7Uk-RH-L9W" id="mLA-wD-qAt"/>
                         <outlet property="deliveryFormatLabel" destination="TNg-uE-mDb" id="JHW-73-Ufl"/>
                         <outlet property="pauseButton" destination="Fre-sx-P7e" id="xPZ-ZP-9To"/>
                         <outlet property="playButton" destination="r3j-NO-iAX" id="Mia-hx-7QZ"/>
@@ -926,22 +894,25 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE TRIVIA"/>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="trivia.jpg"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dq-CQ-RGU" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="290" width="311" height="280"/>
+                                        <rect key="frame" x="0.0" y="290" width="263" height="280"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE GALLERY"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="detailText" value=" "/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Henry Cavill getting some scene direction"/>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="scene.jpg"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cV-Hg-Ist" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="320" y="290" width="165" height="280"/>
+                                        <rect key="frame" x="271" y="290" width="214" height="280"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SHOP THIS SCENE"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Dolce &amp; Gabbana"/>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="shop.jpg"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNJ-8r-bZx" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
@@ -950,6 +921,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE LOCATION"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Kent family farm"/>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="location.jpg"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
@@ -957,12 +929,12 @@
                                     <constraint firstItem="ZNJ-8r-bZx" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.59" id="1s9-aG-j2w"/>
                                     <constraint firstItem="7cV-Hg-Ist" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" id="3C2-40-hVA"/>
                                     <constraint firstAttribute="trailing" secondItem="7cV-Hg-Ist" secondAttribute="trailing" id="3CI-1Q-jA7"/>
-                                    <constraint firstItem="8dq-CQ-RGU" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.64" id="4J2-Wy-rIc"/>
+                                    <constraint firstItem="8dq-CQ-RGU" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.64" constant="-47.400000000000034" id="4J2-Wy-rIc"/>
                                     <constraint firstItem="a3J-Y2-5g4" firstAttribute="leading" secondItem="PhY-e7-orR" secondAttribute="leading" id="EA4-Ui-d3C"/>
-                                    <constraint firstItem="8dq-CQ-RGU" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" id="SJD-xC-GSE"/>
+                                    <constraint firstItem="8dq-CQ-RGU" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" constant="0.69999999999998863" id="SJD-xC-GSE"/>
                                     <constraint firstItem="a3J-Y2-5g4" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" id="UPU-Lr-0Nu"/>
                                     <constraint firstItem="ZNJ-8r-bZx" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" id="cRo-zB-i0W"/>
-                                    <constraint firstItem="7cV-Hg-Ist" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.34" id="en3-5C-YTM"/>
+                                    <constraint firstItem="7cV-Hg-Ist" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.34" constant="49.099999999999994" id="en3-5C-YTM"/>
                                     <constraint firstAttribute="bottom" secondItem="8dq-CQ-RGU" secondAttribute="bottom" id="g4k-hw-bHE"/>
                                     <constraint firstAttribute="bottom" secondItem="7cV-Hg-Ist" secondAttribute="bottom" id="gnT-TP-ZDx"/>
                                     <constraint firstAttribute="trailing" secondItem="ZNJ-8r-bZx" secondAttribute="trailing" id="hRi-c8-rsL"/>
@@ -1022,6 +994,7 @@
         <image name="MOSPlay" width="490" height="133"/>
         <image name="Pause Button" width="32" height="32"/>
         <image name="Play Button" width="32" height="32"/>
+        <image name="commentary.jpg" width="39" height="36"/>
         <image name="home_extras_bg.jpg" width="2120" height="1490"/>
         <image name="home_extras_bts.jpg" width="1014" height="620"/>
         <image name="home_extras_cast.jpg" width="1014" height="620"/>

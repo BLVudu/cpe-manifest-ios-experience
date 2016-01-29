@@ -73,6 +73,15 @@ enum SceneDetailCellViewType {
         }
     }
     
+    @IBInspectable var image: String = "" {
+        
+        didSet{
+            imageView.image = UIImage(named: image)
+        }
+        
+        
+    }
+    
     @IBInspectable var isMap : Bool = false {
         didSet {
             if !isMap {

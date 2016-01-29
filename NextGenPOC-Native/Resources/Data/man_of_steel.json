@@ -1,6 +1,7 @@
 {
   "video": {
     "file_url": "https://d1x310wzaeunai.cloudfront.net/video/man-of-steel-trailer3.mp4",
+    "interstitial_file_url": "https://d1x310wzaeunai.cloudfront.net/video/mos-nextgen-interstitial.mp4",
     "delivery_format": "HD"
   },
   "scenes": [
