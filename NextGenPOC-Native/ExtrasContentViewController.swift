@@ -36,7 +36,7 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("video", forIndexPath: indexPath) as! VideoCell
         cell.backgroundColor = UIColor.darkGrayColor()
         cell.thumbnail.image = UIImage(named: self.btsImages[indexPath.row])
-        //cell.caption.text = self.btsCaption[indexPath.row]
+        cell.caption.text = self.btsCaption[indexPath.row]
         cell.selectionStyle = .None
         return cell
     }
@@ -104,7 +104,7 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
              })
 
         self.videoView.image = UIImage(named: self.btsImages[indexPath.row])
-        //self.imageCaption.text = self.btsCaption[indexPath.row]
+        self.imageCaption.text = self.btsCaption[indexPath.row]
         
     }
     

@@ -12,4 +12,4 @@ SPEC CHECKSUMS:
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.38.2

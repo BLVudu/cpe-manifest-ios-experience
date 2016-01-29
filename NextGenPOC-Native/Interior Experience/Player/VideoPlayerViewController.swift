@@ -15,12 +15,17 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var video: Video!
     var currentScene: Scene?
     
+    @IBOutlet weak var commentaryBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setTitleText(video.title)
         self.setDeliveryFormatText(video.deliveryFormat)
-        self.playVideoWithURL(video.url)
+        self.playVideoWithURL(NSURL(string: "https://d1x310wzaeunai.cloudfront.net/video/mos-nextgen-interstitial.mp4"))
+        
+
+        
+        
     }
     
     override func done(sender: AnyObject?) {
@@ -29,6 +34,33 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
+    
+    
+    
+   
+    
+ 
+    @IBAction func commentary(sender: AnyObject) {
+        
+        
+        let ac = UIAlertController(title: "", message: "", preferredStyle: .ActionSheet)
+        let director = UIAlertAction(title: "Director Commentary", style: .Default, handler: nil)
+        let video = UIAlertAction(title: "Video Commentary", style: .Default, handler: nil)
+        let actor = UIAlertAction(title: "Actor Commentary", style: .Default, handler: nil)
+        let popover = ac.popoverPresentationController
+        popover?.sourceView = view
+        popover?.sourceRect = CGRect(x: self.commentaryBtn.frame.origin.x, y: self.commentaryBtn.frame.origin.y-30, width: 64, height: 64)
+        popover?.backgroundColor = UIColor.darkGrayColor()
+   
+        ac.addAction(director)
+        ac.addAction(video)
+        ac.addAction(actor)
+        presentViewController(ac, animated: true, completion: nil)
+        
+        
+        
+    }
     override func syncScrubber() {
         super.syncScrubber()
         

@@ -783,6 +783,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 	/* After the movie has played to its end time, seek back to time zero 
 		to play it again. */
 	seekToZeroBeforePlay = YES;
+    [self playVideoWithURL:[NSURL URLWithString:@"https://d1x310wzaeunai.cloudfront.net/video/man-of-steel-trailer3.mp4"]];
 }
 
 /* ---------------------------------------------------------
