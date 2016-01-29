@@ -14,18 +14,33 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     var video: Video!
     var currentScene: Scene?
+    var didPlayInterstitial = false
     
     @IBOutlet weak var commentaryBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if video.interstitialUrl != nil {
+            self.playerControlsVisible = false
+            self.lockPlayerControls = true
+            self.playVideoWithURL(video.interstitialUrl)
+        } else {
+            playPrimaryVideo()
+        }
+    }
+    
+    func playPrimaryVideo() {
+        self.lockPlayerControls = false
         self.setTitleText(video.title)
         self.setDeliveryFormatText(video.deliveryFormat)
-        self.playVideoWithURL(NSURL(string: "https://d1x310wzaeunai.cloudfront.net/video/mos-nextgen-interstitial.mp4"))
-        
-
-        
-        
+        self.playVideoWithURL(video.url)
+    }
+    
+    override func playerItemDidReachEnd(notification: NSNotification!) {
+        if !didPlayInterstitial {
+            playPrimaryVideo()
+            didPlayInterstitial = true
+        }
     }
     
     override func done(sender: AnyObject?) {
@@ -34,13 +49,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    
-    
-    
-   
-    
- 
     @IBAction func commentary(sender: AnyObject) {
         
         
@@ -61,6 +69,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         
         
     }
+    
     override func syncScrubber() {
         super.syncScrubber()
         

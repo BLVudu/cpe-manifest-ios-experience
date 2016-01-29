@@ -57,6 +57,7 @@
 		701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C71C482AF70047A67A /* NSURL+Utils.swift */; };
 		701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C91C482C210047A67A /* UIAlertController+Utils.swift */; };
 		701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69CB1C482E060047A67A /* UIImageView+Utils.swift */; };
+		705288501C5B1AF400464C8B /* location.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7052884F1C5B1AF400464C8B /* location.jpg */; };
 		7065F5441C46DC6800A2C74E /* SceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */; };
 		7065F5461C46FCC500A2C74E /* TalentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */; };
 		7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5471C47004100A2C74E /* TalentTableViewCell.swift */; };
@@ -197,6 +198,7 @@
 		701D69C71C482AF70047A67A /* NSURL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Utils.swift"; sourceTree = "<group>"; };
 		701D69C91C482C210047A67A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utils.swift"; sourceTree = "<group>"; };
 		701D69CB1C482E060047A67A /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
+		7052884F1C5B1AF400464C8B /* location.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = location.jpg; sourceTree = "<group>"; };
 		7065F5431C46DC6800A2C74E /* SceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailViewController.swift; sourceTree = "<group>"; };
 		7065F5451C46FCC500A2C74E /* TalentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalentTableViewCell.xib; sourceTree = "<group>"; };
 		7065F5471C47004100A2C74E /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 		7077A3191C4989C200843782 /* Extras */ = {
 			isa = PBXGroup;
 			children = (
+				7052884F1C5B1AF400464C8B /* location.jpg */,
 				497733351C5AAD9B00EC0071 /* scene.jpg */,
 				7077A31A1C4989C200843782 /* extras_bts.jpg */,
 				4977333B1C5AAFD000EC0071 /* shop.jpg */,
@@ -594,6 +597,7 @@
 				4921D9701C3EFD0B00ED2AA6 /* Frameworks */,
 				4921D9711C3EFD0B00ED2AA6 /* Resources */,
 				98AC9B63610E231325532174 /* Copy Pods Resources */,
+				14E3CDB59EF50005EC1AF7DF /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -700,6 +704,7 @@
 				7077A3601C4989C200843782 /* cavill_full.jpg in Resources */,
 				7077A35E1C4989C200843782 /* cornfield.png in Resources */,
 				4977333E1C5AB01E00EC0071 /* trivia.jpg in Resources */,
+				705288501C5B1AF400464C8B /* location.jpg in Resources */,
 				7077A3611C4989C200843782 /* cavill_thumb.jpg in Resources */,
 				4977332B1C59610200EC0071 /* bts_4.jpg in Resources */,
 				4977332E1C59610200EC0071 /* bts_5thumbnail.jpg in Resources */,
@@ -779,6 +784,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		14E3CDB59EF50005EC1AF7DF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NextGen/Pods-NextGen-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		98AC9B63610E231325532174 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

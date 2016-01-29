@@ -89,6 +89,20 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 @property (nonatomic, weak)   IBOutlet  WBVideoPlayerPlaybackView       *playbackView;
 @property (readwrite, nonatomic)        NSInteger                        playerControlsAutoHideTime;
 
+/**
+ * Toggles all player controls visibility.
+ * NOTE: There is a difference between enabling/disableing and showing/hiding
+ * player controls.
+ * @see setPlayerControlsEnabled:
+ * @see setPlayPauseVisible:
+ */
+@property (nonatomic, assign)           BOOL                             playerControlsVisible;
+
+/**
+ * Locks the player controls visibility so showing/hiding is not effective
+ */
+@property (nonatomic, assign)           BOOL                            lockPlayerControls;
+
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)done:(id)sender;
@@ -103,5 +117,6 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 - (void)pauseVideo;
 - (void)seekPlayerToTime:(CMTime)seekTime;
 - (void)syncScrubber;
+- (void)playerItemDidReachEnd:(NSNotification *)notification;
 
 @end

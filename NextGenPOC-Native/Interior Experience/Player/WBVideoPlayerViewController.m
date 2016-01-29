@@ -73,15 +73,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
  */
 @property (nonatomic, assign)           BOOL                             playerControlsEnabled;
 
-/**
- * Toggles all player controls visibility.
- * NOTE: There is a difference between enabling/disableing and showing/hiding
- * player controls.
- * @see setPlayerControlsEnabled:
- * @see setPlayPauseVisible:
- */
-@property (nonatomic, assign)           BOOL                             playerControlsVisible;
-
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer;
 
 // Player
@@ -235,6 +226,10 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 }
 
 - (void)setPlayerControlsVisible:(BOOL)shouldPlayerControlsBeVisible {
+    if (self.lockPlayerControls) {
+        return;
+    }
+    
     // Set instance variable
     _playerControlsVisible      = shouldPlayerControlsBeVisible;
     
@@ -783,7 +778,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 	/* After the movie has played to its end time, seek back to time zero 
 		to play it again. */
 	seekToZeroBeforePlay = YES;
-    [self playVideoWithURL:[NSURL URLWithString:@"https://d1x310wzaeunai.cloudfront.net/video/man-of-steel-trailer3.mp4"]];
 }
 
 /* ---------------------------------------------------------
