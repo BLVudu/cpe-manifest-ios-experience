@@ -25,6 +25,7 @@ class Talent: NSObject {
     var billingOrder = -1
     var thumbnailImage: String?
     var fullImage: String?
+    var biography: String?
     var films = [Film]()
     
     required init(info: NSDictionary) {
@@ -37,6 +38,7 @@ class Talent: NSObject {
         billingOrder = info["billing_block_order"] as! Int
         thumbnailImage = info["thumbnail_image"] as? String
         fullImage = info["full_image"] as? String
+        biography = info["biography"] as? String
         
         if let filmography = info["filmography"] as? NSArray {
             for film in filmography {

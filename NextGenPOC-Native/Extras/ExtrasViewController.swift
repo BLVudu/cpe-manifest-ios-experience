@@ -31,7 +31,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.extrasView.delegate = self
         self.extrasView.dataSource = self
         
-        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         self.extrasView.registerNib(UINib(nibName: "ContentCell", bundle: nil), forCellWithReuseIdentifier: "content")
         
         if let layout = extrasView?.collectionViewLayout as? ExtrasLayout {

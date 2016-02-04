@@ -14,18 +14,24 @@ protocol TalentDetailViewPresenter {
 
 class TalentDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var talentTypeLabel: UILabel!
     @IBOutlet weak var talentImageView: UIImageView!
     @IBOutlet weak var talentNameLabel: UILabel!
     @IBOutlet weak var talentRoleLabel: UILabel!
+    @IBOutlet weak var talentBiographyHeaderLabel: UILabel!
+    @IBOutlet weak var talentBiographyLabel: UILabel!
     
     @IBOutlet weak var filmographyContainerView: UIView!
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
     var talent: Talent? = nil {
         didSet {
-            talentNameLabel.text = talent?.name
+            talentNameLabel.text = talent?.name.uppercaseString
             talentRoleLabel.text = talent?.role
             talentImageView.image = talent?.fullImage != nil ? UIImage(named: talent!.fullImage!) : nil
+            talentBiographyLabel.text = talent?.biography
+            
+            filmographyCollectionView.backgroundColor = UIColor.clearColor()
             
             if talent != nil && talent!.films.count > 0 {
                 filmographyContainerView.hidden = false

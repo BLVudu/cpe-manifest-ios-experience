@@ -15,6 +15,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var talentTableView: TalentTableView!
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet weak var sceneDetailView: UIView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     var selectedIndexPath: NSIndexPath?
     var currentScene: Scene?
@@ -23,7 +24,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         
         if let allScenes = DataManager.sharedInstance.content?.scenes {
             currentScene = allScenes[0]
@@ -70,8 +71,10 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
             UIView.animateWithDuration(0.25, animations: {
                 self.talentDetailView.alpha = 1
                 self.sceneDetailView.alpha = 0
+                self.talentTableView.alpha = 0
             }, completion: { (Bool) -> Void in
                 self.sceneDetailView.hidden = true
+                self.talentTableView.hidden = true
             })
         }
     }
@@ -84,12 +87,15 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         
         sceneDetailView.alpha = 0
         sceneDetailView.hidden = false
+        talentTableView.alpha = 0
+        talentTableView.hidden = false
         
         UIView.animateWithDuration(0.25, animations: {
             self.talentDetailView.alpha = 0
             self.sceneDetailView.alpha = 1
-            }, completion: { (Bool) -> Void in
-                self.talentDetailView.hidden = true
+            self.talentTableView.alpha = 1
+        }, completion: { (Bool) -> Void in
+            self.talentDetailView.hidden = true
         })
     }
     
@@ -108,8 +114,6 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
             cell.talent = sceneTalent[indexPath.row]
         }
         
-        cell.nameLabel?.removeFromSuperview()
-        cell.roleLabel?.removeFromSuperview()
         return cell
     }
     
