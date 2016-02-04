@@ -10,7 +10,7 @@ import UIKit
 
 let kSceneDidChange = "kSceneDidChange"
 
-class VideoPlayerViewController: WBVideoPlayerViewController {
+class VideoPlayerViewController: WBVideoPlayerViewController{
     
     var video: Video!
     var currentScene: Scene?
@@ -20,29 +20,35 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if video.interstitialUrl != nil {
+  if video.interstitialUrl != nil {
             self.playerControlsVisible = false
             self.lockPlayerControls = true
             self.playVideoWithURL(video.interstitialUrl)
+
+
         } else {
             playPrimaryVideo()
         }
     }
+    
     
     func playPrimaryVideo() {
         self.lockPlayerControls = false
         self.setTitleText(video.title)
         self.setDeliveryFormatText(video.deliveryFormat)
         self.playVideoWithURL(video.url)
+
     }
     
+
     override func playerItemDidReachEnd(notification: NSNotification!) {
         if !didPlayInterstitial {
             playPrimaryVideo()
             didPlayInterstitial = true
         }
     }
-    
+
+
     override func done(sender: AnyObject?) {
         super.done(sender)
         
@@ -72,14 +78,22 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     override func syncScrubber() {
         super.syncScrubber()
-        
         if player != nil {
-            let newScene = DataManager.sharedInstance.content?.sceneAtTime(Int(CMTimeGetSeconds(player.currentTime())))
+            var curTime = (CMTimeGetSeconds(player.currentTime()))
+            if (curTime.isNaN == true){
+                
+                curTime = 0.0
+            }
+            
+            let newScene = DataManager.sharedInstance.content?.sceneAtTime(Int(curTime))
+            
             if newScene != self.currentScene {
                 currentScene = newScene
                 NSNotificationCenter.defaultCenter().postNotificationName(kSceneDidChange, object: nil, userInfo: ["scene": currentScene!])
             }
+        
         }
     }
+
 
 }

@@ -39,6 +39,10 @@
 		497733371C5AAD9B00EC0071 /* scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 497733351C5AAD9B00EC0071 /* scene.jpg */; };
 		4977333C1C5AAFD000EC0071 /* shop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4977333B1C5AAFD000EC0071 /* shop.jpg */; };
 		4977333E1C5AB01E00EC0071 /* trivia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4977333D1C5AB01E00EC0071 /* trivia.jpg */; };
+		497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECCB1C61412E000C6636 /* ProfileViewController.swift */; };
+		497DECCE1C61743A000C6636 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECCD1C61743A000C6636 /* Bookmark.swift */; };
+		497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497DECCF1C61754A000C6636 /* BookmarkCell.xib */; };
+		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
@@ -176,6 +180,10 @@
 		497733351C5AAD9B00EC0071 /* scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scene.jpg; sourceTree = "<group>"; };
 		4977333B1C5AAFD000EC0071 /* shop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shop.jpg; sourceTree = "<group>"; };
 		4977333D1C5AB01E00EC0071 /* trivia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = trivia.jpg; sourceTree = "<group>"; };
+		497DECCB1C61412E000C6636 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		497DECCD1C61743A000C6636 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		497DECCF1C61754A000C6636 /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
+		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
@@ -326,6 +334,7 @@
 				494166EF1C52F8580013B94A /* CustomSegue.swift */,
 				4921D9781C3EFD0B00ED2AA6 /* ViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
+				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
 				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
@@ -561,6 +570,9 @@
 				707E10891C40820500FCF81C /* Talent.swift */,
 				70C9E0B21C46CECE002D3B5A /* Video.swift */,
 				7077A37E1C49AB8500843782 /* Scene.swift */,
+				497DECCD1C61743A000C6636 /* Bookmark.swift */,
+				497DECCF1C61754A000C6636 /* BookmarkCell.xib */,
+				497DECD11C6176CF000C6636 /* BookmarkCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -656,6 +668,7 @@
 				TargetAttributes = {
 					4921D9721C3EFD0B00ED2AA6 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = L643L2WM5D;
 					};
 					4921D9891C3EFD0B00ED2AA6 = {
 						CreatedOnToolsVersion = 7.2;
@@ -721,6 +734,7 @@
 				7077A3641C4989C200843782 /* crowe_full.jpg in Resources */,
 				7077A34F1C4989C200843782 /* extras_scenes.jpg in Resources */,
 				7077A35B1C4989C200843782 /* nav_home.jpg in Resources */,
+				497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */,
 				7077A3671C4989C200843782 /* fishburne_thumb.jpg in Resources */,
 				7077A34E1C4989C200843782 /* extras_places.jpg in Resources */,
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
@@ -851,10 +865,12 @@
 				497733341C598ECB00EC0071 /* CommentaryButton.swift in Sources */,
 				701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */,
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
+				497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				49F3EADB1C517ADA00E09484 /* ExtrasContentViewController.swift in Sources */,
 				7077A3771C4989DC00843782 /* DataManager.swift in Sources */,
 				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
+				497DECCE1C61743A000C6636 /* Bookmark.swift in Sources */,
 				701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
@@ -870,6 +886,7 @@
 				49656F231C49C676001DB9C0 /* ExtrasNavigation.swift in Sources */,
 				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
 				49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */,
+				497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 			);
@@ -1016,7 +1033,8 @@
 			baseConfigurationReference = 8C5F832112458571766A2107 /* Pods-NextGen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1032,7 +1050,8 @@
 			baseConfigurationReference = 6C5BE24AF16D012C46DD45E3 /* Pods-NextGen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -15,10 +16,12 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
 
     @IBOutlet weak var imageCaption: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var saveBtn: UIButton!
+    var imgData = NSData()
     let btsImages = ["bts_1.jpg","bts_2.jpg","bts_3.jpg","bts_4.jpg","bts_5.jpg",]
     let btsCaption =  ["Director Zack Snyder","Zack Snyder and Kevin Costner","Zack Snyder with some members of cast","Zack Snyder on location","Zack Snyder and Christopher Nolan"]
     
-    
+    var bookmarks = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +85,7 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
         
         self.videoView.hidden = true
         self.imageCaption.hidden = true
+        self.saveBtn.hidden = true
         
         if(self.videoView.hidden == true && self.imageCaption.hidden == true){
             
@@ -90,6 +94,7 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
             self.imageCaption.alpha = 0
             self.videoView.hidden = false
             self.imageCaption.hidden = false
+            self.saveBtn.hidden = false
             
             
         }
@@ -99,14 +104,44 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
             
             self.videoView.alpha = 1
             self.imageCaption.alpha = 1
+            self.saveBtn.alpha = 1
          }, completion: { (Bool) -> Void in
             
              })
 
         self.videoView.image = UIImage(named: self.btsImages[indexPath.row])
         self.imageCaption.text = self.btsCaption[indexPath.row]
+        self.imgData = UIImageJPEGRepresentation(self.videoView.image!, 1)!
         
     }
     
+    @IBAction func saveBookmark(sender: AnyObject) {
+        
+        
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+
+        let entity =  NSEntityDescription.entityForName("Bookmark",
+            inManagedObjectContext:managedContext)
+        
+        let bookmark = NSManagedObject(entity: entity!,
+            insertIntoManagedObjectContext: managedContext)
+        
+        bookmark.setValue(self.imageCaption.text, forKey: "caption")
+        bookmark.setValue(self.imgData, forKey: "thumbnail")
+        bookmark.setValue("image", forKey: "mediaType")
+
+        do {
+            try managedContext.save()
+
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
+    }
+
     
 }
