@@ -16,6 +16,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ER-mt-O7q">
                         <rect key="frame" x="0.0" y="26" width="326" height="178"/>
+                        <gestureRecognizers/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h88-9l-JoK">
                         <rect key="frame" x="8" y="205" width="318" height="47"/>
@@ -33,6 +34,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="h88-9l-JoK" firstAttribute="leading" secondItem="7ER-mt-O7q" secondAttribute="leading" constant="8" id="4V6-Mg-SKe"/>
                 <constraint firstItem="h88-9l-JoK" firstAttribute="top" secondItem="7ER-mt-O7q" secondAttribute="bottom" constant="1" id="DNm-lZ-Lxq"/>

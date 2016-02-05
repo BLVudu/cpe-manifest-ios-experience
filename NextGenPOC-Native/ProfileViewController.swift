@@ -10,13 +10,14 @@ import UIKit
 import CoreData
 
 
-class ProfileViewController: UICollectionViewController{
+class ProfileViewController: UICollectionViewController, UIGestureRecognizerDelegate{
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     var bookmarks = [NSManagedObject]()
     @IBOutlet weak var backBtn: UIBarButtonItem!
-    
+
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -40,6 +41,8 @@ class ProfileViewController: UICollectionViewController{
         }
     }
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +50,12 @@ class ProfileViewController: UICollectionViewController{
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
+        let longPress = UILongPressGestureRecognizer(target: self, action: "startDeletion:")
+        longPress.delaysTouchesBegan = true
+        longPress.delegate = self
+        self.collectionView!.addGestureRecognizer(longPress)
+        
+       
         
         self.collectionView!.registerNib(UINib(nibName: "BookmarkCell", bundle: nil), forCellWithReuseIdentifier: "bookmark")
         
@@ -54,9 +63,41 @@ class ProfileViewController: UICollectionViewController{
         
     }
     
+    
+    
+    func startDeletion(recognizer: UILongPressGestureRecognizer){
+        
+                let managedContext = appDelegate.managedObjectContext
+        
+        if recognizer.state == UIGestureRecognizerState.Began
+        {
+                let indexPath = self.collectionView?.indexPathForItemAtPoint(recognizer.locationInView(self.collectionView))
+            
+            if((indexPath) != nil){
+                let bookmark = self.bookmarks[(indexPath?.row)!]
+                self.bookmarks.removeAtIndex(indexPath!.row)
+                self.collectionView?.deleteItemsAtIndexPaths([indexPath!])
+                managedContext.deleteObject(bookmark)
+                
+                
+                do {
+                    try managedContext.save()
+                } catch {
+                    let error = error as NSError
+                    print("Could not save \(error), \(error.userInfo)")
+                }
+
+                
+                
+            }
+        }
+        
+        
+    }
+    
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        //self.collectionViewLayout.invalidateLayout()
         
         return bookmarks.count
     }
