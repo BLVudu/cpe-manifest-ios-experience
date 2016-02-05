@@ -17,6 +17,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
     var didPlayInterstitial = false
     
     @IBOutlet weak var commentaryBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,10 +35,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
     
     func playPrimaryVideo() {
         self.lockPlayerControls = false
-        self.setTitleText(video.title)
-        self.setDeliveryFormatText(video.deliveryFormat)
         self.playVideoWithURL(video.url)
-
     }
     
 

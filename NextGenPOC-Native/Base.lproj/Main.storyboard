@@ -347,7 +347,7 @@
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uLZ-Nf-NFJ">
                                                 <rect key="frame" x="0.0" y="30" width="770" height="240"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="15" id="kJf-9j-qS6">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="kJf-9j-qS6">
                                                     <size key="itemSize" width="163" height="245"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -690,54 +690,48 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uk-RH-L9W">
-                                        <rect key="frame" x="950" y="8" width="39" height="36"/>
-                                        <state key="normal" image="commentary.jpg"/>
+                                        <rect key="frame" x="975" y="5" width="34" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="34" id="Ext-h5-2g4"/>
+                                        </constraints>
+                                        <state key="normal" image="Commentary"/>
                                         <connections>
                                             <action selector="commentary:" destination="FsK-dw-pgC" eventType="touchUpInside" id="brH-Pq-A4D"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLt-Qu-Yg8" userLabel="Done Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLt-Qu-Yg8" userLabel="Done Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="Ga0-Ve-Kcg"/>
+                                            <constraint firstAttribute="width" constant="100" id="Ga0-Ve-Kcg"/>
                                         </constraints>
-                                        <state key="normal" title="Home"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Home" image="Home">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="done:" destination="FsK-dw-pgC" eventType="touchUpInside" id="c8M-tS-dSn"/>
                                         </connections>
                                     </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3G-Ez-RrJ" userLabel="Title Label">
-                                        <rect key="frame" x="65" y="0.0" width="50" height="44"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title Logo" translatesAutoresizingMaskIntoConstraints="NO" id="En4-Pq-iSx">
+                                        <rect key="frame" x="385" y="5" width="255" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="CmU-HJ-BVw"/>
+                                            <constraint firstAttribute="width" constant="255" id="U4E-jc-LNJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNg-uE-mDb" userLabel="Delivery Format Label">
-                                        <rect key="frame" x="115" y="0.0" width="50" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="VT0-2l-qBm"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aLt-Qu-Yg8" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" id="1TL-jX-38i"/>
-                                    <constraint firstItem="C3G-Ez-RrJ" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" id="3JQ-x6-4vq"/>
                                     <constraint firstItem="aLt-Qu-Yg8" firstAttribute="leading" secondItem="VY7-Vu-ikZ" secondAttribute="leading" id="46K-Qn-bGM"/>
-                                    <constraint firstItem="C3G-Ez-RrJ" firstAttribute="leading" secondItem="aLt-Qu-Yg8" secondAttribute="trailing" constant="5" id="5PG-nN-y2K"/>
-                                    <constraint firstAttribute="bottom" secondItem="TNg-uE-mDb" secondAttribute="bottom" id="AOK-Hb-uJD"/>
                                     <constraint firstAttribute="height" constant="44" id="B0e-oL-JMI"/>
-                                    <constraint firstAttribute="bottom" secondItem="C3G-Ez-RrJ" secondAttribute="bottom" id="FkW-Ll-bpJ"/>
-                                    <constraint firstItem="TNg-uE-mDb" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" id="OUE-5w-0No"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Uk-RH-L9W" secondAttribute="trailing" constant="15" id="W8W-8V-EBq"/>
+                                    <constraint firstItem="7Uk-RH-L9W" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" constant="5" id="cNn-C5-7nr"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Uk-RH-L9W" secondAttribute="bottom" constant="5" id="cwK-iY-ann"/>
+                                    <constraint firstItem="En4-Pq-iSx" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" constant="5" id="d93-5q-RiJ"/>
                                     <constraint firstAttribute="bottom" secondItem="aLt-Qu-Yg8" secondAttribute="bottom" id="gcv-dM-78f"/>
-                                    <constraint firstItem="TNg-uE-mDb" firstAttribute="leading" secondItem="C3G-Ez-RrJ" secondAttribute="trailing" id="jpv-Xe-kVE"/>
-                                    <constraint firstItem="7Uk-RH-L9W" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="top" constant="8" id="lU2-zC-Hq8"/>
+                                    <constraint firstAttribute="bottom" secondItem="En4-Pq-iSx" secondAttribute="bottom" constant="5" id="p99-5F-Hjb"/>
+                                    <constraint firstItem="En4-Pq-iSx" firstAttribute="centerX" secondItem="VY7-Vu-ikZ" secondAttribute="centerX" id="z77-Dq-wiP"/>
                                 </constraints>
                             </view>
                             <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdq-om-9xU" userLabel="Playback Toolbar">
@@ -841,7 +835,6 @@
                             <constraint firstItem="VY7-Vu-ikZ" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="5Vg-PF-J03"/>
                             <constraint firstAttribute="centerX" secondItem="HZD-oz-ZXg" secondAttribute="centerX" id="7pd-yd-O8a"/>
                             <constraint firstAttribute="bottom" secondItem="HZD-oz-ZXg" secondAttribute="bottom" id="DzX-Ic-rcn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7Uk-RH-L9W" secondAttribute="trailing" constant="15" id="GGo-4O-InA"/>
                             <constraint firstAttribute="centerY" secondItem="HZD-oz-ZXg" secondAttribute="centerY" id="NGJ-V2-Xef"/>
                             <constraint firstAttribute="trailing" secondItem="VY7-Vu-ikZ" secondAttribute="trailing" id="TVX-rr-5DP"/>
                             <constraint firstItem="HZD-oz-ZXg" firstAttribute="top" secondItem="r83-OM-ywG" secondAttribute="top" id="WFQ-gw-au5"/>
@@ -861,7 +854,6 @@
                         <outlet property="backUpButton" destination="sO6-3j-2kn" id="cea-Ua-wga"/>
                         <outlet property="backUpTimeLabel" destination="egg-hA-gCC" id="PWC-cg-3fO"/>
                         <outlet property="commentaryBtn" destination="7Uk-RH-L9W" id="mLA-wD-qAt"/>
-                        <outlet property="deliveryFormatLabel" destination="TNg-uE-mDb" id="JHW-73-Ufl"/>
                         <outlet property="pauseButton" destination="Fre-sx-P7e" id="xPZ-ZP-9To"/>
                         <outlet property="playButton" destination="r3j-NO-iAX" id="Mia-hx-7QZ"/>
                         <outlet property="playbackToolbar" destination="tdq-om-9xU" id="JM8-RH-KYY"/>
@@ -871,7 +863,6 @@
                         <outlet property="tapGestureRecognizer" destination="r3s-SR-OYc" id="32O-Fs-uuC"/>
                         <outlet property="timeLabel" destination="iCT-yk-iq9" id="wGD-2Q-xCe"/>
                         <outlet property="timeLeftLabel" destination="c6W-KZ-1CO" id="PO2-zJ-DK1"/>
-                        <outlet property="titleLabel" destination="C3G-Ez-RrJ" id="J2f-ed-f0V"/>
                         <outlet property="topToolbar" destination="VY7-Vu-ikZ" id="oK3-nh-CIz"/>
                     </connections>
                 </viewController>
@@ -1052,14 +1043,16 @@
     <resources>
         <image name="Back" width="32" height="32"/>
         <image name="Close" width="52" height="52"/>
+        <image name="Commentary" width="23" height="23"/>
         <image name="Google-Cast-CC" width="518" height="294"/>
+        <image name="Home" width="17" height="17"/>
         <image name="MOSBackground" width="1366" height="1024"/>
         <image name="MOSExtras" width="262" height="100"/>
         <image name="MOSLogo" width="461" height="81"/>
         <image name="MOSPlay" width="490" height="133"/>
         <image name="Pause Button" width="32" height="32"/>
         <image name="Play Button" width="32" height="32"/>
-        <image name="commentary.jpg" width="39" height="36"/>
+        <image name="Title Logo" width="414" height="55"/>
         <image name="interior_bg.jpg" width="2048" height="1427"/>
         <image name="menu.png" width="22" height="22"/>
     </resources>

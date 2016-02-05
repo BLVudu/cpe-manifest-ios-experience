@@ -31,8 +31,6 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
             talentImageView.image = talent?.fullImage != nil ? UIImage(named: talent!.fullImage!) : nil
             talentBiographyLabel.text = talent?.biography
             
-            filmographyCollectionView.backgroundColor = UIColor.clearColor()
-            
             if talent != nil && talent!.films.count > 0 {
                 filmographyContainerView.hidden = false
                 filmographyCollectionView.reloadData()
@@ -40,6 +38,13 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
                 filmographyContainerView.hidden = true
             }
         }
+    }
+    
+    // MARK: View Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        filmographyCollectionView.backgroundColor = UIColor.clearColor()
     }
     
     // MARK: Actions

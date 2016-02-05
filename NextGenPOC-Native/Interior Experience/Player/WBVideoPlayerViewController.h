@@ -109,8 +109,6 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 - (IBAction)done:(id)sender;
 - (BOOL)isPlaying;
 - (void)displayError:(NSError *)error;
-- (void)setTitleText:(NSString *)title;
-- (void)setDeliveryFormatText:(NSString *)deliveryFormat;
 - (CMTime)playerItemDuration;
 - (void)playVideoWithURL:(NSURL *)url;
 - (void)playVideoWithURL:(NSURL *)url startTime:(NSTimeInterval)time;

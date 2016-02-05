@@ -40,8 +40,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 //=========================================================
 @interface WBVideoPlayerViewController ()
 @property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
-@property (weak, nonatomic)   IBOutlet  UILabel                         *titleLabel;
-@property (weak, nonatomic)   IBOutlet  UILabel                         *deliveryFormatLabel;
 
 @property (weak, nonatomic)   IBOutlet  UIView                          *playbackToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *playButton;
@@ -743,28 +741,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 - (void)backUpVideo {
     // Seek
     [self.player seekToTime:CMTimeMakeWithSeconds(CMTimeGetSeconds(self.player.currentTime) - kBackTimeInSeconds, self.player.currentTime.timescale)];
-}
-
-//=========================================================
-# pragma mark - Player UI
-//=========================================================
-- (void)setTitleText:(NSString *)title {
-    if (!title) {
-        self.titleLabel.hidden = YES;
-    } else {
-        self.titleLabel.hidden = NO;
-        self.titleLabel.text = title;
-        [self.titleLabel sizeToFit];
-    }
-}
-
-- (void)setDeliveryFormatText:(NSString *)deliveryFormat {
-    if (!deliveryFormat) {
-        self.deliveryFormatLabel.hidden = YES;
-    } else {
-        self.deliveryFormatLabel.hidden = NO;
-        self.deliveryFormatLabel.text = deliveryFormat;
-    }
 }
 
 //=========================================================
