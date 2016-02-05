@@ -521,7 +521,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Back" image="Back">
+                                <state key="normal" title="Back" image="Back Nav">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1085,7 +1085,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back" width="19" height="30"/>
+        <image name="Back" width="32" height="32"/>
+        <image name="Back Nav" width="19" height="30"/>
         <image name="Close" width="52" height="52"/>
         <image name="Commentary" width="23" height="23"/>
         <image name="Google-Cast-CC" width="518" height="294"/>
