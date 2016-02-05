@@ -12,14 +12,19 @@ import CoreData
 
 class ProfileViewController: UICollectionViewController{
     
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     var bookmarks = [NSManagedObject]()
     @IBOutlet weak var backBtn: UIBarButtonItem!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let layout = self.collectionViewLayout as? ExtrasLayout {
+            layout.delegate = self
+        }
 
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+        
         
         let managedContext = appDelegate.managedObjectContext
         
@@ -45,14 +50,13 @@ class ProfileViewController: UICollectionViewController{
         
         self.collectionView!.registerNib(UINib(nibName: "BookmarkCell", bundle: nil), forCellWithReuseIdentifier: "bookmark")
         
-        if let layout = self.collectionViewLayout as? ExtrasLayout {
-            layout.delegate = self
-        }
-
+        
         
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        //self.collectionViewLayout.invalidateLayout()
         
         return bookmarks.count
     }
@@ -75,6 +79,31 @@ class ProfileViewController: UICollectionViewController{
         self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil);
 
     }
+    @IBAction func deleteAll(sender: AnyObject) {
+        
+        
+        
+        let managedContext = appDelegate.managedObjectContext
+        for bookmark in self.bookmarks{
+ 
+            let indexPath = NSIndexPath(forItem:self.bookmarks.count-1, inSection:0)
+            self.bookmarks.removeAtIndex(indexPath.row)
+            self.collectionView?.deleteItemsAtIndexPaths([indexPath])
+            managedContext.deleteObject(bookmark)
+            
+        }
+ 
+        do {
+            try managedContext.save()
+        } catch {
+            let error = error as NSError
+            print("Could not save \(error), \(error.userInfo)")
+        }
+ 
+        
+    }
+    
+
 }
 
     

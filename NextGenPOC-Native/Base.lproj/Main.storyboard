@@ -1077,6 +1077,11 @@
                                 <action selector="dismissProfile:" destination="hzS-uH-dYM" id="nb3-Ru-EDD"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Delete all" id="R5Z-a1-4M1">
+                            <connections>
+                                <action selector="deleteAll:" destination="hzS-uH-dYM" id="leS-rc-SoP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mv7-is-m5u" userLabel="First Responder" sceneMemberID="firstResponder"/>
