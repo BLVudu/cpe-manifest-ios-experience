@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ExtrasContentViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var videoView: UIImageView!
     
@@ -23,14 +23,20 @@ class ExtrasContentViewController:UIViewController, UITableViewDataSource, UITab
     
     var bookmarks = [NSManagedObject]()
     
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        
         self.tableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: "video")
-
+        
+        self.navigationItem.setBackButton(self, action: "close")
+    }
+    
+    // MARK: Actions
+    func close() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     

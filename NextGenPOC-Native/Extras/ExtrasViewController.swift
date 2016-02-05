@@ -12,15 +12,11 @@ import AVFoundation
 
 
 
-class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
+class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
     @IBOutlet weak var talentTableView: TalentTableView!
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet var extrasCollectionView: UICollectionView!
-    @IBOutlet var extrasContentView: UIView!
-    
-    @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     
     var selectedIndexPath: NSIndexPath?
     
@@ -38,6 +34,8 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let layout = extrasCollectionView?.collectionViewLayout as? ExtrasLayout {
             layout.delegate = self
         }
+        
+        self.navigationItem.setHomeButton(self, action: "close")
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -46,13 +44,12 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     
     // MARK: Actions
-    @IBAction func close(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func back(sender: AnyObject) {
-        hideTalentDetailView()
-        hideExtrasContentView()
+    func close() {
+        if talentDetailView.hidden {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            hideTalentDetailView()
+        }
     }
     
     
@@ -71,8 +68,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         if talentDetailView.hidden {
             talentDetailView.alpha = 0
             talentDetailView.hidden = false
-            homeButton.hidden = true
-            backButton.hidden = false
+            self.navigationItem.setBackButton(self, action: "close")
             
             UIView.animateWithDuration(0.25, animations: {
                 self.extrasCollectionView.alpha = 0
@@ -91,8 +87,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         extrasCollectionView.hidden = false
         extrasCollectionView.alpha = 0
-        homeButton.hidden = false
-        backButton.hidden = true
+        self.navigationItem.setHomeButton(self, action: "close")
         
         UIView.animateWithDuration(0.25, animations: {
             self.extrasCollectionView.alpha = 1
@@ -151,34 +146,6 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     
-    // MARK: Extras Content
-    func showExtrasContentView() {
-        if extrasContentView.hidden {
-            extrasContentView.alpha = 0
-            extrasContentView.hidden = false
-            homeButton.hidden = true
-            backButton.hidden = false
-            
-            UIView.animateWithDuration(0.25, animations: {
-                self.extrasContentView.alpha = 1
-            }, completion: { (Bool) -> Void in
-                
-            })
-        }
-    }
-    
-    func hideExtrasContentView() {
-        homeButton.hidden = false
-        backButton.hidden = true
-        
-        UIView.animateWithDuration(0.25, animations: {
-            self.extrasContentView.alpha = 0
-        }, completion: { (Bool) -> Void in
-            self.extrasContentView.hidden = true
-        })
-    }
-    
-    
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return self.extraImages.count
@@ -197,7 +164,7 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        showExtrasContentView()
+        self.performSegueWithIdentifier("ExtrasContentSegue", sender: collectionView.cellForItemAtIndexPath(indexPath))
     }
 }
 
