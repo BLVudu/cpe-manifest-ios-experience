@@ -53,16 +53,6 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         return nil
     }
     
-    func sceneDetailViewController() -> SceneDetailViewController? {
-        for viewController in self.childViewControllers {
-            if viewController is SceneDetailViewController {
-                return viewController as? SceneDetailViewController
-            }
-        }
-        
-        return nil
-    }
-    
     func showTalentDetailView() {
         if talentDetailView.hidden {
             talentDetailView.alpha = 0

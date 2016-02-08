@@ -34,4 +34,8 @@ class StylizedNavigationController: UINavigationController {
         return super.popViewControllerAnimated(animated)
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Landscape
+    }
+    
 }

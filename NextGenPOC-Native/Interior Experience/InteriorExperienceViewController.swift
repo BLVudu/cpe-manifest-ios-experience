@@ -16,7 +16,7 @@ class InteriorExperienceViewController: UIViewController {
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        extrasContainerView.hidden = UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)
+        extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
         updatePlayerConstraints()
     }
     

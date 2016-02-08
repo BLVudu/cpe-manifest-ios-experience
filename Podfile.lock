@@ -2,14 +2,17 @@ PODS:
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
+  - RFQuiltLayout (1.1.1)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - HockeySDK
+  - RFQuiltLayout
   - SWRevealViewController (~> 2.3)
 
 SPEC CHECKSUMS:
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
+  RFQuiltLayout: aa28fc2d4a262fbca7caa43d9d8ef4b4726c8cd4
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
 COCOAPODS: 0.39.0

@@ -179,10 +179,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="140" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-Pl-Rxu" customClass="TalentTableView" customModule="NextGen" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="175" height="600"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="FgB-Az-emI"/>
+                                    <constraint firstAttribute="width" constant="175" id="FgB-Az-emI"/>
                                 </constraints>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -197,9 +197,9 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYn-yB-xQG" userLabel="Scene Detail Container View">
-                                <rect key="frame" x="210" y="0.0" width="390" height="600"/>
+                                <rect key="frame" x="185" y="0.0" width="415" height="600"/>
                                 <connections>
-                                    <segue destination="8tB-3R-mpH" kind="embed" id="8gy-qS-GXS"/>
+                                    <segue destination="VTD-yi-sj7" kind="embed" id="Gcy-nB-vqR"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -886,90 +886,37 @@
             </objects>
             <point key="canvasLocation" x="225" y="1711"/>
         </scene>
-        <!--Scene Detail View Controller-->
-        <scene sceneID="cmR-TS-D57">
+        <!--Delegate-->
+        <scene sceneID="2S6-zB-kic">
             <objects>
-                <viewController id="8tB-3R-mpH" customClass="SceneDetailViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ErQ-eT-hkd"/>
-                        <viewControllerLayoutGuide type="bottom" id="C1R-wk-tIU"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UHC-d6-eim">
+                <collectionViewController id="VTD-yi-sj7" customClass="SceneDetailCollectionViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DCa-cj-7R6" customClass="RFQuilt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhY-e7-orR" userLabel="Scene Detail Cell Container">
-                                <rect key="frame" x="0.0" y="30" width="600" height="570"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-Y2-5g4" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="234" height="280"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE TRIVIA"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="trivia.jpg"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dq-CQ-RGU" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="290" width="336" height="280"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE GALLERY"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Henry Cavill getting some scene direction"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="scene.jpg"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cV-Hg-Ist" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="347" y="290" width="253" height="280"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="SHOP THIS SCENE"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Dolce &amp; Gabbana"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="shop.jpg"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNJ-8r-bZx" userLabel="Scene Detail Cell View" customClass="SceneDetailCellView" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="246" y="-12" width="354" height="292"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="SCENE LOCATION"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="detailText" value="Kent family farm"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isMap" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="image" value="location.jpg"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="ZNJ-8r-bZx" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.59" id="1s9-aG-j2w"/>
-                                    <constraint firstItem="7cV-Hg-Ist" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" id="3C2-40-hVA"/>
-                                    <constraint firstAttribute="trailing" secondItem="7cV-Hg-Ist" secondAttribute="trailing" id="3CI-1Q-jA7"/>
-                                    <constraint firstItem="8dq-CQ-RGU" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.64" constant="-47.400000000000034" id="4J2-Wy-rIc"/>
-                                    <constraint firstItem="a3J-Y2-5g4" firstAttribute="leading" secondItem="PhY-e7-orR" secondAttribute="leading" id="EA4-Ui-d3C"/>
-                                    <constraint firstItem="8dq-CQ-RGU" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" constant="0.69999999999998863" id="SJD-xC-GSE"/>
-                                    <constraint firstItem="a3J-Y2-5g4" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" id="UPU-Lr-0Nu"/>
-                                    <constraint firstItem="ZNJ-8r-bZx" firstAttribute="height" secondItem="PhY-e7-orR" secondAttribute="height" multiplier="0.49" id="cRo-zB-i0W"/>
-                                    <constraint firstItem="7cV-Hg-Ist" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.34" constant="49.099999999999994" id="en3-5C-YTM"/>
-                                    <constraint firstAttribute="bottom" secondItem="8dq-CQ-RGU" secondAttribute="bottom" id="g4k-hw-bHE"/>
-                                    <constraint firstAttribute="bottom" secondItem="7cV-Hg-Ist" secondAttribute="bottom" id="gnT-TP-ZDx"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZNJ-8r-bZx" secondAttribute="trailing" id="hRi-c8-rsL"/>
-                                    <constraint firstItem="8dq-CQ-RGU" firstAttribute="leading" secondItem="PhY-e7-orR" secondAttribute="leading" id="mkK-3h-PTo"/>
-                                    <constraint firstItem="ZNJ-8r-bZx" firstAttribute="top" secondItem="PhY-e7-orR" secondAttribute="top" id="qsX-58-8ms"/>
-                                    <constraint firstItem="a3J-Y2-5g4" firstAttribute="width" secondItem="PhY-e7-orR" secondAttribute="width" multiplier="0.39" id="rXe-0R-W96"/>
-                                    <constraint firstItem="a3J-Y2-5g4" firstAttribute="top" secondItem="PhY-e7-orR" secondAttribute="top" id="w95-KL-gFI"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="PhY-e7-orR" firstAttribute="leading" secondItem="UHC-d6-eim" secondAttribute="leading" id="4t2-F0-VJe"/>
-                            <constraint firstItem="PhY-e7-orR" firstAttribute="top" secondItem="ErQ-eT-hkd" secondAttribute="bottom" constant="30" id="acE-OC-RT0"/>
-                            <constraint firstAttribute="trailing" secondItem="PhY-e7-orR" secondAttribute="trailing" id="eLQ-Cc-fJN"/>
-                            <constraint firstItem="C1R-wk-tIU" firstAttribute="top" secondItem="PhY-e7-orR" secondAttribute="bottom" id="tn7-1X-adg"/>
-                        </constraints>
-                    </view>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sqt-Hf-9Ea" customClass="RFQuiltLayout">
+                            <size key="itemSize" width="100" height="100"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <connections>
+                                <outlet property="delegate" destination="VTD-yi-sj7" id="Dab-tz-lA6"/>
+                            </connections>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="VTD-yi-sj7" id="AVb-uo-tJS"/>
+                            <outlet property="delegate" destination="VTD-yi-sj7" id="Qos-sx-Aaz"/>
+                        </connections>
+                    </collectionView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yZY-1c-1Eq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="87k-ew-RHa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1152" y="2379"/>
+            <point key="canvasLocation" x="1152" y="2355"/>
         </scene>
         <!--Extras Navigation-->
         <scene sceneID="Tmw-kE-xvH">
@@ -1044,6 +991,6 @@
         <image name="menu.png" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kSL-ff-FXa"/>
+        <segue reference="W8P-ST-gWA"/>
     </inferredMetricsTieBreakers>
 </document>

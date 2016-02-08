@@ -2,8 +2,10 @@
 # platform :ios, '6.0'
 
 target 'NextGen' do
-    
-pod 'SWRevealViewController', '~> 2.3'
+
 pod 'HockeySDK'
+
+pod 'RFQuiltLayout'
+pod 'SWRevealViewController', '~> 2.3'
 
 end
