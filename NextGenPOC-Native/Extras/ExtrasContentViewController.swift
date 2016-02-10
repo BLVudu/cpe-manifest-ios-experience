@@ -23,6 +23,8 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     
     var bookmarks = [NSManagedObject]()
     
+    var experience: NGEExperienceType!
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

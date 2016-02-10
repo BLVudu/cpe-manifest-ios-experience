@@ -10,18 +10,15 @@
 import UIKit
 import AVFoundation
 
-
-
 class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
+    
+    let ExtrasContentSegueIdentifier = "ExtrasContentSegue"
     
     @IBOutlet weak var talentTableView: TalentTableView!
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet var extrasCollectionView: UICollectionView!
     
     var selectedIndexPath: NSIndexPath?
-    
-    let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
-    let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Deleted Scenes","Shopping", "DC Universe"]
     
     
     // MARK: View Lifecycle
@@ -147,16 +144,18 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     
     // MARK: UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return self.extraImages.count
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return NextGenDataManager.sharedInstance.outOfMovieExperiences().count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
         
-        cell.extraImg.image = UIImage (named: self.extraImages[indexPath.row])
-        cell.extrasTitle.text = self.extrasCaption[indexPath.row]
+        let experience = NextGenDataManager.sharedInstance.outOfMovieExperiences()[indexPath.row]
+        cell.extrasTitle.text = experience.metadata()?.fullTitle()
+        if let thumbnailPath = experience.thumbnailImagePath() {
+            cell.extraImg.setImageWithURL(NSURL(string: thumbnailPath)!)
+        }
 
         return cell
     }
@@ -164,7 +163,18 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("ExtrasContentSegue", sender: collectionView.cellForItemAtIndexPath(indexPath))
+        self.performSegueWithIdentifier(ExtrasContentSegueIdentifier, sender: NextGenDataManager.sharedInstance.outOfMovieExperiences()[indexPath.row])
+    }
+    
+    
+    // MARK: Storyboard
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let experience = sender as? NGEExperienceType {
+            if segue.identifier == ExtrasContentSegueIdentifier && segue.destinationViewController.isKindOfClass(ExtrasContentViewController) {
+                let contentViewController = segue.destinationViewController as! ExtrasContentViewController
+                contentViewController.experience = experience
+            }
+        }
     }
 }
 

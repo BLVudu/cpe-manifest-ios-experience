@@ -9,3 +9,5 @@
 #import "WBVideoPlayerViewController.h"
 #import "SWRevealViewController.h"
 #import "RFQuiltLayout.h"
+
+#import <libxml/xmlreader.h>
