@@ -24,7 +24,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
   if video.interstitialUrl != nil {
             self.playerControlsVisible = false
             self.lockPlayerControls = true
-            self.playVideoWithURL(video.interstitialUrl)
+            //self.playVideoWithURL(video.interstitialUrl)
 
 
         } else {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -19,28 +19,41 @@
                         <rect key="frame" x="25" y="25" width="271" height="113"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zH-1v-tiT">
-                        <rect key="frame" x="8" y="146" width="304" height="50"/>
+                        <rect key="frame" x="25" y="146" width="271" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play_Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="LCq-qg-chK">
+                        <rect key="frame" x="140" y="62" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="ImZ-Nz-zOj"/>
+                            <constraint firstAttribute="width" constant="40" id="b8A-Xi-gBp"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="kcr-fA-Eba" secondAttribute="bottom" constant="37" id="9wF-pV-Ke1"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="9zH-1v-tiT" secondAttribute="leading" id="Khg-mh-KAQ"/>
+                    <constraint firstItem="LCq-qg-chK" firstAttribute="centerY" secondItem="IzL-Yw-hoz" secondAttribute="centerY" constant="-9.25" id="ALC-JV-aQ8"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="9zH-1v-tiT" secondAttribute="leading" constant="-17" id="Khg-mh-KAQ"/>
                     <constraint firstAttribute="leadingMargin" secondItem="kcr-fA-Eba" secondAttribute="leading" constant="-17" id="LTG-EX-wDa"/>
                     <constraint firstAttribute="bottomMargin" secondItem="9zH-1v-tiT" secondAttribute="bottom" constant="-21" id="Luu-Xa-t0s"/>
+                    <constraint firstItem="LCq-qg-chK" firstAttribute="centerX" secondItem="IzL-Yw-hoz" secondAttribute="centerX" id="oyt-ZF-CBM"/>
                     <constraint firstAttribute="topMargin" secondItem="kcr-fA-Eba" secondAttribute="top" constant="-17" id="tMX-St-NpH"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kcr-fA-Eba" secondAttribute="trailing" constant="16" id="vbv-VL-3pd"/>
                     <constraint firstItem="9zH-1v-tiT" firstAttribute="top" secondItem="IzL-Yw-hoz" secondAttribute="topMargin" constant="138" id="yGM-vu-KiQ"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9zH-1v-tiT" secondAttribute="trailing" id="yaG-CD-yA5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="9zH-1v-tiT" secondAttribute="trailing" constant="16" id="yaG-CD-yA5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="caption" destination="9zH-1v-tiT" id="YWL-kE-YOp"/>
+                <outlet property="playBtn" destination="LCq-qg-chK" id="UCl-1S-UEP"/>
                 <outlet property="thumbnail" destination="kcr-fA-Eba" id="wGm-BR-K5k"/>
             </connections>
             <point key="canvasLocation" x="295" y="321.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Play_Button.png" width="130" height="130"/>
+    </resources>
 </document>
