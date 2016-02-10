@@ -8,41 +8,38 @@
 
 import UIKit
 
-
-class VideoCell: UITableViewCell{
+class VideoCell: UITableViewCell {
     
-    
+    static let ReuseIdentifier = "VideoCellReuseIdentifier"
     
     @IBOutlet weak var thumbnail: UIImageView!
-    
     @IBOutlet weak var caption: UILabel!
     @IBOutlet weak var playBtn: UIImageView!
+    
+    override func layoutSubviews() {
+        thumbnail.layer.borderColor = UIColor.whiteColor().CGColor
+    }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         if selected {
-            
-        UIView.animateWithDuration(1.5, animations:{
-            self.thumbnail.alpha = 1
-            self.caption.alpha = 1
             self.playBtn.hidden = true
             self.thumbnail.layer.borderWidth = 2
-            self.thumbnail.layer.borderColor = UIColor.whiteColor().CGColor
             
-            }, completion: { (Bool) -> Void in
-            
-            })
-            
-            
+            UIView.animateWithDuration(0.25, animations: {
+                self.thumbnail.alpha = 1
+                self.caption.alpha = 1
+            }, completion: nil)
         } else {
             self.playBtn.hidden = false
-            self.thumbnail.alpha = 0.5
-            self.caption.alpha = 0.5
             self.thumbnail.layer.borderWidth = 0
+            
+            UIView.animateWithDuration(0.25, animations: {
+                self.thumbnail.alpha = 0.5
+                self.caption.alpha = 0.5
+            }, completion: nil)
         }
-
     }
-    
     
 }

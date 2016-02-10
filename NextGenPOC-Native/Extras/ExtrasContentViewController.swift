@@ -13,39 +13,39 @@ import AVFoundation
 
 class ExtrasContentViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
     
-   
+    @IBOutlet weak var videoTitleLabel: UILabel!
+    @IBOutlet weak var videoDescriptionLabel: UILabel!
     
-
-
-    var video: Video!
-    @IBOutlet weak var videoView: UIView!
-    @IBOutlet weak var imageCaption: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveBtn: UIButton!
-    let btsThumbnail = ["bts1.jpg","bts2.jpg","bts3.jpg","bts4.jpg"]
-    let btsCaption =  ["The creation and destruction of Kyrpton","Clark discovers the scout ship","The military might of the man of steel","The destruction of New York"]
     
     var experience: NGEExperienceType!
     
     //var bookmarks = [NSManagedObject]()
- 
-    var player = AVPlayer()
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: "video")
-        self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "extras_bg.jpg")!)
-        self.tableView.backgroundView?.alpha = 0
-        
         self.navigationItem.setBackButton(self, action: "close")
         
+        self.tableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
         
-        
+        let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        self.tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        self.tableView(self.tableView, didSelectRowAtIndexPath: selectedIndexPath)
     }
+    
+    func videoPlayerVideController() -> VideoPlayerViewController? {
+        for viewController in self.childViewControllers {
+            if viewController is VideoPlayerViewController {
+                return viewController as? VideoPlayerViewController
+            }
+        }
+        
+        return nil
+    }
+    
     
     // MARK: Actions
     func close() {
@@ -53,92 +53,73 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     }
     
     
+    // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("video", forIndexPath: indexPath) as! VideoCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(VideoCell.ReuseIdentifier, forIndexPath: indexPath) as! VideoCell
         cell.backgroundColor = UIColor.clearColor()
-        cell.thumbnail.image = UIImage(named: self.btsThumbnail[indexPath.row])
-        cell.caption.text = self.btsCaption[indexPath.row]
         cell.selectionStyle = .None
+        
+        let thisExperience = experience.childExperiences()[indexPath.row]
+        cell.caption.text = thisExperience.metadata()?.fullTitle()
+        if let thumbnailPath = thisExperience.thumbnailImagePath() {
+            cell.thumbnail.setImageWithURL(NSURL(string: thumbnailPath)!)
+        } else {
+            cell.thumbnail.image = nil
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.btsThumbnail.count
+        return experience.childExperiences().count
     }
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        
         return 200
     }
     
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-  
         let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
-        headerView.backgroundColor = UIColor(patternImage: UIImage(named: "extras_bg.jpg")!)
+        
         let title = UILabel(frame: CGRectMake(10, 10, tableView.frame.size.width, 40))
-        title.text = "Behind The Scenes"
+        title.text = experience.metadata()?.fullTitle()
         title.textColor = UIColor.whiteColor()
         title.font = UIFont(name: "Helvetica", size: 25.0)
         headerView.addSubview(title)
         
         return headerView
-        
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         return 50
     }
     
-
-
-    
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        self.videoView.hidden = true
-        self.imageCaption.hidden = true
-  
-        
-        if(self.videoView.hidden == true && self.imageCaption.hidden == true){
-            
-            
-            self.videoView.alpha = 0
-            self.imageCaption.alpha = 0
-            self.videoView.hidden = false
-            self.imageCaption.hidden = false
-    
-            
-            
+    // MARK: UITableViewDelegate
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            if !cell.selected {
+                return indexPath
+            }
         }
         
-        UIView.animateWithDuration(0.25, animations:{
-            
-            
-            self.videoView.alpha = 1
-            self.imageCaption.alpha = 1
-         }, completion: { (Bool) -> Void in
-            
-             })
-        let videoURL = DataManager.sharedInstance.content?.video.url
-        let playerItem = AVPlayerItem(URL:videoURL!)
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.videoView.bounds
-        self.videoView.layer.addSublayer(playerLayer)
-        self.player.replaceCurrentItemWithPlayerItem(playerItem)
-        self.player.play()
-        //self.imageCaption.text = self.btsCaption[indexPath.row]
-
-        
+        return nil
     }
     
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let thisExperience = experience.childExperiences()[indexPath.row]
+        videoTitleLabel.text = thisExperience.metadata()?.fullTitle()
+        if let videoURL = thisExperience.videoURL(), videoPlayerViewController = videoPlayerVideController() {
+            if let player = videoPlayerViewController.player {
+                player.removeAllItems()
+            }
+            
+            videoPlayerViewController.playerControlsVisible = false
+            videoPlayerViewController.lockTopToolbar = true
+            videoPlayerViewController.playVideoWithURL(videoURL)
+        }
+    }
     
     /*
     @IBAction func saveBookmark(sender: AnyObject) {

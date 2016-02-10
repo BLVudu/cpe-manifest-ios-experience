@@ -235,15 +235,16 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     
     // Show controls
     if (shouldPlayerControlsBeVisible) {
-        [self.topToolbar setHidden:NO];
-        [self.playbackToolbar setHidden:NO];
-        
         // Top toolbar
-        [UIView animateWithDuration:0.2f animations:^{
-            [self.topToolbar setTransform:CGAffineTransformIdentity];
-        } completion:^(BOOL finished){}];
+        if (!self.lockTopToolbar) {
+            [self.topToolbar setHidden:NO];
+            [UIView animateWithDuration:0.2f animations:^{
+                [self.topToolbar setTransform:CGAffineTransformIdentity];
+            } completion:^(BOOL finished){}];
+        }
         
         // Controls toolbar
+        [self.playbackToolbar setHidden:NO];
         [UIView animateWithDuration:0.2f animations:^{
             [self.playbackToolbar setTransform:CGAffineTransformIdentity];
         } completion:^(BOOL finished){}];
@@ -252,11 +253,13 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     // Hide controls
     else {
         // Top toolbar
-        [UIView animateWithDuration:0.2f animations:^{
-            [self.topToolbar setTransform:CGAffineTransformMakeTranslation(0.f, -(CGRectGetHeight([self.topToolbar bounds])))];
-        } completion:^(BOOL finished) {
-            [self.topToolbar setHidden:YES];
-        }];
+        if (!self.lockTopToolbar) {
+            [UIView animateWithDuration:0.2f animations:^{
+                [self.topToolbar setTransform:CGAffineTransformMakeTranslation(0.f, -(CGRectGetHeight([self.topToolbar bounds])))];
+            } completion:^(BOOL finished) {
+                [self.topToolbar setHidden:YES];
+            }];
+        }
         
         // Playback toolbar
         [UIView animateWithDuration:0.2f animations:^{

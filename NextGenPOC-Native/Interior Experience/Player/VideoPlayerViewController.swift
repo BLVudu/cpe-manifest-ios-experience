@@ -10,42 +10,40 @@ import UIKit
 
 let kSceneDidChange = "kSceneDidChange"
 
-class VideoPlayerViewController: WBVideoPlayerViewController{
+class VideoPlayerViewController: WBVideoPlayerViewController {
     
-    var video: Video!
+    var video: Video?
     var currentScene: Scene?
     var didPlayInterstitial = false
+    var showsTopToolbar = true
     
     @IBOutlet weak var commentaryBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-  if video.interstitialUrl != nil {
-            self.playerControlsVisible = false
-            self.lockPlayerControls = true
-            //self.playVideoWithURL(video.interstitialUrl)
-
-
-        } else {
-            playPrimaryVideo()
+        if video != nil {
+            if video!.interstitialUrl != nil {
+                self.playerControlsVisible = false
+                self.lockPlayerControls = true
+                self.playVideoWithURL(video!.interstitialUrl)
+            } else {
+                playPrimaryVideo()
+            }
         }
     }
     
-    
     func playPrimaryVideo() {
         self.lockPlayerControls = false
-        self.playVideoWithURL(video.url)
+        self.playVideoWithURL(video!.url)
     }
     
-
     override func playerItemDidReachEnd(notification: NSNotification!) {
         if !didPlayInterstitial {
             playPrimaryVideo()
             didPlayInterstitial = true
         }
     }
-
 
     override func done(sender: AnyObject?) {
         super.done(sender)
