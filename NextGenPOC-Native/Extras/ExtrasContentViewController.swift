@@ -8,23 +8,29 @@
 
 import UIKit
 import CoreData
+import AVFoundation
+
 
 class ExtrasContentViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var videoView: UIImageView!
+   
     
 
+
+    var video: Video!
+    @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var imageCaption: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveBtn: UIButton!
-    var imgData = NSData()
-    let btsImages = ["bts_1.jpg","bts_2.jpg","bts_3.jpg","bts_4.jpg","bts_5.jpg",]
-    let btsCaption =  ["Director Zack Snyder","Zack Snyder and Kevin Costner","Zack Snyder with some members of cast","Zack Snyder on location","Zack Snyder and Christopher Nolan"]
-    
-    var bookmarks = [NSManagedObject]()
+    let btsThumbnail = ["bts1.jpg","bts2.jpg","bts3.jpg","bts4.jpg"]
+    let btsCaption =  ["The creation and destruction of Kyrpton","Clark discovers the scout ship","The military might of the man of steel","The destruction of New York"]
     
     var experience: NGEExperienceType!
     
+    //var bookmarks = [NSManagedObject]()
+ 
+    var player = AVPlayer()
+
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +38,13 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: "video")
+        self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "extras_bg.jpg")!)
+        self.tableView.backgroundView?.alpha = 0
         
         self.navigationItem.setBackButton(self, action: "close")
+        
+        
+        
     }
     
     // MARK: Actions
@@ -45,8 +56,8 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("video", forIndexPath: indexPath) as! VideoCell
-        cell.backgroundColor = UIColor.darkGrayColor()
-        cell.thumbnail.image = UIImage(named: self.btsImages[indexPath.row])
+        cell.backgroundColor = UIColor.clearColor()
+        cell.thumbnail.image = UIImage(named: self.btsThumbnail[indexPath.row])
         cell.caption.text = self.btsCaption[indexPath.row]
         cell.selectionStyle = .None
         return cell
@@ -54,7 +65,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.btsImages.count
+        return self.btsThumbnail.count
     }
     
     
@@ -69,7 +80,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         
   
         let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
-        headerView.backgroundColor = UIColor.darkGrayColor()
+        headerView.backgroundColor = UIColor(patternImage: UIImage(named: "extras_bg.jpg")!)
         let title = UILabel(frame: CGRectMake(10, 10, tableView.frame.size.width, 40))
         title.text = "Behind The Scenes"
         title.textColor = UIColor.whiteColor()
@@ -93,7 +104,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         
         self.videoView.hidden = true
         self.imageCaption.hidden = true
-        self.saveBtn.hidden = true
+  
         
         if(self.videoView.hidden == true && self.imageCaption.hidden == true){
             
@@ -102,7 +113,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
             self.imageCaption.alpha = 0
             self.videoView.hidden = false
             self.imageCaption.hidden = false
-            self.saveBtn.hidden = false
+    
             
             
         }
@@ -112,17 +123,24 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
             
             self.videoView.alpha = 1
             self.imageCaption.alpha = 1
-            self.saveBtn.alpha = 1
          }, completion: { (Bool) -> Void in
             
              })
+        let videoURL = DataManager.sharedInstance.content?.video.url
+        let playerItem = AVPlayerItem(URL:videoURL!)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.videoView.bounds
+        self.videoView.layer.addSublayer(playerLayer)
+        self.player.replaceCurrentItemWithPlayerItem(playerItem)
+        self.player.play()
+        //self.imageCaption.text = self.btsCaption[indexPath.row]
 
-        self.videoView.image = UIImage(named: self.btsImages[indexPath.row])
-        self.imageCaption.text = self.btsCaption[indexPath.row]
-        self.imgData = UIImageJPEGRepresentation(self.videoView.image!, 1)!
         
     }
     
+    
+    
+    /*
     @IBAction func saveBookmark(sender: AnyObject) {
         
         
@@ -150,6 +168,6 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         }
         
     }
-
+*/
     
 }

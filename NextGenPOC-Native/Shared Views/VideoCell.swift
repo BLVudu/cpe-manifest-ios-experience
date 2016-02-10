@@ -26,7 +26,7 @@ class VideoCell: UITableViewCell{
         UIView.animateWithDuration(1.5, animations:{
             self.thumbnail.alpha = 1
             self.caption.alpha = 1
-            //self.playBtn.hidden = true
+            self.playBtn.hidden = true
             self.thumbnail.layer.borderWidth = 2
             self.thumbnail.layer.borderColor = UIColor.whiteColor().CGColor
             
@@ -36,7 +36,7 @@ class VideoCell: UITableViewCell{
             
             
         } else {
-            //self.playBtn.hidden = false
+            self.playBtn.hidden = false
             self.thumbnail.alpha = 0.5
             self.caption.alpha = 0.5
             self.thumbnail.layer.borderWidth = 0
