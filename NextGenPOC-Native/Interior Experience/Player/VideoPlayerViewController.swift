@@ -26,7 +26,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             if video!.interstitialUrl != nil {
                 self.playerControlsVisible = false
                 self.lockPlayerControls = true
-                self.playVideoWithURL(video!.interstitialUrl)
+                // self.playVideoWithURL(video!.interstitialUrl)
+                self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
             } else {
                 playPrimaryVideo()
             }
@@ -35,7 +36,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     func playPrimaryVideo() {
         self.lockPlayerControls = false
-        self.playVideoWithURL(video!.url)
+        // self.playVideoWithURL(video!.url)
+        self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("man-of-steel-trailer3", ofType: "mp4")!))
     }
     
     override func playerItemDidReachEnd(notification: NSNotification!) {

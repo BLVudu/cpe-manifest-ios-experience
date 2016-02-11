@@ -23,8 +23,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         ["location.jpg", "Kent family farm", "YORKVILLE, ILLINOIS, USA"],
         ["trivia.jpg", "Kryptonian plasma is left on Earth when the escape pod crashes in the cornfield"],
         ["scene.jpg", "Henry Cavill getting some scene direction"],
-        ["scene.jpg", "Behind the scenes Flying in IL cornfield"],
-        ["scene.jpg", "Shop this scene"]
+        ["deleted_scene.jpg", "Behind the scenes Flying in IL cornfield"],
+        ["shop.jpg", "Shop this scene"]
     ]
     
     // MARK: View Lifecycle
@@ -89,12 +89,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     // MARK: RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
         switch indexPath.row {
-        case SceneDetailItemType.Location.rawValue:
-            return CGSizeMake(3, 1)
-            
-        case SceneDetailItemType.Trivia.rawValue:
-            return CGSizeMake(1, 1)
-            
         case SceneDetailItemType.Shop.rawValue:
             return CGSizeMake(4, 1)
             
