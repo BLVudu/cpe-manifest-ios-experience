@@ -13,8 +13,11 @@ import AVFoundation
 
 class ExtrasContentViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var videoTitleLabel: UILabel!
-    @IBOutlet weak var videoDescriptionLabel: UILabel!
+    @IBOutlet weak var videoContainerView: UIView!
+    @IBOutlet weak var imageContainerView: UIView!
+    
+    @IBOutlet weak var mediaTitleLabel: UILabel!
+    @IBOutlet weak var mediaDescriptionLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveBtn: UIButton!
@@ -36,10 +39,20 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         self.tableView(self.tableView, didSelectRowAtIndexPath: selectedIndexPath)
     }
     
-    func videoPlayerVideController() -> VideoPlayerViewController? {
+    func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
             if viewController is VideoPlayerViewController {
                 return viewController as? VideoPlayerViewController
+            }
+        }
+        
+        return nil
+    }
+    
+    func imageGalleryViewController() -> ImageGalleryViewController? {
+        for viewController in self.childViewControllers {
+            if viewController is ImageGalleryViewController {
+                return viewController as? ImageGalleryViewController
             }
         }
         
@@ -109,15 +122,37 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let thisExperience = experience.childExperiences()[indexPath.row]
-        videoTitleLabel.text = thisExperience.metadata()?.fullTitle()
-        if let videoURL = thisExperience.videoURL(), videoPlayerViewController = videoPlayerVideController() {
-            if let player = videoPlayerViewController.player {
-                player.removeAllItems()
-            }
+        
+        mediaTitleLabel.text = thisExperience.metadata()?.fullTitle()
+        mediaDescriptionLabel.text = thisExperience.metadata()?.fullSummary()
+        
+        if thisExperience.isVideoGallery() {
+            videoContainerView.hidden = false
+            imageContainerView.hidden = true
             
-            videoPlayerViewController.playerControlsVisible = false
-            videoPlayerViewController.lockTopToolbar = true
-            videoPlayerViewController.playVideoWithURL(videoURL)
+            if let videoURL = thisExperience.videoURL(), videoPlayerViewController = videoPlayerViewController() {
+                if let player = videoPlayerViewController.player {
+                    player.removeAllItems()
+                }
+                
+                videoPlayerViewController.playerControlsVisible = false
+                videoPlayerViewController.lockTopToolbar = true
+                videoPlayerViewController.playVideoWithURL(videoURL)
+            }
+        } else {
+            videoContainerView.hidden = true
+            imageContainerView.hidden = false
+            
+            if let imageGallery = thisExperience.imageGallery(), imageGalleryViewController = imageGalleryViewController() {
+                imageGalleryViewController.imageGallery = imageGallery
+                if let title = imageGallery.metadata()?.fullTitle() {
+                    mediaTitleLabel.text = title
+                }
+                
+                if let description = imageGallery.metadata()?.fullSummary() {
+                    mediaDescriptionLabel.text = description
+                }
+            }
         }
     }
     

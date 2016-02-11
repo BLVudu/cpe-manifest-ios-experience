@@ -9,6 +9,7 @@ pod 'HockeySDK'
 
 # pod 'NextGenDataManager', path: '~/Documents/nextgen-data/ios'
 
+pod 'MWPhotoBrowser'
 pod 'RFQuiltLayout'
 pod 'SWRevealViewController', '~> 2.3'
 

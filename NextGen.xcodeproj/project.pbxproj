@@ -295,6 +295,9 @@
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
 		707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */; };
 		707E108A1C40820500FCF81C /* Talent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10891C40820500FCF81C /* Talent.swift */; };
+		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
+		70B9FE3A1C6D3BC700CF1A22 /* NGEGalleryType+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE391C6D3BC700CF1A22 /* NGEGalleryType+Data.swift */; };
+		70B9FE3C1C6D3CC000CF1A22 /* NGEPictureType+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE3B1C6D3CC000CF1A22 /* NGEPictureType+Data.swift */; };
 		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
 		70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B21C46CECE002D3B5A /* Video.swift */; };
 		70C9E9D71C6406E0004DF35B /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E9D61C6406E0004DF35B /* InitialViewController.swift */; };
@@ -631,6 +634,9 @@
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceExtrasViewController.swift; sourceTree = "<group>"; };
 		707E10891C40820500FCF81C /* Talent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talent.swift; sourceTree = "<group>"; };
+		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
+		70B9FE391C6D3BC700CF1A22 /* NGEGalleryType+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEGalleryType+Data.swift"; sourceTree = "<group>"; };
+		70B9FE3B1C6D3CC000CF1A22 /* NGEPictureType+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEPictureType+Data.swift"; sourceTree = "<group>"; };
 		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		70C9E0B21C46CECE002D3B5A /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		70C9E9D61C6406E0004DF35B /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -800,6 +806,7 @@
 				49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */,
 				701D69C01C48205B0047A67A /* TalentDetailViewController.swift */,
 				70FECF741C655187005B1A44 /* StylizedViewController.swift */,
+				70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */,
 			);
 			path = "Shared Controllers";
 			sourceTree = "<group>";
@@ -1023,6 +1030,8 @@
 				7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */,
 				7071C48F1C6BCBF6006F4275 /* NGEExperienceType+Data.swift */,
 				7071C4901C6BCBF6006F4275 /* NGEInventoryMetadataType+Data.swift */,
+				70B9FE391C6D3BC700CF1A22 /* NGEGalleryType+Data.swift */,
+				70B9FE3B1C6D3CC000CF1A22 /* NGEPictureType+Data.swift */,
 			);
 			name = NextGenDataManager;
 			path = "../nextgen-data/ios/NextGenDataManager";
@@ -1524,6 +1533,7 @@
 				7071C4BA1C6BCBF6006F4275 /* NGEContentIdentifierType.swift in Sources */,
 				7071C50B1C6BCBF6006F4275 /* NGEJobFunction.swift in Sources */,
 				7071C4A91C6BCBF6006F4275 /* NGEColorTypeTypeEnum.swift in Sources */,
+				70B9FE3C1C6D3CC000CF1A22 /* NGEPictureType+Data.swift in Sources */,
 				7071C50C1C6BCBF6006F4275 /* NGEMadeForRegionInternalTypeEnum.swift in Sources */,
 				7071C49F1C6BCBF6006F4275 /* NGEAudiovisualClipRefType.swift in Sources */,
 				7071C4E31C6BCBF6006F4275 /* NGEEventLocationOtherCoordinateType.swift in Sources */,
@@ -1560,12 +1570,14 @@
 				7071C4FA1C6BCBF6006F4275 /* NGEHashType.swift in Sources */,
 				7071C5001C6BCBF6006F4275 /* NGEInventoryImageType.swift in Sources */,
 				70FECF6B1C653B72005B1A44 /* UINavigationItem+Stylized.swift in Sources */,
+				70B9FE3A1C6D3BC700CF1A22 /* NGEGalleryType+Data.swift in Sources */,
 				7071C5291C6BCBF6006F4275 /* NGEPresentationType+File.swift in Sources */,
 				7071C4BE1C6BCBF6006F4275 /* NGEContentSequenceInfoType.swift in Sources */,
 				7071C53B1C6BCBF6006F4275 /* NGETextGroupType.swift in Sources */,
 				7071C51B1C6BCBF6006F4275 /* NGEOtherIDType.swift in Sources */,
 				7071C4DB1C6BCBF6006F4275 /* NGEDigitalAssetVideoSubtitleLanguageType.swift in Sources */,
 				7071C5121C6BCBF6006F4275 /* NGEMediaManifestType+File.swift in Sources */,
+				70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */,
 				7071C4E51C6BCBF6006F4275 /* NGEEventPeriodType.swift in Sources */,
 				7071C53F1C6BCBF6006F4275 /* NGETimedEventSequenceType.swift in Sources */,
 				7071C4B11C6BCBF6006F4275 /* NGECompObjEntryType.swift in Sources */,
