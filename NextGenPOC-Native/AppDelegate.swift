@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_v3", ofType: "xml") {
+            NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
+        }
+        
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()

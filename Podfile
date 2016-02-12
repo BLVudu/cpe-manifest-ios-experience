@@ -3,7 +3,14 @@
 
 target 'NextGen' do
     
-pod 'SWRevealViewController', '~> 2.3'
+use_frameworks!
+
 pod 'HockeySDK'
+
+# pod 'NextGenDataManager', path: '~/Documents/nextgen-data/ios'
+
+pod 'MWPhotoBrowser'
+pod 'RFQuiltLayout'
+pod 'SWRevealViewController', '~> 2.3'
 
 end

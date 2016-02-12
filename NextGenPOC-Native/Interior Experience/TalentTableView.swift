@@ -13,7 +13,7 @@ class TalentTableView: UITableView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
     }
     
 }

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B945A76CD9537A81F6B9D041748E884BCDBEB43E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B945A76CD9537A81F6B9D041748E884BCDBEB43E" : 0,
+    "9D4C9CCD543BE9256045509AA1CD3E51964C94D7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DF8D3AF9-422C-4AC4-836D-31EAB56A6C56",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B945A76CD9537A81F6B9D041748E884BCDBEB43E" : "nextgen-ios\/",
+    "9D4C9CCD543BE9256045509AA1CD3E51964C94D7" : "nextgen-data\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "NextGen",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "NextGen.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:wbdigital\/nextgen-data.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9D4C9CCD543BE9256045509AA1CD3E51964C94D7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:wbdigital\/nextgen-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B945A76CD9537A81F6B9D041748E884BCDBEB43E"
+    }
+  ]
+}

@@ -40,8 +40,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 //=========================================================
 @interface WBVideoPlayerViewController ()
 @property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
-@property (weak, nonatomic)   IBOutlet  UILabel                         *titleLabel;
-@property (weak, nonatomic)   IBOutlet  UILabel                         *deliveryFormatLabel;
 
 @property (weak, nonatomic)   IBOutlet  UIView                          *playbackToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *playButton;
@@ -72,6 +70,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
  * @see playerControlsVisible:
  */
 @property (nonatomic, assign)           BOOL                             playerControlsEnabled;
+@property (nonatomic, strong)           NSMutableArray                           *assests;
 
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer;
 
@@ -80,6 +79,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
 - (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
+- (void)createQueue;
 @end
 
 //=========================================================
@@ -235,15 +235,16 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     
     // Show controls
     if (shouldPlayerControlsBeVisible) {
-        [self.topToolbar setHidden:NO];
-        [self.playbackToolbar setHidden:NO];
-        
         // Top toolbar
-        [UIView animateWithDuration:0.2f animations:^{
-            [self.topToolbar setTransform:CGAffineTransformIdentity];
-        } completion:^(BOOL finished){}];
+        if (!self.lockTopToolbar) {
+            [self.topToolbar setHidden:NO];
+            [UIView animateWithDuration:0.2f animations:^{
+                [self.topToolbar setTransform:CGAffineTransformIdentity];
+            } completion:^(BOOL finished){}];
+        }
         
         // Controls toolbar
+        [self.playbackToolbar setHidden:NO];
         [UIView animateWithDuration:0.2f animations:^{
             [self.playbackToolbar setTransform:CGAffineTransformIdentity];
         } completion:^(BOOL finished){}];
@@ -252,11 +253,13 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     // Hide controls
     else {
         // Top toolbar
-        [UIView animateWithDuration:0.2f animations:^{
-            [self.topToolbar setTransform:CGAffineTransformMakeTranslation(0.f, -(CGRectGetHeight([self.topToolbar bounds])))];
-        } completion:^(BOOL finished) {
-            [self.topToolbar setHidden:YES];
-        }];
+        if (!self.lockTopToolbar) {
+            [UIView animateWithDuration:0.2f animations:^{
+                [self.topToolbar setTransform:CGAffineTransformMakeTranslation(0.f, -(CGRectGetHeight([self.topToolbar bounds])))];
+            } completion:^(BOOL finished) {
+                [self.topToolbar setHidden:YES];
+            }];
+        }
         
         // Playback toolbar
         [UIView animateWithDuration:0.2f animations:^{
@@ -744,28 +747,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 }
 
 //=========================================================
-# pragma mark - Player UI
-//=========================================================
-- (void)setTitleText:(NSString *)title {
-    if (!title) {
-        self.titleLabel.hidden = YES;
-    } else {
-        self.titleLabel.hidden = NO;
-        self.titleLabel.text = title;
-        [self.titleLabel sizeToFit];
-    }
-}
-
-- (void)setDeliveryFormatText:(NSString *)deliveryFormat {
-    if (!deliveryFormat) {
-        self.deliveryFormatLabel.hidden = YES;
-    } else {
-        self.deliveryFormatLabel.hidden = NO;
-        self.deliveryFormatLabel.text = deliveryFormat;
-    }
-}
-
-//=========================================================
 # pragma mark - Player Item
 //=========================================================
 
@@ -778,7 +759,8 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 	/* After the movie has played to its end time, seek back to time zero 
 		to play it again. */
 	seekToZeroBeforePlay = YES;
-}
+    
+   }
 
 /* ---------------------------------------------------------
  **  Get the duration for a AVPlayerItem. 
@@ -909,6 +891,10 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 	
     // Create a new instance of AVPlayerItem from the now successfully loaded AVAsset.
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+      
+    
+    
+        
     
     // Observe the player item "status" key to determine when it is ready to play.
     [self.playerItem addObserver:self 
@@ -946,9 +932,10 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
     /* Create new player, if we don't already have one. */
     if (!self.player){
         /* Get a new AVPlayer initialized to play the specified player item. */
-        [self setPlayer:[AVPlayer playerWithPlayerItem:self.playerItem]];	
-		
-        /* Observe the AVPlayer "currentItem" property to find out when any 
+        
+        [self setPlayer:[AVQueuePlayer playerWithPlayerItem:self.playerItem]];
+        
+        /* Observe the AVPlayer "currentItem" property to find out when any
          AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did 
          occur.*/
         [self.player addObserver:self 
@@ -963,7 +950,16 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
                          context:VideoPlayerRateObservationContext];
     }
     
+    else {
+  
+        //insert new items to the queue
+        [self.player insertItem:self.playerItem afterItem:nil];
+    }
+    
     /* Make our new AVPlayerItem the AVPlayer's current item. */
+
+
+    
     if (self.player.currentItem != self.playerItem){
         /* Replace the player item with a new player item. The item replacement occurs 
          asynchronously; observe the currentItem property to find out when the 
@@ -972,13 +968,21 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 		 If needed, configure player item here (example: adding outputs, setting text style rules,
 		 selecting media options) before associating it with a player
 		 */
-        [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-        
+
+        //[self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         [self syncPlayPauseButtons];
     }
+
 	
     [self.scrubber setValue:0.0];
+    
+
+    
 }
+
+
+
+
 
 //=========================================================
 # pragma mark - Asset Key Value Observing

@@ -112,19 +112,28 @@ class ExtrasLayout: UICollectionViewLayout {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
+    
   
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        
+        cache.removeAll()
+        prepareLayout()
         
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
         // Loop through the cache and look for items in the rect
         for attributes  in cache {
+            
             if CGRectIntersectsRect(attributes.frame, rect ) {
                 layoutAttributes.append(attributes)
             }
         }
         return layoutAttributes
     }
+    
+
+    
+    
     
     
 }

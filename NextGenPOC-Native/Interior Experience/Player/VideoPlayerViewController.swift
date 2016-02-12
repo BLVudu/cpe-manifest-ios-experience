@@ -12,28 +12,32 @@ let kSceneDidChange = "kSceneDidChange"
 
 class VideoPlayerViewController: WBVideoPlayerViewController {
     
-    var video: Video!
+    var video: Video?
     var currentScene: Scene?
     var didPlayInterstitial = false
+    var showsTopToolbar = true
     
     @IBOutlet weak var commentaryBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if video.interstitialUrl != nil {
-            self.playerControlsVisible = false
-            self.lockPlayerControls = true
-            self.playVideoWithURL(video.interstitialUrl)
-        } else {
-            playPrimaryVideo()
+        if video != nil {
+            if video!.interstitialUrl != nil {
+                self.playerControlsVisible = false
+                self.lockPlayerControls = true
+                // self.playVideoWithURL(video!.interstitialUrl)
+                self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
+            } else {
+                playPrimaryVideo()
+            }
         }
     }
     
     func playPrimaryVideo() {
         self.lockPlayerControls = false
-        self.setTitleText(video.title)
-        self.setDeliveryFormatText(video.deliveryFormat)
-        self.playVideoWithURL(video.url)
+        // self.playVideoWithURL(video!.url)
+        self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("man-of-steel-trailer3", ofType: "mp4")!))
     }
     
     override func playerItemDidReachEnd(notification: NSNotification!) {
@@ -42,7 +46,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             didPlayInterstitial = true
         }
     }
-    
+
     override func done(sender: AnyObject?) {
         super.done(sender)
         
@@ -72,14 +76,22 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     override func syncScrubber() {
         super.syncScrubber()
-        
         if player != nil {
-            let newScene = DataManager.sharedInstance.content?.sceneAtTime(Int(CMTimeGetSeconds(player.currentTime())))
+            var curTime = (CMTimeGetSeconds(player.currentTime()))
+            if (curTime.isNaN == true){
+                
+                curTime = 0.0
+            }
+            
+            let newScene = DataManager.sharedInstance.content?.sceneAtTime(Int(curTime))
+            
             if newScene != self.currentScene {
                 currentScene = newScene
                 NSNotificationCenter.defaultCenter().postNotificationName(kSceneDidChange, object: nil, userInfo: ["scene": currentScene!])
             }
+        
         }
     }
+
 
 }

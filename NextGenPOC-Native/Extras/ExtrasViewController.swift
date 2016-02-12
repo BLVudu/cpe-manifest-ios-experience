@@ -10,44 +10,47 @@
 import UIKit
 import AVFoundation
 
-
-
-class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
+class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
-    @IBOutlet var extrasView: UICollectionView!
-    @IBOutlet weak var talentDetailView: UIView!
+    let ExtrasContentSegueIdentifier = "ExtrasContentSegue"
+    
     @IBOutlet weak var talentTableView: TalentTableView!
+    @IBOutlet weak var talentDetailView: UIView!
+    @IBOutlet var extrasCollectionView: UICollectionView!
     
     var selectedIndexPath: NSIndexPath?
     
-    let extraImages = ["extras_bts.jpg","extras_galleries.jpg","extras_krypton.jpg","extras_legacy.jpg","extras_places.jpg","extras_scenes.jpg","extras_shopping.jpg","extras_universe.jpg"]
-    let extrasCaption =  ["Behind The Scenes","Galleries","Explore Krypton","Legacy","Places","Deleted Scenes","Shopping", "DC Universe"]
     
-   
-    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.extrasView.delegate = self
-        self.extrasView.dataSource = self
+        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        self.extrasCollectionView.registerNib(UINib(nibName: "ContentCell", bundle: nil), forCellWithReuseIdentifier: "content")
         
-        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
-        self.extrasView.registerNib(UINib(nibName: "ContentCell", bundle: nil), forCellWithReuseIdentifier: "content")
-        
-        if let layout = extrasView?.collectionViewLayout as? ExtrasLayout {
+        if let layout = extrasCollectionView?.collectionViewLayout as? ExtrasLayout {
             layout.delegate = self
         }
+        
+        self.navigationItem.setHomeButton(self, action: "close")
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: Actions
+    func close() {
+        if talentDetailView.hidden {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            hideTalentDetailView()
+        }
     }
     
+    
+    // MARK: Talent Details
     func talentDetailViewController() -> TalentDetailViewController? {
         for viewController in self.childViewControllers {
             if viewController is TalentDetailViewController {
@@ -62,11 +65,13 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         if talentDetailView.hidden {
             talentDetailView.alpha = 0
             talentDetailView.hidden = false
+            self.navigationItem.setBackButton(self, action: "close")
             
             UIView.animateWithDuration(0.25, animations: {
+                self.extrasCollectionView.alpha = 0
                 self.talentDetailView.alpha = 1
             }, completion: { (Bool) -> Void in
-                    
+                self.extrasCollectionView.hidden = true
             })
         }
     }
@@ -77,42 +82,17 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
             selectedIndexPath = nil
         }
         
+        extrasCollectionView.hidden = false
+        extrasCollectionView.alpha = 0
+        self.navigationItem.setHomeButton(self, action: "close")
+        
         UIView.animateWithDuration(0.25, animations: {
+            self.extrasCollectionView.alpha = 1
             self.talentDetailView.alpha = 0
         }, completion: { (Bool) -> Void in
-                self.talentDetailView.hidden = true
+            self.talentDetailView.hidden = true
         })
     }
-    
- 
-    
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        
-        return self.extraImages.count
-    }
-
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
-        
-        cell.extraImg.image = UIImage (named: self.extraImages[indexPath.row])
-        cell.extrasTitle.text = self.extrasCaption[indexPath.row]
-
-        return cell
-     }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        
-        
-        self.performSegueWithIdentifier("moreContent", sender: nil)
-    }
-    
-    
-
-    
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,6 +142,40 @@ class ExtrasViewController: UIViewController, UICollectionViewDelegate, UICollec
         hideTalentDetailView()
     }
     
+    
+    // MARK: UICollectionViewDataSource
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return NextGenDataManager.sharedInstance.outOfMovieExperienceCategories().count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
+        
+        let experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row]
+        cell.extrasTitle.text = experience.metadata()?.fullTitle()
+        if let thumbnailPath = experience.thumbnailImagePath() {
+            cell.extraImg.setImageWithURL(NSURL(string: thumbnailPath)!)
+        }
+
+        return cell
+    }
+    
+    
+    // MARK: UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier(ExtrasContentSegueIdentifier, sender: NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row])
+    }
+    
+    
+    // MARK: Storyboard
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let experience = sender as? NGEExperienceType {
+            if segue.identifier == ExtrasContentSegueIdentifier && segue.destinationViewController.isKindOfClass(ExtrasContentViewController) {
+                let contentViewController = segue.destinationViewController as! ExtrasContentViewController
+                contentViewController.experience = experience
+            }
+        }
+    }
 }
 
 extension ExtrasViewController: ExtrasLayoutDelegate{
@@ -177,13 +191,6 @@ extension ExtrasViewController: ExtrasLayoutDelegate{
     heightForLabelAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
     {
         return 100.0
-    }
-    
-    
-    @IBAction func dismissExtras(sender: AnyObject) {
-        
-        self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil);
-        
     }
     
 }

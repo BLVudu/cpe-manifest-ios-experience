@@ -39,10 +39,10 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        /*let screenSize = UIScreen.mainScreen().bounds
+        let screenSize = UIScreen.mainScreen().bounds
         let viewHeight = (extView.hidden ? screenSize.height : (screenSize.height / 2))
         titleTreatmentTopConstraint.constant = viewHeight * 0.4125
-        titleTreatmentLeftConstraint.constant = screenSize.width * 0.2*/
+        titleTreatmentLeftConstraint.constant = screenSize.width * 0.2
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {

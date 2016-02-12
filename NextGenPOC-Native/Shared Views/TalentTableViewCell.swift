@@ -16,7 +16,7 @@ class TalentTableViewCell: UITableViewCell {
     
     var talent: Talent? = nil {
         didSet {
-            nameLabel?.text = talent?.name
+            nameLabel?.text = talent?.name.uppercaseString
             roleLabel?.text = talent?.role
             if talent?.thumbnailImage != nil {
                 talentImageView.image = UIImage(named: talent!.thumbnailImage!)

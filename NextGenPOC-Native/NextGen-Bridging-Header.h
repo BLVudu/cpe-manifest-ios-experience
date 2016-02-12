@@ -6,5 +6,6 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc.. All rights reserved.
 //
 
+#import <libxml/xmlreader.h>
+
 #import "WBVideoPlayerViewController.h"
-#import "SWRevealViewController.h"

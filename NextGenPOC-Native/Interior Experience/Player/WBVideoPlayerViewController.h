@@ -84,7 +84,7 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 @property (nonatomic, weak)             id<WBVideoPlayerDelegate>        delegate;
 @property (nonatomic, readonly)         WBVideoPlayerState               state;
 @property (nonatomic, readonly)         NSURL                           *URL;
-@property (readwrite, strong)           AVPlayer                        *player;
+@property (readwrite, strong)           AVQueuePlayer                   *player;
 @property (strong)                      AVPlayerItem                    *playerItem;
 @property (nonatomic, weak)   IBOutlet  WBVideoPlayerPlaybackView       *playbackView;
 @property (readwrite, nonatomic)        NSInteger                        playerControlsAutoHideTime;
@@ -99,17 +99,21 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 @property (nonatomic, assign)           BOOL                             playerControlsVisible;
 
 /**
+ * Locks the top toolbar visibility so showing/hiding is not effective
+ */
+@property (nonatomic, assign)           BOOL                            lockTopToolbar;
+
+/**
  * Locks the player controls visibility so showing/hiding is not effective
  */
 @property (nonatomic, assign)           BOOL                            lockPlayerControls;
+
 
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)done:(id)sender;
 - (BOOL)isPlaying;
 - (void)displayError:(NSError *)error;
-- (void)setTitleText:(NSString *)title;
-- (void)setDeliveryFormatText:(NSString *)deliveryFormat;
 - (CMTime)playerItemDuration;
 - (void)playVideoWithURL:(NSURL *)url;
 - (void)playVideoWithURL:(NSURL *)url startTime:(NSTimeInterval)time;
@@ -118,5 +122,6 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 - (void)seekPlayerToTime:(CMTime)seekTime;
 - (void)syncScrubber;
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
+- (void)createQueue;
 
 @end
