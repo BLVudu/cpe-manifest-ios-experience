@@ -8,6 +8,4 @@
 
 #import <libxml/xmlreader.h>
 
-#import "RFQuiltLayout.h"
-#import "SWRevealViewController.h"
 #import "WBVideoPlayerViewController.h"

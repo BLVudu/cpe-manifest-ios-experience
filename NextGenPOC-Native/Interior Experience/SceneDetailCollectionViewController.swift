@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import RFQuiltLayout
 
 enum SceneDetailItemType: Int {
     case Location = 0

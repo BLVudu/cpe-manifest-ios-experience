@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import SWRevealViewController
 
 class ProfileViewController: UICollectionViewController, UIGestureRecognizerDelegate{
     

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13E6AE7730FABCDEC8989161 /* Pods_NextGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB86315725E79B1C3269F733 /* Pods_NextGen.framework */; };
+		0CE62751C28B08C73E3D9D3C /* Pods_NextGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB925CAD4CBE373E778D0949 /* Pods_NextGen.framework */; };
 		4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */; };
 		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
 		4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */; };
@@ -626,7 +626,7 @@
 		70FECF801C6579E4005B1A44 /* ImageSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		70FECF821C690C43005B1A44 /* SceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		8C5F832112458571766A2107 /* Pods-NextGen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextGen/Pods-NextGen.debug.xcconfig"; sourceTree = "<group>"; };
-		EB86315725E79B1C3269F733 /* Pods_NextGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB925CAD4CBE373E778D0949 /* Pods_NextGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -636,7 +636,7 @@
 			files = (
 				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
 				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
-				13E6AE7730FABCDEC8989161 /* Pods_NextGen.framework in Frameworks */,
+				0CE62751C28B08C73E3D9D3C /* Pods_NextGen.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,7 +742,7 @@
 			children = (
 				7071C54B1C6BCC11006F4275 /* libxml2.tbd */,
 				70FECF7C1C657976005B1A44 /* MapKit.framework */,
-				EB86315725E79B1C3269F733 /* Pods_NextGen.framework */,
+				EB925CAD4CBE373E778D0949 /* Pods_NextGen.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
