@@ -34,6 +34,8 @@
 		4993D25F1C6AC0740077220A /* bts2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4993D25B1C6AC0730077220A /* bts2.jpg */; };
 		4993D2601C6AC0740077220A /* bts3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4993D25C1C6AC0730077220A /* bts3.jpg */; };
 		4993D2611C6AC0740077220A /* bts4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4993D25D1C6AC0730077220A /* bts4.jpg */; };
+		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
+		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
@@ -179,6 +181,8 @@
 		4993D25B1C6AC0730077220A /* bts2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bts2.jpg; path = ../bts2.jpg; sourceTree = "<group>"; };
 		4993D25C1C6AC0730077220A /* bts3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bts3.jpg; path = ../bts3.jpg; sourceTree = "<group>"; };
 		4993D25D1C6AC0730077220A /* bts4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bts4.jpg; path = ../bts4.jpg; sourceTree = "<group>"; };
+		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
+		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
@@ -564,6 +568,7 @@
 			children = (
 				7065F5471C47004100A2C74E /* TalentTableViewCell.swift */,
 				707E10841C40797400FCF81C /* RoundImageView.swift */,
+				4993D2661C6CE17F0077220A /* SettingsCell.swift */,
 				7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */,
 				70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */,
 				701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */,
@@ -571,6 +576,7 @@
 				49F3EAD41C51639700E09484 /* ContentCell.swift */,
 				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
 				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
+				4993D2681C6D07800077220A /* RadioButton.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -894,6 +900,7 @@
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
 				497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
+				4993D2691C6D07800077220A /* RadioButton.swift in Sources */,
 				70FECF6B1C653B72005B1A44 /* UINavigationItem+Stylized.swift in Sources */,
 				70FECF811C6579E4005B1A44 /* ImageSceneDetailCollectionViewCell.swift in Sources */,
 				49F3EADB1C517ADA00E09484 /* ExtrasContentViewController.swift in Sources */,
@@ -906,6 +913,7 @@
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
 				7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */,
 				70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */,
+				4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */,
 				701D69C51C4824070047A67A /* Film.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				707E108A1C40820500FCF81C /* Talent.swift in Sources */,
