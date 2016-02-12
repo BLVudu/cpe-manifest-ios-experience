@@ -31,6 +31,8 @@
 		497DECCE1C61743A000C6636 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECCD1C61743A000C6636 /* Bookmark.swift */; };
 		497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497DECCF1C61754A000C6636 /* BookmarkCell.xib */; };
 		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
+		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
+		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
@@ -348,6 +350,8 @@
 		497DECCD1C61743A000C6636 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		497DECCF1C61754A000C6636 /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
 		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
+		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
+		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
@@ -1095,6 +1099,7 @@
 			children = (
 				7065F5471C47004100A2C74E /* TalentTableViewCell.swift */,
 				707E10841C40797400FCF81C /* RoundImageView.swift */,
+				4993D2661C6CE17F0077220A /* SettingsCell.swift */,
 				7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */,
 				70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */,
 				701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */,
@@ -1102,6 +1107,7 @@
 				49F3EAD41C51639700E09484 /* ContentCell.swift */,
 				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
 				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
+				4993D2681C6D07800077220A /* RadioButton.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -1493,6 +1499,7 @@
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				7071C4FA1C6BCBF6006F4275 /* NGEHashType.swift in Sources */,
 				7071C5001C6BCBF6006F4275 /* NGEInventoryImageType.swift in Sources */,
+				4993D2691C6D07800077220A /* RadioButton.swift in Sources */,
 				70FECF6B1C653B72005B1A44 /* UINavigationItem+Stylized.swift in Sources */,
 				70B9FE3A1C6D3BC700CF1A22 /* NGEGalleryType+Data.swift in Sources */,
 				7071C5291C6BCBF6006F4275 /* NGEPresentationType+File.swift in Sources */,
@@ -1559,6 +1566,7 @@
 				7071C4D11C6BCBF6006F4275 /* NGEDigitalAssetSetType.swift in Sources */,
 				7071C4EB1C6BCBF6006F4275 /* NGEFictionalEnd.swift in Sources */,
 				7071C5301C6BCBF6006F4275 /* NGEStringAndLanguageType.swift in Sources */,
+				4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */,
 				701D69C51C4824070047A67A /* Film.swift in Sources */,
 				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
 				7071C4F11C6BCBF6006F4275 /* NGEFileManifestInfoType.swift in Sources */,
