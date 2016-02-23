@@ -41,10 +41,9 @@
 		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44BC1C7CA65700753227 /* ShoppingCell.xib */; };
-		49CB44BF1C7CA67200753227 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44BE1C7CA67200753227 /* ShoppingCell.swift */; };
-		49CB44C11C7CB19600753227 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C01C7CB19600753227 /* ShoppingCell.swift */; };
 		49CB44C31C7CB1BE00753227 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C21C7CB1BE00753227 /* fb.png */; };
 		49CB44C51C7CB1C600753227 /* tw.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C41C7CB1C600753227 /* tw.png */; };
+		49CB44C71C7CCAD700753227 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C61C7CCAD700753227 /* ShoppingCell.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
@@ -372,10 +371,9 @@
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49CB44BC1C7CA65700753227 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoppingCell.xib; path = ../../ShoppingCell.xib; sourceTree = "<group>"; };
-		49CB44BE1C7CA67200753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShoppingCell.swift; path = ../../ShoppingCell.swift; sourceTree = "<group>"; };
-		49CB44C01C7CB19600753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShoppingCell.swift; path = ../../ShoppingCell.swift; sourceTree = "<group>"; };
 		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fb.png; path = ../../../../../Documents/fb.png; sourceTree = "<group>"; };
 		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tw.png; path = ../../../../../Documents/tw.png; sourceTree = "<group>"; };
+		49CB44C61C7CCAD700753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShoppingCell.swift; path = ../../../.Trash/ShoppingCell.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
@@ -1156,10 +1154,9 @@
 				70C9E0B21C46CECE002D3B5A /* Video.swift */,
 				7077A37E1C49AB8500843782 /* Scene.swift */,
 				497DECCD1C61743A000C6636 /* Bookmark.swift */,
-				49CB44BE1C7CA67200753227 /* ShoppingCell.swift */,
+				49CB44C61C7CCAD700753227 /* ShoppingCell.swift */,
 				497DECCF1C61754A000C6636 /* BookmarkCell.xib */,
 				49CB44BC1C7CA65700753227 /* ShoppingCell.xib */,
-				49CB44C01C7CB19600753227 /* ShoppingCell.swift */,
 				497DECD11C6176CF000C6636 /* BookmarkCell.swift */,
 			);
 			path = Models;
@@ -1491,7 +1488,6 @@
 				7071C4E91C6BCBF6006F4275 /* NGEExperienceListType.swift in Sources */,
 				7071C5251C6BCBF6006F4275 /* NGEPresentationLanguagePairType.swift in Sources */,
 				7071C5261C6BCBF6006F4275 /* NGEPresentationListType.swift in Sources */,
-				49CB44BF1C7CA67200753227 /* ShoppingCell.swift in Sources */,
 				7077A37B1C49A4D800843782 /* Content.swift in Sources */,
 				7071C52B1C6BCBF6006F4275 /* NGEPrivateDataType.swift in Sources */,
 				7071C49A1C6BCBF6006F4275 /* NGEAppName.swift in Sources */,
@@ -1678,7 +1674,7 @@
 				7071C4D31C6BCBF6006F4275 /* NGEDigitalAssetSubtitleFormatType.swift in Sources */,
 				7071C4931C6BCBF6006F4275 /* NGEAdaptationSetID.swift in Sources */,
 				497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */,
-				49CB44C11C7CB19600753227 /* ShoppingCell.swift in Sources */,
+				49CB44C71C7CCAD700753227 /* ShoppingCell.swift in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				7071C5311C6BCBF6006F4275 /* NGEStringDisplayIndicatorsEnum.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
