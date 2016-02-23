@@ -154,7 +154,7 @@ class ShoppingViewController: StylizedViewController, UITableViewDelegate, UITab
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("shop", forIndexPath: indexPath)as! ShoppingCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("shop", forIndexPath: indexPath)as! UICollectionViewCell
         
         return cell
           }

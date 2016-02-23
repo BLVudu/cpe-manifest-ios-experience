@@ -25,8 +25,6 @@
 		492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E91C76A56900B306A2 /* CommentaryViewCell.swift */; };
 		492267EC1C76C0F900B306A2 /* commButton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 492267EB1C76C0F900B306A2 /* commButton.jpg */; };
 		492267EE1C7B911100B306A2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492267ED1C7B911100B306A2 /* Social.framework */; };
-		492267F01C7BCF6E00B306A2 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 492267EF1C7BCF6E00B306A2 /* ShoppingCell.xib */; };
-		492267F21C7BCF7E00B306A2 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267F11C7BCF7E00B306A2 /* ShoppingCell.swift */; };
 		494166EE1C52E8CC0013B94A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166ED1C52E8CC0013B94A /* play.png */; };
 		494166F21C5306D90013B94A /* Play_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166F11C5306D90013B94A /* Play_Button.png */; };
 		4956C99A1C73AD9300FAFDE1 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */; };
@@ -42,6 +40,11 @@
 		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
 		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
+		49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44BC1C7CA65700753227 /* ShoppingCell.xib */; };
+		49CB44BF1C7CA67200753227 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44BE1C7CA67200753227 /* ShoppingCell.swift */; };
+		49CB44C11C7CB19600753227 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C01C7CB19600753227 /* ShoppingCell.swift */; };
+		49CB44C31C7CB1BE00753227 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C21C7CB1BE00753227 /* fb.png */; };
+		49CB44C51C7CB1C600753227 /* tw.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C41C7CB1C600753227 /* tw.png */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
@@ -353,8 +356,6 @@
 		492267E91C76A56900B306A2 /* CommentaryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryViewCell.swift; sourceTree = "<group>"; };
 		492267EB1C76C0F900B306A2 /* commButton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = commButton.jpg; sourceTree = "<group>"; };
 		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		492267EF1C7BCF6E00B306A2 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoppingCell.xib; path = ../../../.Trash/ShoppingCell.xib; sourceTree = "<group>"; };
-		492267F11C7BCF7E00B306A2 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShoppingCell.swift; path = ../../../.Trash/ShoppingCell.swift; sourceTree = "<group>"; };
 		494166ED1C52E8CC0013B94A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		494166F11C5306D90013B94A /* Play_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_Button.png; path = ../Play_Button.png; sourceTree = "<group>"; };
 		4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +371,11 @@
 		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		49CB44BC1C7CA65700753227 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoppingCell.xib; path = ../../ShoppingCell.xib; sourceTree = "<group>"; };
+		49CB44BE1C7CA67200753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShoppingCell.swift; path = ../../ShoppingCell.swift; sourceTree = "<group>"; };
+		49CB44C01C7CB19600753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShoppingCell.swift; path = ../../ShoppingCell.swift; sourceTree = "<group>"; };
+		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fb.png; path = ../../../../../Documents/fb.png; sourceTree = "<group>"; };
+		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tw.png; path = ../../../../../Documents/tw.png; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
@@ -1061,6 +1067,8 @@
 		7077A32E1C4989C200843782 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				49CB44C41C7CB1C600753227 /* tw.png */,
+				49CB44C21C7CB1BE00753227 /* fb.png */,
 				494166F11C5306D90013B94A /* Play_Button.png */,
 				7077A32F1C4989C200843782 /* menu.png */,
 				494166ED1C52E8CC0013B94A /* play.png */,
@@ -1148,9 +1156,10 @@
 				70C9E0B21C46CECE002D3B5A /* Video.swift */,
 				7077A37E1C49AB8500843782 /* Scene.swift */,
 				497DECCD1C61743A000C6636 /* Bookmark.swift */,
+				49CB44BE1C7CA67200753227 /* ShoppingCell.swift */,
 				497DECCF1C61754A000C6636 /* BookmarkCell.xib */,
-				492267EF1C7BCF6E00B306A2 /* ShoppingCell.xib */,
-				492267F11C7BCF7E00B306A2 /* ShoppingCell.swift */,
+				49CB44BC1C7CA65700753227 /* ShoppingCell.xib */,
+				49CB44C01C7CB19600753227 /* ShoppingCell.swift */,
 				497DECD11C6176CF000C6636 /* BookmarkCell.swift */,
 			);
 			path = Models;
@@ -1335,7 +1344,7 @@
 				7077A3641C4989C200843782 /* crowe_full.jpg in Resources */,
 				497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */,
 				7077A3671C4989C200843782 /* fishburne_thumb.jpg in Resources */,
-				492267F01C7BCF6E00B306A2 /* ShoppingCell.xib in Resources */,
+				49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */,
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
 				7077A3711C4989C200843782 /* shannon_thumb.jpg in Resources */,
 				70C9E9DE1C642B5D004DF35B /* extras_bg.jpg in Resources */,
@@ -1344,9 +1353,11 @@
 				7077A36C1C4989C200843782 /* meloni_full.jpg in Resources */,
 				7077A3741C4989C200843782 /* zurer_full.jpg in Resources */,
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
+				49CB44C31C7CB1BE00753227 /* fb.png in Resources */,
 				7077A3731C4989C200843782 /* traue_thumb.jpg in Resources */,
 				492267EC1C76C0F900B306A2 /* commButton.jpg in Resources */,
 				7077A35D1C4989C200843782 /* menu.png in Resources */,
+				49CB44C51C7CB1C600753227 /* tw.png in Resources */,
 				70B9FE481C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 in Resources */,
 				49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */,
 				7077A36E1C4989C200843782 /* schiff_full.jpg in Resources */,
@@ -1480,6 +1491,7 @@
 				7071C4E91C6BCBF6006F4275 /* NGEExperienceListType.swift in Sources */,
 				7071C5251C6BCBF6006F4275 /* NGEPresentationLanguagePairType.swift in Sources */,
 				7071C5261C6BCBF6006F4275 /* NGEPresentationListType.swift in Sources */,
+				49CB44BF1C7CA67200753227 /* ShoppingCell.swift in Sources */,
 				7077A37B1C49A4D800843782 /* Content.swift in Sources */,
 				7071C52B1C6BCBF6006F4275 /* NGEPrivateDataType.swift in Sources */,
 				7071C49A1C6BCBF6006F4275 /* NGEAppName.swift in Sources */,
@@ -1666,7 +1678,7 @@
 				7071C4D31C6BCBF6006F4275 /* NGEDigitalAssetSubtitleFormatType.swift in Sources */,
 				7071C4931C6BCBF6006F4275 /* NGEAdaptationSetID.swift in Sources */,
 				497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */,
-				492267F21C7BCF7E00B306A2 /* ShoppingCell.swift in Sources */,
+				49CB44C11C7CB19600753227 /* ShoppingCell.swift in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				7071C5311C6BCBF6006F4275 /* NGEStringDisplayIndicatorsEnum.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,

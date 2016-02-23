@@ -651,13 +651,19 @@
                                         <color key="textColor" red="0.67843137254901964" green="0.67843137254901964" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSc-gW-kCm">
-                                        <rect key="frame" x="15" y="455" width="130" height="56"/>
-                                        <state key="normal" title="Share to Facebook"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSc-gW-kCm">
+                                        <rect key="frame" x="8" y="465" width="190" height="36"/>
+                                        <state key="normal" title="Share to Facebook" image="fb.png"/>
+                                        <connections>
+                                            <action selector="shareToFacebook:" destination="wpZ-Jt-DDC" eventType="touchUpInside" id="oor-xW-VPZ"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Mi-PX-cjT">
-                                        <rect key="frame" x="176" y="455" width="130" height="56"/>
-                                        <state key="normal" title="Share to Twitter"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Mi-PX-cjT">
+                                        <rect key="frame" x="206" y="465" width="190" height="36"/>
+                                        <state key="normal" title="Share to Twitter" image="tw.png"/>
+                                        <connections>
+                                            <action selector="shareToTwitter:" destination="wpZ-Jt-DDC" eventType="touchUpInside" id="wNR-JC-I6B"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -737,7 +743,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ve-iV-aL2" id="62s-sE-27N">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLa-MH-q3f" customClass="RadioButton" customModule="NextGen" customModuleProvider="target">
@@ -1188,8 +1194,10 @@
         <image name="Play Button" width="32" height="32"/>
         <image name="Title Logo" width="414" height="55"/>
         <image name="commButton.jpg" width="31" height="47"/>
+        <image name="fb.png" width="584" height="120"/>
         <image name="interior_bg.jpg" width="2048" height="1427"/>
         <image name="menu.png" width="22" height="22"/>
+        <image name="tw.png" width="583" height="115"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ir8-OX-j5p"/>
