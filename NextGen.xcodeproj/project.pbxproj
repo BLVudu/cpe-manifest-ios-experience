@@ -370,8 +370,8 @@
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49CB44BC1C7CA65700753227 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCell.xib; sourceTree = "<group>"; };
-		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fb.png; path = ../../../../../Documents/fb.png; sourceTree = "<group>"; };
-		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tw.png; path = ../../../../../Documents/tw.png; sourceTree = "<group>"; };
+		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
+		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw.png; sourceTree = "<group>"; };
 		49CB44C61C7CCAD700753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCell.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
