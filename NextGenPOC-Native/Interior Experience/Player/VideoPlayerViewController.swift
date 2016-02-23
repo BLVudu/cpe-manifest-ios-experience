@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DropDown
 
 let kSceneDidChange = "kSceneDidChange"
 
@@ -18,6 +19,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var showsTopToolbar = true
     
     @IBOutlet weak var commentaryBtn: UIButton!
+    @IBOutlet weak var toolbar: UIView!
+    var commentaryPopover: UIPopoverController!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,23 +60,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     @IBAction func commentary(sender: AnyObject) {
         
         
-        let ac = UIAlertController(title: "", message: "", preferredStyle: .ActionSheet)
-        let director = UIAlertAction(title: "Director Commentary", style: .Default, handler: nil)
-        let video = UIAlertAction(title: "Video Commentary", style: .Default, handler: nil)
-        let actor = UIAlertAction(title: "Actor Commentary", style: .Default, handler: nil)
-        let popover = ac.popoverPresentationController
-        popover?.sourceView = view
-        popover?.sourceRect = CGRect(x: self.commentaryBtn.frame.origin.x, y: self.commentaryBtn.frame.origin.y-30, width: 64, height: 64)
-        popover?.backgroundColor = UIColor.darkGrayColor()
-   
-        ac.addAction(director)
-        ac.addAction(video)
-        ac.addAction(actor)
-        presentViewController(ac, animated: true, completion: nil)
         
+        let cpo = self.storyboard?.instantiateViewControllerWithIdentifier("commentary")
+        self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
+        self.commentaryPopover.popoverContentSize = CGSizeMake(320.0, 300.0)
+        self.commentaryPopover.presentPopoverFromRect(sender.frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
         
-        
-    }
+            }
     
     override func syncScrubber() {
         super.syncScrubber()
@@ -95,3 +89,4 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
 
 
 }
+

@@ -34,7 +34,8 @@ class RadioButton: UIButton{
         self.userInteractionEnabled = true
         self.clipsToBounds = true
         self.layer.borderWidth = 3
-        self.layer.cornerRadius = 0.5*self.bounds.size.width
+        self.layer.cornerRadius = 0.5*40
+        //print(self.bounds.size.width)
         self.layer.borderColor = UIColor.grayColor().CGColor
     }
     

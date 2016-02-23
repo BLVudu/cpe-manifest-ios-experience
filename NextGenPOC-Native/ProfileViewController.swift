@@ -12,6 +12,8 @@ import SWRevealViewController
 
 class ProfileViewController: UICollectionViewController, UIGestureRecognizerDelegate{
     
+   
+    
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     var bookmarks = [NSManagedObject]()

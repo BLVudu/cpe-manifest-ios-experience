@@ -19,8 +19,17 @@
 		4921D99A1C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9991C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift */; };
 		4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */; };
 		4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */; };
+		492267D81C73F41300B306A2 /* Shopping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 492267D71C73F41300B306A2 /* Shopping.plist */; };
+		492267E61C7694D000B306A2 /* CommentaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 492267E51C7694D000B306A2 /* CommentaryView.xib */; };
+		492267E81C76950200B306A2 /* CommentaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E71C76950200B306A2 /* CommentaryView.swift */; };
+		492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E91C76A56900B306A2 /* CommentaryViewCell.swift */; };
+		492267EC1C76C0F900B306A2 /* commButton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 492267EB1C76C0F900B306A2 /* commButton.jpg */; };
+		492267EE1C7B911100B306A2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492267ED1C7B911100B306A2 /* Social.framework */; };
+		492267F01C7BCF6E00B306A2 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 492267EF1C7BCF6E00B306A2 /* ShoppingCell.xib */; };
+		492267F21C7BCF7E00B306A2 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267F11C7BCF7E00B306A2 /* ShoppingCell.swift */; };
 		494166EE1C52E8CC0013B94A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166ED1C52E8CC0013B94A /* play.png */; };
 		494166F21C5306D90013B94A /* Play_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166F11C5306D90013B94A /* Play_Button.png */; };
+		4956C99A1C73AD9300FAFDE1 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */; };
 		49656F231C49C676001DB9C0 /* StylizedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */; };
 		49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F241C49C73E001DB9C0 /* CustomSwitch.swift */; };
 		497733301C597D5D00EC0071 /* home_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977332F1C597D5D00EC0071 /* home_logo.png */; };
@@ -338,8 +347,17 @@
 		4921D99B1C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGenPOC-Native/Extras/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
 		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = "NextGenPOC-Native/Extras/ExtrasLayout.swift"; sourceTree = SOURCE_ROOT; };
+		492267D71C73F41300B306A2 /* Shopping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Shopping.plist; sourceTree = "<group>"; };
+		492267E51C7694D000B306A2 /* CommentaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryView.xib; sourceTree = "<group>"; };
+		492267E71C76950200B306A2 /* CommentaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryView.swift; sourceTree = "<group>"; };
+		492267E91C76A56900B306A2 /* CommentaryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryViewCell.swift; sourceTree = "<group>"; };
+		492267EB1C76C0F900B306A2 /* commButton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = commButton.jpg; sourceTree = "<group>"; };
+		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		492267EF1C7BCF6E00B306A2 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoppingCell.xib; path = ../../../.Trash/ShoppingCell.xib; sourceTree = "<group>"; };
+		492267F11C7BCF7E00B306A2 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShoppingCell.swift; path = ../../../.Trash/ShoppingCell.swift; sourceTree = "<group>"; };
 		494166ED1C52E8CC0013B94A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		494166F11C5306D90013B94A /* Play_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_Button.png; path = ../Play_Button.png; sourceTree = "<group>"; };
+		4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
 		49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylizedNavigationController.swift; sourceTree = "<group>"; };
 		49656F241C49C73E001DB9C0 /* CustomSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
 		4977332F1C597D5D00EC0071 /* home_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_logo.png; sourceTree = "<group>"; };
@@ -634,6 +652,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492267EE1C7B911100B306A2 /* Social.framework in Frameworks */,
 				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
 				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
 				0CE62751C28B08C73E3D9D3C /* Pods_NextGen.framework in Frameworks */,
@@ -694,13 +713,18 @@
 				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
 				70C9E9D61C6406E0004DF35B /* InitialViewController.swift */,
+				492267E71C76950200B306A2 /* CommentaryView.swift */,
+				492267E91C76A56900B306A2 /* CommentaryViewCell.swift */,
+				492267E51C7694D000B306A2 /* CommentaryView.xib */,
 				4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */,
 				49F3EAD01C50200A00E09484 /* ContentLayout.swift */,
 				4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
+				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
 				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
+				492267D71C73F41300B306A2 /* Shopping.plist */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
 				4921D97D1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld */,
 				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
@@ -740,6 +764,7 @@
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				492267ED1C7B911100B306A2 /* Social.framework */,
 				7071C54B1C6BCC11006F4275 /* libxml2.tbd */,
 				70FECF7C1C657976005B1A44 /* MapKit.framework */,
 				EB925CAD4CBE373E778D0949 /* Pods_NextGen.framework */,
@@ -1039,6 +1064,7 @@
 				494166F11C5306D90013B94A /* Play_Button.png */,
 				7077A32F1C4989C200843782 /* menu.png */,
 				494166ED1C52E8CC0013B94A /* play.png */,
+				492267EB1C76C0F900B306A2 /* commButton.jpg */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1123,6 +1149,8 @@
 				7077A37E1C49AB8500843782 /* Scene.swift */,
 				497DECCD1C61743A000C6636 /* Bookmark.swift */,
 				497DECCF1C61754A000C6636 /* BookmarkCell.xib */,
+				492267EF1C7BCF6E00B306A2 /* ShoppingCell.xib */,
+				492267F11C7BCF7E00B306A2 /* ShoppingCell.swift */,
 				497DECD11C6176CF000C6636 /* BookmarkCell.swift */,
 			);
 			path = Models;
@@ -1307,6 +1335,7 @@
 				7077A3641C4989C200843782 /* crowe_full.jpg in Resources */,
 				497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */,
 				7077A3671C4989C200843782 /* fishburne_thumb.jpg in Resources */,
+				492267F01C7BCF6E00B306A2 /* ShoppingCell.xib in Resources */,
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
 				7077A3711C4989C200843782 /* shannon_thumb.jpg in Resources */,
 				70C9E9DE1C642B5D004DF35B /* extras_bg.jpg in Resources */,
@@ -1316,6 +1345,7 @@
 				7077A3741C4989C200843782 /* zurer_full.jpg in Resources */,
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
 				7077A3731C4989C200843782 /* traue_thumb.jpg in Resources */,
+				492267EC1C76C0F900B306A2 /* commButton.jpg in Resources */,
 				7077A35D1C4989C200843782 /* menu.png in Resources */,
 				70B9FE481C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 in Resources */,
 				49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */,
@@ -1326,9 +1356,11 @@
 				494166EE1C52E8CC0013B94A /* play.png in Resources */,
 				7077A3621C4989C200843782 /* costner_full.jpg in Resources */,
 				7077A3701C4989C200843782 /* shannon_full.jpg in Resources */,
+				492267E61C7694D000B306A2 /* CommentaryView.xib in Resources */,
 				7077A36F1C4989C200843782 /* schiff_thumb.jpg in Resources */,
 				7077A3591C4989C200843782 /* menu_bg.jpg in Resources */,
 				4921D97C1C3EFD0B00ED2AA6 /* Main.storyboard in Resources */,
+				492267D81C73F41300B306A2 /* Shopping.plist in Resources */,
 				7077A3861C49C66F00843782 /* timberline_full.jpg in Resources */,
 				70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */,
 				7065F5461C46FCC500A2C74E /* TalentTableViewCell-Wide.xib in Resources */,
@@ -1411,6 +1443,7 @@
 				7071C50D1C6BCBF6006F4275 /* NGEMediaManifestEditAddType.swift in Sources */,
 				7071C51E1C6BCBF6006F4275 /* NGEPhone.swift in Sources */,
 				7071C4AA1C6BCBF6006F4275 /* NGECompanyCreditsType.swift in Sources */,
+				492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */,
 				7071C4F61C6BCBF6006F4275 /* NGEGalleryType.swift in Sources */,
 				7071C4D81C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureLightLevelType.swift in Sources */,
 				7071C5381C6BCBF6006F4275 /* NGESummary4000.swift in Sources */,
@@ -1516,6 +1549,7 @@
 				7071C5431C6BCBF6006F4275 /* NGETrackMetadataType.swift in Sources */,
 				7071C4FE1C6BCBF6006F4275 /* NGEInventoryAncillaryType.swift in Sources */,
 				49F3EADB1C517ADA00E09484 /* ExtrasContentViewController.swift in Sources */,
+				492267E81C76950200B306A2 /* CommentaryView.swift in Sources */,
 				7077A3771C4989DC00843782 /* DataManager.swift in Sources */,
 				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
 				7071C4CA1C6BCBF6006F4275 /* NGEDigitalAssetColorVolumeType.swift in Sources */,
@@ -1604,6 +1638,7 @@
 				49656F231C49C676001DB9C0 /* StylizedNavigationController.swift in Sources */,
 				7071C4C21C6BCBF6006F4275 /* NGEDigitalAssetAncillaryDataType.swift in Sources */,
 				7071C4DA1C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureType.swift in Sources */,
+				4956C99A1C73AD9300FAFDE1 /* ShoppingViewController.swift in Sources */,
 				7071C5041C6BCBF6006F4275 /* NGEInventoryMetadataType.swift in Sources */,
 				7071C5471C6BCBF6006F4275 /* NGEVideoTrackReferenceType.swift in Sources */,
 				7071C4FB1C6BCBF6006F4275 /* NGEImageClipRefType.swift in Sources */,
@@ -1631,6 +1666,7 @@
 				7071C4D31C6BCBF6006F4275 /* NGEDigitalAssetSubtitleFormatType.swift in Sources */,
 				7071C4931C6BCBF6006F4275 /* NGEAdaptationSetID.swift in Sources */,
 				497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */,
+				492267F21C7BCF7E00B306A2 /* ShoppingCell.swift in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				7071C5311C6BCBF6006F4275 /* NGEStringDisplayIndicatorsEnum.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,

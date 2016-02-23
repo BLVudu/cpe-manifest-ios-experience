@@ -31,7 +31,8 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         self.displayActionButton = false
         
         super.viewDidLoad()
-    }
+        
+          }
     
     override func setNavBarAppearance(animated: Bool) {
         // Block MWPhotoBrowser's access to navigation bar
@@ -52,7 +53,10 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     }
     
     func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(Int(index), forKey: "currentIndex")
         return _photos[Int(index)]
     }
+   
 
 }
