@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 import AVFoundation
-import Social
-import MWPhotoBrowser
 
 
 
@@ -24,10 +22,11 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveBtn: UIButton!
+
     
     var experience: NGEExperienceType!
     
-    var share: NSURL!
+
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -40,9 +39,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.tableView, didSelectRowAtIndexPath: selectedIndexPath)
-        
-        //let defaults = NSUserDefaults.standardUserDefaults()
-        //print(defaults.objectForKey("currentIndex"))
+
 
             }
     
@@ -145,7 +142,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
                 videoPlayerViewController.playerControlsVisible = false
                 videoPlayerViewController.lockTopToolbar = true
                 videoPlayerViewController.playVideoWithURL(videoURL)
-                self.share = videoURL
+
             }
         } else {
             videoContainerView.hidden = true
@@ -154,8 +151,6 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
             if let imageGallery = thisExperience.imageGallery(), imageGalleryViewController = imageGalleryViewController() {
                 
                 imageGalleryViewController.imageGallery = imageGallery
-                
-                self.share = imageGallery.pictures()[0].imageURL()
                 if let title = imageGallery.metadata()?.fullTitle() {
                     mediaTitleLabel.text = title
                 }
@@ -166,93 +161,15 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
 
             }
         }
-    }
-    
-    
-    @IBAction func shareToFacebook(sender: UIButton) {
+        
        
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
-            let fb:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            fb.completionHandler = {
-                result -> Void in
-                let getResult = result as SLComposeViewControllerResult;
-                switch(getResult.rawValue)
-                {
-                case SLComposeViewControllerResult.Done.rawValue:
-                    let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
-                        success.show()
-                default: break
-                }
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            fb.setInitialText("Man of Steel")
-            fb.addURL(self.share)
-            self.presentViewController(fb, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Not logged in", message: "Please login to Facebook via Settings.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
     }
     
-    
-    @IBAction func shareToTwitter(sender: UIButton) {
-        
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
-            let tw:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            tw.completionHandler = {
-                result -> Void in
-                let getResult = result as SLComposeViewControllerResult;
-                switch(getResult.rawValue)
-                {
-                case SLComposeViewControllerResult.Done.rawValue:
-                    let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
-                    success.show()
-                default: break
-                }
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            tw.setInitialText("Man of Steel")
-            tw.addURL(self.share)
-            self.presentViewController(tw, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Not logged in", message: "Please login to Twitter via Settings.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    
-    /*
-    @IBAction func saveBookmark(sender: AnyObject) {
-        
-        
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-
-        let entity =  NSEntityDescription.entityForName("Bookmark",
-            inManagedObjectContext:managedContext)
-        
-        let bookmark = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext: managedContext)
-        
-        bookmark.setValue(self.imageCaption.text, forKey: "caption")
-        bookmark.setValue(self.imgData, forKey: "thumbnail")
-        bookmark.setValue("image", forKey: "mediaType")
-
-        do {
-            try managedContext.save()
-
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-        
-    }
-*/
     
 }
+    
+
+
 
 
 

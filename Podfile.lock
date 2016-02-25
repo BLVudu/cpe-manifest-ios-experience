@@ -8,6 +8,7 @@ PODS:
   - DACircularProgress (2.3.1)
   - DLRadioButton (1.4.6)
   - DropDown (0.1.4)
+  - Fabric (1.6.6)
   - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.0):
@@ -27,6 +28,10 @@ PODS:
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
   - SWRevealViewController (2.3.0)
+  - TwitterCore (1.15.1):
+    - Fabric
+  - TwitterKit (1.15.1):
+    - TwitterCore (= 1.15.1)
 
 DEPENDENCIES:
   - DLRadioButton (~> 1.4)
@@ -38,12 +43,14 @@ DEPENDENCIES:
   - MWPhotoBrowser
   - RFQuiltLayout
   - SWRevealViewController (~> 2.3)
+  - TwitterKit (~> 1.15)
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DLRadioButton: 4005319c135297c2998781d4b3dabc5e9b9781c4
   DropDown: 09ab078ba0f11d426689526b45d4d5179420e321
+  Fabric: 1abc1e59f11fa39ede6f690ef7309d8563e3ec59
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
@@ -53,5 +60,7 @@ SPEC CHECKSUMS:
   RFQuiltLayout: aa28fc2d4a262fbca7caa43d9d8ef4b4726c8cd4
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
+  TwitterCore: 12983a7464e34afbbf18881347898a9db526ac71
+  TwitterKit: b5821570887ec2d77650fa232eaec175665dc443
 
 COCOAPODS: 0.39.0

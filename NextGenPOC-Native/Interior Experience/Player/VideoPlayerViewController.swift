@@ -8,6 +8,9 @@
 
 import UIKit
 import DropDown
+import FBSDKShareKit
+import FBSDKCoreKit
+import TwitterKit
 
 let kSceneDidChange = "kSceneDidChange"
 
@@ -17,6 +20,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var currentScene: Scene?
     var didPlayInterstitial = false
     var showsTopToolbar = true
+    let shared = FBSDKShareLinkContent()
     
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
@@ -64,6 +68,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         let cpo = self.storyboard?.instantiateViewControllerWithIdentifier("commentary")
         self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
         self.commentaryPopover.popoverContentSize = CGSizeMake(320.0, 300.0)
+        self.commentaryPopover.backgroundColor = UIColor.blackColor()
         self.commentaryPopover.presentPopoverFromRect(sender.frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
         
             }
@@ -85,6 +90,59 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             }
         
         }
+    }
+
+    @IBAction func shareClip(sender: UIButton) {
+
+        
+        if UIApplication.sharedApplication().statusBarOrientation.isLandscape {
+        
+            let alert = UIAlertController(title: "Rotate device to share clip", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            let pop = UIPopoverController.init(contentViewController: alert)
+            pop.backgroundColor = UIColor.blackColor()
+            pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,self.view.frame.size.height, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+
+
+    } else {
+        let share = UIAlertController(title: "Share to", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let fb = UIAlertAction(title: "Facebook", style: UIAlertActionStyle.Default, handler:
+                { Void in
+                    self.shared.contentURL = self.video?.url
+                    FBSDKShareDialog.showFromViewController(self, withContent: self.shared, delegate: nil)
+            })
+        let tw = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler:
+            { Void in
+                
+                let compose = TWTRComposer()
+                compose.setURL(self.video?.url)
+                compose.setText("Check out this clip from Man of Steel")
+
+                
+                compose.showFromViewController(self) { result in
+                    if (result == TWTRComposerResult.Cancelled) {
+                        print("Tweet composition cancelled")
+                    }
+                    else {
+                        let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
+                        success.show()
+                        }
+
+                
+                }
+        })
+        share.addAction(fb)
+        share.addAction(tw)
+        
+        let pop = UIPopoverController.init(contentViewController: share)
+        pop.backgroundColor = UIColor.blackColor()
+        pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,self.view.frame.size.width/2.45, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+
+    
+        }
+        
+        
+
     }
 
 

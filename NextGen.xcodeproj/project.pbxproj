@@ -40,11 +40,15 @@
 		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
 		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
+		49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E65C1C7E60530076E9F3 /* share.jpg */; };
 		49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44BC1C7CA65700753227 /* ShoppingCell.xib */; };
 		49CB44C31C7CB1BE00753227 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C21C7CB1BE00753227 /* fb.png */; };
 		49CB44C51C7CB1C600753227 /* tw.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C41C7CB1C600753227 /* tw.png */; };
 		49CB44C71C7CCAD700753227 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C61C7CCAD700753227 /* ShoppingCell.swift */; };
 		49CB44C91C7CF02400753227 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */; };
+		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
+		49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CE1C7D0F7700753227 /* fb_logo.tif */; };
+		49CB44D11C7D0F7700753227 /* tw_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CF1C7D0F7700753227 /* tw_logo.png */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
@@ -370,11 +374,15 @@
 		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		49C1E65C1C7E60530076E9F3 /* share.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = share.jpg; sourceTree = "<group>"; };
 		49CB44BC1C7CA65700753227 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCell.xib; sourceTree = "<group>"; };
 		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
 		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw.png; sourceTree = "<group>"; };
 		49CB44C61C7CCAD700753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCell.swift; sourceTree = "<group>"; };
 		49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
+		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
+		49CB44CE1C7D0F7700753227 /* fb_logo.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = fb_logo.tif; sourceTree = "<group>"; };
+		49CB44CF1C7D0F7700753227 /* tw_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw_logo.png; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
@@ -724,6 +732,7 @@
 				49F3EAD01C50200A00E09484 /* ContentLayout.swift */,
 				4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
+				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
 				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
 				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
@@ -1065,6 +1074,9 @@
 		7077A32E1C4989C200843782 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				49C1E65C1C7E60530076E9F3 /* share.jpg */,
+				49CB44CE1C7D0F7700753227 /* fb_logo.tif */,
+				49CB44CF1C7D0F7700753227 /* tw_logo.png */,
 				49CB44C41C7CB1C600753227 /* tw.png */,
 				49CB44C21C7CB1BE00753227 /* fb.png */,
 				494166F11C5306D90013B94A /* Play_Button.png */,
@@ -1277,7 +1289,7 @@
 				TargetAttributes = {
 					4921D9721C3EFD0B00ED2AA6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = CE7D7D92E2;
+						DevelopmentTeam = L643L2WM5D;
 					};
 					4921D9891C3EFD0B00ED2AA6 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1324,6 +1336,7 @@
 				7077A3871C49C66F00843782 /* timberline_thumb.jpg in Resources */,
 				49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */,
 				497733301C597D5D00EC0071 /* home_logo.png in Resources */,
+				49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */,
 				7077A35F1C4989C200843782 /* adams.jpg in Resources */,
 				7077A3601C4989C200843782 /* cavill_full.jpg in Resources */,
 				70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */,
@@ -1343,7 +1356,9 @@
 				7077A3671C4989C200843782 /* fishburne_thumb.jpg in Resources */,
 				49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */,
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
+				49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */,
 				7077A3711C4989C200843782 /* shannon_thumb.jpg in Resources */,
+				49CB44D11C7D0F7700753227 /* tw_logo.png in Resources */,
 				70C9E9DE1C642B5D004DF35B /* extras_bg.jpg in Resources */,
 				7077A36B1C4989C200843782 /* lennix_thumb.jpg in Resources */,
 				70FECF7F1C6579CD005B1A44 /* ImageSceneDetailCollectionViewCell.xib in Resources */,
@@ -1658,6 +1673,7 @@
 				7071C4E81C6BCBF6006F4275 /* NGEExperienceID.swift in Sources */,
 				7071C4EE1C6BCBF6006F4275 /* NGEFileDeleteManifestType.swift in Sources */,
 				49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */,
+				49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */,
 				7071C4E11C6BCBF6006F4275 /* NGEEarthCoordinate.swift in Sources */,
 				7071C4C41C6BCBF6006F4275 /* NGEDigitalAssetAudioEncodingType.swift in Sources */,
 				7071C5411C6BCBF6006F4275 /* NGETitleAlternate.swift in Sources */,
@@ -1831,6 +1847,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1848,7 +1865,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
