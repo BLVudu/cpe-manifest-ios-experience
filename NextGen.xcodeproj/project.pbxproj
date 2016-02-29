@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0CE62751C28B08C73E3D9D3C /* Pods_NextGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB925CAD4CBE373E778D0949 /* Pods_NextGen.framework */; };
+		490213421C84D93A00071552 /* ExpandedSceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213411C84D93A00071552 /* ExpandedSceneDetailViewController.swift */; };
 		4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */; };
 		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
 		4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */; };
@@ -41,6 +42,12 @@
 		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E65C1C7E60530076E9F3 /* share.jpg */; };
+		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
+		49C1E6651C8108730076E9F3 /* mammoth.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6601C8108730076E9F3 /* mammoth.JPG */; };
+		49C1E6661C8108730076E9F3 /* vancouver.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6611C8108730076E9F3 /* vancouver.jpg */; };
+		49C1E6671C8108730076E9F3 /* edwards.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6621C8108730076E9F3 /* edwards.jpg */; };
+		49C1E6681C8108730076E9F3 /* chicago.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6631C8108730076E9F3 /* chicago.jpg */; };
+		49C1E6691C8108730076E9F3 /* plano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6641C8108730076E9F3 /* plano.jpg */; };
 		49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44BC1C7CA65700753227 /* ShoppingCell.xib */; };
 		49CB44C31C7CB1BE00753227 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C21C7CB1BE00753227 /* fb.png */; };
 		49CB44C51C7CB1C600753227 /* tw.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C41C7CB1C600753227 /* tw.png */; };
@@ -49,6 +56,7 @@
 		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
 		49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CE1C7D0F7700753227 /* fb_logo.tif */; };
 		49CB44D11C7D0F7700753227 /* tw_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CF1C7D0F7700753227 /* tw_logo.png */; };
+		49E546481C84BF1600DBD318 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E546471C84BF1600DBD318 /* MapDetailViewController.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
 		49F3EAD51C51639700E09484 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* ContentCell.swift */; };
@@ -336,6 +344,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		490213411C84D93A00071552 /* ExpandedSceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSceneDetailViewController.swift; sourceTree = "<group>"; };
 		4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuViewController.swift; sourceTree = "<group>"; };
 		4921D9731C3EFD0B00ED2AA6 /* NextGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -375,6 +384,12 @@
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49C1E65C1C7E60530076E9F3 /* share.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = share.jpg; sourceTree = "<group>"; };
+		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		49C1E6601C8108730076E9F3 /* mammoth.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mammoth.JPG; sourceTree = "<group>"; };
+		49C1E6611C8108730076E9F3 /* vancouver.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vancouver.jpg; sourceTree = "<group>"; };
+		49C1E6621C8108730076E9F3 /* edwards.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edwards.jpg; sourceTree = "<group>"; };
+		49C1E6631C8108730076E9F3 /* chicago.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chicago.jpg; sourceTree = "<group>"; };
+		49C1E6641C8108730076E9F3 /* plano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plano.jpg; sourceTree = "<group>"; };
 		49CB44BC1C7CA65700753227 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCell.xib; sourceTree = "<group>"; };
 		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
 		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw.png; sourceTree = "<group>"; };
@@ -383,6 +398,7 @@
 		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		49CB44CE1C7D0F7700753227 /* fb_logo.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = fb_logo.tif; sourceTree = "<group>"; };
 		49CB44CF1C7D0F7700753227 /* tw_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw_logo.png; sourceTree = "<group>"; };
+		49E546471C84BF1600DBD318 /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentCell.swift; path = ../Extras/ContentCell.swift; sourceTree = "<group>"; };
@@ -664,6 +680,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */,
 				492267EE1C7B911100B306A2 /* Social.framework in Frameworks */,
 				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
 				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
@@ -731,6 +748,8 @@
 				4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */,
 				49F3EAD01C50200A00E09484 /* ContentLayout.swift */,
 				4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */,
+				49E546471C84BF1600DBD318 /* MapDetailViewController.swift */,
+				490213411C84D93A00071552 /* ExpandedSceneDetailViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
@@ -777,6 +796,7 @@
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */,
 				492267ED1C7B911100B306A2 /* Social.framework */,
 				7071C54B1C6BCC11006F4275 /* libxml2.tbd */,
 				70FECF7C1C657976005B1A44 /* MapKit.framework */,
@@ -1050,6 +1070,11 @@
 		7077A3191C4989C200843782 /* Extras */ = {
 			isa = PBXGroup;
 			children = (
+				49C1E6601C8108730076E9F3 /* mammoth.JPG */,
+				49C1E6611C8108730076E9F3 /* vancouver.jpg */,
+				49C1E6621C8108730076E9F3 /* edwards.jpg */,
+				49C1E6631C8108730076E9F3 /* chicago.jpg */,
+				49C1E6641C8108730076E9F3 /* plano.jpg */,
 				70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */,
 				70C9E9DD1C642B5D004DF35B /* extras_bg.jpg */,
 				7077A31B1C4989C200843782 /* extras_galleries.jpg */,
@@ -1339,6 +1364,7 @@
 				49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */,
 				7077A35F1C4989C200843782 /* adams.jpg in Resources */,
 				7077A3601C4989C200843782 /* cavill_full.jpg in Resources */,
+				49C1E6651C8108730076E9F3 /* mammoth.JPG in Resources */,
 				70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */,
 				4977333E1C5AB01E00EC0071 /* trivia.jpg in Resources */,
 				705288501C5B1AF400464C8B /* location.jpg in Resources */,
@@ -1347,6 +1373,7 @@
 				7077A3841C49C66F00843782 /* sprayberry_full.jpg in Resources */,
 				7077A3721C4989C200843782 /* traue_full.jpg in Resources */,
 				7077A34B1C4989C200843782 /* extras_galleries.jpg in Resources */,
+				49C1E6681C8108730076E9F3 /* chicago.jpg in Resources */,
 				70C9E9E01C642E6C004DF35B /* extras_header.png in Resources */,
 				497733371C5AAD9B00EC0071 /* scene.jpg in Resources */,
 				4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */,
@@ -1357,9 +1384,12 @@
 				49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */,
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
 				49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */,
+				49C1E6671C8108730076E9F3 /* edwards.jpg in Resources */,
+				49C1E6661C8108730076E9F3 /* vancouver.jpg in Resources */,
 				7077A3711C4989C200843782 /* shannon_thumb.jpg in Resources */,
 				49CB44D11C7D0F7700753227 /* tw_logo.png in Resources */,
 				70C9E9DE1C642B5D004DF35B /* extras_bg.jpg in Resources */,
+				49C1E6691C8108730076E9F3 /* plano.jpg in Resources */,
 				7077A36B1C4989C200843782 /* lennix_thumb.jpg in Resources */,
 				70FECF7F1C6579CD005B1A44 /* ImageSceneDetailCollectionViewCell.xib in Resources */,
 				7077A36C1C4989C200843782 /* meloni_full.jpg in Resources */,
@@ -1468,6 +1498,7 @@
 				7071C4AA1C6BCBF6006F4275 /* NGECompanyCreditsType.swift in Sources */,
 				492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */,
 				7071C4F61C6BCBF6006F4275 /* NGEGalleryType.swift in Sources */,
+				490213421C84D93A00071552 /* ExpandedSceneDetailViewController.swift in Sources */,
 				7071C4D81C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureLightLevelType.swift in Sources */,
 				7071C5381C6BCBF6006F4275 /* NGESummary4000.swift in Sources */,
 				7071C53E1C6BCBF6006F4275 /* NGETimedEventSequenceListType.swift in Sources */,
@@ -1605,6 +1636,7 @@
 				7071C49B1C6BCBF6006F4275 /* NGEArtReference.swift in Sources */,
 				7071C4981C6BCBF6006F4275 /* NGEAppGroupListType.swift in Sources */,
 				7071C4D51C6BCBF6006F4275 /* NGEDigitalAssetVideoEncodingType.swift in Sources */,
+				49E546481C84BF1600DBD318 /* MapDetailViewController.swift in Sources */,
 				7071C5371C6BCBF6006F4275 /* NGESummary400.swift in Sources */,
 				7071C4F01C6BCBF6006F4275 /* NGEFileInfoType.swift in Sources */,
 				7071C4AE1C6BCBF6006F4275 /* NGEComplexSequenceInfoHouseSequence.swift in Sources */,

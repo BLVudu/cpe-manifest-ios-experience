@@ -11,10 +11,11 @@ import DropDown
 import FBSDKShareKit
 import FBSDKCoreKit
 import TwitterKit
+import MessageUI
 
 let kSceneDidChange = "kSceneDidChange"
 
-class VideoPlayerViewController: WBVideoPlayerViewController {
+class VideoPlayerViewController: WBVideoPlayerViewController, FBSDKSharingDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
     
     var video: Video?
     var currentScene: Scene?
@@ -69,7 +70,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
         self.commentaryPopover.popoverContentSize = CGSizeMake(320.0, 300.0)
         self.commentaryPopover.backgroundColor = UIColor.blackColor()
-        self.commentaryPopover.presentPopoverFromRect(sender.frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+        self.commentaryPopover.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,200,1,1), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
         
             }
     
@@ -97,19 +98,23 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         
         if UIApplication.sharedApplication().statusBarOrientation.isLandscape {
         
-            let alert = UIAlertController(title: "Rotate device to share clip", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
             
+            let styledTitle = NSAttributedString(string: "Rotate device to share clip", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor()])
+            alert.setValue(styledTitle, forKey: "_attributedTitle")
             let pop = UIPopoverController.init(contentViewController: alert)
             pop.backgroundColor = UIColor.blackColor()
-            pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,self.view.frame.size.height, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-
+            print(self.view.frame.size.height)
+            pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,520, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+            alert.view.tintColor = UIColor.yellowColor()
 
     } else {
-        let share = UIAlertController(title: "Share to", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let share = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
             let fb = UIAlertAction(title: "Facebook", style: UIAlertActionStyle.Default, handler:
                 { Void in
                     self.shared.contentURL = self.video?.url
-                    FBSDKShareDialog.showFromViewController(self, withContent: self.shared, delegate: nil)
+                    FBSDKShareDialog.showFromViewController(self, withContent: self.shared, delegate:self)
+
             })
         let tw = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler:
             { Void in
@@ -117,7 +122,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
                 let compose = TWTRComposer()
                 compose.setURL(self.video?.url)
                 compose.setText("Check out this clip from Man of Steel")
-
                 
                 compose.showFromViewController(self) { result in
                     if (result == TWTRComposerResult.Cancelled) {
@@ -131,12 +135,41 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
                 
                 }
         })
+        let sms = UIAlertAction(title: "SMS", style: UIAlertActionStyle.Default, handler:
+            { Void in
+                
+                let sms = MFMessageComposeViewController()
+                sms.messageComposeDelegate = self
+                sms.body = "Check out this clip from Man of Steel " + String(self.video!.url)
+                UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
+                self.presentViewController(sms, animated: true, completion: nil)
+                
+                
+        })
+            let email = UIAlertAction(title: "Email", style: UIAlertActionStyle.Default, handler:
+                { Void in
+                    
+                let email = MFMailComposeViewController()
+                email.mailComposeDelegate = self
+                email.setSubject("Man of Steel")
+                email.setMessageBody("Check out this clip from Man of Steel "  + String(self.video!.url), isHTML: true)
+                UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
+                self.presentViewController(email, animated: true, completion: nil)
+ 
+                
+                
+            })
         share.addAction(fb)
         share.addAction(tw)
-        
+        share.addAction(sms)
+        share.addAction(email)
+        let styledTitle = NSAttributedString(string: "Share to", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor()])
+        share.setValue(styledTitle, forKey: "_attributedTitle")
         let pop = UIPopoverController.init(contentViewController: share)
         pop.backgroundColor = UIColor.blackColor()
-        pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,self.view.frame.size.width/2.45, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+        pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,340, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+        share.view.tintColor = UIColor.yellowColor()
+        
 
     
         }
@@ -144,6 +177,71 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         
 
     }
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        
+        if results.count == 0{
+            
+            let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
+            success.show()
+            
+        }
+        
+        
+    }
+    
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+        
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        
+        let error = UIAlertView(title: "Error", message: "Please try again", delegate: nil, cancelButtonTitle: "OK")
+        error.show()
+        print(error)
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        
+        switch(result){
+        case MessageComposeResultCancelled:
+            break
+        case MessageComposeResultSent:
+            
+            let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
+            success.show()
+
+        case MessageComposeResultFailed:
+            break;
+        default:
+            break
+        }
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        switch(result){
+        case MFMailComposeResultCancelled:
+            break
+        case MFMailComposeResultSent:
+            let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
+            success.show()
+
+        case MFMailComposeResultFailed:
+            break;
+        default:
+            break
+        }
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+
+    }
+    
+    
 
 
 }

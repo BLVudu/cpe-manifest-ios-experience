@@ -11,21 +11,40 @@
       "people": [
         "nge:actor-crowe",
         "nge:actor-zurer"
-      ]
+      ],
+        "location":{
+            "latitude": 49.259710,
+            "longitude": -122.926297,
+             "name": "Mammoth Studios (Burnaby British Columbia)",
+             "image": "mammoth.JPG"
+             }
     },
     {
       "startTime": 34,
       "endTime": 46,
       "people": [
         "nge:actor-timberline"
-      ]
+      ],
+             "location":{
+            "latitude": 41.662796,
+            "longitude": -88.535147,
+             "name": "Plano, IL",
+             "image": "plano.jpg"
+             }
+             
     },
     {
       "startTime": 46,
       "endTime": 55,
       "people": [
         "nge:actor-sprayberry"
-      ]
+      ],
+             "location":{
+            "latitude": 41.662796,
+            "longitude": -88.535147,
+             "name": "Plano, IL",
+             "image": "plano.jpg"
+             }
     },
     {
       "startTime": 55,
@@ -33,7 +52,13 @@
       "people": [
         "nge:actor-costner",
         "nge:actor-sprayberry"
-      ]
+      ],
+             "location":{
+            "latitude": 41.662796,
+            "longitude": -88.535147,
+             "name": "Plano, IL",
+             "image": "plano.jpg"
+             }
     },
     {
       "startTime": 69,
@@ -41,14 +66,26 @@
       "people": [
         "nge:actor-cavill",
         "nge:actor-adams"
-      ]
+      ],
+             "location":{
+             "latitude": 49.684865,
+             "longitude": -125.465519,
+             "name": "Vancouver Island",
+             "image": "vancouver.jpg"
+             }
     },
     {
       "startTime": 83,
       "endTime": 125,
       "people": [
         "nge:actor-cavill"
-      ]
+      ],
+             "location":{
+             "latitude": 34.924015,
+             "longitude": -117.911017,
+             "name": "Edwards Airforce Base",
+             "image": "edwards.jpg"
+             }
     },
     {
       "startTime": 125,
@@ -56,7 +93,13 @@
       "people": [
         "nge:actor-cavill",
         "nge:actor-shannon"
-      ]
+      ],
+             "location":{
+             "latitude": 41.877374,
+             "longitude": -87.627822,
+             "name": "Chicago, IL",
+             "image": "chicago.jpg"
+             }
     },
     {
       "startTime": 155,
@@ -64,7 +107,13 @@
       "people": [
         "nge:actor-cavill",
         "nge:actor-adams"
-      ]
+      ],
+             "location":{
+            "latitude": 41.877374,
+            "longitude": -87.627822,
+            "name": "Chicago, IL",
+            "image": "chicago.jpg"
+             }
     }
   ],
   "metadata": {

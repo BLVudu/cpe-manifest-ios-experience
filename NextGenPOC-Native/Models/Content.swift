@@ -43,6 +43,13 @@ class Content: NSObject {
                     }
                 }
             }
+            
+            if let location = scene["location"] as? NSDictionary{
+                sceneObj.longitude = (location["longitude"] as? Double)!
+                sceneObj.latitude = (location["latitude"] as? Double)!
+                sceneObj.locationName = (location["name"] as? String)!
+                sceneObj.locationImage = (location["image"] as? String)!
+            }
         }
         
         sceneKeys = scenes.keys.sort { $0 < $1 }

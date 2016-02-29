@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -91,6 +91,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="VOo-by-sXh" id="DYf-fI-ezE"/>
                 <outlet property="imageView" destination="cNr-Xp-RaJ" id="UFC-IB-XXw"/>
+                <outlet property="mapView" destination="dxv-bD-3fJ" id="vp5-pl-ZnU"/>
                 <outlet property="titleLabel" destination="5fk-Fh-dR6" id="Zwz-GP-pxR"/>
             </connections>
             <point key="canvasLocation" x="704" y="422"/>
