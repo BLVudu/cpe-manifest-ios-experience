@@ -15,7 +15,7 @@ import MessageUI
 
 let kSceneDidChange = "kSceneDidChange"
 
-class VideoPlayerViewController: WBVideoPlayerViewController, FBSDKSharingDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
+class VideoPlayerViewController: WBVideoPlayerViewController{
     
     var video: Video?
     var currentScene: Scene?
@@ -40,6 +40,18 @@ class VideoPlayerViewController: WBVideoPlayerViewController, FBSDKSharingDelega
             } else {
                 playPrimaryVideo()
             }
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("pauseMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            print("pause")
+            self.pauseVideo()
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("resumeMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            print("resume")
+            self.playVideo()
         }
     }
     
@@ -96,7 +108,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, FBSDKSharingDelega
     @IBAction func shareClip(sender: UIButton) {
 
         
-        if UIApplication.sharedApplication().statusBarOrientation.isLandscape {
+        if UIDevice.currentDevice().orientation.isLandscape {
         
             let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
             
@@ -108,139 +120,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController, FBSDKSharingDelega
             pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
             alert.view.tintColor = UIColor.yellowColor()
 
-    } else {
-        let share = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            let fb = UIAlertAction(title: "Facebook", style: UIAlertActionStyle.Default, handler:
-                { Void in
-                    self.shared.contentURL = self.video?.url
-                    FBSDKShareDialog.showFromViewController(self, withContent: self.shared, delegate:self)
-
-            })
-        let tw = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler:
-            { Void in
-                
-                let compose = TWTRComposer()
-                compose.setURL(self.video?.url)
-                compose.setText("Check out this clip from Man of Steel")
-                
-                compose.showFromViewController(self) { result in
-                    if (result == TWTRComposerResult.Cancelled) {
-                        print("Tweet composition cancelled")
-                    }
-                    else {
-                        let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
-                        success.show()
-                        }
-
-                
-                }
-        })
-        let sms = UIAlertAction(title: "SMS", style: UIAlertActionStyle.Default, handler:
-            { Void in
-                
-                let sms = MFMessageComposeViewController()
-                sms.messageComposeDelegate = self
-                sms.body = "Check out this clip from Man of Steel " + String(self.video!.url)
-                UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
-                self.presentViewController(sms, animated: true, completion: nil)
-                
-                
-        })
-            let email = UIAlertAction(title: "Email", style: UIAlertActionStyle.Default, handler:
-                { Void in
-                    
-                let email = MFMailComposeViewController()
-                email.mailComposeDelegate = self
-                email.setSubject("Man of Steel")
-                email.setMessageBody("Check out this clip from Man of Steel "  + String(self.video!.url), isHTML: true)
-                UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
-                self.presentViewController(email, animated: true, completion: nil)
- 
-                
-                
-            })
-        share.addAction(fb)
-        share.addAction(tw)
-        share.addAction(sms)
-        share.addAction(email)
-        let styledTitle = NSAttributedString(string: "Share to", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor()])
-        share.setValue(styledTitle, forKey: "_attributedTitle")
-        let pop = UIPopoverController.init(contentViewController: share)
-        pop.backgroundColor = UIColor.blackColor()
-        let anchor = self.view.frame.height + 30
-        pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-        share.view.tintColor = UIColor.yellowColor()
-        
-
-    
-        }
-        
-        
-
     }
-    
-    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
-        
-        if results.count == 0{
+        else if UIDevice.currentDevice().orientation.isPortrait{
             
-            let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
-            success.show()
-            
+            self.performSegueWithIdentifier("showShare", sender: nil)
         }
-        
-        
     }
     
-    func sharerDidCancel(sharer: FBSDKSharing!) {
         
-    }
-    
-    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
-        
-        let error = UIAlertView(title: "Error", message: "Please try again", delegate: nil, cancelButtonTitle: "OK")
-        error.show()
-        print(error)
-    }
-    
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        
-        switch(result){
-        case MessageComposeResultCancelled:
-            break
-        case MessageComposeResultSent:
-            
-            let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
-            success.show()
-
-        case MessageComposeResultFailed:
-            break;
-        default:
-            break
-        }
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        
-        switch(result){
-        case MFMailComposeResultCancelled:
-            break
-        case MFMailComposeResultSent:
-            let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
-            success.show()
-
-        case MFMailComposeResultFailed:
-            break;
-        default:
-            break
-        }
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-
-    }
     
     
 

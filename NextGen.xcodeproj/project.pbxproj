@@ -10,6 +10,7 @@
 		0CE62751C28B08C73E3D9D3C /* Pods_NextGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB925CAD4CBE373E778D0949 /* Pods_NextGen.framework */; };
 		490213441C8509DB00071552 /* ExpandedSceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */; };
 		490213461C850A0100071552 /* GalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213451C850A0100071552 /* GalleryDetailViewController.swift */; };
+		490213481C860C9A00071552 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213471C860C9A00071552 /* SharingViewController.swift */; };
 		4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */; };
 		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
 		4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */; };
@@ -347,6 +348,7 @@
 /* Begin PBXFileReference section */
 		490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedSceneDetailViewController.swift; sourceTree = "<group>"; };
 		490213451C850A0100071552 /* GalleryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryDetailViewController.swift; sourceTree = "<group>"; };
+		490213471C860C9A00071552 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
 		4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuViewController.swift; sourceTree = "<group>"; };
 		4921D9731C3EFD0B00ED2AA6 /* NextGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				490213451C850A0100071552 /* GalleryDetailViewController.swift */,
 				490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
+				490213471C860C9A00071552 /* SharingViewController.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
 				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
@@ -1675,6 +1678,7 @@
 				70FECF7B1C65759F005B1A44 /* MapSceneDetailCollectionViewCell.swift in Sources */,
 				7071C5441C6BCBF6006F4275 /* NGEType.swift in Sources */,
 				7071C4AD1C6BCBF6006F4275 /* NGEComplexSequenceInfoDistributionNumber.swift in Sources */,
+				490213481C860C9A00071552 /* SharingViewController.swift in Sources */,
 				7071C4B51C6BCBF6006F4275 /* NGEContainerMetadataWithIDType.swift in Sources */,
 				7071C4A71C6BCBF6006F4275 /* NGEChapterListType.swift in Sources */,
 				7071C4EA1C6BCBF6006F4275 /* NGEExperienceType.swift in Sources */,

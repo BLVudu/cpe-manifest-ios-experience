@@ -17,12 +17,18 @@ class MapDetailViewController: UIViewController{
     @IBOutlet weak var mapCollectionView: UICollectionView!
     
     var initialLocation = CLLocation(latitude: 0, longitude: 0)
+    var locationName: String!
     let regionRadius: CLLocationDistance = 2000
     
     override func viewDidLoad() {
         super.viewDidLoad()
         centerMapOnLocation(initialLocation, region: regionRadius)
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named:"extras_bg.jpg")!)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = initialLocation.coordinate
+        annotation.title = locationName
+        mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
     }
     
     

@@ -30,7 +30,6 @@ class GalleryDetailViewController: UIViewController{
         super.viewDidLoad()
         let experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[4]
         print(experience.childExperiences()[0].isImageGallery())
-        
         //let thisExperience = experience.childExperiences()[0]
         //let imageGallery = thisExperience.imageGallery()
         //let imageViewController = imageGalleryViewController()

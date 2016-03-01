@@ -38,7 +38,7 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
             if talent != nil && talent!.films.count > 0 {
                 filmographyContainerView.hidden = false
                 filmographyCollectionView.reloadData()
-               filmographyCollectionView.flashScrollIndicators()
+               
 
             } else {
                 filmographyContainerView.hidden = true
@@ -57,7 +57,8 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func showIndicators(){
-                talentBiographyLabel.flashScrollIndicators()
+            filmographyCollectionView.flashScrollIndicators()
+            talentBiographyLabel.flashScrollIndicators()
     }
     override func viewDidLoad() {
         super.viewDidLoad()

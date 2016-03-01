@@ -16,9 +16,17 @@ class InteriorExperienceViewController: UIViewController {
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
-        updatePlayerConstraints()
-    }
+        
+
+        
+        if UIDevice.currentDevice().orientation.isLandscape{
+            extrasContainerView.hidden = true
+            updatePlayerConstraints()
+        } else if UIDevice.currentDevice().orientation.isPortrait{
+            extrasContainerView.hidden = false
+            updatePlayerConstraints()
+        }
+            }
     
     
     func updatePlayerConstraints() {
@@ -28,6 +36,7 @@ class InteriorExperienceViewController: UIViewController {
 
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
         updatePlayerConstraints()
     }

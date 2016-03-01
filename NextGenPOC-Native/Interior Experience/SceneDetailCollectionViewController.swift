@@ -48,6 +48,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             currentScene = allScenes[0]
         }
         
+        let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
+        layout.direction = UICollectionViewScrollDirection.Vertical
+        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 8), 250)
+        print(self.collectionView!.bounds)
+
+        
         NSNotificationCenter.defaultCenter().addObserverForName(kSceneDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo {
                 self.currentScene = userInfo["scene"] as? Scene
@@ -59,11 +65,14 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         }
     }
     
+   /*
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
         layout.direction = UICollectionViewScrollDirection.Vertical
         layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 4), 250)
+        print(self.collectionView!.bounds)
     }
+*/
     
     // MARK: UICollectionViewDataSource
      override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -157,10 +166,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         let coordinates = segue.destinationViewController as! MapDetailViewController
         
             coordinates.initialLocation = self.initialLocation
+            coordinates.locationName = self.locName
             
     }
 
     }
+    
     
     
     // MARK: RFQuiltLayoutDelegate
@@ -177,5 +188,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
         return UIEdgeInsetsMake(5, 5, 5, 5)
     }
+
 
 }
