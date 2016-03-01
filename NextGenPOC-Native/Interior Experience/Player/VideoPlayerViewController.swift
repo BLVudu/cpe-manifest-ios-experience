@@ -104,8 +104,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, FBSDKSharingDelega
             alert.setValue(styledTitle, forKey: "_attributedTitle")
             let pop = UIPopoverController.init(contentViewController: alert)
             pop.backgroundColor = UIColor.blackColor()
-            print(self.view.frame.size.height)
-            pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,520, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+            let anchor = self.view.frame.size.height - 100
+            pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
             alert.view.tintColor = UIColor.yellowColor()
 
     } else {
@@ -167,7 +167,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, FBSDKSharingDelega
         share.setValue(styledTitle, forKey: "_attributedTitle")
         let pop = UIPopoverController.init(contentViewController: share)
         pop.backgroundColor = UIColor.blackColor()
-        pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,340, 300, 400), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+        let anchor = self.view.frame.height + 30
+        pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
         share.view.tintColor = UIColor.yellowColor()
         
 

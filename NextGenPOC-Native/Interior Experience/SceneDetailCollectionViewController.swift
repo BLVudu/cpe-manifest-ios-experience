@@ -130,7 +130,22 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
      override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
+        
+        switch indexPath.row {
+            
+        case SceneDetailItemType.Location.rawValue:
         self.performSegueWithIdentifier("showMap", sender: nil)
+            break
+            
+        case SceneDetailItemType.Gallery.rawValue:
+        self.performSegueWithIdentifier("showGallery", sender: nil)
+            break
+            
+        default:
+            break
+        }
+        
+            
 
     }
     

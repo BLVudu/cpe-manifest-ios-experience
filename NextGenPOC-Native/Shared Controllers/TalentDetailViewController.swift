@@ -19,7 +19,7 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     @IBOutlet weak var talentNameLabel: UILabel!
     @IBOutlet weak var talentRoleLabel: UILabel!
     @IBOutlet weak var talentBiographyHeaderLabel: UILabel!
-    @IBOutlet weak var talentBiographyLabel: UILabel!
+    @IBOutlet weak var talentBiographyLabel: UITextView!
     
     @IBOutlet weak var filmographyContainerView: UIView!
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
@@ -38,6 +38,8 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
             if talent != nil && talent!.films.count > 0 {
                 filmographyContainerView.hidden = false
                 filmographyCollectionView.reloadData()
+               filmographyCollectionView.flashScrollIndicators()
+
             } else {
                 filmographyContainerView.hidden = true
             }
@@ -45,12 +47,26 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     // MARK: View Lifecycle
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    self.performSelector(("showIndicators"), withObject: nil, afterDelay: 0.0)
+        
+
+    }
+    
+    func showIndicators(){
+                talentBiographyLabel.flashScrollIndicators()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filmographyCollectionView.backgroundColor = UIColor.clearColor()
+        filmographyCollectionView.showsHorizontalScrollIndicator = true
         self.twProfile.backgroundColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1.0)
-            }
+        
+                    }
     
     // MARK: Actions
     @IBAction func close() {

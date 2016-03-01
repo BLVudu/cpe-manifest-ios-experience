@@ -77,6 +77,16 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         cell.selectionStyle = .None
         
         let thisExperience = experience.childExperiences()[indexPath.row]
+        
+        if(thisExperience.isImageGallery() == true){
+            cell.playBtn.hidden = true
+            cell.isGallery = true
+        } else {
+            cell.playBtn.hidden = false
+            cell.isGallery = false
+        }
+        
+        
         cell.caption.text = thisExperience.metadata()?.fullTitle()
         if let thumbnailPath = thisExperience.thumbnailImagePath() {
             cell.thumbnail.setImageWithURL(NSURL(string: thumbnailPath)!)
