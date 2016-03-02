@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "MapSceneDetailCollectionViewCellReuseIdentifier"
+       
+       
     
 }

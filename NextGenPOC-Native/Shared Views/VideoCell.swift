@@ -16,6 +16,8 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak var caption: UILabel!
     @IBOutlet weak var playBtn: UIImageView!
     
+    var isGallery = false
+    
     override func layoutSubviews() {
         thumbnail.layer.borderColor = UIColor.whiteColor().CGColor
     }
@@ -31,8 +33,13 @@ class VideoCell: UITableViewCell {
                 self.thumbnail.alpha = 1
                 self.caption.alpha = 1
             }, completion: nil)
-        } else {
+        }else {
+            if isGallery == true{
+                self.playBtn.hidden = true
+                
+            } else {
             self.playBtn.hidden = false
+            }
             self.thumbnail.layer.borderWidth = 0
             
             UIView.animateWithDuration(0.25, animations: {

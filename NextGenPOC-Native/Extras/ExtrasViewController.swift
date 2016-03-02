@@ -150,21 +150,23 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
-        
-        let experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row]
-        cell.extrasTitle.text = experience.metadata()?.fullTitle()
-        if let thumbnailPath = experience.thumbnailImagePath() {
-            cell.extraImg.setImageWithURL(NSURL(string: thumbnailPath)!)
+            let experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row]
+            cell.extrasTitle.text = experience.metadata()?.fullTitle()
+            if let thumbnailPath = experience.thumbnailImagePath() {
+                cell.extraImg.setImageWithURL(NSURL(string: thumbnailPath)!)
+            
         }
-
+       
+       
         return cell
     }
     
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(ExtrasContentSegueIdentifier, sender: NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row])
-    }
+        
+            self.performSegueWithIdentifier(ExtrasContentSegueIdentifier, sender: NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row])
+           }
     
     
     // MARK: Storyboard
@@ -175,6 +177,8 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
                 contentViewController.experience = experience
             }
         }
+        
+        
     }
 }
 

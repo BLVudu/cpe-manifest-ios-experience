@@ -11,6 +11,7 @@ import CoreData
 import AVFoundation
 
 
+
 class ExtrasContentViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var videoContainerView: UIView!
@@ -21,10 +22,11 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveBtn: UIButton!
+
     
     var experience: NGEExperienceType!
     
-    //var bookmarks = [NSManagedObject]()
+
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -37,7 +39,9 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.tableView, didSelectRowAtIndexPath: selectedIndexPath)
-    }
+
+
+            }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
@@ -73,6 +77,16 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         cell.selectionStyle = .None
         
         let thisExperience = experience.childExperiences()[indexPath.row]
+        
+        if(thisExperience.isImageGallery() == true){
+            cell.playBtn.hidden = true
+            cell.isGallery = true
+        } else {
+            cell.playBtn.hidden = false
+            cell.isGallery = false
+        }
+        
+        
         cell.caption.text = thisExperience.metadata()?.fullTitle()
         if let thumbnailPath = thisExperience.thumbnailImagePath() {
             cell.thumbnail.setImageWithURL(NSURL(string: thumbnailPath)!)
@@ -138,12 +152,14 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
                 videoPlayerViewController.playerControlsVisible = false
                 videoPlayerViewController.lockTopToolbar = true
                 videoPlayerViewController.playVideoWithURL(videoURL)
+
             }
         } else {
             videoContainerView.hidden = true
             imageContainerView.hidden = false
             
             if let imageGallery = thisExperience.imageGallery(), imageGalleryViewController = imageGalleryViewController() {
+                
                 imageGalleryViewController.imageGallery = imageGallery
                 if let title = imageGallery.metadata()?.fullTitle() {
                     mediaTitleLabel.text = title
@@ -152,38 +168,21 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
                 if let description = imageGallery.metadata()?.fullSummary() {
                     mediaDescriptionLabel.text = description
                 }
+
             }
         }
+        
+       
     }
     
-    /*
-    @IBAction func saveBookmark(sender: AnyObject) {
-        
-        
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-
-        let entity =  NSEntityDescription.entityForName("Bookmark",
-            inManagedObjectContext:managedContext)
-        
-        let bookmark = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext: managedContext)
-        
-        bookmark.setValue(self.imageCaption.text, forKey: "caption")
-        bookmark.setValue(self.imgData, forKey: "thumbnail")
-        bookmark.setValue("image", forKey: "mediaType")
-
-        do {
-            try managedContext.save()
-
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-        
-    }
-*/
     
 }
+    
+
+
+
+
+
+
+
+

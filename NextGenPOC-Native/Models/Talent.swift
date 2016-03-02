@@ -26,6 +26,9 @@ class Talent: NSObject {
     var thumbnailImage: String?
     var fullImage: String?
     var biography: String?
+    var facebook: String?
+    var facebookID: String?
+    var twitter: String?
     var films = [Film]()
     
     required init(info: NSDictionary) {
@@ -39,6 +42,10 @@ class Talent: NSObject {
         thumbnailImage = info["thumbnail_image"] as? String
         fullImage = info["full_image"] as? String
         biography = info["biography"] as? String
+        facebook = info["facebook"] as? String
+        facebookID = info["facebookID"] as? String
+        twitter = info["twitter"] as? String
+
         
         if let filmography = info["filmography"] as? NSArray {
             for film in filmography {

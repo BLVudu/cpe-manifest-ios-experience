@@ -7,17 +7,26 @@
 //
 
 import UIKit
+import DropDown
+import FBSDKShareKit
+import FBSDKCoreKit
+import TwitterKit
+import MessageUI
 
 let kSceneDidChange = "kSceneDidChange"
 
-class VideoPlayerViewController: WBVideoPlayerViewController {
+class VideoPlayerViewController: WBVideoPlayerViewController{
     
     var video: Video?
     var currentScene: Scene?
     var didPlayInterstitial = false
     var showsTopToolbar = true
+    let shared = FBSDKShareLinkContent()
     
     @IBOutlet weak var commentaryBtn: UIButton!
+    @IBOutlet weak var toolbar: UIView!
+    var commentaryPopover: UIPopoverController!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +40,18 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             } else {
                 playPrimaryVideo()
             }
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("pauseMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            print("pause")
+            self.pauseVideo()
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("resumeMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            print("resume")
+            self.playVideo()
         }
     }
     
@@ -56,23 +77,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     @IBAction func commentary(sender: AnyObject) {
         
         
-        let ac = UIAlertController(title: "", message: "", preferredStyle: .ActionSheet)
-        let director = UIAlertAction(title: "Director Commentary", style: .Default, handler: nil)
-        let video = UIAlertAction(title: "Video Commentary", style: .Default, handler: nil)
-        let actor = UIAlertAction(title: "Actor Commentary", style: .Default, handler: nil)
-        let popover = ac.popoverPresentationController
-        popover?.sourceView = view
-        popover?.sourceRect = CGRect(x: self.commentaryBtn.frame.origin.x, y: self.commentaryBtn.frame.origin.y-30, width: 64, height: 64)
-        popover?.backgroundColor = UIColor.darkGrayColor()
-   
-        ac.addAction(director)
-        ac.addAction(video)
-        ac.addAction(actor)
-        presentViewController(ac, animated: true, completion: nil)
         
+        let cpo = self.storyboard?.instantiateViewControllerWithIdentifier("commentary")
+        self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
+        self.commentaryPopover.popoverContentSize = CGSizeMake(320.0, 300.0)
+        self.commentaryPopover.backgroundColor = UIColor.blackColor()
+        self.commentaryPopover.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,200,1,1), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
         
-        
-    }
+            }
     
     override func syncScrubber() {
         super.syncScrubber()
@@ -93,5 +105,32 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         }
     }
 
+    @IBAction func shareClip(sender: UIButton) {
+
+        
+        if UIDevice.currentDevice().orientation.isLandscape {
+        
+            let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            let styledTitle = NSAttributedString(string: "Rotate device to share clip", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor()])
+            alert.setValue(styledTitle, forKey: "_attributedTitle")
+            let pop = UIPopoverController.init(contentViewController: alert)
+            pop.backgroundColor = UIColor.blackColor()
+            let anchor = self.view.frame.size.height - 100
+            pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+            alert.view.tintColor = UIColor.yellowColor()
+
+    }
+        else if UIDevice.currentDevice().orientation.isPortrait{
+            
+            self.performSegueWithIdentifier("showShare", sender: nil)
+        }
+    }
+    
+        
+    
+    
+
 
 }
+

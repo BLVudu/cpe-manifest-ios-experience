@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DLRadioButton
 
 
 class SettingsMenuViewController: UITableViewController{
@@ -19,8 +20,11 @@ class SettingsMenuViewController: UITableViewController{
    var audioSettings = ["Audio Settings","English (US)", "English (US)(AC3)","Spanish (Latin America)", "French (Canada)"]
     
     var audioSettingsShort = ["English","English", "AC3","Spanish", "French"]
-    var commentary = ["Commentary","Director Commentary", "Actor Commentary"]
-    var commentaryShort = ["Off","Director", "Actor"]
+    var commentary = ["Commentary","Off","Director Commentary", "Actor Commentary"]
+    var commentaryShort = ["Off","Off","Director", "Actor"]
+    
+    var subtitiles = ["","Turn commentary off","Hear from the director in his own words about the decisions he made","Henry Cavill walks through his approach in various scenes as the Man of Steel"]
+
     
     
 
@@ -30,6 +34,8 @@ class SettingsMenuViewController: UITableViewController{
    var selectedAudioIndex: Int = 0
    var selectedSubIndex: Int = 0
    var selectedCommIndex: Int = 0
+    
+    var currentSettings = [SettingsCell]()
     
     
     override func viewDidLoad() {
@@ -103,10 +109,10 @@ class SettingsMenuViewController: UITableViewController{
         if (indexPath.section == 0){
             
             return 100.0
-        } else {
-            
+        }else {
             return 60.0
         }
+        
     }
     
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -115,12 +121,11 @@ class SettingsMenuViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("settingsItem") as! SettingsCell
-        
-        
-            cell.cellSetting.text = settings[indexPath.section]
-            
-      
+                cell.cellSetting.text = settings[indexPath.section]
+            cell.subtitle.hidden = true
         if (indexPath.section == 1){
             cell.currentSetting.hidden = false
             
@@ -134,10 +139,12 @@ class SettingsMenuViewController: UITableViewController{
             
             if(indexPath.row == 0){
                 
-            cell.radioBtn.hidden = true
+                cell.radioBtn.hidden = true
             
             } else {
-            cell.radioBtn.hidden = false
+                
+
+                cell.radioBtn.hidden = false
             }
             
             cell.cellSetting.text = audioSettings[indexPath.row]
@@ -178,6 +185,7 @@ class SettingsMenuViewController: UITableViewController{
                 
             } else {
                 
+                
                 if(indexPath.row == 0){
                     
                    cell.radioBtn.hidden = true
@@ -188,8 +196,11 @@ class SettingsMenuViewController: UITableViewController{
                 
             
             }
+
                     cell.cellSetting.text = commentary[indexPath.row]
                     cell.currentSetting.hidden = true
+                    cell.subtitle.hidden = false
+                    cell.subtitle.text = subtitiles[indexPath.row]
                     
                
 
@@ -197,41 +208,64 @@ class SettingsMenuViewController: UITableViewController{
 
         }
         
+
         return cell
         
+        
+      
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-    
-
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SettingsCell
 
         if (indexPath.section == 1){
             
-            if (showAudioList){
-                selectedAudioIndex = indexPath.row
-            }
+            if (indexPath.row == 0){
+         
+                showAudioList = !showAudioList
+
+                //self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
             
-            showAudioList = !showAudioList
+            } else {
+                
+                
+                selectedAudioIndex = indexPath.row
+
+                return
+            }
             
  
         } else if (indexPath.section == 2){
             
-            if (showSubtitlesList){
-                selectedSubIndex = indexPath.row
-            }
+            if (indexPath.row == 0){
+            
+            
             
             showSubtitlesList = !showSubtitlesList
+                //self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+                
+            } else {
+                
+                selectedSubIndex = indexPath.row
+                return
+            }
+
             
 
 
         } else if (indexPath.section == 3){
-            
-            if (showCommentaryList){
-                selectedCommIndex = indexPath.row
-            }
+            if (indexPath.row == 0){
             
             showCommentaryList = !showCommentaryList
+                //self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+                
+            } else {
+                
+                selectedCommIndex = indexPath.row
+                //cell.radioBtn.selected = true
+                return
+            }
         
         }
     
@@ -240,7 +274,6 @@ class SettingsMenuViewController: UITableViewController{
     }
     
     
-
     
-  
+    
 }

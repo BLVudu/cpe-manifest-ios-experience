@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import HockeySDK
+import DropDown
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
         
         application.statusBarHidden = true
+        
+        DropDown.startListeningToKeyboard()
         
         return true
     }

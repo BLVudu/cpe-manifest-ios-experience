@@ -19,21 +19,27 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     @IBOutlet weak var talentNameLabel: UILabel!
     @IBOutlet weak var talentRoleLabel: UILabel!
     @IBOutlet weak var talentBiographyHeaderLabel: UILabel!
-    @IBOutlet weak var talentBiographyLabel: UILabel!
+    @IBOutlet weak var talentBiographyLabel: UITextView!
     
     @IBOutlet weak var filmographyContainerView: UIView!
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
+    @IBOutlet weak var twProfile: SocialButton!
+    @IBOutlet weak var fbProfile: SocialButton!
     var talent: Talent? = nil {
         didSet {
             talentNameLabel.text = talent?.name.uppercaseString
             talentRoleLabel.text = talent?.role
             talentImageView.image = talent?.fullImage != nil ? UIImage(named: talent!.fullImage!) : nil
             talentBiographyLabel.text = talent?.biography
-            
+            fbProfile.profileFB = talent?.facebook
+            fbProfile.profileFBID = talent?.facebookID
+            twProfile.profileTW = talent?.twitter
             if talent != nil && talent!.films.count > 0 {
                 filmographyContainerView.hidden = false
                 filmographyCollectionView.reloadData()
+               
+
             } else {
                 filmographyContainerView.hidden = true
             }
@@ -41,11 +47,27 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     // MARK: View Lifecycle
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    self.performSelector(("showIndicators"), withObject: nil, afterDelay: 0.0)
+        
+
+    }
+    
+    func showIndicators(){
+            filmographyCollectionView.flashScrollIndicators()
+            talentBiographyLabel.flashScrollIndicators()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filmographyCollectionView.backgroundColor = UIColor.clearColor()
-    }
+        filmographyCollectionView.showsHorizontalScrollIndicator = true
+        self.twProfile.backgroundColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1.0)
+        
+                    }
     
     // MARK: Actions
     @IBAction func close() {
@@ -54,6 +76,18 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+    }
+    
+    @IBAction func loadTwitter(sender: SocialButton) {
+        
+        
+        sender.loadProfile("TW")
+    }
+    
+    
+    @IBAction func loadFacebook(sender: SocialButton) {
+        
+        sender.loadProfile("FB")
     }
     
     // MARK: UICollectionViewDataSource
