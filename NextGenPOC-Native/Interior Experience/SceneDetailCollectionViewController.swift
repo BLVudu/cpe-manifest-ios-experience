@@ -13,7 +13,6 @@ import RFQuiltLayout
 
 enum SceneDetailItemType: Int {
     case Location = 0
-    case Trivia
     case Gallery
     case DeletedScene
     case Shop
@@ -76,7 +75,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
     // MARK: UICollectionViewDataSource
      override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     
@@ -95,14 +94,14 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                 cell.imageView.image = UIImage(named: self.locImg)
                 cell.descriptionLabel.text = self.locName
                 break
-                
+               /*
             case SceneDetailItemType.Trivia.rawValue:
                 cell.title = "Scene Trivia"
                 cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
                 cell.descriptionLabel.text = cellDetails[indexPath.row][1]
 
                 break
-                
+                */
             case SceneDetailItemType.Gallery.rawValue:
                 cell.title = "Scene Gallery"
                 cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
@@ -167,6 +166,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         
             coordinates.initialLocation = self.initialLocation
             coordinates.locationName = self.locName
+            coordinates.locationImages = (self.currentScene?.locationImages)!
             
     }
 
@@ -176,6 +176,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
     // MARK: RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
+        /*
         switch indexPath.row {
         case SceneDetailItemType.Shop.rawValue:
             return CGSizeMake(4, 1)
@@ -183,6 +184,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         default:
             return CGSizeMake(2, 1)
         }
+*/
+        return CGSizeMake(2, 1)
     }
     
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {

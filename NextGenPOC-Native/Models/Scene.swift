@@ -17,6 +17,8 @@ class Scene: NSObject {
     var latitude = 0.0
     var locationName = ""
     var locationImage = ""
+    var locationImages = []
+    var triviaFact = ""
     
     required init(info: NSDictionary) {
         super.init()

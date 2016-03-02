@@ -8,6 +8,7 @@
     {
       "startTime": 0,
       "endTime": 25,
+      "gallery": 0,
       "people": [
         "nge:actor-crowe",
         "nge:actor-zurer"
@@ -16,12 +17,22 @@
             "latitude": 49.259710,
             "longitude": -122.926297,
              "name": "Mammoth Studios (Burnaby British Columbia)",
-             "image": "mammoth.JPG"
+             "image": "mammoth.JPG",
+             "images": [
+             "http://images1.variety.com/graphics/photos/_specials-art2/canadastage_toronto.jpg",
+             "http://yvrshoots.com/wp-content/uploads/2012/06/my1-300x225.jpg",
+             "http://assets.vancouverisawesome.com/wp-content/uploads/2011/05/Sanctuary-0-for-VIA.jpg"
+             ]
+             },
+             "trivia":{
+             "image":"",
+             "fact":"The flying animal Jor-El rides is named Haraka, which means 'fast' in Swahili.",
              }
     },
     {
       "startTime": 34,
       "endTime": 46,
+      "gallery": 1,
       "people": [
         "nge:actor-timberline"
       ],
@@ -29,13 +40,24 @@
             "latitude": 41.662796,
             "longitude": -88.535147,
              "name": "Plano, IL",
-             "image": "plano.jpg"
+             "image": "plano.jpg",
+             "images": [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
+                        "http://static.panoramio.com/photos/original/25175378.jpg",
+                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        ]
+
+             },
+             "trivia":{
+             "image":"",
+             "fact":"The film released in June 2013, the 75th anniversary of Superman",
              }
              
     },
     {
       "startTime": 46,
       "endTime": 55,
+      "gallery": 2,
       "people": [
         "nge:actor-sprayberry"
       ],
@@ -43,12 +65,22 @@
             "latitude": 41.662796,
             "longitude": -88.535147,
              "name": "Plano, IL",
-             "image": "plano.jpg"
+             "image": "plano.jpg",
+             "images": [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
+                        "http://static.panoramio.com/photos/original/25175378.jpg",
+                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        ]
+             },
+             "trivia":{
+             "image":"",
+             "fact":"First Kevin Costner film since The Bodyguard (1992) to gross $100 million in the US.",
              }
     },
     {
       "startTime": 55,
       "endTime": 69,
+      "gallery": 3,
       "people": [
         "nge:actor-costner",
         "nge:actor-sprayberry"
@@ -57,12 +89,22 @@
             "latitude": 41.662796,
             "longitude": -88.535147,
              "name": "Plano, IL",
-             "image": "plano.jpg"
+             "image": "plano.jpg",
+             "images": [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
+                        "http://static.panoramio.com/photos/original/25175378.jpg",
+                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        ]
+             },
+             "trivia":{
+             "image":"",
+             "fact":"Clark's line 'Can't I keep pretending I'm your son?' and Jonathan's response 'You are my son' are taken from 'Superman: Secret Origin' by Geoff Johns",
              }
     },
     {
       "startTime": 69,
       "endTime": 83,
+      "gallery": 4,
       "people": [
         "nge:actor-cavill",
         "nge:actor-adams"
@@ -71,12 +113,23 @@
              "latitude": 49.684865,
              "longitude": -125.465519,
              "name": "Vancouver Island",
-             "image": "vancouver.jpg"
+             "image": "vancouver.jpg",
+             "images": [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
+                        "http://static.panoramio.com/photos/original/25175378.jpg",
+                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        ]
+
+             },
+             "trivia":{
+             "image":"",
+             "fact":"Amy Adams (Lois Lane) is in fact only 9 years younger than Diane Lane (Martha Kent).",
              }
     },
     {
       "startTime": 83,
       "endTime": 125,
+      "gallery": 5,
       "people": [
         "nge:actor-cavill"
       ],
@@ -84,12 +137,23 @@
              "latitude": 34.924015,
              "longitude": -117.911017,
              "name": "Edwards Airforce Base",
-             "image": "edwards.jpg"
+             "image": "edwards.jpg",
+             "images": [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
+                        "http://static.panoramio.com/photos/original/25175378.jpg",
+                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        ]
+
+             },
+             "trivia":{
+             "image":"",
+             "fact":"Many scenes were taken from the Superman graphic novel 'Superman: Birthright' written by comic book writer Mark Waid.",
              }
     },
     {
       "startTime": 125,
       "endTime": 153,
+      "gallery": 6,
       "people": [
         "nge:actor-cavill",
         "nge:actor-shannon"
@@ -98,12 +162,23 @@
              "latitude": 41.877374,
              "longitude": -87.627822,
              "name": "Chicago, IL",
-             "image": "chicago.jpg"
+             "image": "chicago.jpg",
+             "images": [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
+                        "http://static.panoramio.com/photos/original/25175378.jpg",
+                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        ]
+
+             },
+             "trivia":{
+             "image":"",
+             "fact":"According to the comics, General Zod's first name is Dru.",
              }
     },
     {
       "startTime": 155,
       "endTime": 182,
+      "gallery": 7,
       "people": [
         "nge:actor-cavill",
         "nge:actor-adams"
@@ -112,7 +187,17 @@
             "latitude": 41.877374,
             "longitude": -87.627822,
             "name": "Chicago, IL",
-            "image": "chicago.jpg"
+            "image": "chicago.jpg",
+             "images": [
+                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
+                        "http://static.panoramio.com/photos/original/25175378.jpg",
+                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        ]
+
+             },
+             "trivia":{
+             "image":"",
+             "fact":"The majority of the action scenes use a CGI cape for Superman and a CGI armor for the other Kryptonians.",
              }
     }
   ],

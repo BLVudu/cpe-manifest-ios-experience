@@ -32,6 +32,7 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         
         super.viewDidLoad()
         
+        
           }
     
     override func setNavBarAppearance(animated: Bool) {
@@ -53,8 +54,8 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     }
     
     func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(Int(index), forKey: "currentIndex")
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("updateControl", object: nil, userInfo: ["index": self.currentIndex])
         return _photos[Int(index)]
     }
    

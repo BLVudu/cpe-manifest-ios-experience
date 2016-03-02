@@ -49,6 +49,11 @@ class Content: NSObject {
                 sceneObj.latitude = (location["latitude"] as? Double)!
                 sceneObj.locationName = (location["name"] as? String)!
                 sceneObj.locationImage = (location["image"] as? String)!
+                sceneObj.locationImages = (location["images"] as? NSArray)!
+            }
+            
+            if let trivia = scene["trivia"] as? NSDictionary{
+                sceneObj.triviaFact = (trivia["fact"] as? String)!
             }
         }
         

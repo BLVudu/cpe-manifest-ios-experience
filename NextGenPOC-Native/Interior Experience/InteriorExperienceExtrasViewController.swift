@@ -16,6 +16,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet weak var sceneDetailView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var triviaFact: UILabel!
     
     var selectedIndexPath: NSIndexPath?
     var currentScene: Scene?
@@ -33,6 +34,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         NSNotificationCenter.defaultCenter().addObserverForName(kSceneDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo {
                 self.currentScene = userInfo["scene"] as? Scene
+                self.triviaFact.text = self.currentScene!.triviaFact
                 self.talentTableView.reloadData()
             }
         }

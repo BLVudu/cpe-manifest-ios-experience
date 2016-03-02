@@ -9,16 +9,24 @@
 import UIKit
 import MapKit
 
+class MapDetailCell: UICollectionViewCell {
+    
+    @IBOutlet weak var mapImage: UIImageView!
+    
+}
 
-class MapDetailViewController: UIViewController{
+
+class MapDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var mapCollectionView: UICollectionView!
     
     var initialLocation = CLLocation(latitude: 0, longitude: 0)
     var locationName: String!
     let regionRadius: CLLocationDistance = 2000
+    var locationImages = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,9 @@ class MapDetailViewController: UIViewController{
         annotation.title = locationName
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
+        
+        self.imageView.hidden = true
+
     }
     
     
@@ -43,4 +54,30 @@ class MapDetailViewController: UIViewController{
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("mapCell", forIndexPath: indexPath) as! MapDetailCell
+        let imgData = NSData(contentsOfURL:NSURL(string: locationImages[indexPath.row] as! String)!)
+        cell.mapImage.image = UIImage(data: imgData!)
+        print(locationImages[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return locationImages.count
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let imgData = NSData(contentsOfURL:NSURL(string: locationImages[indexPath.row] as! String)!)
+        self.imageView.hidden = false
+        self.mapView.alpha = 0.5
+        self.imageView.image = UIImage(data: imgData!)
+        
+    }
+    
+    
 }
