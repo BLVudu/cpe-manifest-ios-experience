@@ -12,7 +12,7 @@ import DLRadioButton
 
 class SettingsMenuViewController: UITableViewController{
    
-   var settings = ["Menu","Audio Settings","Subtitles", "Commentary"]
+   var settings = ["Menu","Audio Settings","Subtitles"]
     
    var subtitles = ["Subtitles","Off","English (CC)","English (United States)","Spanish (Latin America)", "French (Canada)","Portuguese (Brazil)"]
    var subtitlesShort = ["Off","Off","CC","EN(US)","SP","FR(CA)","PR(BR)"]
@@ -33,7 +33,7 @@ class SettingsMenuViewController: UITableViewController{
    var showCommentaryList: Bool = false
    var selectedAudioIndex: Int = 0
    var selectedSubIndex: Int = 0
-   var selectedCommIndex: Int = 0
+
     
     var currentSettings = [SettingsCell]()
     
@@ -47,7 +47,7 @@ class SettingsMenuViewController: UITableViewController{
 
         selectedAudioIndex = 0
         selectedSubIndex = 0
-        selectedCommIndex = 0
+
     
 
     }
@@ -75,19 +75,9 @@ class SettingsMenuViewController: UITableViewController{
             }
             else{
                 return subtitles.count
-                
             }
 
-        } else if (section == 3) {
-            
-            if (!showCommentaryList) {
-                return 1
-            }
-            else{
-                return commentary.count
-            }
-            
-        }else {
+        } else {
 
             
             return 1
@@ -177,36 +167,6 @@ class SettingsMenuViewController: UITableViewController{
         }
         }
         
-        else if (indexPath.section == 3){
-            cell.currentSetting.hidden = false
-            if (!showCommentaryList){
-                
-                    cell.currentSetting.text = commentaryShort[selectedCommIndex]
-                
-            } else {
-                
-                
-                if(indexPath.row == 0){
-                    
-                   cell.radioBtn.hidden = true
-
-                    
-                } else {
-                    cell.radioBtn.hidden = false
-                
-            
-            }
-
-                    cell.cellSetting.text = commentary[indexPath.row]
-                    cell.currentSetting.hidden = true
-                    cell.subtitle.hidden = false
-                    cell.subtitle.text = subtitiles[indexPath.row]
-                    
-               
-
-            }
-
-        }
         
 
         return cell
@@ -254,20 +214,7 @@ class SettingsMenuViewController: UITableViewController{
             
 
 
-        } else if (indexPath.section == 3){
-            if (indexPath.row == 0){
-            
-            showCommentaryList = !showCommentaryList
-                //self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
-                
-            } else {
-                
-                selectedCommIndex = indexPath.row
-                //cell.radioBtn.selected = true
-                return
-            }
-        
-        }
+        } 
     
         self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
         

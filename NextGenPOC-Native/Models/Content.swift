@@ -53,6 +53,8 @@ class Content: NSObject {
             }
             
             if let trivia = scene["trivia"] as? NSDictionary{
+                
+                sceneObj.triviaImage = (trivia["image"] as? String)!
                 sceneObj.triviaFact = (trivia["fact"] as? String)!
             }
         }

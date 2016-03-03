@@ -36,6 +36,7 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
           }
     
     override func setNavBarAppearance(animated: Bool) {
+        print(currentIndex)
         // Block MWPhotoBrowser's access to navigation bar
     }
     
@@ -55,9 +56,18 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     
     func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
         
-        NSNotificationCenter.defaultCenter().postNotificationName("updateControl", object: nil, userInfo: ["index": self.currentIndex])
-        return _photos[Int(index)]
+            return _photos[Int(index)]
+     
+    
+        
+        
     }
-   
+    
+    func photoBrowser(photoBrowser: MWPhotoBrowser!, didDisplayPhotoAtIndex index: UInt) {
+        NSNotificationCenter.defaultCenter().postNotificationName("updateControl", object: nil, userInfo: ["index": self.currentIndex])
+        
+    }
+    
+    
 
 }

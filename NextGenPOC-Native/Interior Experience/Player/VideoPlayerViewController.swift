@@ -23,6 +23,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
     var showsTopToolbar = true
     let shared = FBSDKShareLinkContent()
     
+    @IBOutlet weak var shareContent: UIButton!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
     var commentaryPopover: UIPopoverController!
@@ -43,14 +44,12 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName("pauseMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            
-            print("pause")
+
             self.pauseVideo()
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName("resumeMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            
-            print("resume")
+
             self.playVideo()
         }
     }
@@ -100,6 +99,16 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
             if newScene != self.currentScene {
                 currentScene = newScene
                 NSNotificationCenter.defaultCenter().postNotificationName(kSceneDidChange, object: nil, userInfo: ["scene": currentScene!])
+                if (self.currentScene?.canShare == false){
+                   self.shareContent.alpha = 0.5
+                } else{
+                   self.shareContent.alpha = 1
+                }
+                self.shareContent.userInteractionEnabled = (self.currentScene?.canShare)!
+                
+
+
+                
             }
         
         }

@@ -9,6 +9,7 @@
       "startTime": 0,
       "endTime": 25,
       "gallery": 0,
+      "share": false,
       "people": [
         "nge:actor-crowe",
         "nge:actor-zurer"
@@ -25,14 +26,15 @@
              ]
              },
              "trivia":{
-             "image":"",
-             "fact":"The flying animal Jor-El rides is named Haraka, which means 'fast' in Swahili.",
+             "image":"http://vignette3.wikia.nocookie.net/newdcmovieuniverse/images/3/3d/Hraka-MOS.png/revision/latest?cb=20140510141420",
+             "fact":"The flying animal Jor-El rides is named H'raka, which means 'fast' in Swahili.",
              }
     },
     {
       "startTime": 34,
       "endTime": 46,
       "gallery": 1,
+      "share": false,
       "people": [
         "nge:actor-timberline"
       ],
@@ -49,7 +51,7 @@
 
              },
              "trivia":{
-             "image":"",
+             "image":"http://www.mtv.com/news/wp-content/uploads/geek/2013/05/Superman75top.jpg",
              "fact":"The film released in June 2013, the 75th anniversary of Superman",
              }
              
@@ -58,6 +60,7 @@
       "startTime": 46,
       "endTime": 55,
       "gallery": 2,
+      "share": false,
       "people": [
         "nge:actor-sprayberry"
       ],
@@ -73,7 +76,7 @@
                         ]
              },
              "trivia":{
-             "image":"",
+             "image":"https://upload.wikimedia.org/wikipedia/en/8/8f/The_Bodyguard_1992_Film_Poster.jpg",
              "fact":"First Kevin Costner film since The Bodyguard (1992) to gross $100 million in the US.",
              }
     },
@@ -81,6 +84,7 @@
       "startTime": 55,
       "endTime": 69,
       "gallery": 3,
+      "share": false,
       "people": [
         "nge:actor-costner",
         "nge:actor-sprayberry"
@@ -97,7 +101,7 @@
                         ]
              },
              "trivia":{
-             "image":"",
+             "image":"https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/Secret_Origin_HC.jpg/250px-Secret_Origin_HC.jpg",
              "fact":"Clark's line 'Can't I keep pretending I'm your son?' and Jonathan's response 'You are my son' are taken from 'Superman: Secret Origin' by Geoff Johns",
              }
     },
@@ -105,6 +109,7 @@
       "startTime": 69,
       "endTime": 83,
       "gallery": 4,
+      "share": true,
       "people": [
         "nge:actor-cavill",
         "nge:actor-adams"
@@ -115,14 +120,14 @@
              "name": "Vancouver Island",
              "image": "vancouver.jpg",
              "images": [
-                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
-                        "http://static.panoramio.com/photos/original/25175378.jpg",
-                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        "http://tvtrippin.com/wp-content/uploads/2015/06/wickaninnishaerial.jpg",
+                        "http://westcoastexpeditions.com/media2/images/1200/spring_island_area/spring_island_area_14.jpg",
+                        "http://www.travelrewardscompany.co.uk/wp-content/uploads/2016/01/pacific-rim-national-park-reserve-6-vancouver-island.jpg"
                         ]
 
              },
              "trivia":{
-             "image":"",
+             "image":"http://cdn.movieweb.com/img.news.tops/NEFDCyBOZnawJK_1_b.jpg",
              "fact":"Amy Adams (Lois Lane) is in fact only 9 years younger than Diane Lane (Martha Kent).",
              }
     },
@@ -130,6 +135,7 @@
       "startTime": 83,
       "endTime": 125,
       "gallery": 5,
+      "share": true,
       "people": [
         "nge:actor-cavill"
       ],
@@ -139,14 +145,14 @@
              "name": "Edwards Airforce Base",
              "image": "edwards.jpg",
              "images": [
-                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
-                        "http://static.panoramio.com/photos/original/25175378.jpg",
-                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        "https://upload.wikimedia.org/wikipedia/commons/b/b2/Edwards_AFB_control_tower.jpg",
+                        "http://militarybases.com/images/bases/edwards-afb.jpg",
+                        "http://www.blog.hankplumley.com/wp-content/uploads/2010/11/Welcome-to-Edwards-Air-Force-Base-Main-Entrance-Sign.jpg"
                         ]
 
              },
              "trivia":{
-             "image":"",
+             "image":"http://static.comicvine.com/uploads/original/3/39001/3101197-brcover.jpg",
              "fact":"Many scenes were taken from the Superman graphic novel 'Superman: Birthright' written by comic book writer Mark Waid.",
              }
     },
@@ -154,6 +160,7 @@
       "startTime": 125,
       "endTime": 153,
       "gallery": 6,
+      "share": true,
       "people": [
         "nge:actor-cavill",
         "nge:actor-shannon"
@@ -164,14 +171,14 @@
              "name": "Chicago, IL",
              "image": "chicago.jpg",
              "images": [
-                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
-                        "http://static.panoramio.com/photos/original/25175378.jpg",
-                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        "http://cdn.acbl.org/wp-content/uploads/2014/08/Chicago3.jpg",
+                        "http://static.travel.usnews.com/images/destinations/2/sunny_day_at_cloud_gate_-_main_cropped_2014_445x280.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/2/26/Chicago_Theatre_blend.jpg"
                         ]
 
              },
              "trivia":{
-             "image":"",
+             "image":"http://static.comicvine.com/uploads/scale_small/3/31666/3100943-action_23-2-zod_dao64tqzd7_.jpg",
              "fact":"According to the comics, General Zod's first name is Dru.",
              }
     },
@@ -179,6 +186,7 @@
       "startTime": 155,
       "endTime": 182,
       "gallery": 7,
+      "share": true,
       "people": [
         "nge:actor-cavill",
         "nge:actor-adams"
@@ -189,14 +197,14 @@
             "name": "Chicago, IL",
             "image": "chicago.jpg",
              "images": [
-                        "https://upload.wikimedia.org/wikipedia/commons/6/62/Plano_Il_Plano_Hotel1.jpg",
-                        "http://static.panoramio.com/photos/original/25175378.jpg",
-                        "https://i.ytimg.com/vi/PhQcAdLAQEY/hqdefault.jpg"
+                        "http://cdn.acbl.org/wp-content/uploads/2014/08/Chicago3.jpg",
+                        "http://static.travel.usnews.com/images/destinations/2/sunny_day_at_cloud_gate_-_main_cropped_2014_445x280.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/2/26/Chicago_Theatre_blend.jpg"
                         ]
 
              },
              "trivia":{
-             "image":"",
+             "image":"https://www.mikefromtheinternet.com/wp-content/uploads/2014/04/superman-man-of-steel.jpg",
              "fact":"The majority of the action scenes use a CGI cape for Superman and a CGI armor for the other Kryptonians.",
              }
     }

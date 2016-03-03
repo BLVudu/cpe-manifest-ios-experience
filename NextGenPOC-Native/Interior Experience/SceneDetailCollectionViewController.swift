@@ -23,7 +23,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
 
     let cellDetails = [
         ["location.jpg", "Kent family farm", "YORKVILLE, ILLINOIS, USA"],
-        ["trivia.jpg", "Kryptonian plasma is left on Earth when the escape pod crashes in the cornfield"],
         ["scene.jpg", "Henry Cavill getting some scene direction"],
         ["deleted_scene.jpg", "Behind the scenes Flying in IL cornfield"],
         ["shop.jpg", "Shop this scene"]
@@ -34,6 +33,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     var initialLocation = CLLocation(latitude: 0, longitude: 0)
     var locName = ""
     var locImg = ""
+    var galleryID = 0
     var currentScene: Scene?
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -49,13 +49,13 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         
         let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
         layout.direction = UICollectionViewScrollDirection.Vertical
-        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 8), 250)
-        print(self.collectionView!.bounds)
+        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 8), (CGRectGetWidth(self.collectionView!.bounds)/4))
 
         
         NSNotificationCenter.defaultCenter().addObserverForName(kSceneDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo {
                 self.currentScene = userInfo["scene"] as? Scene
+                self.galleryID = self.currentScene!.gallery
                 self.initialLocation = CLLocation(latitude: (self.currentScene?.latitude)!, longitude: (self.currentScene?.longitude)!)
                 self.locName = (self.currentScene?.locationName)!
                 self.locImg = (self.currentScene?.locationImage)!
@@ -91,7 +91,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             case SceneDetailItemType.Location.rawValue:
                 cell.title = "Scene Location"
                 cell.centerMapOnLocation(initialLocation, region: regionRadius)
-                cell.imageView.image = UIImage(named: self.locImg)
                 cell.descriptionLabel.text = self.locName
                 break
                /*
@@ -162,13 +161,19 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         
         if segue.identifier == "showMap"{
         
-        let coordinates = segue.destinationViewController as! MapDetailViewController
+        let mapVC = segue.destinationViewController as! MapDetailViewController
         
-            coordinates.initialLocation = self.initialLocation
-            coordinates.locationName = self.locName
-            coordinates.locationImages = (self.currentScene?.locationImages)!
+            mapVC.initialLocation = self.initialLocation
+            mapVC.locationName = self.locName
+            mapVC.locationImages = (self.currentScene?.locationImages)!
             
-    }
+    } else if segue.identifier == "showGallery"{
+            
+            let galleryVC = segue.destinationViewController as! GalleryDetailViewController
+            
+            galleryVC.galleryID = self.galleryID
+
+        }
 
     }
     
@@ -189,7 +194,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     }
     
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(5, 5, 5, 5)
+        return UIEdgeInsetsMake(0, 0, 0, 0)
     }
 
 

@@ -17,6 +17,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var sceneDetailView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var triviaFact: UILabel!
+    @IBOutlet weak var triviaImage: UIImageView!
     
     var selectedIndexPath: NSIndexPath?
     var currentScene: Scene?
@@ -35,6 +36,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
             if let userInfo = notification.userInfo {
                 self.currentScene = userInfo["scene"] as? Scene
                 self.triviaFact.text = self.currentScene!.triviaFact
+                self.triviaImage.setImageWithURL(NSURL(string:(self.currentScene?.triviaImage)!)!)
                 self.talentTableView.reloadData()
             }
         }
