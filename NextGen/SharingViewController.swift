@@ -104,15 +104,7 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)
             self.shareContent = videoURL
-            //NSNotificationCenter.defaultCenter().addObserverForName("endClip", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-                
-              //  videoPlayerViewController.player.seekToTime(CMTimeMake(0, 1))
-               // videoPlayerViewController.pauseVideo()
-                
-                
-            //}
-
-            
+                       
             
         }
     }

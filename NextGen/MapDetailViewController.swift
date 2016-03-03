@@ -98,6 +98,8 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
 
     
     @IBAction func close(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().postNotificationName("endClip",object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -157,17 +159,26 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
                 videoPlayerViewController.lockTopToolbar = true
                 videoPlayerViewController.playVideoWithURL(videoURL)
                 
+                NSNotificationCenter.defaultCenter().addObserverForName("endClip", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+                    
+                    videoPlayerViewController.pauseVideo()
+                    videoPlayerViewController.player.removeAllItems()
+  
+                }
+ 
             }
         
         }
         else if (indexPath.row == 0){
             NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("endClip",object: nil)
             self.imageView.alpha = 0
             self.videoView.hidden = true
             self.mapView.alpha = 1
         
         }else{
         NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("endClip",object: nil)
         self.mapView.alpha = 0.5
         self.imageView.hidden = false
         self.imageView.alpha = 1
