@@ -760,7 +760,6 @@
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
 				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
-				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
 				492267D71C73F41300B306A2 /* Shopping.plist */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
@@ -791,6 +790,7 @@
 		4921D9C51C3F04EE00ED2AA6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
 				7077A3141C49897900843782 /* Data */,
 				7077A3181C4989C200843782 /* Images */,
 				70B9FE441C6D54D400CF1A22 /* Videos */,
