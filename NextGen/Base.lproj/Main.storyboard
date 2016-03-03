@@ -1438,7 +1438,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKQ-ID-gPI">
                                         <rect key="frame" x="61" y="118" width="902" height="128"/>
                                     </imageView>
-                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYz-XW-apL">
+                                    <containerView opaque="NO" contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYz-XW-apL">
                                         <rect key="frame" x="61" y="118" width="902" height="128"/>
                                         <connections>
                                             <segue destination="FsK-dw-pgC" kind="embed" id="z13-8m-qRk"/>
@@ -1527,6 +1527,17 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xy7-HO-Qx8">
+                                        <rect key="frame" x="981" y="19" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="EZQ-Xa-Bah"/>
+                                            <constraint firstAttribute="width" constant="35" id="grY-RU-vaX"/>
+                                        </constraints>
+                                        <state key="normal" image="Close"/>
+                                        <connections>
+                                            <action selector="close:" destination="rnf-6M-6TQ" eventType="touchUpInside" id="X7Z-GM-Kag"/>
+                                        </connections>
+                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D4I-wb-wjM">
                                         <rect key="frame" x="0.0" y="11" width="175" height="429"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1552,12 +1563,6 @@
                                             </mask>
                                         </variation>
                                     </button>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l50-wE-PgB">
-                                        <rect key="frame" x="183" y="73" width="833" height="204"/>
-                                        <connections>
-                                            <segue destination="FsK-dw-pgC" kind="embed" id="fcX-fX-008"/>
-                                        </connections>
-                                    </containerView>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5m-Tm-7pB">
                                         <rect key="frame" x="916" y="344" width="100" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1603,17 +1608,12 @@
                                             <action selector="shareSMS:" destination="rnf-6M-6TQ" eventType="touchUpInside" id="Lmf-6f-uRp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xy7-HO-Qx8">
-                                        <rect key="frame" x="981" y="19" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="EZQ-Xa-Bah"/>
-                                            <constraint firstAttribute="width" constant="35" id="grY-RU-vaX"/>
-                                        </constraints>
-                                        <state key="normal" image="Close"/>
+                                    <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="l50-wE-PgB">
+                                        <rect key="frame" x="183" y="73" width="833" height="204"/>
                                         <connections>
-                                            <action selector="close:" destination="rnf-6M-6TQ" eventType="touchUpInside" id="X7Z-GM-Kag"/>
+                                            <segue destination="FsK-dw-pgC" kind="embed" id="fcX-fX-008"/>
                                         </connections>
-                                    </button>
+                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1733,7 +1733,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wLr-WP-rI5">
+                                    <containerView opaque="NO" contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wLr-WP-rI5">
                                         <rect key="frame" x="8" y="78" width="1008" height="286"/>
                                         <connections>
                                             <segue destination="VDs-4i-RId" kind="embed" id="bDD-de-Ulp"/>
