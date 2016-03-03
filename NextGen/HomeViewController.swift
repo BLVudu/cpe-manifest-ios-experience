@@ -15,9 +15,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var backgroundContainerView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
+ 
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())

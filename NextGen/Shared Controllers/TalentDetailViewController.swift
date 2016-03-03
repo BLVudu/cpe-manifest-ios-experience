@@ -51,7 +51,7 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-    self.performSelector(("showIndicators"), withObject: nil, afterDelay: 0.0)
+        self.performSelector(("showIndicators"), withObject: nil, afterDelay: 0.0)
         
 
     }
@@ -60,12 +60,16 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
             filmographyCollectionView.flashScrollIndicators()
             talentBiographyLabel.flashScrollIndicators()
     }
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filmographyCollectionView.backgroundColor = UIColor.clearColor()
         filmographyCollectionView.showsHorizontalScrollIndicator = true
         self.twProfile.backgroundColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1.0)
+
         
                     }
     

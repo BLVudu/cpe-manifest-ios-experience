@@ -63,14 +63,13 @@
                                             <action selector="revealToggle:" destination="dkx-z0-nzr" eventType="touchUpInside" id="xFW-5U-Uoa"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MOSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-I9-ecR" userLabel="Logo Treatement">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MOSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-I9-ecR" userLabel="Logo Treatement">
                                         <rect key="frame" x="120" y="225" width="300" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="YSS-I9-ecR" secondAttribute="height" multiplier="15:2" id="DQw-oz-4mv"/>
-                                            <constraint firstAttribute="width" constant="300" id="TRR-he-dHR"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-Mu-C6w">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-Mu-C6w">
                                         <rect key="frame" x="120" y="276" width="300" height="82"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="D1l-Mu-C6w" secondAttribute="height" multiplier="150:41" id="hpb-dg-cQC"/>
@@ -79,11 +78,16 @@
                                         <state key="normal" image="MOSPlay">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="nar-8f-A9w"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <segue destination="UvH-hR-t5e" kind="show" id="aeM-3y-kH4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
                                         <rect key="frame" x="170" y="343" width="200" height="76"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="oBy-bL-9Wq" secondAttribute="height" multiplier="50:19" id="jVu-U8-HB3"/>
@@ -107,17 +111,24 @@
                                     <constraint firstItem="D1l-Mu-C6w" firstAttribute="top" secondItem="YSS-I9-ecR" secondAttribute="bottom" constant="11" id="d29-rd-1wl"/>
                                     <constraint firstItem="oBy-bL-9Wq" firstAttribute="width" secondItem="D1l-Mu-C6w" secondAttribute="width" multiplier="2/3" id="e0T-Cb-Byu"/>
                                     <constraint firstItem="gA2-16-mAf" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" id="g7X-UE-nZc"/>
+                                    <constraint firstItem="YSS-I9-ecR" firstAttribute="width" secondItem="gKy-zB-UIg" secondAttribute="width" multiplier="0.26" id="neb-Ls-fgb"/>
                                     <constraint firstItem="D1l-Mu-C6w" firstAttribute="width" secondItem="YSS-I9-ecR" secondAttribute="width" id="o6C-X8-qcV"/>
                                     <constraint firstItem="D1l-Mu-C6w" firstAttribute="centerX" secondItem="YSS-I9-ecR" secondAttribute="centerX" id="rJ8-oe-IpG"/>
                                     <constraint firstItem="gA2-16-mAf" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="top" id="ucS-G1-kBG"/>
                                     <constraint firstAttribute="trailing" secondItem="gA2-16-mAf" secondAttribute="trailing" id="vTz-ex-Wiv"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="neb-Ls-fgb"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="gKy-zB-UIg" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3ci-gX-Aos"/>
+                            <constraint firstItem="YSS-I9-ecR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.26" id="DQZ-UU-ecU"/>
                             <constraint firstItem="gKy-zB-UIg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UYv-i2-Fjy"/>
                             <constraint firstAttribute="trailing" secondItem="gKy-zB-UIg" secondAttribute="trailing" id="Z0n-8s-4Va"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="bottom" priority="750" id="s0f-b4-4Lk"/>
@@ -453,7 +464,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilmCollectionViewCell" id="21E-0K-81B" customClass="FilmCollectionViewCell" customModule="NextGen" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="-3" width="163" height="245"/>
+                                                        <rect key="frame" x="0.0" y="-2.5" width="163" height="245"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="163" height="245"/>
@@ -1370,7 +1381,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mapCell" id="Y5b-hq-Q2k" customClass="MapDetailCell" customModule="NextGen" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="4" width="157" height="121"/>
+                                                <rect key="frame" x="0.0" y="3.5" width="157" height="121"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="157" height="121"/>
@@ -1435,7 +1446,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKQ-ID-gPI">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKQ-ID-gPI">
                                         <rect key="frame" x="61" y="118" width="902" height="128"/>
                                     </imageView>
                                     <containerView opaque="NO" contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYz-XW-apL">
@@ -1886,6 +1897,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="W8P-ST-gWA"/>
-        <segue reference="fcX-fX-008"/>
+        <segue reference="z13-8m-qRk"/>
     </inferredMetricsTieBreakers>
 </document>
