@@ -1,6 +1,6 @@
 //
-//  NextGenPOC_NativeUITests.swift
-//  NextGenPOC-NativeUITests
+//  NextGenUITests.swift
+//  NextGenUITests
 //
 //  Created by Sedinam Gadzekpo on 1/7/16.
 //  Copyright © 2016 Warner Bros. Entertainment, Inc.. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class NextGenPOC_NativeUITests: XCTestCase {
+class NextGenUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

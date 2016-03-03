@@ -1,15 +1,15 @@
 //
-//  NextGenPOC_NativeTests.swift
-//  NextGenPOC-NativeTests
+//  NextGenTests.swift
+//  NextGenTests
 //
 //  Created by Sedinam Gadzekpo on 1/7/16.
 //  Copyright © 2016 Warner Bros. Entertainment, Inc.. All rights reserved.
 //
 
 import XCTest
-@testable import NextGenPOC_Native
+@testable import NextGen
 
-class NextGenPOC_NativeTests: XCTestCase {
+class NextGenTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

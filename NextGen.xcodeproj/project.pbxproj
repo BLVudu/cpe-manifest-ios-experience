@@ -15,11 +15,11 @@
 		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
 		4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */; };
 		4921D97C1C3EFD0B00ED2AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */; };
-		4921D97F1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4921D97D1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld */; };
+		4921D97F1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4921D97D1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld */; };
 		4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */; };
 		4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */; };
-		4921D98F1C3EFD0B00ED2AA6 /* NextGenPOC_NativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D98E1C3EFD0B00ED2AA6 /* NextGenPOC_NativeTests.swift */; };
-		4921D99A1C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9991C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift */; };
+		4921D98F1C3EFD0B00ED2AA6 /* NextGenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D98E1C3EFD0B00ED2AA6 /* NextGenTests.swift */; };
+		4921D99A1C3EFD0B00ED2AA6 /* NextGenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9991C3EFD0B00ED2AA6 /* NextGenUITests.swift */; };
 		4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */; };
 		4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */; };
 		492267D81C73F41300B306A2 /* Shopping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 492267D71C73F41300B306A2 /* Shopping.plist */; };
@@ -354,18 +354,18 @@
 		4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4921D97B1C3EFD0B00ED2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4921D97E1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NextGenPOC_Native.xcdatamodel; sourceTree = "<group>"; };
+		4921D97E1C3EFD0B00ED2AA6 /* NextGen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NextGen.xcdatamodel; sourceTree = "<group>"; };
 		4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4921D9831C3EFD0B00ED2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4921D9851C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4921D98A1C3EFD0B00ED2AA6 /* NextGen.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextGen.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4921D98E1C3EFD0B00ED2AA6 /* NextGenPOC_NativeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGenPOC_NativeTests.swift; sourceTree = "<group>"; };
+		4921D98E1C3EFD0B00ED2AA6 /* NextGenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGenTests.swift; sourceTree = "<group>"; };
 		4921D9901C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4921D9951C3EFD0B00ED2AA6 /* NextGen.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextGen.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4921D9991C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGenPOC_NativeUITests.swift; sourceTree = "<group>"; };
+		4921D9991C3EFD0B00ED2AA6 /* NextGenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGenUITests.swift; sourceTree = "<group>"; };
 		4921D99B1C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGenPOC-Native/Extras/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
-		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = "NextGenPOC-Native/Extras/ExtrasLayout.swift"; sourceTree = SOURCE_ROOT; };
+		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = NextGen/Extras/ExtrasViewController.swift; sourceTree = SOURCE_ROOT; };
+		4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasLayout.swift; path = NextGen/Extras/ExtrasLayout.swift; sourceTree = SOURCE_ROOT; };
 		492267D71C73F41300B306A2 /* Shopping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Shopping.plist; sourceTree = "<group>"; };
 		492267E51C7694D000B306A2 /* CommentaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryView.xib; sourceTree = "<group>"; };
 		492267E71C76950200B306A2 /* CommentaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryView.swift; sourceTree = "<group>"; };
@@ -715,9 +715,9 @@
 				7071C3D31C6BCBF6006F4275 /* Manifest Models */,
 				7071C48D1C6BCBF6006F4275 /* NextGenDataManager */,
 				4921D9C51C3F04EE00ED2AA6 /* Resources */,
-				4921D9751C3EFD0B00ED2AA6 /* NextGenPOC-Native */,
-				4921D98D1C3EFD0B00ED2AA6 /* NextGenPOC-NativeTests */,
-				4921D9981C3EFD0B00ED2AA6 /* NextGenPOC-NativeUITests */,
+				4921D9751C3EFD0B00ED2AA6 /* NextGen */,
+				4921D98D1C3EFD0B00ED2AA6 /* NextGenTests */,
+				4921D9981C3EFD0B00ED2AA6 /* NextGenUITests */,
 				4921D9741C3EFD0B00ED2AA6 /* Products */,
 				CD91B825F7748A9A9034E7EA /* Pods */,
 				5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */,
@@ -734,7 +734,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4921D9751C3EFD0B00ED2AA6 /* NextGenPOC-Native */ = {
+		4921D9751C3EFD0B00ED2AA6 /* NextGen */ = {
 			isa = PBXGroup;
 			children = (
 				70A1E08B1C486BCD0079779A /* Extras */,
@@ -764,28 +764,28 @@
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
 				492267D71C73F41300B306A2 /* Shopping.plist */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
-				4921D97D1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld */,
+				4921D97D1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld */,
 				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
 			);
-			path = "NextGenPOC-Native";
+			path = NextGen;
 			sourceTree = "<group>";
 		};
-		4921D98D1C3EFD0B00ED2AA6 /* NextGenPOC-NativeTests */ = {
+		4921D98D1C3EFD0B00ED2AA6 /* NextGenTests */ = {
 			isa = PBXGroup;
 			children = (
-				4921D98E1C3EFD0B00ED2AA6 /* NextGenPOC_NativeTests.swift */,
+				4921D98E1C3EFD0B00ED2AA6 /* NextGenTests.swift */,
 				4921D9901C3EFD0B00ED2AA6 /* Info.plist */,
 			);
-			path = "NextGenPOC-NativeTests";
+			path = NextGenTests;
 			sourceTree = "<group>";
 		};
-		4921D9981C3EFD0B00ED2AA6 /* NextGenPOC-NativeUITests */ = {
+		4921D9981C3EFD0B00ED2AA6 /* NextGenUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4921D9991C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift */,
+				4921D9991C3EFD0B00ED2AA6 /* NextGenUITests.swift */,
 				4921D99B1C3EFD0B00ED2AA6 /* Info.plist */,
 			);
-			path = "NextGenPOC-NativeUITests";
+			path = NextGenUITests;
 			sourceTree = "<group>";
 		};
 		4921D9C51C3F04EE00ED2AA6 /* Resources */ = {
@@ -796,7 +796,7 @@
 				70B9FE441C6D54D400CF1A22 /* Videos */,
 			);
 			name = Resources;
-			path = "NextGenPOC-Native/Resources";
+			path = NextGen/Resources;
 			sourceTree = "<group>";
 		};
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
@@ -1524,7 +1524,7 @@
 				7071C5361C6BCBF6006F4275 /* NGESummary190.swift in Sources */,
 				7071C4D61C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureFrameRateType.swift in Sources */,
 				7071C4AC1C6BCBF6006F4275 /* NGEComplexSequenceInfoAlternateNumber.swift in Sources */,
-				4921D97F1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld in Sources */,
+				4921D97F1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld in Sources */,
 				7077A37F1C49AB8500843782 /* Scene.swift in Sources */,
 				7071C5241C6BCBF6006F4275 /* NGEPlayableSequenceType.swift in Sources */,
 				7071C50E1C6BCBF6006F4275 /* NGEMediaManifestEditDeleteType.swift in Sources */,
@@ -1748,7 +1748,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4921D98F1C3EFD0B00ED2AA6 /* NextGenPOC_NativeTests.swift in Sources */,
+				4921D98F1C3EFD0B00ED2AA6 /* NextGenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1756,7 +1756,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4921D99A1C3EFD0B00ED2AA6 /* NextGenPOC_NativeUITests.swift in Sources */,
+				4921D99A1C3EFD0B00ED2AA6 /* NextGenUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1890,13 +1890,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
+				INFOPLIST_FILE = NextGen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGen;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "NextGenPOC-Native/NextGen-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextGen/NextGen-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Debug;
@@ -1909,13 +1909,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "NextGenPOC-Native/Info.plist";
+				INFOPLIST_FILE = NextGen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGen;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "NextGenPOC-Native/NextGen-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextGen/NextGen-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Release;
@@ -1924,9 +1924,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "NextGenPOC-NativeTests/Info.plist";
+				INFOPLIST_FILE = NextGenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SG.NextGenTests;
 				PRODUCT_NAME = NextGen;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextGen.app/NextGen";
 			};
@@ -1936,9 +1936,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "NextGenPOC-NativeTests/Info.plist";
+				INFOPLIST_FILE = NextGenTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SG.NextGenTests;
 				PRODUCT_NAME = NextGen;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextGen.app/NextGen";
 			};
@@ -1947,11 +1947,11 @@
 		4921D9A51C3EFD0B00ED2AA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "NextGenPOC-NativeUITests/Info.plist";
+				INFOPLIST_FILE = NextGenUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SG.NextGenUITests;
 				PRODUCT_NAME = NextGen;
-				TEST_TARGET_NAME = "NextGenPOC-Native";
+				TEST_TARGET_NAME = NextGen;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -1959,11 +1959,11 @@
 		4921D9A61C3EFD0B00ED2AA6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "NextGenPOC-NativeUITests/Info.plist";
+				INFOPLIST_FILE = NextGenUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.SG.NextGenPOC-NativeUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SG.NextGenUITests;
 				PRODUCT_NAME = NextGen;
-				TEST_TARGET_NAME = "NextGenPOC-Native";
+				TEST_TARGET_NAME = NextGen;
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
@@ -2010,13 +2010,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4921D97D1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodeld */ = {
+		4921D97D1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4921D97E1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodel */,
+				4921D97E1C3EFD0B00ED2AA6 /* NextGen.xcdatamodel */,
 			);
-			currentVersion = 4921D97E1C3EFD0B00ED2AA6 /* NextGenPOC_Native.xcdatamodel */;
-			path = NextGenPOC_Native.xcdatamodeld;
+			currentVersion = 4921D97E1C3EFD0B00ED2AA6 /* NextGen.xcdatamodel */;
+			path = NextGen.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
