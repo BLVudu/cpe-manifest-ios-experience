@@ -31,6 +31,13 @@
 	<string>7</string>
 	<key>FacebookAppID</key>
 	<string>2558160538</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>RobotoCondensed-Regular.ttf</string>
+		<string>RobotoCondensed-Italic.ttf</string>
+		<string>RobotoCondensed-Bold.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+	</array>
 	<key>FacebookDisplayName</key>
 	<string>NextGen</string>
 	<key>LSApplicationQueriesSchemes</key>

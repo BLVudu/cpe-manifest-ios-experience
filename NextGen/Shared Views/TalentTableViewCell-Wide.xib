@@ -5,13 +5,21 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RobotoCondensed-Italic.ttf">
+            <string>RobotoCondensed-Italic</string>
+        </mutableArray>
+        <mutableArray key="RobotoCondensed-Regular.ttf">
+            <string>RobotoCondensed-Regular</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="ZFg-U0-fjg" customClass="TalentTableViewCell" customModule="NextGen" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="250" height="96"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZFg-U0-fjg" id="Rb8-s1-zKI">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="95.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="250" height="95"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-D7-49Z" customClass="RoundImageView" customModule="NextGen" customModuleProvider="target">
@@ -30,7 +38,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="PXo-6C-qJm"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Italic" family="Roboto Condensed" pointSize="16"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -39,7 +47,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="TMV-XB-qoa"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
