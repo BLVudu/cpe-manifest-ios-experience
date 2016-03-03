@@ -1322,7 +1322,7 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DAm-oj-e2C">
                                 <rect key="frame" x="0.0" y="320" width="1024" height="448"/>
                                 <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="satellite" translatesAutoresizingMaskIntoConstraints="NO" id="2Co-Ss-0K5">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2Co-Ss-0K5">
                                         <rect key="frame" x="8" y="78" width="1008" height="208"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="208" id="JEL-QM-9qg"/>
@@ -1344,29 +1344,49 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mapCell" id="Y5b-hq-Q2k" customClass="MapDetailCell" customModule="NextGen" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="3.5" width="157" height="121"/>
+                                                <rect key="frame" x="0.0" y="4" width="157" height="121"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="157" height="121"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TrN-Gh-EAj">
-                                                            <rect key="frame" x="0.0" y="2.5" width="157" height="116"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TrN-Gh-EAj">
+                                                            <rect key="frame" x="0.0" y="3" width="157" height="116"/>
                                                         </imageView>
-                                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpC-5F-LbR">
+                                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpC-5F-LbR">
                                                             <rect key="frame" x="0.0" y="2" width="157" height="116"/>
                                                         </mapView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrM-tv-eXV">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrM-tv-eXV">
                                                             <rect key="frame" x="8" y="89" width="40" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="s0k-aO-5Jg"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Play_Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="y9P-vs-wAN">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play_Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="y9P-vs-wAN">
                                                             <rect key="frame" x="63" y="45" width="30" height="30"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <constraints>
+                                                    <constraint firstItem="fpC-5F-LbR" firstAttribute="centerY" secondItem="Y5b-hq-Q2k" secondAttribute="centerY" id="0YX-bS-Ntb"/>
+                                                    <constraint firstItem="TrN-Gh-EAj" firstAttribute="centerY" secondItem="Y5b-hq-Q2k" secondAttribute="centerY" id="Aj8-Zj-9y4"/>
+                                                    <constraint firstItem="TrN-Gh-EAj" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="topMargin" constant="-5" id="CcE-0F-Th1"/>
+                                                    <constraint firstItem="y9P-vs-wAN" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="topMargin" constant="37" id="Gn8-N8-Hk5"/>
+                                                    <constraint firstItem="LrM-tv-eXV" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="topMargin" constant="81" id="JFt-9z-H38"/>
+                                                    <constraint firstItem="LrM-tv-eXV" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leadingMargin" id="JRz-68-E8A"/>
+                                                    <constraint firstItem="fpC-5F-LbR" firstAttribute="centerY" secondItem="y9P-vs-wAN" secondAttribute="centerY" id="NLB-nI-Pbj"/>
+                                                    <constraint firstItem="LrM-tv-eXV" firstAttribute="bottom" secondItem="Y5b-hq-Q2k" secondAttribute="bottomMargin" id="Tdu-0m-7ZY"/>
+                                                    <constraint firstItem="y9P-vs-wAN" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leadingMargin" constant="55" id="Vvt-Lv-K9O"/>
+                                                    <constraint firstAttribute="trailing" secondItem="TrN-Gh-EAj" secondAttribute="trailing" id="cda-t8-1tU"/>
+                                                    <constraint firstItem="TrN-Gh-EAj" firstAttribute="leading" secondItem="fpC-5F-LbR" secondAttribute="leading" id="dZ6-AO-t6T"/>
+                                                    <constraint firstItem="fpC-5F-LbR" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leading" id="hez-W5-vxJ"/>
+                                                    <constraint firstItem="TrN-Gh-EAj" firstAttribute="trailing" secondItem="fpC-5F-LbR" secondAttribute="trailing" id="nve-en-Oya"/>
+                                                    <constraint firstItem="fpC-5F-LbR" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="topMargin" constant="-6" id="w4Y-XL-coB"/>
+                                                    <constraint firstItem="y9P-vs-wAN" firstAttribute="centerX" secondItem="fpC-5F-LbR" secondAttribute="centerX" id="z2y-0U-wls"/>
+                                                </constraints>
                                                 <connections>
                                                     <outlet property="label" destination="LrM-tv-eXV" id="Y8e-yt-FMC"/>
                                                     <outlet property="mapImage" destination="TrN-Gh-EAj" id="3XA-vD-K2w"/>
