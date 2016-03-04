@@ -20,17 +20,13 @@ class SettingsMenuViewController: UITableViewController{
    var audioSettings = ["Audio Settings","English (US)", "English (US)(AC3)","Spanish (Latin America)", "French (Canada)"]
     
     var audioSettingsShort = ["English","English", "AC3","Spanish", "French"]
-    var commentary = ["Commentary","Off","Director Commentary", "Actor Commentary"]
-    var commentaryShort = ["Off","Off","Director", "Actor"]
-    
-    var subtitiles = ["","Turn commentary off","Hear from the director in his own words about the decisions he made","Henry Cavill walks through his approach in various scenes as the Man of Steel"]
+
 
     
     
 
    var showAudioList: Bool = false
    var showSubtitlesList: Bool = false
-   var showCommentaryList: Bool = false
    var selectedAudioIndex: Int = 0
    var selectedSubIndex: Int = 0
 
@@ -116,6 +112,9 @@ class SettingsMenuViewController: UITableViewController{
         let cell = tableView.dequeueReusableCellWithIdentifier("settingsItem") as! SettingsCell
                 cell.cellSetting.text = settings[indexPath.section]
             cell.subtitle.hidden = true
+        if (indexPath.section == 0){
+            cell.userInteractionEnabled = false
+        }
         if (indexPath.section == 1){
             cell.currentSetting.hidden = false
             

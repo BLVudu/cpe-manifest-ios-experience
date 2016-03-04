@@ -30,7 +30,7 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
         didSet {
             talentNameLabel.text = talent?.name.uppercaseString
             talentRoleLabel.text = talent?.role
-            talentImageView.image = talent?.fullImage != nil ? UIImage(named: talent!.fullImage!) : nil
+            talentImageView.image = talent?.thumbnailImage != nil ? UIImage(named: talent!.thumbnailImage!) : nil
             talentBiographyLabel.text = talent?.biography
             fbProfile.profileFB = talent?.facebook
             fbProfile.profileFBID = talent?.facebookID
