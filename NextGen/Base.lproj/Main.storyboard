@@ -401,7 +401,7 @@
                                                     <constraint firstAttribute="width" constant="40" id="muV-kr-Pvf"/>
                                                     <constraint firstAttribute="height" constant="40" id="uKQ-8O-eys"/>
                                                 </constraints>
-                                                <state key="normal" image="twtr-icn-logo-white.png"/>
+                                                <state key="normal" image="tw_logo.png"/>
                                                 <connections>
                                                     <action selector="loadTwitter:" destination="enc-ld-Xnm" eventType="touchUpInside" id="Na4-4w-KpG"/>
                                                 </connections>
@@ -2228,10 +2228,10 @@
         <image name="share.jpg" width="26" height="23"/>
         <image name="thetake-logo-nav.png" width="100" height="25"/>
         <image name="tw.png" width="583" height="115"/>
-        <image name="twtr-icn-logo-white.png" width="16" height="13"/>
+        <image name="tw_logo.png" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="W8P-ST-gWA"/>
-        <segue reference="z13-8m-qRk"/>
+        <segue reference="fcX-fX-008"/>
     </inferredMetricsTieBreakers>
 </document>
