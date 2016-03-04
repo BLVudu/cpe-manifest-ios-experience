@@ -148,6 +148,11 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         self.performSegueWithIdentifier("showGallery", sender: nil)
             break
             
+            
+        case SceneDetailItemType.Shop.rawValue:
+            self.performSegueWithIdentifier("showShop", sender: nil)
+            break
+            
         default:
             break
         }
@@ -173,6 +178,11 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             
             galleryVC.galleryID = self.galleryID
 
+        } else if segue.identifier == "showShop"{
+            
+            let shopVC = segue.destinationViewController as! ShoppingDetailViewController
+
+            shopVC.items = (self.currentScene?.shopping)!
         }
 
     }

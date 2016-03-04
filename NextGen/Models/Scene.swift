@@ -22,6 +22,7 @@ class Scene: NSObject {
     var locationImages = []
     var triviaImage = ""
     var triviaFact = ""
+    var shopping = [Shopping]()
     
     required init(info: NSDictionary) {
         super.init()

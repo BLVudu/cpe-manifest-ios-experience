@@ -14,7 +14,6 @@
 		4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */; };
 		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
 		4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */; };
-		4921D97C1C3EFD0B00ED2AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */; };
 		4921D97F1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4921D97D1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld */; };
 		4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */; };
 		4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */; };
@@ -37,6 +36,9 @@
 		497733371C5AAD9B00EC0071 /* scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 497733351C5AAD9B00EC0071 /* scene.jpg */; };
 		4977333C1C5AAFD000EC0071 /* shop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4977333B1C5AAFD000EC0071 /* shop.jpg */; };
 		4977333E1C5AB01E00EC0071 /* trivia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4977333D1C5AB01E00EC0071 /* trivia.jpg */; };
+		497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */; };
+		497ABF791C89286D005463C9 /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497ABF781C89286D005463C9 /* Shopping.swift */; };
+		497ABF7B1C894E61005463C9 /* thetake-logo-nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 497ABF7A1C894E61005463C9 /* thetake-logo-nav@2x.png */; };
 		497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECCB1C61412E000C6636 /* ProfileViewController.swift */; };
 		497DECCE1C61743A000C6636 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECCD1C61743A000C6636 /* Bookmark.swift */; };
 		497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497DECCF1C61754A000C6636 /* BookmarkCell.xib */; };
@@ -65,6 +67,9 @@
 		49F3EADB1C517ADA00E09484 /* ExtrasContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADA1C517ADA00E09484 /* ExtrasContentViewController.swift */; };
 		49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EADC1C51890A00E09484 /* VideoCell.xib */; };
 		49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADE1C518ABE00E09484 /* VideoCell.swift */; };
+		49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */; };
+		49F502531C890DF500DFAD88 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F502521C890DF500DFAD88 /* TwitterKit.framework */; };
+		49F502551C890E6500DFAD88 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F502541C890E6500DFAD88 /* Twitter.framework */; };
 		6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */; };
 		6AA9CCC51C883EE2005EBA92 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC11C883E91005EBA92 /* RobotoCondensed-Bold.ttf */; };
 		6AA9CCC61C883EE2005EBA92 /* RobotoCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC21C883E91005EBA92 /* RobotoCondensed-Italic.ttf */; };
@@ -385,6 +390,9 @@
 		497733351C5AAD9B00EC0071 /* scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scene.jpg; sourceTree = "<group>"; };
 		4977333B1C5AAFD000EC0071 /* shop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shop.jpg; sourceTree = "<group>"; };
 		4977333D1C5AB01E00EC0071 /* trivia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = trivia.jpg; sourceTree = "<group>"; };
+		497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
+		497ABF781C89286D005463C9 /* Shopping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
+		497ABF7A1C894E61005463C9 /* thetake-logo-nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thetake-logo-nav@2x.png"; sourceTree = "<group>"; };
 		497DECCB1C61412E000C6636 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		497DECCD1C61743A000C6636 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		497DECCF1C61754A000C6636 /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
@@ -413,6 +421,8 @@
 		49F3EADA1C517ADA00E09484 /* ExtrasContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasContentViewController.swift; sourceTree = "<group>"; };
 		49F3EADC1C51890A00E09484 /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		49F3EADE1C518ABE00E09484 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		49F502521C890DF500DFAD88 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = Pods/TwitterKit/TwitterKit.framework; sourceTree = "<group>"; };
+		49F502541C890E6500DFAD88 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		6AA9CCC11C883E91005EBA92 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
 		6AA9CCC21C883E91005EBA92 /* RobotoCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Italic.ttf"; sourceTree = "<group>"; };
@@ -692,7 +702,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F502551C890E6500DFAD88 /* Twitter.framework in Frameworks */,
 				49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */,
+				49F502531C890DF500DFAD88 /* TwitterKit.framework in Frameworks */,
 				492267EE1C7B911100B306A2 /* Social.framework in Frameworks */,
 				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
 				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
@@ -764,6 +776,7 @@
 				490213451C850A0100071552 /* GalleryDetailViewController.swift */,
 				490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
+				497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */,
 				490213471C860C9A00071552 /* SharingViewController.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
@@ -811,6 +824,8 @@
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49F502541C890E6500DFAD88 /* Twitter.framework */,
+				49F502521C890DF500DFAD88 /* TwitterKit.framework */,
 				49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */,
 				492267ED1C7B911100B306A2 /* Social.framework */,
 				7071C54B1C6BCC11006F4275 /* libxml2.tbd */,
@@ -1216,6 +1231,7 @@
 				707E10891C40820500FCF81C /* Talent.swift */,
 				70C9E0B21C46CECE002D3B5A /* Video.swift */,
 				7077A37E1C49AB8500843782 /* Scene.swift */,
+				497ABF781C89286D005463C9 /* Shopping.swift */,
 				497DECCD1C61743A000C6636 /* Bookmark.swift */,
 				49CB44C61C7CCAD700753227 /* ShoppingCell.swift */,
 				497DECCF1C61754A000C6636 /* BookmarkCell.xib */,
@@ -1247,6 +1263,7 @@
 		70C9E9D81C640A97004DF35B /* Interior Experience */ = {
 			isa = PBXGroup;
 			children = (
+				497ABF7A1C894E61005463C9 /* thetake-logo-nav@2x.png */,
 				70C9E9D91C640A97004DF35B /* interior_bg.jpg */,
 			);
 			path = "Interior Experience";
@@ -1383,6 +1400,7 @@
 				7077A3651C4989C200843782 /* crowe_thumb.jpg in Resources */,
 				7077A36D1C4989C200843782 /* meloni_thumb.jpg in Resources */,
 				70C9E9DA1C640A97004DF35B /* interior_bg.jpg in Resources */,
+				49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */,
 				6AA9CCC71C883EE2005EBA92 /* RobotoCondensed-Regular.ttf in Resources */,
 				7077A3681C4989C200843782 /* lane_full.jpg in Resources */,
 				7077A3871C49C66F00843782 /* timberline_thumb.jpg in Resources */,
@@ -1411,6 +1429,7 @@
 				497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */,
 				7077A3671C4989C200843782 /* fishburne_thumb.jpg in Resources */,
 				49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */,
+				497ABF7B1C894E61005463C9 /* thetake-logo-nav@2x.png in Resources */,
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
 				49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */,
 				49C1E6671C8108730076E9F3 /* edwards.jpg in Resources */,
@@ -1442,7 +1461,6 @@
 				492267E61C7694D000B306A2 /* CommentaryView.xib in Resources */,
 				7077A36F1C4989C200843782 /* schiff_thumb.jpg in Resources */,
 				7077A3591C4989C200843782 /* menu_bg.jpg in Resources */,
-				4921D97C1C3EFD0B00ED2AA6 /* Main.storyboard in Resources */,
 				492267D81C73F41300B306A2 /* Shopping.plist in Resources */,
 				7077A3861C49C66F00843782 /* timberline_full.jpg in Resources */,
 				70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */,
@@ -1612,6 +1630,7 @@
 				7071C4D91C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureProgressiveType.swift in Sources */,
 				7071C4951C6BCBF6006F4275 /* NGEALIDExperienceMapType.swift in Sources */,
 				7071C4DE1C6BCBF6006F4275 /* NGEDisplayLabel.swift in Sources */,
+				497ABF791C89286D005463C9 /* Shopping.swift in Sources */,
 				7071C4921C6BCBF6006F4275 /* NGEAbbreviatedMetadataType.swift in Sources */,
 				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				7071C4FA1C6BCBF6006F4275 /* NGEHashType.swift in Sources */,
@@ -1744,6 +1763,7 @@
 				7071C4B01C6BCBF6006F4275 /* NGECompObjDataType.swift in Sources */,
 				7071C51C1C6BCBF6006F4275 /* NGEPersonIdentifierType.swift in Sources */,
 				7071C4F71C6BCBF6006F4275 /* NGEGenderEnum.swift in Sources */,
+				497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */,
 				7071C53C1C6BCBF6006F4275 /* NGETextString.swift in Sources */,
 				7071C4DD1C6BCBF6006F4275 /* NGEDisplayIndicatorsEnum.swift in Sources */,
 				7071C4FF1C6BCBF6006F4275 /* NGEInventoryAudioType.swift in Sources */,
@@ -1914,6 +1934,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/TwitterKit",
+				);
 				INFOPLIST_FILE = NextGen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1933,6 +1957,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/TwitterKit",
+				);
 				INFOPLIST_FILE = NextGen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

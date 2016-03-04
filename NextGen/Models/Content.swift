@@ -57,6 +57,15 @@ class Content: NSObject {
                 sceneObj.triviaImage = (trivia["image"] as? String)!
                 sceneObj.triviaFact = (trivia["fact"] as? String)!
             }
+            
+            if let shopping = scene["shopping"] as? NSArray{
+                for item in shopping{
+                    let shoppingObj = Shopping(info: item as! NSDictionary)
+                    sceneObj.shopping.append(shoppingObj)
+                    
+                }
+                
+            }
         }
         
         sceneKeys = scenes.keys.sort { $0 < $1 }
