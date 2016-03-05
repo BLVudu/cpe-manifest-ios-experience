@@ -388,7 +388,15 @@
             "poster_image": "https://resizing.flixster.com/lhmSvFu-P5Gdkjeg15aAkHe2adE=/180x240/dkpu1ddg7pbsk.cloudfront.net/movie/11/37/75/11377594_ori.jpg",
             "external_url": "https://video.flixster.com/movies/stardust/urn:dece:cid:org:ppc:000003475600100003753"
           }
-        ]
+        ],
+        "gallery":[
+               "http://henrycavill.org/plugins/content/jw_sigpro/jw_sigpro/includes/download.php?file=images/Photoshoots/2015-08-Vanity/VanityFairItalia26Agosto2015-385.jpg",
+                "http://henrycavill.org/plugins/content/jw_sigpro/jw_sigpro/includes/download.php?file=images/Candids/2015-12-16/Henry-Cavill-coat-002.jpg",
+                "http://henrycavill.org/plugins/content/jw_sigpro/jw_sigpro/includes/download.php?file=images/Events/2016-02-28/512918868.jpg",
+                "http://henrycavill.org/plugins/content/jw_sigpro/jw_sigpro/includes/download.php?file=images/Events/2015-11-17/Dunhill.png",
+                "http://henrycavill.org/plugins/content/jw_sigpro/jw_sigpro/includes/download.php?file=images/Events/2016-01-10/Henry-Cavill-Dunhill-012.jpg",
+                "http://henrycavill.org/plugins/content/jw_sigpro/jw_sigpro/includes/download.php?file=images/Films/2014-Man-from-UNCLE/posters/Character-N.jpg",
+                "http://henrycavill.org/plugins/content/jw_sigpro/jw_sigpro/includes/download.php?file=images/Events/2016-02-28-vanity/513088500.jpg",]
       },
       {
         "id": "nge:actor-adams",

@@ -1,29 +1,30 @@
 //
-//  ImageGalleryViewController.swift
+//  MediaGalleryViewController.swift
 //  NextGen
 //
-//  Created by Alec Ananian on 2/11/16.
+//  Created by Sedinam Gadzekpo on 3/4/16.
 //  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit
 import MWPhotoBrowser
 
-class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
+class MediaGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     
     var _photos = [MWPhoto]()
-    var imageGallery: NGEGalleryType! {
+    var imageGallery = [String](){
         didSet {
             _photos.removeAll()
-            for picture in imageGallery.pictures() {
-                _photos.append(MWPhoto(URL: picture.imageURL()))
+            for pictureLink in imageGallery {
+                let url = NSURL(string: pictureLink)
+                _photos.append(MWPhoto(URL:url))
             }
             
             self.setCurrentPhotoIndex(0)
             self.reloadData()
         }
         
-    
+        
     }
     
     // MARK: View Lifecycle
@@ -35,7 +36,7 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         super.viewDidLoad()
         
         
-          }
+    }
     
     override func setNavBarAppearance(animated: Bool) {
         print(currentIndex)
@@ -58,18 +59,9 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     
     func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
         
-            return _photos[Int(index)]
-     
-    
-        
-        
-    }
-    
-    func photoBrowser(photoBrowser: MWPhotoBrowser!, didDisplayPhotoAtIndex index: UInt) {
-        NSNotificationCenter.defaultCenter().postNotificationName("updateControl", object: nil, userInfo: ["index": self.currentIndex])
+        return _photos[Int(index)]
         
     }
     
     
-
 }

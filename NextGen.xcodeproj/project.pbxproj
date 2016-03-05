@@ -70,6 +70,8 @@
 		49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */; };
 		49F502531C890DF500DFAD88 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F502521C890DF500DFAD88 /* TwitterKit.framework */; };
 		49F502551C890E6500DFAD88 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F502541C890E6500DFAD88 /* Twitter.framework */; };
+		49F684A01C8A3FC60066C5A2 /* MediaGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */; };
+		49F684A21C8A5F7F0066C5A2 /* ActorGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F684A11C8A5F7F0066C5A2 /* ActorGalleryViewController.swift */; };
 		6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */; };
 		6AA9CCC51C883EE2005EBA92 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC11C883E91005EBA92 /* RobotoCondensed-Bold.ttf */; };
 		6AA9CCC61C883EE2005EBA92 /* RobotoCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC21C883E91005EBA92 /* RobotoCondensed-Italic.ttf */; };
@@ -423,6 +425,8 @@
 		49F3EADE1C518ABE00E09484 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		49F502521C890DF500DFAD88 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = Pods/TwitterKit/TwitterKit.framework; sourceTree = "<group>"; };
 		49F502541C890E6500DFAD88 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaGalleryViewController.swift; sourceTree = "<group>"; };
+		49F684A11C8A5F7F0066C5A2 /* ActorGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorGalleryViewController.swift; sourceTree = "<group>"; };
 		6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		6AA9CCC11C883E91005EBA92 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
 		6AA9CCC21C883E91005EBA92 /* RobotoCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Italic.ttf"; sourceTree = "<group>"; };
@@ -774,10 +778,12 @@
 				4903F9AA1C48683200701479 /* SettingsMenuViewController.swift */,
 				49E546471C84BF1600DBD318 /* MapDetailViewController.swift */,
 				490213451C850A0100071552 /* GalleryDetailViewController.swift */,
+				49F684A11C8A5F7F0066C5A2 /* ActorGalleryViewController.swift */,
 				490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */,
 				490213471C860C9A00071552 /* SharingViewController.swift */,
+				49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
 				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
@@ -1553,6 +1559,7 @@
 				4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */,
 				49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */,
 				4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */,
+				49F684A01C8A3FC60066C5A2 /* MediaGalleryViewController.swift in Sources */,
 				7071C5031C6BCBF6006F4275 /* NGEInventoryMetadataLocalizedPairType.swift in Sources */,
 				7071C4C11C6BCBF6006F4275 /* NGEDateTimeRangeType.swift in Sources */,
 				7071C51D1C6BCBF6006F4275 /* NGEPersonNameType.swift in Sources */,
@@ -1760,6 +1767,7 @@
 				7071C4E11C6BCBF6006F4275 /* NGEEarthCoordinate.swift in Sources */,
 				7071C4C41C6BCBF6006F4275 /* NGEDigitalAssetAudioEncodingType.swift in Sources */,
 				7071C5411C6BCBF6006F4275 /* NGETitleAlternate.swift in Sources */,
+				49F684A21C8A5F7F0066C5A2 /* ActorGalleryViewController.swift in Sources */,
 				7071C4B01C6BCBF6006F4275 /* NGECompObjDataType.swift in Sources */,
 				7071C51C1C6BCBF6006F4275 /* NGEPersonIdentifierType.swift in Sources */,
 				7071C4F71C6BCBF6006F4275 /* NGEGenderEnum.swift in Sources */,

@@ -30,6 +30,7 @@ class Talent: NSObject {
     var facebookID: String?
     var twitter: String?
     var films = [Film]()
+    var gallery = [String]()
     
     required init(info: NSDictionary) {
         super.init()
@@ -50,6 +51,12 @@ class Talent: NSObject {
         if let filmography = info["filmography"] as? NSArray {
             for film in filmography {
                 films.append(Film(info: film as! NSDictionary))
+            }
+        }
+        
+        if let images = info["gallery"] as? NSArray{
+            for image in images{
+            gallery.append(image as! String)
             }
         }
     }

@@ -21,11 +21,14 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     @IBOutlet weak var talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak var talentBiographyLabel: UITextView!
     
+    @IBOutlet weak var galleryView: UIView!
     @IBOutlet weak var filmographyContainerView: UIView!
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
+    @IBOutlet weak var showGallery: UIButton!
     @IBOutlet weak var twProfile: SocialButton!
     @IBOutlet weak var fbProfile: SocialButton!
+    var images = [String]()
     var talent: Talent? = nil {
         didSet {
             talentNameLabel.text = talent?.name.uppercaseString
@@ -43,6 +46,12 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
             } else {
                 filmographyContainerView.hidden = true
             }
+            
+            if talent != nil && talent?.gallery.count > 0{
+                images = (talent?.gallery)!
+            } else {
+                self.showGallery.userInteractionEnabled = false
+            }
         }
     }
     
@@ -51,7 +60,8 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.performSelector(("showIndicators"), withObject: nil, afterDelay: 0.0)
+        //self.performSelector(("showIndicators"), withObject: nil, afterDelay: 0.0)
+       
         
 
     }
@@ -69,6 +79,8 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
         filmographyCollectionView.backgroundColor = UIColor.clearColor()
         filmographyCollectionView.showsHorizontalScrollIndicator = true
         self.twProfile.backgroundColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1.0)
+        self.showGallery.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+        
 
         
                     }
@@ -82,6 +94,11 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
         }
     }
     
+       @IBAction func displayGallery(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("showActorGallery", sender: nil)
+       
+    }
     @IBAction func loadTwitter(sender: SocialButton) {
         
         
@@ -92,6 +109,15 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     @IBAction func loadFacebook(sender: SocialButton) {
         
         sender.loadProfile("FB")
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+         if segue.identifier == "showActorGallery"{
+            
+            let actorGalleryVC = segue.destinationViewController as! ActorGalleryViewController
+            
+            actorGalleryVC.images = (talent?.gallery)!
+        }
     }
     
     // MARK: UICollectionViewDataSource
