@@ -102,7 +102,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                 break
                 */
             case SceneDetailItemType.Gallery.rawValue:
-                cell.title = "Scene Gallery"
+                cell.title = "SCENE GALLERY"
                 cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
                 cell.descriptionLabel.text = cellDetails[indexPath.row][1]
 
