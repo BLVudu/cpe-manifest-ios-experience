@@ -9,6 +9,9 @@
 import UIKit
 
 
+
+
+
 class ActorGalleryViewController: UIViewController{
     
     var images = [String]()
@@ -23,13 +26,16 @@ class ActorGalleryViewController: UIViewController{
     }
     
     
-
+   
     
     override func viewDidLoad() {
         let mediaViewController = mediaGalleryViewController()
         mediaViewController?.imageGallery = images
 
     }
+    
+   
+
     
     @IBAction func close(sender: AnyObject) {
         

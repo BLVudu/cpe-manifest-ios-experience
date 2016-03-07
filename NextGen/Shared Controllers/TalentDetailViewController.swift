@@ -96,6 +96,8 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     
        @IBAction func displayGallery(sender: AnyObject) {
         
+        self.galleryView.hidden = false
+        
         self.performSegueWithIdentifier("showActorGallery", sender: nil)
        
     }
