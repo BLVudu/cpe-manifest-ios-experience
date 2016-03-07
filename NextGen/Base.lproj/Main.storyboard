@@ -1863,7 +1863,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="108" id="YBR-Bk-4R0"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8jG-0Z-lI2">
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="8jG-0Z-lI2">
                                             <size key="itemSize" width="213" height="107"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1882,6 +1882,11 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="78" id="ZlT-lA-HJa"/>
                                                             </constraints>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="ZlT-lA-HJa"/>
+                                                                </mask>
+                                                            </variation>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XER-Bz-9pc">
                                                             <rect key="frame" x="85" y="8" width="120" height="35"/>
@@ -2361,7 +2366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ESk-3C-nL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1666" y="5789"/>
+            <point key="canvasLocation" x="1621" y="5947"/>
         </scene>
         <!--Actor Gallery View Controller-->
         <scene sceneID="yVb-t7-RUF">

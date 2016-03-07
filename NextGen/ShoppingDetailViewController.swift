@@ -38,7 +38,7 @@ class ShoppingDetailCell: UICollectionViewCell{
 }
 
 
-class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MFMailComposeViewControllerDelegate{
+class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MFMailComposeViewControllerDelegate, UICollectionViewDelegateFlowLayout{
     
     var items = [Shopping]()
     var curItem = 0
@@ -66,7 +66,7 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
     
     override func viewDidLoad() {
         
-        //print(self.view.frame.width)
+
         if self.view.frame.width == 768{
            self.buttonSpacing.constant = -97
         } else {
@@ -74,7 +74,7 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
         }
         
         
-        //print(self.buttonSpacing.constant)
+        print(self.shoppingItems.frame.height)
        
         
         self.brandName.text = items[curItem].itemBrand
@@ -83,6 +83,11 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
         self.itemView.setImageWithURL(NSURL(string: items[curItem].itemimage)!)
   
 
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        return CGSizeMake(250, self.shoppingItems.frame.height)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
