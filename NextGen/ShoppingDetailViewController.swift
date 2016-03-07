@@ -51,6 +51,9 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
     @IBOutlet weak var theTake: UIButton!
     @IBOutlet weak var emailLink: UIButton!
 
+    @IBOutlet weak var buttonSpacing: NSLayoutConstraint!
+
+    
     
     
     @IBOutlet weak var shoppingItems: UICollectionView!
@@ -62,6 +65,17 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
     
     
     override func viewDidLoad() {
+        
+        //print(self.view.frame.width)
+        if self.view.frame.width == 768{
+           self.buttonSpacing.constant = -97
+        } else {
+            self.buttonSpacing.constant = -150
+        }
+        
+        
+        //print(self.buttonSpacing.constant)
+       
         
         self.brandName.text = items[curItem].itemBrand
         self.itemName.text = items[curItem].itemName
@@ -80,6 +94,8 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
         
         return cell
     }
+    
+   
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
