@@ -43,6 +43,7 @@
 		497DECCE1C61743A000C6636 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECCD1C61743A000C6636 /* Bookmark.swift */; };
 		497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497DECCF1C61754A000C6636 /* BookmarkCell.xib */; };
 		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
+		4986F8351C8F91D100FF60EB /* CustomScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4986F8341C8F91D100FF60EB /* CustomScrubber.swift */; };
 		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E65C1C7E60530076E9F3 /* share.jpg */; };
@@ -399,6 +400,7 @@
 		497DECCD1C61743A000C6636 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		497DECCF1C61754A000C6636 /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
 		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
+		4986F8341C8F91D100FF60EB /* CustomScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrubber.swift; sourceTree = "<group>"; };
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49C1E65C1C7E60530076E9F3 /* share.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = share.jpg; sourceTree = "<group>"; };
@@ -1243,6 +1245,7 @@
 				497DECCF1C61754A000C6636 /* BookmarkCell.xib */,
 				49CB44BC1C7CA65700753227 /* ShoppingCell.xib */,
 				497DECD11C6176CF000C6636 /* BookmarkCell.swift */,
+				4986F8341C8F91D100FF60EB /* CustomScrubber.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1652,6 +1655,7 @@
 				7071C51B1C6BCBF6006F4275 /* NGEOtherIDType.swift in Sources */,
 				7071C4DB1C6BCBF6006F4275 /* NGEDigitalAssetVideoSubtitleLanguageType.swift in Sources */,
 				7071C5121C6BCBF6006F4275 /* NGEMediaManifestType+File.swift in Sources */,
+				4986F8351C8F91D100FF60EB /* CustomScrubber.swift in Sources */,
 				70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */,
 				7071C4E51C6BCBF6006F4275 /* NGEEventPeriodType.swift in Sources */,
 				7071C53F1C6BCBF6006F4275 /* NGETimedEventSequenceType.swift in Sources */,

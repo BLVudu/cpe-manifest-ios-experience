@@ -538,6 +538,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 }
 
 - (void)viewDidLoad {
+    
     // Disable OS Idle timer
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     

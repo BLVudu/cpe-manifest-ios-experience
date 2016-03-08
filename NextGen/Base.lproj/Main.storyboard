@@ -1159,8 +1159,9 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yBz-nT-qfC">
+                                    <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yBz-nT-qfC" customClass="CustomScrubber" customModule="NextGen" customModuleProvider="target">
                                         <rect key="frame" x="92" y="7" width="805" height="31"/>
+                                        <color key="minimumTrackTintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="beginScrubbing:" destination="FsK-dw-pgC" eventType="touchDown" id="RN9-Kl-8aZ"/>
                                             <action selector="endScrubbing:" destination="FsK-dw-pgC" eventType="touchUpInside" id="9mC-FJ-7wc"/>
