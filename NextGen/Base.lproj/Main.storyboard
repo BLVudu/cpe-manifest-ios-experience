@@ -2404,13 +2404,13 @@
                                             <action selector="close:" destination="pqd-81-fRE" eventType="touchUpInside" id="0qK-RN-GA1"/>
                                         </connections>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YiE-XK-tQq">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YiE-XK-tQq">
                                         <rect key="frame" x="8" y="585" width="738" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="CNL-f6-3ML"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rjl-RC-j2e">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rjl-RC-j2e">
                                             <size key="itemSize" width="100" height="100"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2485,7 +2485,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="caroselView" destination="cUd-Mu-vG9" id="4yZ-gZ-CEk"/>
+                        <outlet property="carouselView" destination="YiE-XK-tQq" id="eQU-5d-03I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rm3-Ui-fwF" userLabel="First Responder" sceneMemberID="firstResponder"/>

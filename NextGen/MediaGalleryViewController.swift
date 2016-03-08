@@ -59,9 +59,34 @@ class MediaGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     
     func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
         
-        return _photos[Int(index)]
+    
+                return _photos[Int(index)]
         
     }
+    
+    
+    func photoBrowser(photoBrowser: MWPhotoBrowser!, didDisplayPhotoAtIndex index: UInt) {
+ 
+        NSNotificationCenter.defaultCenter().addObserverForName("updateViewer", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            if let userInfo = notification.userInfo {
+
+                self.setCurrentPhotoIndex(userInfo["index"] as! UInt)
+                
+            }
+            
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("updateCarousel", object: nil, userInfo: ["index": self.currentIndex])
+
+        
+        
+        
+
+        
+    }
+    
+    
+
     
     
     

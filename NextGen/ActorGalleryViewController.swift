@@ -37,9 +37,10 @@ class ActorGalleryCell: UICollectionViewCell{
 
 
 
-class ActorGalleryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
+class ActorGalleryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
-    @IBOutlet weak var caroselView: UIView!
+    @IBOutlet weak var carouselView: UICollectionView!
+ 
     var images = [String]()
     func mediaGalleryViewController() -> MediaGalleryViewController? {
         for viewController in self.childViewControllers {
@@ -57,6 +58,21 @@ class ActorGalleryViewController: UIViewController, UICollectionViewDataSource, 
     override func viewDidLoad() {
         let mediaViewController = mediaGalleryViewController()
         mediaViewController?.imageGallery = images
+        
+        let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        self.carouselView.selectItemAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.CenteredHorizontally)
+        self.collectionView(self.carouselView, didSelectItemAtIndexPath: selectedIndexPath)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("updateCarousel", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            if let userInfo = notification.userInfo {
+                let viewerIndexPath = NSIndexPath(forRow: userInfo["index"]as! Int, inSection: 0)
+                self.carouselView.selectItemAtIndexPath(viewerIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.CenteredHorizontally)
+                
+                
+            }
+        }
+
+        
 
     }
     
@@ -73,21 +89,18 @@ class ActorGalleryViewController: UIViewController, UICollectionViewDataSource, 
     
     }
     
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        return CGSizeMake(100, 100)
+        NSNotificationCenter.defaultCenter().postNotificationName("updateViewer", object: nil, userInfo: ["index": indexPath.row])
+        
+        
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
-
-
     
-   
 
-    
     @IBAction func close(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
