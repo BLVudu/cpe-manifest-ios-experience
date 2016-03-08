@@ -34,9 +34,9 @@ class MediaGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         self.displayActionButton = false
         
         super.viewDidLoad()
-        
-        
+                
     }
+    
     
     override func setNavBarAppearance(animated: Bool) {
         print(currentIndex)
@@ -62,6 +62,8 @@ class MediaGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         return _photos[Int(index)]
         
     }
+    
+    
     
     
 }

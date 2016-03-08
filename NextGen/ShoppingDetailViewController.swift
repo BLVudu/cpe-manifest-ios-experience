@@ -72,9 +72,6 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
         } else {
             self.buttonSpacing.constant = -150
         }
-        
-        
-        print(self.shoppingItems.frame.height)
        
         
         self.brandName.text = items[curItem].itemBrand
