@@ -145,40 +145,36 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NextGenDataManager.sharedInstance.outOfMovieExperienceCategories().count
+        return NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
-            let experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row]
-            cell.extrasTitle.text = experience.metadata()?.fullTitle()
-            if let thumbnailPath = experience.thumbnailImagePath() {
-                cell.extraImg.setImageWithURL(NSURL(string: thumbnailPath)!)
-            
+        
+        let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
+        cell.extrasTitle.text = experience.metadata?.title
+        if let thumbnailImagePath = experience.thumbnailImagePath {
+            cell.extraImg.setImageWithURL(NSURL(string: thumbnailImagePath)!)
         }
-       
-       
+        
         return cell
     }
     
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-            self.performSegueWithIdentifier(ExtrasContentSegueIdentifier, sender: NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[indexPath.row])
-           }
+        self.performSegueWithIdentifier(ExtrasContentSegueIdentifier, sender: NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row])
+    }
     
     
     // MARK: Storyboard
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let experience = sender as? NGEExperienceType {
+        if let experience = sender as? NGDMExperience {
             if segue.identifier == ExtrasContentSegueIdentifier && segue.destinationViewController.isKindOfClass(ExtrasContentViewController) {
                 let contentViewController = segue.destinationViewController as! ExtrasContentViewController
                 contentViewController.experience = experience
             }
         }
-        
-        
     }
 }
 

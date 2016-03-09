@@ -13,12 +13,11 @@ import FBSDKCoreKit
 import TwitterKit
 import MessageUI
 
-let kSceneDidChange = "kSceneDidChange"
+let kVideoPlayerTimeDidChange = "kVideoPlayerTimeDidChange"
 
 class VideoPlayerViewController: WBVideoPlayerViewController{
     
     var video: Video?
-    var currentScene: Scene?
     var didPlayInterstitial = false
     var showsTopToolbar = true
     let shared = FBSDKShareLinkContent()
@@ -33,14 +32,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
         super.viewDidLoad()
         
         if video != nil {
-            if video!.interstitialUrl != nil {
-                self.playerControlsVisible = false
-                self.lockPlayerControls = true
+            //if video!.interstitialUrl != nil {
+            //    self.playerControlsVisible = false
+            //    self.lockPlayerControls = true
                 // self.playVideoWithURL(video!.interstitialUrl)
-                self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
-            } else {
+            //    self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
+            //} else {
                 playPrimaryVideo()
-            }
+            //}
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName("pauseMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
@@ -89,28 +88,17 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
         super.syncScrubber()
         if player != nil {
             var curTime = (CMTimeGetSeconds(player.currentTime()))
-            if (curTime.isNaN == true){
-                
+            if (curTime.isNaN == true) {
                 curTime = 0.0
             }
             
-            let newScene = DataManager.sharedInstance.content?.sceneAtTime(Int(curTime))
-            
-            if newScene != self.currentScene {
-                currentScene = newScene
-                NSNotificationCenter.defaultCenter().postNotificationName(kSceneDidChange, object: nil, userInfo: ["scene": currentScene!])
-                if (self.currentScene?.canShare == false){
-                   self.shareContent.alpha = 0.5
-                } else{
-                   self.shareContent.alpha = 1
-                }
-                self.shareContent.userInteractionEnabled = (self.currentScene?.canShare)!
-                
-
-
-                
+            NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerTimeDidChange, object: nil, userInfo: ["time": Double(curTime)])
+            /*if (self.currentScene?.canShare == false){
+                self.shareContent.alpha = 0.5
+            } else{
+                self.shareContent.alpha = 1
             }
-        
+            self.shareContent.userInteractionEnabled = (self.currentScene?.canShare)!*/
         }
     }
 

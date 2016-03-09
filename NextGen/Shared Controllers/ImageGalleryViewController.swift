@@ -12,11 +12,11 @@ import MWPhotoBrowser
 class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     
     var _photos = [MWPhoto]()
-    var imageGallery: NGEGalleryType! {
+    var gallery: NGDMGallery! {
         didSet {
             _photos.removeAll()
-            for picture in imageGallery.pictures() {
-                _photos.append(MWPhoto(URL: picture.imageURL()))
+            for picture in gallery.pictures {
+                _photos.append(MWPhoto(URL: picture.imageURL))
             }
             
             self.setCurrentPhotoIndex(0)

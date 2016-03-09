@@ -23,10 +23,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveBtn: UIButton!
 
-    
-    var experience: NGEExperienceType!
-    
-
+    var experience: NGDMExperience!
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -39,9 +36,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.tableView, didSelectRowAtIndexPath: selectedIndexPath)
-
-
-            }
+    }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
@@ -76,20 +71,12 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         cell.backgroundColor = UIColor.clearColor()
         cell.selectionStyle = .None
         
-        let thisExperience = experience.childExperiences()[indexPath.row]
-        
-        if(thisExperience.isImageGallery() == true){
-            cell.playBtn.hidden = true
-            cell.isGallery = true
-        } else {
-            cell.playBtn.hidden = false
-            cell.isGallery = false
-        }
-        
-        
-        cell.caption.text = thisExperience.metadata()?.fullTitle()
-        if let thumbnailPath = thisExperience.thumbnailImagePath() {
-            cell.thumbnail.setImageWithURL(NSURL(string: thumbnailPath)!)
+        let thisExperience = experience.childExperiences[indexPath.row]
+        cell.isGallery = thisExperience.isGallery()
+        cell.playBtn.hidden = !cell.isGallery
+        cell.caption.text = thisExperience.metadata?.title
+        if let thumbnailImagePath = thisExperience.thumbnailImagePath {
+            cell.thumbnail.setImageWithURL(NSURL(string: thumbnailImagePath)!)
         } else {
             cell.thumbnail.image = nil
         }
@@ -98,7 +85,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return experience.childExperiences().count
+        return experience.childExperiences.count
     }
     
     
@@ -111,7 +98,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
         
         let title = UILabel(frame: CGRectMake(10, 10, tableView.frame.size.width, 40))
-        title.text = experience.metadata()?.fullTitle()
+        title.text = experience.metadata?.title
         title.textColor = UIColor.whiteColor()
         title.font = UIFont(name: "Helvetica", size: 25.0)
         headerView.addSubview(title)
@@ -135,16 +122,16 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let thisExperience = experience.childExperiences()[indexPath.row]
+        let thisExperience = experience.childExperiences[indexPath.row]
         
-        mediaTitleLabel.text = thisExperience.metadata()?.fullTitle()
-        mediaDescriptionLabel.text = thisExperience.metadata()?.fullSummary()
+        mediaTitleLabel.text = thisExperience.metadata?.title
+        mediaDescriptionLabel.text = thisExperience.metadata?.description
         
-        if thisExperience.isVideoGallery() {
+        if thisExperience.isAudioVisual() {
             videoContainerView.hidden = false
             imageContainerView.hidden = true
             
-            if let videoURL = thisExperience.videoURL(), videoPlayerViewController = videoPlayerViewController() {
+            if let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController() {
                 if let player = videoPlayerViewController.player {
                     player.removeAllItems()
                 }
@@ -158,23 +145,13 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
             videoContainerView.hidden = true
             imageContainerView.hidden = false
             
-            if let imageGallery = thisExperience.imageGallery(), imageGalleryViewController = imageGalleryViewController() {
-                
-                imageGalleryViewController.imageGallery = imageGallery
-                if let title = imageGallery.metadata()?.fullTitle() {
-                    mediaTitleLabel.text = title
-                }
-                
-                if let description = imageGallery.metadata()?.fullSummary() {
-                    mediaDescriptionLabel.text = description
-                }
-
+            if let imageGallery = thisExperience.imageGallery, imageGalleryViewController = imageGalleryViewController() {
+                imageGalleryViewController.gallery = imageGallery
+                mediaTitleLabel.text = imageGallery.metadata?.title
+                mediaDescriptionLabel.text = imageGallery.metadata?.description
             }
         }
-        
-       
     }
-    
     
 }
     

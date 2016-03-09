@@ -65,7 +65,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         centerMapOnLocation(initialLocation, region: regionRadius, view:mapView)
-        experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[2]
+        //experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[2]
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = initialLocation.coordinate
@@ -105,7 +105,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let thisExperience = experience.childExperiences()[0]
+        //let thisExperience = experience.childExperiences()[0]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("mapCell", forIndexPath: indexPath) as! MapDetailCell
 
         
@@ -117,12 +117,12 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
             cell.playBtn.hidden = true
         }
          else if indexPath.row == locationImages.count+1 {
-            let imgData = NSData(contentsOfURL:NSURL(string: (thisExperience.thumbnailImagePath()! as String))!)
+            /*let imgData = NSData(contentsOfURL:NSURL(string: (thisExperience.thumbnailImagePath()! as String))!)
             cell.isVideo = true
             cell.mapImage.image = UIImage(data: imgData!)
             cell.mapThumbnail.hidden = true
             cell.label.hidden = true
-            cell.playBtn.hidden = false
+            cell.playBtn.hidden = false*/
             
         } else {
         let imgData = NSData(contentsOfURL:NSURL(string: locationImages[indexPath.row-1] as! String)!)
@@ -149,7 +149,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
             NSNotificationCenter.defaultCenter().postNotificationName("pauseMovie", object: nil)
             self.videoView.hidden = false
             self.imageView.hidden = true
-            let thisExperience = experience.childExperiences()[0]
+            /*let thisExperience = experience.childExperiences()[0]
             if let videoURL = thisExperience.videoURL(), videoPlayerViewController = videoPlayerViewController() {
                 if let player = videoPlayerViewController.player {
                     player.removeAllItems()
@@ -166,7 +166,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
   
                 }
  
-            }
+            }*/
         
         }
         else if (indexPath.row == 0){

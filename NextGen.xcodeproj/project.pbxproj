@@ -86,6 +86,19 @@
 		701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C71C482AF70047A67A /* NSURL+Utils.swift */; };
 		701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C91C482C210047A67A /* UIAlertController+Utils.swift */; };
 		701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69CB1C482E060047A67A /* UIImageView+Utils.swift */; };
+		70367AAF1C8F67B30042B5B5 /* NGDMExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AAE1C8F67B30042B5B5 /* NGDMExperience.swift */; };
+		70367AB11C8F69970042B5B5 /* NGDMMainExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB01C8F69970042B5B5 /* NGDMMainExperience.swift */; };
+		70367AB51C8F74560042B5B5 /* NGDMMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB41C8F74560042B5B5 /* NGDMMetadata.swift */; };
+		70367AB71C8F87AE0042B5B5 /* NGDMPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB61C8F87AE0042B5B5 /* NGDMPresentation.swift */; };
+		70367AB91C8F8BDE0042B5B5 /* NGDMGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB81C8F8BDE0042B5B5 /* NGDMGallery.swift */; };
+		70367ABD1C8F8DA30042B5B5 /* NGDMPictureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ABC1C8F8DA30042B5B5 /* NGDMPictureGroup.swift */; };
+		70367ABF1C8F8E9E0042B5B5 /* NGDMPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ABE1C8F8E9E0042B5B5 /* NGDMPicture.swift */; };
+		70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC01C8F8F420042B5B5 /* NGDMImage.swift */; };
+		70367AC31C8F9D450042B5B5 /* NGDMTimedEventSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC21C8F9D450042B5B5 /* NGDMTimedEventSequence.swift */; };
+		70367AC51C8F9E840042B5B5 /* NGDMTimedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC41C8F9E840042B5B5 /* NGDMTimedEvent.swift */; };
+		70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */; };
+		70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */; };
+		70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */; };
 		705288501C5B1AF400464C8B /* location.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7052884F1C5B1AF400464C8B /* location.jpg */; };
 		7065F5461C46FCC500A2C74E /* TalentTableViewCell-Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */; };
 		7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5471C47004100A2C74E /* TalentTableViewCell.swift */; };
@@ -273,8 +286,6 @@
 		7071C5461C6BCBF6006F4275 /* NGEVideoFrameTimecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C48B1C6BCBF6006F4275 /* NGEVideoFrameTimecode.swift */; };
 		7071C5471C6BCBF6006F4275 /* NGEVideoTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C48C1C6BCBF6006F4275 /* NGEVideoTrackReferenceType.swift */; };
 		7071C5481C6BCBF6006F4275 /* NextGenDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */; };
-		7071C5491C6BCBF6006F4275 /* NGEExperienceType+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C48F1C6BCBF6006F4275 /* NGEExperienceType+Data.swift */; };
-		7071C54A1C6BCBF6006F4275 /* NGEInventoryMetadataType+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C4901C6BCBF6006F4275 /* NGEInventoryMetadataType+Data.swift */; };
 		7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7071C54B1C6BCC11006F4275 /* libxml2.tbd */; };
 		7077A3151C49897900843782 /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3141C49897900843782 /* Data */; };
 		7077A34B1C4989C200843782 /* extras_galleries.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7077A31B1C4989C200843782 /* extras_galleries.jpg */; };
@@ -314,9 +325,8 @@
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
 		707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */; };
 		707E108A1C40820500FCF81C /* Talent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10891C40820500FCF81C /* Talent.swift */; };
+		7085F76D1C90D83D00DF31B6 /* NGDMVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
-		70B9FE3A1C6D3BC700CF1A22 /* NGEGalleryType+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE391C6D3BC700CF1A22 /* NGEGalleryType+Data.swift */; };
-		70B9FE3C1C6D3CC000CF1A22 /* NGEPictureType+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE3B1C6D3CC000CF1A22 /* NGEPictureType+Data.swift */; };
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
 		70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */; };
 		70B9FE481C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */; };
@@ -446,6 +456,19 @@
 		701D69C71C482AF70047A67A /* NSURL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Utils.swift"; sourceTree = "<group>"; };
 		701D69C91C482C210047A67A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utils.swift"; sourceTree = "<group>"; };
 		701D69CB1C482E060047A67A /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
+		70367AAE1C8F67B30042B5B5 /* NGDMExperience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMExperience.swift; sourceTree = "<group>"; };
+		70367AB01C8F69970042B5B5 /* NGDMMainExperience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMMainExperience.swift; sourceTree = "<group>"; };
+		70367AB41C8F74560042B5B5 /* NGDMMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMMetadata.swift; sourceTree = "<group>"; };
+		70367AB61C8F87AE0042B5B5 /* NGDMPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPresentation.swift; sourceTree = "<group>"; };
+		70367AB81C8F8BDE0042B5B5 /* NGDMGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMGallery.swift; sourceTree = "<group>"; };
+		70367ABC1C8F8DA30042B5B5 /* NGDMPictureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPictureGroup.swift; sourceTree = "<group>"; };
+		70367ABE1C8F8E9E0042B5B5 /* NGDMPicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPicture.swift; sourceTree = "<group>"; };
+		70367AC01C8F8F420042B5B5 /* NGDMImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMImage.swift; sourceTree = "<group>"; };
+		70367AC21C8F9D450042B5B5 /* NGDMTimedEventSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTimedEventSequence.swift; sourceTree = "<group>"; };
+		70367AC41C8F9E840042B5B5 /* NGDMTimedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTimedEvent.swift; sourceTree = "<group>"; };
+		70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextGroup.swift; sourceTree = "<group>"; };
+		70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextObject.swift; sourceTree = "<group>"; };
+		70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAudioVisual.swift; sourceTree = "<group>"; };
 		7052884F1C5B1AF400464C8B /* location.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = location.jpg; sourceTree = "<group>"; };
 		7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Wide.xib"; sourceTree = "<group>"; };
 		7065F5471C47004100A2C74E /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
@@ -634,8 +657,6 @@
 		7071C48B1C6BCBF6006F4275 /* NGEVideoFrameTimecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEVideoFrameTimecode.swift; sourceTree = "<group>"; };
 		7071C48C1C6BCBF6006F4275 /* NGEVideoTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEVideoTrackReferenceType.swift; sourceTree = "<group>"; };
 		7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataManager.swift; sourceTree = "<group>"; };
-		7071C48F1C6BCBF6006F4275 /* NGEExperienceType+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEExperienceType+Data.swift"; sourceTree = "<group>"; };
-		7071C4901C6BCBF6006F4275 /* NGEInventoryMetadataType+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEInventoryMetadataType+Data.swift"; sourceTree = "<group>"; };
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		7077A3141C49897900843782 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		7077A31B1C4989C200843782 /* extras_galleries.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = extras_galleries.jpg; sourceTree = "<group>"; };
@@ -675,9 +696,8 @@
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceExtrasViewController.swift; sourceTree = "<group>"; };
 		707E10891C40820500FCF81C /* Talent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Talent.swift; sourceTree = "<group>"; };
+		7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMVideo.swift; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
-		70B9FE391C6D3BC700CF1A22 /* NGEGalleryType+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEGalleryType+Data.swift"; sourceTree = "<group>"; };
-		70B9FE3B1C6D3CC000CF1A22 /* NGEPictureType+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEPictureType+Data.swift"; sourceTree = "<group>"; };
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
 		70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "man-of-steel-trailer3.mp4"; sourceTree = "<group>"; };
 		70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-interstitial.mp4"; sourceTree = "<group>"; };
@@ -1095,10 +1115,20 @@
 			isa = PBXGroup;
 			children = (
 				7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */,
-				7071C48F1C6BCBF6006F4275 /* NGEExperienceType+Data.swift */,
-				7071C4901C6BCBF6006F4275 /* NGEInventoryMetadataType+Data.swift */,
-				70B9FE391C6D3BC700CF1A22 /* NGEGalleryType+Data.swift */,
-				70B9FE3B1C6D3CC000CF1A22 /* NGEPictureType+Data.swift */,
+				70367AAE1C8F67B30042B5B5 /* NGDMExperience.swift */,
+				70367AB01C8F69970042B5B5 /* NGDMMainExperience.swift */,
+				70367AB41C8F74560042B5B5 /* NGDMMetadata.swift */,
+				70367AB61C8F87AE0042B5B5 /* NGDMPresentation.swift */,
+				70367AB81C8F8BDE0042B5B5 /* NGDMGallery.swift */,
+				70367ABC1C8F8DA30042B5B5 /* NGDMPictureGroup.swift */,
+				70367ABE1C8F8E9E0042B5B5 /* NGDMPicture.swift */,
+				70367AC01C8F8F420042B5B5 /* NGDMImage.swift */,
+				70367AC21C8F9D450042B5B5 /* NGDMTimedEventSequence.swift */,
+				70367AC41C8F9E840042B5B5 /* NGDMTimedEvent.swift */,
+				70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */,
+				70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */,
+				70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */,
+				7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */,
 			);
 			name = NextGenDataManager;
 			path = "../nextgen-data/ios/NextGenDataManager";
@@ -1556,8 +1586,10 @@
 				492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */,
 				7071C4F61C6BCBF6006F4275 /* NGEGalleryType.swift in Sources */,
 				490213441C8509DB00071552 /* ExpandedSceneDetailViewController.swift in Sources */,
+				70367ABD1C8F8DA30042B5B5 /* NGDMPictureGroup.swift in Sources */,
 				7071C4D81C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureLightLevelType.swift in Sources */,
 				7071C5381C6BCBF6006F4275 /* NGESummary4000.swift in Sources */,
+				70367AC51C8F9E840042B5B5 /* NGDMTimedEvent.swift in Sources */,
 				7071C53E1C6BCBF6006F4275 /* NGETimedEventSequenceListType.swift in Sources */,
 				4903F9AB1C48683200701479 /* SettingsMenuViewController.swift in Sources */,
 				49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */,
@@ -1573,6 +1605,7 @@
 				7071C4BB1C6BCBF6006F4275 /* NGEContentMax.swift in Sources */,
 				7071C4B71C6BCBF6006F4275 /* NGEContainerReferenceType.swift in Sources */,
 				7071C4D21C6BCBF6006F4275 /* NGEDigitalAssetSubtitleDataType.swift in Sources */,
+				70367AB71C8F87AE0042B5B5 /* NGDMPresentation.swift in Sources */,
 				7071C5361C6BCBF6006F4275 /* NGESummary190.swift in Sources */,
 				7071C4D61C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureFrameRateType.swift in Sources */,
 				7071C4AC1C6BCBF6006F4275 /* NGEComplexSequenceInfoAlternateNumber.swift in Sources */,
@@ -1586,8 +1619,8 @@
 				70FECF731C654FC3005B1A44 /* FadeSegue.swift in Sources */,
 				7071C4AF1C6BCBF6006F4275 /* NGECompObjClassType.swift in Sources */,
 				7071C53A1C6BCBF6006F4275 /* NGETextGroupListType.swift in Sources */,
-				7071C5491C6BCBF6006F4275 /* NGEExperienceType+Data.swift in Sources */,
 				70FECF771C656707005B1A44 /* SceneDetailCollectionViewController.swift in Sources */,
+				70367ABF1C8F8E9E0042B5B5 /* NGDMPicture.swift in Sources */,
 				7071C4A61C6BCBF6006F4275 /* NGECaption.swift in Sources */,
 				7071C4E91C6BCBF6006F4275 /* NGEExperienceListType.swift in Sources */,
 				7071C5251C6BCBF6006F4275 /* NGEPresentationLanguagePairType.swift in Sources */,
@@ -1599,7 +1632,7 @@
 				7071C4ED1C6BCBF6006F4275 /* NGEFileDeleteManifestType+File.swift in Sources */,
 				7071C4BD1C6BCBF6006F4275 /* NGEContentRatingType.swift in Sources */,
 				7071C4E21C6BCBF6006F4275 /* NGEEventLocationEarthCoordinateType.swift in Sources */,
-				7071C54A1C6BCBF6006F4275 /* NGEInventoryMetadataType+Data.swift in Sources */,
+				70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */,
 				70FECF751C655187005B1A44 /* StylizedViewController.swift in Sources */,
 				7071C4991C6BCBF6006F4275 /* NGEAppGroupType.swift in Sources */,
 				7071C4CF1C6BCBF6006F4275 /* NGEDigitalAssetInteractiveEncodingType.swift in Sources */,
@@ -1607,7 +1640,7 @@
 				7071C4BA1C6BCBF6006F4275 /* NGEContentIdentifierType.swift in Sources */,
 				7071C50B1C6BCBF6006F4275 /* NGEJobFunction.swift in Sources */,
 				7071C4A91C6BCBF6006F4275 /* NGEColorTypeTypeEnum.swift in Sources */,
-				70B9FE3C1C6D3CC000CF1A22 /* NGEPictureType+Data.swift in Sources */,
+				70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */,
 				7071C50C1C6BCBF6006F4275 /* NGEMadeForRegionInternalTypeEnum.swift in Sources */,
 				7071C49F1C6BCBF6006F4275 /* NGEAudiovisualClipRefType.swift in Sources */,
 				7071C4E31C6BCBF6006F4275 /* NGEEventLocationOtherCoordinateType.swift in Sources */,
@@ -1616,6 +1649,7 @@
 				7071C5021C6BCBF6006F4275 /* NGEInventoryMetadataAliasType.swift in Sources */,
 				7071C4F31C6BCBF6006F4275 /* NGEFileManifestType.swift in Sources */,
 				7071C52F1C6BCBF6006F4275 /* NGEReleaseType.swift in Sources */,
+				70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */,
 				7071C49D1C6BCBF6006F4275 /* NGEAudioClipRefType.swift in Sources */,
 				7071C50F1C6BCBF6006F4275 /* NGEMediaManifestEditLocRefType.swift in Sources */,
 				7071C5321C6BCBF6006F4275 /* NGEStringVideoPicFrameRateMultiplierEnum.swift in Sources */,
@@ -1647,7 +1681,7 @@
 				7071C5001C6BCBF6006F4275 /* NGEInventoryImageType.swift in Sources */,
 				4993D2691C6D07800077220A /* RadioButton.swift in Sources */,
 				70FECF6B1C653B72005B1A44 /* UINavigationItem+Stylized.swift in Sources */,
-				70B9FE3A1C6D3BC700CF1A22 /* NGEGalleryType+Data.swift in Sources */,
+				70367AAF1C8F67B30042B5B5 /* NGDMExperience.swift in Sources */,
 				7071C5291C6BCBF6006F4275 /* NGEPresentationType+File.swift in Sources */,
 				7071C4BE1C6BCBF6006F4275 /* NGEContentSequenceInfoType.swift in Sources */,
 				7071C53B1C6BCBF6006F4275 /* NGETextGroupType.swift in Sources */,
@@ -1689,6 +1723,7 @@
 				7071C4E71C6BCBF6006F4275 /* NGEExperienceChildType.swift in Sources */,
 				7071C53D1C6BCBF6006F4275 /* NGETimecodeType.swift in Sources */,
 				701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */,
+				70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */,
 				7071C4B91C6BCBF6006F4275 /* NGEContainerTrackMetadataType.swift in Sources */,
 				4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */,
 				707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */,
@@ -1699,6 +1734,7 @@
 				7071C4D51C6BCBF6006F4275 /* NGEDigitalAssetVideoEncodingType.swift in Sources */,
 				49E546481C84BF1600DBD318 /* MapDetailViewController.swift in Sources */,
 				7071C5371C6BCBF6006F4275 /* NGESummary400.swift in Sources */,
+				7085F76D1C90D83D00DF31B6 /* NGDMVideo.swift in Sources */,
 				7071C4F01C6BCBF6006F4275 /* NGEFileInfoType.swift in Sources */,
 				7071C4AE1C6BCBF6006F4275 /* NGEComplexSequenceInfoHouseSequence.swift in Sources */,
 				7071C5341C6BCBF6006F4275 /* NGEStringVideoPicProgressiveScanOrderEnum.swift in Sources */,
@@ -1715,6 +1751,7 @@
 				70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */,
 				7071C4D11C6BCBF6006F4275 /* NGEDigitalAssetSetType.swift in Sources */,
 				7071C4EB1C6BCBF6006F4275 /* NGEFictionalEnd.swift in Sources */,
+				70367AB51C8F74560042B5B5 /* NGDMMetadata.swift in Sources */,
 				7071C5301C6BCBF6006F4275 /* NGEStringAndLanguageType.swift in Sources */,
 				4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */,
 				701D69C51C4824070047A67A /* Film.swift in Sources */,
@@ -1759,6 +1796,7 @@
 				7071C5041C6BCBF6006F4275 /* NGEInventoryMetadataType.swift in Sources */,
 				7071C5471C6BCBF6006F4275 /* NGEVideoTrackReferenceType.swift in Sources */,
 				7071C4FB1C6BCBF6006F4275 /* NGEImageClipRefType.swift in Sources */,
+				70367AB11C8F69970042B5B5 /* NGDMMainExperience.swift in Sources */,
 				7071C4A21C6BCBF6006F4275 /* NGEBasicMetadataJobType.swift in Sources */,
 				7071C5191C6BCBF6006F4275 /* NGEOrgNameType.swift in Sources */,
 				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
@@ -1776,6 +1814,7 @@
 				7071C51C1C6BCBF6006F4275 /* NGEPersonIdentifierType.swift in Sources */,
 				7071C4F71C6BCBF6006F4275 /* NGEGenderEnum.swift in Sources */,
 				497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */,
+				70367AB91C8F8BDE0042B5B5 /* NGDMGallery.swift in Sources */,
 				7071C53C1C6BCBF6006F4275 /* NGETextString.swift in Sources */,
 				7071C4DD1C6BCBF6006F4275 /* NGEDisplayIndicatorsEnum.swift in Sources */,
 				7071C4FF1C6BCBF6006F4275 /* NGEInventoryAudioType.swift in Sources */,
@@ -1785,6 +1824,7 @@
 				7071C4FC1C6BCBF6006F4275 /* NGEImageID.swift in Sources */,
 				7071C4D31C6BCBF6006F4275 /* NGEDigitalAssetSubtitleFormatType.swift in Sources */,
 				7071C4931C6BCBF6006F4275 /* NGEAdaptationSetID.swift in Sources */,
+				70367AC31C8F9D450042B5B5 /* NGDMTimedEventSequence.swift in Sources */,
 				497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */,
 				49CB44C71C7CCAD700753227 /* ShoppingCell.swift in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
