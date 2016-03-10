@@ -96,18 +96,23 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        /*
         if let allActors = DataManager.sharedInstance.content?.allActors() {
             return allActors.count
         }
         
         return 0
+*/
+        
+        return GetCredits.sharedInstance.talent.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
-        if let allActors = DataManager.sharedInstance.content?.allActors() {
+        let allActors = GetCredits.sharedInstance.talent
             cell.talent = allActors[indexPath.row]
-        }
+        
         
         return cell
     }

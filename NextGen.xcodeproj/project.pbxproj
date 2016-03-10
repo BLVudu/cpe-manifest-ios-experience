@@ -44,6 +44,7 @@
 		497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497DECCF1C61754A000C6636 /* BookmarkCell.xib */; };
 		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
 		4986F8351C8F91D100FF60EB /* CustomScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4986F8341C8F91D100FF60EB /* CustomScrubber.swift */; };
+		4986F83B1C90D45100FF60EB /* GetCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4986F83A1C90D45100FF60EB /* GetCredits.swift */; };
 		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E65C1C7E60530076E9F3 /* share.jpg */; };
@@ -401,6 +402,7 @@
 		497DECCF1C61754A000C6636 /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
 		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		4986F8341C8F91D100FF60EB /* CustomScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrubber.swift; sourceTree = "<group>"; };
+		4986F83A1C90D45100FF60EB /* GetCredits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCredits.swift; sourceTree = "<group>"; };
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49C1E65C1C7E60530076E9F3 /* share.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = share.jpg; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 				707E10831C40796000FCF81C /* Shared Views */,
 				701D69BF1C48205B0047A67A /* Shared Controllers */,
 				707E10881C4081F700FCF81C /* Models */,
+				4986F8391C90D42100FF60EB /* Baseline */,
 				70FECF711C654FC3005B1A44 /* Segues */,
 				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
@@ -827,6 +830,14 @@
 			);
 			name = Resources;
 			path = NextGen/Resources;
+			sourceTree = "<group>";
+		};
+		4986F8391C90D42100FF60EB /* Baseline */ = {
+			isa = PBXGroup;
+			children = (
+				4986F83A1C90D45100FF60EB /* GetCredits.swift */,
+			);
+			name = Baseline;
 			sourceTree = "<group>";
 		};
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
@@ -1567,6 +1578,7 @@
 				7071C4C11C6BCBF6006F4275 /* NGEDateTimeRangeType.swift in Sources */,
 				7071C51D1C6BCBF6006F4275 /* NGEPersonNameType.swift in Sources */,
 				7071C5061C6BCBF6006F4275 /* NGEInventoryTextObjectType.swift in Sources */,
+				4986F83B1C90D45100FF60EB /* GetCredits.swift in Sources */,
 				7071C5351C6BCBF6006F4275 /* NGESubtitleTrackReferenceType.swift in Sources */,
 				7071C4CE1C6BCBF6006F4275 /* NGEDigitalAssetInteractiveDataType.swift in Sources */,
 				7071C4F41C6BCBF6006F4275 /* NGEFrameAverageMax.swift in Sources */,

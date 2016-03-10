@@ -16,14 +16,19 @@ import DropDown
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+    let charSet = NSCharacterSet.URLQueryAllowedCharacterSet()
+    var movieTitle: String!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current film's data file
+        
+       
         if let path = NSBundle.mainBundle().pathForResource("Data/man_of_steel", ofType: "json") {
             do {
                 let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: path), options: NSDataReadingOptions.DataReadingMappedIfSafe)
-                DataManager.sharedInstance.loadData(data)
+                //DataManager.sharedInstance.loadData(data)
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
@@ -33,6 +38,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
         }
         
+        if let baselineData = NSBundle.mainBundle().pathForResource("Data/config", ofType: "json"){
+            do {
+
+            let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: baselineData), options: NSDataReadingOptions.DataReadingMappedIfSafe)
+
+                
+            let rawJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                
+                defaults.setObject(rawJSON!["data"]?.objectForKey("apiKey"), forKey: "apiKey")
+                defaults.setObject(rawJSON!["data"]?.objectForKey("title"), forKey: "title")
+                movieTitle = (defaults.objectForKey("title") as! String).stringByAddingPercentEncodingWithAllowedCharacters(charSet)!
+                
+
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+    
+            
+        }
+        
+        let key = defaults.objectForKey("apiKey")
+        let url = NSURL(string: "http://baselineapi.com/api/ProjectSearch?id=\(movieTitle)&apikey=\(key!)")
+        let task = defaultSession.dataTaskWithURL(url!){
+        data, response, error in
+
+            if let error = error {
+            print(error.localizedDescription)
+        } else if let httpResponse = response as? NSHTTPURLResponse {
+            if httpResponse.statusCode == 200 {
+                self.parseResults(data!)
+            }
+        }
+    }
+ 
+        task.resume()
+        GetCredits.sharedInstance.callAPI(NSURL(string:"http://baselineapi.com/api/ProjectAllCredits?id=4667130&apikey=\(key!)")!)
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
@@ -42,6 +83,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DropDown.startListeningToKeyboard()
         
         return true
+    }
+    
+    func parseResults(data: NSData){
+        
+      
+        
+        
+        
+        do {
+        
+        let rawJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+            
+            for movieData in rawJSON as! [AnyObject]{
+                
+                if movieData["PROJECT_NAME"] as! String == defaults.objectForKey("title") as! String{
+                    defaults.setObject(movieData["PROJECT_ID"],forKey: "projectID")
+                }
+            }
+            
+        } catch let error as NSError {
+        print(error.localizedDescription)
+        }
+    
+
+
+    
     }
 
     func applicationWillResignActive(application: UIApplication) {
