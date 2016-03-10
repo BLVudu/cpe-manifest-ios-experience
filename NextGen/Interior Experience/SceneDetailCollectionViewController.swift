@@ -12,7 +12,7 @@ import RFQuiltLayout
 
 class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate {
     
-    let kSceneDetailSegueShowGallery = "kSceneDetailSegueShowGallery"
+    let kSceneDetailSegueShowGallery = "showGallery"
     
     let regionRadius: CLLocationDistance = 2000
     var initialLocation = CLLocation(latitude: 0, longitude: 0)
@@ -96,6 +96,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isGallery() {
                 self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
+            } else if timedEvent.isAudioVisual() {
+                self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
             }
         }
         
@@ -105,10 +107,14 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if segue.identifier == kSceneDetailSegueShowGallery {
             let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
-            galleryDetailViewController.gallery = sender as? NGDMGallery
+            
+            if let gallery = sender as? NGDMGallery {
+                galleryDetailViewController.gallery = gallery
+            } else if let audioVisual = sender as? NGDMAudioVisual {
+                galleryDetailViewController.audioVisual = audioVisual
+            }
         }
         
         /*if segue.identifier == "showMap"{
