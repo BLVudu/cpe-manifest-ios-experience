@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_v3", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
+            
+            TheTakeAPIUtil.sharedInstance.mediaId = NextGenDataManager.sharedInstance.mainExperience.customIdentifier(kTheTakeIdentifierNamespace)
+            TheTakeAPIUtil.sharedInstance.prefetchProductFrames()
         }
         
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
