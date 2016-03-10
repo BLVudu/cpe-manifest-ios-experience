@@ -84,7 +84,15 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         let experienceId = Array(currentTimedEvents.keys)[indexPath.row]
         if let experience = NGDMExperience.getById(experienceId), timedEvent = currentTimedEvents[experienceId] {
             cell.experience = experience
-            cell.timedEvent = timedEvent
+            if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
+                TheTakeAPIUtil.sharedInstance.getFrameProducts(currentTime, successBlock: { (result) -> Void in
+                    if let products = result["products"] as? [TheTakeProduct], product = products.first {
+                        cell.theTakeProduct = product
+                    }
+                })
+            } else {
+                cell.timedEvent = timedEvent
+            }
         }
         
         return cell

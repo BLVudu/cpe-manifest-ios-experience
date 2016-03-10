@@ -15,7 +15,7 @@ class TheTakeAPIUtil: APIUtil {
     static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")
     
     var mediaId: String!
-    var frameTimes = [Double]()
+    var frameTimes = [Double: NSDictionary]()
     
     override func requestWithURLPath(urlPath: String) -> NSMutableURLRequest {
         let request = super.requestWithURLPath(urlPath)
@@ -29,10 +29,10 @@ class TheTakeAPIUtil: APIUtil {
         frameTimes.removeAll()
         
         getJSONWithPath("/frames/listFrames", parameters: ["media": mediaId, "limit": "9999"], successBlock: { (result) -> Void in
-            if let frames = result["result"] as? NSArray {
+            if let frames = result["result"] as? [NSDictionary] {
                 for frameInfo in frames {
                     if let frameTime = frameInfo["frameTime"] as? Double {
-                        self.frameTimes.append(frameTime)
+                        self.frameTimes[frameTime] = frameInfo
                     }
                 }
                 
@@ -50,26 +50,41 @@ class TheTakeAPIUtil: APIUtil {
         }, errorBlock: nil)
     }
     
-    func getFrameProducts(frameTime: Double, successBlock: APIUtilSuccessBlock) {
-        getJSONWithPath("/frameProducts/listFrameProducts", parameters: ["media": mediaId, "time": String(frameTime)], successBlock: { (result) -> Void in
-            if let productList = result["result"] as? NSArray {
-                var products = [TheTakeProduct]()
-                for productInfo in productList {
-                    if let productData = productInfo as? NSDictionary {
-                        products.append(TheTakeProduct(data: productData))
-                    }
-                }
-                
-                successBlock(result: ["products": products])
+    func getFrameProducts(var frameTime: Double, successBlock: APIUtilSuccessBlock) {
+        frameTime = 1275
+        
+        var closestFrameTime = -1.0
+        if frameTimes[frameTime] == nil {
+            let frameTimeKeys = frameTimes.keys.sort()
+            let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > frameTime })
+            if frameIndex > 0 {
+                closestFrameTime = frameTimeKeys[frameIndex - 1]
             }
-        }) { (error) -> Void in
-            
+        } else {
+            closestFrameTime = frameTime
+        }
+        
+        if closestFrameTime > 0 {
+            getJSONWithPath("/frameProducts/listFrameProducts", parameters: ["media": mediaId, "time": String(closestFrameTime)], successBlock: { (result) -> Void in
+                if let productList = result["result"] as? NSArray {
+                    var products = [TheTakeProduct]()
+                    for productInfo in productList {
+                        if let productData = productInfo as? NSDictionary {
+                            products.append(TheTakeProduct(data: productData))
+                        }
+                    }
+                    
+                    successBlock(result: ["products": products])
+                }
+            }) { (error) -> Void in
+                
+            }
         }
     }
     
     func getProductDetails(productId: String, successBlock: APIUtilSuccessBlock) {
         getJSONWithPath("/products/productDetails", parameters: ["product": productId], successBlock: { (result) -> Void in
-            successBlock(result: result)
+            successBlock(result: ["product": TheTakeProduct(data: result)])
         }) { (error) -> Void in
                 
         }

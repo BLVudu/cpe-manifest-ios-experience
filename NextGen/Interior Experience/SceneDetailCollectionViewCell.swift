@@ -93,6 +93,22 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private var _theTakeProduct: TheTakeProduct!
+    var theTakeProduct: TheTakeProduct? {
+        get {
+            return _theTakeProduct
+        }
+        
+        set(v) {
+            _theTakeProduct = v
+            
+            if let product = _theTakeProduct {
+                descriptionText = product.name
+                imageURL = product.imageURL
+            }
+        }
+    }
+    
     override func prepareForReuse() {
         experience = nil
         timedEvent = nil

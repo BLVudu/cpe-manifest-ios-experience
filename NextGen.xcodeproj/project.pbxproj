@@ -331,6 +331,7 @@
 		7085F7781C920E4F00DF31B6 /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */; };
 		7085F77A1C920E7500DF31B6 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7791C920E7500DF31B6 /* String+Utils.swift */; };
 		7085F77C1C92200700DF31B6 /* TheTakeProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F77B1C92200700DF31B6 /* TheTakeProduct.swift */; };
+		7085F7801C923BE100DF31B6 /* Indexable+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
 		70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */; };
@@ -707,6 +708,7 @@
 		7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		7085F7791C920E7500DF31B6 /* String+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		7085F77B1C92200700DF31B6 /* TheTakeProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeProduct.swift; sourceTree = "<group>"; };
+		7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Indexable+Utils.swift"; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
 		70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "man-of-steel-trailer3.mp4"; sourceTree = "<group>"; };
@@ -920,6 +922,7 @@
 				70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */,
 				7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */,
 				7085F7791C920E7500DF31B6 /* String+Utils.swift */,
+				7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1770,6 +1773,7 @@
 				7071C4D71C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift in Sources */,
 				7071C4E61C6BCBF6006F4275 /* NGEExperienceAppType.swift in Sources */,
 				7071C5231C6BCBF6006F4275 /* NGEPlayableSequenceListType.swift in Sources */,
+				7085F7801C923BE100DF31B6 /* Indexable+Utils.swift in Sources */,
 				7071C5461C6BCBF6006F4275 /* NGEVideoFrameTimecode.swift in Sources */,
 				7071C4C71C6BCBF6006F4275 /* NGEDigitalAssetCardsetType.swift in Sources */,
 				7071C5141C6BCBF6006F4275 /* NGEMediaProfileType.swift in Sources */,

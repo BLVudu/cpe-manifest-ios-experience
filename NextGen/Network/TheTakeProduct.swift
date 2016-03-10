@@ -24,6 +24,16 @@ class TheTakeProduct {
         }
     }
     
+    var imageURL: NSURL? {
+        get {
+            if let images = _data["productImages"] as? NSDictionary, image = images["500pxLink"] as? String {
+                return NSURL(string: image)!
+            }
+            
+            return nil
+        }
+    }
+    
     init(data: NSDictionary) {
         _data = data
     }
