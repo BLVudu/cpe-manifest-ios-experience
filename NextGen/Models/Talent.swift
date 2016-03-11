@@ -42,7 +42,7 @@ class Talent: NSObject {
         role = info["CREDIT"] as? String
         type = talentTypeFromString(info["CREDIT_GROUP"] as? String)
         getBio(participantID)
-        //getFilmography("http://www.baselineapi.com/api/ParticipantFilmCredit?id=\(participantID)&apikey=\(key!)")
+        getFilmography(participantID)
         getHeadshot(participantID)
        
        
@@ -90,12 +90,12 @@ class Talent: NSObject {
         
     }
     
-    func getFilmography(url: String){
+    func getFilmography(id: String){
         let key = defaults.objectForKey("apiKey")
         
         let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         
-        let task = defaultSession.dataTaskWithURL(NSURL(string:"http://www.baselineapi.com/api/ParticipantFilmCredit?id=\(id)&apikey=\(key!)")!){
+    let task = defaultSession.dataTaskWithURL(NSURL(string:"http://www.baselineapi.com/api/ParticipantFilmCredit?id=\(id)&apikey=\(key!)")!){
             data, response, error in
             
             if let error = error {
@@ -104,15 +104,20 @@ class Talent: NSObject {
                 if httpResponse.statusCode == 200 {
                     do {
                         
-                        let rawJSON = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-                        /*
-                        if rawJSON.count == 0 {
-                            self.biography = "No biography information avaliable"
+                        let rawJSON = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)as! NSArray
+                        if rawJSON.count <= 5{
+                            print(rawJSON.count)
+                            for film in rawJSON{
+                                self.films.append(Film(info:film as! NSDictionary))
+                                
+                            }
                         } else {
-                            self.biography = rawJSON[0]["SHORT_BIO"] as! String
+                            for index in 0...5{
+                                self.films.append(Film(info:rawJSON[index] as! NSDictionary))
+                                
+                            }
                         }
                         
-                        */
                         
                     } catch let error as NSError {
                         print(error.localizedDescription)

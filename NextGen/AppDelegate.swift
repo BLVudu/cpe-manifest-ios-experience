@@ -86,11 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func parseResults(data: NSData){
-        
-      
-        
-        
-        
+
         do {
         
         let rawJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
