@@ -20,9 +20,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     var locImg = ""
     var galleryID = 0
     
-    var currentTime = 0.0
-    var currentTimedEvents = [String: NGDMTimedEvent]() // ExperienceID: TimedEvent
-    
+    var currentTime = -1.0
+    var currentProductFrameTime = -1.0
+    var currentProductSessionDataTask: NSURLSessionDataTask?
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -36,23 +36,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerTimeDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo, time = userInfo["time"] as? Double {
                 self.currentTime = time
-                
-                var shouldReloadExperiences = false
-                for experience in NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences {
-                    if let timedEvent = experience.timedEventSequence?.timedEvent(self.currentTime) {
-                        if self.currentTimedEvents[experience.id] == nil || timedEvent != self.currentTimedEvents[experience.id] {
-                            self.currentTimedEvents[experience.id] = timedEvent
-                            shouldReloadExperiences = true
-                        }
-                    } else if self.currentTimedEvents[experience.id] != nil {
-                        self.currentTimedEvents.removeValueForKey(experience.id)
-                        shouldReloadExperiences = true
-                    }
-                }
-                
-                if shouldReloadExperiences {
-                    self.collectionView?.reloadData()
-                }
+                self.updateCollectionView()
             }
         }
     }
@@ -74,9 +58,45 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 2), (CGRectGetWidth(self.collectionView!.bounds) / 2))
     }
     
+    func updateCollectionView() {
+        if let visibleCells = self.collectionView?.visibleCells() {
+            for cell in visibleCells {
+                if let cell = cell as? SceneDetailCollectionViewCell {
+                    updateCollectionViewCell(cell)
+                }
+            }
+        }
+    }
+    
+    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell) {
+        if let experience = cell.experience, timedEvent = experience.timedEventSequence?.timedEvent(currentTime) {
+            if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
+                let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
+                if currentProductFrameTime != newFrameTime {
+                    currentProductFrameTime = newFrameTime
+                    
+                    if let currentTask = currentProductSessionDataTask {
+                        currentTask.cancel()
+                    }
+                    
+                    currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
+                        if let product = products.first {
+                            cell.theTakeProduct = product
+                        }
+                        
+                        self.currentProductSessionDataTask = nil
+                    })
+                }
+            } else if cell.timedEvent == nil || timedEvent != cell.timedEvent {
+                cell.timedEvent = timedEvent
+            }
+        }
+    }
+    
+    
     // MARK: UICollectionViewDataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentTimedEvents.count
+        return NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -86,19 +106,10 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         //}
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
-        
-        let experienceId = Array(currentTimedEvents.keys)[indexPath.row]
-        if let experience = NGDMExperience.getById(experienceId), timedEvent = currentTimedEvents[experienceId] {
-            cell.experience = experience
-            if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
-                TheTakeAPIUtil.sharedInstance.getFrameProducts(currentTime, successBlock: { (products) -> Void in
-                    if let product = products.first {
-                        cell.theTakeProduct = product
-                    }
-                })
-            } else {
-                cell.timedEvent = timedEvent
-            }
+        let experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences[indexPath.row]
+        cell.experience = experience
+        if cell.timedEvent == nil || (cell.timedEvent!.isProduct(kTheTakeIdentifierNamespace) && cell.theTakeProduct == nil) {
+            updateCollectionViewCell(cell)
         }
         
         return cell
@@ -149,6 +160,20 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             //shopVC.items = (self.currentScene?.shopping)!
         }*/
 
+    }
+    
+    func cellForExperience(experience: NGDMExperience) -> SceneDetailCollectionViewCell? {
+        if let visibleCells = collectionView?.visibleCells() {
+            for cell in visibleCells {
+                if let cell = cell as? SceneDetailCollectionViewCell, cellExperience = cell.experience {
+                    if cellExperience == experience {
+                        return cell
+                    }
+                }
+            }
+        }
+        
+        return nil
     }
     
     

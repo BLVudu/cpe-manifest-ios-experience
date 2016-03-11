@@ -50,20 +50,24 @@ class TheTakeAPIUtil: APIUtil {
         }, errorBlock: nil)
     }
     
-    func getFrameProducts(frameTime: Double, successBlock: (products: [TheTakeProduct]) -> Void) {
+    func closestFrameTime(timeInSeconds: Double) -> Double {
+        let timeInMilliseconds = timeInSeconds * 1000
         var closestFrameTime = -1.0
-        if frameTimes[frameTime] == nil {
+        
+        if frameTimes[timeInMilliseconds] == nil {
             let frameTimeKeys = frameTimes.keys.sort()
-            let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > frameTime })
-            if frameIndex > 0 {
-                closestFrameTime = frameTimeKeys[frameIndex - 1]
-            }
+            let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > timeInMilliseconds })
+            closestFrameTime = frameTimeKeys[max(frameIndex - 1, 0)]
         } else {
-            closestFrameTime = frameTime
+            closestFrameTime = timeInMilliseconds
         }
         
-        if closestFrameTime > 0 {
-            getJSONWithPath("/frameProducts/listFrameProducts", parameters: ["media": mediaId, "time": String(closestFrameTime)], successBlock: { (result) -> Void in
+        return closestFrameTime
+    }
+    
+    func getFrameProducts(frameTime: Double, successBlock: (products: [TheTakeProduct]) -> Void) -> NSURLSessionDataTask? {
+        if frameTime >= 0 && frameTimes[frameTime] != nil {
+            return getJSONWithPath("/frameProducts/listFrameProducts", parameters: ["media": mediaId, "time": String(frameTime)], successBlock: { (result) -> Void in
                 if let productList = result["result"] as? NSArray {
                     var products = [TheTakeProduct]()
                     for productInfo in productList {
@@ -78,10 +82,12 @@ class TheTakeAPIUtil: APIUtil {
                 
             }
         }
+        
+        return nil
     }
     
-    func getProductDetails(productId: String, successBlock: (product: TheTakeProduct) -> Void) {
-        getJSONWithPath("/products/productDetails", parameters: ["product": productId], successBlock: { (result) -> Void in
+    func getProductDetails(productId: String, successBlock: (product: TheTakeProduct) -> Void) -> NSURLSessionDataTask {
+        return getJSONWithPath("/products/productDetails", parameters: ["product": productId], successBlock: { (result) -> Void in
             successBlock(product: TheTakeProduct(data: result))
         }) { (error) -> Void in
                 

@@ -92,15 +92,18 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
         
         set(v) {
-            _timedEvent = v
-            
-            if let event = _timedEvent, experience = experience {
-                descriptionText = event.getDescriptionText(experience)
-                imageURL = event.getImageURL(experience)
-            } else {
-                imageURL = nil
-                descriptionText = nil
-                extraDescriptionText = nil
+            if _timedEvent != v {
+                _timedEvent = v
+                
+                if let event = _timedEvent, experience = experience {
+                    imageURL = event.getImageURL(experience)
+                    descriptionText = event.getDescriptionText(experience)
+                    extraDescriptionText = nil
+                } else {
+                    imageURL = nil
+                    descriptionText = nil
+                    extraDescriptionText = nil
+                }
             }
         }
     }
@@ -112,17 +115,21 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
         
         set(v) {
-            _theTakeProduct = v
-            
-            if let product = _theTakeProduct {
-                imageURL = product.imageURL
-                descriptionText = product.brand
-                extraDescriptionText = product.name
+            if _theTakeProduct != v {
+                _theTakeProduct = v
+                
+                if let product = _theTakeProduct {
+                    imageURL = product.imageURL
+                    descriptionText = product.brand
+                    extraDescriptionText = product.name
+                }
             }
         }
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         experience = nil
         timedEvent = nil
     }

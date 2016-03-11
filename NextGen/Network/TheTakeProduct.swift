@@ -8,9 +8,15 @@
 
 import Foundation
 
-class TheTakeProduct {
+class TheTakeProduct: NSObject {
     
     private var _data: NSDictionary!
+    
+    var id: String {
+        get {
+            return dataValue("productId")
+        }
+    }
     
     var name: String {
         get {
@@ -38,9 +44,17 @@ class TheTakeProduct {
         _data = data
     }
     
+    override func isEqual(object: AnyObject?) -> Bool {
+        if let otherProduct = object as? TheTakeProduct {
+            return otherProduct.id == id
+        }
+        
+        return false
+    }
+    
     func dataValue(key: String) -> String {
-        if let value = _data[key] as? String {
-            return value
+        if let value = _data[key] {
+            return String(value)
         }
         
         return ""

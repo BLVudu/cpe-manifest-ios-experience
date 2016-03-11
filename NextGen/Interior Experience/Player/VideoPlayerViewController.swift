@@ -55,7 +55,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
     
     func playPrimaryVideo() {
         self.lockPlayerControls = false
-        // self.playVideoWithURL(video!.url)
+        /*if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
+            self.playVideoWithURL(audioVisual.videoURL)
+        }*/
+        
         self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("man-of-steel-trailer3", ofType: "mp4")!))
     }
     

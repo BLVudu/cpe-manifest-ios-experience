@@ -25,15 +25,15 @@ class APIUtil: NSObject {
         return NSMutableURLRequest(URL: NSURL(string: apiDomain + urlPath)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 60)
     }
     
-    func getJSONWithPath(urlPath: String, parameters: [String: String], successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) {
-        getJSONWithPath(urlPath + "?" + parameters.stringFromHTTPParameters(), successBlock: successBlock, errorBlock: errorBlock)
+    func getJSONWithPath(urlPath: String, parameters: [String: String], successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) -> NSURLSessionDataTask {
+        return getJSONWithPath(urlPath + "?" + parameters.stringFromHTTPParameters(), successBlock: successBlock, errorBlock: errorBlock)
     }
     
-    func getJSONWithPath(urlPath: String, successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) {
-        getJSONWithRequest(requestWithURLPath(urlPath), successBlock: successBlock, errorBlock: errorBlock)
+    func getJSONWithPath(urlPath: String, successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) -> NSURLSessionDataTask {
+        return getJSONWithRequest(requestWithURLPath(urlPath), successBlock: successBlock, errorBlock: errorBlock)
     }
     
-    func getJSONWithRequest(request: NSURLRequest, successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) {
+    func getJSONWithRequest(request: NSURLRequest, successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) -> NSURLSessionDataTask {
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: nil, delegateQueue: NSOperationQueue.mainQueue())
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             if error == nil {
@@ -54,6 +54,7 @@ class APIUtil: NSObject {
         }
         
         task.resume()
+        return task
     }
     
 }

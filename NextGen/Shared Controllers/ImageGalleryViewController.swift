@@ -31,9 +31,9 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         didSet {
             _photos.removeAll()
             
-            if let audioVisual = audioVisual, presentation = audioVisual.getPresentation() {
+            if let audioVisual = audioVisual, presentation = audioVisual.presentation {
                 var video: MWPhoto!
-                if let imageURL = audioVisual.getImageURL() {
+                if let imageURL = audioVisual.imageURL {
                     video = MWPhoto(URL: imageURL)
                 } else {
                     video = MWPhoto()
