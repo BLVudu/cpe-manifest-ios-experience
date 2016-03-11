@@ -14,6 +14,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var extraDescriptionLabel: UILabel?
     @IBOutlet weak var mapView: MKMapView!
     
     var title: String? {
@@ -37,6 +38,16 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         
         set(v) {
             descriptionLabel.text = v
+        }
+    }
+    
+    var extraDescriptionText: String? {
+        get {
+            return extraDescriptionLabel?.text
+        }
+        
+        set(v) {
+            extraDescriptionLabel?.text = v
         }
     }
     
@@ -87,8 +98,9 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
                 descriptionText = event.getDescriptionText(experience)
                 imageURL = event.getImageURL(experience)
             } else {
-                descriptionText = nil
                 imageURL = nil
+                descriptionText = nil
+                extraDescriptionText = nil
             }
         }
     }
@@ -103,8 +115,9 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             _theTakeProduct = v
             
             if let product = _theTakeProduct {
-                descriptionText = product.name
                 imageURL = product.imageURL
+                descriptionText = product.brand
+                extraDescriptionText = product.name
             }
         }
     }

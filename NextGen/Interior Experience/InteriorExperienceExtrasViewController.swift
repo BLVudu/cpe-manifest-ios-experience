@@ -16,14 +16,9 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet weak var sceneDetailView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var triviaFact: UILabel!
-    @IBOutlet weak var triviaImage: UIImageView!
     
     var selectedIndexPath: NSIndexPath?
     var currentTime = 0.0
-    
-    var triviaExperience: NGDMExperience!
-    var currentTriviaTimedEvent: NGDMTimedEvent?
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -31,13 +26,9 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         
         talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         
-        // !!!TODO: Makes assumption about how to find which one is the Trivia experience
-        triviaExperience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences.last
-        
         NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerTimeDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo, time = userInfo["time"] as? Double {
                 self.currentTime = time
-                self.updateTrivia()
                 self.talentTableView.reloadData()
             }
         }
@@ -46,15 +37,6 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func updateTrivia() {
-        if let timedEvent = triviaExperience.timedEventSequence?.timedEvent(currentTime) {
-            if currentTriviaTimedEvent == nil || timedEvent != currentTriviaTimedEvent! {
-                currentTriviaTimedEvent = timedEvent
-                triviaFact.text = currentTriviaTimedEvent?.text
-            }
-        }
     }
     
     func talentDetailViewController() -> TalentDetailViewController? {

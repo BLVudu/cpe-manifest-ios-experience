@@ -23,17 +23,15 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     var currentTime = 0.0
     var currentTimedEvents = [String: NGDMTimedEvent]() // ExperienceID: TimedEvent
     
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView?.backgroundColor = UIColor.clearColor()
+        self.collectionView?.alpha = 0
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
-        
-        let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
-        layout.direction = UICollectionViewScrollDirection.Vertical
-        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 8), (CGRectGetWidth(self.collectionView!.bounds)/4))
         
         NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerTimeDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo, time = userInfo["time"] as? Double {
@@ -59,17 +57,25 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         }
     }
     
-   /*
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        layoutCollectionView()
+        self.collectionView?.alpha = 1
+    }
+    
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        layoutCollectionView()
+    }
+    
+    func layoutCollectionView() {
         let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
         layout.direction = UICollectionViewScrollDirection.Vertical
-        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 4), 250)
-        print(self.collectionView!.bounds)
+        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 2), (CGRectGetWidth(self.collectionView!.bounds) / 2))
     }
-*/
     
     // MARK: UICollectionViewDataSource
-     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return currentTimedEvents.count
     }
     
@@ -85,8 +91,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         if let experience = NGDMExperience.getById(experienceId), timedEvent = currentTimedEvents[experienceId] {
             cell.experience = experience
             if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
-                TheTakeAPIUtil.sharedInstance.getFrameProducts(currentTime, successBlock: { (result) -> Void in
-                    if let products = result["products"] as? [TheTakeProduct], product = products.first {
+                TheTakeAPIUtil.sharedInstance.getFrameProducts(currentTime, successBlock: { (products) -> Void in
+                    if let product = products.first {
                         cell.theTakeProduct = product
                     }
                 })
@@ -97,10 +103,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         
         return cell
     }
-
     
-    
-     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isGallery() {
                 self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
@@ -112,7 +116,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         // showMap
         // showShop
     }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == kSceneDetailSegueShowGallery {
@@ -149,24 +152,13 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     }
     
     
-    
     // MARK: RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
-        /*
-        switch indexPath.row {
-        case SceneDetailItemType.Shop.rawValue:
-            return CGSizeMake(4, 1)
-            
-        default:
-            return CGSizeMake(2, 1)
-        }
-*/
-        return CGSizeMake(2, 1)
+        return CGSizeMake(1, 1)
     }
     
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 0, 0, 0)
+        return UIEdgeInsetsMake(5, 5, 5, 5)
     }
-
-
+    
 }

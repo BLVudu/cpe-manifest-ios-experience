@@ -50,9 +50,7 @@ class TheTakeAPIUtil: APIUtil {
         }, errorBlock: nil)
     }
     
-    func getFrameProducts(var frameTime: Double, successBlock: APIUtilSuccessBlock) {
-        frameTime = 1275
-        
+    func getFrameProducts(frameTime: Double, successBlock: (products: [TheTakeProduct]) -> Void) {
         var closestFrameTime = -1.0
         if frameTimes[frameTime] == nil {
             let frameTimeKeys = frameTimes.keys.sort()
@@ -74,7 +72,7 @@ class TheTakeAPIUtil: APIUtil {
                         }
                     }
                     
-                    successBlock(result: ["products": products])
+                    successBlock(products: products)
                 }
             }) { (error) -> Void in
                 
@@ -82,9 +80,9 @@ class TheTakeAPIUtil: APIUtil {
         }
     }
     
-    func getProductDetails(productId: String, successBlock: APIUtilSuccessBlock) {
+    func getProductDetails(productId: String, successBlock: (product: TheTakeProduct) -> Void) {
         getJSONWithPath("/products/productDetails", parameters: ["product": productId], successBlock: { (result) -> Void in
-            successBlock(result: ["product": TheTakeProduct(data: result)])
+            successBlock(product: TheTakeProduct(data: result))
         }) { (error) -> Void in
                 
         }
