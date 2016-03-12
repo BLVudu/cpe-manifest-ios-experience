@@ -30,6 +30,12 @@ class TheTakeProduct: NSObject {
         }
     }
     
+    var price: String {
+        get {
+            return dataValue("productPrice")
+        }
+    }
+    
     var imageURL: NSURL? {
         get {
             if let images = _data["productImages"] as? NSDictionary, image = images["500pxLink"] as? String {
@@ -37,6 +43,16 @@ class TheTakeProduct: NSObject {
             }
             
             return nil
+        }
+    }
+    
+    var exactMatch: Bool {
+        get {
+            if let verified = _data["verified"] {
+                return verified.boolValue
+            }
+            
+            return false
         }
     }
     

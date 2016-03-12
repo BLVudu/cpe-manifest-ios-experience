@@ -13,6 +13,7 @@ import RFQuiltLayout
 class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate {
     
     let kSceneDetailSegueShowGallery = "showGallery"
+    let kSceneDetailSegueShowShop = "showShop"
     
     let regionRadius: CLLocationDistance = 2000
     var initialLocation = CLLocation(latitude: 0, longitude: 0)
@@ -80,8 +81,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                     }
                     
                     currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
-                        if let product = products.first {
-                            cell.theTakeProduct = product
+                        if products.count > 0 {
+                            cell.theTakeProducts = products
                         }
                         
                         self.currentProductSessionDataTask = nil
@@ -108,7 +109,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
         let experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences[indexPath.row]
         cell.experience = experience
-        if cell.timedEvent == nil || (cell.timedEvent!.isProduct(kTheTakeIdentifierNamespace) && cell.theTakeProduct == nil) {
+        if cell.timedEvent == nil || (cell.timedEvent!.isProduct(kTheTakeIdentifierNamespace) && cell.theTakeProducts == nil) {
             updateCollectionViewCell(cell)
         }
         
@@ -116,16 +117,19 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
-            if timedEvent.isGallery() {
-                self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
-            } else if timedEvent.isAudioVisual() {
-                self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience {
+            if cell.theTakeProducts != nil {
+                self.performSegueWithIdentifier(kSceneDetailSegueShowShop, sender: cell.theTakeProducts)
+            } else if let timedEvent = cell.timedEvent {
+                if timedEvent.isGallery() {
+                    self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
+                } else if timedEvent.isAudioVisual() {
+                    self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
+                }
             }
         }
         
         // showMap
-        // showShop
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -137,6 +141,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             } else if let audioVisual = sender as? NGDMAudioVisual {
                 galleryDetailViewController.audioVisual = audioVisual
             }
+        } else if segue.identifier == kSceneDetailSegueShowShop {
+            let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
+            shopDetailViewController.products = sender as! [TheTakeProduct]
         }
         
         /*if segue.identifier == "showMap"{

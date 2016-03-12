@@ -335,6 +335,8 @@
 		7085F7821C93359000DF31B6 /* NGDMAppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7811C93359000DF31B6 /* NGDMAppGroup.swift */; };
 		7085F7841C9336C600DF31B6 /* NGDMInteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7831C9336C600DF31B6 /* NGDMInteractive.swift */; };
 		7085F7861C933A5000DF31B6 /* NGDMExperienceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */; };
+		7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7881C93937800DF31B6 /* UIColor+Utils.swift */; };
+		7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
 		70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */; };
@@ -715,6 +717,8 @@
 		7085F7811C93359000DF31B6 /* NGDMAppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAppGroup.swift; sourceTree = "<group>"; };
 		7085F7831C9336C600DF31B6 /* NGDMInteractive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMInteractive.swift; sourceTree = "<group>"; };
 		7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMExperienceApp.swift; sourceTree = "<group>"; };
+		7085F7881C93937800DF31B6 /* UIColor+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
 		70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "man-of-steel-trailer3.mp4"; sourceTree = "<group>"; };
@@ -822,7 +826,6 @@
 				49F684A11C8A5F7F0066C5A2 /* ActorGalleryViewController.swift */,
 				490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
-				497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */,
 				490213471C860C9A00071552 /* SharingViewController.swift */,
 				49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
@@ -920,15 +923,17 @@
 		701D69C61C482A900047A67A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				701D69C71C482AF70047A67A /* NSURL+Utils.swift */,
-				701D69C91C482C210047A67A /* UIAlertController+Utils.swift */,
-				701D69CB1C482E060047A67A /* UIImageView+Utils.swift */,
 				7077A3761C4989DC00843782 /* DataManager.swift */,
-				70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */,
-				70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */,
 				7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */,
-				7085F7791C920E7500DF31B6 /* String+Utils.swift */,
 				7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */,
+				701D69C71C482AF70047A67A /* NSURL+Utils.swift */,
+				7085F7791C920E7500DF31B6 /* String+Utils.swift */,
+				701D69C91C482C210047A67A /* UIAlertController+Utils.swift */,
+				70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */,
+				7085F7881C93937800DF31B6 /* UIColor+Utils.swift */,
+				7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */,
+				701D69CB1C482E060047A67A /* UIImageView+Utils.swift */,
+				70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1254,6 +1259,7 @@
 			isa = PBXGroup;
 			children = (
 				701B02711C45C8990020DCD1 /* Player */,
+				7085F7871C936DA900DF31B6 /* Shopping */,
 				707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */,
 				49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
@@ -1313,6 +1319,14 @@
 				7085F77B1C92200700DF31B6 /* TheTakeProduct.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		7085F7871C936DA900DF31B6 /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */,
+			);
+			path = Shopping;
 			sourceTree = "<group>";
 		};
 		70A1E08B1C486BCD0079779A /* Extras */ = {
@@ -1658,6 +1672,7 @@
 				70367ABF1C8F8E9E0042B5B5 /* NGDMPicture.swift in Sources */,
 				7071C4A61C6BCBF6006F4275 /* NGECaption.swift in Sources */,
 				7071C4E91C6BCBF6006F4275 /* NGEExperienceListType.swift in Sources */,
+				7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */,
 				7071C5251C6BCBF6006F4275 /* NGEPresentationLanguagePairType.swift in Sources */,
 				7071C5261C6BCBF6006F4275 /* NGEPresentationListType.swift in Sources */,
 				7077A37B1C49A4D800843782 /* Content.swift in Sources */,
@@ -1875,6 +1890,7 @@
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 				7071C5181C6BCBF6006F4275 /* NGENVPairType.swift in Sources */,
 				7071C4EC1C6BCBF6006F4275 /* NGEFictionalStart.swift in Sources */,
+				7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */,
 				7071C4C31C6BCBF6006F4275 /* NGEDigitalAssetAudioDataType.swift in Sources */,
 				7071C4A41C6BCBF6006F4275 /* NGEBasicMetadataPeopleType.swift in Sources */,
 				7071C5281C6BCBF6006F4275 /* NGEPresentationManifestType.swift in Sources */,

@@ -108,17 +108,19 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private var _theTakeProduct: TheTakeProduct!
-    var theTakeProduct: TheTakeProduct? {
+    private var _theTakeProducts: [TheTakeProduct]!
+    private var _currentProduct: TheTakeProduct?
+    var theTakeProducts: [TheTakeProduct]? {
         get {
-            return _theTakeProduct
+            return _theTakeProducts
         }
         
         set(v) {
-            if _theTakeProduct != v {
-                _theTakeProduct = v
-                
-                if let product = _theTakeProduct {
+            _theTakeProducts = v
+            
+            if let products = _theTakeProducts, product = products.first {
+                if _currentProduct != product {
+                    _currentProduct = product
                     imageURL = product.imageURL
                     descriptionText = product.brand
                     extraDescriptionText = product.name
