@@ -33,6 +33,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         self.collectionView?.alpha = 0
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
+        self.collectionView?.registerNib(UINib(nibName: String(TextSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: TextSceneDetailCollectionViewCell.ReuseIdentifier)
         
         NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerTimeDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo, time = userInfo["time"] as? Double {
@@ -71,26 +72,34 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
     func updateCollectionViewCell(cell: SceneDetailCollectionViewCell) {
         if let experience = cell.experience, timedEvent = experience.timedEventSequence?.timedEvent(currentTime) {
-            if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
-                let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
-                if currentProductFrameTime != newFrameTime {
-                    currentProductFrameTime = newFrameTime
-                    
-                    if let currentTask = currentProductSessionDataTask {
-                        currentTask.cancel()
+            updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent)
+        }
+    }
+    
+    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell, experience: NGDMExperience, timedEvent: NGDMTimedEvent) {
+        if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
+            let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
+            if currentProductFrameTime != newFrameTime {
+                currentProductFrameTime = newFrameTime
+                
+                if let currentTask = currentProductSessionDataTask {
+                    currentTask.cancel()
+                }
+                
+                currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
+                    if products.count > 0 {
+                        cell.theTakeProducts = products
                     }
                     
-                    currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
-                        if products.count > 0 {
-                            cell.theTakeProducts = products
-                        }
-                        
-                        self.currentProductSessionDataTask = nil
-                    })
-                }
-            } else if cell.timedEvent == nil || timedEvent != cell.timedEvent {
-                cell.timedEvent = timedEvent
+                    self.currentProductSessionDataTask = nil
+                })
             }
+        } else if timedEvent.isTextItem() && (timedEvent.hasImage(experience) && cell.reuseIdentifier != ImageSceneDetailCollectionViewCell.ReuseIdentifier) || (!timedEvent.hasImage(experience) && cell.reuseIdentifier != TextSceneDetailCollectionViewCell.ReuseIdentifier) {
+            if let indexPath = self.collectionView?.indexPathForCell(cell) {
+                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+            }
+        } else if cell.timedEvent == nil || timedEvent != cell.timedEvent {
+            cell.timedEvent = timedEvent
         }
     }
     
@@ -101,16 +110,20 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        //var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
-        //if indexPath.row == SceneDetailItemType.Location.rawValue {
-        //    reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
-        //}
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
         let experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences[indexPath.row]
+        let timedEvent = experience.timedEventSequence?.timedEvent(currentTime)
+        
+        var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
+        if let timedEvent = timedEvent {
+            if timedEvent.isTextItem() {
+                reuseIdentifier = TextSceneDetailCollectionViewCell.ReuseIdentifier
+            }
+        }
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
         cell.experience = experience
-        if cell.timedEvent == nil || (cell.timedEvent!.isProduct(kTheTakeIdentifierNamespace) && cell.theTakeProducts == nil) {
-            updateCollectionViewCell(cell)
+        if (cell.timedEvent == nil || (cell.timedEvent!.isProduct(kTheTakeIdentifierNamespace) && cell.theTakeProducts == nil)) && timedEvent != nil {
+            updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent!)
         }
         
         return cell

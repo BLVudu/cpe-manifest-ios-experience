@@ -8,9 +8,6 @@
 
 import UIKit
 import CoreData
-import AVFoundation
-
-
 
 class ExtrasContentViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -75,8 +72,8 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         cell.isGallery = thisExperience.isGallery()
         cell.playBtn.hidden = !cell.isGallery
         cell.caption.text = thisExperience.metadata?.title
-        if let thumbnailImagePath = thisExperience.thumbnailImagePath {
-            cell.thumbnail.setImageWithURL(NSURL(string: thumbnailImagePath)!)
+        if let imageURL = thisExperience.imageURL {
+            cell.thumbnail.setImageWithURL(imageURL)
         } else {
             cell.thumbnail.image = nil
         }
@@ -154,12 +151,3 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     }
     
 }
-    
-
-
-
-
-
-
-
-

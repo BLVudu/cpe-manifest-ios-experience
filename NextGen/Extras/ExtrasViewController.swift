@@ -153,8 +153,10 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         
         let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
         cell.extrasTitle.text = experience.metadata?.title
-        if let thumbnailImagePath = experience.thumbnailImagePath {
-            cell.extraImg.setImageWithURL(NSURL(string: thumbnailImagePath)!)
+        if let imageURL = experience.imageURL {
+            cell.extraImg.setImageWithURL(imageURL)
+        } else {
+            cell.extraImg.image = nil
         }
         
         return cell

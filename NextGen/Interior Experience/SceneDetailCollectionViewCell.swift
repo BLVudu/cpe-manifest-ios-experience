@@ -12,7 +12,7 @@ import MapKit
 class SceneDetailCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var extraDescriptionLabel: UILabel?
     @IBOutlet weak var mapView: MKMapView!
@@ -61,9 +61,9 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             _imageURL = v
             
             if let url = _imageURL {
-                imageView.setImageWithURL(url)
+                imageView?.setImageWithURL(url)
             } else {
-                imageView.image = nil
+                imageView?.image = nil
             }
         }
     }
