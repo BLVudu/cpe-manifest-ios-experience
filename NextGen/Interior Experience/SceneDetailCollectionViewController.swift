@@ -9,11 +9,13 @@
 import UIKit
 import MapKit
 import RFQuiltLayout
+import DZNWebViewController
 
 class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate {
     
     let kSceneDetailSegueShowGallery = "showGallery"
     let kSceneDetailSegueShowShop = "showShop"
+    let kSceneDetailSegueShowMap = "showMap"
     
     let regionRadius: CLLocationDistance = 2000
     var initialLocation = CLLocation(latitude: 0, longitude: 0)
@@ -138,11 +140,15 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                     self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
                 } else if timedEvent.isAudioVisual() {
                     self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
+                } else if timedEvent.isAppGroup() {
+                    if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
+                        let webViewController = WebViewController(title: experienceApp.title, url: url)
+                        let navigationController = UINavigationController(rootViewController: webViewController)
+                        self.presentViewController(navigationController, animated: true, completion: nil)
+                    }
                 }
             }
         }
-        
-        // showMap
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

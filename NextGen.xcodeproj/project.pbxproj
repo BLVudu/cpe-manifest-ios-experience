@@ -339,6 +339,7 @@
 		7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */; };
 		7085F7911C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7901C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift */; };
 		7085F7931C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7085F7921C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib */; };
+		7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7981C97550C00DF31B6 /* WebViewController.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
 		70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */; };
@@ -723,6 +724,7 @@
 		7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		7085F7901C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		7085F7921C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		7085F7981C97550C00DF31B6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
 		70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "man-of-steel-trailer3.mp4"; sourceTree = "<group>"; };
@@ -920,6 +922,7 @@
 				701D69C01C48205B0047A67A /* TalentDetailViewController.swift */,
 				70FECF741C655187005B1A44 /* StylizedViewController.swift */,
 				70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */,
+				7085F7981C97550C00DF31B6 /* WebViewController.swift */,
 			);
 			path = "Shared Controllers";
 			sourceTree = "<group>";
@@ -1697,6 +1700,7 @@
 				7071C4BA1C6BCBF6006F4275 /* NGEContentIdentifierType.swift in Sources */,
 				7071C50B1C6BCBF6006F4275 /* NGEJobFunction.swift in Sources */,
 				7071C4A91C6BCBF6006F4275 /* NGEColorTypeTypeEnum.swift in Sources */,
+				7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */,
 				70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */,
 				7071C50C1C6BCBF6006F4275 /* NGEMadeForRegionInternalTypeEnum.swift in Sources */,
 				7071C49F1C6BCBF6006F4275 /* NGEAudiovisualClipRefType.swift in Sources */,
