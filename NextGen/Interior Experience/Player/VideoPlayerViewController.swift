@@ -22,7 +22,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
     var didPlayInterstitial = false
     var showsTopToolbar = true
     let shared = FBSDKShareLinkContent()
+    var fullScreen = false
     
+
     @IBOutlet weak var shareContent: UIButton!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
@@ -113,6 +115,15 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
         
         }
     }
+    
+    
+    @IBAction func showFullScreen(sender: AnyObject) {
+        
+        self.fullScreen = !self.fullScreen
+        NSNotificationCenter.defaultCenter().postNotificationName("fullScreen", object: nil,userInfo: ["toggleFS": self.fullScreen])
+   
+    }
+    
 
     @IBAction func shareClip(sender: UIButton) {
 

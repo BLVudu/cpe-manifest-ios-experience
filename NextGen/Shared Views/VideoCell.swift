@@ -32,7 +32,7 @@ class VideoCell: UITableViewCell {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnail.alpha = 1
                 self.caption.alpha = 1
-            }, completion: nil)
+                }, completion: nil)
         }else {
             if isGallery == true{
                 self.playBtn.hidden = true

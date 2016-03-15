@@ -20,6 +20,7 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaDescriptionLabel: UILabel!
     
+    @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveBtn: UIButton!
 
@@ -39,6 +40,23 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.tableView, didSelectRowAtIndexPath: selectedIndexPath)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("fullScreen", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            if let userInfo = notification.userInfo{
+                if (userInfo["toggleFS"] as! Bool) == true{
+                    UIView.animateWithDuration(1, animations: {
+                    self.videoContainerView.frame = self.view.frame
+                    }, completion: nil)
+                } else {
+                    UIView.animateWithDuration(1, animations: {
+                        
+                    self.videoContainerView.frame = self.imageContainerView.frame
+                    }, completion: nil)
+                }
+            }
+           
+        }
 
 
             }
