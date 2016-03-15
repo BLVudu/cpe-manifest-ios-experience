@@ -344,6 +344,8 @@
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
 		70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */; };
 		70B9FE481C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */; };
+		70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */; };
+		70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */; };
 		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
 		70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B21C46CECE002D3B5A /* Video.swift */; };
 		70C9E9D71C6406E0004DF35B /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E9D61C6406E0004DF35B /* InitialViewController.swift */; };
@@ -729,6 +731,8 @@
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
 		70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "man-of-steel-trailer3.mp4"; sourceTree = "<group>"; };
 		70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-interstitial.mp4"; sourceTree = "<group>"; };
+		70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMLocation.swift; sourceTree = "<group>"; };
+		70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapView+Utils.swift"; sourceTree = "<group>"; };
 		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		70C9E0B21C46CECE002D3B5A /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		70C9E9D61C6406E0004DF35B /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -941,6 +945,7 @@
 				7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */,
 				701D69CB1C482E060047A67A /* UIImageView+Utils.swift */,
 				70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */,
+				70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1166,6 +1171,7 @@
 				7085F7811C93359000DF31B6 /* NGDMAppGroup.swift */,
 				7085F7831C9336C600DF31B6 /* NGDMInteractive.swift */,
 				7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */,
+				70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */,
 			);
 			name = NextGenDataManager;
 			path = "../nextgen-data/ios/NextGenDataManager";
@@ -1646,6 +1652,7 @@
 				7071C4F61C6BCBF6006F4275 /* NGEGalleryType.swift in Sources */,
 				490213441C8509DB00071552 /* ExpandedSceneDetailViewController.swift in Sources */,
 				70367ABD1C8F8DA30042B5B5 /* NGDMPictureGroup.swift in Sources */,
+				70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */,
 				7071C4D81C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureLightLevelType.swift in Sources */,
 				7071C5381C6BCBF6006F4275 /* NGESummary4000.swift in Sources */,
 				70367AC51C8F9E840042B5B5 /* NGDMTimedEvent.swift in Sources */,
@@ -1760,6 +1767,7 @@
 				7071C4B11C6BCBF6006F4275 /* NGECompObjEntryType.swift in Sources */,
 				70FECF811C6579E4005B1A44 /* ImageSceneDetailCollectionViewCell.swift in Sources */,
 				7071C5431C6BCBF6006F4275 /* NGETrackMetadataType.swift in Sources */,
+				70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */,
 				7071C4FE1C6BCBF6006F4275 /* NGEInventoryAncillaryType.swift in Sources */,
 				49F3EADB1C517ADA00E09484 /* ExtrasContentViewController.swift in Sources */,
 				492267E81C76950200B306A2 /* CommentaryView.swift in Sources */,

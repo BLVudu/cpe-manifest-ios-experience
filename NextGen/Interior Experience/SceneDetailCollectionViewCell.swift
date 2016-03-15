@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MapKit
 
 class SceneDetailCollectionViewCell: UICollectionViewCell {
     
@@ -15,7 +14,6 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var extraDescriptionLabel: UILabel?
-    @IBOutlet weak var mapView: MKMapView!
     
     var title: String? {
         get {
@@ -95,7 +93,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private var _timedEvent: NGDMTimedEvent!
+    internal var _timedEvent: NGDMTimedEvent!
     var timedEvent: NGDMTimedEvent? {
         get {
             return _timedEvent
@@ -108,7 +106,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
                 if let event = _timedEvent, experience = experience {
                     imageURL = event.getImageURL(experience)
                     descriptionText = event.getDescriptionText(experience)
-                    extraDescriptionText = nil
+                    extraDescriptionText = event.extraDescriptionText
                 } else {
                     imageURL = nil
                     descriptionText = nil
@@ -145,11 +143,4 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         experience = nil
         timedEvent = nil
     }
-    
-    func centerMapOnLocation(location: CLLocation, region: CLLocationDistance) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            region * 2.0, region * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
 }

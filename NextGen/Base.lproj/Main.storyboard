@@ -1388,7 +1388,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mapCell" id="Y5b-hq-Q2k" customClass="MapDetailCell" customModule="NextGen" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapDetailCellReuseIdentifier" id="Y5b-hq-Q2k" customClass="MapDetailCell" customModule="NextGen" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="4" width="157" height="121"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1435,7 +1435,7 @@
                                                 <connections>
                                                     <outlet property="label" destination="LrM-tv-eXV" id="Y8e-yt-FMC"/>
                                                     <outlet property="mapImage" destination="TrN-Gh-EAj" id="3XA-vD-K2w"/>
-                                                    <outlet property="mapThumbnail" destination="fpC-5F-LbR" id="qbd-Yi-A4J"/>
+                                                    <outlet property="mapView" destination="fpC-5F-LbR" id="rXq-Tq-Phl"/>
                                                     <outlet property="playBtn" destination="y9P-vs-wAN" id="GZS-vy-v61"/>
                                                 </connections>
                                             </collectionViewCell>
@@ -2415,6 +2415,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kSL-ff-FXa"/>
-        <segue reference="ir8-OX-j5p"/>
+        <segue reference="z13-8m-qRk"/>
     </inferredMetricsTieBreakers>
 </document>

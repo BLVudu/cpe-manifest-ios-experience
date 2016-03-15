@@ -95,7 +95,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                     self.currentProductSessionDataTask = nil
                 })
             }
-        } else if timedEvent.isTextItem() && (timedEvent.hasImage(experience) && cell.reuseIdentifier != ImageSceneDetailCollectionViewCell.ReuseIdentifier) || (!timedEvent.hasImage(experience) && cell.reuseIdentifier != TextSceneDetailCollectionViewCell.ReuseIdentifier) {
+        } else if (timedEvent.isTextItem() && ((timedEvent.hasImage(experience) && cell.reuseIdentifier != ImageSceneDetailCollectionViewCell.ReuseIdentifier) || (!timedEvent.hasImage(experience) && cell.reuseIdentifier != TextSceneDetailCollectionViewCell.ReuseIdentifier))) ||
+                    (timedEvent.isLocation() && cell.reuseIdentifier != MapSceneDetailCollectionViewCell.ReuseIdentifier) {
             if let indexPath = self.collectionView?.indexPathForCell(cell) {
                 self.collectionView?.reloadItemsAtIndexPaths([indexPath])
             }
@@ -118,6 +119,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         if let timedEvent = timedEvent {
             if timedEvent.isTextItem() {
                 reuseIdentifier = TextSceneDetailCollectionViewCell.ReuseIdentifier
+            } else if timedEvent.isLocation() {
+                reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
             }
         }
         
@@ -145,6 +148,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                         let navigationController = UINavigationController(rootViewController: webViewController)
                         self.presentViewController(navigationController, animated: true, completion: nil)
                     }
+                } else if timedEvent.isLocation() {
+                    self.performSegueWithIdentifier(kSceneDetailSegueShowMap, sender: timedEvent)
                 }
             }
         }
@@ -162,29 +167,10 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         } else if segue.identifier == kSceneDetailSegueShowShop {
             let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
             shopDetailViewController.products = sender as! [TheTakeProduct]
+        } else if segue.identifier == kSceneDetailSegueShowMap {
+            let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
+            mapDetailViewController.timedEvent = sender as! NGDMTimedEvent
         }
-        
-        /*if segue.identifier == "showMap"{
-        
-        let mapVC = segue.destinationViewController as! MapDetailViewController
-        
-            mapVC.initialLocation = self.initialLocation
-            mapVC.locationName = self.locName
-            //mapVC.locationImages = (self.currentScene?.locationImages)!
-            
-    } else if segue.identifier == "showGallery"{
-            
-            let galleryVC = segue.destinationViewController as! GalleryDetailViewController
-            
-            galleryVC.galleryID = self.galleryID
-
-        } else if segue.identifier == "showShop"{
-            
-            let shopVC = segue.destinationViewController as! ShoppingDetailViewController
-
-            //shopVC.items = (self.currentScene?.shopping)!
-        }*/
-
     }
     
     func cellForExperience(experience: NGDMExperience) -> SceneDetailCollectionViewCell? {

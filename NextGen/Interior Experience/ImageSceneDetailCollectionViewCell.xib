@@ -82,7 +82,7 @@
                 <outlet property="imageView" destination="RC2-bx-j7n" id="OaQ-J5-Wt8"/>
                 <outlet property="titleLabel" destination="5fk-Fh-dR6" id="u49-va-dpI"/>
             </connections>
-            <point key="canvasLocation" x="704" y="422"/>
+            <point key="canvasLocation" x="1094" y="550"/>
         </collectionViewCell>
     </objects>
 </document>
