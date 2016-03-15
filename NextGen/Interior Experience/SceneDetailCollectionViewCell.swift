@@ -61,7 +61,17 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             _imageURL = v
             
             if let url = _imageURL {
-                imageView?.setImageWithURL(url)
+                if let imageView = imageView {
+                    if _currentProduct != nil {
+                        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                        imageView.setImageWithURL(url, completion: { (image) -> Void in
+                            self.imageView!.backgroundColor = image?.getPixelColor(CGPoint.zero)
+                        })
+                    } else {
+                        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                        imageView.setImageWithURL(url)
+                    }
+                }
             } else {
                 imageView?.image = nil
             }

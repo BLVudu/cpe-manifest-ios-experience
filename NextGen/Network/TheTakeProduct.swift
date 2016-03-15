@@ -56,6 +56,24 @@ class TheTakeProduct: NSObject {
         }
     }
     
+    var theTakeURLString: String {
+        get {
+            return "http://www.thetake.com/product/" + id
+        }
+    }
+    
+    var theTakeURL: NSURL {
+        get {
+            return NSURL(string: theTakeURLString)!
+        }
+    }
+    
+    var shareText: String {
+        get {
+            return name + " - " + theTakeURLString
+        }
+    }
+    
     init(data: NSDictionary) {
         _data = data
     }

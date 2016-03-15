@@ -35,17 +35,6 @@ class TheTakeAPIUtil: APIUtil {
                         self.frameTimes[frameTime] = frameInfo
                     }
                 }
-                
-                /*if let frameTime = self.frameTimes.first {
-                    TheTakeAPIUtil.sharedInstance.getFrameProducts(frameTime, successBlock: { (result) -> Void in
-                        if let products = result["products"] as? [TheTakeProduct] {
-                            for product in products {
-                                print(product.brand)
-                                print(product.name)
-                            }
-                        }
-                    })
-                }*/
             }
         }, errorBlock: nil)
     }

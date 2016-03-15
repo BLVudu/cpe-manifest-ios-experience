@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MessageUI
 
 class ShoppingDetailCell: UICollectionViewCell {
     
@@ -47,7 +46,7 @@ class ShoppingDetailCell: UICollectionViewCell {
     
 }
 
-class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MFMailComposeViewControllerDelegate, UICollectionViewDelegateFlowLayout {
+class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var productMatchIcon: UIView!
     @IBOutlet weak var productMatchLabel: UILabel!
@@ -92,7 +91,14 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
         super.viewDidLoad()
         
         productMatchIcon.layer.cornerRadius = CGRectGetWidth(productMatchIcon.frame) / 2
-        currentProduct = products.first
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        productsCollectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
+        collectionView(productsCollectionView, didSelectItemAtIndexPath: indexPath)
     }
     
     
@@ -101,26 +107,18 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func shopTheTake(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Are you sure you want to leave the movie and visit THETAKE.COM ", message: "Click 'Cancel' to continuue watching your movie or click 'OK' to continue watching your movie", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
-            //UIApplication.sharedApplication().openURL(NSURL(string: self.items[self.curItem].itemLink)!)
-            
-        }))
-        
-        alertController.show()
+    @IBAction func onShop(sender: AnyObject) {
+        if let product = currentProduct {
+            product.theTakeURL.promptLaunchBrowser()
+        }
     }
     
-    @IBAction func sendLink(sender: AnyObject) {
-        let email = MFMailComposeViewController()
-        email.mailComposeDelegate = self
-        email.setSubject("Man of Steel")
-        //email.setMessageBody("Check out this item from Man of Steel "  + String(items[curItem].itemLink), isHTML: true)
-        //UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
-        self.presentViewController(email, animated: true, completion: nil)
-        
+    @IBAction func onSendLink(sender: AnyObject) {
+        if let button = sender as? UIButton, product = currentProduct {
+            let activityViewController = UIActivityViewController(activityItems: [product.shareText], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = button
+            self.presentViewController(activityViewController, animated: true, completion: nil)
+        }
     }
     
     
@@ -132,7 +130,6 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ShoppingDetailCell.ReuseIdentifier, forIndexPath: indexPath) as! ShoppingDetailCell
         cell.product = products[indexPath.row]
-        cell.selected = (cell.product == currentProduct)
         
         return cell
     }
@@ -140,7 +137,10 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        currentProduct = products[indexPath.row]
+        let product = products[indexPath.row]
+        if product != currentProduct {
+            currentProduct = product
+        }
     }
     
 }
