@@ -23,14 +23,13 @@ class Film: NSObject {
         projectID = String(info["PROJECT_ID"] as! NSNumber)
         
         getPosterImage(projectID)
+        let retailerURL = defaults.objectForKey("link")
+        let restrictedChar = NSMutableCharacterSet.init(charactersInString: "!&:.'")
+        let newStr = title.componentsSeparatedByCharactersInSet(restrictedChar).joinWithSeparator("")
+        let whiStr = newStr.stringByReplacingOccurrencesOfString("  ", withString: " ")
+        let hypStr = whiStr.stringByReplacingOccurrencesOfString(" ", withString: "-")
+        externalURL = NSURL(string: (retailerURL! as! String)+(hypStr))
         
-        //if let posterImage = info["poster_image"] as? String {
-            //posterImageURL = NSURL(string: posterImage)
-        //}
-        
-        if let externalURLStr = info["external_url"] as? String {
-            externalURL = NSURL(string: externalURLStr)
-        }
     }
     
     func getPosterImage(id:String){

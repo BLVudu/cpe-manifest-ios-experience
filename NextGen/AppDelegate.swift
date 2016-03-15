@@ -48,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 defaults.setObject(rawJSON!["data"]?.objectForKey("apiKey"), forKey: "apiKey")
                 defaults.setObject(rawJSON!["data"]?.objectForKey("title"), forKey: "title")
+                defaults.setObject(rawJSON!["data"]?.objectForKey("retailerLink"), forKey: "link")
                 movieTitle = (defaults.objectForKey("title") as! String).stringByAddingPercentEncodingWithAllowedCharacters(charSet)!
                 
 
@@ -57,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
             
         }
-        
         let key = defaults.objectForKey("apiKey")
         let url = NSURL(string: "http://baselineapi.com/api/ProjectSearch?id=\(movieTitle)&apikey=\(key!)")
         let task = defaultSession.dataTaskWithURL(url!){

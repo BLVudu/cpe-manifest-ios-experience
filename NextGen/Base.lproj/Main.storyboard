@@ -44,7 +44,6 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
-            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1005,12 +1004,6 @@
                                             <color key="textColor" red="0.73108974358974366" green="0.72994468792913936" blue="0.002075914139110467" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52M-Fa-ReK">
-                                            <rect key="frame" x="56" y="54" width="544" height="46"/>
-                                            <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="13"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOT-be-HTP" customClass="RadioButton" customModule="NextGen" customModuleProvider="target">
                                             <rect key="frame" x="8" y="30" width="40" height="40"/>
                                             <constraints>
@@ -1060,7 +1053,6 @@
                                     <outlet property="cellSetting" destination="bhc-ig-QyP" id="22J-6f-F5k"/>
                                     <outlet property="currentSetting" destination="oxD-jH-NCj" id="9q0-49-rMN"/>
                                     <outlet property="radioBtn" destination="xOT-be-HTP" id="ggN-hY-smg"/>
-                                    <outlet property="subtitle" destination="52M-Fa-ReK" id="yTt-Uj-hCM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

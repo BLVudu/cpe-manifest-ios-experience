@@ -62,6 +62,7 @@
 		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
 		49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CE1C7D0F7700753227 /* fb_logo.tif */; };
 		49CB44D11C7D0F7700753227 /* tw_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CF1C7D0F7700753227 /* tw_logo.png */; };
+		49CC33E51C98B81C000AB801 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49CC33E41C98B81C000AB801 /* Settings.plist */; };
 		49E546481C84BF1600DBD318 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E546471C84BF1600DBD318 /* MapDetailViewController.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
@@ -420,6 +421,7 @@
 		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		49CB44CE1C7D0F7700753227 /* fb_logo.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = fb_logo.tif; sourceTree = "<group>"; };
 		49CB44CF1C7D0F7700753227 /* tw_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw_logo.png; sourceTree = "<group>"; };
+		49CC33E41C98B81C000AB801 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		49E546471C84BF1600DBD318 /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
@@ -794,6 +796,7 @@
 				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
 				492267D71C73F41300B306A2 /* Shopping.plist */,
+				49CC33E41C98B81C000AB801 /* Settings.plist */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
 				4921D97D1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld */,
 				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
@@ -1421,6 +1424,7 @@
 				7077A36D1C4989C200843782 /* meloni_thumb.jpg in Resources */,
 				70C9E9DA1C640A97004DF35B /* interior_bg.jpg in Resources */,
 				49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */,
+				49CC33E51C98B81C000AB801 /* Settings.plist in Resources */,
 				6AA9CCC71C883EE2005EBA92 /* RobotoCondensed-Regular.ttf in Resources */,
 				7077A3681C4989C200843782 /* lane_full.jpg in Resources */,
 				7077A3871C49C66F00843782 /* timberline_thumb.jpg in Resources */,
