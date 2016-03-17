@@ -12,6 +12,10 @@ import UIKit
 
 class SettingsMenuViewController: UITableViewController{
    
+    var RBAudio = [RadioButton]()
+    var RBSubtitles = [RadioButton]()
+    var visibleRowsPerSection = [[Int]]()
+    var currentIndexPath: NSIndexPath?
      override func viewWillAppear(animated: Bool) {
         
         super.viewDidLoad()
@@ -106,7 +110,10 @@ class SettingsMenuViewController: UITableViewController{
         let cell = tableView.dequeueReusableCellWithIdentifier("settingsItem") as! SettingsCell
         cell.cellSetting.text = currentCellDescriptor["primaryTitle"] as? String
         cell.cellSetting.textColor = UIColor.yellowColor()
-        
+        cell.radioBtn.section = indexPath.section
+        cell.radioBtn.index = indexPath.row
+        cell.radioBtn.hidden = (currentCellDescriptor["hideRadioButton"] as! Bool)
+        cell.radioBtn.addTarget(self, action: "buttonSelected:", forControlEvents: UIControlEvents.TouchUpInside)
         
 
         return cell
@@ -117,7 +124,9 @@ class SettingsMenuViewController: UITableViewController{
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+       
         let indexOfTappedRow = visibleRowsPerSection[indexPath.section][indexPath.row]
+        //var shouldExpandAndShowSubRows = false
         
         if decriptions[indexPath.section][indexOfTappedRow]["isExpandable"] as! Bool == true {
             var shouldExpandAndShowSubRows = false
@@ -129,12 +138,27 @@ class SettingsMenuViewController: UITableViewController{
             decriptions[indexPath.section][indexOfTappedRow].setValue(shouldExpandAndShowSubRows, forKey: "isExpanded")
             for i in (indexOfTappedRow + 1)...(indexOfTappedRow + (decriptions[indexPath.section][indexOfTappedRow]["additionalRows"] as! Int)) {
                 decriptions[indexPath.section][i].setValue(shouldExpandAndShowSubRows, forKey: "isVisible")
+                
+                
             }
+            
+           
         }
         
+
         getIndicesOfVisibleRows()
         self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+        self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+
     
     }
     
+    
+    @IBAction func buttonSelected(sender: RadioButton) {
+        let indexPath = NSIndexPath(forRow: sender.index!, inSection: sender.section!)
+        
+        self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        
+         }
+
 }

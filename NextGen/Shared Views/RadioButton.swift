@@ -11,11 +11,18 @@ import UIKit
 
 class RadioButton: UIButton{
     
+    var section:Int?
+    var index:Int?
+    
+    /*
     override var selected: Bool {
         didSet {
             toggleButon()
         }
+
     }
+*/
+
 
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,20 +42,34 @@ class RadioButton: UIButton{
         self.clipsToBounds = true
         self.layer.borderWidth = 3
         self.layer.cornerRadius = 0.5*40
-        //print(self.bounds.size.width)
         self.layer.borderColor = UIColor.grayColor().CGColor
     }
     
     
 
-    
+    /*
     func toggleButon() {
         if self.selected {
-    self.backgroundColor = UIColor.yellowColor()
+ 
         } else{
-    self.backgroundColor = UIColor.clearColor()
+
     }
     }
     
+    func highlight(){
+        //self.selected = !self.selected
+        self.highlighted = true
+        self.backgroundColor = UIColor.yellowColor()
+        
+        
+    }
+    
+    func removeHighlight(){
+        //self.selected = !self.selected
+        self.highlighted = false
+        self.backgroundColor = UIColor.clearColor()
+        
+    }
+    */
     
 }

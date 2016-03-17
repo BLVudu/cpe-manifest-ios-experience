@@ -10,8 +10,8 @@
 			<false/>
 			<key>isVisible</key>
 			<true/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<true/>
 			<key>primaryTitle</key>
 			<string>Menu</string>
 			<key>secondaryTitle</key>
@@ -30,8 +30,8 @@
 			<false/>
 			<key>isVisible</key>
 			<true/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<true/>
 			<key>primaryTitle</key>
 			<string>Audio Settings</string>
 			<key>secondaryTitle</key>
@@ -48,8 +48,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>English(US)</string>
 			<key>secondaryTitle</key>
@@ -66,8 +66,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>English(US)(AC3)</string>
 			<key>secondaryTitle</key>
@@ -84,8 +84,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>Spanish(Latin America)</string>
 			<key>secondaryTitle</key>
@@ -102,8 +102,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>French(Canada)</string>
 			<key>secondaryTitle</key>
@@ -122,8 +122,8 @@
 			<false/>
 			<key>isVisible</key>
 			<true/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<true/>
 			<key>primaryTitle</key>
 			<string>Subtitles</string>
 			<key>secondaryTitle</key>
@@ -140,8 +140,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>Off</string>
 			<key>secondaryTitle</key>
@@ -158,8 +158,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>English(CC)</string>
 			<key>secondaryTitle</key>
@@ -176,8 +176,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>English(United States)</string>
 			<key>secondaryTitle</key>
@@ -194,8 +194,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>Spanish(Latin America)</string>
 			<key>secondaryTitle</key>
@@ -212,8 +212,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>French(Canada)</string>
 			<key>secondaryTitle</key>
@@ -230,8 +230,8 @@
 			<false/>
 			<key>isVisible</key>
 			<false/>
-			<key>value</key>
-			<string></string>
+			<key>hideRadioButton</key>
+			<false/>
 			<key>primaryTitle</key>
 			<string>Portuguese(Brazil)</string>
 			<key>secondaryTitle</key>
