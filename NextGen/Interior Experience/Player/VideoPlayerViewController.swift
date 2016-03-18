@@ -14,6 +14,7 @@ import TwitterKit
 import MessageUI
 
 let kVideoPlayerTimeDidChange = "kVideoPlayerTimeDidChange"
+let kVideoPlayerIsPlayingPrimaryVideo = "kVideoPlayerIsPlayingPrimaryVideo"
 
 class VideoPlayerViewController: WBVideoPlayerViewController {
     
@@ -51,6 +52,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             self.playVideoWithURL(audioVisual.videoURL)
         }*/
         
+        NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerIsPlayingPrimaryVideo, object: nil)
         self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("man-of-steel-trailer3", ofType: "mp4")!))
     }
     
