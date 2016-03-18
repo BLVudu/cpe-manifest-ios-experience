@@ -19,22 +19,167 @@ enum TalentType {
 class Talent: NSObject {
     
     var id: String!
+    var participantID: String!
     var name: String!
     var role: String?
     var type = TalentType.Unknown
     var billingOrder = -1
     var thumbnailImage: String?
     var fullImage: String?
-    var biography: String?
+    var biography: String!
     var facebook: String?
     var facebookID: String?
     var twitter: String?
     var films = [Film]()
     var gallery = [String]()
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     
     required init(info: NSDictionary) {
         super.init()
+        participantID = String(info["PARTICIPANT_ID"] as! NSNumber)
+        name = info["FULL_NAME"] as! String
+        role = info["CREDIT"] as? String
+        type = talentTypeFromString(info["CREDIT_GROUP"] as? String)
+        getBio(participantID)
+        getFilmography(participantID)
+        getHeadshot(participantID)
+       
+       
         
+        
+
+    }
+    
+
+    
+    func getBio(id:String){
+        let key = defaults.objectForKey("apiKey")
+        
+        let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        
+        let task = defaultSession.dataTaskWithURL(NSURL(string:"http://baselineapi.com/api/ParticipantBioShort?id=\(id)&apikey=\(key!)")!){
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let httpResponse = response as? NSHTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    do {
+                        
+                        let rawJSON = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
+                        if rawJSON.count == 0 {
+                            self.biography = "No biography information avaliable"
+                        } else {
+                        self.biography = rawJSON[0]["SHORT_BIO"] as! String
+                        }
+                        
+                        
+                        
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                    
+                }
+            }
+        }
+        
+        task.resume()
+        
+        
+        
+    }
+    
+    func getFilmography(id: String){
+        let key = defaults.objectForKey("apiKey")
+        
+        let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        
+    let task = defaultSession.dataTaskWithURL(NSURL(string:"http://www.baselineapi.com/api/ParticipantFilmCredit?id=\(id)&apikey=\(key!)")!){
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let httpResponse = response as? NSHTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    do {
+                        
+                        let rawJSON = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)as! NSArray
+                        if rawJSON.count <= 5{
+                            print(rawJSON.count)
+                            for film in rawJSON{
+                                self.films.append(Film(info:film as! NSDictionary))
+                                
+                            }
+                        } else {
+                            for index in 0...5{
+                                self.films.append(Film(info:rawJSON[index] as! NSDictionary))
+                                
+                            }
+                        }
+                        
+                        
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                    
+                }
+            }
+        }
+        
+        task.resume()
+        
+
+        
+    }
+    
+    func getHeadshot(id: String){
+        let key = defaults.objectForKey("apiKey")
+        let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        
+        let task = defaultSession.dataTaskWithURL(NSURL(string:"http://www.baselineapi.com/api/ParticipantHeadshot?id=\(id)&apikey=\(key!)")!){
+            data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let httpResponse = response as? NSHTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    do {
+                        
+                        let rawJSON = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
+                        if rawJSON.count == 0 {
+                            self.thumbnailImage = nil
+                            self.fullImage = nil
+
+                            
+                        } else {
+                            self.thumbnailImage = rawJSON[0]["LARGE_THUMBNAIL_URL"] as? String
+                            self.fullImage = rawJSON[0]["LARGE_URL"] as? String
+                            
+                            
+                        }
+                        
+                       
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                    
+                }
+            }
+        }
+        
+        task.resume()
+        
+
+        
+    }
+
+
+ 
+    
+        
+
+/*
         id = info["id"] as! String
         name = info["name"] as! String
         role = info["character"] as? String
@@ -60,7 +205,7 @@ class Talent: NSObject {
             }
         }
     }
-    
+    */
     private func talentTypeFromString(typeString: String?) -> TalentType! {
         if typeString != nil {
             let str = typeString!
@@ -86,3 +231,4 @@ class Talent: NSObject {
     }
 
 }
+

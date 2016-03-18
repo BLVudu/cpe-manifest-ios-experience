@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="250" height="140"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZFg-U0-fjg" id="Rb8-s1-zKI">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="139"/>
+                <rect key="frame" x="0.0" y="0.0" width="250" height="139.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Role" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veR-JQ-nkI">

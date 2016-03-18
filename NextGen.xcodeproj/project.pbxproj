@@ -44,6 +44,7 @@
 		497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497DECCF1C61754A000C6636 /* BookmarkCell.xib */; };
 		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
 		4986F8351C8F91D100FF60EB /* CustomScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4986F8341C8F91D100FF60EB /* CustomScrubber.swift */; };
+		4986F83B1C90D45100FF60EB /* GetCredits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4986F83A1C90D45100FF60EB /* GetCredits.swift */; };
 		4993D2671C6CE17F0077220A /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2661C6CE17F0077220A /* SettingsCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E65C1C7E60530076E9F3 /* share.jpg */; };
@@ -61,6 +62,7 @@
 		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
 		49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CE1C7D0F7700753227 /* fb_logo.tif */; };
 		49CB44D11C7D0F7700753227 /* tw_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CF1C7D0F7700753227 /* tw_logo.png */; };
+		49CC33E51C98B81C000AB801 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49CC33E41C98B81C000AB801 /* Settings.plist */; };
 		49E546481C84BF1600DBD318 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E546471C84BF1600DBD318 /* MapDetailViewController.swift */; };
 		49F3EAD11C50200A00E09484 /* ContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD01C50200A00E09484 /* ContentLayout.swift */; };
 		49F3EAD31C515B3100E09484 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* ContentCell.xib */; };
@@ -427,6 +429,7 @@
 		497DECCF1C61754A000C6636 /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
 		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		4986F8341C8F91D100FF60EB /* CustomScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrubber.swift; sourceTree = "<group>"; };
+		4986F83A1C90D45100FF60EB /* GetCredits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCredits.swift; sourceTree = "<group>"; };
 		4993D2661C6CE17F0077220A /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsCell.swift; path = ../SettingsCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49C1E65C1C7E60530076E9F3 /* share.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = share.jpg; sourceTree = "<group>"; };
@@ -444,6 +447,7 @@
 		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		49CB44CE1C7D0F7700753227 /* fb_logo.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = fb_logo.tif; sourceTree = "<group>"; };
 		49CB44CF1C7D0F7700753227 /* tw_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw_logo.png; sourceTree = "<group>"; };
+		49CC33E41C98B81C000AB801 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		49E546471C84BF1600DBD318 /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		49F3EAD01C50200A00E09484 /* ContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLayout.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* ContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
@@ -821,6 +825,7 @@
 				701D69BF1C48205B0047A67A /* Shared Controllers */,
 				707E10881C4081F700FCF81C /* Models */,
 				7085F76E1C91DDDE00DF31B6 /* Network */,
+				4986F8391C90D42100FF60EB /* Baseline */,
 				70FECF711C654FC3005B1A44 /* Segues */,
 				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
@@ -843,6 +848,7 @@
 				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
 				492267D71C73F41300B306A2 /* Shopping.plist */,
+				49CC33E41C98B81C000AB801 /* Settings.plist */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
 				4921D97D1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld */,
 				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
@@ -879,6 +885,14 @@
 			);
 			name = Resources;
 			path = NextGen/Resources;
+			sourceTree = "<group>";
+		};
+		4986F8391C90D42100FF60EB /* Baseline */ = {
+			isa = PBXGroup;
+			children = (
+				4986F83A1C90D45100FF60EB /* GetCredits.swift */,
+			);
+			name = Baseline;
 			sourceTree = "<group>";
 		};
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
@@ -1504,6 +1518,7 @@
 				7077A36D1C4989C200843782 /* meloni_thumb.jpg in Resources */,
 				70C9E9DA1C640A97004DF35B /* interior_bg.jpg in Resources */,
 				49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */,
+				49CC33E51C98B81C000AB801 /* Settings.plist in Resources */,
 				6AA9CCC71C883EE2005EBA92 /* RobotoCondensed-Regular.ttf in Resources */,
 				7077A3681C4989C200843782 /* lane_full.jpg in Resources */,
 				7077A3871C49C66F00843782 /* timberline_thumb.jpg in Resources */,
@@ -1665,6 +1680,7 @@
 				7071C4C11C6BCBF6006F4275 /* NGEDateTimeRangeType.swift in Sources */,
 				7071C51D1C6BCBF6006F4275 /* NGEPersonNameType.swift in Sources */,
 				7071C5061C6BCBF6006F4275 /* NGEInventoryTextObjectType.swift in Sources */,
+				4986F83B1C90D45100FF60EB /* GetCredits.swift in Sources */,
 				7071C5351C6BCBF6006F4275 /* NGESubtitleTrackReferenceType.swift in Sources */,
 				7071C4CE1C6BCBF6006F4275 /* NGEDigitalAssetInteractiveDataType.swift in Sources */,
 				7071C4F41C6BCBF6006F4275 /* NGEFrameAverageMax.swift in Sources */,

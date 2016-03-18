@@ -15,13 +15,14 @@ import MessageUI
 
 let kVideoPlayerTimeDidChange = "kVideoPlayerTimeDidChange"
 
-class VideoPlayerViewController: WBVideoPlayerViewController{
+class VideoPlayerViewController: WBVideoPlayerViewController {
     
-    var video: Video?
     var didPlayInterstitial = false
     var showsTopToolbar = true
     let shared = FBSDKShareLinkContent()
+    var fullScreen = false
     
+
     @IBOutlet weak var shareContent: UIButton!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
@@ -31,26 +32,17 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if video != nil {
-            //if video!.interstitialUrl != nil {
-            //    self.playerControlsVisible = false
-            //    self.lockPlayerControls = true
-                // self.playVideoWithURL(video!.interstitialUrl)
-            //    self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
-            //} else {
-                playPrimaryVideo()
-            //}
-        }
-        
         NSNotificationCenter.defaultCenter().addObserverForName("pauseMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-
             self.pauseVideo()
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName("resumeMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-
             self.playVideo()
         }
+        
+        self.playerControlsVisible = false
+        self.lockPlayerControls = true
+        self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
     }
     
     func playPrimaryVideo() {
@@ -76,16 +68,12 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
     }
     
     @IBAction func commentary(sender: AnyObject) {
-        
-        
-        
         let cpo = self.storyboard?.instantiateViewControllerWithIdentifier("commentary")
         self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
         self.commentaryPopover.popoverContentSize = CGSizeMake(320.0, 300.0)
         self.commentaryPopover.backgroundColor = UIColor.blackColor()
         self.commentaryPopover.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,200,1,1), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-        
-            }
+    }
     
     override func syncScrubber() {
         super.syncScrubber()
@@ -104,6 +92,15 @@ class VideoPlayerViewController: WBVideoPlayerViewController{
             self.shareContent.userInteractionEnabled = (self.currentScene?.canShare)!*/
         }
     }
+    
+    
+    @IBAction func showFullScreen(sender: AnyObject) {
+        
+        self.fullScreen = !self.fullScreen
+        NSNotificationCenter.defaultCenter().postNotificationName("fullScreen", object: nil,userInfo: ["toggleFS": self.fullScreen])
+   
+    }
+    
 
     @IBAction func shareClip(sender: UIButton) {
 

@@ -17,7 +17,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
             if film?.posterImageURL != nil {
                 imageView.setImageWithURL(film!.posterImageURL!)
             } else {
-                imageView.image = nil
+                imageView.image = UIImage(named: "Blank Poster")
             }
         }
     }
@@ -26,6 +26,23 @@ class FilmCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         film = nil
+    }
+    
+    override var selected: Bool {
+        get {
+            return super.selected
+        }
+        set {
+            if newValue {
+                super.selected = true
+                self.layer.borderWidth = 2
+                self.layer.borderColor = UIColor.whiteColor().CGColor
+                
+            } else if newValue == false {
+                
+                self.layer.borderWidth = 0
+            }
+        }
     }
     
 }

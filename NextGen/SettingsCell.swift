@@ -18,26 +18,24 @@ class SettingsCell: UITableViewCell{
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var radioBtn: RadioButton!
 
+  
     
-    
-   
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         if (selected){
-            
 
-            self.radioBtn.selected = true
+            self.radioBtn.backgroundColor = UIColor.yellowColor()
                
             
         } else {
-
-            self.radioBtn.selected = false
+            self.radioBtn.backgroundColor = UIColor.clearColor()
 
             
         }
 
 
     }
+
 
  }

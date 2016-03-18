@@ -19,7 +19,7 @@ class TalentTableViewCell: UITableViewCell {
             nameLabel?.text = talent?.name.uppercaseString
             roleLabel?.text = talent?.role
             if talent?.thumbnailImage != nil {
-                talentImageView.image = UIImage(named: talent!.thumbnailImage!)
+                talentImageView.setImageWithURL(NSURL(string:talent!.thumbnailImage!)!)
             } else {
                 talentImageView.image = nil
             }
