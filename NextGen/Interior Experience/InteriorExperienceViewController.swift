@@ -43,5 +43,12 @@ class InteriorExperienceViewController: UIViewController {
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
         updatePlayerConstraints()
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PlayerViewControllerSegue" {
+            let playerViewController = segue.destinationViewController as! VideoPlayerViewController
+            playerViewController.shouldPlayInterstitial = true
+        }
+    }
 
 }

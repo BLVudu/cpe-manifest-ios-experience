@@ -22,8 +22,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var showsTopToolbar = true
     let shared = FBSDKShareLinkContent()
     var fullScreen = false
+    var shouldPlayInterstitial = false
     
-
     @IBOutlet weak var shareContent: UIButton!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
@@ -41,9 +41,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             self.playVideo()
         }
         
-        self.playerControlsVisible = false
-        self.lockPlayerControls = true
-        self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
+        if shouldPlayInterstitial {
+            self.playerControlsVisible = false
+            self.lockPlayerControls = true
+            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
+        }
     }
     
     func playPrimaryVideo() {
