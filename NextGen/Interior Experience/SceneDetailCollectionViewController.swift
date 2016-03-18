@@ -10,202 +10,191 @@ import UIKit
 import MapKit
 import RFQuiltLayout
 
-
-enum SceneDetailItemType: Int {
-    case Location = 0
-    case Gallery
-    case DeletedScene
-    case Shop
-}
-
 class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate {
     
-
-    let cellDetails = [
-        ["location.jpg", "Kent family farm", "YORKVILLE, ILLINOIS, USA"],
-        ["scene.jpg", "Henry Cavill getting some scene direction"],
-        ["deleted_scene.jpg", "Behind the scenes Flying in IL cornfield"],
-        ["shop.jpg", "Shop this scene"]
-    ]
-
-
+    let kSceneDetailSegueShowGallery = "showGallery"
+    let kSceneDetailSegueShowShop = "showShop"
+    let kSceneDetailSegueShowMap = "showMap"
+    
     let regionRadius: CLLocationDistance = 2000
     var initialLocation = CLLocation(latitude: 0, longitude: 0)
     var locName = ""
     var locImg = ""
     var galleryID = 0
-    var currentScene: Scene?
+    
+    var currentTime = -1.0
+    var currentProductFrameTime = -1.0
+    var currentProductSessionDataTask: NSURLSessionDataTask?
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView?.backgroundColor = UIColor.clearColor()
+        self.collectionView?.alpha = 0
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
+        self.collectionView?.registerNib(UINib(nibName: String(TextSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: TextSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        if let allScenes = DataManager.sharedInstance.content?.scenes {
-            currentScene = allScenes[0]
-        }
-        
-        let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
-        layout.direction = UICollectionViewScrollDirection.Vertical
-        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 8), (CGRectGetWidth(self.collectionView!.bounds)/4))
-
-        
-        NSNotificationCenter.defaultCenter().addObserverForName(kSceneDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            if let userInfo = notification.userInfo {
-                self.currentScene = userInfo["scene"] as? Scene
-                self.galleryID = self.currentScene!.gallery
-                self.initialLocation = CLLocation(latitude: (self.currentScene?.latitude)!, longitude: (self.currentScene?.longitude)!)
-                self.locName = (self.currentScene?.locationName)!
-                self.locImg = (self.currentScene?.locationImage)!
-                self.collectionView?.reloadData()
+        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerTimeDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            if let userInfo = notification.userInfo, time = userInfo["time"] as? Double {
+                self.currentTime = time
+                self.updateCollectionView()
             }
         }
     }
     
-   /*
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        layoutCollectionView()
+        self.collectionView?.alpha = 1
+    }
+    
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        layoutCollectionView()
+    }
+    
+    func layoutCollectionView() {
         let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
         layout.direction = UICollectionViewScrollDirection.Vertical
-        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 4), 250)
-        print(self.collectionView!.bounds)
+        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 2), (CGRectGetWidth(self.collectionView!.bounds) / 2))
     }
-*/
+    
+    func updateCollectionView() {
+        if let visibleCells = self.collectionView?.visibleCells() {
+            for cell in visibleCells {
+                if let cell = cell as? SceneDetailCollectionViewCell {
+                    updateCollectionViewCell(cell)
+                }
+            }
+        }
+    }
+    
+    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell) {
+        if let experience = cell.experience, timedEvent = experience.timedEventSequence?.timedEvent(currentTime) {
+            updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent)
+        }
+    }
+    
+    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell, experience: NGDMExperience, timedEvent: NGDMTimedEvent) {
+        if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
+            let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
+            if currentProductFrameTime != newFrameTime {
+                currentProductFrameTime = newFrameTime
+                
+                if let currentTask = currentProductSessionDataTask {
+                    currentTask.cancel()
+                }
+                
+                currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
+                    if products.count > 0 {
+                        cell.theTakeProducts = products
+                    }
+                    
+                    self.currentProductSessionDataTask = nil
+                })
+            }
+        } else if (timedEvent.isTextItem() && ((timedEvent.hasImage(experience) && cell.reuseIdentifier != ImageSceneDetailCollectionViewCell.ReuseIdentifier) || (!timedEvent.hasImage(experience) && cell.reuseIdentifier != TextSceneDetailCollectionViewCell.ReuseIdentifier))) ||
+                    (timedEvent.isLocation() && cell.reuseIdentifier != MapSceneDetailCollectionViewCell.ReuseIdentifier) {
+            if let indexPath = self.collectionView?.indexPathForCell(cell) {
+                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+            }
+        } else if cell.timedEvent == nil || timedEvent != cell.timedEvent {
+            cell.timedEvent = timedEvent
+        }
+    }
+    
     
     // MARK: UICollectionViewDataSource
-     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences.count
     }
-    
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences[indexPath.row]
+        let timedEvent = experience.timedEventSequence?.timedEvent(currentTime)
         
-            var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
-            if indexPath.row == SceneDetailItemType.Location.rawValue {
+        var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
+        if let timedEvent = timedEvent {
+            if timedEvent.isTextItem() {
+                reuseIdentifier = TextSceneDetailCollectionViewCell.ReuseIdentifier
+            } else if timedEvent.isLocation() {
                 reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
             }
-            
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
-            switch indexPath.row {
-            case SceneDetailItemType.Location.rawValue:
-                cell.title = "Scene Location"
-                cell.centerMapOnLocation(initialLocation, region: regionRadius)
-                cell.descriptionLabel.text = self.locName
-                break
-               /*
-            case SceneDetailItemType.Trivia.rawValue:
-                cell.title = "Scene Trivia"
-                cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
-                cell.descriptionLabel.text = cellDetails[indexPath.row][1]
-
-                break
-                */
-            case SceneDetailItemType.Gallery.rawValue:
-                cell.title = "SCENE GALLERY"
-                cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
-                cell.descriptionLabel.text = cellDetails[indexPath.row][1]
-
-                break
-                
-            case SceneDetailItemType.DeletedScene.rawValue:
-                cell.title = "Deleted Scene"
-                cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
-                cell.descriptionLabel.text = cellDetails[indexPath.row][1]
-
-                break
-                
-            case SceneDetailItemType.Shop.rawValue:
-                cell.title = "Shop This Scene"
-                cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
-                cell.descriptionLabel.text = cellDetails[indexPath.row][1]
-
-                break
-                
-            default:
-                cell.title = nil
-                break
-            }
-            
-            //cell.imageView.image = UIImage(named: cellDetails[indexPath.row][0])
-            //cell.descriptionLabel.text = cellDetails[indexPath.row][1]
-            
-            return cell
-        }
-
-    
-    
-     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        switch indexPath.row {
-            
-        case SceneDetailItemType.Location.rawValue:
-        self.performSegueWithIdentifier("showMap", sender: nil)
-            break
-            
-        case SceneDetailItemType.Gallery.rawValue:
-        self.performSegueWithIdentifier("showGallery", sender: nil)
-            break
-            
-            
-        case SceneDetailItemType.Shop.rawValue:
-            self.performSegueWithIdentifier("showShop", sender: nil)
-            break
-            
-        default:
-            break
         }
         
-            
-
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
+        cell.experience = experience
+        if (cell.timedEvent == nil || (cell.timedEvent!.isProduct(kTheTakeIdentifierNamespace) && cell.theTakeProducts == nil)) && timedEvent != nil {
+            updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent!)
+        }
+        
+        return cell
     }
     
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience {
+            if cell.theTakeProducts != nil {
+                self.performSegueWithIdentifier(kSceneDetailSegueShowShop, sender: cell.theTakeProducts)
+            } else if let timedEvent = cell.timedEvent {
+                if timedEvent.isGallery() {
+                    self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
+                } else if timedEvent.isAudioVisual() {
+                    self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
+                } else if timedEvent.isAppGroup() {
+                    if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
+                        let webViewController = WebViewController(title: experienceApp.title, url: url)
+                        let navigationController = UINavigationController(rootViewController: webViewController)
+                        self.presentViewController(navigationController, animated: true, completion: nil)
+                    }
+                } else if timedEvent.isLocation() {
+                    self.performSegueWithIdentifier(kSceneDetailSegueShowMap, sender: timedEvent)
+                }
+            }
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showMap"{
-        
-        let mapVC = segue.destinationViewController as! MapDetailViewController
-        
-            mapVC.initialLocation = self.initialLocation
-            mapVC.locationName = self.locName
-            mapVC.locationImages = (self.currentScene?.locationImages)!
+        if segue.identifier == kSceneDetailSegueShowGallery {
+            let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
             
-    } else if segue.identifier == "showGallery"{
-            
-            let galleryVC = segue.destinationViewController as! GalleryDetailViewController
-            
-            galleryVC.galleryID = self.galleryID
-
-        } else if segue.identifier == "showShop"{
-            
-            let shopVC = segue.destinationViewController as! ShoppingDetailViewController
-
-            shopVC.items = (self.currentScene?.shopping)!
+            if let gallery = sender as? NGDMGallery {
+                galleryDetailViewController.gallery = gallery
+            } else if let audioVisual = sender as? NGDMAudioVisual {
+                galleryDetailViewController.audioVisual = audioVisual
+            }
+        } else if segue.identifier == kSceneDetailSegueShowShop {
+            let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
+            shopDetailViewController.products = sender as! [TheTakeProduct]
+        } else if segue.identifier == kSceneDetailSegueShowMap {
+            let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
+            mapDetailViewController.timedEvent = sender as! NGDMTimedEvent
         }
-
     }
     
+    func cellForExperience(experience: NGDMExperience) -> SceneDetailCollectionViewCell? {
+        if let visibleCells = collectionView?.visibleCells() {
+            for cell in visibleCells {
+                if let cell = cell as? SceneDetailCollectionViewCell, cellExperience = cell.experience {
+                    if cellExperience == experience {
+                        return cell
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
     
     
     // MARK: RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
-        /*
-        switch indexPath.row {
-        case SceneDetailItemType.Shop.rawValue:
-            return CGSizeMake(4, 1)
-            
-        default:
-            return CGSizeMake(2, 1)
-        }
-*/
-        return CGSizeMake(2, 1)
+        return CGSizeMake(1, 1)
     }
     
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 0, 0, 0)
+        return UIEdgeInsetsMake(5, 5, 5, 5)
     }
-
-
+    
 }

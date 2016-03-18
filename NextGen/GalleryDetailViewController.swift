@@ -8,12 +8,12 @@
 
 import UIKit
 
-
-class GalleryDetailViewController: UIViewController{
-    
+class GalleryDetailViewController: UIViewController {
     
     @IBOutlet weak var pageControl: UIPageControl!
-    var galleryID = 0
+    
+    var gallery: NGDMGallery?
+    var audioVisual: NGDMAudioVisual?
     
     func imageGalleryViewController() -> ImageGalleryViewController? {
         for viewController in self.childViewControllers {
@@ -25,30 +25,28 @@ class GalleryDetailViewController: UIViewController{
         return nil
     }
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[4]
-        let thisExperience = experience.childExperiences()[self.galleryID]
-        let imageGallery = thisExperience.imageGallery()
-        let imageViewController = imageGalleryViewController()
         
-        imageViewController?.imageGallery = imageGallery
-        self.pageControl.numberOfPages = (thisExperience.imageGallery()?.pictures().count)!
-        NSNotificationCenter.defaultCenter().addObserverForName("updateControl", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            if let userInfo = notification.userInfo {
-                self.pageControl.currentPage = userInfo["index"] as! Int
-
-               
+        if let imageGalleryViewController = imageGalleryViewController() {
+            if let gallery = gallery {
+                imageGalleryViewController.gallery = gallery
+                pageControl.numberOfPages = gallery.pictures.count
+            } else if let audioVisual = audioVisual {
+                imageGalleryViewController.audioVisual = audioVisual
+                pageControl.numberOfPages = 1
+            }
+            
+            NSNotificationCenter.defaultCenter().addObserverForName("updateControl", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+                if let userInfo = notification.userInfo, index = userInfo["index"] as? Int {
+                    self.pageControl.currentPage = index
+                }
             }
         }
     }
     
-    
-    
     @IBAction func close(sender: AnyObject) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
 }

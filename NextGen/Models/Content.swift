@@ -13,8 +13,8 @@ class Content: NSObject {
     var title: String!
     var video: Video!
     var talent = [String: Talent]()
-    var scenes = [Int: Scene]()
-    var sceneKeys: [Int]?
+    var scenes = [Double: Scene]()
+    var sceneKeys: [Double]?
     
     required init(info: NSDictionary) {
         super.init()
@@ -55,7 +55,6 @@ class Content: NSObject {
             if let trivia = scene["trivia"] as? NSDictionary{
                 
                 sceneObj.triviaImage = (trivia["image"] as? String)!
-                sceneObj.triviaFact = (trivia["fact"] as? String)!
             }
             
             if let shopping = scene["shopping"] as? NSArray{
@@ -86,8 +85,8 @@ class Content: NSObject {
         return allTalent.sort { $0.billingOrder < $1.billingOrder }
     }
     
-    func sceneAtTime(time: Int) -> Scene? {
-        var closestSceneTime = -1
+    func sceneAtTime(time: Double) -> Scene? {
+        var closestSceneTime: Double = -1
         if sceneKeys != nil {
             for sceneTime in sceneKeys! {
                 if sceneTime > time {

@@ -27,8 +27,7 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[3]
-        print(experience.childExperiences().count)
+        //experience = NextGenDataManager.sharedInstance.outOfMovieExperienceCategories()[3]
         
         self.tableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
         
@@ -57,14 +56,14 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.backgroundColor = UIColor.clearColor()
         cell.selectionStyle = .None
         
-        let thisExperience = experience.childExperiences()[indexPath.row]
+        /*let thisExperience = experience.childExperiences()[indexPath.row]
         
         cell.caption.text = thisExperience.metadata()?.fullTitle()
         if let thumbnailPath = thisExperience.thumbnailImagePath() {
             cell.thumbnail.setImageWithURL(NSURL(string: thumbnailPath)!)
         } else {
             cell.thumbnail.image = nil
-        }
+        }*/
         
         return cell
 
@@ -77,7 +76,8 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return experience.childExperiences().count
+        return 0
+        //return experience.childExperiences().count
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
@@ -93,7 +93,7 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let thisExperience = experience.childExperiences()[indexPath.row]
+        /*let thisExperience = experience.childExperiences()[indexPath.row]
         
         if let videoURL = thisExperience.videoURL(), videoPlayerViewController = videoPlayerViewController() {
             if let player = videoPlayerViewController.player {
@@ -106,7 +106,7 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
             self.shareContent = videoURL
                        
             
-        }
+        }*/
     }
     
     @IBAction func shareTW(sender: AnyObject) {

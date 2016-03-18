@@ -10,8 +10,8 @@ import UIKit
 
 class Scene: NSObject {
     
-    var startTime = -1
-    var endTime = -1
+    var startTime: Double = -1
+    var endTime: Double = -1
     var gallery = 0
     var canShare = false
     var talent = [Talent]()
@@ -21,16 +21,24 @@ class Scene: NSObject {
     var locationImage = ""
     var locationImages = []
     var triviaImage = ""
-    var triviaFact = ""
     var shopping = [Shopping]()
     
     required init(info: NSDictionary) {
         super.init()
         
-        startTime = info["startTime"] as! Int
-        endTime = info["endTime"] as! Int
+        startTime = info["startTime"] as! Double
+        endTime = info["endTime"] as! Double
         gallery = info["gallery"] as! Int
         canShare = info["share"] as! Bool
             }
+    
+    func triviaText() -> String? {
+        /*if let triviaExperience = NextGenDataManager.sharedInstance.triviaExperience(), timedEvent = triviaExperience.timedEvent(startTime) {
+            return timedEvent.textItem()
+        }
+        
+        return nil*/
+        return ""
+    }
     
 }

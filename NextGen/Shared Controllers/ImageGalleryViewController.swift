@@ -11,20 +11,47 @@ import MWPhotoBrowser
 
 class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     
-    var _photos = [MWPhoto]()
-    var imageGallery: NGEGalleryType! {
+    private var _photos = [MWPhoto]()
+    var gallery: NGDMGallery? {
         didSet {
             _photos.removeAll()
-            for picture in imageGallery.pictures() {
-                _photos.append(MWPhoto(URL: picture.imageURL()))
+            
+            if let gallery = gallery {
+                for picture in gallery.pictures {
+                    _photos.append(MWPhoto(URL: picture.imageURL))
+                }
             }
             
             self.setCurrentPhotoIndex(0)
             self.reloadData()
         }
-        
-    
     }
+    
+    var audioVisual: NGDMAudioVisual? {
+        didSet {
+            _photos.removeAll()
+            
+            if let audioVisual = audioVisual, presentation = audioVisual.presentation {
+                var video: MWPhoto!
+                if let imageURL = audioVisual.imageURL {
+                    video = MWPhoto(URL: imageURL)
+                } else {
+                    video = MWPhoto()
+                }
+                
+                if let videoURL = presentation.videoURL {
+                    video.videoURL = videoURL
+                }
+                
+                _photos.append(video)
+                //self.autoPlayOnAppear = true
+            }
+            
+            self.setCurrentPhotoIndex(0)
+            self.reloadData()
+        }
+    }
+    
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -33,12 +60,9 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         self.displayActionButton = false
         
         super.viewDidLoad()
-        
-        
-          }
+    }
     
     override func setNavBarAppearance(animated: Bool) {
-        print(currentIndex)
         // Block MWPhotoBrowser's access to navigation bar
     }
     
@@ -57,19 +81,11 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
     }
     
     func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
-        
-            return _photos[Int(index)]
-     
-    
-        
-        
+        return _photos[Int(index)]
     }
     
     func photoBrowser(photoBrowser: MWPhotoBrowser!, didDisplayPhotoAtIndex index: UInt) {
         NSNotificationCenter.defaultCenter().postNotificationName("updateControl", object: nil, userInfo: ["index": self.currentIndex])
-        
     }
     
-    
-
 }

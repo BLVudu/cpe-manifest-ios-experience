@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_v3", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
+            
+            TheTakeAPIUtil.sharedInstance.mediaId = NextGenDataManager.sharedInstance.mainExperience.customIdentifier(kTheTakeIdentifierNamespace)
+            TheTakeAPIUtil.sharedInstance.prefetchProductFrames()
         }
         
         if let baselineData = NSBundle.mainBundle().pathForResource("Data/config", ofType: "json"){

@@ -16,9 +16,6 @@ class InteriorExperienceViewController: UIViewController {
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        
-
-        
         if UIDevice.currentDevice().orientation.isLandscape{
             extrasContainerView.hidden = true
             updatePlayerConstraints()
@@ -26,7 +23,7 @@ class InteriorExperienceViewController: UIViewController {
             extrasContainerView.hidden = false
             updatePlayerConstraints()
         }
-            }
+    }
     
     
     func updatePlayerConstraints() {
@@ -36,16 +33,8 @@ class InteriorExperienceViewController: UIViewController {
 
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
         updatePlayerConstraints()
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "PlayerViewControllerSegue" {
-            let playerViewController = segue.destinationViewController as! VideoPlayerViewController
-            playerViewController.video = DataManager.sharedInstance.content?.video
-        }
     }
 
 }
