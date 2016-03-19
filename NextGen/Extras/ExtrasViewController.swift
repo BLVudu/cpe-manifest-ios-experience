@@ -176,9 +176,8 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: Storyboard
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let experience = sender as? NGDMExperience {
-            if segue.identifier == ExtrasContentSegueIdentifier && segue.destinationViewController.isKindOfClass(ExtrasContentViewController) {
-                let contentViewController = segue.destinationViewController as! ExtrasContentViewController
+        if segue.identifier == ExtrasContentSegueIdentifier {
+            if let experience = sender as? NGDMExperience, contentViewController = segue.destinationViewController as? ExtrasVideoGalleryViewController {
                 contentViewController.experience = experience
             }
         }
