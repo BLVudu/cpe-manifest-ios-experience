@@ -10,9 +10,10 @@
 import UIKit
 import AVFoundation
 
-class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
+class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
-    let ExtrasContentSegueIdentifier = "ExtrasContentSegue"
+    let ExtrasVideoGallerySegueIdentifier = "ExtrasVideoGallerySegue"
+    let ExtrasImageGalleryListSegueIdentifier = "ExtrasImageGalleryListSegue"
     
     @IBOutlet weak var talentTableView: TalentTableView!
     @IBOutlet weak var talentDetailView: UIView!
@@ -26,11 +27,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         super.viewDidLoad()
         
         self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
-        self.extrasCollectionView.registerNib(UINib(nibName: "ContentCell", bundle: nil), forCellWithReuseIdentifier: "content")
-        
-        if let layout = extrasCollectionView?.collectionViewLayout as? ExtrasLayout {
-            layout.delegate = self
-        }
+        self.extrasCollectionView.registerNib(UINib(nibName: "TitledImageCell", bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
         
         self.navigationItem.setHomeButton(self, action: "close")
     }
@@ -103,7 +100,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         }
         
         return 0
-*/
+        */
         
         return GetCredits.sharedInstance.talent.count
     }
@@ -154,15 +151,8 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("content", forIndexPath: indexPath)as! ContentCell
-        
-        let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
-        cell.extrasTitle.text = experience.metadata?.title
-        if let imageURL = experience.imageURL {
-            cell.extraImg.setImageWithURL(imageURL)
-        } else {
-            cell.extraImg.image = nil
-        }
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(TitledImageCell.ReuseIdentifier, forIndexPath: indexPath) as! TitledImageCell
+        cell.experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
         
         return cell
     }
@@ -170,33 +160,33 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(ExtrasContentSegueIdentifier, sender: NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row])
+        let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
+        if experience.isGalleryList() {
+            self.performSegueWithIdentifier(ExtrasImageGalleryListSegueIdentifier, sender: experience)
+        } else {
+            self.performSegueWithIdentifier(ExtrasVideoGallerySegueIdentifier, sender: experience)
+        }
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 2) - 10, 235)
     }
     
     
     // MARK: Storyboard
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == ExtrasContentSegueIdentifier {
-            if let experience = sender as? NGDMExperience, contentViewController = segue.destinationViewController as? ExtrasVideoGalleryViewController {
-                contentViewController.experience = experience
+        if let experience = sender as? NGDMExperience {
+            if segue.identifier == ExtrasVideoGallerySegueIdentifier {
+                if let videoGalleryViewController = segue.destinationViewController as? ExtrasVideoGalleryViewController {
+                    videoGalleryViewController.experience = experience
+                }
+            } else if segue.identifier == ExtrasImageGalleryListSegueIdentifier {
+                if let imageGalleryListViewController = segue.destinationViewController as? ExtrasImageGalleryListCollectionViewController {
+                    imageGalleryListViewController.experience = experience
+                }
             }
         }
-    }
-}
-
-extension ExtrasViewController: ExtrasLayoutDelegate{
-    
-    func collectionView(collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath: NSIndexPath,
-        withWidth width: CGFloat) -> CGFloat {
-            
-            
-            return collectionView.frame.height/2.8
-    }
-    
-    func collectionView(collectionView: UICollectionView,
-    heightForLabelAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
-    {
-        return 100.0
     }
     
 }

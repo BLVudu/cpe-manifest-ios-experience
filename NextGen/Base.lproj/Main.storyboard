@@ -658,9 +658,14 @@
                                 </connections>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5xC-Cb-zKQ">
-                                <rect key="frame" x="315" y="60" width="709" height="708"/>
+                                <rect key="frame" x="315" y="60" width="694" height="693"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewLayout key="collectionViewLayout" id="UZh-gu-Oeb" customClass="ExtrasLayout" customModule="NextGen" customModuleProvider="target"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="20j-cl-wUg">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="0Ub-1E-w0a" id="vJB-BZ-dO1"/>
@@ -679,14 +684,14 @@
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="top" secondItem="1Qn-Pd-QBx" secondAttribute="bottom" constant="16" id="0HR-0f-Hee"/>
                             <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="SBH-gG-bSP" secondAttribute="bottom" id="AEe-T1-SeU"/>
                             <constraint firstItem="5xC-Cb-zKQ" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="top" id="RdA-cK-6QW"/>
-                            <constraint firstAttribute="trailing" secondItem="5xC-Cb-zKQ" secondAttribute="trailing" id="W3c-GQ-ueg"/>
+                            <constraint firstAttribute="trailing" secondItem="5xC-Cb-zKQ" secondAttribute="trailing" constant="15" id="W3c-GQ-ueg"/>
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="leading" secondItem="7Nn-Gk-Fn3" secondAttribute="leading" id="ZmJ-vN-5RR"/>
                             <constraint firstItem="SBH-gG-bSP" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="top" id="ZrM-ZM-SDd"/>
                             <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="bottom" id="crn-yw-kQL"/>
                             <constraint firstItem="SBH-gG-bSP" firstAttribute="leading" secondItem="nfb-lf-5Cb" secondAttribute="trailing" constant="15" id="iNU-h9-oLX"/>
                             <constraint firstItem="5xC-Cb-zKQ" firstAttribute="leading" secondItem="nfb-lf-5Cb" secondAttribute="trailing" constant="15" id="iSk-M7-6oS"/>
                             <constraint firstAttribute="trailing" secondItem="SBH-gG-bSP" secondAttribute="trailing" id="ktZ-lb-g6j"/>
-                            <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="5xC-Cb-zKQ" secondAttribute="bottom" id="wqy-jG-SSQ"/>
+                            <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="5xC-Cb-zKQ" secondAttribute="bottom" constant="15" id="wqy-jG-SSQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Y88-si-SGo"/>
@@ -697,13 +702,38 @@
                         <outlet property="extrasCollectionView" destination="5xC-Cb-zKQ" id="Gl8-dK-2nu"/>
                         <outlet property="talentDetailView" destination="SBH-gG-bSP" id="Z5R-YU-i3D"/>
                         <outlet property="talentTableView" destination="nfb-lf-5Cb" id="fkG-uc-1N7"/>
-                        <segue destination="wpZ-Jt-DDC" kind="show" identifier="ExtrasContentSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="eGG-kJ-fSM"/>
+                        <segue destination="wpZ-Jt-DDC" kind="show" identifier="ExtrasVideoGallerySegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="eGG-kJ-fSM"/>
                         <segue destination="UOm-Gf-Iww" kind="show" identifier="ShoppingSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="bWI-9R-eXR"/>
+                        <segue destination="zYt-6b-Uxo" kind="show" identifier="ExtrasImageGalleryListSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="KFa-MJ-Ziv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxE-Et-E7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2066" y="743"/>
+        </scene>
+        <!--Extras Image Gallery List Collection View Controller-->
+        <scene sceneID="8Rz-OG-9PA">
+            <objects>
+                <collectionViewController id="zYt-6b-Uxo" customClass="ExtrasImageGalleryListCollectionViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="fqt-gI-xtN">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="MMb-0e-9fP">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="zYt-6b-Uxo" id="jwY-Sz-KQG"/>
+                            <outlet property="delegate" destination="zYt-6b-Uxo" id="MKO-0U-AZo"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fRU-Bx-DVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3206" y="223"/>
         </scene>
         <!--Extras Video Gallery View Controller-->
         <scene sceneID="MV1-Sx-b77">
@@ -806,28 +836,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcg-tj-b2S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3212" y="743"/>
-        </scene>
-        <!--Image Gallery View Controller-->
-        <scene sceneID="TAc-v0-eAe">
-            <objects>
-                <viewController id="c8S-g5-na5" customClass="ImageGalleryViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Bsm-Dm-RKS"/>
-                        <viewControllerLayoutGuide type="bottom" id="yz1-4u-dqE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Czm-ty-bKn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tbc-Zh-qGp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3237.5" y="1518"/>
+            <point key="canvasLocation" x="3206" y="1095"/>
         </scene>
         <!--Commentary View-->
         <scene sceneID="Jbf-A9-Kho">
