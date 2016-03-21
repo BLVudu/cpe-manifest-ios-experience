@@ -345,6 +345,7 @@
 		70A3AC971C9DDB500038B60F /* NSTimeInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */; };
 		70A3AC9B1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9A1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift */; };
 		70A3AC9D1C9DE98D0038B60F /* StylizedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9C1C9DE98D0038B60F /* StylizedCollectionViewController.swift */; };
+		70A3AC9F1C9E56350038B60F /* ExtrasImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
 		70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */; };
@@ -737,6 +738,7 @@
 		70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Utils.swift"; sourceTree = "<group>"; };
 		70A3AC9A1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasImageGalleryListCollectionViewController.swift; sourceTree = "<group>"; };
 		70A3AC9C1C9DE98D0038B60F /* StylizedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylizedCollectionViewController.swift; sourceTree = "<group>"; };
+		70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
 		70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "man-of-steel-trailer3.mp4"; sourceTree = "<group>"; };
@@ -1373,6 +1375,7 @@
 				4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */,
 				49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */,
 				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
+				70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -1926,6 +1929,7 @@
 				7071C4FF1C6BCBF6006F4275 /* NGEInventoryAudioType.swift in Sources */,
 				7071C4A31C6BCBF6006F4275 /* NGEBasicMetadataParentType.swift in Sources */,
 				7071C52E1C6BCBF6006F4275 /* NGEReleaseHistoryType.swift in Sources */,
+				70A3AC9F1C9E56350038B60F /* ExtrasImageGalleryViewController.swift in Sources */,
 				7071C4C01C6BCBF6006F4275 /* NGEDate.swift in Sources */,
 				7071C4FC1C6BCBF6006F4275 /* NGEImageID.swift in Sources */,
 				7071C4D31C6BCBF6006F4275 /* NGEDigitalAssetSubtitleFormatType.swift in Sources */,

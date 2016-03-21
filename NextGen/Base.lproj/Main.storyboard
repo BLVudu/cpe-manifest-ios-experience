@@ -44,6 +44,7 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -730,10 +731,100 @@
                             <outlet property="delegate" destination="zYt-6b-Uxo" id="MKO-0U-AZo"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="psv-JP-kVu" kind="show" identifier="ExtrasImageGallerySegueIdentifier" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="iEB-Fr-lvH"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRU-Bx-DVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3206" y="223"/>
+        </scene>
+        <!--Extras Image Gallery View Controller-->
+        <scene sceneID="LLK-wa-7YM">
+            <objects>
+                <viewController id="psv-JP-kVu" customClass="ExtrasImageGalleryViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hSH-eO-JwJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uct-fl-gz8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NP1-n0-AOK">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qat-wu-1st">
+                                <rect key="frame" x="15" y="92" width="994" height="551"/>
+                                <connections>
+                                    <outlet property="delegate" destination="psv-JP-kVu" id="Ig0-hh-zR9"/>
+                                </connections>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Gallery Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXe-q8-Fl7">
+                                <rect key="frame" x="15" y="52" width="994" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3XV-rd-cuV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FHV-cE-fU9">
+                                <rect key="frame" x="15" y="673" width="994" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="vno-M2-hZb"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="9DV-n5-2N9">
+                                    <size key="itemSize" width="75" height="75"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ExtrasImageThumbnailCollectionViewCellReuseIdentifier" id="nyX-er-Z1G" customClass="ExtrasImageThumbnailCollectionViewCell" customModule="NextGen" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7RB-82-4Cr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="imageView" destination="7RB-82-4Cr" id="5OZ-ge-UHq"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="psv-JP-kVu" id="ygl-qw-WNs"/>
+                                    <outlet property="delegate" destination="psv-JP-kVu" id="fxq-6b-S1s"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uXe-q8-Fl7" secondAttribute="trailing" constant="15" id="3rQ-6H-xlY"/>
+                            <constraint firstItem="FHV-cE-fU9" firstAttribute="leading" secondItem="NP1-n0-AOK" secondAttribute="leading" constant="15" id="5Kx-Mu-p9O"/>
+                            <constraint firstItem="Qat-wu-1st" firstAttribute="top" secondItem="uXe-q8-Fl7" secondAttribute="bottom" id="Dvn-JF-sfa"/>
+                            <constraint firstItem="uXe-q8-Fl7" firstAttribute="leading" secondItem="NP1-n0-AOK" secondAttribute="leading" constant="15" id="IWI-Mg-N8G"/>
+                            <constraint firstItem="Qat-wu-1st" firstAttribute="leading" secondItem="NP1-n0-AOK" secondAttribute="leading" constant="15" id="NsC-F3-MFB"/>
+                            <constraint firstAttribute="trailing" secondItem="FHV-cE-fU9" secondAttribute="trailing" constant="15" id="UnZ-C3-ecm"/>
+                            <constraint firstItem="FHV-cE-fU9" firstAttribute="top" secondItem="Qat-wu-1st" secondAttribute="bottom" constant="30" id="WzB-PL-rNP"/>
+                            <constraint firstAttribute="trailing" secondItem="Qat-wu-1st" secondAttribute="trailing" constant="15" id="YgD-rb-kdj"/>
+                            <constraint firstItem="Uct-fl-gz8" firstAttribute="top" secondItem="FHV-cE-fU9" secondAttribute="bottom" constant="20" id="baR-Wk-E38"/>
+                            <constraint firstItem="uXe-q8-Fl7" firstAttribute="top" secondItem="hSH-eO-JwJ" secondAttribute="bottom" constant="8" id="cyV-9V-UtE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="galleryScrollView" destination="Qat-wu-1st" id="gEf-H0-Tnv"/>
+                        <outlet property="thumbnailCollectionView" destination="FHV-cE-fU9" id="7bg-6O-ehy"/>
+                        <outlet property="titleLabel" destination="uXe-q8-Fl7" id="7Vc-7r-TLL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3jK-Pw-Bvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4332" y="223"/>
         </scene>
         <!--Extras Video Gallery View Controller-->
         <scene sceneID="MV1-Sx-b77">

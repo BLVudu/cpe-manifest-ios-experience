@@ -10,6 +10,8 @@ import UIKit
 
 class ExtrasImageGalleryListCollectionViewController: StylizedCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    let kExtrasImageGallerySegueIdentifier = "ExtrasImageGallerySegueIdentifier"
+    
     var experience: NGDMExperience!
 
     override func viewDidLoad() {
@@ -17,7 +19,7 @@ class ExtrasImageGalleryListCollectionViewController: StylizedCollectionViewCont
         
         self.collectionView!.registerNib(UINib(nibName: TitledImageCell.NibName, bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
     }
-
+    
     // MARK: UICollectionViewDataSource
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -37,7 +39,9 @@ class ExtrasImageGalleryListCollectionViewController: StylizedCollectionViewCont
 
     // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? TitledImageCell {
+            self.performSegueWithIdentifier(kExtrasImageGallerySegueIdentifier, sender: cell.experience)
+        }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -47,6 +51,15 @@ class ExtrasImageGalleryListCollectionViewController: StylizedCollectionViewCont
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(CGRectGetWidth(collectionView.frame) / 3 - 20, 225)
+    }
+    
+    // MARK: Storyboard
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == kExtrasImageGallerySegueIdentifier {
+            if let imageGalleryViewController = segue.destinationViewController as? ExtrasImageGalleryViewController, experience = sender as? NGDMExperience, gallery = experience.galleries.values.first  {
+                imageGalleryViewController.gallery = gallery
+            }
+        }
     }
 
 }
