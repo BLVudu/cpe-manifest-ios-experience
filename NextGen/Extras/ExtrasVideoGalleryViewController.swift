@@ -44,6 +44,21 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
                 }
             }
         }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            if let userInfo = notification.userInfo{
+                let index = userInfo["index"]as! Int
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                self.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                self.tableView(self.galleryTableView, didSelectRowAtIndexPath: indexPath)
+                
+                
+            }
+            
+            
+        }
+
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
@@ -109,7 +124,8 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
             }
-            
+            videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
+            videoPlayerViewController.isExtras = true
             videoPlayerViewController.playerControlsVisible = false
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)

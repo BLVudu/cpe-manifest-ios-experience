@@ -112,8 +112,11 @@ class SettingsMenuViewController: UITableViewController{
         cell.cellSetting.textColor = UIColor.yellowColor()
         cell.radioBtn.section = indexPath.section
         cell.radioBtn.index = indexPath.row
-        cell.radioBtn.hidden = (currentCellDescriptor["hideRadioButton"] as! Bool)
+        cell.radioBtn.hidden = currentCellDescriptor["hideRadioButton"] as! Bool
         cell.radioBtn.addTarget(self, action: "buttonSelected:", forControlEvents: UIControlEvents.TouchUpInside)
+        let deg:CGFloat = -90
+        cell.dropDownIcon.transform = CGAffineTransformMakeRotation(deg * CGFloat(M_PI/180));
+        cell.dropDownIcon.hidden = !(currentCellDescriptor["isExpanded"] as! Bool)
         
 
         return cell
@@ -126,25 +129,25 @@ class SettingsMenuViewController: UITableViewController{
         
        
         let indexOfTappedRow = visibleRowsPerSection[indexPath.section][indexPath.row]
-        //var shouldExpandAndShowSubRows = false
-        
         if decriptions[indexPath.section][indexOfTappedRow]["isExpandable"] as! Bool == true {
             var shouldExpandAndShowSubRows = false
             if decriptions[indexPath.section][indexOfTappedRow]["isExpanded"] as! Bool == false {
                 // In this case the cell should expand.
                 shouldExpandAndShowSubRows = true
+                
             }
             
+            
             decriptions[indexPath.section][indexOfTappedRow].setValue(shouldExpandAndShowSubRows, forKey: "isExpanded")
+            
             for i in (indexOfTappedRow + 1)...(indexOfTappedRow + (decriptions[indexPath.section][indexOfTappedRow]["additionalRows"] as! Int)) {
                 decriptions[indexPath.section][i].setValue(shouldExpandAndShowSubRows, forKey: "isVisible")
                 
-                
             }
+            
             
            
         }
-        
 
         getIndicesOfVisibleRows()
         self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)

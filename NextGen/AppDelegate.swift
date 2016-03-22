@@ -75,8 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
  
-        task.resume()
-        GetCredits.sharedInstance.callAPI(NSURL(string:"http://baselineapi.com/api/ProjectAllCredits?id=4667130&apikey=\(key!)")!)
+        //task.resume()
+        //GetCredits.sharedInstance.callAPI(NSURL(string:"http://baselineapi.com/api/ProjectAllCredits?id=4667130&apikey=\(key!)")!)
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()

@@ -45,6 +45,7 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -450,7 +451,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilmCollectionViewCell" id="21E-0K-81B" customClass="FilmCollectionViewCell" customModule="NextGen" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="-3" width="163" height="245"/>
+                                                        <rect key="frame" x="0.0" y="-2.5" width="163" height="245"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="163" height="245"/>
@@ -1050,6 +1051,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back Nav" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-DQ-I0h">
+                                            <rect key="frame" x="455" y="25" width="10" height="10"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="10" id="Iwr-US-YJ3"/>
+                                                <constraint firstAttribute="height" constant="10" id="gt0-1R-xbO"/>
+                                            </constraints>
+                                        </imageView>
                                         <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOT-be-HTP" customClass="RadioButton" customModule="NextGen" customModuleProvider="target">
                                             <rect key="frame" x="8" y="30" width="40" height="40"/>
                                             <constraints>
@@ -1087,6 +1095,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="oxD-jH-NCj" secondAttribute="bottom" constant="-7" id="AQQ-nW-wII"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="pEK-DQ-I0h" secondAttribute="bottom" constant="17" id="BLb-s5-dDK"/>
                                         <constraint firstItem="xOT-be-HTP" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="topMargin" constant="2" id="BUR-s3-1Ph"/>
                                         <constraint firstItem="xOT-be-HTP" firstAttribute="trailing" secondItem="bhc-ig-QyP" secondAttribute="trailing" id="F5n-f9-aXj"/>
                                         <constraint firstItem="bhc-ig-QyP" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="top" id="Mbg-qz-DbG"/>
@@ -1096,6 +1105,8 @@
                                         <constraint firstItem="xOT-be-HTP" firstAttribute="centerY" secondItem="bhc-ig-QyP" secondAttribute="centerY" id="ZyZ-5Q-ggm"/>
                                         <constraint firstItem="bhc-ig-QyP" firstAttribute="leading" secondItem="UU4-e4-kOJ" secondAttribute="leading" constant="56" id="oXY-Ri-Zzj"/>
                                         <constraint firstItem="xOT-be-HTP" firstAttribute="leading" secondItem="bhc-ig-QyP" secondAttribute="leading" id="q8a-zV-ihe"/>
+                                        <constraint firstItem="pEK-DQ-I0h" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="topMargin" constant="17" id="t31-wX-M9s"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pEK-DQ-I0h" secondAttribute="trailing" constant="127" id="vCI-mi-Toq"/>
                                         <constraint firstItem="oxD-jH-NCj" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="topMargin" constant="-8" id="xKH-Ky-Hzy"/>
                                     </constraints>
                                     <variation key="default">
@@ -1110,6 +1121,7 @@
                                 <connections>
                                     <outlet property="cellSetting" destination="bhc-ig-QyP" id="22J-6f-F5k"/>
                                     <outlet property="currentSetting" destination="oxD-jH-NCj" id="9q0-49-rMN"/>
+                                    <outlet property="dropDownIcon" destination="pEK-DQ-I0h" id="JXt-JO-q2H"/>
                                     <outlet property="radioBtn" destination="xOT-be-HTP" id="ggN-hY-smg"/>
                                 </connections>
                             </tableViewCell>
@@ -1147,6 +1159,31 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cbz-fT-NUV" userLabel="Activity Indicator">
                                 <rect key="frame" x="494" y="365" width="37" height="37"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxP-Uc-jyH">
+                                <rect key="frame" x="0.0" y="45" width="300" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUd-3G-JmP">
+                                        <rect key="frame" x="21" y="0.0" width="137.5" height="40"/>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="fUd-3G-JmP" firstAttribute="top" secondItem="kxP-Uc-jyH" secondAttribute="top" id="KKU-9F-87I"/>
+                                    <constraint firstAttribute="bottom" secondItem="fUd-3G-JmP" secondAttribute="bottom" id="TTG-Tm-LbK"/>
+                                    <constraint firstAttribute="trailing" secondItem="fUd-3G-JmP" secondAttribute="trailing" id="qHo-5l-SsZ"/>
+                                    <constraint firstItem="fUd-3G-JmP" firstAttribute="leading" secondItem="kxP-Uc-jyH" secondAttribute="leading" constant="21" id="sQq-Ii-sDt"/>
+                                    <constraint firstAttribute="height" constant="40" id="tAG-kB-uYB"/>
+                                    <constraint firstAttribute="width" constant="300" id="vES-nR-pYc"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="qHo-5l-SsZ"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-Vu-ikZ" userLabel="Top Toolbar">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <subviews>
@@ -1237,7 +1274,14 @@
                                             <action selector="shareClip:" destination="FsK-dw-pgC" eventType="touchUpInside" id="XKN-Ik-j9P"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3j-NO-iAX">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fre-sx-P7e">
+                                        <rect key="frame" x="5" y="0.0" width="44" height="44"/>
+                                        <state key="normal" image="Pause Button"/>
+                                        <connections>
+                                            <action selector="pause:" destination="FsK-dw-pgC" eventType="touchUpInside" id="OYj-Fe-qYC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3j-NO-iAX">
                                         <rect key="frame" x="5" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="pi3-On-VMe"/>
@@ -1245,13 +1289,6 @@
                                         <state key="normal" image="Play Button"/>
                                         <connections>
                                             <action selector="play:" destination="FsK-dw-pgC" eventType="touchUpInside" id="So1-SV-4RS"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fre-sx-P7e">
-                                        <rect key="frame" x="5" y="0.0" width="44" height="44"/>
-                                        <state key="normal" image="Pause Button"/>
-                                        <connections>
-                                            <action selector="pause:" destination="FsK-dw-pgC" eventType="touchUpInside" id="OYj-Fe-qYC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sO6-3j-2kn" userLabel="Back">
@@ -1323,9 +1360,12 @@
                             <constraint firstItem="VY7-Vu-ikZ" firstAttribute="top" secondItem="r83-OM-ywG" secondAttribute="top" id="cGT-q1-ZXP"/>
                             <constraint firstAttribute="bottom" secondItem="tdq-om-9xU" secondAttribute="bottom" id="edM-Ea-fe1"/>
                             <constraint firstItem="tdq-om-9xU" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="etO-mi-IvY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kxP-Uc-jyH" secondAttribute="trailing" constant="704" id="fcK-Ni-ivB"/>
                             <constraint firstAttribute="trailing" secondItem="tdq-om-9xU" secondAttribute="trailing" id="fyL-K2-PAp"/>
                             <constraint firstAttribute="centerY" secondItem="cbz-fT-NUV" secondAttribute="centerY" constant="0.5" id="g9C-79-alw"/>
                             <constraint firstItem="HZD-oz-ZXg" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="kNv-IZ-Bbp"/>
+                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="bottom" constant="1" id="nUh-rg-ryi"/>
+                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leadingMargin" constant="-20" id="oPL-Ay-SwS"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1335,6 +1375,8 @@
                         <outlet property="backUpButton" destination="sO6-3j-2kn" id="cea-Ua-wga"/>
                         <outlet property="backUpTimeLabel" destination="egg-hA-gCC" id="PWC-cg-3fO"/>
                         <outlet property="commentaryBtn" destination="7Uk-RH-L9W" id="mLA-wD-qAt"/>
+                        <outlet property="countdown" destination="fUd-3G-JmP" id="ju7-5P-CjX"/>
+                        <outlet property="countdownTimer" destination="fUd-3G-JmP" id="3Oz-Dp-1yr"/>
                         <outlet property="pauseButton" destination="Fre-sx-P7e" id="xPZ-ZP-9To"/>
                         <outlet property="playButton" destination="r3j-NO-iAX" id="Mia-hx-7QZ"/>
                         <outlet property="playbackToolbar" destination="tdq-om-9xU" id="JM8-RH-KYY"/>
@@ -1345,6 +1387,7 @@
                         <outlet property="tapGestureRecognizer" destination="r3s-SR-OYc" id="32O-Fs-uuC"/>
                         <outlet property="timeLabel" destination="iCT-yk-iq9" id="wGD-2Q-xCe"/>
                         <outlet property="timeLeftLabel" destination="c6W-KZ-1CO" id="PO2-zJ-DK1"/>
+                        <outlet property="timer" destination="fUd-3G-JmP" id="NsR-8B-4e9"/>
                         <outlet property="toolbar" destination="VY7-Vu-ikZ" id="Caf-si-4Ch"/>
                         <outlet property="topToolbar" destination="VY7-Vu-ikZ" id="oK3-nh-CIz"/>
                         <segue destination="rnf-6M-6TQ" kind="presentation" identifier="showShare" modalPresentationStyle="overFullScreen" id="zxc-m2-IVV"/>
@@ -1433,7 +1476,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapDetailCellReuseIdentifier" id="Y5b-hq-Q2k" customClass="MapDetailCell" customModule="NextGen" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="4" width="157" height="121"/>
+                                                <rect key="frame" x="0.0" y="3.5" width="157" height="121"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="157" height="121"/>
@@ -2368,6 +2411,7 @@
     </scenes>
     <resources>
         <image name="Back" width="32" height="32"/>
+        <image name="Back Nav" width="19" height="30"/>
         <image name="Close" width="52" height="52"/>
         <image name="Full Screen" width="16" height="15"/>
         <image name="Home" width="17" height="17"/>
@@ -2389,7 +2433,7 @@
         <image name="tw_logo.png" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kSL-ff-FXa"/>
-        <segue reference="ir8-OX-j5p"/>
+        <segue reference="W8P-ST-gWA"/>
+        <segue reference="z13-8m-qRk"/>
     </inferredMetricsTieBreakers>
 </document>

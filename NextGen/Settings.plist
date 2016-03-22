@@ -16,8 +16,8 @@
 			<string>Menu</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -36,8 +36,8 @@
 			<string>Audio Settings</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>4</integer>
 		</dict>
@@ -54,8 +54,8 @@
 			<string>English(US)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -72,8 +72,8 @@
 			<string>English(US)(AC3)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -90,8 +90,8 @@
 			<string>Spanish(Latin America)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -108,8 +108,8 @@
 			<string>French(Canada)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -128,8 +128,8 @@
 			<string>Subtitles</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>6</integer>
 		</dict>
@@ -146,8 +146,8 @@
 			<string>Off</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -164,8 +164,8 @@
 			<string>English(CC)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -182,8 +182,8 @@
 			<string>English(United States)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -200,8 +200,8 @@
 			<string>Spanish(Latin America)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -218,8 +218,8 @@
 			<string>French(Canada)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>
@@ -236,8 +236,8 @@
 			<string>Portuguese(Brazil)</string>
 			<key>secondaryTitle</key>
 			<string></string>
-			<key>cellIdentifier</key>
-			<string></string>
+			<key>hideDropDown</key>
+			<true/>
 			<key>additionalRows</key>
 			<integer>0</integer>
 		</dict>

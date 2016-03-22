@@ -17,9 +17,11 @@ class SettingsCell: UITableViewCell{
 
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var radioBtn: RadioButton!
+    @IBOutlet weak var dropDownIcon: UIImageView!
 
   
     
+
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

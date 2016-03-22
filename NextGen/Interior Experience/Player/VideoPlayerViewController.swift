@@ -23,12 +23,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     let shared = FBSDKShareLinkContent()
     var fullScreen = false
     var shouldPlayInterstitial = false
+    var showCountdownTimer = false
+    
     
     @IBOutlet weak var shareContent: UIButton!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
     var commentaryPopover: UIPopoverController!
-    
+    @IBOutlet weak var countdown: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,15 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             self.lockPlayerControls = true
             self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
         }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("playMainFeature", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            if !self.didPlayInterstitial {
+                self.playPrimaryVideo()
+                self.didPlayInterstitial = true
+            }
+            
+        }
     }
     
     func playPrimaryVideo() {
@@ -58,13 +69,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("man-of-steel-trailer3", ofType: "mp4")!))
     }
     
+    /*
     override func playerItemDidReachEnd(notification: NSNotification!) {
-        if !didPlayInterstitial {
-            playPrimaryVideo()
-            didPlayInterstitial = true
-        }
+        
     }
-
+*/
     override func done(sender: AnyObject?) {
         super.done(sender)
         
