@@ -109,6 +109,7 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
 @property (nonatomic, assign)           BOOL                            lockPlayerControls;
 @property (nonatomic, assign)           BOOL                            isExtras;
 @property (nonatomic, assign)           int                             indexMax;
+@property (nonatomic, assign)           int                             curIndex;
 
 
 

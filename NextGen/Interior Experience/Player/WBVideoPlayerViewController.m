@@ -56,7 +56,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 @property (strong, nonatomic)           NSTimer                         *countdown;
 @property (assign, nonatomic)           NSUInteger                      countdownSeconds;
 @property (strong, nonatomic)           NSArray                         *videoURLS;
-@property (assign, nonatomic)           int                             index;
+
 
 
 
@@ -593,7 +593,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 	[self syncPlayPauseButtons];
 	[self syncScrubber];
     self.countdownTimer.hidden = YES;
-    self.index = 0;
     [super viewDidLoad];    
 }
 
@@ -781,44 +780,47 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
 	/* After the movie has played to its end time, seek back to time zero 
 		to play it again. */
-    seekToZeroBeforePlay = YES;
+    
+    self.curIndex++;
     if(self.isExtras == false){
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"playMainFeature" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"playMainFeature" object:self];
     } else {
-    if (self.index >= self.indexMax) {
-       //do nothing
-    } else {
-    self.index++;
-    self.countdownTimer.hidden = NO;
-    self.timer.hidden = NO;
-    self.playerControlsEnabled = NO;
-    [self pauseVideo];
-    self.countdownSeconds = 6;
-    self.countdown = [NSTimer scheduledTimerWithTimeInterval:1.0f
+        if (self.curIndex < self.indexMax) {
+            //seekToZeroBeforePlay = YES;
+            self.countdownTimer.hidden = NO;
+            self.timer.hidden = NO;
+            self.playerControlsEnabled = NO;
+            [self pauseVideo];
+            self.countdownSeconds = 6;
+            self.countdown = [NSTimer scheduledTimerWithTimeInterval:1.0f
                                              target:self
                                            selector:@selector(subtractTime)
                                            userInfo:nil
                                             repeats:YES];
-    NSDictionary* dict = [NSDictionary dictionaryWithObject:
-                            [NSNumber numberWithInt:self.index]
+            NSDictionary* dict = [NSDictionary dictionaryWithObject:
+                            [NSNumber numberWithInt:self.curIndex]
                                                          forKey:@"index"];
     
-    double delayInSeconds = 5.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"playNextItem" object:self userInfo:dict];
-        self.countdownTimer.hidden = YES;
-        self.timer.hidden = YES;
-        self.playerControlsEnabled = YES;
+            double delayInSeconds = 5.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"playNextItem" object:self userInfo:dict];
+                self.countdownTimer.hidden = YES;
+                self.timer.hidden = YES;
+                self.playerControlsEnabled = YES;
+                self.countdownSeconds = 6;
         
     });
     }
     }
+     
+     
 }
 
 - (void)subtractTime {
  
-    if (self.countdownSeconds <= 0) {
+    if (self.countdownSeconds == 0) {
+        self.timer.text = @"Next Clip: 5 seconds";
         [self.countdown invalidate];
         self.countdownSeconds = 6;
     } else {

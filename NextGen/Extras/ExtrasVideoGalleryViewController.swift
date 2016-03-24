@@ -11,6 +11,7 @@ import UIKit
 class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var galleryTableView: UITableView!
+    @IBOutlet weak var proxyView: UIView!
     
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var mediaTitleLabel: UILabel!
@@ -20,6 +21,7 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     var experience: NGDMExperience!
 
     // MARK: View Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,37 +29,48 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         
         galleryTableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
         
-        let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        galleryTableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        tableView(galleryTableView, didSelectRowAtIndexPath: selectedIndexPath)
+        //let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        //galleryTableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        //tableView(galleryTableView, didSelectRowAtIndexPath: selectedIndexPath)
+        
+        self.videoContainerView.hidden = true
+        self.mediaTitleLabel.hidden = true
+        self.mediaDescriptionLabel.hidden = true
+        self.mediaRuntimeLabel.hidden = true
 
         NSNotificationCenter.defaultCenter().addObserverForName("fullScreen", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             if let userInfo = notification.userInfo {
                 if userInfo["toggleFS"] as! Bool {
-                    UIView.animateWithDuration(0.25, animations: {
+                    UIView.animateWithDuration(1, animations: {
                         self.videoContainerView.frame = self.view.frame
                     }, completion: nil)
                 } else {
-                    UIView.animateWithDuration(0.25, animations: {
-                        
+                    UIView.animateWithDuration(1, animations: {
+                        self.videoContainerView.frame = self.proxyView.frame
                     }, completion: nil)
                 }
             }
         }
         
+        
         NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             
             if let userInfo = notification.userInfo{
                 let index = userInfo["index"]as! Int
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                self.tableView(self.galleryTableView, didSelectRowAtIndexPath: indexPath)
-                
-                
+                if index >= self.experience.childExperiences.count{
+                } else {
+                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    self.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                    self.tableView(self.galleryTableView, didSelectRowAtIndexPath: indexPath)
+                    
+
+                    
+                }
             }
             
             
         }
+
 
     }
     
@@ -108,6 +121,12 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.videoContainerView.hidden = false
+        self.mediaTitleLabel.hidden = false
+        self.mediaDescriptionLabel.hidden = false
+        self.mediaRuntimeLabel.hidden = false
+
         let thisExperience = experience.childExperiences[indexPath.row]
         
         mediaTitleLabel.text = thisExperience.metadata?.title
@@ -124,6 +143,8 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
             }
+            
+            videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
             videoPlayerViewController.isExtras = true
             videoPlayerViewController.playerControlsVisible = false

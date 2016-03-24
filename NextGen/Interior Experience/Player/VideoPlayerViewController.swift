@@ -24,6 +24,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var fullScreen = false
     var shouldPlayInterstitial = false
     var showCountdownTimer = false
+    var mainFeatureIsPlaying = false
     
     
     @IBOutlet weak var shareContent: UIButton!
@@ -37,10 +38,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         
         NSNotificationCenter.defaultCenter().addObserverForName("pauseMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.pauseVideo()
+            self.isExtras = true
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName("resumeMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.playVideo()
+            self.isExtras = false
+            
         }
         
         if shouldPlayInterstitial {
@@ -61,6 +65,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     func playPrimaryVideo() {
         self.lockPlayerControls = false
+        self.mainFeatureIsPlaying = true
         /*if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
             self.playVideoWithURL(audioVisual.videoURL)
         }*/
@@ -68,12 +73,17 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerIsPlayingPrimaryVideo, object: nil)
         self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("man-of-steel-trailer3", ofType: "mp4")!))
     }
-    
     /*
     override func playerItemDidReachEnd(notification: NSNotification!) {
         
+        if !self.didPlayInterstitial {
+            self.playPrimaryVideo()
+            self.didPlayInterstitial = true
+        }
+
     }
 */
+
     override func done(sender: AnyObject?) {
         super.done(sender)
         
@@ -134,6 +144,16 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         else if UIDevice.currentDevice().orientation.isPortrait{
             
             self.performSegueWithIdentifier("showShare", sender: nil)
+        }
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showShare"{
+            let shareVC = segue.destinationViewController as! SharingViewController
+            shareVC.clip = DataManager.sharedInstance.content?.clip
+
         }
     }
     

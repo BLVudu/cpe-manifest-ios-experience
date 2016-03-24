@@ -20,10 +20,21 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var player: UIView!
     
     var experience: NGEExperienceType!
+    var clipURL: NSURL!
+    var clipThumbnail: NSURL!
+    var clipCaption: String!
     
     @IBOutlet weak var fbShare: FBSDKShareButton!
     var shareContent: NSURL!
     let shared = FBSDKShareLinkContent()
+    var clip: Clip? = nil {
+        didSet {
+            clipURL = clip?.url
+            clipThumbnail = clip?.thumbnailImage
+            clipCaption = (clip?.text)!
+            
+        }
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -37,6 +48,25 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
         
         fbShare.shareContent = shared
         NSNotificationCenter.defaultCenter().postNotificationName("pauseMovie", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            if let userInfo = notification.userInfo{
+                let index = userInfo["index"]as! Int
+                if index >= 1{
+                } else {
+                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                    self.tableView(self.tableView, didSelectRowAtIndexPath: indexPath)
+                    
+                    
+                    
+                }
+            }
+            
+            
+        }
+        
         
     }
     
@@ -56,14 +86,14 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.backgroundColor = UIColor.clearColor()
         cell.selectionStyle = .None
         
-        /*let thisExperience = experience.childExperiences()[indexPath.row]
         
-        cell.caption.text = thisExperience.metadata()?.fullTitle()
-        if let thumbnailPath = thisExperience.thumbnailImagePath() {
-            cell.thumbnail.setImageWithURL(NSURL(string: thumbnailPath)!)
-        } else {
-            cell.thumbnail.image = nil
-        }*/
+        cell.thumbnailImageView.setImageWithURL(self.clipThumbnail)
+        cell.captionLabel.text = self.clipCaption
+        //if let thumbnailPath = thisExperience.thumbnailImagePath() {
+          //  cell.thumbnail.setImageWithURL(NSURL(string: thumbnailPath)!)
+        //} else {
+          //  cell.thumbnail.image = nil
+        //}
         
         return cell
 
@@ -76,7 +106,7 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 1
         //return experience.childExperiences().count
     }
     
@@ -93,20 +123,25 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*let thisExperience = experience.childExperiences()[indexPath.row]
+       
         
-        if let videoURL = thisExperience.videoURL(), videoPlayerViewController = videoPlayerViewController() {
+        if let videoURL = self.clipURL, videoPlayerViewController = videoPlayerViewController() {
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
             }
             
+            videoPlayerViewController.curIndex = Int32(indexPath.row)
+            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.isExtras = true
             videoPlayerViewController.playerControlsVisible = false
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)
             self.shareContent = videoURL
+            
+            print(videoURL)
                        
             
-        }*/
+        }
     }
     
     @IBAction func shareTW(sender: AnyObject) {
