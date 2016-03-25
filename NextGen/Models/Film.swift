@@ -62,7 +62,7 @@ class Film: NSObject {
             }
         }
         
-        task.resume()
+        //task.resume()
         
         
 

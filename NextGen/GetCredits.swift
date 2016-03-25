@@ -42,7 +42,7 @@ class GetCredits{
             }
         }
         
-        task.resume()
+        //task.resume()
 
         
         

@@ -40,7 +40,8 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 //=========================================================
 @interface WBVideoPlayerViewController ()
 @property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
-
+@property (weak, nonatomic)   IBOutlet  UIView                          *countdownTimer;
+@property (weak, nonatomic)   IBOutlet  UILabel                         *timer;
 @property (weak, nonatomic)   IBOutlet  UIView                          *playbackToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *playButton;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *pauseButton;
@@ -52,6 +53,12 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *subtitlesButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
 @property (strong, nonatomic)           NSTimer                         *playerControlsAutoHideTimer;
+@property (strong, nonatomic)           NSTimer                         *countdown;
+@property (assign, nonatomic)           NSUInteger                      countdownSeconds;
+@property (strong, nonatomic)           NSArray                         *videoURLS;
+
+
+
 
 /**
  * Observe the kApplicationWillResignActive notification
@@ -90,6 +97,15 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 //=========================================================
 # pragma mark - Playback
 //=========================================================
+-(void)loadItems:(NSMutableArray*) urls{
+    
+    self.videoURLS = urls;
+    
+    [self playVideoWithURL:self.videoURLS.firstObject];
+    
+}
+
+
 // Play from beginning
 - (void)playVideoWithURL:(NSURL *)theURL {
     [self playVideoWithURL:theURL startTime:0];
@@ -134,7 +150,8 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 //=========================================================
 - (IBAction)play:(id)sender {
 	// Play media
-	[self playVideo];
+    [self initScrubberTimer];
+    [self playVideo];
 }
 
 - (IBAction)pause:(id)sender {
@@ -575,6 +592,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 	[self initScrubberTimer];
 	[self syncPlayPauseButtons];
 	[self syncScrubber];
+    self.countdownTimer.hidden = YES;
     [super viewDidLoad];    
 }
 
@@ -647,7 +665,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
         case WBVideoPlayerStateUnknown:
             [self removePlayerTimeObserver];
             [self syncScrubber];
-            self.playerControlsEnabled = NO;
+            //self.playerControlsEnabled = NO;
             break;
         case WBVideoPlayerStateReadyToPlay:
             // Play from playbackSyncStartTime
@@ -661,6 +679,8 @@ static NSInteger const kBackTimeInSeconds                       = 10;
             // Start from either beginning or from wherever left off
             else {
                [self playVideo];
+
+                
             }
             
             // Scrubber timer
@@ -699,6 +719,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
         case WBVideoPlayerStateVideoLoading:
             // Show activity indicator
             self.activityIndicatorVisible       = YES;
+            
             
         default:
             // Disable controls
@@ -759,10 +780,57 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
 	/* After the movie has played to its end time, seek back to time zero 
 		to play it again. */
-	seekToZeroBeforePlay = YES;
     
-   }
+    self.curIndex++;
+    if(self.isExtras == false){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"playMainFeature" object:self];
+    } else {
+        if (self.curIndex < self.indexMax) {
+            //seekToZeroBeforePlay = YES;
+            self.countdownTimer.hidden = NO;
+            self.timer.hidden = NO;
+            self.playerControlsEnabled = NO;
+            [self pauseVideo];
+            self.countdownSeconds = 6;
+            self.countdown = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                             target:self
+                                           selector:@selector(subtractTime)
+                                           userInfo:nil
+                                            repeats:YES];
+            NSDictionary* dict = [NSDictionary dictionaryWithObject:
+                            [NSNumber numberWithInt:self.curIndex]
+                                                         forKey:@"index"];
+    
+            double delayInSeconds = 5.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"playNextItem" object:self userInfo:dict];
+                self.countdownTimer.hidden = YES;
+                self.timer.hidden = YES;
+                self.playerControlsEnabled = YES;
+                self.countdownSeconds = 6;
+        
+    });
+    }
+    }
+     
+     
+}
 
+- (void)subtractTime {
+ 
+    if (self.countdownSeconds == 0) {
+        self.timer.text = @"Next Clip: 5 seconds";
+        [self.countdown invalidate];
+        self.countdownSeconds = 6;
+    } else {
+        
+        self.countdownSeconds = self.countdownSeconds -1;
+        self.timer.text = [NSString stringWithFormat:@"Next Clip: %i seconds",self.countdownSeconds];
+
+        
+    }
+}
 /* ---------------------------------------------------------
  **  Get the duration for a AVPlayerItem. 
  ** ------------------------------------------------------- */
@@ -887,7 +955,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 		
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
-                                                      object:self.playerItem];
+                                                      object:self.player.currentItem];
     }
 	
     // Create a new instance of AVPlayerItem from the now successfully loaded AVAsset.
@@ -926,7 +994,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:self.playerItem];
+                                               object:self.player.currentItem];
 	
     seekToZeroBeforePlay = NO;
 	
@@ -935,6 +1003,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
         /* Get a new AVPlayer initialized to play the specified player item. */
         
         [self setPlayer:[AVQueuePlayer playerWithPlayerItem:self.playerItem]];
+
         
         /* Observe the AVPlayer "currentItem" property to find out when any
          AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did 
@@ -949,12 +1018,15 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
                       forKeyPath:kAVPlayerRateKVO
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                          context:VideoPlayerRateObservationContext];
+        
+        
     }
     
     else {
   
         //insert new items to the queue
         [self.player insertItem:self.playerItem afterItem:nil];
+
     }
     
     /* Make our new AVPlayerItem the AVPlayer's current item. */
@@ -1008,23 +1080,24 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 			context:(void*)context {
 	/* AVPlayerItem "status" property value observer. */
 	if (context == VideoPlayerStatusObservationContext) {
-        AVPlayerItemStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
         switch (status){
             /* Indicates that the status of the player is not yet known because 
              it has not tried to load new media resources for playback */
-            case AVPlayerItemStatusUnknown:{
+            case AVPlayerStatusUnknown:{
                 // Set player state
                 [self setState:WBVideoPlayerStateUnknown];
             }
             break;
                 
-            case AVPlayerItemStatusReadyToPlay:{
+            case AVPlayerStatusReadyToPlay:{
                 /* Once the AVPlayerItem becomes ready to play, i.e. 
                  [playerItem status] == AVPlayerItemStatusReadyToPlay,
                  its duration can be fetched from the item. */
                 
                 // Set player state
                 [self setState:WBVideoPlayerStateReadyToPlay];
+                [self playVideo];
                 
                 // Notification
                 [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerItemReadyToPlayNotification object:nil];
@@ -1032,7 +1105,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
             }
             break;
                 
-            case AVPlayerItemStatusFailed:{
+            case AVPlayerStatusFailed:{
                 AVPlayerItem *playerItem = (AVPlayerItem *)object;
                 [self assetFailedToPrepareForPlayback:playerItem.error];
             }
@@ -1120,7 +1193,10 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
                 [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerPlaybackLikelyToKeepUpNotification object:nil];
                 
                 // Play
+                
                 [self playVideo];
+
+
             }
         }
     }

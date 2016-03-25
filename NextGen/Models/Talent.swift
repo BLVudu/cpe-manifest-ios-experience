@@ -84,7 +84,7 @@ class Talent: NSObject {
             }
         }
         
-        task.resume()
+        //task.resume()
         
         
         
@@ -127,7 +127,7 @@ class Talent: NSObject {
             }
         }
         
-        task.resume()
+        //task.resume()
         
 
         
@@ -168,7 +168,7 @@ class Talent: NSObject {
             }
         }
         
-        task.resume()
+        //task.resume()
         
 
         

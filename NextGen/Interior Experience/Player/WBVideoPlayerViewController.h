@@ -107,6 +107,10 @@ static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"
  * Locks the player controls visibility so showing/hiding is not effective
  */
 @property (nonatomic, assign)           BOOL                            lockPlayerControls;
+@property (nonatomic, assign)           BOOL                            isExtras;
+@property (nonatomic, assign)           int                             indexMax;
+@property (nonatomic, assign)           int                             curIndex;
+
 
 
 - (IBAction)play:(id)sender;

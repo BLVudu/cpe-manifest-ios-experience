@@ -24,6 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current film's data file
         
+        
+        if let metadataPath = NSBundle.mainBundle().pathForResource("Data/mos_timeline_v2", ofType: "json") {
+            do {
+                let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: metadataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                DataManager.sharedInstance.loadData(data)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+
        
         if let path = NSBundle.mainBundle().pathForResource("Data/man_of_steel", ofType: "json") {
             do {
@@ -75,8 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
  
-        task.resume()
-        GetCredits.sharedInstance.callAPI(NSURL(string:"http://baselineapi.com/api/ProjectAllCredits?id=4667130&apikey=\(key!)")!)
+        //task.resume()
+        //GetCredits.sharedInstance.callAPI(NSURL(string:"http://baselineapi.com/api/ProjectAllCredits?id=4667130&apikey=\(key!)")!)
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
