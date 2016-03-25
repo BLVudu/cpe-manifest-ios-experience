@@ -14,6 +14,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     let ExtrasVideoGallerySegueIdentifier = "ExtrasVideoGallerySegue"
     let ExtrasImageGalleryListSegueIdentifier = "ExtrasImageGalleryListSegue"
+    let ExtrasShoppingSegueIdentifier = "ExtrasShoppingSegue"
     
     @IBOutlet weak var talentTableView: TalentTableView!
     @IBOutlet weak var talentDetailView: UIView!
@@ -102,14 +103,13 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         return 0
         */
         
-        return GetCredits.sharedInstance.talent.count
+        return BaselineAPIUtil.sharedInstance.orderedTalent.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
-        let allActors = GetCredits.sharedInstance.talent
-            cell.talent = allActors[indexPath.row]
-        
+        let talent = BaselineAPIUtil.sharedInstance.orderedTalent[indexPath.row]
+        cell.talent = talent
         
         return cell
     }
@@ -163,6 +163,8 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
         if experience.isGalleryList() {
             self.performSegueWithIdentifier(ExtrasImageGalleryListSegueIdentifier, sender: experience)
+        } else if experience.isShopping() {
+            self.performSegueWithIdentifier(ExtrasShoppingSegueIdentifier, sender: experience)
         } else {
             self.performSegueWithIdentifier(ExtrasVideoGallerySegueIdentifier, sender: experience)
         }
@@ -184,6 +186,10 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
             } else if segue.identifier == ExtrasImageGalleryListSegueIdentifier {
                 if let imageGalleryListViewController = segue.destinationViewController as? ExtrasImageGalleryListCollectionViewController {
                     imageGalleryListViewController.experience = experience
+                }
+            } else if segue.identifier == ExtrasShoppingSegueIdentifier {
+                if let shoppingViewController = segue.destinationViewController as? ExtrasShoppingViewController {
+                    shoppingViewController.experience = experience
                 }
             }
         }

@@ -48,9 +48,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         }
         
         if shouldPlayInterstitial {
-            self.playerControlsVisible = false
-            self.lockPlayerControls = true
-            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
+            //self.playerControlsVisible = false
+            //self.lockPlayerControls = true
+            //self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
+            playPrimaryVideo()
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName("playMainFeature", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
@@ -67,11 +68,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         self.lockPlayerControls = false
         self.mainFeatureIsPlaying = true
         /*if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
+            NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerIsPlayingPrimaryVideo, object: nil)
             self.playVideoWithURL(audioVisual.videoURL)
         }*/
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerIsPlayingPrimaryVideo, object: nil)
-        self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("man-of-steel-trailer3", ofType: "mp4")!))
     }
     /*
     override func playerItemDidReachEnd(notification: NSNotification!) {

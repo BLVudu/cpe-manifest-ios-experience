@@ -25,13 +25,9 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.setBackButton(self, action: "close")
+        self.navigationItem.setBackButton(self, action: #selector(ExtrasVideoGalleryViewController.close))
         
         galleryTableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
-        
-        //let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        //galleryTableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        //tableView(galleryTableView, didSelectRowAtIndexPath: selectedIndexPath)
         
         self.videoContainerView.hidden = true
         self.mediaTitleLabel.hidden = true

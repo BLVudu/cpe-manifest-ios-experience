@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RobotoCondensed-Regular.ttf">
+            <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuSectionCellReuseIdentifier" id="hL8-fj-HHz" customClass="MenuSectionCell" customModule="NextGen" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hL8-fj-HHz" id="qf2-SQ-lmI">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmG-2I-HV0">
+                        <rect key="frame" x="20" y="0.0" width="365" height="59.5"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7b-1A-LHo">
+                        <rect key="frame" x="385" y="0.0" width="100" height="59.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="j6S-QD-USb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
+                        <color key="textColor" red="0.73108974360000001" green="0.7299446879" blue="0.0020759141390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dropdown Icon" translatesAutoresizingMaskIntoConstraints="NO" id="0Y0-pW-JkU">
+                        <rect key="frame" x="505" y="22" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="IaA-Pj-EL5"/>
+                            <constraint firstAttribute="height" constant="16" id="NbR-kV-x70"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="UmG-2I-HV0" secondAttribute="bottom" id="9j4-jt-eJ2"/>
+                    <constraint firstItem="UmG-2I-HV0" firstAttribute="leading" secondItem="qf2-SQ-lmI" secondAttribute="leading" constant="20" id="BtK-fU-4QT"/>
+                    <constraint firstItem="0Y0-pW-JkU" firstAttribute="top" secondItem="qf2-SQ-lmI" secondAttribute="top" constant="22" id="C5W-R5-pse"/>
+                    <constraint firstAttribute="bottom" secondItem="R7b-1A-LHo" secondAttribute="bottom" id="anw-1V-0hY"/>
+                    <constraint firstItem="R7b-1A-LHo" firstAttribute="leading" secondItem="UmG-2I-HV0" secondAttribute="trailing" id="er8-wn-yNx"/>
+                    <constraint firstItem="0Y0-pW-JkU" firstAttribute="leading" secondItem="R7b-1A-LHo" secondAttribute="trailing" constant="20" id="f9t-uQ-Cdv"/>
+                    <constraint firstAttribute="trailing" secondItem="0Y0-pW-JkU" secondAttribute="trailing" constant="79" id="lT6-su-yxs"/>
+                    <constraint firstAttribute="bottom" secondItem="0Y0-pW-JkU" secondAttribute="bottom" constant="22" id="tPb-Jd-O7M"/>
+                    <constraint firstItem="UmG-2I-HV0" firstAttribute="top" secondItem="qf2-SQ-lmI" secondAttribute="top" id="uFw-zu-r87"/>
+                    <constraint firstItem="R7b-1A-LHo" firstAttribute="top" secondItem="qf2-SQ-lmI" secondAttribute="top" id="whE-yV-GAi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="dropDownImageView" destination="0Y0-pW-JkU" id="sIW-5w-toV"/>
+                <outlet property="primaryLabel" destination="UmG-2I-HV0" id="lU4-lj-sJc"/>
+                <outlet property="secondaryLabel" destination="R7b-1A-LHo" id="lFo-El-fGm"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Dropdown Icon" width="40" height="40"/>
+    </resources>
+</document>

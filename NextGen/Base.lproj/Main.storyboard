@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NWX-a1-PHC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NWX-a1-PHC">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -17,8 +17,6 @@
             <string>RobotoCondensed-Italic</string>
         </mutableArray>
         <mutableArray key="RobotoCondensed-Regular.ttf">
-            <string>RobotoCondensed-Regular</string>
-            <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
@@ -709,11 +707,30 @@
                         <segue destination="wpZ-Jt-DDC" kind="show" identifier="ExtrasVideoGallerySegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="eGG-kJ-fSM"/>
                         <segue destination="UOm-Gf-Iww" kind="show" identifier="ShoppingSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="bWI-9R-eXR"/>
                         <segue destination="zYt-6b-Uxo" kind="show" identifier="ExtrasImageGalleryListSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="KFa-MJ-Ziv"/>
+                        <segue destination="8Rs-86-BDa" kind="show" identifier="ExtrasShoppingSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="KBV-cK-jkC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxE-Et-E7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2066" y="743"/>
+        </scene>
+        <!--Extras Shopping View Controller-->
+        <scene sceneID="Ubv-u3-snz">
+            <objects>
+                <viewController id="8Rs-86-BDa" customClass="ExtrasShoppingViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uWj-5q-P2f"/>
+                        <viewControllerLayoutGuide type="bottom" id="kyk-08-75f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Odx-cT-dTO">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iXe-u1-ZaE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3206" y="-701"/>
         </scene>
         <!--Extras Image Gallery List Collection View Controller-->
         <scene sceneID="8Rz-OG-9PA">
@@ -1044,114 +1061,11 @@
                     </view>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="xtu-Ox-Ldq"/>
-                        <segue destination="6J9-WH-tIv" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="hke-is-wtO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUK-Hj-Oyk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-472" y="-1010"/>
-        </scene>
-        <!--Settings Menu View Controller-->
-        <scene sceneID="gcS-qG-svJ">
-            <objects>
-                <tableViewController id="6J9-WH-tIv" customClass="SettingsMenuViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="M5y-79-ah3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingsItem" id="axG-Pz-wZj" customClass="SettingsCell" customModule="NextGen" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="axG-Pz-wZj" id="UU4-e4-kOJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back Nav" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-DQ-I0h">
-                                            <rect key="frame" x="455" y="25" width="10" height="10"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="10" id="Iwr-US-YJ3"/>
-                                                <constraint firstAttribute="height" constant="10" id="gt0-1R-xbO"/>
-                                            </constraints>
-                                        </imageView>
-                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOT-be-HTP" customClass="RadioButton" customModule="NextGen" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="30" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="ax9-Ku-bUW"/>
-                                                <constraint firstAttribute="height" constant="40" id="eEH-N0-YY1"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                                    <color key="value" red="0.73108974360000001" green="0.7299446879" blue="0.0020759141390000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
-                                                    <real key="value" value="30"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="indicatorSize">
-                                                    <real key="value" value="20"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="indicatorColor">
-                                                    <color key="value" red="0.73108974360000001" green="0.7299446879" blue="0.0020759141390000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Audio Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhc-ig-QyP">
-                                            <rect key="frame" x="56" y="3" width="387" height="97"/>
-                                            <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="English" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-jH-NCj">
-                                            <rect key="frame" x="385" y="0.0" width="113" height="59"/>
-                                            <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
-                                            <color key="textColor" red="0.73108974358974366" green="0.72994468792913936" blue="0.002075914139110467" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="oxD-jH-NCj" secondAttribute="bottom" constant="-7" id="AQQ-nW-wII"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="pEK-DQ-I0h" secondAttribute="bottom" constant="17" id="BLb-s5-dDK"/>
-                                        <constraint firstItem="xOT-be-HTP" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="topMargin" constant="2" id="BUR-s3-1Ph"/>
-                                        <constraint firstItem="xOT-be-HTP" firstAttribute="trailing" secondItem="bhc-ig-QyP" secondAttribute="trailing" id="F5n-f9-aXj"/>
-                                        <constraint firstItem="bhc-ig-QyP" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="top" id="Mbg-qz-DbG"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="oxD-jH-NCj" secondAttribute="trailing" constant="94" id="O0z-qn-5JZ"/>
-                                        <constraint firstItem="bhc-ig-QyP" firstAttribute="leading" secondItem="xOT-be-HTP" secondAttribute="trailing" constant="8" id="RSr-63-8FS"/>
-                                        <constraint firstAttribute="bottom" secondItem="bhc-ig-QyP" secondAttribute="bottom" id="TmU-YU-oiT"/>
-                                        <constraint firstItem="xOT-be-HTP" firstAttribute="centerY" secondItem="bhc-ig-QyP" secondAttribute="centerY" id="ZyZ-5Q-ggm"/>
-                                        <constraint firstItem="bhc-ig-QyP" firstAttribute="leading" secondItem="UU4-e4-kOJ" secondAttribute="leading" constant="56" id="oXY-Ri-Zzj"/>
-                                        <constraint firstItem="xOT-be-HTP" firstAttribute="leading" secondItem="bhc-ig-QyP" secondAttribute="leading" id="q8a-zV-ihe"/>
-                                        <constraint firstItem="pEK-DQ-I0h" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="topMargin" constant="17" id="t31-wX-M9s"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="pEK-DQ-I0h" secondAttribute="trailing" constant="127" id="vCI-mi-Toq"/>
-                                        <constraint firstItem="oxD-jH-NCj" firstAttribute="top" secondItem="UU4-e4-kOJ" secondAttribute="topMargin" constant="-8" id="xKH-Ky-Hzy"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="F5n-f9-aXj"/>
-                                            <exclude reference="ZyZ-5Q-ggm"/>
-                                            <exclude reference="q8a-zV-ihe"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="cellSetting" destination="bhc-ig-QyP" id="22J-6f-F5k"/>
-                                    <outlet property="currentSetting" destination="oxD-jH-NCj" id="9q0-49-rMN"/>
-                                    <outlet property="dropDownIcon" destination="pEK-DQ-I0h" id="JXt-JO-q2H"/>
-                                    <outlet property="radioBtn" destination="xOT-be-HTP" id="ggN-hY-smg"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="6J9-WH-tIv" id="pzI-kS-1yK"/>
-                            <outlet property="delegate" destination="6J9-WH-tIv" id="THe-Yp-Ss8"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lAc-5q-ziH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-872" y="615"/>
         </scene>
         <!--Video Player View Controller-->
         <scene sceneID="fcf-Td-6zT">
@@ -2429,7 +2343,6 @@
     </scenes>
     <resources>
         <image name="Back" width="32" height="32"/>
-        <image name="Back Nav" width="19" height="30"/>
         <image name="Close" width="52" height="52"/>
         <image name="Full Screen" width="16" height="15"/>
         <image name="Home" width="17" height="17"/>

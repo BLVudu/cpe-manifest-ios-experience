@@ -15,7 +15,7 @@ class InteriorExperienceViewController: UIViewController {
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
-    var allowPortraitOrientation = false
+    var allowPortraitOrientation = true
     
     override func viewDidLoad() {
         super.viewDidLoad()

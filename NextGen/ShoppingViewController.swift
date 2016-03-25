@@ -81,9 +81,10 @@ class ShoppingViewController: StylizedViewController, UITableViewDelegate, UITab
     }
     
     func getCellDescriptorForIndexPath(indexPath: NSIndexPath) -> [String: AnyObject] {
-        let indexOfVisibleRow = visibleRowsPerSection[indexPath.section][indexPath.row]
+        /*let indexOfVisibleRow = visibleRowsPerSection[indexPath.section][indexPath.row]
         let cellDescriptor = decriptions[indexPath.section][indexOfVisibleRow] as! [String: AnyObject]
-        return cellDescriptor
+        return cellDescriptor*/
+        return [String: AnyObject]()
     }
     
     /*
