@@ -100,7 +100,7 @@ class ExtrasLayout: UICollectionViewLayout {
                 contentHeight = max(contentHeight, CGRectGetMaxY(frame))
                 yOffset[column] = yOffset[column] + height
                 
-                column = column >= (numberOfColumns - 1) ? 0 : ++column
+                column = column >= (numberOfColumns - 1) ? 0 : column + 1
             }
         }
     }

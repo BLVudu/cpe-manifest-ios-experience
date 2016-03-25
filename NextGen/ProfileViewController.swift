@@ -52,7 +52,7 @@ class ProfileViewController: UICollectionViewController, UIGestureRecognizerDele
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
-        let longPress = UILongPressGestureRecognizer(target: self, action: "startDeletion:")
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ProfileViewController.startDeletion(_:)))
         longPress.delaysTouchesBegan = true
         longPress.delegate = self
         self.collectionView!.addGestureRecognizer(longPress)

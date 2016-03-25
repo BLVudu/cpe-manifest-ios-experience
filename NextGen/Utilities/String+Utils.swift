@@ -25,7 +25,7 @@ extension String {
             var hours = 0, minutes = 0, seconds = 0
             
             let timeString = self[2...self.characters.count - 1]
-            for var i = 0; i < timeString.characters.count; i++ {
+            for i in 0 ..< timeString.characters.count {
                 if timeString[i] == "H" {
                     hours = Int(currentNumberString)!
                     currentNumberString = ""

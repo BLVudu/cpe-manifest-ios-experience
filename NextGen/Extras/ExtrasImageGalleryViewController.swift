@@ -31,12 +31,12 @@ class ExtrasImageGalleryViewController: StylizedViewController, UIScrollViewDele
         let numPictures = gallery.pictures.count
         var imageViewX: CGFloat = 0
         _scrollViewPageWidth = CGRectGetWidth(galleryScrollView.bounds)
-        for var i = 1; i <= numPictures; i++ {
+        for i in 0 ..< numPictures {
             let imageView = UIImageView()
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
             imageView.frame = CGRectMake(imageViewX, 0, _scrollViewPageWidth, CGRectGetHeight(galleryScrollView.bounds))
             imageView.clipsToBounds = true
-            imageView.tag = i
+            imageView.tag = i + 1
             galleryScrollView.addSubview(imageView)
             imageViewX += _scrollViewPageWidth
         }

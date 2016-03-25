@@ -29,7 +29,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         self.extrasCollectionView.registerNib(UINib(nibName: "TitledImageCell", bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
         
-        self.navigationItem.setHomeButton(self, action: "close")
+        self.navigationItem.setHomeButton(self, action: #selector(ExtrasViewController.close))
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -62,7 +62,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         if talentDetailView.hidden {
             talentDetailView.alpha = 0
             talentDetailView.hidden = false
-            self.navigationItem.setBackButton(self, action: "close")
+            self.navigationItem.setBackButton(self, action: #selector(ExtrasViewController.close))
             
             UIView.animateWithDuration(0.25, animations: {
                 self.extrasCollectionView.alpha = 0
@@ -81,7 +81,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         
         extrasCollectionView.hidden = false
         extrasCollectionView.alpha = 0
-        self.navigationItem.setHomeButton(self, action: "close")
+        self.navigationItem.setHomeButton(self, action: #selector(ExtrasViewController.close))
         
         UIView.animateWithDuration(0.25, animations: {
             self.extrasCollectionView.alpha = 1
