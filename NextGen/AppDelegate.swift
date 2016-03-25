@@ -16,108 +16,55 @@ import DropDown
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let defaults = NSUserDefaults.standardUserDefaults()
     let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
     let charSet = NSCharacterSet.URLQueryAllowedCharacterSet()
-    var movieTitle: String!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current film's data file
-        
-        
-        if let metadataPath = NSBundle.mainBundle().pathForResource("Data/mos_timeline_v2", ofType: "json") {
+        /*if let metadataPath = NSBundle.mainBundle().pathForResource("Data/mos_timeline_v2", ofType: "json") {
             do {
                 let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: metadataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
                 DataManager.sharedInstance.loadData(data)
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
-        }
+        }*/
 
-       
-        if let path = NSBundle.mainBundle().pathForResource("Data/man_of_steel", ofType: "json") {
-            do {
-                let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: path), options: NSDataReadingOptions.DataReadingMappedIfSafe)
-                //DataManager.sharedInstance.loadData(data)
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        }
-        
         if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_v3", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
             
             TheTakeAPIUtil.sharedInstance.mediaId = NextGenDataManager.sharedInstance.mainExperience.customIdentifier(kTheTakeIdentifierNamespace)
-            TheTakeAPIUtil.sharedInstance.prefetchProductFrames()
-        }
-        
-        if let baselineData = NSBundle.mainBundle().pathForResource("Data/config", ofType: "json"){
-            do {
-
-            let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: baselineData), options: NSDataReadingOptions.DataReadingMappedIfSafe)
-
-                
-            let rawJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-                
-                defaults.setObject(rawJSON!["data"]?.objectForKey("apiKey"), forKey: "apiKey")
-                defaults.setObject(rawJSON!["data"]?.objectForKey("title"), forKey: "title")
-                defaults.setObject(rawJSON!["data"]?.objectForKey("retailerLink"), forKey: "link")
-                movieTitle = (defaults.objectForKey("title") as! String).stringByAddingPercentEncodingWithAllowedCharacters(charSet)!
-                
-
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-    
+            BaselineAPIUtil.sharedInstance.projectId = NextGenDataManager.sharedInstance.mainExperience.customIdentifier(kBaselineIdentifierNamespace)
             
-        }
-        let key = defaults.objectForKey("apiKey")
-        let url = NSURL(string: "http://baselineapi.com/api/ProjectSearch?id=\(movieTitle)&apikey=\(key!)")
-        let task = defaultSession.dataTaskWithURL(url!){
-        data, response, error in
-
-            if let error = error {
-            print(error.localizedDescription)
-        } else if let httpResponse = response as? NSHTTPURLResponse {
-            if httpResponse.statusCode == 200 {
-                self.parseResults(data!)
+            if let configDataPath = NSBundle.mainBundle().pathForResource("Data/config", ofType: "json") {
+                do {
+                    let configData = try NSData(contentsOfURL: NSURL(fileURLWithPath: configDataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                    if let configJSON = try NSJSONSerialization.JSONObjectWithData(configData, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
+                        if let theTakeAPIKey = configJSON["thetake_api_key"] as? String {
+                            TheTakeAPIUtil.sharedInstance.apiKey = theTakeAPIKey
+                            //TheTakeAPIUtil.sharedInstance.prefetchProductFrames()
+                        }
+                        
+                        if let baselineAPIKey = configJSON["baseline_api_key"] as? String {
+                            BaselineAPIUtil.sharedInstance.apiKey = baselineAPIKey
+                            //BaselineAPIUtil.sharedInstance.prefetchCredits()
+                        }
+                    }
+                } catch let error as NSError {
+                    print("Error parsing config data \(error.localizedDescription)")
+                }
             }
         }
-    }
  
-        //task.resume()
-        //GetCredits.sharedInstance.callAPI(NSURL(string:"http://baselineapi.com/api/ProjectAllCredits?id=4667130&apikey=\(key!)")!)
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
         
-        application.statusBarHidden = true
-        
         DropDown.startListeningToKeyboard()
         
-        return true
-    }
-    
-    func parseResults(data: NSData){
-
-        do {
+        application.statusBarHidden = true
         
-        let rawJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-            
-            for movieData in rawJSON as! [AnyObject]{
-                
-                if movieData["PROJECT_NAME"] as! String == defaults.objectForKey("title") as! String{
-                    defaults.setObject(movieData["PROJECT_ID"],forKey: "projectID")
-                }
-            }
-            
-        } catch let error as NSError {
-        print(error.localizedDescription)
-        }
-    
-
-
-    
+        return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
