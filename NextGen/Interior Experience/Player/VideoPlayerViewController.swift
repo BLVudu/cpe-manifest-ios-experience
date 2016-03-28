@@ -135,19 +135,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         }
     }
     
+   
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showShare"{
-            let shareVC = segue.destinationViewController as! SharingViewController
-            shareVC.clip = DataManager.sharedInstance.content?.clip
-
-        }
-    }
-    
-        
-    
-    
+  
 
 
 }
