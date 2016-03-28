@@ -12,6 +12,7 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var menuTableView: UITableView!
     var menuSections = [MenuSection]()
+    var showsSelectedMenuItem = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,9 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(MenuSectionCell.ReuseIdentifier) as! MenuSectionCell
             cell.menuSection = menuSection
+            if !showsSelectedMenuItem {
+                cell.secondaryLabel?.removeFromSuperview()
+            }
             
             return cell
         }

@@ -15,13 +15,13 @@ class MenuSectionCell: UITableViewCell {
     static let ReuseIdentifier = "MenuSectionCellReuseIdentifier"
     
     @IBOutlet weak var primaryLabel: UILabel!
-    @IBOutlet weak var secondaryLabel: UILabel!
+    @IBOutlet weak var secondaryLabel: UILabel?
     @IBOutlet weak var dropDownImageView: UIImageView!
     
     var menuSection: MenuSection? {
         didSet {
             primaryLabel.text = menuSection?.title
-            secondaryLabel.text = menuSection?.selectedItem?.title
+            secondaryLabel?.text = menuSection?.selectedItem?.title
             dropDownImageView.hidden = (menuSection == nil || !menuSection!.expandable)
         }
     }

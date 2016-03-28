@@ -20,6 +20,8 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.showsSelectedMenuItem = false
+        
         for category in TheTakeAPIUtil.sharedInstance.productCategories {
             let info = NSMutableDictionary()
             info[MenuSection.Keys.Title] = category.name
@@ -58,8 +60,10 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, menuItem = cell.menuItem, categoryId = menuItem.value {
             TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
-                self._products = products
-                self.productsCollectionView.reloadData()
+                dispatch_async(dispatch_get_main_queue(),{
+                    self._products = products
+                    self.productsCollectionView.reloadData()
+                })
             })
         }
     }
