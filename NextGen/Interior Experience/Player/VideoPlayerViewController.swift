@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import FBSDKShareKit
 import FBSDKCoreKit
 import TwitterKit

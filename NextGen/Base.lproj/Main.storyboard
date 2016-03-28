@@ -557,69 +557,6 @@
             </objects>
             <point key="canvasLocation" x="2732" y="3318"/>
         </scene>
-        <!--Shopping View Controller-->
-        <scene sceneID="uvx-dI-aAU">
-            <objects>
-                <viewController id="UOm-Gf-Iww" customClass="ShoppingViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Q7D-rP-NJJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="vo3-7x-Zxh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lte-sv-yfU">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KcE-V9-VHw">
-                                <rect key="frame" x="0.0" y="44" width="299" height="724"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="299" id="nRv-Bt-sDe"/>
-                                </constraints>
-                                <color key="separatorColor" red="0.22868589743589729" green="0.22868589743589729" blue="0.22868589743589729" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="UOm-Gf-Iww" id="kNQ-oW-Xq6"/>
-                                    <outlet property="delegate" destination="UOm-Gf-Iww" id="eV7-PY-aGr"/>
-                                </connections>
-                            </tableView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Sn-3V-VMv">
-                                <rect key="frame" x="299" y="44" width="725" height="724"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewLayout key="collectionViewLayout" id="oU2-hY-vXO" customClass="ExtrasLayout" customModule="NextGen" customModuleProvider="target"/>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="UOm-Gf-Iww" id="lvM-cl-sTY"/>
-                                    <outlet property="delegate" destination="UOm-Gf-Iww" id="gM2-1o-f65"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="KcE-V9-VHw" secondAttribute="trailing" constant="705" id="Baz-rw-OJj"/>
-                            <constraint firstItem="KcE-V9-VHw" firstAttribute="top" secondItem="Q7D-rP-NJJ" secondAttribute="bottom" id="K6Q-tr-OKf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="4Sn-3V-VMv" secondAttribute="trailing" constant="-20" id="Msl-cP-5Bn"/>
-                            <constraint firstItem="KcE-V9-VHw" firstAttribute="leading" secondItem="lte-sv-yfU" secondAttribute="leading" id="NfL-4Q-58q"/>
-                            <constraint firstItem="4Sn-3V-VMv" firstAttribute="leading" secondItem="lte-sv-yfU" secondAttribute="leadingMargin" constant="279" id="PzS-tO-Lbo"/>
-                            <constraint firstItem="4Sn-3V-VMv" firstAttribute="top" secondItem="Q7D-rP-NJJ" secondAttribute="bottom" id="aa6-dY-iwC"/>
-                            <constraint firstItem="vo3-7x-Zxh" firstAttribute="top" secondItem="KcE-V9-VHw" secondAttribute="bottom" id="bh3-gT-KQi"/>
-                            <constraint firstItem="vo3-7x-Zxh" firstAttribute="top" secondItem="4Sn-3V-VMv" secondAttribute="bottom" id="iyU-0p-gk5"/>
-                            <constraint firstItem="KcE-V9-VHw" firstAttribute="leading" secondItem="lte-sv-yfU" secondAttribute="leadingMargin" constant="-20" id="pYZ-O2-lC9"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Baz-rw-OJj"/>
-                                <exclude reference="pYZ-O2-lC9"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="shoppingView" destination="4Sn-3V-VMv" id="03Q-mP-AgY"/>
-                        <outlet property="tableView" destination="KcE-V9-VHw" id="9nt-T9-3Cl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ecj-84-M5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2920" y="2475"/>
-        </scene>
         <!--Stylized Navigation Controller-->
         <scene sceneID="TCv-lT-DKk">
             <objects>
@@ -705,7 +642,6 @@
                         <outlet property="talentDetailView" destination="SBH-gG-bSP" id="Z5R-YU-i3D"/>
                         <outlet property="talentTableView" destination="nfb-lf-5Cb" id="fkG-uc-1N7"/>
                         <segue destination="wpZ-Jt-DDC" kind="show" identifier="ExtrasVideoGallerySegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="eGG-kJ-fSM"/>
-                        <segue destination="UOm-Gf-Iww" kind="show" identifier="ShoppingSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="bWI-9R-eXR"/>
                         <segue destination="zYt-6b-Uxo" kind="show" identifier="ExtrasImageGalleryListSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="KFa-MJ-Ziv"/>
                         <segue destination="8Rs-86-BDa" kind="show" identifier="ExtrasShoppingSegue" customClass="FadeSegue" customModule="NextGen" customModuleProvider="target" id="KBV-cK-jkC"/>
                     </connections>
@@ -714,7 +650,7 @@
             </objects>
             <point key="canvasLocation" x="2066" y="743"/>
         </scene>
-        <!--Extras Shopping View Controller-->
+        <!--Delegate-->
         <scene sceneID="Ubv-u3-snz">
             <objects>
                 <viewController id="8Rs-86-BDa" customClass="ExtrasShoppingViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
@@ -725,8 +661,47 @@
                     <view key="view" contentMode="scaleToFill" id="Odx-cT-dTO">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BYf-0c-3Eg">
+                                <rect key="frame" x="0.0" y="44" width="300" height="724"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="JW1-6i-rlt"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="8Rs-86-BDa" id="dJs-Vm-DPb"/>
+                                    <outlet property="delegate" destination="8Rs-86-BDa" id="MpZ-SV-zfZ"/>
+                                </connections>
+                            </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSg-Dw-bVg">
+                                <rect key="frame" x="300" y="44" width="724" height="724"/>
+                                <collectionViewLayout key="collectionViewLayout" id="GF0-WG-nW4" customClass="RFQuiltLayout">
+                                    <connections>
+                                        <outlet property="delegate" destination="8Rs-86-BDa" id="Vg7-LE-rJS"/>
+                                    </connections>
+                                </collectionViewLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="8Rs-86-BDa" id="sjn-ea-q1i"/>
+                                    <outlet property="delegate" destination="8Rs-86-BDa" id="seZ-KB-KOo"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kyk-08-75f" firstAttribute="top" secondItem="mSg-Dw-bVg" secondAttribute="bottom" id="AMG-EU-Wlq"/>
+                            <constraint firstItem="BYf-0c-3Eg" firstAttribute="leading" secondItem="Odx-cT-dTO" secondAttribute="leading" id="GuY-oM-Gc9"/>
+                            <constraint firstItem="mSg-Dw-bVg" firstAttribute="leading" secondItem="BYf-0c-3Eg" secondAttribute="trailing" id="QQy-cT-ms9"/>
+                            <constraint firstItem="kyk-08-75f" firstAttribute="top" secondItem="BYf-0c-3Eg" secondAttribute="bottom" id="UpX-rp-gxD"/>
+                            <constraint firstItem="BYf-0c-3Eg" firstAttribute="top" secondItem="uWj-5q-P2f" secondAttribute="bottom" id="WFx-kB-oOe"/>
+                            <constraint firstAttribute="trailing" secondItem="mSg-Dw-bVg" secondAttribute="trailing" id="jtr-Qm-09T"/>
+                            <constraint firstItem="mSg-Dw-bVg" firstAttribute="top" secondItem="uWj-5q-P2f" secondAttribute="bottom" id="p8l-Sp-2d2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="menuTableView" destination="BYf-0c-3Eg" id="ucI-15-FyI"/>
+                        <outlet property="productsCollectionView" destination="mSg-Dw-bVg" id="BOs-CC-HVe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXe-u1-ZaE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1061,11 +1036,49 @@
                     </view>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="xtu-Ox-Ldq"/>
+                        <segue destination="0kD-py-cHI" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="2P2-p5-qwW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUK-Hj-Oyk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-472" y="-1010"/>
+        </scene>
+        <!--Settings Menu View Controller-->
+        <scene sceneID="y9o-t6-xfp">
+            <objects>
+                <viewController id="0kD-py-cHI" customClass="SettingsMenuViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qUP-KJ-plj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qg9-As-V1L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vxc-mp-iYe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OtB-HL-HuX">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0kD-py-cHI" id="NBK-Yn-EtH"/>
+                                    <outlet property="delegate" destination="0kD-py-cHI" id="Psr-PO-vsr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OtB-HL-HuX" secondAttribute="trailing" id="I5M-OR-6rh"/>
+                            <constraint firstItem="Qg9-As-V1L" firstAttribute="top" secondItem="OtB-HL-HuX" secondAttribute="bottom" id="mZM-6i-a3E"/>
+                            <constraint firstItem="OtB-HL-HuX" firstAttribute="top" secondItem="Vxc-mp-iYe" secondAttribute="top" id="sNm-xj-NY4"/>
+                            <constraint firstItem="OtB-HL-HuX" firstAttribute="leading" secondItem="Vxc-mp-iYe" secondAttribute="leading" id="tZ0-3k-IhS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="menuTableView" destination="OtB-HL-HuX" id="TvZ-7y-Nm9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w0b-AH-pDL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-472" y="-222"/>
         </scene>
         <!--Video Player View Controller-->
         <scene sceneID="fcf-Td-6zT">

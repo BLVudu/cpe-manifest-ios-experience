@@ -7,7 +7,6 @@ PODS:
   - Bolts/Tasks (1.6.0)
   - DACircularProgress (2.3.1)
   - DLRadioButton (1.4.6)
-  - DropDown (0.1.4)
   - Fabric (1.6.7)
   - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
@@ -35,7 +34,6 @@ PODS:
 
 DEPENDENCIES:
   - DLRadioButton (~> 1.4)
-  - DropDown (~> 0.1)
   - FBSDKCoreKit (~> 4.10)
   - FBSDKLoginKit (~> 4.10)
   - FBSDKShareKit (~> 4.10)
@@ -49,7 +47,6 @@ SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DLRadioButton: 4005319c135297c2998781d4b3dabc5e9b9781c4
-  DropDown: 09ab078ba0f11d426689526b45d4d5179420e321
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976

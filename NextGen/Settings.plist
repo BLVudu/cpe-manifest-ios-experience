@@ -12,19 +12,19 @@
 		<key>rows</key>
 		<array>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>English (US)</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>English (US) (AC3)</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>Spanish (Latin America)</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>French (Canada)</string>
 			</dict>
 		</array>
@@ -35,27 +35,27 @@
 		<key>rows</key>
 		<array>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>Off</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>English (CC)</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>English (US)</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>Spanish (Latin America)</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>French (Canada)</string>
 			</dict>
 			<dict>
-				<key>value</key>
+				<key>title</key>
 				<string>Portuguese (Brazil)</string>
 			</dict>
 		</array>

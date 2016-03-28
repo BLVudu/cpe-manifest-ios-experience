@@ -21,7 +21,7 @@ class MenuSectionCell: UITableViewCell {
     var menuSection: MenuSection? {
         didSet {
             primaryLabel.text = menuSection?.title
-            secondaryLabel.text = menuSection?.value
+            secondaryLabel.text = menuSection?.selectedItem?.title
             dropDownImageView.hidden = (menuSection == nil || !menuSection!.expandable)
         }
     }

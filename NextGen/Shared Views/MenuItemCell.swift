@@ -14,11 +14,11 @@ class MenuItemCell: UITableViewCell {
     static let NibName = "MenuItemCell"
     static let ReuseIdentifier = "MenuItemCellReuseIdentifier"
     
-    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var menuItem: MenuItem? {
         didSet {
-            valueLabel.text = menuItem?.value
+            titleLabel.text = menuItem?.title
         }
     }
     
@@ -26,6 +26,22 @@ class MenuItemCell: UITableViewCell {
         super.prepareForReuse()
         
         menuItem = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateCellStyle()
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        updateCellStyle()
+    }
+    
+    func updateCellStyle() {
+        titleLabel.textColor = (self.selected ? UIColor(netHex: 0xffcd14) : UIColor.whiteColor())
     }
 
 }

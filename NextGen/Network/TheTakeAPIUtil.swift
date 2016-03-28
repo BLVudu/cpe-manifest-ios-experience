@@ -16,7 +16,9 @@ class TheTakeAPIUtil: APIUtil {
     
     var mediaId: String!
     var apiKey: String!
+    
     private var _frameTimes = [Double: NSDictionary]()
+    var productCategories = [TheTakeCategory]()
     
     override func requestWithURLPath(urlPath: String) -> NSMutableURLRequest {
         let request = super.requestWithURLPath(urlPath)
@@ -35,6 +37,18 @@ class TheTakeAPIUtil: APIUtil {
                     if let frameTime = frameInfo["frameTime"] as? Double {
                         self._frameTimes[frameTime] = frameInfo
                     }
+                }
+            }
+        }, errorBlock: nil)
+    }
+    
+    func prefetchProductCategories() {
+        productCategories.removeAll()
+        
+        getJSONWithPath("/categories/listProductCategories", parameters: ["media": mediaId], successBlock: { (result) in
+            if let categories = result["result"] as? [NSDictionary] {
+                for categoryInfo in categories {
+                    self.productCategories.append(TheTakeCategory(info: categoryInfo))
                 }
             }
         }, errorBlock: nil)
@@ -74,6 +88,23 @@ class TheTakeAPIUtil: APIUtil {
         }
         
         return nil
+    }
+    
+    func getCategoryProducts(categoryId: String, successBlock: (products: [TheTakeProduct]) -> Void) -> NSURLSessionDataTask? {
+        return getJSONWithPath("/products/listProducts", parameters: ["category": categoryId, "media": mediaId], successBlock: { (result) -> Void in
+            if let productList = result["result"] as? NSArray {
+                var products = [TheTakeProduct]()
+                for productInfo in productList {
+                    if let productData = productInfo as? NSDictionary {
+                        products.append(TheTakeProduct(data: productData))
+                    }
+                }
+                
+                successBlock(products: products)
+            }
+        }) { (error) -> Void in
+            
+        }
     }
     
     func getProductDetails(productId: String, successBlock: (product: TheTakeProduct) -> Void) -> NSURLSessionDataTask {

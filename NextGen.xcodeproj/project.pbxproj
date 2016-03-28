@@ -28,7 +28,6 @@
 		492267EE1C7B911100B306A2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492267ED1C7B911100B306A2 /* Social.framework */; };
 		494166EE1C52E8CC0013B94A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166ED1C52E8CC0013B94A /* play.png */; };
 		494166F21C5306D90013B94A /* Play_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166F11C5306D90013B94A /* Play_Button.png */; };
-		4956C99A1C73AD9300FAFDE1 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */; };
 		49656F231C49C676001DB9C0 /* StylizedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */; };
 		49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F241C49C73E001DB9C0 /* CustomSwitch.swift */; };
 		497733301C597D5D00EC0071 /* home_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977332F1C597D5D00EC0071 /* home_logo.png */; };
@@ -51,10 +50,8 @@
 		49C1E6671C8108730076E9F3 /* edwards.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6621C8108730076E9F3 /* edwards.jpg */; };
 		49C1E6681C8108730076E9F3 /* chicago.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6631C8108730076E9F3 /* chicago.jpg */; };
 		49C1E6691C8108730076E9F3 /* plano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6641C8108730076E9F3 /* plano.jpg */; };
-		49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44BC1C7CA65700753227 /* ShoppingCell.xib */; };
 		49CB44C31C7CB1BE00753227 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C21C7CB1BE00753227 /* fb.png */; };
 		49CB44C51C7CB1C600753227 /* tw.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C41C7CB1C600753227 /* tw.png */; };
-		49CB44C71C7CCAD700753227 /* ShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C61C7CCAD700753227 /* ShoppingCell.swift */; };
 		49CB44C91C7CF02400753227 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */; };
 		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
 		49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44CE1C7D0F7700753227 /* fb_logo.tif */; };
@@ -366,6 +363,9 @@
 		70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */; };
 		70DF2F8E1CA5F433007AD2A0 /* MenuSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */; };
 		70DF2F901CA5F453007AD2A0 /* MenuSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */; };
+		70DF2F921CA5FBBC007AD2A0 /* MenuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */; };
+		70DF2F941CA5FD70007AD2A0 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F931CA5FD70007AD2A0 /* SettingsMenuViewController.swift */; };
+		70DF2F961CA640AA007AD2A0 /* TheTakeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */; };
 		70FECF6B1C653B72005B1A44 /* UINavigationItem+Stylized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */; };
 		70FECF6D1C65433A005B1A44 /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */; };
 		70FECF731C654FC3005B1A44 /* FadeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF721C654FC3005B1A44 /* FadeSegue.swift */; };
@@ -424,7 +424,6 @@
 		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		494166ED1C52E8CC0013B94A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		494166F11C5306D90013B94A /* Play_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_Button.png; path = ../Play_Button.png; sourceTree = "<group>"; };
-		4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
 		49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylizedNavigationController.swift; sourceTree = "<group>"; };
 		49656F241C49C73E001DB9C0 /* CustomSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
 		4977332F1C597D5D00EC0071 /* home_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_logo.png; sourceTree = "<group>"; };
@@ -447,10 +446,8 @@
 		49C1E6621C8108730076E9F3 /* edwards.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edwards.jpg; sourceTree = "<group>"; };
 		49C1E6631C8108730076E9F3 /* chicago.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chicago.jpg; sourceTree = "<group>"; };
 		49C1E6641C8108730076E9F3 /* plano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plano.jpg; sourceTree = "<group>"; };
-		49CB44BC1C7CA65700753227 /* ShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCell.xib; sourceTree = "<group>"; };
 		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
 		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw.png; sourceTree = "<group>"; };
-		49CB44C61C7CCAD700753227 /* ShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCell.swift; sourceTree = "<group>"; };
 		49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
 		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		49CB44CE1C7D0F7700753227 /* fb_logo.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = fb_logo.tif; sourceTree = "<group>"; };
@@ -766,6 +763,9 @@
 		70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuSectionCell.xib; sourceTree = "<group>"; };
 		70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSectionCell.swift; sourceTree = "<group>"; };
+		70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuedViewController.swift; sourceTree = "<group>"; };
+		70DF2F931CA5FD70007AD2A0 /* SettingsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuViewController.swift; sourceTree = "<group>"; };
+		70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeCategory.swift; sourceTree = "<group>"; };
 		70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Stylized.swift"; sourceTree = "<group>"; };
 		70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Utils.swift"; sourceTree = "<group>"; };
 		70FECF721C654FC3005B1A44 /* FadeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeSegue.swift; sourceTree = "<group>"; };
@@ -866,13 +866,13 @@
 				49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				497DECCB1C61412E000C6636 /* ProfileViewController.swift */,
-				4956C9991C73AD9300FAFDE1 /* ShoppingViewController.swift */,
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
 				492267D71C73F41300B306A2 /* Shopping.plist */,
 				49CC33E41C98B81C000AB801 /* Settings.plist */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
 				4921D97D1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld */,
 				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
+				70DF2F931CA5FD70007AD2A0 /* SettingsMenuViewController.swift */,
 			);
 			path = NextGen;
 			sourceTree = "<group>";
@@ -950,8 +950,9 @@
 		701D69BF1C48205B0047A67A /* Shared Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				70DF2F851CA5E888007AD2A0 /* MenuTableViewController.swift */,
 				70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */,
+				70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */,
+				70DF2F851CA5E888007AD2A0 /* MenuTableViewController.swift */,
 				70A3AC9C1C9DE98D0038B60F /* StylizedCollectionViewController.swift */,
 				49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */,
 				70FECF741C655187005B1A44 /* StylizedViewController.swift */,
@@ -1351,9 +1352,7 @@
 				49E01B6C1CA20514009AF65C /* Clip.swift */,
 				497ABF781C89286D005463C9 /* Shopping.swift */,
 				497DECCD1C61743A000C6636 /* Bookmark.swift */,
-				49CB44C61C7CCAD700753227 /* ShoppingCell.swift */,
 				497DECCF1C61754A000C6636 /* BookmarkCell.xib */,
-				49CB44BC1C7CA65700753227 /* ShoppingCell.xib */,
 				497DECD11C6176CF000C6636 /* BookmarkCell.swift */,
 				4986F8341C8F91D100FF60EB /* CustomScrubber.swift */,
 				70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */,
@@ -1367,6 +1366,7 @@
 			children = (
 				7085F7711C91E4C000DF31B6 /* APIUtil.swift */,
 				7085F7731C920A7500DF31B6 /* TheTakeAPIUtil.swift */,
+				70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */,
 				7085F77B1C92200700DF31B6 /* TheTakeProduct.swift */,
 				70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */,
 			);
@@ -1573,7 +1573,6 @@
 				7077A3641C4989C200843782 /* crowe_full.jpg in Resources */,
 				497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */,
 				7077A3671C4989C200843782 /* fishburne_thumb.jpg in Resources */,
-				49CB44BD1C7CA65700753227 /* ShoppingCell.xib in Resources */,
 				497ABF7B1C894E61005463C9 /* thetake-logo-nav@2x.png in Resources */,
 				7077A3691C4989C200843782 /* lane_thumb.jpg in Resources */,
 				49CB44D01C7D0F7700753227 /* fb_logo.tif in Resources */,
@@ -1800,6 +1799,7 @@
 				70FECF6B1C653B72005B1A44 /* UINavigationItem+Stylized.swift in Sources */,
 				70367AAF1C8F67B30042B5B5 /* NGDMExperience.swift in Sources */,
 				7071C5291C6BCBF6006F4275 /* NGEPresentationType+File.swift in Sources */,
+				70DF2F961CA640AA007AD2A0 /* TheTakeCategory.swift in Sources */,
 				7071C4BE1C6BCBF6006F4275 /* NGEContentSequenceInfoType.swift in Sources */,
 				7071C53B1C6BCBF6006F4275 /* NGETextGroupType.swift in Sources */,
 				49CB44C91C7CF02400753227 /* InteriorExperienceViewController.swift in Sources */,
@@ -1812,6 +1812,7 @@
 				7071C53F1C6BCBF6006F4275 /* NGETimedEventSequenceType.swift in Sources */,
 				7071C4B11C6BCBF6006F4275 /* NGECompObjEntryType.swift in Sources */,
 				70FECF811C6579E4005B1A44 /* ImageSceneDetailCollectionViewCell.swift in Sources */,
+				70DF2F941CA5FD70007AD2A0 /* SettingsMenuViewController.swift in Sources */,
 				7071C5431C6BCBF6006F4275 /* NGETrackMetadataType.swift in Sources */,
 				70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */,
 				7071C4FE1C6BCBF6006F4275 /* NGEInventoryAncillaryType.swift in Sources */,
@@ -1918,7 +1919,6 @@
 				49656F231C49C676001DB9C0 /* StylizedNavigationController.swift in Sources */,
 				7071C4C21C6BCBF6006F4275 /* NGEDigitalAssetAncillaryDataType.swift in Sources */,
 				7071C4DA1C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureType.swift in Sources */,
-				4956C99A1C73AD9300FAFDE1 /* ShoppingViewController.swift in Sources */,
 				7085F7861C933A5000DF31B6 /* NGDMExperienceApp.swift in Sources */,
 				7071C5041C6BCBF6006F4275 /* NGEInventoryMetadataType.swift in Sources */,
 				7071C5471C6BCBF6006F4275 /* NGEVideoTrackReferenceType.swift in Sources */,
@@ -1956,7 +1956,6 @@
 				7071C4931C6BCBF6006F4275 /* NGEAdaptationSetID.swift in Sources */,
 				70367AC31C8F9D450042B5B5 /* NGDMTimedEventSequence.swift in Sources */,
 				497DECCC1C61412E000C6636 /* ProfileViewController.swift in Sources */,
-				49CB44C71C7CCAD700753227 /* ShoppingCell.swift in Sources */,
 				70C9E0B31C46CECE002D3B5A /* Video.swift in Sources */,
 				7071C5311C6BCBF6006F4275 /* NGEStringDisplayIndicatorsEnum.swift in Sources */,
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
@@ -1964,6 +1963,7 @@
 				7071C4EC1C6BCBF6006F4275 /* NGEFictionalStart.swift in Sources */,
 				7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */,
 				7071C4C31C6BCBF6006F4275 /* NGEDigitalAssetAudioDataType.swift in Sources */,
+				70DF2F921CA5FBBC007AD2A0 /* MenuedViewController.swift in Sources */,
 				7071C4A41C6BCBF6006F4275 /* NGEBasicMetadataPeopleType.swift in Sources */,
 				7071C5281C6BCBF6006F4275 /* NGEPresentationManifestType.swift in Sources */,
 				7071C4A81C6BCBF6006F4275 /* NGEChapterType.swift in Sources */,

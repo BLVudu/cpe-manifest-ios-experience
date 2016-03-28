@@ -11,12 +11,6 @@ import SWRevealViewController
 
 class InitialViewController: SWRevealViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.rearViewController = MenuTableViewController(plistName: "Settings")
-    }
-    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
     }

@@ -13,9 +13,9 @@ pod 'MWPhotoBrowser'
 pod 'RFQuiltLayout'
 pod 'SWRevealViewController', '~> 2.3'
 pod 'DLRadioButton', '~> 1.4'
-pod 'DropDown', '~> 0.1'
 pod 'FBSDKCoreKit', '~> 4.10'
 pod 'FBSDKShareKit', '~> 4.10'
 pod 'FBSDKLoginKit', '~> 4.10'
 pod 'TwitterKit', '~> 1.15'
+
 end

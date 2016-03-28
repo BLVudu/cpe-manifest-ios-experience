@@ -72,6 +72,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
                 }
             } else {
                 imageView?.image = nil
+                imageView?.backgroundColor = UIColor.clearColor()
             }
         }
     }

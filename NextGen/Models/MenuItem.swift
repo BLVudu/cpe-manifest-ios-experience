@@ -11,13 +11,16 @@ import UIKit
 class MenuItem: NSObject {
     
     struct Keys {
-        static let value = "value"
+        static let Title = "title"
+        static let Value = "value"
     }
     
-    var value: String!
+    var title: String!
+    var value: String?
     
     required init(info: NSDictionary) {
-        value = info[Keys.value] as! String
+        title = info[Keys.Title] as! String
+        value = info[Keys.Value] as? String
     }
 
 }

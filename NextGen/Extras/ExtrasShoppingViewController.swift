@@ -7,31 +7,99 @@
 //
 
 import UIKit
+import RFQuiltLayout
 
-class ExtrasShoppingViewController: StylizedViewController {
+class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
+    
+    @IBOutlet weak var productsCollectionView: UICollectionView!
     
     var experience: NGDMExperience!
+    
+    private var _products: [TheTakeProduct]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        for category in TheTakeAPIUtil.sharedInstance.productCategories {
+            let info = NSMutableDictionary()
+            info[MenuSection.Keys.Title] = category.name
+            info[MenuSection.Keys.Value] = String(category.id)
+            
+            if let children = category.children {
+                if children.count > 1 {
+                    var rows = [[MenuItem.Keys.Title: "All", MenuItem.Keys.Value: String(category.id)]]
+                    for child in children {
+                        rows.append([MenuItem.Keys.Title: child.name, MenuItem.Keys.Value: String(child.id)])
+                    }
+                    
+                    info[MenuSection.Keys.Rows] = rows
+                }
+            }
+            
+            menuSections.append(MenuSection(info: info))
+        }
+        
+        productsCollectionView.backgroundColor = UIColor.clearColor()
+        productsCollectionView.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let layout = productsCollectionView.collectionViewLayout as? RFQuiltLayout {
+            layout.direction = UICollectionViewScrollDirection.Vertical
+            layout.blockPixels = CGSizeMake((CGRectGetWidth(productsCollectionView.bounds) / 3), (CGRectGetWidth(productsCollectionView.bounds) / 3))
+        }
     }
-    */
+    
+    // MARK: UITableViewDelegate
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+        
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, menuItem = cell.menuItem, categoryId = menuItem.value {
+            TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
+                self._products = products
+                self.productsCollectionView.reloadData()
+            })
+        }
+    }
+    
+    // MARK: UICollectionViewDataSource
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let products = _products {
+            return products.count
+        }
+        
+        return 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ImageSceneDetailCollectionViewCell
+        cell.title = nil
+        
+        if let product = _products?[indexPath.row] {
+            cell.theTakeProducts = [product]
+        }
+        
+        return cell
+    }
+    
+    // MARK: UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    // MARK: RFQuiltLayoutDelegate
+    func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
+        return CGSizeMake(1, 1)
+    }
+    
+    func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(5, 5, 5, 5)
+    }
 
 }

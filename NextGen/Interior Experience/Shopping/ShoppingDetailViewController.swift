@@ -33,6 +33,7 @@ class ShoppingDetailCell: UICollectionViewCell {
                 })
             } else {
                 productImageView.image = nil
+                productImageView.backgroundColor = UIColor.clearColor()
             }
         }
     }
@@ -81,6 +82,7 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
                 })
             } else {
                 productImageView.image = nil
+                productImageView.backgroundColor = UIColor.clearColor()
             }
         }
     }

@@ -12,10 +12,12 @@ class MenuSection: NSObject {
     
     struct Keys {
         static let Title = "title"
+        static let Value = "Value"
         static let Rows = "rows"
     }
     
     var title: String!
+    var value: String?
     var items = [MenuItem]()
     var expanded = false
     var selectedItem: MenuItem?
@@ -30,12 +32,6 @@ class MenuSection: NSObject {
         }
     }
     
-    var value: String? {
-        get {
-            return selectedItem?.value
-        }
-    }
-    
     var expandable: Bool {
         get {
             return items.count > 0
@@ -44,6 +40,7 @@ class MenuSection: NSObject {
     
     required init(info: NSDictionary) {
         title = info[Keys.Title] as! String
+        value = info[Keys.Value] as? String
         if let rows = info[Keys.Rows] as? [NSDictionary] {
             for itemInfo in rows {
                 items.append(MenuItem(info: itemInfo))
