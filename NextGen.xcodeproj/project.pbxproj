@@ -358,7 +358,6 @@
 		70DF2F801CA5C292007AD2A0 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */; };
 		70DF2F821CA5C2B5007AD2A0 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F811CA5C2B5007AD2A0 /* MenuItem.swift */; };
 		70DF2F841CA5C8B2007AD2A0 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F831CA5C8B2007AD2A0 /* MenuItemCell.swift */; };
-		70DF2F861CA5E888007AD2A0 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F851CA5E888007AD2A0 /* MenuTableViewController.swift */; };
 		70DF2F8A1CA5EADF007AD2A0 /* MenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DF2F891CA5EADF007AD2A0 /* MenuItemCell.xib */; };
 		70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */; };
 		70DF2F8E1CA5F433007AD2A0 /* MenuSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */; };
@@ -758,7 +757,6 @@
 		70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		70DF2F811CA5C2B5007AD2A0 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		70DF2F831CA5C8B2007AD2A0 /* MenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
-		70DF2F851CA5E888007AD2A0 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		70DF2F891CA5EADF007AD2A0 /* MenuItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemCell.xib; sourceTree = "<group>"; };
 		70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuSectionCell.xib; sourceTree = "<group>"; };
@@ -952,7 +950,6 @@
 			children = (
 				70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */,
 				70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */,
-				70DF2F851CA5E888007AD2A0 /* MenuTableViewController.swift */,
 				70A3AC9C1C9DE98D0038B60F /* StylizedCollectionViewController.swift */,
 				49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */,
 				70FECF741C655187005B1A44 /* StylizedViewController.swift */,
@@ -1866,7 +1863,6 @@
 				70A3AC971C9DDB500038B60F /* NSTimeInterval+Utils.swift in Sources */,
 				7071C4D71C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift in Sources */,
 				7071C4E61C6BCBF6006F4275 /* NGEExperienceAppType.swift in Sources */,
-				70DF2F861CA5E888007AD2A0 /* MenuTableViewController.swift in Sources */,
 				7071C5231C6BCBF6006F4275 /* NGEPlayableSequenceListType.swift in Sources */,
 				7085F7801C923BE100DF31B6 /* Indexable+Utils.swift in Sources */,
 				7071C5461C6BCBF6006F4275 /* NGEVideoFrameTimecode.swift in Sources */,

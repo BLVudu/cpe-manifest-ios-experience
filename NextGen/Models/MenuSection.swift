@@ -20,7 +20,6 @@ class MenuSection: NSObject {
     var value: String?
     var items = [MenuItem]()
     var expanded = false
-    var selectedItem: MenuItem?
     
     var numRows: Int {
         get {

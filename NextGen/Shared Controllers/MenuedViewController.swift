@@ -12,13 +12,14 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var menuTableView: UITableView!
     var menuSections = [MenuSection]()
+    var selectedItem: MenuItem?
     var showsSelectedMenuItem = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         menuTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        menuTableView.backgroundView = UIImageView(image: UIImage(named: "MOSMenu"))
+        menuTableView.backgroundColor = UIColor.clearColor()
         menuTableView.registerNib(UINib(nibName: MenuSectionCell.NibName, bundle: nil), forCellReuseIdentifier: MenuSectionCell.ReuseIdentifier)
         menuTableView.registerNib(UINib(nibName: MenuItemCell.NibName, bundle: nil), forCellReuseIdentifier: MenuItemCell.ReuseIdentifier)
     }
@@ -38,7 +39,9 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(MenuSectionCell.ReuseIdentifier) as! MenuSectionCell
             cell.menuSection = menuSection
-            if !showsSelectedMenuItem {
+            if showsSelectedMenuItem {
+                cell.selectedItem = selectedItem
+            } else {
                 cell.secondaryLabel?.removeFromSuperview()
             }
             
@@ -47,6 +50,7 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
         
         let cell = tableView.dequeueReusableCellWithIdentifier(MenuItemCell.ReuseIdentifier) as! MenuItemCell
         cell.menuItem = menuSection.items[indexPath.row - 1]
+        cell.selected = selectedItem != nil && selectedItem == cell.menuItem
         
         return cell
     }
@@ -73,11 +77,12 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
                 cell.toggleDropDownIcon()
             }
         } else {
-            let menuItem = menuSection.items[indexPath.row - 1]
-            menuSection.selectedItem = menuItem
+            selectedItem = menuSection.items[indexPath.row - 1]
         }
         
-        tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.beginUpdates()
+        tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
+        tableView.endUpdates()
     }
     
 }

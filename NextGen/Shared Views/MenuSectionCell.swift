@@ -21,8 +21,13 @@ class MenuSectionCell: UITableViewCell {
     var menuSection: MenuSection? {
         didSet {
             primaryLabel.text = menuSection?.title
-            secondaryLabel?.text = menuSection?.selectedItem?.title
             dropDownImageView.hidden = (menuSection == nil || !menuSection!.expandable)
+        }
+    }
+    
+    var selectedItem: MenuItem? {
+        didSet {
+            secondaryLabel?.text = selectedItem?.title
         }
     }
     
@@ -30,6 +35,7 @@ class MenuSectionCell: UITableViewCell {
         super.prepareForReuse()
         
         menuSection = nil
+        selectedItem = nil
     }
     
     override func layoutSubviews() {

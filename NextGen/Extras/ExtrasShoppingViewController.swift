@@ -8,6 +8,7 @@
 
 import UIKit
 import RFQuiltLayout
+import MBProgressHUD
 
 class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
     
@@ -16,6 +17,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     var experience: NGDMExperience!
     
     private var _products: [TheTakeProduct]?
+    private var _productListSessionDataTask: NSURLSessionDataTask?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +52,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         
         if let layout = productsCollectionView.collectionViewLayout as? RFQuiltLayout {
             layout.direction = UICollectionViewScrollDirection.Vertical
-            layout.blockPixels = CGSizeMake((CGRectGetWidth(productsCollectionView.bounds) / 3), (CGRectGetWidth(productsCollectionView.bounds) / 3))
+            layout.blockPixels = CGSizeMake((CGRectGetWidth(productsCollectionView.bounds) / 3), 190)
         }
     }
     
@@ -59,11 +61,21 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, menuItem = cell.menuItem, categoryId = menuItem.value {
-            TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
-                dispatch_async(dispatch_get_main_queue(),{
+            if let currentTask = _productListSessionDataTask {
+                currentTask.cancel()
+            }
+            
+            productsCollectionView.userInteractionEnabled = false
+            MBProgressHUD.showHUDAddedTo(productsCollectionView, animated: true)
+            _productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
+                dispatch_async(dispatch_get_main_queue(), {
                     self._products = products
                     self.productsCollectionView.reloadData()
+                    self.productsCollectionView.userInteractionEnabled = true
+                    MBProgressHUD.hideAllHUDsForView(self.productsCollectionView, animated: true)
                 })
+                
+                self._productListSessionDataTask = nil
             })
         }
     }
@@ -83,7 +95,8 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ImageSceneDetailCollectionViewCell
-        cell.title = nil
+        cell.titleLabel?.removeFromSuperview()
+        cell.productImageType = ImageSceneDetailCollectionViewCell.ProductImageType.Scene
         
         if let product = _products?[indexPath.row] {
             cell.theTakeProducts = [product]

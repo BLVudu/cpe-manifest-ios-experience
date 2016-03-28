@@ -24,7 +24,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
     var currentTime = -1.0
     var currentProductFrameTime = -1.0
-    var currentProductSessionDataTask: NSURLSessionDataTask?
+    private var _currentProductSessionDataTask: NSURLSessionDataTask?
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -77,31 +77,39 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         }
     }
     
-    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell, experience: NGDMExperience, timedEvent: NGDMTimedEvent) {
-        if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
-            let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
-            if currentProductFrameTime != newFrameTime {
-                currentProductFrameTime = newFrameTime
-                
-                if let currentTask = currentProductSessionDataTask {
-                    currentTask.cancel()
-                }
-                
-                currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
-                    if products.count > 0 {
-                        cell.theTakeProducts = products
+    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell, experience: NGDMExperience, timedEvent: NGDMTimedEvent?) {
+        if let timedEvent = timedEvent {
+            if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
+                if let cell = cell as? ImageSceneDetailCollectionViewCell {
+                    let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
+                    if currentProductFrameTime != newFrameTime {
+                        currentProductFrameTime = newFrameTime
+                        
+                        if let currentTask = _currentProductSessionDataTask {
+                            currentTask.cancel()
+                        }
+                        
+                        _currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
+                            dispatch_async(dispatch_get_main_queue(), {
+                                if products.count > 0 {
+                                    cell.theTakeProducts = products
+                                }
+                            })
+                            
+                            self._currentProductSessionDataTask = nil
+                        })
                     }
-                    
-                    self.currentProductSessionDataTask = nil
-                })
+                }
+            } else if (timedEvent.isTextItem() && ((timedEvent.hasImage(experience) && cell.reuseIdentifier != ImageSceneDetailCollectionViewCell.ReuseIdentifier) || (!timedEvent.hasImage(experience) && cell.reuseIdentifier != TextSceneDetailCollectionViewCell.ReuseIdentifier))) ||
+                        (timedEvent.isLocation() && cell.reuseIdentifier != MapSceneDetailCollectionViewCell.ReuseIdentifier) {
+                if let indexPath = self.collectionView?.indexPathForCell(cell) {
+                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                }
+            } else if cell.timedEvent == nil || timedEvent != cell.timedEvent {
+                cell.timedEvent = timedEvent
             }
-        } else if (timedEvent.isTextItem() && ((timedEvent.hasImage(experience) && cell.reuseIdentifier != ImageSceneDetailCollectionViewCell.ReuseIdentifier) || (!timedEvent.hasImage(experience) && cell.reuseIdentifier != TextSceneDetailCollectionViewCell.ReuseIdentifier))) ||
-                    (timedEvent.isLocation() && cell.reuseIdentifier != MapSceneDetailCollectionViewCell.ReuseIdentifier) {
-            if let indexPath = self.collectionView?.indexPathForCell(cell) {
-                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-            }
-        } else if cell.timedEvent == nil || timedEvent != cell.timedEvent {
-            cell.timedEvent = timedEvent
+        } else {
+            cell.timedEvent = nil
         }
     }
     
@@ -114,7 +122,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences[indexPath.row]
         let timedEvent = experience.timedEventSequence?.timedEvent(currentTime)
-        
         var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
         if let timedEvent = timedEvent {
             if timedEvent.isTextItem() {
@@ -126,31 +133,31 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
         cell.experience = experience
-        if (cell.timedEvent == nil || (cell.timedEvent!.isProduct(kTheTakeIdentifierNamespace) && cell.theTakeProducts == nil)) && timedEvent != nil {
-            updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent!)
-        }
+        updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent)
         
         return cell
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience {
-            if cell.theTakeProducts != nil {
-                self.performSegueWithIdentifier(kSceneDetailSegueShowShop, sender: cell.theTakeProducts)
-            } else if let timedEvent = cell.timedEvent {
-                if timedEvent.isGallery() {
-                    self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
-                } else if timedEvent.isAudioVisual() {
-                    self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
-                } else if timedEvent.isAppGroup() {
-                    if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
-                        let webViewController = WebViewController(title: experienceApp.title, url: url)
-                        let navigationController = UINavigationController(rootViewController: webViewController)
-                        self.presentViewController(navigationController, animated: true, completion: nil)
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, let timedEvent = cell.timedEvent {
+            if timedEvent.isProduct() {
+                if let cell = cell as? ImageSceneDetailCollectionViewCell {
+                    if cell.theTakeProducts != nil {
+                        self.performSegueWithIdentifier(kSceneDetailSegueShowShop, sender: cell.theTakeProducts)
                     }
-                } else if timedEvent.isLocation() {
-                    self.performSegueWithIdentifier(kSceneDetailSegueShowMap, sender: timedEvent)
                 }
+            } else if timedEvent.isGallery() {
+                self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
+            } else if timedEvent.isAudioVisual() {
+                self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
+            } else if timedEvent.isAppGroup() {
+                if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
+                    let webViewController = WebViewController(title: experienceApp.title, url: url)
+                    let navigationController = UINavigationController(rootViewController: webViewController)
+                    self.presentViewController(navigationController, animated: true, completion: nil)
+                }
+            } else if timedEvent.isLocation() {
+                self.performSegueWithIdentifier(kSceneDetailSegueShowMap, sender: timedEvent)
             }
         }
     }
