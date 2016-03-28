@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import HockeySDK
-import DropDown
 
 
 @UIApplicationMain

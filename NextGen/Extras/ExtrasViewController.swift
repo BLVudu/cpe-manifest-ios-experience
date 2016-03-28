@@ -94,15 +94,6 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        /*
-        if let allActors = DataManager.sharedInstance.content?.allActors() {
-            return allActors.count
-        }
-        
-        return 0
-        */
-        
         return BaselineAPIUtil.sharedInstance.orderedTalent.count
     }
     

@@ -33,6 +33,10 @@ class BaselineAPIUtil: APIUtil {
         static let ProjectName = "PROJECT_NAME"
     }
     
+    struct Constants {
+        static let MaxCredits = 10
+    }
+    
     static let sharedInstance = BaselineAPIUtil(apiDomain: "http://baselineapi.com/api")
     
     var projectId: String!
@@ -48,7 +52,7 @@ class BaselineAPIUtil: APIUtil {
     func prefetchCredits() {
         getJSONWithPath(Endpoints.GetCredits, parameters: ["id": projectId, "apikey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
-                for talentInfo in results {
+                for talentInfo in results.subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxCredits, results.count))) {
                     if let talentInfo = talentInfo as? NSDictionary, talentID = talentInfo[Keys.ParticipantID] as? NSNumber {
                         self._talent[talentID.longLongValue] = Talent(info: talentInfo)
                     }

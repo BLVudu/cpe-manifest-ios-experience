@@ -48,16 +48,30 @@ class Talent: NSObject {
     var images = [TalentImage]()
     var films = [TalentFilm]()
     
+    var thumbnailImageURL: NSURL? {
+        get {
+            if images.count > 0 {
+                return images[0].thumbnailImageURL
+            }
+            
+            return nil
+        }
+    }
     
-    var billingOrder = -1
-    var thumbnailImage: String?
-    var fullImage: String?
+    var fullImageURL: NSURL? {
+        get {
+            if images.count > 0 {
+                return images[0].imageURL
+            }
+            
+            return nil
+        }
+    }
+    
     var facebook: String?
     var facebookID: String?
     var twitter: String?
     var gallery = [String]()
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
     
     required init(info: NSDictionary) {
         super.init()

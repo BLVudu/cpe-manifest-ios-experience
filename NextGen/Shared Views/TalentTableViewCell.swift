@@ -18,8 +18,8 @@ class TalentTableViewCell: UITableViewCell {
         didSet {
             nameLabel?.text = talent?.name.uppercaseString
             roleLabel?.text = talent?.role
-            if talent?.thumbnailImage != nil {
-                talentImageView.setImageWithURL(NSURL(string:talent!.thumbnailImage!)!)
+            if let imageURL = talent?.thumbnailImageURL {
+                talentImageView.setImageWithURL(imageURL)
             } else {
                 talentImageView.image = nil
             }
