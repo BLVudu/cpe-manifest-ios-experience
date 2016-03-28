@@ -95,6 +95,7 @@
 		70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */; };
 		70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */; };
 		70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */; };
+		70482E8A1CA99BAB0003ED45 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70482E891CA99BAB0003ED45 /* mos-nextgen-interstitial.mov */; };
 		705288501C5B1AF400464C8B /* location.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7052884F1C5B1AF400464C8B /* location.jpg */; };
 		7065F5461C46FCC500A2C74E /* TalentTableViewCell-Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */; };
 		7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5471C47004100A2C74E /* TalentTableViewCell.swift */; };
@@ -343,7 +344,6 @@
 		70A3AC9F1C9E56350038B60F /* ExtrasImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
-		70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */; };
 		70B9FE481C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */; };
 		70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */; };
 		70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */; };
@@ -494,6 +494,7 @@
 		70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextGroup.swift; sourceTree = "<group>"; };
 		70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextObject.swift; sourceTree = "<group>"; };
 		70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAudioVisual.swift; sourceTree = "<group>"; };
+		70482E891CA99BAB0003ED45 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
 		7052884F1C5B1AF400464C8B /* location.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = location.jpg; sourceTree = "<group>"; };
 		7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Wide.xib"; sourceTree = "<group>"; };
 		7065F5471C47004100A2C74E /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
@@ -743,7 +744,6 @@
 		70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
-		70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "man-of-steel-trailer3.mp4"; sourceTree = "<group>"; };
 		70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-interstitial.mp4"; sourceTree = "<group>"; };
 		70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMLocation.swift; sourceTree = "<group>"; };
 		70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapView+Utils.swift"; sourceTree = "<group>"; };
@@ -1397,7 +1397,7 @@
 		70B9FE441C6D54D400CF1A22 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				70B9FE451C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 */,
+				70482E891CA99BAB0003ED45 /* mos-nextgen-interstitial.mov */,
 				70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */,
 			);
 			path = Videos;
@@ -1556,10 +1556,10 @@
 				7077A3601C4989C200843782 /* cavill_full.jpg in Resources */,
 				49C1E6651C8108730076E9F3 /* mammoth.JPG in Resources */,
 				70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */,
+				70482E8A1CA99BAB0003ED45 /* mos-nextgen-interstitial.mov in Resources */,
 				6AA9CCC61C883EE2005EBA92 /* RobotoCondensed-Italic.ttf in Resources */,
 				4977333E1C5AB01E00EC0071 /* trivia.jpg in Resources */,
 				705288501C5B1AF400464C8B /* location.jpg in Resources */,
-				70B9FE471C6D54D400CF1A22 /* man-of-steel-trailer3.mp4 in Resources */,
 				6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */,
 				7077A3611C4989C200843782 /* cavill_thumb.jpg in Resources */,
 				7077A3841C49C66F00843782 /* sprayberry_full.jpg in Resources */,

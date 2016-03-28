@@ -13,18 +13,19 @@ import TwitterKit
 import MessageUI
 
 let kVideoPlayerTimeDidChange = "kVideoPlayerTimeDidChange"
-let kVideoPlayerIsPlayingPrimaryVideo = "kVideoPlayerIsPlayingPrimaryVideo"
+let kVideoPlayerIsPlayingMainExperience = "kVideoPlayerIsPlayingMainExperience"
+let kVideoPlayerShouldPause = "kVideoPlayerShouldPause"
+let kVideoPlayerShouldResume = "kVideoPlayerShouldResume"
 
 class VideoPlayerViewController: WBVideoPlayerViewController {
     
-    var didPlayInterstitial = false
     var showsTopToolbar = true
     let shared = FBSDKShareLinkContent()
     var fullScreen = false
-    var shouldPlayInterstitial = false
     var showCountdownTimer = false
-    var mainFeatureIsPlaying = false
     
+    var shouldPlayMainExperience = false
+    private var _didPlayInterstitial = false
     
     @IBOutlet weak var shareContent: UIButton!
     @IBOutlet weak var commentaryBtn: UIButton!
@@ -35,53 +36,41 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserverForName("pauseMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerShouldPause, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.pauseVideo()
-            self.isExtras = true
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName("resumeMovie", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             self.playVideo()
-            self.isExtras = false
-            
         }
         
-        if shouldPlayInterstitial {
-            //self.playerControlsVisible = false
-            //self.lockPlayerControls = true
-            //self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mp4")!))
-            playPrimaryVideo()
-        }
-        
-        NSNotificationCenter.defaultCenter().addObserverForName("playMainFeature", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            
-            if !self.didPlayInterstitial {
-                self.playPrimaryVideo()
-                self.didPlayInterstitial = true
-            }
-            
+        if shouldPlayMainExperience {
+            playMainExperience()
         }
     }
     
-    func playPrimaryVideo() {
-        self.lockPlayerControls = false
-        self.mainFeatureIsPlaying = true
-        /*if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
-            NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerIsPlayingPrimaryVideo, object: nil)
-            self.playVideoWithURL(audioVisual.videoURL)
-        }*/
-    }
-    /*
-    override func playerItemDidReachEnd(notification: NSNotification!) {
-        
-        if !self.didPlayInterstitial {
-            self.playPrimaryVideo()
-            self.didPlayInterstitial = true
+    func playMainExperience() {
+        self.playerControlsVisible = false
+        self.lockPlayerControls = !_didPlayInterstitial
+        if _didPlayInterstitial {
+            if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
+                NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerIsPlayingMainExperience, object: nil)
+                self.playVideoWithURL(audioVisual.videoURL)
+            }
+        } else {
+            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mov")!))
         }
-
     }
-*/
-
+    
+    override func playerItemDidReachEnd(notification: NSNotification!) {
+        super.playerItemDidReachEnd(notification)
+        
+        if shouldPlayMainExperience && !_didPlayInterstitial {
+            _didPlayInterstitial = true
+            playMainExperience()
+        }
+    }
+    
     override func done(sender: AnyObject?) {
         super.done(sender)
         
@@ -98,7 +87,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     override func syncScrubber() {
         super.syncScrubber()
-        if player != nil {
+        
+        if player != nil && (shouldPlayMainExperience && _didPlayInterstitial) {
             var curTime = (CMTimeGetSeconds(player.currentTime()))
             if (curTime.isNaN == true) {
                 curTime = 0.0

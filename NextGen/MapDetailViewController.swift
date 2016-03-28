@@ -108,7 +108,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     
     // MARK: Actions
     @IBAction func close(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerShouldResume, object: nil)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -131,7 +131,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         /*if (indexPath.row == locationImages.count+1){
             self.mapView.alpha = 0.5
-            NSNotificationCenter.defaultCenter().postNotificationName("pauseMovie", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerShouldPause, object: nil)
             self.videoView.hidden = false
             self.imageView.hidden = true
             let thisExperience = experience.childExperiences()[0]

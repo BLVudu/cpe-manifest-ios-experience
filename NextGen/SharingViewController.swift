@@ -47,7 +47,7 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView(self.tableView, didSelectRowAtIndexPath: selectedIndexPath)
         
         fbShare.shareContent = shared
-        NSNotificationCenter.defaultCenter().postNotificationName("pauseMovie", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerShouldPause, object: nil)
         
         NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             
@@ -73,7 +73,7 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func close(sender: AnyObject) {
         
-        NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerShouldResume, object: nil)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -132,7 +132,6 @@ class SharingViewController: UIViewController, UITableViewDataSource, UITableVie
             
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = 1
-            videoPlayerViewController.isExtras = true
             videoPlayerViewController.playerControlsVisible = false
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)

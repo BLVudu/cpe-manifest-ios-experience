@@ -15,12 +15,12 @@ class InteriorExperienceViewController: UIViewController {
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
-    var allowPortraitOrientation = true
+    var allowPortraitOrientation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerIsPlayingPrimaryVideo, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (_) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerIsPlayingMainExperience, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (_) -> Void in
             if let strongSelf = self {
                 strongSelf.allowPortraitOrientation = true
             }
@@ -47,7 +47,7 @@ class InteriorExperienceViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PlayerViewControllerSegue" {
             let playerViewController = segue.destinationViewController as! VideoPlayerViewController
-            playerViewController.shouldPlayInterstitial = true
+            playerViewController.shouldPlayMainExperience = true
         }
     }
 

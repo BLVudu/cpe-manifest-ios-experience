@@ -782,39 +782,33 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 		to play it again. */
     
     self.curIndex++;
-    if(self.isExtras == false){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"playMainFeature" object:self];
-    } else {
-        if (self.curIndex < self.indexMax) {
-            //seekToZeroBeforePlay = YES;
-            self.countdownTimer.hidden = NO;
-            self.timer.hidden = NO;
-            self.playerControlsEnabled = NO;
-            [self pauseVideo];
+    if (self.curIndex < self.indexMax) {
+        //seekToZeroBeforePlay = YES;
+        self.countdownTimer.hidden = NO;
+        self.timer.hidden = NO;
+        self.playerControlsEnabled = NO;
+        [self pauseVideo];
+        self.countdownSeconds = 6;
+        self.countdown = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                         target:self
+                                       selector:@selector(subtractTime)
+                                       userInfo:nil
+                                        repeats:YES];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject:
+                        [NSNumber numberWithInt:self.curIndex]
+                                                     forKey:@"index"];
+
+        double delayInSeconds = 5.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"playNextItem" object:self userInfo:dict];
+            self.countdownTimer.hidden = YES;
+            self.timer.hidden = YES;
+            self.playerControlsEnabled = YES;
             self.countdownSeconds = 6;
-            self.countdown = [NSTimer scheduledTimerWithTimeInterval:1.0f
-                                             target:self
-                                           selector:@selector(subtractTime)
-                                           userInfo:nil
-                                            repeats:YES];
-            NSDictionary* dict = [NSDictionary dictionaryWithObject:
-                            [NSNumber numberWithInt:self.curIndex]
-                                                         forKey:@"index"];
     
-            double delayInSeconds = 5.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"playNextItem" object:self userInfo:dict];
-                self.countdownTimer.hidden = YES;
-                self.timer.hidden = YES;
-                self.playerControlsEnabled = YES;
-                self.countdownSeconds = 6;
-        
-    });
+        });
     }
-    }
-     
-     
 }
 
 - (void)subtractTime {

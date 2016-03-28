@@ -142,7 +142,6 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
-            videoPlayerViewController.isExtras = true
             videoPlayerViewController.playerControlsVisible = false
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)
