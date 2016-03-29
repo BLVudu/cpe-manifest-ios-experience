@@ -16,7 +16,7 @@ class SharingViewController: UIViewController{
         
         super.viewDidLoad()
     
-       NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerShouldPause, object: nil)
+       NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
       
                         }
     
@@ -24,7 +24,7 @@ class SharingViewController: UIViewController{
     
     @IBAction func close(sender: AnyObject) {
         
-        NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerShouldResume, object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldResume, object: nil)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }

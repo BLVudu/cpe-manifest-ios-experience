@@ -10,6 +10,8 @@ import UIKit
 
 class TalentTableViewCell: UITableViewCell {
     
+    static let ReuseIdentifier = "TalentTableViewCell"
+    
     @IBOutlet weak var talentImageView: RoundImageView!
     @IBOutlet weak var nameLabel: UILabel?
     @IBOutlet weak var roleLabel: UILabel?

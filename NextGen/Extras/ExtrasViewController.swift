@@ -98,7 +98,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
         let talent = BaselineAPIUtil.sharedInstance.orderedTalent[indexPath.row]
         cell.talent = talent
         

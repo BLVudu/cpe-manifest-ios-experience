@@ -12,19 +12,27 @@ import RFQuiltLayout
 
 class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate {
     
-    let kSceneDetailSegueShowGallery = "showGallery"
-    let kSceneDetailSegueShowShop = "showShop"
-    let kSceneDetailSegueShowMap = "showMap"
+    struct SegueIdentifier {
+        static let ShowGallery = "showGallery"
+        static let ShowShop = "showShop"
+        static let ShowMap = "showMap"
+    }
     
-    let regionRadius: CLLocationDistance = 2000
-    var initialLocation = CLLocation(latitude: 0, longitude: 0)
-    var locName = ""
-    var locImg = ""
-    var galleryID = 0
+    let kSceneDetailExtrasUpdateInterval = 30.0
     
-    var currentTime = -1.0
-    var currentProductFrameTime = -1.0
+    private var _didChangeTimeObserver: NSObjectProtocol!
+    private var _currentTime = -1.0
+    private var _currentProductFrameTime = -1.0
     private var _currentProductSessionDataTask: NSURLSessionDataTask?
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
+        if let currentTask = _currentProductSessionDataTask {
+            currentTask.cancel()
+        }
+        
+        _currentProductSessionDataTask = nil
+    }
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -36,10 +44,10 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(TextSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: TextSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerTimeDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            if let userInfo = notification.userInfo, time = userInfo["time"] as? Double {
-                self.currentTime = time
-                self.updateCollectionView()
+        _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
+                strongSelf._currentTime = time
+                strongSelf.updateCollectionView()
             }
         }
     }
@@ -72,7 +80,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     }
     
     func updateCollectionViewCell(cell: SceneDetailCollectionViewCell) {
-        if let experience = cell.experience, timedEvent = experience.timedEventSequence?.timedEvent(currentTime) {
+        if let experience = cell.experience, timedEvent = experience.timedEventSequence?.timedEvent(_currentTime) {
             updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent)
         }
     }
@@ -81,22 +89,24 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         if let timedEvent = timedEvent {
             if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
                 if let cell = cell as? ImageSceneDetailCollectionViewCell {
-                    let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
-                    if currentProductFrameTime != newFrameTime {
-                        currentProductFrameTime = newFrameTime
+                    let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(_currentTime)
+                    if _currentProductFrameTime < 0 || newFrameTime - _currentProductFrameTime >= kSceneDetailExtrasUpdateInterval {
+                        _currentProductFrameTime = newFrameTime
                         
                         if let currentTask = _currentProductSessionDataTask {
                             currentTask.cancel()
                         }
                         
-                        _currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(currentProductFrameTime, successBlock: { (products) -> Void in
+                        _currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(_currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
                             dispatch_async(dispatch_get_main_queue(), {
                                 if products.count > 0 {
                                     cell.theTakeProducts = products
                                 }
                             })
                             
-                            self._currentProductSessionDataTask = nil
+                            if let strongSelf = self {
+                                strongSelf._currentProductSessionDataTask = nil
+                            }
                         })
                     }
                 }
@@ -121,7 +131,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences[indexPath.row]
-        let timedEvent = experience.timedEventSequence?.timedEvent(currentTime)
+        let timedEvent = experience.timedEventSequence?.timedEvent(_currentTime)
         var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
         if let timedEvent = timedEvent {
             if timedEvent.isTextItem() {
@@ -143,13 +153,13 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             if timedEvent.isProduct() {
                 if let cell = cell as? ImageSceneDetailCollectionViewCell {
                     if cell.theTakeProducts != nil {
-                        self.performSegueWithIdentifier(kSceneDetailSegueShowShop, sender: cell.theTakeProducts)
+                        self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell.theTakeProducts)
                     }
                 }
             } else if timedEvent.isGallery() {
-                self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getGallery(experience))
+                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: timedEvent.getGallery(experience))
             } else if timedEvent.isAudioVisual() {
-                self.performSegueWithIdentifier(kSceneDetailSegueShowGallery, sender: timedEvent.getAudioVisual(experience))
+                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: timedEvent.getAudioVisual(experience))
             } else if timedEvent.isAppGroup() {
                 if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
@@ -157,13 +167,13 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
             } else if timedEvent.isLocation() {
-                self.performSegueWithIdentifier(kSceneDetailSegueShowMap, sender: timedEvent)
+                self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: timedEvent)
             }
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == kSceneDetailSegueShowGallery {
+        if segue.identifier == SegueIdentifier.ShowGallery {
             let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
             
             if let gallery = sender as? NGDMGallery {
@@ -171,10 +181,10 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             } else if let audioVisual = sender as? NGDMAudioVisual {
                 galleryDetailViewController.audioVisual = audioVisual
             }
-        } else if segue.identifier == kSceneDetailSegueShowShop {
+        } else if segue.identifier == SegueIdentifier.ShowShop {
             let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
             shopDetailViewController.products = sender as! [TheTakeProduct]
-        } else if segue.identifier == kSceneDetailSegueShowMap {
+        } else if segue.identifier == SegueIdentifier.ShowMap {
             let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
             mapDetailViewController.timedEvent = sender as! NGDMTimedEvent
         }

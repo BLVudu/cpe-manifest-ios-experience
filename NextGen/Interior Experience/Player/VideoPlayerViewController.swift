@@ -12,10 +12,13 @@ import FBSDKCoreKit
 import TwitterKit
 import MessageUI
 
-let kVideoPlayerTimeDidChange = "kVideoPlayerTimeDidChange"
-let kVideoPlayerIsPlayingMainExperience = "kVideoPlayerIsPlayingMainExperience"
-let kVideoPlayerShouldPause = "kVideoPlayerShouldPause"
-let kVideoPlayerShouldResume = "kVideoPlayerShouldResume"
+struct VideoPlayerNotification {
+    static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
+    static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
+    static let ShouldPause = "VideoPlayerNotificationShouldPause"
+    static let ShouldResume = "VideoPlayerNotificationShouldResume"
+    static let ShouldSkipInterstitial = "VideoPlayerNotificationShouldSkipInterstitial"
+}
 
 class VideoPlayerViewController: WBVideoPlayerViewController {
     
@@ -33,15 +36,41 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var commentaryPopover: UIPopoverController!
     @IBOutlet weak var countdown: UIView!
     
+    private var _shouldPauseObserver: NSObjectProtocol!
+    private var _shouldResumeObserver: NSObjectProtocol!
+    private var _shouldSkipInterstitialObserver: NSObjectProtocol!
+    
+    deinit {
+        let center = NSNotificationCenter.defaultCenter()
+        center.removeObserver(_shouldPauseObserver)
+        center.removeObserver(_shouldResumeObserver)
+        center.removeObserver(_shouldSkipInterstitialObserver)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerShouldPause, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            self.pauseVideo()
+        _shouldPauseObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPause, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self {
+                strongSelf.pauseVideo()
+            }
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            self.playVideo()
+        _shouldResumeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self {
+                strongSelf.playVideo()
+            }
+        }
+        
+        _shouldSkipInterstitialObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldSkipInterstitial, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) in
+            if let strongSelf = self {
+                if !strongSelf._didPlayInterstitial {
+                    strongSelf.pauseVideo()
+                    strongSelf.player.removeAllItems()
+                    strongSelf._didPlayInterstitial = true
+                    strongSelf.playMainExperience()
+                }
+            }
         }
         
         if shouldPlayMainExperience {
@@ -54,7 +83,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         self.lockPlayerControls = !_didPlayInterstitial
         if _didPlayInterstitial {
             if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
-                NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerIsPlayingMainExperience, object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayMainExperience, object: nil)
                 self.playVideoWithURL(audioVisual.videoURL)
             }
         } else {
@@ -97,7 +126,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
                 }
             }
             
-            NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerTimeDidChange, object: nil, userInfo: ["time": Double(currentTime)])
+            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
             /*if (self.currentScene?.canShare == false){
                 self.shareContent.alpha = 0.5
             } else{
@@ -109,10 +138,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     
     @IBAction func showFullScreen(sender: AnyObject) {
-        
         self.fullScreen = !self.fullScreen
         NSNotificationCenter.defaultCenter().postNotificationName("fullScreen", object: nil,userInfo: ["toggleFS": self.fullScreen])
-   
     }
     
 
