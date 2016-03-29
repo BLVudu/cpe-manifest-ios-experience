@@ -15,16 +15,8 @@ class InteriorExperienceViewController: UIViewController {
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
-    var allowPortraitOrientation = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerIsPlayingMainExperience, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (_) -> Void in
-            if let strongSelf = self {
-                strongSelf.allowPortraitOrientation = true
-            }
-        }
         
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
         updatePlayerConstraints()
@@ -36,7 +28,7 @@ class InteriorExperienceViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (allowPortraitOrientation ? UIInterfaceOrientationMask.All : UIInterfaceOrientationMask.Landscape)
+        return UIInterfaceOrientationMask.All
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {

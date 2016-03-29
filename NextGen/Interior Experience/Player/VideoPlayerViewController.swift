@@ -88,13 +88,16 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func syncScrubber() {
         super.syncScrubber()
         
-        if player != nil && (shouldPlayMainExperience && _didPlayInterstitial) {
-            var curTime = (CMTimeGetSeconds(player.currentTime()))
-            if (curTime.isNaN == true) {
-                curTime = 0.0
+        if player != nil {
+            var currentTime = 0.0
+            if shouldPlayMainExperience && _didPlayInterstitial {
+                currentTime = CMTimeGetSeconds(player.currentTime())
+                if currentTime.isNaN {
+                    currentTime = 0.0
+                }
             }
             
-            NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerTimeDidChange, object: nil, userInfo: ["time": Double(curTime)])
+            NSNotificationCenter.defaultCenter().postNotificationName(kVideoPlayerTimeDidChange, object: nil, userInfo: ["time": Double(currentTime)])
             /*if (self.currentScene?.canShare == false){
                 self.shareContent.alpha = 0.5
             } else{
