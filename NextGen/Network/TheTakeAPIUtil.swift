@@ -58,7 +58,7 @@ class TheTakeAPIUtil: APIUtil {
         let timeInMilliseconds = timeInSeconds * 1000
         var closestFrameTime = -1.0
         
-        if _frameTimes[timeInMilliseconds] == nil {
+        if _frameTimes.count > 0 && _frameTimes[timeInMilliseconds] == nil {
             let frameTimeKeys = _frameTimes.keys.sort()
             let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > timeInMilliseconds })
             closestFrameTime = frameTimeKeys[max(frameIndex - 1, 0)]

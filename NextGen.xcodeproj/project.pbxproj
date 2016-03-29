@@ -344,6 +344,8 @@
 		70A3AC9B1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9A1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift */; };
 		70A3AC9D1C9DE98D0038B60F /* StylizedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9C1C9DE98D0038B60F /* StylizedCollectionViewController.swift */; };
 		70A3AC9F1C9E56350038B60F /* ExtrasImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */; };
+		70A5D5711CAB2CE500ACC58F /* InteriorExperiencePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5D5701CAB2CE500ACC58F /* InteriorExperiencePresentationController.swift */; };
+		70A5D5731CAB437700ACC58F /* UIStoryboard+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70B9FE3E1C6D53D700CF1A22 /* deleted_scene.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */; };
 		70B9FE481C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */; };
@@ -745,6 +747,8 @@
 		70A3AC9A1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasImageGalleryListCollectionViewController.swift; sourceTree = "<group>"; };
 		70A3AC9C1C9DE98D0038B60F /* StylizedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylizedCollectionViewController.swift; sourceTree = "<group>"; };
 		70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasImageGalleryViewController.swift; sourceTree = "<group>"; };
+		70A5D5701CAB2CE500ACC58F /* InteriorExperiencePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperiencePresentationController.swift; sourceTree = "<group>"; };
+		70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Utils.swift"; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70B9FE3D1C6D53D700CF1A22 /* deleted_scene.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deleted_scene.jpg; sourceTree = "<group>"; };
 		70B9FE461C6D54D400CF1A22 /* mos-nextgen-interstitial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-interstitial.mp4"; sourceTree = "<group>"; };
@@ -981,6 +985,7 @@
 				70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */,
 				70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */,
 				70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */,
+				70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1319,6 +1324,7 @@
 				70FECF781C65732B005B1A44 /* MapSceneDetailCollectionViewCell.xib */,
 				70FECF7E1C6579CD005B1A44 /* ImageSceneDetailCollectionViewCell.xib */,
 				7085F7921C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib */,
+				70A5D5701CAB2CE500ACC58F /* InteriorExperiencePresentationController.swift */,
 			);
 			path = "Interior Experience";
 			sourceTree = "<group>";
@@ -1745,6 +1751,7 @@
 				7071C4BD1C6BCBF6006F4275 /* NGEContentRatingType.swift in Sources */,
 				7071C4E21C6BCBF6006F4275 /* NGEEventLocationEarthCoordinateType.swift in Sources */,
 				70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */,
+				70A5D5731CAB437700ACC58F /* UIStoryboard+Utils.swift in Sources */,
 				70FECF751C655187005B1A44 /* StylizedViewController.swift in Sources */,
 				7071C4991C6BCBF6006F4275 /* NGEAppGroupType.swift in Sources */,
 				7071C4CF1C6BCBF6006F4275 /* NGEDigitalAssetInteractiveEncodingType.swift in Sources */,
@@ -1831,6 +1838,7 @@
 				7071C4B31C6BCBF6006F4275 /* NGEContactInfoType.swift in Sources */,
 				7071C5391C6BCBF6006F4275 /* NGETextGroupID.swift in Sources */,
 				7071C5091C6BCBF6006F4275 /* NGEInventoryVideoType.swift in Sources */,
+				70A5D5711CAB2CE500ACC58F /* InteriorExperiencePresentationController.swift in Sources */,
 				7071C4FD1C6BCBF6006F4275 /* NGEInteractiveTrackReferenceType.swift in Sources */,
 				7071C5161C6BCBF6006F4275 /* NGENotRated.swift in Sources */,
 				7071C5401C6BCBF6006F4275 /* NGETimedEventType.swift in Sources */,

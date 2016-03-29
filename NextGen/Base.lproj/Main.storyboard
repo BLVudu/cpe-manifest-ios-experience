@@ -737,7 +737,7 @@
         <!--Extras Image Gallery View Controller-->
         <scene sceneID="LLK-wa-7YM">
             <objects>
-                <viewController id="psv-JP-kVu" customClass="ExtrasImageGalleryViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExtrasImageGalleryViewController" id="psv-JP-kVu" customClass="ExtrasImageGalleryViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hSH-eO-JwJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Uct-fl-gz8"/>
@@ -1375,7 +1375,7 @@
                     <connections>
                         <segue destination="MuK-Ns-GCf" kind="presentation" identifier="showMap" modalPresentationStyle="overFullScreen" id="eQ5-Yo-rrV"/>
                         <segue destination="v1c-4O-jsc" kind="presentation" identifier="showGallery" modalPresentationStyle="overFullScreen" id="spb-bK-1jQ"/>
-                        <segue destination="bbI-hR-KQu" kind="presentation" identifier="showShop" modalPresentationStyle="overFullScreen" id="bgg-4x-haH"/>
+                        <segue destination="bbI-hR-KQu" kind="presentation" identifier="showShop" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="bgg-4x-haH"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="87k-ew-RHa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1868,33 +1868,18 @@
         <!--Shopping Detail View Controller-->
         <scene sceneID="xAo-fh-KBU">
             <objects>
-                <viewController id="bbI-hR-KQu" customClass="ShoppingDetailViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShoppingDetailViewController" autoresizesArchivedViewToFullSize="NO" id="bbI-hR-KQu" customClass="ShoppingDetailViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xh6-wQ-TRr"/>
                         <viewControllerLayoutGuide type="bottom" id="qTy-yw-gaA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="voF-ug-V1g">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="592"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5F-1m-Fyu" userLabel="Dummy Video Container View">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="432"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="I5F-1m-Fyu" secondAttribute="height" multiplier="16:9" id="kXl-un-y6Z"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QqR-j7-KvB" userLabel="Shopping Detail Container View">
-                                <rect key="frame" x="0.0" y="432" width="768" height="592"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="592"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOP THIS SCENE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmr-So-K4j">
-                                        <rect key="frame" x="8" y="0.0" width="752" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="ety-dI-OJQ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="25"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQd-u3-Iqa" userLabel="Close Button">
                                         <rect key="frame" x="725" y="8" width="35" height="35"/>
                                         <constraints>
@@ -2161,6 +2146,15 @@
                                             <constraint firstItem="QEc-4f-1jD" firstAttribute="top" secondItem="7dZ-0W-5hr" secondAttribute="top" id="rvG-0w-ci1"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOP THIS SCENE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmr-So-K4j">
+                                        <rect key="frame" x="8" y="0.0" width="752" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ety-dI-OJQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="25"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2190,14 +2184,11 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="QqR-j7-KvB" secondAttribute="trailing" constant="-20" id="1iM-UT-FDH"/>
-                            <constraint firstAttribute="trailing" secondItem="I5F-1m-Fyu" secondAttribute="trailing" id="FQe-lb-xf2"/>
-                            <constraint firstItem="I5F-1m-Fyu" firstAttribute="leading" secondItem="voF-ug-V1g" secondAttribute="leading" id="GeC-Hp-sD7"/>
+                            <constraint firstItem="QqR-j7-KvB" firstAttribute="top" secondItem="Xh6-wQ-TRr" secondAttribute="bottom" id="5K4-BE-cAH"/>
                             <constraint firstItem="QqR-j7-KvB" firstAttribute="leading" secondItem="voF-ug-V1g" secondAttribute="leading" id="Mgs-SL-dgg"/>
                             <constraint firstAttribute="trailing" secondItem="QqR-j7-KvB" secondAttribute="trailing" id="aDQ-d5-r5C"/>
                             <constraint firstItem="qTy-yw-gaA" firstAttribute="top" secondItem="QqR-j7-KvB" secondAttribute="bottom" id="lLQ-nF-ktj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QqR-j7-KvB" secondAttribute="trailing" constant="-20" id="ngA-DF-NQl"/>
-                            <constraint firstItem="QqR-j7-KvB" firstAttribute="top" secondItem="I5F-1m-Fyu" secondAttribute="bottom" id="u3T-Fq-Cas"/>
-                            <constraint firstItem="I5F-1m-Fyu" firstAttribute="top" secondItem="Xh6-wQ-TRr" secondAttribute="bottom" id="vfF-4h-nBM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -2207,7 +2198,7 @@
                         </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="768" height="1024"/>
+                    <size key="freeformSize" width="768" height="592"/>
                     <connections>
                         <outlet property="emailButton" destination="90b-8Y-5s8" id="Jfs-dW-uqO"/>
                         <outlet property="productBrandLabel" destination="zXy-2o-SuG" id="4ua-Rm-SC0"/>
@@ -2222,7 +2213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="No3-dS-hMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2158" y="5401"/>
+            <point key="canvasLocation" x="1891" y="3624"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="kuE-y9-WPv">

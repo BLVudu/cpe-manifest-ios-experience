@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import RFQuiltLayout
 
-class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate {
+class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate, UIViewControllerTransitioningDelegate {
     
     struct SegueIdentifier {
         static let ShowGallery = "showGallery"
@@ -80,13 +80,17 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     }
     
     func updateCollectionViewCell(cell: SceneDetailCollectionViewCell) {
-        if let experience = cell.experience, timedEvent = experience.timedEventSequence?.timedEvent(_currentTime) {
-            updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent)
+        if let experience = cell.experience {
+            updateCollectionViewCell(cell, experience: experience, timedEvent: experience.timedEventSequence?.timedEvent(_currentTime))
         }
     }
     
     func updateCollectionViewCell(cell: SceneDetailCollectionViewCell, experience: NGDMExperience, timedEvent: NGDMTimedEvent?) {
         if let timedEvent = timedEvent {
+            if cell.timedEvent == nil || timedEvent != cell.timedEvent {
+                cell.timedEvent = timedEvent
+            }
+            
             if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
                 if let cell = cell as? ImageSceneDetailCollectionViewCell {
                     let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(_currentTime)
@@ -115,8 +119,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                 if let indexPath = self.collectionView?.indexPathForCell(cell) {
                     self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                 }
-            } else if cell.timedEvent == nil || timedEvent != cell.timedEvent {
-                cell.timedEvent = timedEvent
             }
         } else {
             cell.timedEvent = nil
@@ -149,7 +151,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, let timedEvent = cell.timedEvent {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isProduct() {
                 if let cell = cell as? ImageSceneDetailCollectionViewCell {
                     if cell.theTakeProducts != nil {
@@ -157,7 +159,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
                     }
                 }
             } else if timedEvent.isGallery() {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: timedEvent.getGallery(experience))
+                if let galleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController, gallery = timedEvent.getGallery(experience) {
+                    galleryViewController.gallery = gallery
+                    galleryViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                    galleryViewController.transitioningDelegate = self
+                    self.presentViewController(galleryViewController, animated: true, completion: nil)
+                }
             } else if timedEvent.isAudioVisual() {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: timedEvent.getAudioVisual(experience))
             } else if timedEvent.isAppGroup() {
@@ -184,6 +191,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         } else if segue.identifier == SegueIdentifier.ShowShop {
             let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
             shopDetailViewController.products = sender as! [TheTakeProduct]
+            shopDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+            shopDetailViewController.transitioningDelegate = self
         } else if segue.identifier == SegueIdentifier.ShowMap {
             let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
             mapDetailViewController.timedEvent = sender as! NGDMTimedEvent
@@ -212,6 +221,11 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
         return UIEdgeInsetsMake(5, 5, 5, 5)
+    }
+    
+    // MARK: UIViewControllerTransitioningDelegate
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+        return InteriorExperiencePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
     }
     
 }
