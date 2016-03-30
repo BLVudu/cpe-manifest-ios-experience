@@ -173,6 +173,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 if let galleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController, gallery = timedEvent.getGallery(experience) {
                     galleryViewController.gallery = gallery
                     galleryViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                    galleryViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                     galleryViewController.transitioningDelegate = self
                     self.presentViewController(galleryViewController, animated: true, completion: nil)
                 }
