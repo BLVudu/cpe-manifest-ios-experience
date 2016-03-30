@@ -16,7 +16,7 @@ class ClipViewController: UIViewController {
     
       @IBOutlet weak var player: UIView!
     
-    var experience: NGEExperienceType!
+
     var clipURL: NSURL!
     var clipThumbnail: NSURL!
     var clipCaption: String!
@@ -24,7 +24,6 @@ class ClipViewController: UIViewController {
    
 
     var shareContent: NSURL!
-    let shared = FBSDKShareLinkContent()
     var clip: Clip? = nil {
         didSet {
             clipURL = clip?.url
@@ -81,30 +80,6 @@ class ClipViewController: UIViewController {
         }
         
         */
-    
-    
-    
-    @IBAction func close(sender: AnyObject) {
-        
-        //self.performSegueWithIdentifier("showCollection", sender: nil)
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
-    
-    @IBAction func shareClip(sender: AnyObject) {
-        
-        
-        let activityViewController = UIActivityViewController(activityItems: [self.shareContent], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = sender as? UIView
-        self.presentViewController(activityViewController, animated: true, completion: nil)
-    
-
-    }
-    
     func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
             if viewController is VideoPlayerViewController {
@@ -116,51 +91,30 @@ class ClipViewController: UIViewController {
     }
     
     
-    
-    
-    
-    @IBAction func shareTW(sender: AnyObject) {
-        let compose = TWTRComposer()
-        compose.setURL(self.shareContent)
-        compose.setText("Check out this clip from Man of Steel")
+    @IBAction func close(sender: AnyObject) {
         
-        compose.showFromViewController(self) { result in
-            if (result == TWTRComposerResult.Cancelled) {
-                print("Tweet composition cancelled")
-            }
-            else if result == TWTRComposerResult.Done {
-                //self.performSegueWithIdentifier("showCollection", sender: nil)
-            }
-            
-            
-        }
+        self.performSegueWithIdentifier("showCollection", sender: nil)
         
+        //NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
         
+        //self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
-        
-        if results.count == 0{
-            
-            let success = UIAlertView(title: "Success", message: "Your content has been shared!", delegate: nil, cancelButtonTitle: "OK")
-            success.show()
-            
-        }
+    
+    
+    @IBAction func shareClip(sender: AnyObject) {
         
         
+        let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = sender as? UIView
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    
+
     }
     
-    func sharerDidCancel(sharer: FBSDKSharing!) {
-        
-    }
-    
-    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
-        
-        let error = UIAlertView(title: "Error", message: "Please try again", delegate: nil, cancelButtonTitle: "OK")
-        error.show()
-        print(error)
-    }
-    
+
     
 }
+
+    
 
