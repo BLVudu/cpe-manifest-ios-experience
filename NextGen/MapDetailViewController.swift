@@ -58,7 +58,7 @@ class MapDetailCell: UICollectionViewCell {
     
 }
 
-class MapDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class MapDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -156,6 +156,14 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
             let imgData = NSData(contentsOfURL:NSURL(string: locationImages[indexPath.row-1] as! String)!)
             self.imageView.image = UIImage(data: imgData!)
         }*/
+    }
+    
+    // MARK: MKMapViewDelegate
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")
+        annotationView.image = UIImage(named: "MOSMapPin")
+        annotationView.canShowCallout = true
+        return annotationView
     }
     
 }

@@ -20,7 +20,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     struct Constants {
         static let ItemsPerRow: CGFloat = 2.0
         static let ItemSpacing: CGFloat = 5.0
-        static let UpdateInterval: Double = 30.0
+        static let UpdateInterval: Double = 15000.0
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!

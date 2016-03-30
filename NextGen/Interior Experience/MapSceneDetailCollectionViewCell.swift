@@ -8,7 +8,7 @@
 
 import MapKit
 
-class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
+class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell, MKMapViewDelegate {
     
     static let ReuseIdentifier = "MapSceneDetailCollectionViewCellReuseIdentifier"
     
@@ -37,6 +37,13 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
                 mapView.userInteractionEnabled = false
             }
         }
+    }
+    
+    // MARK: MKMapViewDelegate
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")
+        annotationView.image = UIImage(named: "MOSMapPin")
+        return annotationView
     }
     
 }
