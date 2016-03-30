@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NWX-a1-PHC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -67,17 +67,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MOSBackground" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-16-mAf" userLabel="Background Image">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VE2-z8-fS4">
-                                        <rect key="frame" x="30" y="29" width="25" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="7ZF-iC-scG"/>
-                                            <constraint firstAttribute="width" constant="25" id="I9Z-5m-AKf"/>
-                                        </constraints>
-                                        <state key="normal" image="menu.png"/>
-                                        <connections>
-                                            <action selector="revealToggle:" destination="dkx-z0-nzr" eventType="touchUpInside" id="xFW-5U-Uoa"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MOSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-I9-ecR" userLabel="Logo Treatement">
                                         <rect key="frame" x="120" y="225" width="300" height="40"/>
                                         <constraints>
@@ -120,9 +109,7 @@
                                     <constraint firstItem="YSS-I9-ecR" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="top" constant="225" id="GGm-07-xji"/>
                                     <constraint firstAttribute="bottom" secondItem="gA2-16-mAf" secondAttribute="bottom" id="LlW-y3-uxX"/>
                                     <constraint firstItem="oBy-bL-9Wq" firstAttribute="centerX" secondItem="D1l-Mu-C6w" secondAttribute="centerX" id="Upn-rc-DH1"/>
-                                    <constraint firstItem="VE2-z8-fS4" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="top" constant="29" id="Ynq-l2-Twq"/>
                                     <constraint firstItem="YSS-I9-ecR" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" constant="120" id="ZH5-9h-FLn"/>
-                                    <constraint firstItem="VE2-z8-fS4" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" constant="30" id="can-rV-rDM"/>
                                     <constraint firstItem="D1l-Mu-C6w" firstAttribute="top" secondItem="YSS-I9-ecR" secondAttribute="bottom" constant="11" id="d29-rd-1wl"/>
                                     <constraint firstItem="oBy-bL-9Wq" firstAttribute="width" secondItem="D1l-Mu-C6w" secondAttribute="width" multiplier="2/3" id="e0T-Cb-Byu"/>
                                     <constraint firstItem="gA2-16-mAf" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" id="g7X-UE-nZc"/>
@@ -157,7 +144,6 @@
                     <connections>
                         <outlet property="backgroundContainerView" destination="gKy-zB-UIg" id="lBw-Pa-Gsh"/>
                         <outlet property="backgroundImageView" destination="gA2-16-mAf" id="UF8-gt-sCz"/>
-                        <outlet property="menuButton" destination="VE2-z8-fS4" id="Zsg-3C-WfL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1040,65 +1026,6 @@
             </objects>
             <point key="canvasLocation" x="3790" y="2244"/>
         </scene>
-        <!--Initial View Controller-->
-        <scene sceneID="fLH-oi-LTw">
-            <objects>
-                <viewController id="NWX-a1-PHC" customClass="InitialViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="a9M-u3-Ed9"/>
-                        <viewControllerLayoutGuide type="bottom" id="rj5-rR-EiR"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BUe-uQ-7Na">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="xtu-Ox-Ldq"/>
-                        <segue destination="0kD-py-cHI" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="2P2-p5-qwW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FUK-Hj-Oyk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-472" y="-1010"/>
-        </scene>
-        <!--Settings Menu View Controller-->
-        <scene sceneID="y9o-t6-xfp">
-            <objects>
-                <viewController id="0kD-py-cHI" customClass="SettingsMenuViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qUP-KJ-plj"/>
-                        <viewControllerLayoutGuide type="bottom" id="Qg9-As-V1L"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Vxc-mp-iYe">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OtB-HL-HuX">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="0kD-py-cHI" id="NBK-Yn-EtH"/>
-                                    <outlet property="delegate" destination="0kD-py-cHI" id="Psr-PO-vsr"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OtB-HL-HuX" secondAttribute="trailing" id="I5M-OR-6rh"/>
-                            <constraint firstItem="Qg9-As-V1L" firstAttribute="top" secondItem="OtB-HL-HuX" secondAttribute="bottom" id="mZM-6i-a3E"/>
-                            <constraint firstItem="OtB-HL-HuX" firstAttribute="top" secondItem="Vxc-mp-iYe" secondAttribute="top" id="sNm-xj-NY4"/>
-                            <constraint firstItem="OtB-HL-HuX" firstAttribute="leading" secondItem="Vxc-mp-iYe" secondAttribute="leading" id="tZ0-3k-IhS"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="menuTableView" destination="OtB-HL-HuX" id="TvZ-7y-Nm9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w0b-AH-pDL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-472" y="-222"/>
-        </scene>
         <!--Video Player View Controller-->
         <scene sceneID="fcf-Td-6zT">
             <objects>
@@ -1767,17 +1694,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="1008" height="378"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sOT-7m-KOm">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="493" height="184"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="clip" id="bAo-Qn-DE8">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="53.5" y="0.0" width="493" height="184"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="493" height="184"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -2405,7 +2332,6 @@
         <image name="commButton.jpg" width="31" height="47"/>
         <image name="fb_logo.tif" width="40" height="40"/>
         <image name="interior_bg.jpg" width="2048" height="1427"/>
-        <image name="menu.png" width="22" height="22"/>
         <image name="share.jpg" width="26" height="23"/>
         <image name="thetake-logo-nav.png" width="100" height="25"/>
         <image name="tw_logo.png" width="40" height="40"/>
