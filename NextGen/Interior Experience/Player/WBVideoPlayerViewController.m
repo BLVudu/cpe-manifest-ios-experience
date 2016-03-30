@@ -801,7 +801,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
         double delayInSeconds = 5.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"playNextItem" object:self userInfo:dict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerWillPlayNextItem object:self userInfo:dict];
             self.countdownTimer.hidden = YES;
             self.timer.hidden = YES;
             self.playerControlsEnabled = YES;

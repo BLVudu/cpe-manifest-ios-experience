@@ -62,7 +62,7 @@ class ClipViewController: UIViewController {
     }
     
         /*
-        NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
         
         if let userInfo = notification.userInfo{
         let index = userInfo["index"]as! Int

@@ -39,6 +39,7 @@ static NSString * const kWBVideoPlayerPlaybackStateDidChangeNotification    = @"
 
 static NSString * const kWBVideoPlayerPlaybackBufferEmptyNotification       = @"kWBVideoPlayerPlaybackBufferEmptyNotification";
 static NSString * const kWBVideoPlayerPlaybackLikelyToKeepUpNotification    = @"kWBVideoPlayerPlaybackLikelyToKeepUpNotification";
+static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"kWBVideoPlayerWillPlayNextItem";
 
 //static NSString * const kWBVideoPlayerStateChangedNotification            = @"kWBVideoPlayerStateChangedNotification";
 //static NSString * const kWBVideoPlayerDismissNotification                 = @"kWBVideoPlayerDismissNotification";

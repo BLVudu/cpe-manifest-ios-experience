@@ -15,6 +15,7 @@ import MessageUI
 struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
+    static let DidToggleFullScreen = "VideoPlayerNotificationDidToggleFullScreen"
     static let ShouldPause = "VideoPlayerNotificationShouldPause"
     static let ShouldResume = "VideoPlayerNotificationShouldResume"
     static let ShouldSkipInterstitial = "VideoPlayerNotificationShouldSkipInterstitial"
@@ -139,7 +140,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     @IBAction func showFullScreen(sender: AnyObject) {
         self.fullScreen = !self.fullScreen
-        NSNotificationCenter.defaultCenter().postNotificationName("fullScreen", object: nil,userInfo: ["toggleFS": self.fullScreen])
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidToggleFullScreen, object: nil,userInfo: ["toggleFS": self.fullScreen])
     }
     
 

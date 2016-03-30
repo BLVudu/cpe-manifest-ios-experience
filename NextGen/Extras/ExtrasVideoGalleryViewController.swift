@@ -19,55 +19,55 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
     
     var experience: NGDMExperience!
+    
+    private var _didToggleFullScreenObserver: NSObjectProtocol!
+    private var _willPlayNextItemObserver: NSObjectProtocol!
+    
+    
+    // MARK: Initialization
+    deinit {
+        let center = NSNotificationCenter.defaultCenter()
+        center.removeObserver(_didToggleFullScreenObserver)
+        center.removeObserver(_willPlayNextItemObserver)
+    }
 
     // MARK: View Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.setBackButton(self, action: #selector(ExtrasVideoGalleryViewController.close))
         
-        galleryTableView.registerNib(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
+        galleryTableView.registerNib(UINib(nibName: String(VideoCell), bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
         
         self.videoContainerView.hidden = true
         self.mediaTitleLabel.hidden = true
         self.mediaDescriptionLabel.hidden = true
         self.mediaRuntimeLabel.hidden = true
 
-        NSNotificationCenter.defaultCenter().addObserverForName("fullScreen", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            if let userInfo = notification.userInfo {
-                if userInfo["toggleFS"] as! Bool {
+        _didToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self, userInfo = notification.userInfo, fullScreenEnabled = userInfo["toggleFS"] as? Bool {
+                if fullScreenEnabled {
                     UIView.animateWithDuration(1, animations: {
-                        self.videoContainerView.frame = self.view.frame
+                        strongSelf.videoContainerView.frame = strongSelf.view.frame
                     }, completion: nil)
                 } else {
                     UIView.animateWithDuration(1, animations: {
-                        self.videoContainerView.frame = self.proxyView.frame
+                        strongSelf.videoContainerView.frame = strongSelf.proxyView.frame
                     }, completion: nil)
                 }
             }
         }
         
         
-        NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            
-            if let userInfo = notification.userInfo{
-                let index = userInfo["index"]as! Int
-                if index >= self.experience.childExperiences.count{
-                } else {
+        _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
+                if index < strongSelf.experience.childExperiences.count {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                    self.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                    self.tableView(self.galleryTableView, didSelectRowAtIndexPath: indexPath)
-                    
-
-                    
+                    strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                    strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
                 }
             }
-            
-            
         }
-
-
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
