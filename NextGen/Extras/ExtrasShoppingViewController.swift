@@ -103,7 +103,11 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        if let shoppingDetailViewController = UIStoryboard.getMainStoryboardViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageSceneDetailCollectionViewCell {
+            shoppingDetailViewController.products = cell.theTakeProducts
+            shoppingDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+            self.navigationController?.presentViewController(shoppingDetailViewController, animated: true, completion: nil)
+        }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
