@@ -15,15 +15,16 @@ class Content: NSObject {
     var talent = [String: Talent]()
     var scenes = [Double: Scene]()
     var sceneKeys: [Double]?
-    var clip: Clip!
+    var allClips = [Clip]()
     
     required init(info: NSDictionary) {
         super.init()
         
         if let share = info["share"] as? NSDictionary{
-            if let aClip = share["clips"] as? NSArray{
-                clip = Clip(info: aClip[0] as! NSDictionary)
-                
+            if let clips = share["clips"] as? NSArray{
+                for aClip in clips{
+                    allClips.append(Clip(info: aClip as! NSDictionary))
+                }
             }
         }
 

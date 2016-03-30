@@ -10,10 +10,5 @@ import UIKit
 
 
 class StylizedClipNavigationController: UINavigationController{
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+ 
 }

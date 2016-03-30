@@ -42,6 +42,9 @@
 		497DECD01C61754A000C6636 /* BookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497DECCF1C61754A000C6636 /* BookmarkCell.xib */; };
 		497DECD21C6176CF000C6636 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497DECD11C6176CF000C6636 /* BookmarkCell.swift */; };
 		4986F8351C8F91D100FF60EB /* CustomScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4986F8341C8F91D100FF60EB /* CustomScrubber.swift */; };
+		498FBC041CA9DB4E00B81798 /* ClipCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498FBC031CA9DB4E00B81798 /* ClipCollectionViewController.swift */; };
+		498FBC061CA9DEB400B81798 /* ClipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498FBC051CA9DEB400B81798 /* ClipCell.xib */; };
+		498FBC081CA9E6D500B81798 /* ClipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498FBC071CA9E6D500B81798 /* ClipCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		49B525081CA61452007698DC /* ClipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B525071CA61452007698DC /* ClipViewController.swift */; };
 		49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E65C1C7E60530076E9F3 /* share.jpg */; };
@@ -51,7 +54,6 @@
 		49C1E6671C8108730076E9F3 /* edwards.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6621C8108730076E9F3 /* edwards.jpg */; };
 		49C1E6681C8108730076E9F3 /* chicago.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6631C8108730076E9F3 /* chicago.jpg */; };
 		49C1E6691C8108730076E9F3 /* plano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49C1E6641C8108730076E9F3 /* plano.jpg */; };
-		49C301891CA9A1A30076BB3B /* StylizedClipNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C301881CA9A1A30076BB3B /* StylizedClipNavigationController.swift */; };
 		49CB44C31C7CB1BE00753227 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C21C7CB1BE00753227 /* fb.png */; };
 		49CB44C51C7CB1C600753227 /* tw.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CB44C41C7CB1C600753227 /* tw.png */; };
 		49CB44C91C7CF02400753227 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */; };
@@ -440,6 +442,9 @@
 		497DECCF1C61754A000C6636 /* BookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkCell.xib; sourceTree = "<group>"; };
 		497DECD11C6176CF000C6636 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		4986F8341C8F91D100FF60EB /* CustomScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrubber.swift; sourceTree = "<group>"; };
+		498FBC031CA9DB4E00B81798 /* ClipCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewController.swift; sourceTree = "<group>"; };
+		498FBC051CA9DEB400B81798 /* ClipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClipCell.xib; sourceTree = "<group>"; };
+		498FBC071CA9E6D500B81798 /* ClipCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		49B525071CA61452007698DC /* ClipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipViewController.swift; sourceTree = "<group>"; };
 		49C1E65C1C7E60530076E9F3 /* share.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = share.jpg; sourceTree = "<group>"; };
@@ -449,7 +454,6 @@
 		49C1E6621C8108730076E9F3 /* edwards.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = edwards.jpg; sourceTree = "<group>"; };
 		49C1E6631C8108730076E9F3 /* chicago.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chicago.jpg; sourceTree = "<group>"; };
 		49C1E6641C8108730076E9F3 /* plano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plano.jpg; sourceTree = "<group>"; };
-		49C301881CA9A1A30076BB3B /* StylizedClipNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylizedClipNavigationController.swift; sourceTree = "<group>"; };
 		49CB44C21C7CB1BE00753227 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
 		49CB44C41C7CB1C600753227 /* tw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tw.png; sourceTree = "<group>"; };
 		49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
@@ -867,6 +871,7 @@
 				490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */,
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				49B525071CA61452007698DC /* ClipViewController.swift */,
+				498FBC031CA9DB4E00B81798 /* ClipCollectionViewController.swift */,
 				490213471C860C9A00071552 /* SharingViewController.swift */,
 				49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
@@ -960,7 +965,6 @@
 				70DF2F851CA5E888007AD2A0 /* MenuTableViewController.swift */,
 				70A3AC9C1C9DE98D0038B60F /* StylizedCollectionViewController.swift */,
 				49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */,
-				49C301881CA9A1A30076BB3B /* StylizedClipNavigationController.swift */,
 				70FECF741C655187005B1A44 /* StylizedViewController.swift */,
 				701D69C01C48205B0047A67A /* TalentDetailViewController.swift */,
 				7085F7981C97550C00DF31B6 /* WebViewController.swift */,
@@ -1343,6 +1347,8 @@
 				49F3EAD21C515B3100E09484 /* TitledImageCell.xib */,
 				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
 				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
+				498FBC051CA9DEB400B81798 /* ClipCell.xib */,
+				498FBC071CA9E6D500B81798 /* ClipCell.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -1560,6 +1566,7 @@
 				49C1E65D1C7E60530076E9F3 /* share.jpg in Resources */,
 				7077A35F1C4989C200843782 /* adams.jpg in Resources */,
 				7077A3601C4989C200843782 /* cavill_full.jpg in Resources */,
+				498FBC061CA9DEB400B81798 /* ClipCell.xib in Resources */,
 				49C1E6651C8108730076E9F3 /* mammoth.JPG in Resources */,
 				70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */,
 				70482E8A1CA99BAB0003ED45 /* mos-nextgen-interstitial.mov in Resources */,
@@ -1708,6 +1715,7 @@
 				70DF2F901CA5F453007AD2A0 /* MenuSectionCell.swift in Sources */,
 				49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */,
 				4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */,
+				498FBC081CA9E6D500B81798 /* ClipCell.swift in Sources */,
 				49F684A01C8A3FC60066C5A2 /* MediaGalleryViewController.swift in Sources */,
 				7071C5031C6BCBF6006F4275 /* NGEInventoryMetadataLocalizedPairType.swift in Sources */,
 				7071C4C11C6BCBF6006F4275 /* NGEDateTimeRangeType.swift in Sources */,
@@ -1721,6 +1729,7 @@
 				7071C4D21C6BCBF6006F4275 /* NGEDigitalAssetSubtitleDataType.swift in Sources */,
 				70367AB71C8F87AE0042B5B5 /* NGDMPresentation.swift in Sources */,
 				7071C5361C6BCBF6006F4275 /* NGESummary190.swift in Sources */,
+				498FBC041CA9DB4E00B81798 /* ClipCollectionViewController.swift in Sources */,
 				7071C4D61C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureFrameRateType.swift in Sources */,
 				7071C4AC1C6BCBF6006F4275 /* NGEComplexSequenceInfoAlternateNumber.swift in Sources */,
 				4921D97F1C3EFD0B00ED2AA6 /* NextGen.xcdatamodeld in Sources */,
@@ -1826,7 +1835,6 @@
 				49F3EADB1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift in Sources */,
 				492267E81C76950200B306A2 /* CommentaryView.swift in Sources */,
 				7077A3771C4989DC00843782 /* DataManager.swift in Sources */,
-				49C301891CA9A1A30076BB3B /* StylizedClipNavigationController.swift in Sources */,
 				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
 				7071C4CA1C6BCBF6006F4275 /* NGEDigitalAssetColorVolumeType.swift in Sources */,
 				7071C4B21C6BCBF6006F4275 /* NGECompObjType.swift in Sources */,
