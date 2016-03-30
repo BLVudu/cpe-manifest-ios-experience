@@ -12,12 +12,7 @@ import FBSDKCoreKit
 import TwitterKit
 import MessageUI
 
-protocol SendClip{
-    
-}
-
-
-class ClipViewController: UIViewController, FBSDKSharingDelegate {
+class ClipViewController: UIViewController {
     
       @IBOutlet weak var player: UIView!
     
@@ -26,8 +21,8 @@ class ClipViewController: UIViewController, FBSDKSharingDelegate {
     var clipThumbnail: NSURL!
     var clipCaption: String!
     
-    @IBOutlet weak var sendTweet: UIButton!
-    @IBOutlet weak var fbShare: FBSDKShareButton!
+   
+
     var shareContent: NSURL!
     let shared = FBSDKShareLinkContent()
     var clip: Clip? = nil {
@@ -44,10 +39,9 @@ class ClipViewController: UIViewController, FBSDKSharingDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
+         clip = DataManager.sharedInstance.content?.allClips[0]
         
-        self.sendTweet.backgroundColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1.0)
-        fbShare.shareContent = shared
-         clip = DataManager.sharedInstance.content?.clip
         
         if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
             if let player = videoPlayerViewController.player {
@@ -64,6 +58,7 @@ class ClipViewController: UIViewController, FBSDKSharingDelegate {
             
             
         }
+ 
     }
     
         /*
@@ -100,6 +95,16 @@ class ClipViewController: UIViewController, FBSDKSharingDelegate {
     
     
     
+    @IBAction func shareClip(sender: AnyObject) {
+        
+        
+        let activityViewController = UIActivityViewController(activityItems: [self.shareContent], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = sender as? UIView
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    
+
+    }
+    
     func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
             if viewController is VideoPlayerViewController {
@@ -124,7 +129,7 @@ class ClipViewController: UIViewController, FBSDKSharingDelegate {
                 print("Tweet composition cancelled")
             }
             else if result == TWTRComposerResult.Done {
-                self.performSegueWithIdentifier("showCollection", sender: nil)
+                //self.performSegueWithIdentifier("showCollection", sender: nil)
             }
             
             

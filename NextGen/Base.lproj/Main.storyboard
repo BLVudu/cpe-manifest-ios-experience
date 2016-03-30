@@ -1691,27 +1691,15 @@
                                     <segue destination="FsK-dw-pgC" kind="embed" id="dOp-tz-u3e"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5O-1Y-JIJ" customClass="FBSDKShareButton">
-                                <rect key="frame" x="250" y="490" width="100" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5O-1Y-JIJ">
+                                <rect key="frame" x="297" y="490" width="100" height="45"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="uY9-28-RN5"/>
                                     <constraint firstAttribute="height" constant="45" id="y1v-YF-pbd"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrA-9e-oI3">
-                                <rect key="frame" x="355" y="490" width="100" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="4Vc-Zm-2Qx"/>
-                                    <constraint firstAttribute="width" constant="100" id="h50-BP-kBn"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="15"/>
-                                <state key="normal" title="Tweet">
+                                <state key="normal" title="Share">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1720,17 +1708,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="shareTW:" destination="l0s-z9-Ggu" eventType="touchUpInside" id="RNw-ie-Ihc"/>
+                                    <action selector="shareClip:" destination="l0s-z9-Ggu" eventType="touchUpInside" id="Bns-7W-p4I"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uf-8d-3AZ">
-                                <rect key="frame" x="145" y="490" width="100" height="45"/>
+                                <rect key="frame" x="189" y="490" width="100" height="45"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="SjC-vO-c5C"/>
                                     <constraint firstAttribute="width" constant="100" id="q6O-yU-OVg"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="14"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -1748,21 +1736,17 @@
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="oLx-aK-dSs" secondAttribute="leading" constant="-35" id="3h2-07-o0d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oLx-aK-dSs" secondAttribute="trailing" constant="35" id="9e0-sn-ycX"/>
-                            <constraint firstItem="qrA-9e-oI3" firstAttribute="leading" secondItem="p5O-1Y-JIJ" secondAttribute="trailing" constant="5" id="HXY-Tv-Xm0"/>
-                            <constraint firstItem="p5O-1Y-JIJ" firstAttribute="centerX" secondItem="oLx-aK-dSs" secondAttribute="centerX" id="ONp-6e-p3e"/>
+                            <constraint firstItem="p5O-1Y-JIJ" firstAttribute="centerX" secondItem="oLx-aK-dSs" secondAttribute="centerX" constant="47" id="ONp-6e-p3e"/>
                             <constraint firstItem="Vld-kw-swQ" firstAttribute="top" secondItem="p5O-1Y-JIJ" secondAttribute="bottom" constant="65" id="SgM-Bv-4aY"/>
-                            <constraint firstItem="p5O-1Y-JIJ" firstAttribute="leading" secondItem="1uf-8d-3AZ" secondAttribute="trailing" constant="5" id="a3r-6T-5Mw"/>
+                            <constraint firstItem="p5O-1Y-JIJ" firstAttribute="leading" secondItem="1uf-8d-3AZ" secondAttribute="trailing" constant="8" id="a3r-6T-5Mw"/>
                             <constraint firstItem="Vld-kw-swQ" firstAttribute="top" secondItem="oLx-aK-dSs" secondAttribute="bottom" constant="144" id="a6b-wd-q6r"/>
-                            <constraint firstItem="Vld-kw-swQ" firstAttribute="top" secondItem="qrA-9e-oI3" secondAttribute="bottom" constant="65" id="ak0-ss-9Rw"/>
                             <constraint firstItem="Vld-kw-swQ" firstAttribute="top" secondItem="1uf-8d-3AZ" secondAttribute="bottom" constant="65" id="h4o-qS-upb"/>
                             <constraint firstItem="oLx-aK-dSs" firstAttribute="top" secondItem="FFJ-8t-Nr8" secondAttribute="bottom" constant="19" id="tnw-jo-LlV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ozW-fG-Cxi"/>
                     <connections>
-                        <outlet property="fbShare" destination="p5O-1Y-JIJ" id="DEq-mA-xaD"/>
                         <outlet property="player" destination="oLx-aK-dSs" id="i2E-NO-Ti2"/>
-                        <outlet property="sendTweet" destination="qrA-9e-oI3" id="o10-29-yzi"/>
                         <segue destination="Awb-kL-nlt" kind="show" identifier="showCollection" id="tIH-6r-u6b"/>
                     </connections>
                 </viewController>
@@ -1770,10 +1754,10 @@
             </objects>
             <point key="canvasLocation" x="-1084" y="4099"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Clip Collection View Controller-->
         <scene sceneID="K5d-uZ-XNY">
             <objects>
-                <collectionViewController id="Awb-kL-nlt" sceneMemberID="viewController">
+                <collectionViewController id="Awb-kL-nlt" customClass="ClipCollectionViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="jqs-Da-Ieh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1784,7 +1768,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TDC-fB-qXo">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="clip" id="bAo-Qn-DE8">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1792,6 +1776,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
