@@ -15,25 +15,40 @@ class TheTakeAPIUtil: APIUtil {
     static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")
     
     var mediaId: String!
-    var frameTimes = [Double: NSDictionary]()
+    var apiKey: String!
+    
+    private var _frameTimes = [Double: NSDictionary]()
+    var productCategories = [TheTakeCategory]()
     
     override func requestWithURLPath(urlPath: String) -> NSMutableURLRequest {
         let request = super.requestWithURLPath(urlPath)
-        request.addValue("M1RnzsU2OTmshwzmN7w8Wnq7ZPCep1SFQFQjsnZYY4C9sXhsPy", forHTTPHeaderField: "X-Mashape-Key")
+        request.addValue(apiKey, forHTTPHeaderField: "X-Mashape-Key")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         return request
     }
     
     func prefetchProductFrames() {
-        frameTimes.removeAll()
+        _frameTimes.removeAll()
         
         getJSONWithPath("/frames/listFrames", parameters: ["media": mediaId, "limit": "9999"], successBlock: { (result) -> Void in
             if let frames = result["result"] as? [NSDictionary] {
                 for frameInfo in frames {
                     if let frameTime = frameInfo["frameTime"] as? Double {
-                        self.frameTimes[frameTime] = frameInfo
+                        self._frameTimes[frameTime] = frameInfo
                     }
+                }
+            }
+        }, errorBlock: nil)
+    }
+    
+    func prefetchProductCategories() {
+        productCategories.removeAll()
+        
+        getJSONWithPath("/categories/listProductCategories", parameters: ["media": mediaId], successBlock: { (result) in
+            if let categories = result["result"] as? [NSDictionary] {
+                for categoryInfo in categories {
+                    self.productCategories.append(TheTakeCategory(info: categoryInfo))
                 }
             }
         }, errorBlock: nil)
@@ -43,8 +58,8 @@ class TheTakeAPIUtil: APIUtil {
         let timeInMilliseconds = timeInSeconds * 1000
         var closestFrameTime = -1.0
         
-        if frameTimes[timeInMilliseconds] == nil {
-            let frameTimeKeys = frameTimes.keys.sort()
+        if _frameTimes.count > 0 && _frameTimes[timeInMilliseconds] == nil {
+            let frameTimeKeys = _frameTimes.keys.sort()
             let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > timeInMilliseconds })
             closestFrameTime = frameTimeKeys[max(frameIndex - 1, 0)]
         } else {
@@ -55,7 +70,7 @@ class TheTakeAPIUtil: APIUtil {
     }
     
     func getFrameProducts(frameTime: Double, successBlock: (products: [TheTakeProduct]) -> Void) -> NSURLSessionDataTask? {
-        if frameTime >= 0 && frameTimes[frameTime] != nil {
+        if frameTime >= 0 && _frameTimes[frameTime] != nil {
             return getJSONWithPath("/frameProducts/listFrameProducts", parameters: ["media": mediaId, "time": String(frameTime)], successBlock: { (result) -> Void in
                 if let productList = result["result"] as? NSArray {
                     var products = [TheTakeProduct]()
@@ -73,6 +88,23 @@ class TheTakeAPIUtil: APIUtil {
         }
         
         return nil
+    }
+    
+    func getCategoryProducts(categoryId: String, successBlock: (products: [TheTakeProduct]) -> Void) -> NSURLSessionDataTask? {
+        return getJSONWithPath("/products/listProducts", parameters: ["category": categoryId, "media": mediaId], successBlock: { (result) -> Void in
+            if let productList = result["result"] as? NSArray {
+                var products = [TheTakeProduct]()
+                for productInfo in productList {
+                    if let productData = productInfo as? NSDictionary {
+                        products.append(TheTakeProduct(data: productData))
+                    }
+                }
+                
+                successBlock(products: products)
+            }
+        }) { (error) -> Void in
+            
+        }
     }
     
     func getProductDetails(productId: String, successBlock: (product: TheTakeProduct) -> Void) -> NSURLSessionDataTask {

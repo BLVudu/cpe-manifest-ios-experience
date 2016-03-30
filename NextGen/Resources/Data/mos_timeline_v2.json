@@ -1,0 +1,3484 @@
+{
+    "music": [
+        {
+            "in_time": 0,
+            "out_time": 171,
+            "track": "Krypton",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 174,
+            "out_time": 369,
+            "track": "Zod Disbands Council",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 371,
+            "out_time": 561,
+            "track": "The Codex",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 562,
+            "out_time": 675,
+            "track": "Goodbyes/ Launch Preparation",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 678,
+            "out_time": 742,
+            "track": "Surrender the Codex",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 742,
+            "out_time": 900,
+            "track": "The Launch",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 902,
+            "out_time": 1087,
+            "track": "Zod is Captured",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 1089,
+            "out_time": 1199,
+            "track": ",Krypton is destroyed/ Ka'al to Earth",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 1248,
+            "out_time": 1353,
+            "track": "Oil Rig Rescue",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 1354,
+            "out_time": 1507,
+            "track": "Young Clark Freaks",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 1507,
+            "out_time": 1593,
+            "track": "Seasons",
+            "artist": "Chris Cornell"
+        },
+        {
+            "in_time": 1608,
+            "out_time": 1643,
+            "track": "Bus Rescue pt.1",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 1643,
+            "out_time": 1701,
+            "track": "Bus Rescue pt.2",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 1721,
+            "out_time": 1936,
+            "track": "I Just Wanted to Help",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 1940,
+            "out_time": 1976,
+            "track": "Ring of Fire",
+            "artist": "June Carter"
+        },
+        {
+            "in_time": 2007,
+            "out_time": 2067,
+            "track": "On the Road Again",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 2108,
+            "out_time": 2127,
+            "track": "Meet Lois",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 2144,
+            "out_time": 2186,
+            "track": "The Anomaly",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 2191,
+            "out_time": 2491,
+            "track": "The Scout Ship",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 2515,
+            "out_time": 2582,
+            "track": "The Scout Ship Takes Off",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 2697,
+            "out_time": 2895,
+            "track": "Who are you?",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 2895,
+            "out_time": 3139,
+            "track": "First Flight",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 3143,
+            "out_time": 3218,
+            "track": "Lois Investigates",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 3303,
+            "out_time": 3465,
+            "track": "The Tornado",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 3532,
+            "out_time": 3671,
+            "track": "Homecoming",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 3677,
+            "out_time": 3796,
+            "track": "UFO",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 3800,
+            "out_time": 3815,
+            "track": "The Long Walk",
+            "artist": "Marco Beltrami, Buck Sanders"
+        },
+        {
+            "in_time": 3817,
+            "out_time": 3939,
+            "track": "You Are Not Alone",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 3984,
+            "out_time": 4020,
+            "track": "Lois Arrested",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 4027,
+            "out_time": 4097,
+            "track": "Who is This Ka'al Person",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 4113,
+            "out_time": 4256,
+            "track": "What's on Your Mind",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 4360,
+            "out_time": 4438,
+            "track": "Surrender to Faora",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 4440,
+            "out_time": 4481,
+            "track": "Alien Ship Arrives",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 4521,
+            "out_time": 4618,
+            "track": "Lois and Superman Brought Before Zod",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 4628,
+            "out_time": 4788,
+            "track": "Zod's Story pt.1",
+            "artist": "Hans Zimmer"
+        },
+        {
+            "in_time": 4788,
+            "out_time": 4868,
+            "track": "Zod's Story pt.2",
+            "artist": "Hans Zimmer"
+        },
+{
+    "in_time": 4888,
+    "out_time": 5014,
+    "track": "Alien Ships Head to Kansas",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 5054,
+    "out_time": 5309,
+    "track": "Escape from Ship",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 5314,
+    "out_time": 5916,
+    "track": "Superman Rescues Mother/ Smallville",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 5925,
+    "out_time": 6030,
+    "track": "This Man is Not Our Enemy",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 6044,
+    "out_time": 6207,
+    "track": "Release the World Engine",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 6265,
+    "out_time": 6310,
+    "track": "Terraforming",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 6315,
+    "out_time": 6459,
+    "track": "We Have a Plan",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 6470,
+    "out_time": 6890,
+    "track": "World Engine",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 6898,
+    "out_time": 6934,
+    "track": "We Did It",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 6934,
+    "out_time": 7189,
+    "track": "Destroy This Ship/ Faora Attacks",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 7206,
+    "out_time": 7256,
+    "track": "Kiss",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 7270,
+    "out_time": 7487,
+    "track": "Final Confrontation",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 7487,
+    "out_time": 7728,
+    "track": "Battle Continues",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 7811,
+    "out_time": 8113,
+    "track": "Clark Kent - Reporter",
+    "artist": "Hans Zimmer"
+},
+{
+    "in_time": 8113,
+    "out_time": 8578,
+    "track": "End Credits",
+    "artist": "Hans Zimmer"
+}
+
+    ],
+    "trivia": [
+        {
+            "in_time": 0,
+            "out_time": 10,
+            "text": "The Warner Bros. and Legendary logos have Kryptonian carving on their edges.",
+            "thumbnail": "thumbnails/317_1001.png"
+        },
+        {
+            "in_time": 85,
+            "out_time": 105,
+            "text": "The look of the master shots in the “birth of Kal-El scene” was partially inspired by the Tenebrism of Italian Baroque paintings, especially Artemisia Gentileschi’s “Judith Slaying Holofernes.”",
+            "thumbnail": "thumbnails/317_1002.png"
+        },
+        {
+            "in_time": 117,
+            "out_time": 127,
+            "text": "Ruins of the previous Kryptonian age are in the background of every shot of the planet.",
+            "thumbnail": "thumbnails/317_1004.png"
+        },
+        {
+            "in_time": 132,
+            "out_time": 140,
+            "text": "Each council member represents a guild of Krypton.",
+            "thumbnail": "thumbnails/317_1006.png"
+        },
+        {
+            "in_time": 140,
+            "out_time": 155,
+            "text": "Each guild member chair is carved with various Kryptonian phrases that are unique to that particular guild.",
+            "thumbnail": "thumbnails/317_1005.png"
+        },
+        {
+            "in_time": 189,
+            "out_time": 199,
+            "text": "The weapons are covered in poetry and have been passed down in each family/guild.",
+            "thumbnail": "thumbnails/317_1008.png"
+        },
+        {
+            "in_time": 258,
+            "out_time": 268,
+            "text": "Robots are in families/guilds for generations and are older than their masters.",
+            "thumbnail": "thumbnails/317_1009.png"
+        },
+        {
+            "in_time": 353,
+            "out_time": 363,
+            "text": "Armor is also ancient and handed down through generations.",
+            "thumbnail": "thumbnails/317_1012.png"
+        },
+        {
+            "in_time": 394,
+            "out_time": 404,
+            "text": "The Codex is like Lucy – a proto-Kryptonian being.",
+            "thumbnail": "thumbnails/317_1014.png"
+        },
+        {
+            "in_time": 423,
+            "out_time": 433,
+            "text": "The voice of the Kryptonian warning announcements is Henry Cavill.",
+            "thumbnail": "thumbnails/317_1015.png"
+        },
+        {
+            "in_time": 463,
+            "out_time": 488,
+            "text": "Writer and artist John Byrne reimagined Kryptonian society for his mythology reboot series The Man of Steel, showing a colder, more emotionally detached society than had been depicted before, one that had dominated its home planet to the point of collapse.",
+            "thumbnail": "thumbnails/317_1129.png"
+        },
+        {
+            "in_time": 511,
+            "out_time": 536,
+            "text": "The skull shown in the liquid geo display is proto-human – more Cro-Magnon than Homo sapiens – the data being 20,000 years old as relayed from the Scout Ship we will see later buried in the ice on Earth.",
+            "thumbnail": "thumbnails/317_1017.png"
+        },
+        {
+            "in_time": 610,
+            "out_time": 620,
+            "text": "The proto-Kryptonian is now inside Kal-El’s genes.",
+            "thumbnail": "thumbnails/317_1019.png"
+        },
+        {
+            "in_time": 624,
+            "out_time": 634,
+            "text": "The Command Key becomes an integral plot point throughout the movie.",
+            "thumbnail": "thumbnails/317_1020.png"
+        },
+        {
+            "in_time": 769,
+            "out_time": 784,
+            "text": "Kryptonian weapons are treated within the culture as ancient artifacts and family heirlooms; they are not mass-produced.",
+            "thumbnail": "thumbnails/317_1007.png"
+        },
+        {
+            "in_time": 957,
+            "out_time": 972,
+            "text": "There are personal robots with the other council members watching the sentencing, like pages in medieval times.",
+            "thumbnail": "thumbnails/317_1024.png"
+        },
+        {
+            "in_time": 1042,
+            "out_time": 1052,
+            "text": "The sun is a red dwarf star in the movie. In the comics, it was a red giant.",
+            "thumbnail": "thumbnails/317_1011.png"
+        },
+        {
+            "in_time": 1122,
+            "out_time": 1132,
+            "text": "The violin soloist is playing a Stradivarius built in 1728, one of the rarest instruments in the world.",
+            "thumbnail": "thumbnails/317_1165.png"
+        },
+        {
+            "in_time": 1145,
+            "out_time": 1155,
+            "text": "\nThe core has been ignited, and now the planet is becoming a failed sun, or neutron star.",
+            "thumbnail": "thumbnails/317_1026.png"
+        },
+        {
+            "in_time": 1202,
+            "out_time": 1222,
+            "text": "The Debbie Sue is a trawler. The average number of crewmembers on a crab boat is 5-10. Crabbing is considered one of the most dangerous jobs in the world.",
+            "thumbnail": "thumbnails/317_1138.png"
+        },
+        {
+            "in_time": 1352,
+            "out_time": 1362,
+            "text": "The tank set was the largest underwater green screen ever built.",
+            "thumbnail": "thumbnails/317_1160.png"
+        },
+        {
+            "in_time": 1499,
+            "out_time": 1509,
+            "text": "The two whales are the last of their species – extinction binds them to Clark.",
+            "thumbnail": "thumbnails/317_1029.png"
+        },
+        {
+            "in_time": 1581,
+            "out_time": 1596,
+            "text": "\nThe girl across from Clark in the school bus is Lana Lang. In the comics, Lana Lang is Clark’s love interest.",
+            "thumbnail": "thumbnails/317_1031.png"
+        },
+        {
+            "in_time": 1606,
+            "out_time": 1616,
+            "text": "The stuntman who played Nam-Ek, Mike Justus, is also the same person driving the car.",
+            "thumbnail": "thumbnails/317_1176.png"
+        },
+        {
+            "in_time": 1733,
+            "out_time": 1763,
+            "text": "The depiction of the Kents in Man of Steel harkens back to the very first page of Superman #1 and what the as-yet unnamed adoptive parents say to young Clark. “Now listen to me, Clark! This great strength of yours – you’ve got to hide it from people or they’ll be scared of you!” “But when the proper time comes, you must use it to assist humanity.”",
+            "thumbnail": "thumbnails/317_1150.png"
+        },
+        {
+            "in_time": 1815,
+            "out_time": 1840,
+            "text": "The scene where Jonathan shows Clark the spacecraft was partially inspired by the limited-series comic Superman: Secret Origin, in which young Clark tearfully says, “I want to be Clark Kent. I want to be your son,” to which Jonathan responds, “Clark...You are my son.”",
+            "thumbnail": "thumbnails/317_1122.png"
+        },
+        {
+            "in_time": 1908,
+            "out_time": 1923,
+            "text": "The 1986 limited series The Man of Steel changed many elements of the classic Superman mythology, including having both of his adoptive parents remaining alive well into Clark’s adult life.",
+            "thumbnail": "thumbnails/317_1099.png"
+        },
+        {
+            "in_time": 2042,
+            "out_time": 2072,
+            "text": "In the 2003/2004 limited series Superman: Birthright, Clark Kent travels the world not knowing his own background/heritage, while trying to use his powers to help people without revealing himself, similar to in the movie.",
+            "thumbnail": "thumbnails/317_1092.png"
+        },
+        {
+            "in_time": 2147,
+            "out_time": 2163,
+            "text": "Alessandro Juliani (“Officer Sekowsky”) portrayed Dr. Emil Hamilton on Smallville. He also appeared in Watchmen.",
+            "thumbnail": "thumbnails/317_1105.png"
+        },
+        {
+            "in_time": 2219,
+            "out_time": 2234,
+            "text": "The picture that Lois takes on her camera of Clark walking on the ice-shelf wall was inspired by blurry photos of Bigfoot.",
+            "thumbnail": "thumbnails/317_1178.png"
+        },
+        {
+            "in_time": 2310,
+            "out_time": 2320,
+            "text": "Robots have been keeping the Scout Ship running for over 20,000 years.",
+            "thumbnail": "thumbnails/317_1033.png"
+        },
+        {
+            "in_time": 2448,
+            "out_time": 2468,
+            "text": "Lois’ scared first reaction to Clark in the Scout Ship recalls what Superman says to the reporter in their first meeting in Action Comics #1: “You needn’t be afraid of me. I won’t harm you.”",
+            "thumbnail": "thumbnails/317_1027.png"
+        },
+        {
+            "in_time": 2488,
+            "out_time": 2508,
+            "text": "The scene when Dr. Manhattan is discovered to have escaped to Mars in Zack Snyder’s film Watchmen inspired the landscape on the military computer’s screen.",
+            "thumbnail": "thumbnails/317_1035.png"
+        },
+        {
+            "in_time": 2652,
+            "out_time": 2663,
+            "text": "The polar bear is a reminder that Clark, like the bear, is an endangered species – the last of his kind.",
+            "thumbnail": "thumbnails/317_1036.png"
+        },
+        {
+            "in_time": 2663,
+            "out_time": 2673,
+            "text": "￼\nThe voice of the Scout Ship computer is that of Carla Gugino, who played Sally Jupiter in Watchmen.",
+            "thumbnail": "thumbnails/317_1037.png"
+        },
+        {
+            "in_time": 2728,
+            "out_time": 2743,
+            "text": "The visual style of the Kryptonian history lesson in liquid geo is influenced by a mix of Soviet and bas-relief art.",
+            "thumbnail": "thumbnails/317_1039.png"
+        },
+        {
+            "in_time": 2775,
+            "out_time": 2795,
+            "text": "The longest visual effects shot in the movie is the history lesson of Krypton that Jor-El explains to Clark as the camera continually pans and pivots around the room (it is 90 seconds long).",
+            "thumbnail": "thumbnails/317_1179.png"
+        },
+        {
+            "in_time": 2885,
+            "out_time": 2895,
+            "text": "It took five months of careful preparation to figure out how to build the Superman suit.",
+            "thumbnail": "thumbnails/317_1175.png"
+        },
+        {
+            "in_time": 2902,
+            "out_time": 2912,
+            "text": "Jor-El gets the classic “S” reveal of pulling back his cloak in this scene.",
+            "thumbnail": "thumbnails/317_1040.png"
+        },
+        {
+            "in_time": 2932,
+            "out_time": 2942,
+            "text": "Each Superman suit would require 20 different artisans from four costuming companies to create.",
+            "thumbnail": "thumbnails/317_1174.png"
+        },
+        {
+            "in_time": 2952,
+            "out_time": 2960,
+            "text": "Each Superman cape required 14 3/4 yards of ultrasuede fabric to create.",
+            "thumbnail": "thumbnails/317_1173.png"
+        },
+        {
+            "in_time": 2960,
+            "out_time": 2970,
+            "text": "There were 14 Superman suits made for Man of Steel.",
+            "thumbnail": "thumbnails/317_1171.png"
+        },
+        {
+            "in_time": 3056,
+            "out_time": 3068,
+            "text": "When Superman flies, he’s manipulating space and gravity because of the effect the sun and earth have on him.",
+            "thumbnail": "thumbnails/317_1042.png"
+        },
+        {
+            "in_time": 3068,
+            "out_time": 3078,
+            "text": "Each sonic boom = Mach speed.",
+            "thumbnail": "thumbnails/317_1041.png"
+        },
+        {
+            "in_time": 3140,
+            "out_time": 3170,
+            "text": "Amy Adams’ auburn-haired Lois Lane is a departure for the typically brunette or raven-haired character.",
+            "thumbnail": "thumbnails/317_1088.png"
+        },
+        {
+            "in_time": 3315,
+            "out_time": 3330,
+            "text": "As in the movie, a tornado threatens Smallville in the 1998 limited-series comic Superman For All Seasons.",
+            "thumbnail": "thumbnails/317_1117.png"
+        },
+        {
+            "in_time": 3418,
+            "out_time": 3438,
+            "text": "In Superman: Earth One, Jonathan dies while Clark is still growing up, leaving the young man conflicted over how to honor his late adoptive father’s wishes for how he should use his abilities.",
+            "thumbnail": "thumbnails/317_1128.png"
+        },
+        {
+            "in_time": 3458,
+            "out_time": 3478,
+            "text": "Lois and Perry’s contentious but mutually respectful relationship has its basis in the comics, such as in Superman: Birthright, which shows Perry making a list of reasons why and why not to fire Lois.",
+            "thumbnail": "thumbnails/317_1118.png"
+        },
+        {
+            "in_time": 3555,
+            "out_time": 3577,
+            "text": "The LexCorp truck that drops Clark off reads “Better Farming Through Science,” alluding to Lex Luthor’s character as having a brilliant, if misguided, scientific mind.",
+            "thumbnail": "thumbnails/317_1106.png"
+        },
+        {
+            "in_time": 3578,
+            "out_time": 3598,
+            "text": "The farmland surrounding the Kent Farm location was due to grow soy that year, so production arranged to grow corn and timed the planting so the corn could be the correct height during filming.",
+            "thumbnail": "thumbnails/317_1167.png"
+        },
+        {
+            "in_time": 3773,
+            "out_time": 3783,
+            "text": "The Black Zero looks like the International Space Station when tracked from the ground.",
+            "thumbnail": "thumbnails/317_1045.png"
+        },
+        {
+            "in_time": 3916,
+            "out_time": 3946,
+            "text": "The earliest depictions of Krypton, in the Superman newspaper strips of 1939, described its inhabitants as being a “civilization of supermen – beings which represent the human race at its ultimate peak of perfect development!”",
+            "thumbnail": "thumbnails/317_1149.png"
+        },
+        {
+            "in_time": 4045,
+            "out_time": 4060,
+            "text": "Plato’s The Republic discusses the meaning of justice, the theory of forms and the immortality of the soul, among other philosophical topics.",
+            "thumbnail": "thumbnails/317_1049.png"
+        },
+        {
+            "in_time": 4069,
+            "out_time": 4079,
+            "text": "The Smallville High School sports team name is The Spartans, in homage to 300.",
+            "thumbnail": "thumbnails/317_1136.png"
+        },
+        {
+            "in_time": 4087,
+            "out_time": 4097,
+            "text": "Sullivan’s Truck & Tractor Repair is a reference to the TV series Smallville.",
+            "thumbnail": "thumbnails/317_1190.png"
+        },
+        {
+            "in_time": 4131,
+            "out_time": 4141,
+            "text": "The stained glass image behind Clark depicts the biblical story of Jesus in the Garden of Gethsemane.",
+            "thumbnail": "thumbnails/317_1050.png"
+        },
+        {
+            "in_time": 4202,
+            "out_time": 4222,
+            "text": "In the 2010 graphic novel Superman: Earth One volume one, Clark’s first public appearance as Superman is when an invading alien force threatens to destroy Earth, as in the movie.",
+            "thumbnail": "thumbnails/317_1090.png"
+        },
+        {
+            "in_time": 4264,
+            "out_time": 4284,
+            "text": "Although there have been variations through the years, the red, blue and yellow color scheme of Superman’s costume dates back to the first Action Comic in 1938.",
+            "thumbnail": "thumbnails/317_1125.png"
+        },
+        {
+            "in_time": 4408,
+            "out_time": 4428,
+            "text": "All of the military personnel are real-life airmen, guardsmen, sailors and soldiers who each had at least one deployment to Iraq or Afghanistan.",
+            "thumbnail": "thumbnails/317_1168.png"
+        },
+        {
+            "in_time": 4451,
+            "out_time": 4461,
+            "text": "The first Faora, Faora Hu-Ul, was introduced in Action Comics #471 and #472 in 1977.",
+            "thumbnail": "thumbnails/317_1145.png"
+        },
+        {
+            "in_time": 4638,
+            "out_time": 4648,
+            "text": "DC Comics killed Superman in Superman #75 (1993).",
+            "thumbnail": "thumbnails/317_1101.png"
+        },
+        {
+            "in_time": 4761,
+            "out_time": 4776,
+            "text": "The character of Tor-An is played by Richard Cetrone, who has appeared in all but one of Mr. Snyder’s films.",
+            "thumbnail": "thumbnails/317_1169.png"
+        },
+        {
+            "in_time": 4824,
+            "out_time": 4839,
+            "text": "Superman famously wore a black and silver costume when he returned from the dead in 1993, except with a longer hairstyle and no cape.",
+            "thumbnail": "thumbnails/317_1111.png"
+        },
+        {
+            "in_time": 4862,
+            "out_time": 4872,
+            "text": "The straps restraining Kal-El are made of liquid geo, just like the display screens throughout Krypton.",
+            "thumbnail": "thumbnails/317_1057.png"
+        },
+        {
+            "in_time": 4982,
+            "out_time": 5012,
+            "text": "The Command Key that Jor-El sends to help educate and guide his son in the film has a variety of comic book counterparts, such as the historical chronicle tablet in Superman: Birthright, and the sunstone crystal in Superman: Secret Origin.",
+            "thumbnail": "thumbnails/317_1154.png"
+        },
+        {
+            "in_time": 5071,
+            "out_time": 5086,
+            "text": "The character of Jax-Ur, portrayed in the film by Mackenzie Grey, first appeared in Adventure Comics #289 (1961).",
+            "thumbnail": "thumbnails/317_1158.png"
+        },
+        {
+            "in_time": 5196,
+            "out_time": 5211,
+            "text": "The twinkle of light behind Kal-El when he flies away is Jor-El blinking out/unplugging from the ship’s systems.",
+            "thumbnail": "thumbnails/317_1058.png"
+        },
+        {
+            "in_time": 5262,
+            "out_time": 5272,
+            "text": "Kryptonian plasma is left on Earth when the escape pod crashes in the cornfield.",
+            "thumbnail": "thumbnails/317_1059.png"
+        },
+        {
+            "in_time": 5367,
+            "out_time": 5397,
+            "text": "During the Smallville battle, a hot dog truck can be seen three times making its way across town. It first appears by the Kent Farm as Superman tackles Zod near the grain silos; it then appears outside the IHOP windows as Faora and Superman trade blows; finally, as the Dropship lands to pick up Faora and Nam-Ek, the hot dog truck arrives at the far end of the street. A miniature version of this truck now sits in the Cruel and Unusual Films office.",
+            "thumbnail": "thumbnails/317_1182.png"
+        },
+        {
+            "in_time": 5415,
+            "out_time": 5425,
+            "text": "When Zod’s helmet breaks, it harks back to young Clark’s X-ray vision fright.",
+            "thumbnail": "thumbnails/317_1061.png"
+        },
+        {
+            "in_time": 5696,
+            "out_time": 5716,
+            "text": "Heat vision comes from an internal source, hence the sub-surface glow that is visible under Zod’s skin when he uses it. This is not an easy power to use, as it does cause some discomfort.",
+            "thumbnail": "thumbnails/317_1181.png"
+        },
+        {
+            "in_time": 5859,
+            "out_time": 5869,
+            "text": "Superman is famously more powerful than a locomotive.",
+            "thumbnail": "thumbnails/317_1063.png"
+        },
+        {
+            "in_time": 6089,
+            "out_time": 6114,
+            "text": "The Black Zero at the start of the film is very clean. By the time Zod arrives on Earth, it has been retrofitted and the three triangular sections of the Phantom Zone generator can be seen attached to the “shoulders” of the Black Zero.",
+            "thumbnail": "thumbnails/317_1177.png"
+        },
+        {
+            "in_time": 6210,
+            "out_time": 6225,
+            "text": "The debris cloud ejected from the top of the World Engine was referenced from images of the volcano Eyjafjallajökull in Iceland.",
+            "thumbnail": "thumbnails/317_1065.png"
+        },
+        {
+            "in_time": 6332,
+            "out_time": 6342,
+            "text": "A gravitational singularity, or space-time singularity, is thought to have infinite gravity.",
+            "thumbnail": "thumbnails/317_1066.png"
+        },
+        {
+            "in_time": 6396,
+            "out_time": 6406,
+            "text": "Original white-board sketch (May 2011) of World Engine with the gravity beam pounding the ground.",
+            "thumbnail": "thumbnails/317_1184.png"
+        },
+        {
+            "in_time": 6592,
+            "out_time": 6612,
+            "text": "Metropolis is an amalgam of Los Angeles, New York and Chicago, with landmark buildings removed. When rendered digitally by Double Negative, Metropolis comprised 32 square miles of CG buildings and streets.",
+            "thumbnail": "thumbnails/317_1162.png"
+        },
+        {
+            "in_time": 6732,
+            "out_time": 6747,
+            "text": "The defense mechanisms at work here are the same liquid geo technology seen in display screens throughout Krypton.",
+            "thumbnail": "thumbnails/317_1068.png"
+        },
+        {
+            "in_time": 6934,
+            "out_time": 6944,
+            "text": "Richard Schiff’s Dr. Emil Hamilton works for S.T.A.R. Labs, a DC Comics reference.",
+            "thumbnail": "thumbnails/317_1189.png"
+        },
+        {
+            "in_time": 7248.1,
+            "out_time": 7258.1,
+            "text": "When Kal-El hovers across the crater to Zod, it is a Dr. Manhattan moment, in homage to Watchmen.",
+            "thumbnail": "thumbnails/317_1075.png"
+        },
+        {
+            "in_time": 7276.1,
+            "out_time": 7296.1,
+            "text": "The second longest visual effects shot in the film is Zod on his knees, explaining how Superman has taken everything from him. Michael’s performance was so good that his speech was played in one long take.",
+            "thumbnail": "thumbnails/317_1180.png"
+        },
+        {
+            "in_time": 7457.1,
+            "out_time": 7467.1,
+            "text": "Blaze Comics is a cryptic reference from the Superman canon.",
+            "thumbnail": "thumbnails/317_1188.png"
+        },
+        {
+            "in_time": 7470.1,
+            "out_time": 7485.1,
+            "text": "Here is the original (April 2011) white-board drawing, by Zack Snyder, of Zod swinging the I-beam at Superman, while Superman shoots his heat vision at it.",
+            "thumbnail": "thumbnails/317_1183.png"
+        },
+        {
+            "in_time": 7558.1,
+            "out_time": 7570.1,
+            "text": "\nThe “Utopia Casino” sign is a possible tease of a villain from the comics, Tony Gallo.",
+            "thumbnail": "thumbnails/317_1187.png"
+        },
+        {
+            "in_time": 7570.1,
+            "out_time": 7580.1,
+            "text": "A Wayne Industries satellite hints at future storylines.",
+            "thumbnail": "thumbnails/317_1078.png"
+        },
+        {
+            "in_time": 7589.1,
+            "out_time": 7601.1,
+            "text": "LexCorp is visible on the side of the building, referencing another villain from the canon.",
+            "thumbnail": "thumbnails/317_1077.png"
+        },
+        {
+            "in_time": 7601.1,
+            "out_time": 7611.1,
+            "text": "The statues that are struck are Truth and Justice. Truth falls.",
+            "thumbnail": "thumbnails/317_1079.png"
+        },
+        {
+            "in_time": 7744.1,
+            "out_time": 7759.1,
+            "text": "A Reaper drone does not cost $12 million, as stated by General Swanwick – its estimated flyaway cost is closer to $17 million.",
+            "thumbnail": "thumbnails/317_1185.png"
+        },
+        {
+            "in_time": 7899.1,
+            "out_time": 7909.1,
+            "text": "The Daily Planet’s iconic globe has typically been situated on the rooftop of its building.",
+            "thumbnail": "thumbnails/317_1110.png"
+        }
+    ],
+    "share": {
+        "clips": [
+            {
+                "in_time": 117,
+                "out_time": 127,
+                "url": "video/Man_of_Steel_ClipShare_01_SettingSun.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_001_SettingSun_LRG.jpg"
+                    }
+                ],
+                "text": "Setting Sun"
+            },
+            {
+                "in_time": 136,
+                "out_time": 161,
+                "url": "video/Man_of_Steel_ClipShare_02_LookToTheStars.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_002_LookToTheStars_LRG.jpg"
+                    }
+                ],
+                "text": "Look to the Stars"
+            },
+            {
+                "in_time": 166,
+                "out_time": 194,
+                "url": "video/Man_of_Steel_ClipShare_03_CounselDisband.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_003_CounselDisband_LRG.jpg"
+                    }
+                ],
+                "text": "Counsel Disband"            },
+            {
+                "in_time": 199,
+                "out_time": 211,
+                "url": "video/Man_of_Steel_ClipShare_04_Madness.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_004_Madness_LRG.jpg"
+                    }
+                ],
+                "text": "Madness"
+            },
+            {
+                "in_time": 236,
+                "out_time": 251,
+                "url": "video/Man_of_Steel_ClipShare_05_Monster.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_005_Monster_LRG.jpg"
+                    }
+                ],
+                "text": "Monster"
+            },
+            {
+                "in_time": 263,
+                "out_time": 281,
+                "url": "video/Man_of_Steel_ClipShare_06_Defense.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_006_Defense_LRG.jpg"
+                    }
+                ],
+                "text": "Defense"
+            },
+            {
+                "in_time": 307,
+                "out_time": 328,
+                "url": "video/Man_of_Steel_ClipShare_07_HRaka.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_007_HRaka_LRG.jpg"
+                    }
+                ],
+                "text": "H'Raka"
+            },
+            {
+                "in_time": 335,
+                "out_time": 347,
+                "url": "video/Man_of_Steel_ClipShare_08_FlightPattern.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_008_FlightPattern_LRG.jpg"
+                    }
+                ],
+                "text": "Flight Pattern"
+            },
+            {
+                "in_time": 349,
+                "out_time": 365,
+                "url": "video/Man_of_Steel_ClipShare_09_BreakingTheLaw.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_009_BreakingTheLaw_LRG.jpg"
+                    }
+                ],
+                "text": "Breaking the Law"
+            },
+            {
+                "in_time": 371,
+                "out_time": 393,
+                "url": "video/Man_of_Steel_ClipShare_10_DivingDeep.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_010_DivingDeep_LRG.jpg"
+                    }
+                ],
+                "text": "Diving Deep"
+            },
+            {
+                "in_time": 396,
+                "out_time": 410,
+                "url": "video/Man_of_Steel_ClipShare_11_SkeletonKey.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_011_SkeletonKey_LRG.jpg"
+                    }
+                ],
+                "text": "Skeleton Key"
+            },
+            {
+                "in_time": 421,
+                "out_time": 440,
+                "url": "video/Man_of_Steel_ClipShare_12_LeapOfFaith.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_012_LeapOfFaith_LRG.jpg"
+                    }
+                ],
+                "text": "Leap of Faith"
+            },
+            {
+                "in_time": 457,
+                "out_time": 472,
+                "url": "video/Man_of_Steel_ClipShare_13_ToTheSkies.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_013_ToTheSkies_LRG.jpg"
+                    }
+                ],
+                "text": "To the Skies"
+            },
+            {
+                "in_time": 470,
+                "out_time": 492,
+                "url": "video/Man_of_Steel_ClipShare_14_GoodbyeMyFriend.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_014_GoodbyeMyFriend.mov_LRG.jpg"
+                    }
+                ],
+                "text": "Goodbye My Friend"
+            },
+            {
+                "in_time": 511,
+                "out_time": 528,
+                "url": "video/Man_of_Steel_ClipShare_15_Outcast.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_015_Outcast_LRG.jpg"
+                    }
+                ],
+                "text": "Outcast"
+            },
+            {
+                "in_time": 569,
+                "out_time": 592,
+                "url": "video/Man_of_Steel_ClipShare_16_AmongstTheStars.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_016_AmongstTheStars_LRG.jpg"
+                    }
+                ],
+                "text": "Amongst the Stars"
+            },
+            {
+                "in_time": 658,
+                "out_time": 673,
+                "url": "video/Man_of_Steel_ClipShare_17_HeartBroken.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_017_HeartBroken_LRG.jpg"
+                    }
+                ],
+                "text": "Heartbroken"
+            },
+            {
+                "in_time": 748,
+                "out_time": 767,
+                "url": "video/Man_of_Steel_ClipShare_18_KryptonsFirst.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_018_KryptonsFirst_LRG.jpg"
+                    }
+                ],
+                "text": "Kryptons First"
+            },
+            {
+                "in_time": 795,
+                "out_time": 809,
+                "url": "video/Man_of_Steel_ClipShare_19_ThrowingPunches.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_019_ThrowingPunches_LRG.jpg"
+                    }
+                ],
+                "text": "Throwing Punches"
+            },
+            {
+                "in_time": 835,
+                "out_time": 864,
+                "url": "video/Man_of_Steel_ClipShare_20_BattleScars.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_020_BattleScars.mov_LRG.jpg"
+                    }
+                ],
+                "text": "Battle Scars"
+            },
+            {
+                "in_time": 1004,
+                "out_time": 1034,
+                "url": "video/Man_of_Steel_ClipShare_21_Captured.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_021_Captured_LRG.jpg"
+                    }
+                ],
+                "text": "Captured"
+            },
+            {
+                "in_time": 1102,
+                "out_time": 1156,
+                "url": "video/Man_of_Steel_ClipShare_22_NoRefuge.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_022_NoRefuge_LRG.jpg"
+                    }
+                ],
+                "text": "No Refuge"
+            },
+            {
+                "in_time": 1165,
+                "out_time": 1183,
+                "url": "video/Man_of_Steel_ClipShare_23_Journey.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_023_Journey_LRG.jpg"
+                    }
+                ],
+                "text": "Journey"
+            },
+            {
+                "in_time": 1275,
+                "out_time": 1287,
+                "url": "video/Man_of_Steel_ClipShare_24_ManOnFire.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_024_ManOnFire_LRG.jpg"
+                    }
+                ],
+                "text": "Man On Fire"
+            },
+            {
+                "in_time": 1316,
+                "out_time": 1344,
+                "url": "video/Man_of_Steel_ClipShare_25_SuperhumanStrength.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_025_SuperhumanStrength_LRG.jpg"
+                    }
+                ],
+                "text": "Superhuman Strength"
+            },
+            {
+                "in_time": 1378,
+                "out_time": 1398,
+                "url": "video/Man_of_Steel_ClipShare_26_XRayVision.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_026_XRayVision_LRG.jpg"
+                    }
+                ],
+                "text": "X-ray Vision"
+            },
+            {
+                "in_time": 1447,
+                "out_time": 1477,
+                "url": "video/Man_of_Steel_ClipShare_27_BigWorld.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_027_BigWorld_LRG.jpg"
+                    }
+                ],
+                "text": "Big World"
+            },
+            {
+                "in_time": 1632,
+                "out_time": 1668,
+                "url": "video/Man_of_Steel_ClipShare_28_SuperStrength.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_028_SuperStrength_LRG.jpg"
+                    }
+                ],
+                "text": "Super Strength"
+            },
+            {
+                "in_time": 1746,
+                "out_time": 1782,
+                "url": "video/Man_of_Steel_ClipShare_29_SecretLife.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_029_SecretLife_LRG.jpg"
+                    }
+                ],
+                "text": "Secret Life"
+            },
+            {
+                "in_time": 1842,
+                "out_time": 1866,
+                "url": "video/Man_of_Steel_ClipShare_30_NotFromThisWorld.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_030_NotFromThisWorld_LRG.jpg"
+                    }
+                ],
+                "text": "Not From This World"
+            },
+            {
+                "in_time": 1886,
+                "out_time": 1907,
+                "url": "video/Man_of_Steel_ClipShare_31_Changes.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_031_Changes_LRG.jpg"
+                    }
+                ],
+                "text": "Changes"
+            },
+            {
+                "in_time": 1978,
+                "out_time": 2002,
+                "url": "video/Man_of_Steel_ClipShare_32_BarBrawl.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_032_BarBrawl_LRG.jpg"
+                    }
+                ],
+                "text": "Bar Brawl"
+            },
+            {
+                "in_time": 2029,
+                "out_time": 2042,
+                "url": "video/Man_of_Steel_ClipShare_33_LessonsLearned.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_033_LessonsLearned_LRG.jpg"
+                    }
+                ],
+                "text": "Lesson Learned"
+            },
+            {
+                "in_time": 2126,
+                "out_time": 2143,
+                "url": "video/Man_of_Steel_ClipShare_34_CanadianSoil.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_034_CanadianSoil_LRG.jpg"
+                    }
+                ],
+                "text": "Canadian Soil"
+                            },
+            {
+                "in_time": 2207,
+                "out_time": 2224,
+                "url": "video/Man_of_Steel_ClipShare_35_PhotographicEvidence.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_035_PhotographicEvidence_LRG.jpg"
+                    }
+                ],
+                "text": "Photographic Evidence"
+            },
+            {
+                "in_time": 2330,
+                "out_time": 2355,
+                "url": "video/Man_of_Steel_ClipShare_36_TheKey.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_036_TheKey_LRG.jpg"
+                    }
+                ],
+                "text": "The Key"
+            },
+            {
+                "in_time": 2459,
+                "out_time": 2477,
+                "url": "video/Man_of_Steel_ClipShare_37_SpecialSkills.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_037_SpecialSkills_LRG.jpg"
+                    }
+                ],
+                "text": "Special Skills"
+            },
+            {
+                "in_time": 2508,
+                "out_time": 2543,
+                "url": "video/Man_of_Steel_ClipShare_38_Speechless.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_038_Speechless_LRG.jpg"
+                    }
+                ],
+                "text": "Speechless"
+            },
+            {
+                "in_time": 2563,
+                "out_time": 2583,
+                "url": "video/Man_of_Steel_ClipShare_39_FalseIdentity.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_039_FalseIdentity_LRG.jpg"
+                    }
+                ],
+                "text": "False Identity"
+            },
+            {
+                "in_time": 2631,
+                "out_time": 2646,
+                "url": "video/Man_of_Steel_ClipShare_40_MysteryMan.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_040_MysteryMan_LRG.jpg"
+                    }
+                ],
+                "text": "Mystery Man"
+            },
+            {
+                "in_time": 2740,
+                "out_time": 2775,
+                "url": "video/Man_of_Steel_ClipShare_41_ScoutShip.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_041_ScoutShip_LRG.jpg"
+                    }
+                ],
+                "text": "Scout Ship"            },
+            {
+                "in_time": 2819,
+                "out_time": 2843,
+                "url": "video/Man_of_Steel_ClipShare_42_Predesigned.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_042_Predesigned_LRG.jpg"
+                    }
+                ],
+                "text": "Predesigned"
+            },
+            {
+                "in_time": 2895,
+                "out_time": 2929,
+                "url": "video/Man_of_Steel_ClipShare_43_SymbolOfHope.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_043_SymbolOfHope_LRG.jpg"
+                    }
+                ],
+                "text": "Symbol Of Hope"
+            },
+            {
+                "in_time": 2970,
+                "out_time": 2990,
+                "url": "video/Man_of_Steel_ClipShare_44_TestingTheLimits.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_044_TestingTheLimits_LRG.jpg"
+                    }
+                ],
+                "text": "Testing the Limits"
+            },
+            {
+                "in_time": 3048,
+                "out_time": 3073,
+                "url": "video/Man_of_Steel_ClipShare_45_Flight.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_045_Flight_LRG.jpg"
+                    }
+                ],
+                "text": "Flight"
+            },
+            {
+                "in_time": 3212,
+                "out_time": 3245,
+                "url": "video/Man_of_Steel_ClipShare_46_UntoldStory.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_046_UntoldStory_LRG.jpg"
+                    }
+                ],
+                "text": "Untold Story"
+            },
+            {
+                "in_time": 3284,
+                "out_time": 3300,
+                "url": "video/Man_of_Steel_ClipShare_47_NotGoodEnough.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_047_NotGoodEnough_LRG.jpg"
+                    }
+                ],
+                "text": "Not Good Enough"
+            },
+            {
+                "in_time": 3407,
+                "out_time": 3429,
+                "url": "video/Man_of_Steel_ClipShare_48_TwistOfFate.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_048_TwistOfFate_LRG.jpg"
+                    }
+                ],
+                "text": "Twist of Fate"
+            },
+            {
+                "in_time": 3510,
+                "out_time": 3536,
+                "url": "video/Man_of_Steel_ClipShare_49_ColdTrail.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_049_ColdTrail_LRG.jpg"
+                    }
+                ],
+                "text": "Cold Trail"
+            },
+            {
+                "in_time": 3579,
+                "out_time": 3604,
+                "url": "video/Man_of_Steel_ClipShare_50_PastDiscovered.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_050_PastDiscovered_LRG.jpg"
+                    }
+                ],
+                "text": "Past Discovered"
+            },
+            {
+                "in_time": 3640,
+                "out_time": 3660,
+                "url": "video/Man_of_Steel_ClipShare_51_BeautifulTruth.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_051_BeautifulTruth_LRG.jpg"
+                    }
+                ],
+                "text": "Beautiful Truth"
+            },
+            {
+                "in_time": 3681,
+                "out_time": 3692,
+                "url": "video/Man_of_Steel_ClipShare_52_CourseCorrections.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_052_CourseCorrections_LRG.jpg"
+                    }
+                ],
+                "text": "Course Corrections"
+            },
+            {
+                "in_time": 3714,
+                "out_time": 3724,
+                "url": "video/Man_of_Steel_ClipShare_53_DramaticEntranc.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_053_DramaticEntrance_LRG.jpg"
+                    }
+                ],
+                "text": "Dramatic Entrance"
+            },
+            {
+                "in_time": 3775,
+                "out_time": 3789,
+                "url": "video/Man_of_Steel_ClipShare_54_BreakingNews.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_054_BreakingNews_LRG.jpg"
+                    }
+                ],
+                "text": "Breaking News"
+                            },
+            {
+                "in_time": 3826,
+                "out_time": 3862,
+                "url": "video/Man_of_Steel_ClipShare_55_NotAlone.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_055_NotAlone_LRG.jpg"
+                    }
+                ],
+                "text": "Not Alone"
+            },
+            {
+                "in_time": 3905,
+                "out_time": 3926,
+                "url": "video/Man_of_Steel_ClipShare_56_FateofThePlanet.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_056_FateofThePlanet_LRG.jpg"
+                    }
+                ],
+                "text": "Fate of the Planet"
+            },
+            {
+                "in_time": 3968,
+                "out_time": 3989,
+                "url": "video/Man_of_Steel_ClipShare_57_JournalisticIntegrity.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_057_JournalisticIntegrity_LRG.jpg"
+                    }
+                ],
+                "text": "Journalistic Integrity"
+            },
+            {
+                "in_time": 4043,
+                "out_time": 4059,
+                "url": "video/Man_of_Steel_ClipShare_58_GetUpKent.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_058_GetUpKent_LRG.jpg"
+                    }
+                ],
+                "text": "Get Up Kent"
+            },
+            {
+                "in_time": 4099,
+                "out_time": 4125,
+                "url": "video/Man_of_Steel_ClipShare_59_ChangingTheWorld.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_059_ChangingTheWorld_LRG.jpg"
+                    }
+                ],
+                "text": "Changing the World"
+            },
+            {
+                "in_time": 4159,
+                "out_time": 4176,
+                "url": "video/Man_of_Steel_ClipShare_60_GutReaction.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_060_GutReaction_LRG.jpg"
+                    }
+                ],
+                "text": "Gut Reaction"
+            },
+            {
+                "in_time": 4255,
+                "out_time": 4267,
+                "url": "video/Man_of_Steel_ClipShare_61_Cuffed.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_061_Cuffed_LRG.jpg"
+                    }
+                ],
+                "text": "Cuffed"
+            },
+            {
+                "in_time": 4271,
+                "out_time": 4296,
+                "url": "video/Man_of_Steel_ClipShare_62_LostInTranslation.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_062_LostInTranslation_LRG.jpg"
+                    }
+                ],
+                "text": "Lost in Translation"
+            },
+            {
+                "in_time": 4332,
+                "out_time": 4350,
+                "url": "video/Man_of_Steel_ClipShare_63_NotYourEnemy.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_063_NotYourEnemy_LRG.jpg"
+                    }
+                ],
+                "text": "Not Your Enemy"
+            },
+            {
+                "in_time": 4362,
+                "out_time": 4382,
+                "url": "video/Man_of_Steel_ClipShare_64_Faith.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_064_Faith_LRG.jpg"
+                    }
+                ],
+                "text": "Faith"
+            },
+            {
+                "in_time": 4492,
+                "out_time": 4510,
+                "url": "video/Man_of_Steel_ClipShare_65_Negotiations.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_065_Negotiations_LRG.jpg"
+                    }
+                ],
+                "text": "Negotiations"
+            },
+            {
+                "in_time": 4546,
+                "out_time": 4558,
+                "url": "video/Man_of_Steel_ClipShare_66_SecretPlan.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_066_SecretPlan_LRG.jpg"
+                    }
+                ],
+                "text": "Secret Plan"
+            },
+            {
+                "in_time": 4612,
+                "out_time": 4639,
+                "url": "video/Man_of_Steel_ClipShare_67_Adaptation.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_067_Adaptation_LRG.jpg"
+                    }
+                ],
+                "text": "Adaptation"
+            },
+            {
+                "in_time": 4676,
+                "out_time": 4697,
+                "url": "video/Man_of_Steel_ClipShare_68_PhantomZone.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_068_PhantomZone_LRG.jpg"
+                    }
+                ],
+                "text": "Phantom Zone"
+            },
+            {
+                "in_time": 4768,
+                "out_time": 4782,
+                "url": "video/Man_of_Steel_ClipShare_69_PowerWithin.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_069_PowerWithin_LRG.jpg"
+                    }
+                ],
+                "text": "Power Within"
+            },
+            {
+                "in_time": 4831,
+                "out_time": 4854,
+                "url": "video/Man_of_Steel_ClipShare_70_CrackingTheFoundation.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_070_CrackingTheFoundation_LRG.jpg"
+                    }
+                ],
+                "text": "Cracking the Foundation"
+            },
+            {
+                "in_time": 4935,
+                "out_time": 4950,
+                "url": "video/Man_of_Steel_ClipShare_71_HumanWeakness.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_071_HumanWeakness_LRG.jpg"
+                    }
+                ],
+                "text": "Human Weakness"
+            },
+            {
+                "in_time": 5059,
+                "out_time": 5071,
+                "url": "video/Man_of_Steel_ClipShare_72_Sidekick.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_072_Sidekick_LRG.jpg"
+                    }
+                ],
+                "text": "Sidekick"
+            },
+            {
+                "in_time": 5097,
+                "out_time": 5108,
+                "url": "video/Man_of_Steel_ClipShare_73_Gameplay.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_073_Gameplay_LRG.jpg"
+                    }
+                ],
+                "text": "Game Play"
+            },
+            {
+                "in_time": 5156,
+                "out_time": 5175,
+                "url": "video/Man_of_Steel_ClipShare_74_Bridge.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_074_Bridge_LRG.jpg"
+                    }
+                ],
+                "text": "Bridge"
+            },
+            {
+                "in_time": 5222,
+                "out_time": 5238,
+                "url": "video/Man_of_Steel_ClipShare_75_HerosCatch.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_075_HerosCatch_LRG.jpg"
+                    }
+                ],
+                "text": "Hero's Catch"
+            },
+            {
+                "in_time": 5360,
+                "out_time": 5391,
+                "url": "video/Man_of_Steel_ClipShare_76_ProtectingMom.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_076_ProtectingMom1_LRG.jpg"
+                    }
+                ],
+                "text": "Protecting Mom"
+            },
+            {
+                "in_time": 5533,
+                "out_time": 5547,
+                "url": "video/Man_of_Steel_ClipShare_77_BattleOfSmallville.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_077_BattleOfSmallville1_LRG.jpg"
+                    }
+                ],
+                "text": "Battle of Smallville"
+            },
+            {
+                "in_time": 5573,
+                "out_time": 5593,
+                "url": "video/Man_of_Steel_ClipShare_78_Incoming.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_078_Incoming1_LRG.jpg"
+                    }
+                ],
+                "text": "Incoming"
+            },
+            {
+                "in_time": 5675,
+                "out_time": 5690,
+                "url": "video/Man_of_Steel_ClipShare_79_FlyingBattle.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_079_FlyingBattle1_LRG.jpg"
+                    }
+                ],
+                "text": "Flying Battle"
+                            },
+            {
+                "in_time": 5716,
+                "out_time": 5739,
+                "url": "video/Man_of_Steel_ClipShare_80_Contact.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_080_Contact1_LRG.jpg"
+                    }
+                ],
+                "text": "Contact"
+            },
+            {
+                "in_time": 5819,
+                "out_time": 5834,
+                "url": "video/Man_of_Steel_ClipShare_81_ColonelHardy.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_081_ColonelHardy1_LRG.jpg"
+                    }
+                ],
+                "text": "Colonel Hardy"
+            },
+            {
+                "in_time": 5936,
+                "out_time": 5964,
+                "url": "video/Man_of_Steel_ClipShare_82_Allies.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_082_Allies1_LRG.jpg"
+                    }
+                ],
+                "text": "Allies"
+            },
+            {
+                "in_time": 6063,
+                "out_time": 6084,
+                "url": "video/Man_of_Steel_ClipShare_83_HiddenCodex.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_083_HiddenCodex1_LRG.jpg"
+                    }
+                ],
+                "text": "Hidden Codex"            },
+            {
+                "in_time": 6134,
+                "out_time": 6152,
+                "url": "video/Man_of_Steel_ClipShare_84_ComingInForALanding.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_084_ComingInForALanding1_LRG.jpg"
+                    }
+                ],
+                "text": "Coming in for a Landing"
+                            },
+            {
+                "in_time": 6236,
+                "out_time": 6263,
+                "url": "video/Man_of_Steel_ClipShare_85_Panic.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_085_Panic1_LRG.jpg"
+                    }
+                ],
+                "text": "Panic"
+            },
+            {
+                "in_time": 6297,
+                "out_time": 6308,
+                "url": "video/Man_of_Steel_ClipShare_86_Superman.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_086_Superman1_LRG.jpg"
+                    }
+                ],
+                "text": "Superman"
+            },
+            {
+                "in_time": 6320,
+                "out_time": 6354,
+                "url": "video/Man_of_Steel_ClipShare_87_Blackhole.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_087_Blackhole1_LRG.jpg"
+                    }
+                ],
+                "text": "Black Hole" 
+            },
+            {
+                "in_time": 6539,
+                "out_time": 6561,
+                "url": "video/Man_of_Steel_ClipShare_88_ReleasingTheHounds.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_088_ReleasingTheHounds1_LRG.jpg"
+                    }
+                ],
+                "text": "Releasing The Hounds"
+            },
+            {
+                "in_time": 6622,
+                "out_time": 6645,
+                "url": "video/Man_of_Steel_ClipShare_89_FallenCity.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_089_FallenCity_LRG.jpg"
+                    }
+                ],
+                "text": "Fallen City"
+            },
+            {
+                "in_time": 6692,
+                "out_time": 6713,
+                "url": "video/Man_of_Steel_ClipShare_90_Vengeance.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_090_Vengeance_LRG.jpg"
+                    }
+                ],
+                "text": "Vengeance"
+            },
+            {
+                "in_time": 6738,
+                "out_time": 6764,
+                "url": "video/Man_of_Steel_ClipShare_91_FallenHero.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_091_FallenHero_LRG.jpg"
+                    }
+                ],
+                "text": "Fallen Hero"
+            },
+            {
+                "in_time": 6785,
+                "out_time": 6802,
+                "url": "video/Man_of_Steel_ClipShare_92_Teamwork.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_092_Teamwork_LRG.jpg"
+                    }
+                ],
+                "text": "Teamwork"
+            },
+            {
+                "in_time": 6937,
+                "out_time": 6957,
+                "url": "video/Man_of_Steel_ClipShare_93_SomethingsWrong.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_093_SomethingsWrong_LRG.jpg"
+                    }
+                ],
+                "text": "Something's Wrong"
+            },
+            {
+                "in_time": 7002,
+                "out_time": 7014,
+                "url": "video/Man_of_Steel_ClipShare_94_PleaBargin.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_094_PleaBargin_LRG.jpg"
+                    }
+                ],
+                "text": "Plea Bargain"
+            },
+            {
+                "in_time": 7067,
+                "out_time": 7092,
+                "url": "video/Man_of_Steel_ClipShare_95_SafetyFirst.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_095_SafetyFirst_LRG.jpg"
+                    }
+                ],
+                "text": "Safety First" 
+            },
+            {
+                "in_time": 7120,
+                "out_time": 7142,
+                "url": "video/Man_of_Steel_ClipShare_96_KeyActivation.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_096_KeyActivation_LRG.jpg"
+                    }
+                ],
+                "text": "Key Activation"
+            },
+            {
+                "in_time": 7189,
+                "out_time": 7212,
+                "url": "video/Man_of_Steel_ClipShare_97_Hero.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_097_Hero_LRG.jpg"
+                    }
+                ],
+                "text": "Hero"
+            },
+            {
+                "in_time": 7260,
+                "out_time": 7287,
+                "url": "video/Man_of_Steel_ClipShare_98_ProtectingKrypton.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_098_ProtectingKrypton_LRG.jpg"
+                    }
+                ],
+                "text": "Protecting Krypton"
+            },
+            {
+                "in_time": 7341,
+                "out_time": 7356,
+                "url": "video/Man_of_Steel_ClipShare_99_HighFlying.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_099_HighFlying_LRG.jpg"
+                    }
+                ],
+                "text": "High Flying"
+            },
+            {
+                "in_time": 7379,
+                "out_time": 7401,
+                "url": "video/Man_of_Steel_ClipShare_100_FightToTheDeath.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_100_FightToTheDeath_LRG.jpg"
+                    }
+                ],
+                "text": "Fight to the Death"
+            },
+            {
+                "in_time": 7477,
+                "out_time": 7491,
+                "url": "video/Man_of_Steel_ClipShare_101_FarmTraining.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_101_FarmTraining_LRG.jpg"
+                    }
+                ],
+                "text": "Farm Training"
+            },
+            {
+                "in_time": 7626,
+                "out_time": 7660,
+                "url": "video/Man_of_Steel_ClipShare_102_NeverStop.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_102_NeverStop_LRG.jpg"
+                    }
+                ],
+                "text": "Never Stop"
+            },
+            {
+                "in_time": 7748,
+                "out_time": 7784,
+                "url": "video/Man_of_Steel_ClipShare_103_RaisedInKansas.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_103_RaisedInKansas_LRG.jpg"
+                    }
+                ],
+                "text": "Raised in Kansas"
+            },
+            {
+                "in_time": 7788,
+                "out_time": 7803,
+                "url": "video/Man_of_Steel_ClipShare_104_HotStuff.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_104_HotStuff_LRG.jpg"
+                    }
+                ],
+                "text": "Hot Stuff"
+            },
+            {
+                "in_time": 7832,
+                "out_time": 7847,
+                "url": "video/Man_of_Steel_ClipShare_105_Memories.mp4",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_105_Memories_LRG.jpg"
+                    }
+                ],
+                "text": "Memories"
+            }
+        ],
+        "screenshots": [
+            {
+                "in_time": 117,
+                "out_time": 127,
+                "url": "thumbnails/MOS_NG_ClipShare_001_SettingSun_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_001_SettingSun_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 136,
+                "out_time": 161,
+                "url": "thumbnails/MOS_NG_ClipShare_002_LookToTheStars_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_002_LookToTheStars_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 166,
+                "out_time": 194,
+                "url": "thumbnails/MOS_NG_ClipShare_003_CounselDisband_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_003_CounselDisband_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 199,
+                "out_time": 211,
+                "url": "thumbnails/MOS_NG_ClipShare_004_Madness_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_004_Madness_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 236,
+                "out_time": 251,
+                "url": "thumbnails/MOS_NG_ClipShare_005_Monster_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_005_Monster_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 263,
+                "out_time": 281,
+                "url": "thumbnails/MOS_NG_ClipShare_006_Defense_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_006_Defense_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 307,
+                "out_time": 328,
+                "url": "thumbnails/MOS_NG_ClipShare_007_HRaka_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_007_HRaka_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 335,
+                "out_time": 347,
+                "url": "thumbnails/MOS_NG_ClipShare_008_FlightPattern_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_008_FlightPattern_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 349,
+                "out_time": 365,
+                "url": "thumbnails/MOS_NG_ClipShare_009_BreakingTheLaw_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_009_BreakingTheLaw_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 371,
+                "out_time": 393,
+                "url": "thumbnails/MOS_NG_ClipShare_010_DivingDeep_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_010_DivingDeep_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 396,
+                "out_time": 410,
+                "url": "thumbnails/MOS_NG_ClipShare_011_SkeletonKey_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_011_SkeletonKey_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 421,
+                "out_time": 440,
+                "url": "thumbnails/MOS_NG_ClipShare_012_LeapOfFaith_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_012_LeapOfFaith_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 457,
+                "out_time": 472,
+                "url": "thumbnails/MOS_NG_ClipShare_013_ToTheSkies_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_013_ToTheSkies_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 470,
+                "out_time": 492,
+                "url": "thumbnails/MOS_NG_ClipShare_014_GoodbyeMyFriend.mov_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_014_GoodbyeMyFriend.mov_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 511,
+                "out_time": 528,
+                "url": "thumbnails/MOS_NG_ClipShare_015_Outcast_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_015_Outcast_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 569,
+                "out_time": 592,
+                "url": "thumbnails/MOS_NG_ClipShare_016_AmongstTheStars_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_016_AmongstTheStars_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 658,
+                "out_time": 673,
+                "url": "thumbnails/MOS_NG_ClipShare_017_HeartBroken_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_017_HeartBroken_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 748,
+                "out_time": 767,
+                "url": "thumbnails/MOS_NG_ClipShare_018_KryptonsFirst_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_018_KryptonsFirst_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 795,
+                "out_time": 809,
+                "url": "thumbnails/MOS_NG_ClipShare_019_ThrowingPunches_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_019_ThrowingPunches_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 835,
+                "out_time": 864,
+                "url": "thumbnails/MOS_NG_ClipShare_020_BattleScars.mov_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_020_BattleScars.mov_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1004,
+                "out_time": 1034,
+                "url": "thumbnails/MOS_NG_ClipShare_021_Captured_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_021_Captured_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1102,
+                "out_time": 1156,
+                "url": "thumbnails/MOS_NG_ClipShare_022_NoRefuge_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_022_NoRefuge_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1165,
+                "out_time": 1183,
+                "url": "thumbnails/MOS_NG_ClipShare_023_Journey_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_023_Journey_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1275,
+                "out_time": 1287,
+                "url": "thumbnails/MOS_NG_ClipShare_024_ManOnFire_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_024_ManOnFire_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1316,
+                "out_time": 1344,
+                "url": "thumbnails/MOS_NG_ClipShare_025_SuperhumanStrength_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_025_SuperhumanStrength_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1378,
+                "out_time": 1398,
+                "url": "thumbnails/MOS_NG_ClipShare_026_XRayVision_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_026_XRayVision_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1447,
+                "out_time": 1477,
+                "url": "thumbnails/MOS_NG_ClipShare_027_BigWorld_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_027_BigWorld_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1632,
+                "out_time": 1668,
+                "url": "thumbnails/MOS_NG_ClipShare_028_SuperStrength_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_028_SuperStrength_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1746,
+                "out_time": 1782,
+                "url": "thumbnails/MOS_NG_ClipShare_029_SecretLife_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_029_SecretLife_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1842,
+                "out_time": 1866,
+                "url": "thumbnails/MOS_NG_ClipShare_030_NotFromThisWorld_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_030_NotFromThisWorld_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1886,
+                "out_time": 1907,
+                "url": "thumbnails/MOS_NG_ClipShare_031_Changes_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_031_Changes_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 1978,
+                "out_time": 2002,
+                "url": "thumbnails/MOS_NG_ClipShare_032_BarBrawl_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_032_BarBrawl_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2029,
+                "out_time": 2042,
+                "url": "thumbnails/MOS_NG_ClipShare_033_LessonsLearned_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_033_LessonsLearned_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2126,
+                "out_time": 2143,
+                "url": "thumbnails/MOS_NG_ClipShare_034_CanadianSoil_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_034_CanadianSoil_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2207,
+                "out_time": 2224,
+                "url": "thumbnails/MOS_NG_ClipShare_035_PhotographicEvidence_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_035_PhotographicEvidence_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2330,
+                "out_time": 2355,
+                "url": "thumbnails/MOS_NG_ClipShare_036_TheKey_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_036_TheKey_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2459,
+                "out_time": 2477,
+                "url": "thumbnails/MOS_NG_ClipShare_037_SpecialSkills_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_037_SpecialSkills_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2508,
+                "out_time": 2543,
+                "url": "thumbnails/MOS_NG_ClipShare_038_Speechless_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_038_Speechless_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2563,
+                "out_time": 2583,
+                "url": "thumbnails/MOS_NG_ClipShare_039_FalseIdentity_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_039_FalseIdentity_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2631,
+                "out_time": 2646,
+                "url": "thumbnails/MOS_NG_ClipShare_040_MysteryMan_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_040_MysteryMan_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2740,
+                "out_time": 2775,
+                "url": "thumbnails/MOS_NG_ClipShare_041_ScoutShip_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_041_ScoutShip_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2819,
+                "out_time": 2843,
+                "url": "thumbnails/MOS_NG_ClipShare_042_Predesigned_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_042_Predesigned_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2895,
+                "out_time": 2929,
+                "url": "thumbnails/MOS_NG_ClipShare_043_SymbolOfHope_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_043_SymbolOfHope_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 2970,
+                "out_time": 2990,
+                "url": "thumbnails/MOS_NG_ClipShare_044_TestingTheLimits_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_044_TestingTheLimits_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3048,
+                "out_time": 3073,
+                "url": "thumbnails/MOS_NG_ClipShare_045_Flight_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_045_Flight_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3212,
+                "out_time": 3245,
+                "url": "thumbnails/MOS_NG_ClipShare_046_UntoldStory_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_046_UntoldStory_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3284,
+                "out_time": 3300,
+                "url": "thumbnails/MOS_NG_ClipShare_047_NotGoodEnough_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_047_NotGoodEnough_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3407,
+                "out_time": 3429,
+                "url": "thumbnails/MOS_NG_ClipShare_048_TwistOfFate_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_048_TwistOfFate_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3510,
+                "out_time": 3536,
+                "url": "thumbnails/MOS_NG_ClipShare_049_ColdTrail_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_049_ColdTrail_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3579,
+                "out_time": 3604,
+                "url": "thumbnails/MOS_NG_ClipShare_050_PastDiscovered_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_050_PastDiscovered_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3640,
+                "out_time": 3660,
+                "url": "thumbnails/MOS_NG_ClipShare_051_BeautifulTruth_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_051_BeautifulTruth_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3681,
+                "out_time": 3692,
+                "url": "thumbnails/MOS_NG_ClipShare_052_CourseCorrections_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_052_CourseCorrections_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3714,
+                "out_time": 3724,
+                "url": "thumbnails/MOS_NG_ClipShare_053_DramaticEntrance_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_053_DramaticEntrance_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3775,
+                "out_time": 3789,
+                "url": "thumbnails/MOS_NG_ClipShare_054_BreakingNews_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_054_BreakingNews_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3826,
+                "out_time": 3862,
+                "url": "thumbnails/MOS_NG_ClipShare_055_NotAlone_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_055_NotAlone_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3905,
+                "out_time": 3926,
+                "url": "thumbnails/MOS_NG_ClipShare_056_FateofThePlanet_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_056_FateofThePlanet_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 3968,
+                "out_time": 3989,
+                "url": "thumbnails/MOS_NG_ClipShare_057_JournalisticIntegrity_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_057_JournalisticIntegrity_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4043,
+                "out_time": 4059,
+                "url": "thumbnails/MOS_NG_ClipShare_058_GetUpKent_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_058_GetUpKent_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4099,
+                "out_time": 4125,
+                "url": "thumbnails/MOS_NG_ClipShare_059_ChangingTheWorld_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_059_ChangingTheWorld_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4159,
+                "out_time": 4176,
+                "url": "thumbnails/MOS_NG_ClipShare_060_GutReaction_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_060_GutReaction_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4255,
+                "out_time": 4267,
+                "url": "thumbnails/MOS_NG_ClipShare_061_Cuffed_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_061_Cuffed_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4271,
+                "out_time": 4296,
+                "url": "thumbnails/MOS_NG_ClipShare_062_LostInTranslation_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_062_LostInTranslation_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4332,
+                "out_time": 4350,
+                "url": "thumbnails/MOS_NG_ClipShare_063_NotYourEnemy_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_063_NotYourEnemy_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4362,
+                "out_time": 4382,
+                "url": "thumbnails/MOS_NG_ClipShare_064_Faith_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_064_Faith_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4492,
+                "out_time": 4510,
+                "url": "thumbnails/MOS_NG_ClipShare_065_Negotiations_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_065_Negotiations_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4546,
+                "out_time": 4558,
+                "url": "thumbnails/MOS_NG_ClipShare_066_SecretPlan_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_066_SecretPlan_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4612,
+                "out_time": 4639,
+                "url": "thumbnails/MOS_NG_ClipShare_067_Adaptation_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_067_Adaptation_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4676,
+                "out_time": 4697,
+                "url": "thumbnails/MOS_NG_ClipShare_068_PhantomZone_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_068_PhantomZone_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4768,
+                "out_time": 4782,
+                "url": "thumbnails/MOS_NG_ClipShare_069_PowerWithin_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_069_PowerWithin_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4831,
+                "out_time": 4854,
+                "url": "thumbnails/MOS_NG_ClipShare_070_CrackingTheFoundation_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_070_CrackingTheFoundation_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 4935,
+                "out_time": 4950,
+                "url": "thumbnails/MOS_NG_ClipShare_071_HumanWeakness_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_071_HumanWeakness_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5059,
+                "out_time": 5071,
+                "url": "thumbnails/MOS_NG_ClipShare_072_Sidekick_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_072_Sidekick_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5097,
+                "out_time": 5108,
+                "url": "thumbnails/MOS_NG_ClipShare_073_Gameplay_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_073_Gameplay_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5156,
+                "out_time": 5175,
+                "url": "thumbnails/MOS_NG_ClipShare_074_Bridge_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_074_Bridge_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5222,
+                "out_time": 5238,
+                "url": "thumbnails/MOS_NG_ClipShare_075_HerosCatch_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_075_HerosCatch_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5360,
+                "out_time": 5391,
+                "url": "thumbnails/MOS_NG_ClipShare_076_ProtectingMom1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_076_ProtectingMom1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5533,
+                "out_time": 5547,
+                "url": "thumbnails/MOS_NG_ClipShare_077_BattleOfSmallville1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_077_BattleOfSmallville1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5573,
+                "out_time": 5593,
+                "url": "thumbnails/MOS_NG_ClipShare_078_Incoming1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_078_Incoming1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5675,
+                "out_time": 5690,
+                "url": "thumbnails/MOS_NG_ClipShare_079_FlyingBattle1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_079_FlyingBattle1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5716,
+                "out_time": 5739,
+                "url": "thumbnails/MOS_NG_ClipShare_080_Contact1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_080_Contact1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5819,
+                "out_time": 5834,
+                "url": "thumbnails/MOS_NG_ClipShare_081_ColonelHardy1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_081_ColonelHardy1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 5936,
+                "out_time": 5964,
+                "url": "thumbnails/MOS_NG_ClipShare_082_Allies1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_082_Allies1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6063,
+                "out_time": 6084,
+                "url": "thumbnails/MOS_NG_ClipShare_083_HiddenCodex1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_083_HiddenCodex1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6134,
+                "out_time": 6152,
+                "url": "thumbnails/MOS_NG_ClipShare_084_ComingInForALanding1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_084_ComingInForALanding1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6236,
+                "out_time": 6263,
+                "url": "thumbnails/MOS_NG_ClipShare_085_Panic1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_085_Panic1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6297,
+                "out_time": 6308,
+                "url": "thumbnails/MOS_NG_ClipShare_086_Superman1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_086_Superman1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6320,
+                "out_time": 6354,
+                "url": "thumbnails/MOS_NG_ClipShare_087_Blackhole1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_087_Blackhole1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6539,
+                "out_time": 6561,
+                "url": "thumbnails/MOS_NG_ClipShare_088_ReleasingTheHounds1_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_088_ReleasingTheHounds1_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6622,
+                "out_time": 6645,
+                "url": "thumbnails/MOS_NG_ClipShare_089_FallenCity_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_089_FallenCity_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6692,
+                "out_time": 6713,
+                "url": "thumbnails/MOS_NG_ClipShare_090_Vengeance_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_090_Vengeance_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6738,
+                "out_time": 6764,
+                "url": "thumbnails/MOS_NG_ClipShare_091_FallenHero_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_091_FallenHero_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6785,
+                "out_time": 6802,
+                "url": "thumbnails/MOS_NG_ClipShare_092_Teamwork_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_092_Teamwork_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 6937,
+                "out_time": 6957,
+                "url": "thumbnails/MOS_NG_ClipShare_093_SomethingsWrong_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_093_SomethingsWrong_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7002,
+                "out_time": 7014,
+                "url": "thumbnails/MOS_NG_ClipShare_094_PleaBargin_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_094_PleaBargin_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7067,
+                "out_time": 7092,
+                "url": "thumbnails/MOS_NG_ClipShare_095_SafetyFirst_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_095_SafetyFirst_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7120,
+                "out_time": 7142,
+                "url": "thumbnails/MOS_NG_ClipShare_096_KeyActivation_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_096_KeyActivation_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7189,
+                "out_time": 7212,
+                "url": "thumbnails/MOS_NG_ClipShare_097_Hero_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_097_Hero_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7260,
+                "out_time": 7287,
+                "url": "thumbnails/MOS_NG_ClipShare_098_ProtectingKrypton_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_098_ProtectingKrypton_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7341,
+                "out_time": 7356,
+                "url": "thumbnails/MOS_NG_ClipShare_099_HighFlying_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_099_HighFlying_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7379,
+                "out_time": 7401,
+                "url": "thumbnails/MOS_NG_ClipShare_100_FightToTheDeath_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_100_FightToTheDeath_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7477,
+                "out_time": 7491,
+                "url": "thumbnails/MOS_NG_ClipShare_101_FarmTraining_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_101_FarmTraining_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7626,
+                "out_time": 7660,
+                "url": "thumbnails/MOS_NG_ClipShare_102_NeverStop_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_102_NeverStop_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7748,
+                "out_time": 7784,
+                "url": "thumbnails/MOS_NG_ClipShare_103_RaisedInKansas_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_103_RaisedInKansas_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7788,
+                "out_time": 7803,
+                "url": "thumbnails/MOS_NG_ClipShare_104_HotStuff_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_104_HotStuff_LRG.jpg"
+                    }
+                ]
+            },
+            {
+                "in_time": 7832,
+                "out_time": 7847,
+                "url": "thumbnails/MOS_NG_ClipShare_105_Memories_LRG.jpg",
+                "thumbnails": [
+                    {
+                        "dimensions": "1076x614",
+                        "url": "thumbnails/MOS_NG_ClipShare_105_Memories_LRG.jpg"
+                    }
+                ]
+            }
+        ]
+    },
+    "menu": [
+       
+        {
+            "name": "Shop",
+            "type": "take",
+            "items": []
+        },
+        {
+            "name": "Share",
+            "type": "share",
+            "items": [
+                {
+                    "name": "Clip",
+                    "type": "clip"
+                },
+                {
+                    "name": "Screenshot",
+                    "type": "screenshot"
+                },
+                {
+                    "name": "Comment",
+                    "type": "comment"
+                }
+            ]
+        },
+        {
+            "name": "Search",
+            "type": "search",
+            "items": []
+        },
+        {
+            "name": "Timeline Filters",
+            "type": "filter",
+            "disabled": "1",
+            "items": [
+                {
+                    "name": "Characters and Story",
+                    "filters": [
+                        "Characters and Story"
+                    ]
+                },
+                {
+                    "name": "Creating the World",
+                    "filters": [
+                        "Creating the World"
+                    ]
+                },
+                {
+                    "name": "On the Set",
+                    "filters": [
+                        "On the Set"
+                    ]
+                },
+                {
+                    "name": "Visual Effects",
+                    "filters": [
+                        "Visual Effects"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Playback Modes",
+            "type": "modes",
+            "disabled": "1",
+            "items": [
+                {
+                    "name": "Shop",
+                    "type": "take"
+                },
+                {
+                    "name": "Social",
+                    "type": "social"
+                },
+                {
+                    "name": "Facts/Trivia",
+                    "type": "trivia"
+                },
+                {
+                    "name": "Music",
+                    "type": "music"
+                }
+            ]
+        }
+    ],
+    "cast": [
+        {
+            "guid": "716B26B9-E487-9183-2A7E-2BDAA0DDE19E",
+            "avatar_url": "castAndCrew\/MOS_NG_timeline_icons_HenryCavill.jpg",
+            "timecodes": [
+                {"in_time": "1206", "out_time": "1371"},
+                {"in_time": "1496", "out_time": "1570"},
+                {"in_time": "1946", "out_time": "2052"},
+                {"in_time": "2260", "out_time": "2488"},
+                {"in_time": "2663", "out_time": "3140"},
+                {"in_time": "3220", "out_time": "3458"},
+                {"in_time": "3555", "out_time": "3677"},
+                {"in_time": "3752", "out_time": "3946"},
+                {"in_time": "4018", "out_time": "4036"},
+                {"in_time": "4131", "out_time": "4899"},
+                {"in_time": "4933", "out_time": "4950"},
+                {"in_time": "5076", "out_time": "5096"},
+                {"in_time": "5151", "out_time": "5307"},
+                {"in_time": "5366", "out_time": "6039"},
+                {"in_time": "6323", "out_time": "6400"},
+                {"in_time": "6431", "out_time": "6450"},
+                {"in_time": "6508", "out_time": "6645"},
+                {"in_time": "6725", "out_time": "6764"},
+                {"in_time": "6820", "out_time": "6886"},
+                {"in_time": "6909", "out_time": "6930"},
+                {"in_time": "7003", "out_time": "7050"},
+                {"in_time": "7159", "out_time": "7785"},
+                {"in_time": "7812", "out_time": "7959"}
+            ]
+        },
+        {
+            "guid": "89F182CB-A0D2-9177-1FA1-DF2631A9DD7F",
+            "avatar_url": "castAndCrew\/MOS_NG_timeline_icons_AmyAdams.jpg",
+            "timecodes": [
+                {"in_time": "2062", "out_time": "2652"},
+                {"in_time": "3140", "out_time": "3262"},
+                {"in_time": "3444", "out_time": "3537"},
+                {"in_time": "3729", "out_time": "4018"},
+                {"in_time": "4249", "out_time": "4648"},
+                {"in_time": "4950", "out_time": "5076"},
+                {"in_time": "5096", "out_time": "5309"},
+                {"in_time": "6033", "out_time": "6039"},
+                {"in_time": "6313", "out_time": "6400"},
+                {"in_time": "6436", "out_time": "6450"},
+                {"in_time": "6565", "out_time": "6645"},
+                {"in_time": "6807", "out_time": "6909"},
+                {"in_time": "6939", "out_time": "7352"},
+                {"in_time": "7590", "out_time": "7718"},
+                {"in_time": "7920", "out_time": "7959"}
+            ]
+        },
+        {
+            "guid": "778C273B-3899-1BF3-29A0-A383D2870786",
+            "avatar_url": "castAndCrew\/MOS_NG_CastCrewIcon_Michael_Shannon.jpg",
+            "timecodes": [
+                {"in_time": "173", "out_time": "254"},
+                {"in_time": "689", "out_time": "1087"},
+                {"in_time": "3872", "out_time": "3943"},
+                {"in_time": "4585", "out_time": "4954"},
+                {"in_time": "5310", "out_time": "5480"},
+                {"in_time": "6039", "out_time": "6120"},
+                {"in_time": "6197", "out_time": "6263"},
+                {"in_time": "6407", "out_time": "6508"},
+                {"in_time": "6645", "out_time": "6725"},
+                {"in_time": "6987", "out_time": "7046"},
+                {"in_time": "7253", "out_time": "7714"}
+            ]
+        },
+        {
+            "guid": "15EF751A-BC7D-7202-03D2-7BDC76245C7E",
+            "avatar_url": "castAndCrew\/MOS_NG_timeline_icons_KevinCostner.jpg",
+            "timecodes": [
+                {"in_time": "1700", "out_time": "1933"},
+                {"in_time": "3262", "out_time": "3444"},
+                {"in_time": "4067", "out_time": "4131"},
+                {"in_time": "7842", "out_time": "7878"}
+            ]
+        },
+        {
+            "guid": "AA6E7D2B-7EF0-166D-6AD4-D4A2B5095815",
+            "avatar_url": "castAndCrew\/MOS_NG_timeline_icons_DianeLane.jpg",
+            "timecodes": [
+                {"in_time": "1428", "out_time": "1496"},
+                {"in_time": "1700", "out_time": "1731"},
+                {"in_time": "3183", "out_time": "3199"},
+                {"in_time": "3262", "out_time": "3444"},
+                {"in_time": "3546", "out_time": "3677"},
+                {"in_time": "3759", "out_time": "3946"},
+                {"in_time": "5243", "out_time": "5260"},
+                {"in_time": "5313", "out_time": "5366"},
+                {"in_time": "5975", "out_time": "6039"},
+                {"in_time": "7812", "out_time": "7888"}
+            ]
+        },
+        {
+            "guid": "154E5124-E369-758B-D905-BB0B79D3A5AC",
+            "avatar_url": "castAndCrew\/MOS_NG_CastCrewIcon_Lawrence_Fishburne.jpg",
+            "timecodes": [
+                {"in_time": "2576", "out_time": "2623"},
+                {"in_time": "3474", "out_time": "3537"},
+                {"in_time": "3736", "out_time": "3993"},
+                {"in_time": "6187", "out_time": "6263"},
+                {"in_time": "6568", "out_time": "6600"},
+                {"in_time": "6764", "out_time": "6893"},
+                {"in_time": "7028", "out_time": "7046"},
+                {"in_time": "7187", "out_time": "7382"},
+                {"in_time": "7590", "out_time": "7621"},
+                {"in_time": "7913", "out_time": "7959"}
+            ]
+        },
+        {
+            "guid": "4FB24001-3F38-1365-E679-A216B3715614",
+            "avatar_url": "castAndCrew\/MOS_Icons_Russel_Crowe.png",
+            "timecodes": [
+                {"in_time": "58", "out_time": "904"},
+                {"in_time": "2675", "out_time": "2979"},
+                {"in_time": "5003", "out_time": "5076"},
+                {"in_time": "5096", "out_time": "5131"},
+                {"in_time": "5155", "out_time": "5198"},
+                {"in_time": "6488", "out_time": "6508"},
+                {"in_time": "6645", "out_time": "6725"}
+            ]
+        },
+        {
+            "guid": "ED3AE71D-4E83-9707-DA94-B15879A6DEB9",
+            "avatar_url": "castAndCrew\/MOS_NG_CastCrewIcon_Zack_Snyder.jpg",
+            "timecodes": [
+                {
+                    "in_time": "",
+                    "out_time": ""
+                }
+            ]
+        }
+    ]
+}

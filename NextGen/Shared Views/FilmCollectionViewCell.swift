@@ -12,10 +12,10 @@ class FilmCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    var film: Film? = nil {
+    var film: TalentFilm? {
         didSet {
-            if film?.posterImageURL != nil {
-                imageView.setImageWithURL(film!.posterImageURL!)
+            if let imageURL = film?.imageURL {
+                imageView.setImageWithURL(imageURL)
             } else {
                 imageView.image = UIImage(named: "Blank Poster")
             }

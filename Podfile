@@ -10,12 +10,13 @@ pod 'HockeySDK'
 # pod 'NextGenDataManager', path: '~/Documents/nextgen-data/ios'
 
 pod 'MWPhotoBrowser'
-pod 'RFQuiltLayout'
 pod 'SWRevealViewController', '~> 2.3'
-pod 'DLRadioButton', '~> 1.4'
-pod 'DropDown', '~> 0.1'
+pod 'MBProgressHUD', '~> 0.9.2'
+
 pod 'FBSDKCoreKit', '~> 4.10'
 pod 'FBSDKShareKit', '~> 4.10'
 pod 'FBSDKLoginKit', '~> 4.10'
 pod 'TwitterKit', '~> 1.15'
+pod 'Google-Maps-iOS-SDK-for-Business', '~> 1.13.0'
+
 end

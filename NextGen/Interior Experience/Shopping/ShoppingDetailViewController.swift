@@ -27,12 +27,13 @@ class ShoppingDetailCell: UICollectionViewCell {
             
             productBrandLabel.text = _product?.brand
             productNameLabel.text = _product?.name
-            if let imageURL = _product?.imageURL {
+            if let imageURL = _product?.productImageURL {
                 productImageView.setImageWithURL(imageURL, completion: { (image) -> Void in
                     self.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
                 productImageView.image = nil
+                productImageView.backgroundColor = UIColor.clearColor()
             }
         }
     }
@@ -75,12 +76,13 @@ class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource
             productBrandLabel.text = _currentProduct?.brand
             productNameLabel.text = _currentProduct?.name
             productPriceLabel.text = _currentProduct?.price
-            if let imageURL = _currentProduct?.imageURL {
+            if let imageURL = _currentProduct?.productImageURL {
                 productImageView.setImageWithURL(imageURL, completion: { (image) -> Void in
                     self.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
                 productImageView.image = nil
+                productImageView.backgroundColor = UIColor.clearColor()
             }
         }
     }

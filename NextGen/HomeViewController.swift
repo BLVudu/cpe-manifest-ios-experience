@@ -21,12 +21,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
 
-        if self.revealViewController() != nil {
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
-        self.revealViewController().rearViewRevealWidth = 300
-        backgroundContainerView.sendSubviewToBack(backgroundImageView)
+             backgroundContainerView.sendSubviewToBack(backgroundImageView)
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {

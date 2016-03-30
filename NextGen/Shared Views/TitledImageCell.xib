@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RobotoCondensed-Regular.ttf">
+            <string>RobotoCondensed-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TitledImageCellReuseIdentifier" id="ezU-0e-q1m" userLabel="TitledImageCell" customClass="TitledImageCell" customModule="NextGen" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="318" height="224"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="318" height="224"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mq6-xI-JSp">
+                        <rect key="frame" x="0.0" y="45" width="318" height="179"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="mq6-xI-JSp" secondAttribute="height" multiplier="16:9" id="Ab2-Qt-c5w"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extras Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="1ZW-m2-1Lx">
+                        <rect key="frame" x="10" y="0.0" width="298" height="45"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="19"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="1ZW-m2-1Lx" firstAttribute="top" secondItem="ezU-0e-q1m" secondAttribute="top" id="0Pb-yk-v7I"/>
+                <constraint firstItem="mq6-xI-JSp" firstAttribute="top" secondItem="1ZW-m2-1Lx" secondAttribute="bottom" id="1ch-TN-g3N"/>
+                <constraint firstAttribute="bottom" secondItem="mq6-xI-JSp" secondAttribute="bottom" id="NeE-fT-PKg"/>
+                <constraint firstItem="1ZW-m2-1Lx" firstAttribute="leading" secondItem="ezU-0e-q1m" secondAttribute="leading" constant="10" id="pJX-be-yZO"/>
+                <constraint firstAttribute="trailing" secondItem="mq6-xI-JSp" secondAttribute="trailing" id="rzM-bs-mWk"/>
+                <constraint firstAttribute="trailingMargin" secondItem="mq6-xI-JSp" secondAttribute="trailing" constant="-8" id="spu-cK-mWE"/>
+                <constraint firstItem="mq6-xI-JSp" firstAttribute="leading" secondItem="ezU-0e-q1m" secondAttribute="leading" id="vM9-if-DiX"/>
+                <constraint firstAttribute="trailing" secondItem="1ZW-m2-1Lx" secondAttribute="trailing" constant="10" id="ymg-BB-TUV"/>
+            </constraints>
+            <size key="customSize" width="318" height="224"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="spu-cK-mWE"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="imageView" destination="mq6-xI-JSp" id="bUo-QK-bOQ"/>
+                <outlet property="titleLabel" destination="1ZW-m2-1Lx" id="Dlo-to-29E"/>
+            </connections>
+            <point key="canvasLocation" x="35" y="167"/>
+        </collectionViewCell>
+    </objects>
+</document>

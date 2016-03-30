@@ -32,7 +32,6 @@ extension UINavigationItem {
         let rightHeaderImageView = UIImageView(image: UIImage(named: "extras_header.png"))
         rightHeaderImageView.frame = CGRectMake(0, 0, 182, navigationHeight)
         self.rightBarButtonItem = UIBarButtonItem(customView: rightHeaderImageView)
-        
     }
     
     func setBarButton(side: UIBarButtonItemSide!, button: UIButton!, target: AnyObject?, action: Selector) {

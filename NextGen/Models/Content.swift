@@ -15,10 +15,22 @@ class Content: NSObject {
     var talent = [String: Talent]()
     var scenes = [Double: Scene]()
     var sceneKeys: [Double]?
+    var allClips = [Clip]()
     
     required init(info: NSDictionary) {
         super.init()
         
+        if let share = info["share"] as? NSDictionary{
+            if let clips = share["clips"] as? NSArray{
+                for aClip in clips{
+                    allClips.append(Clip(info: aClip as! NSDictionary))
+                }
+            }
+        }
+
+        
+    }
+        /*
         video = Video(info: info["video"] as! NSDictionary)
         video.content = self
         
@@ -99,5 +111,5 @@ class Content: NSObject {
         
         return (closestSceneTime >= 0 ? scenes[closestSceneTime] : nil)
     }
-    
+    */
 }

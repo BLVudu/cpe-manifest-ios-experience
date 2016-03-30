@@ -8,8 +8,6 @@
 
 import UIKit
 
-let TalentTableViewCellIdentifier = "TalentTableViewCell"
-
 class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TalentDetailViewPresenter {
     
     @IBOutlet weak var talentTableView: TalentTableView!
@@ -17,8 +15,13 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     @IBOutlet weak var sceneDetailView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
-    var selectedIndexPath: NSIndexPath?
-    var currentTime = 0.0
+    private var _didChangeTimeObserver: NSObjectProtocol!
+    private var _selectedIndexPath: NSIndexPath?
+    private var _currentTime = -1.0
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
+    }
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -26,17 +29,12 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         
         talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         
-        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerTimeDidChange, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            if let userInfo = notification.userInfo, time = userInfo["time"] as? Double {
-                self.currentTime = time
-                self.talentTableView.reloadData()
+        _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
+                strongSelf._currentTime = time
+                strongSelf.talentTableView.reloadData()
             }
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func talentDetailViewController() -> TalentDetailViewController? {
@@ -66,9 +64,9 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     }
     
     func hideTalentDetailView() {
-        if selectedIndexPath != nil {
-            talentTableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
-            selectedIndexPath = nil
+        if let indexPath = _selectedIndexPath {
+            talentTableView.deselectRowAtIndexPath(indexPath, animated: true)
+            _selectedIndexPath = nil
         }
         
         sceneDetailView.alpha = 0
@@ -95,7 +93,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCellIdentifier) as! TalentTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
         //if let sceneTalent = currentScene?.talent {
         //    cell.talent = sceneTalent[indexPath.row]
         //}
@@ -114,7 +112,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if indexPath == selectedIndexPath {
+        if indexPath == _selectedIndexPath {
             hideTalentDetailView()
             return nil
         }
@@ -123,7 +121,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndexPath = indexPath
+        _selectedIndexPath = indexPath
         talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
         showTalentDetailView()
     }

@@ -36,10 +36,34 @@ class TheTakeProduct: NSObject {
         }
     }
     
-    var imageURL: NSURL? {
+    var productImageURL: NSURL? {
         get {
-            if let images = _data["productImages"] as? NSDictionary, image = images["500pxLink"] as? String {
-                return NSURL(string: image)!
+            var images = _data["productImages"]
+            if images == nil {
+                images = _data["productImage"]
+            }
+            
+            if images != nil {
+                if let image = images?["500pxLink"] as? String {
+                    return NSURL(string: image)
+                }
+            }
+            
+            return nil
+        }
+    }
+    
+    var sceneImageURL: NSURL? {
+        get {
+            var images = _data["cropImages"]
+            if images == nil {
+                images = _data["cropImage"]
+            }
+            
+            if images != nil {
+                if let image = images?["500pxCropLink"] as? String {
+                    return NSURL(string: image)
+                }
             }
             
             return nil
@@ -92,6 +116,10 @@ class TheTakeProduct: NSObject {
         }
         
         return ""
+    }
+    
+    func getSceneBullseyePoint(parentRect: CGRect) -> CGPoint {
+        return CGPointMake(CGRectGetWidth(parentRect) * CGFloat((dataValue("keyCropProductX") as NSString).doubleValue), CGRectGetHeight(parentRect) * CGFloat((dataValue("keyCropProductY") as NSString).doubleValue))
     }
     
 }

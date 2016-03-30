@@ -58,7 +58,7 @@ class MapDetailCell: UICollectionViewCell {
     
 }
 
-class MapDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class MapDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -108,7 +108,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     
     // MARK: Actions
     @IBAction func close(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName("resumeMovie", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldResume, object: nil)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -131,7 +131,7 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         /*if (indexPath.row == locationImages.count+1){
             self.mapView.alpha = 0.5
-            NSNotificationCenter.defaultCenter().postNotificationName("pauseMovie", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.PlayerShouldPause, object: nil)
             self.videoView.hidden = false
             self.imageView.hidden = true
             let thisExperience = experience.childExperiences()[0]
@@ -156,6 +156,14 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
             let imgData = NSData(contentsOfURL:NSURL(string: locationImages[indexPath.row-1] as! String)!)
             self.imageView.image = UIImage(data: imgData!)
         }*/
+    }
+    
+    // MARK: MKMapViewDelegate
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")
+        annotationView.image = UIImage(named: "MOSMapPin")
+        annotationView.canShowCallout = true
+        return annotationView
     }
     
 }

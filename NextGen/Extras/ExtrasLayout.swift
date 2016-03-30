@@ -87,8 +87,6 @@ class ExtrasLayout: UICollectionViewLayout {
                  
                 let width = columnWidth - cellPadding*2
                 let photoHeight = delegate.collectionView(collectionView!, heightForPhotoAtIndexPath: indexPath , withWidth:width)
-                let annotationHeight = delegate.collectionView(collectionView!,
-                    heightForLabelAtIndexPath: indexPath, withWidth: width)
                 let height = cellPadding +  photoHeight +  cellPadding
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = CGRectInset(frame, cellPadding, cellPadding)
@@ -102,7 +100,7 @@ class ExtrasLayout: UICollectionViewLayout {
                 contentHeight = max(contentHeight, CGRectGetMaxY(frame))
                 yOffset[column] = yOffset[column] + height
                 
-                column = column >= (numberOfColumns - 1) ? 0 : ++column
+                column = column >= (numberOfColumns - 1) ? 0 : column + 1
             }
         }
     }

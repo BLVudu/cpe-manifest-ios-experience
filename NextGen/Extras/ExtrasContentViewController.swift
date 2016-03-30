@@ -22,6 +22,8 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
     @IBOutlet weak var saveBtn: UIButton!
 
     var experience: NGDMExperience!
+    let readyToPlay = kWBVideoPlayerItemReadyToPlayNotification
+    var videoURLS: [NSURL] = []
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -50,6 +52,20 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
                 }
             }
         }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            if let userInfo = notification.userInfo{
+                let index = userInfo["index"]as! Int
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                self.tableView(self.tableView, didSelectRowAtIndexPath: indexPath)
+                
+                
+            }
+            
+            
+        }
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
@@ -70,6 +86,10 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
         }
         
         return nil
+    }
+    
+    func playNextItem(){
+        
     }
     
     
@@ -149,7 +169,8 @@ class ExtrasContentViewController: StylizedViewController, UITableViewDataSource
                 if let player = videoPlayerViewController.player {
                     player.removeAllItems()
                 }
-                
+                videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
+                videoPlayerViewController.isExtras = true
                 videoPlayerViewController.playerControlsVisible = false
                 videoPlayerViewController.lockTopToolbar = true
                 videoPlayerViewController.playVideoWithURL(videoURL)

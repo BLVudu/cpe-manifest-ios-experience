@@ -105,7 +105,7 @@ class ContentLayout: UICollectionViewFlowLayout{
                 contentWidth = max(contentWidth, CGRectGetMaxX(frame))
                 xOffset[column] = xOffset[column] + width
                 
-                column = column >= (numberOfColumns - 1) ? 0 : ++column
+                column = column >= (numberOfColumns - 1) ? 0 : column + 1
             }
         }
     }

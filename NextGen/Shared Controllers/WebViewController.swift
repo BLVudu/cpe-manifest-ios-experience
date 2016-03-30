@@ -28,7 +28,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         
         self.title = _title
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "onDone")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(WebViewController.onDone))
         self.view.backgroundColor = UIColor.blackColor()
         
         let configuration = WKWebViewConfiguration()

@@ -10,19 +10,28 @@ import UIKit
 
 class InteriorExperienceViewController: UIViewController {
     
+    struct SegueIdentifier {
+        static let PlayerViewController = "PlayerViewControllerSegue"
+    }
+    
     @IBOutlet weak var playerContainerView: UIView!
     @IBOutlet weak var extrasContainerView: UIView!
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
-    var allowPortraitOrientation = false
+    private var _didPlayMainExperienceObserver: NSObjectProtocol!
+    private var _isShowingInterstitial = true
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(_didPlayMainExperienceObserver)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserverForName(kVideoPlayerIsPlayingPrimaryVideo, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (_) -> Void in
+        _didPlayMainExperienceObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayMainExperience, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) in
             if let strongSelf = self {
-                strongSelf.allowPortraitOrientation = true
+                strongSelf._isShowingInterstitial = false
             }
         }
         
@@ -36,12 +45,29 @@ class InteriorExperienceViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (allowPortraitOrientation ? UIInterfaceOrientationMask.All : UIInterfaceOrientationMask.Landscape)
+        return UIInterfaceOrientationMask.All
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
         updatePlayerConstraints()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SegueIdentifier.PlayerViewController {
+            let playerViewController = segue.destinationViewController as! VideoPlayerViewController
+            playerViewController.shouldPlayMainExperience = true
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if _isShowingInterstitial {
+            if let point = touches.first?.locationInView(self.view) {
+                if CGRectContainsPoint(CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 60), point) {
+                    NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldSkipInterstitial, object: nil)
+                }
+            }
+        }
     }
 
 }

@@ -26,8 +26,7 @@ class CustomScrubber: UISlider{
         
         
         self.setThumbImage(UIImage(named: "Scrubber Image"), forState: .Normal)
-        
-        print(self.frame)
+ 
         
     }
     

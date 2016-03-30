@@ -12,41 +12,68 @@ class VideoCell: UITableViewCell {
     
     static let ReuseIdentifier = "VideoCellReuseIdentifier"
     
-    @IBOutlet weak var thumbnail: UIImageView!
-    @IBOutlet weak var caption: UILabel!
-    @IBOutlet weak var playBtn: UIImageView!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var playIconImageView: UIImageView!
+    @IBOutlet weak var runtimeLabel: UILabel!
     
-    var isGallery = false
+    var experience: NGDMExperience? {
+        didSet {
+            captionLabel.text = experience?.metadata?.title
+            if let runtime = experience?.videoRuntime {
+                if runtime > 0 {
+                    runtimeLabel.hidden = false
+                    runtimeLabel.text = runtime.formattedTime()
+                } else {
+                    runtimeLabel.hidden = true
+                }
+            } else {
+                runtimeLabel.hidden = true
+            }
+            
+            if let imageURL = experience?.imageURL {
+                thumbnailImageView.setImageWithURL(imageURL)
+            } else {
+                thumbnailImageView.image = nil
+            }
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        experience = nil
+    }
     
     override func layoutSubviews() {
-        thumbnail.layer.borderColor = UIColor.whiteColor().CGColor
+        super.layoutSubviews()
+        
+        updateCellStyle()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
+        updateCellStyle()
+        
         if selected {
-            self.playBtn.hidden = true
-            self.thumbnail.layer.borderWidth = 2
-            
             UIView.animateWithDuration(0.25, animations: {
-                self.thumbnail.alpha = 1
-                self.caption.alpha = 1
-                }, completion: nil)
-        }else {
-            if isGallery == true{
-                self.playBtn.hidden = true
-                
-            } else {
-            self.playBtn.hidden = false
-            }
-            self.thumbnail.layer.borderWidth = 0
-            
+                self.thumbnailImageView.alpha = 1
+                self.captionLabel.alpha = 1
+            }, completion: nil)
+        } else {
             UIView.animateWithDuration(0.25, animations: {
-                self.thumbnail.alpha = 0.5
-                self.caption.alpha = 0.5
+                self.thumbnailImageView.alpha = 0.5
+                self.captionLabel.alpha = 0.5
             }, completion: nil)
         }
+    }
+    
+    func updateCellStyle() {
+        thumbnailImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        thumbnailImageView.layer.borderWidth = (self.selected ? 2 : 0)
+        captionLabel.textColor = (self.selected ? UIColor(netHex: 0xffcd14) : UIColor.whiteColor())
+        playIconImageView.hidden = self.selected
     }
     
 }
