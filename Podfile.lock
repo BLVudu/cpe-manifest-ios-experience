@@ -6,7 +6,6 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
   - DACircularProgress (2.3.1)
-  - DLRadioButton (1.4.6)
   - Fabric (1.6.7)
   - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
@@ -22,7 +21,6 @@ PODS:
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
-  - RFQuiltLayout (1.1.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -33,21 +31,18 @@ PODS:
     - TwitterCore (= 1.15.3)
 
 DEPENDENCIES:
-  - DLRadioButton (~> 1.4)
   - FBSDKCoreKit (~> 4.10)
   - FBSDKLoginKit (~> 4.10)
   - FBSDKShareKit (~> 4.10)
   - HockeySDK
   - MBProgressHUD (~> 0.9.2)
   - MWPhotoBrowser
-  - RFQuiltLayout
   - SWRevealViewController (~> 2.3)
   - TwitterKit (~> 1.15)
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
-  DLRadioButton: 4005319c135297c2998781d4b3dabc5e9b9781c4
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
@@ -55,7 +50,6 @@ SPEC CHECKSUMS:
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
-  RFQuiltLayout: aa28fc2d4a262fbca7caa43d9d8ef4b4726c8cd4
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4

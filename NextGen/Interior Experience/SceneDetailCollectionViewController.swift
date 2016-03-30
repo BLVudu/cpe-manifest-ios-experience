@@ -8,9 +8,8 @@
 
 import UIKit
 import MapKit
-import RFQuiltLayout
 
-class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLayoutDelegate, UIViewControllerTransitioningDelegate {
+class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
     
     struct SegueIdentifier {
         static let ShowGallery = "showGallery"
@@ -18,7 +17,11 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         static let ShowMap = "showMap"
     }
     
-    let kSceneDetailExtrasUpdateInterval = 30.0
+    struct Constants {
+        static let ItemsPerRow: CGFloat = 2.0
+        static let ItemSpacing: CGFloat = 5.0
+        static let UpdateInterval: Double = 30.0
+    }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
     private var _currentTime = -1.0
@@ -55,18 +58,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        layoutCollectionView()
         self.collectionView?.alpha = 1
+        self.collectionViewLayout.invalidateLayout()
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        layoutCollectionView()
-    }
-    
-    func layoutCollectionView() {
-        let layout = self.collectionView?.collectionViewLayout as! RFQuiltLayout
-        layout.direction = UICollectionViewScrollDirection.Vertical
-        layout.blockPixels = CGSizeMake((CGRectGetWidth(self.collectionView!.bounds) / 2), (CGRectGetWidth(self.collectionView!.bounds) / 2))
+        self.collectionViewLayout.invalidateLayout()
     }
     
     func updateCollectionView() {
@@ -94,7 +91,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
             if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
                 if let cell = cell as? ImageSceneDetailCollectionViewCell {
                     let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(_currentTime)
-                    if _currentProductFrameTime < 0 || newFrameTime - _currentProductFrameTime >= kSceneDetailExtrasUpdateInterval {
+                    if _currentProductFrameTime < 0 || newFrameTime - _currentProductFrameTime >= Constants.UpdateInterval {
                         _currentProductFrameTime = newFrameTime
                         
                         if let currentTask = _currentProductSessionDataTask {
@@ -150,6 +147,20 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         return cell
     }
     
+    // MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), 250)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.ItemSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.ItemSpacing
+    }
+    
+    // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isProduct() {
@@ -179,6 +190,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         }
     }
     
+    // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.ShowGallery {
             let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
@@ -211,16 +223,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, RFQuiltLa
         }
         
         return nil
-    }
-    
-    
-    // MARK: RFQuiltLayoutDelegate
-    func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
-        return CGSizeMake(1, 1)
-    }
-    
-    func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(5, 5, 5, 5)
     }
     
     // MARK: UIViewControllerTransitioningDelegate

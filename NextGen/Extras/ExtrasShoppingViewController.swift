@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import RFQuiltLayout
 import MBProgressHUD
 
-class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
+class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
@@ -50,10 +49,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let layout = productsCollectionView.collectionViewLayout as? RFQuiltLayout {
-            layout.direction = UICollectionViewScrollDirection.Vertical
-            layout.blockPixels = CGSizeMake((CGRectGetWidth(productsCollectionView.bounds) / 3), 190)
-        }
+        productsCollectionView.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: UITableViewDelegate
@@ -110,13 +106,17 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         
     }
     
-    // MARK: RFQuiltLayoutDelegate
-    func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
-        return CGSizeMake(1, 1)
+    // MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake((CGRectGetWidth(collectionView.bounds) / 3) - 5, 190)
     }
     
-    func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(5, 5, 5, 5)
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 5.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 5.0
     }
 
 }

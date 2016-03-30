@@ -72,7 +72,11 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
         
         set(v) {
-            if _timedEvent != v {
+            if v == nil {
+                descriptionText = nil
+                extraDescriptionText = nil
+                _timedEvent = nil
+            } else if _timedEvent != v {
                 _timedEvent = v
                 
                 if let event = _timedEvent, experience = experience {

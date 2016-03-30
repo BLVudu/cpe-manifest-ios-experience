@@ -650,7 +650,7 @@
             </objects>
             <point key="canvasLocation" x="2066" y="743"/>
         </scene>
-        <!--Delegate-->
+        <!--Extras Shopping View Controller-->
         <scene sceneID="Ubv-u3-snz">
             <objects>
                 <viewController id="8Rs-86-BDa" customClass="ExtrasShoppingViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
@@ -673,13 +673,14 @@
                                     <outlet property="delegate" destination="8Rs-86-BDa" id="MpZ-SV-zfZ"/>
                                 </connections>
                             </tableView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSg-Dw-bVg">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mSg-Dw-bVg">
                                 <rect key="frame" x="300" y="44" width="724" height="724"/>
-                                <collectionViewLayout key="collectionViewLayout" id="GF0-WG-nW4" customClass="RFQuiltLayout">
-                                    <connections>
-                                        <outlet property="delegate" destination="8Rs-86-BDa" id="Vg7-LE-rJS"/>
-                                    </connections>
-                                </collectionViewLayout>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="xjy-sX-aGg">
+                                    <size key="itemSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="8Rs-86-BDa" id="sjn-ea-q1i"/>
@@ -1345,26 +1346,23 @@
             </objects>
             <point key="canvasLocation" x="48" y="2053"/>
         </scene>
-        <!--Delegate-->
+        <!--Scene Detail Collection View Controller-->
         <scene sceneID="2S6-zB-kic">
             <objects>
                 <collectionViewController id="VTD-yi-sj7" customClass="SceneDetailCollectionViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DCa-cj-7R6" customClass="RFQuilt">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DCa-cj-7R6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sqt-Hf-9Ea" customClass="RFQuiltLayout">
-                            <size key="itemSize" width="100" height="100"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sqt-Hf-9Ea">
+                            <size key="itemSize" width="0.0" height="0.0"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <connections>
-                                <outlet property="delegate" destination="VTD-yi-sj7" id="Dab-tz-lA6"/>
-                            </connections>
                         </collectionViewFlowLayout>
                         <cells/>
                         <connections>
-                            <outlet property="dataSource" destination="VTD-yi-sj7" id="AVb-uo-tJS"/>
-                            <outlet property="delegate" destination="VTD-yi-sj7" id="Qos-sx-Aaz"/>
+                            <outlet property="dataSource" destination="VTD-yi-sj7" id="JUV-4E-Gch"/>
+                            <outlet property="delegate" destination="VTD-yi-sj7" id="Q0r-Oj-UhD"/>
                         </connections>
                     </collectionView>
                     <nil key="simulatedStatusBarMetrics"/>
