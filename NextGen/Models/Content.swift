@@ -14,8 +14,8 @@ class Content: NSObject {
     var video: Video!
     var talent = [String: Talent]()
     var scenes = [Double: Scene]()
-    var sceneKeys: [Double]?
-    var allClips = [Clip]()
+    var clipKeys: [Double]?
+    var allClips = [Double: Clip]()
     
     required init(info: NSDictionary) {
         super.init()
@@ -23,13 +23,37 @@ class Content: NSObject {
         if let share = info["share"] as? NSDictionary{
             if let clips = share["clips"] as? NSArray{
                 for aClip in clips{
-                    allClips.append(Clip(info: aClip as! NSDictionary))
+                    let clipData = Clip(info: aClip as! NSDictionary)
+                    allClips[clipData.inTime!] = clipData
                 }
             }
         }
-
         
+        clipKeys = allClips.keys.sort { $0 < $1 }
     }
+    
+        
+        func clipToShareAtTime(time: Double)->Clip?{
+            
+            var closestSceneTime: Double = -1
+            if clipKeys != nil {
+                for sceneTime in clipKeys! {
+                    if sceneTime > time {
+                        break
+                    }
+                    
+                    closestSceneTime = sceneTime
+                }
+            }
+            
+            return (closestSceneTime >= 0 ? allClips[closestSceneTime] : nil)
+
+            
+        }
+        
+    
+    
+    
         /*
         video = Video(info: info["video"] as! NSDictionary)
         video.content = self

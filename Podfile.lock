@@ -13,6 +13,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
+  - Google-Maps-iOS-SDK-for-Business (1.13.0)
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.10)
   - FBSDKLoginKit (~> 4.10)
   - FBSDKShareKit (~> 4.10)
+  - Google-Maps-iOS-SDK-for-Business (~> 1.13.0)
   - HockeySDK
   - MBProgressHUD (~> 0.9.2)
   - MWPhotoBrowser
@@ -47,6 +49,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
+  Google-Maps-iOS-SDK-for-Business: 3484cc7fa796151285e34e07fb272d8168db710f
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c

@@ -11,8 +11,8 @@ import UIKit
 
 class Clip: NSObject{
     
-    var inTime: Int?
-    var outTime: Int?
+    var inTime: Double? = -1
+    var outTime: Double? = -1
     var url: NSURL?
     var thumbnailImage: NSURL?
     var text: String?
@@ -20,8 +20,8 @@ class Clip: NSObject{
     required init(info: NSDictionary) {
         super.init()
    
-        inTime = info["in_time"] as? Int
-        outTime = info["out_time"] as? Int
+        inTime = info["in_time"] as? Double
+        outTime = info["out_time"] as? Double
         url = NSURL(string:"http://cdn.theplatform.services/u/ContentServer/WarnerBros/Static/mos/NextGEN/\(info["url"] as! String)")
         if let thumbnails = info["thumbnails"] as? NSArray{
             for thumbnail  in thumbnails{

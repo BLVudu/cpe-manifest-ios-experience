@@ -42,6 +42,7 @@ class ClipViewController: UIViewController {
          clip = DataManager.sharedInstance.content?.allClips[0]
         
         
+        
         if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
