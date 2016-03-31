@@ -50,6 +50,7 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -897,6 +898,26 @@
                                     <segue destination="FsK-dw-pgC" kind="embed" id="ir8-OX-j5p"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-Ys-did">
+                                <rect key="frame" x="308" y="624" width="160" height="45"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="6QS-Uq-4Yo"/>
+                                    <constraint firstAttribute="height" constant="45" id="K00-Uf-3tE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="15"/>
+                                <state key="normal" title="SHARE THIS CLIP">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="shareClip:" destination="wpZ-Jt-DDC" eventType="touchUpInside" id="cAB-ep-kod"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -917,7 +938,9 @@
                             <constraint firstItem="jRd-aM-U4T" firstAttribute="leading" secondItem="fGJ-AQ-eTt" secondAttribute="trailing" constant="20" id="XXS-dI-72i"/>
                             <constraint firstItem="Lqt-gp-7il" firstAttribute="trailing" secondItem="gVb-rK-Z1W" secondAttribute="trailing" id="bVB-zy-jOw"/>
                             <constraint firstItem="iVh-Ev-WDN" firstAttribute="leading" secondItem="fGJ-AQ-eTt" secondAttribute="trailing" constant="20" id="dDJ-je-eka"/>
+                            <constraint firstItem="gxh-Ys-did" firstAttribute="top" secondItem="nG0-ho-vG4" secondAttribute="bottom" constant="45" id="eyY-nC-xnc"/>
                             <constraint firstItem="fGJ-AQ-eTt" firstAttribute="leading" secondItem="OB4-DC-Qqz" secondAttribute="leading" id="noS-ER-vfS"/>
+                            <constraint firstItem="gxh-Ys-did" firstAttribute="leading" secondItem="gVb-rK-Z1W" secondAttribute="leading" id="oeT-TT-Qou"/>
                             <constraint firstItem="gVb-rK-Z1W" firstAttribute="trailing" secondItem="iVh-Ev-WDN" secondAttribute="trailing" id="ohB-fU-9va"/>
                             <constraint firstItem="jRd-aM-U4T" firstAttribute="trailing" secondItem="gVb-rK-Z1W" secondAttribute="trailing" id="pCF-hv-NwR"/>
                             <constraint firstItem="gVb-rK-Z1W" firstAttribute="top" secondItem="jRd-aM-U4T" secondAttribute="bottom" constant="15" id="sZb-bv-FrO"/>
@@ -940,6 +963,7 @@
                         <outlet property="mediaRuntimeLabel" destination="nG0-ho-vG4" id="rjO-Qk-LEO"/>
                         <outlet property="mediaTitleLabel" destination="gVb-rK-Z1W" id="81f-7j-5TJ"/>
                         <outlet property="proxyView" destination="jRd-aM-U4T" id="PTB-12-0ED"/>
+                        <outlet property="shareClip" destination="gxh-Ys-did" id="YDb-zC-4pB"/>
                         <outlet property="videoContainerView" destination="iVh-Ev-WDN" id="avd-qd-Y9Y"/>
                     </connections>
                 </viewController>
@@ -2390,7 +2414,7 @@
         <image name="tw_logo.png" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dhm-Xt-tFh"/>
+        <segue reference="ir8-OX-j5p"/>
         <segue reference="W8P-ST-gWA"/>
     </inferredMetricsTieBreakers>
 </document>

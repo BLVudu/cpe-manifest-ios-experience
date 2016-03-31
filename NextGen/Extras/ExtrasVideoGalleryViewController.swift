@@ -13,12 +13,14 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     @IBOutlet weak var galleryTableView: UITableView!
     @IBOutlet weak var proxyView: UIView!
     
+    @IBOutlet weak var shareClip: UIButton!
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaDescriptionLabel: UILabel!
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
     
     var experience: NGDMExperience!
+    var shareContent: NSURL!
     
     private var _didToggleFullScreenObserver: NSObjectProtocol!
     private var _willPlayNextItemObserver: NSObjectProtocol!
@@ -43,6 +45,7 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         self.mediaTitleLabel.hidden = true
         self.mediaDescriptionLabel.hidden = true
         self.mediaRuntimeLabel.hidden = true
+        self.shareClip.hidden = true
 
         _didToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, fullScreenEnabled = userInfo["toggleFS"] as? Bool {
@@ -122,6 +125,7 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         self.mediaTitleLabel.hidden = false
         self.mediaDescriptionLabel.hidden = false
         self.mediaRuntimeLabel.hidden = false
+        self.shareClip.hidden = false
 
         let thisExperience = experience.childExperiences[indexPath.row]
         
@@ -145,7 +149,19 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             videoPlayerViewController.playerControlsVisible = false
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)
+            self.shareContent = videoURL
         }
     }
+    
+    @IBAction func shareClip(sender: AnyObject) {
+        
+        
+        let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = sender as? UIView
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+        
+        
+    }
+
     
 }
