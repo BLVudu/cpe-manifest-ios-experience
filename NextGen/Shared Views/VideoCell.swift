@@ -60,11 +60,13 @@ class VideoCell: UITableViewCell {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
+                self.runtimeLabel.text = "PLAYING"
             }, completion: nil)
         } else {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 0.5
                 self.captionLabel.alpha = 0.5
+                self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
             }, completion: nil)
         }
     }

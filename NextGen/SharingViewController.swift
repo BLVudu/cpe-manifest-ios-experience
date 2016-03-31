@@ -15,7 +15,10 @@ class SharingViewController: UIViewController{
     
     @IBOutlet weak var player: UIView!
     
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var clipDuration: UILabel!
     @IBOutlet weak var clipName: UILabel!
+    @IBOutlet weak var clipThumbnailView: UIImageView!
     
     var clipURL: NSURL!
     var clipThumbnail: NSURL!
@@ -39,26 +42,12 @@ class SharingViewController: UIViewController{
         
         super.viewDidLoad()
         
-        //clip = DataManager.sharedInstance.content?.allClips[0]
+
         
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
         clipName.text = clip?.text
+        clipThumbnailView.setImageWithURL(clipThumbnail)
         
-        if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
-            if let player = videoPlayerViewController.player {
-                player.removeAllItems()
-            }
-            
-            videoPlayerViewController.curIndex = 0
-            videoPlayerViewController.indexMax = 1
-            videoPlayerViewController.playerControlsVisible = false
-            videoPlayerViewController.lockTopToolbar = true
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            self.shareContent = videoURL
-            
-            
-            
-        }
         
     }
 
@@ -98,6 +87,28 @@ class SharingViewController: UIViewController{
 
     
 
+    @IBAction func playClip(sender: AnyObject) {
+        
+        self.clipThumbnailView.hidden = true
+        self.playButton.hidden = true
+        
+        if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
+            if let player = videoPlayerViewController.player {
+                player.removeAllItems()
+            }
+            
+            videoPlayerViewController.curIndex = 0
+            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.playerControlsVisible = false
+            videoPlayerViewController.lockTopToolbar = true
+            videoPlayerViewController.playVideoWithURL(videoURL)
+            self.shareContent = videoURL
+            
+            
+            
+        }
+
+    }
 
     
     @IBAction func shareClip(sender: AnyObject) {

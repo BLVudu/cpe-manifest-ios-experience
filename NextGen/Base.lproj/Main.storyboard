@@ -49,8 +49,6 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
-            <string>RobotoCondensed-Regular</string>
-            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1627,9 +1625,24 @@
                                             <action selector="shareClip:" destination="rnf-6M-6TQ" eventType="touchUpInside" id="b8k-ni-2Wy"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="urK-as-M3M">
+                                        <rect key="frame" x="57" y="73" width="910" height="225"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTR-b1-2VW">
+                                        <rect key="frame" x="488" y="170" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="8xa-Dt-RX2"/>
+                                            <constraint firstAttribute="height" constant="32" id="R1n-0R-uZD"/>
+                                        </constraints>
+                                        <state key="normal" image="Play_Button.png"/>
+                                        <connections>
+                                            <action selector="playClip:" destination="rnf-6M-6TQ" eventType="touchUpInside" id="0ze-li-Ys7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="urK-as-M3M" firstAttribute="top" secondItem="9E1-bh-rC1" secondAttribute="top" constant="73" id="03c-Rn-idm"/>
                                     <constraint firstAttribute="trailing" secondItem="jMt-DL-X6M" secondAttribute="trailing" constant="510" id="0cm-wS-XW1"/>
                                     <constraint firstItem="jMt-DL-X6M" firstAttribute="centerX" secondItem="9E1-bh-rC1" secondAttribute="centerX" constant="-48" id="2xr-on-bln"/>
                                     <constraint firstItem="xy7-HO-Qx8" firstAttribute="top" secondItem="9E1-bh-rC1" secondAttribute="top" constant="11" id="6Xt-3Z-E7C"/>
@@ -1639,19 +1652,24 @@
                                     <constraint firstAttribute="bottom" secondItem="jMt-DL-X6M" secondAttribute="bottom" constant="22" id="Mnc-1n-Xdh"/>
                                     <constraint firstItem="qIU-9d-a7B" firstAttribute="centerY" secondItem="xy7-HO-Qx8" secondAttribute="centerY" id="Ngs-ei-y3l"/>
                                     <constraint firstItem="qIU-9d-a7B" firstAttribute="top" secondItem="9E1-bh-rC1" secondAttribute="topMargin" id="Quv-4J-GmZ"/>
+                                    <constraint firstItem="TTR-b1-2VW" firstAttribute="centerY" secondItem="urK-as-M3M" secondAttribute="centerY" id="RVe-w4-C62"/>
                                     <constraint firstItem="qI0-H8-B8x" firstAttribute="leading" secondItem="tLg-2l-20v" secondAttribute="leading" id="Sq0-Ai-bmu"/>
                                     <constraint firstItem="jMt-DL-X6M" firstAttribute="top" secondItem="5gt-MH-qlj" secondAttribute="bottom" constant="29" id="Wug-e5-1yo"/>
                                     <constraint firstAttribute="bottom" secondItem="tLg-2l-20v" secondAttribute="bottom" constant="149" id="XRG-lo-NMI"/>
                                     <constraint firstItem="jMt-DL-X6M" firstAttribute="top" secondItem="9E1-bh-rC1" secondAttribute="top" constant="381" id="Yyp-ee-VP7"/>
+                                    <constraint firstAttribute="trailing" secondItem="urK-as-M3M" secondAttribute="trailing" constant="57" id="ar0-G4-G21"/>
                                     <constraint firstItem="qI0-H8-B8x" firstAttribute="trailing" secondItem="tLg-2l-20v" secondAttribute="trailing" constant="-453" id="bgM-UL-l6x"/>
+                                    <constraint firstItem="urK-as-M3M" firstAttribute="leading" secondItem="9E1-bh-rC1" secondAttribute="leading" constant="57" id="cMU-pH-iRL"/>
                                     <constraint firstItem="fKx-eX-a6t" firstAttribute="leading" secondItem="jMt-DL-X6M" secondAttribute="trailing" constant="9" id="dxz-FC-rt9"/>
                                     <constraint firstItem="qIU-9d-a7B" firstAttribute="leading" secondItem="9E1-bh-rC1" secondAttribute="leadingMargin" id="eHC-Wg-oIQ"/>
                                     <constraint firstAttribute="trailing" secondItem="tLg-2l-20v" secondAttribute="trailing" constant="57" id="fD7-AZ-66a"/>
+                                    <constraint firstItem="TTR-b1-2VW" firstAttribute="centerX" secondItem="urK-as-M3M" secondAttribute="centerX" id="gHD-DJ-bKS"/>
                                     <constraint firstAttribute="trailing" secondItem="xy7-HO-Qx8" secondAttribute="trailing" constant="8" id="iw7-Tm-oit"/>
                                     <constraint firstItem="5gt-MH-qlj" firstAttribute="trailing" secondItem="tLg-2l-20v" secondAttribute="trailing" id="jT0-3H-YxQ"/>
                                     <constraint firstItem="fKx-eX-a6t" firstAttribute="top" secondItem="5gt-MH-qlj" secondAttribute="bottom" constant="29" id="jud-lB-VVM"/>
                                     <constraint firstAttribute="bottom" secondItem="5gt-MH-qlj" secondAttribute="bottom" constant="96" id="sI5-FT-D0c"/>
                                     <constraint firstItem="jMt-DL-X6M" firstAttribute="leading" secondItem="9E1-bh-rC1" secondAttribute="leading" constant="414" id="sbm-cq-a4P"/>
+                                    <constraint firstAttribute="bottom" secondItem="urK-as-M3M" secondAttribute="bottom" constant="150" id="sgR-Ku-zlr"/>
                                     <constraint firstItem="tLg-2l-20v" firstAttribute="top" secondItem="9E1-bh-rC1" secondAttribute="top" constant="73" id="zBf-yH-3o4"/>
                                 </constraints>
                                 <variation key="default">
@@ -1683,7 +1701,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
+                        <outlet property="clipDuration" destination="5gt-MH-qlj" id="Y64-fg-pTn"/>
                         <outlet property="clipName" destination="qI0-H8-B8x" id="uYV-ah-hW3"/>
+                        <outlet property="clipThumbnailView" destination="urK-as-M3M" id="Cyk-qL-NqQ"/>
+                        <outlet property="playButton" destination="TTR-b1-2VW" id="UAr-VF-11e"/>
                         <outlet property="player" destination="tLg-2l-20v" id="bkf-gO-gne"/>
                     </connections>
                 </viewController>
@@ -1703,118 +1724,10 @@
                         <rect key="frame" x="0.0" y="334" width="1008" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
-                    <connections>
-                        <segue destination="l0s-z9-Ggu" kind="relationship" relationship="rootViewController" id="mCP-mJ-FBp"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l5o-OU-DFF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2078" y="4003"/>
-        </scene>
-        <!--Clip View Controller-->
-        <scene sceneID="GOR-2s-g0g">
-            <objects>
-                <viewController id="l0s-z9-Ggu" customClass="ClipViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FFJ-8t-Nr8"/>
-                        <viewControllerLayoutGuide type="bottom" id="Vld-kw-swQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iD5-6J-1PV">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLx-aK-dSs">
-                                <rect key="frame" x="55" y="83" width="898" height="373"/>
-                                <connections>
-                                    <segue destination="FsK-dw-pgC" kind="embed" id="dOp-tz-u3e"/>
-                                </connections>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5O-1Y-JIJ">
-                                <rect key="frame" x="501" y="268" width="100" height="45"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="uY9-28-RN5"/>
-                                    <constraint firstAttribute="height" constant="45" id="y1v-YF-pbd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="15"/>
-                                <state key="normal" title="Share">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="shareClip:" destination="l0s-z9-Ggu" eventType="touchUpInside" id="Bns-7W-p4I"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uf-8d-3AZ">
-                                <rect key="frame" x="393" y="268" width="100" height="45"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="SjC-vO-c5C"/>
-                                    <constraint firstAttribute="width" constant="100" id="q6O-yU-OVg"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="14"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="close:" destination="l0s-z9-Ggu" eventType="touchUpInside" id="hKZ-iJ-GIG"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ozW-fG-Cxi"/>
-                    <connections>
-                        <segue destination="Awb-kL-nlt" kind="show" identifier="showCollection" id="tIH-6r-u6b"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nbc-IL-YJK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1084" y="4099"/>
-        </scene>
-        <!--Clip Collection View Controller-->
-        <scene sceneID="K5d-uZ-XNY">
-            <objects>
-                <collectionViewController id="Awb-kL-nlt" customClass="ClipCollectionViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="jqs-Da-Ieh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sOT-7m-KOm">
-                            <size key="itemSize" width="493" height="184"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="clip" id="bAo-Qn-DE8">
-                                <rect key="frame" x="53.5" y="0.0" width="493" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="493" height="184"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="Awb-kL-nlt" id="ICI-iF-DgI"/>
-                            <outlet property="delegate" destination="Awb-kL-nlt" id="3QW-Yx-wgf"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HdF-XB-AUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-324" y="4099"/>
         </scene>
         <!--Gallery Detail View Controller-->
         <scene sceneID="2wX-pQ-gL2">
@@ -2414,7 +2327,7 @@
         <image name="tw_logo.png" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ir8-OX-j5p"/>
         <segue reference="W8P-ST-gWA"/>
+        <segue reference="Vcm-iL-9qf"/>
     </inferredMetricsTieBreakers>
 </document>
