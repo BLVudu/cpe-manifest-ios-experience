@@ -94,27 +94,18 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return BaselineAPIUtil.sharedInstance.orderedTalent.count
+        return NextGenDataManager.sharedInstance.mainExperience.orderedActors.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        let talent = BaselineAPIUtil.sharedInstance.orderedTalent[indexPath.row]
+        let talent = NextGenDataManager.sharedInstance.mainExperience.orderedActors[indexPath.row]
         cell.talent = talent
         
         return cell
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "ACTORS"
-    }
-    
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.whiteColor()
-    }
-    
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         if indexPath == selectedIndexPath {
             hideTalentDetailView()

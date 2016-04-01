@@ -10,7 +10,6 @@ pod 'HockeySDK'
 # pod 'NextGenDataManager', path: '~/Documents/nextgen-data/ios'
 
 pod 'MWPhotoBrowser'
-pod 'SWRevealViewController', '~> 2.3'
 pod 'MBProgressHUD', '~> 0.9.2'
 
 pod 'FBSDKCoreKit', '~> 4.10'

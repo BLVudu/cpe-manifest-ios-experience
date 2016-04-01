@@ -10,14 +10,24 @@ import UIKit
 
 class FilmCollectionViewCell: UICollectionViewCell {
     
+    static let ReuseIdentifier = "FilmCollectionViewCellReuseIdentifier"
+    
     @IBOutlet weak var imageView: UIImageView!
     
     var film: TalentFilm? {
         didSet {
-            if let imageURL = film?.imageURL {
-                imageView.setImageWithURL(imageURL)
+            if film != nil {
+                film!.getImageURL({ (imageURL) in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if imageURL != nil {
+                            self.imageView.setImageWithURL(imageURL!)
+                        } else {
+                            self.imageView.image = UIImage(named: "Blank Poster")
+                        }
+                    })
+                })
             } else {
-                imageView.image = UIImage(named: "Blank Poster")
+                imageView.image = nil
             }
         }
     }
@@ -26,23 +36,6 @@ class FilmCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         film = nil
-    }
-    
-    override var selected: Bool {
-        get {
-            return super.selected
-        }
-        set {
-            if newValue {
-                super.selected = true
-                self.layer.borderWidth = 2
-                self.layer.borderColor = UIColor.whiteColor().CGColor
-                
-            } else if newValue == false {
-                
-                self.layer.borderWidth = 0
-            }
-        }
     }
     
 }

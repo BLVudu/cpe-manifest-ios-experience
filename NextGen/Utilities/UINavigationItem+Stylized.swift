@@ -9,9 +9,6 @@
 import UIKit
 
 let navigationHeight: CGFloat = 44
-let logoImagePadding: CGFloat = 5
-let logoImageWidth: CGFloat = 255
-let logoImageHeight: CGFloat = navigationHeight - (2 * logoImagePadding)
 
 enum UIBarButtonItemSide {
     case Left
@@ -21,14 +18,6 @@ enum UIBarButtonItemSide {
 extension UINavigationItem {
     
     func addTitleStyling() {
-        let logoContainerView = UIView(frame: CGRectMake(0, 0, logoImageWidth, navigationHeight))
-        
-        let logoImageView = UIImageView(image: UIImage(named: "Title Logo"))
-        logoImageView.frame = CGRectMake(0, logoImagePadding, logoImageWidth, logoImageHeight)
-        logoContainerView.addSubview(logoImageView)
-        
-        self.titleView = logoContainerView
-        
         let rightHeaderImageView = UIImageView(image: UIImage(named: "extras_header.png"))
         rightHeaderImageView.frame = CGRectMake(0, 0, 182, navigationHeight)
         self.rightBarButtonItem = UIBarButtonItem(customView: rightHeaderImageView)

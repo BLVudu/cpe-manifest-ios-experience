@@ -24,10 +24,9 @@ struct VideoPlayerNotification {
 class VideoPlayerViewController: WBVideoPlayerViewController {
     
     var showsTopToolbar = true
-    let shared = FBSDKShareLinkContent()
     var fullScreen = false
     var showCountdownTimer = false
-    
+    var currentClip: Clip?
     var shouldPlayMainExperience = false
     private var _didPlayInterstitial = false
     
@@ -127,14 +126,23 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
                 }
             }
             
-            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
-            /*if (self.currentScene?.canShare == false){
-                self.shareContent.alpha = 0.5
-            } else{
-                self.shareContent.alpha = 1
+            let newClip = DataManager.sharedInstance.content?.clipToShareAtTime(currentTime)
+ 
+            if newClip != self.currentClip {
+                currentClip = newClip
             }
-            self.shareContent.userInteractionEnabled = (self.currentScene?.canShare)!*/
-        }
+        
+            if (newClip == nil){
+             self.shareContent.alpha = 0.5
+                self.shareContent.userInteractionEnabled = false
+             } else{
+             self.shareContent.alpha = 1
+                self.shareContent.userInteractionEnabled = true
+             }
+             
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
+                  }
     }
     
     
@@ -166,9 +174,16 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showShare"{
+            let shareVC = segue.destinationViewController as! SharingViewController
+            shareVC.clip = self.currentClip
+    }
+    
    
     
-  
+    }
 
 
 }
