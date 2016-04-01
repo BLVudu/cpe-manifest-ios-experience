@@ -16,6 +16,7 @@ class BaselineAPIUtil: APIUtil {
         static let GetCredits = "/ProjectAllCredits"
         static let GetBio = "/ParticipantBioShort"
         static let GetHeadshot = "/ParticipantHeadshot"
+        static let GetSocialMedia = "/ParticipantSocialMedia"
         static let GetFilmography = "/ParticipantFilmCredit"
         static let GetFilmPoster = "/ProjectFilmPoster"
     }
@@ -26,15 +27,18 @@ class BaselineAPIUtil: APIUtil {
         static let Credit = "CREDIT"
         static let CreditGroup = "CREDIT_GROUP"
         static let ShortBio = "SHORT_BIO"
-        static let LargeThumbnailURL = "LARGE_THUMBNAIL_URL"
+        static let MediumURL = "MEDIUM_URL"
         static let LargeURL = "LARGE_URL"
         static let FullURL = "FULL_URL"
         static let ProjectID = "PROJECT_ID"
         static let ProjectName = "PROJECT_NAME"
+        static let Handle = "HANDLE"
+        static let URL = "URL"
     }
     
     struct Constants {
-        static let MaxCredits = 10
+        static let MaxCredits = 15
+        static let MaxFilmography = 10
     }
     
     static let sharedInstance = BaselineAPIUtil(apiDomain: "http://baselineapi.com/api")
@@ -42,66 +46,94 @@ class BaselineAPIUtil: APIUtil {
     var projectId: String!
     var apiKey: String!
     
-    private var _talent = [Int64: Talent]()
-    var orderedTalent: [Talent] {
-        get {
-            return Array(_talent.values)
-        }
+    func isActive() -> Bool {
+        return projectId != nil
     }
     
-    func prefetchCredits() {
+    func prefetchCredits(successBlock: (talents: [String: Talent]) -> Void) {
         getJSONWithPath(Endpoints.GetCredits, parameters: ["id": projectId, "apikey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
+                var talents = [String: Talent]()
                 for talentInfo in results.subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxCredits, results.count))) {
                     if let talentInfo = talentInfo as? NSDictionary, talentID = talentInfo[Keys.ParticipantID] as? NSNumber {
-                        self._talent[talentID.longLongValue] = Talent(info: talentInfo)
+                        talents[talentID.stringValue] = Talent(baselineInfo: talentInfo)
                     }
                 }
+                
+                successBlock(talents: talents)
             }
         }, errorBlock: nil)
     }
     
-    func getTalentBio(talent: Talent) {
-        getJSONWithPath(Endpoints.GetBio, parameters: ["id": String(talent.id), "apikey": apiKey], successBlock: { (result) -> Void in
+    func getTalentBio(talentID: String, successBlock: (biography: String) -> Void) {
+        getJSONWithPath(Endpoints.GetBio, parameters: ["id": talentID, "apikey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary, biography = response[Keys.ShortBio] as? String {
-                talent.biography = biography
+                successBlock(biography: biography)
             }
         }, errorBlock: nil)
     }
     
-    func getTalentImages(talent: Talent) {
-        getJSONWithPath(Endpoints.GetHeadshot, parameters: ["id": String(talent.id), "apiKey": apiKey], successBlock: { (result) -> Void in
+    func getTalentImages(talentID: String, successBlock: (talentImages: [TalentImage]) -> Void) {
+        getJSONWithPath(Endpoints.GetHeadshot, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary {
                 let talentImage = TalentImage()
-                if let thumbnailURL = response[Keys.LargeThumbnailURL] as? String {
+                if let thumbnailURL = response[Keys.MediumURL] as? String {
                     talentImage.thumbnailImageURL = NSURL(string: thumbnailURL)
                 }
                 
-                if let imageURL = response[Keys.LargeURL] as? String {
+                if let imageURL = response[Keys.FullURL] as? String {
                     talentImage.imageURL = NSURL(string: imageURL)
                 }
                 
-                talent.images.append(talentImage)
+                successBlock(talentImages: [talentImage])
             }
         }, errorBlock: nil)
     }
     
-    func getTalentFilmography(talent: Talent) {
-        getJSONWithPath(Endpoints.GetFilmography, parameters: ["id": String(talent.id), "apiKey": apiKey], successBlock: { (result) -> Void in
+    func getTalentSocialAccounts(talentID: String, successBlock: (socialAccounts: [TalentSocialAccount]?) -> Void) {
+        getJSONWithPath(Endpoints.GetSocialMedia, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
-                for filmInfo in results {
-                    if let filmInfo = filmInfo as? NSDictionary {
-                        talent.films.append(TalentFilm(info: filmInfo))
+                if results.count > 0 {
+                    var socialAccounts = [TalentSocialAccount]()
+                    for socialAccountInfo in results {
+                        if let socialAccountInfo = socialAccountInfo as? NSDictionary {
+                            socialAccounts.append(TalentSocialAccount(baselineInfo: socialAccountInfo))
+                        }
                     }
+                    
+                    successBlock(socialAccounts: socialAccounts)
+                } else {
+                    successBlock(socialAccounts: nil)
                 }
             }
         }, errorBlock: nil)
     }
     
-    func getFilmPoster(film: TalentFilm) {
-        getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": String(film.id), "apiKey": apiKey], successBlock: { (result) -> Void in
-            if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary, imageURL = response[Keys.FullURL] as? String {
-                film.imageURL = NSURL(string: imageURL)
+    func getTalentFilmography(talentID: String, successBlock: (films: [TalentFilm]) -> Void) {
+        getJSONWithPath(Endpoints.GetFilmography, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
+            if let results = result["result"] as? NSArray {
+                var films = [TalentFilm]()
+                for filmInfo in (results.reverse() as NSArray).subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxFilmography, results.count))) {
+                    if let filmInfo = filmInfo as? NSDictionary {
+                        films.append(TalentFilm(baselineInfo: filmInfo))
+                    }
+                }
+                
+                successBlock(films: films)
+            }
+        }, errorBlock: nil)
+    }
+    
+    func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) {
+        getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
+            if let results = result["result"] as? NSArray {
+                if results.count > 0 {
+                    if let response = results[0] as? NSDictionary, imageURL = response[Keys.FullURL] as? String {
+                        successBlock(imageURL: NSURL(string: imageURL))
+                    }
+                } else {
+                    successBlock(imageURL: nil)
+                }
             }
         }, errorBlock: nil)
     }

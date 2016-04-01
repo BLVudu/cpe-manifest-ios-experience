@@ -47,13 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         if let baselineAPIKey = configJSON["baseline_api_key"] as? String {
                             BaselineAPIUtil.sharedInstance.apiKey = baselineAPIKey
-                            BaselineAPIUtil.sharedInstance.prefetchCredits()
                         }
                     }
                 } catch let error as NSError {
                     print("Error parsing config data \(error.localizedDescription)")
                 }
             }
+            
+            NextGenDataManager.sharedInstance.mainExperience.loadTalent()
         }
  
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")

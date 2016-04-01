@@ -18,7 +18,7 @@ class TalentTableViewCell: UITableViewCell {
     
     var talent: Talent? = nil {
         didSet {
-            nameLabel?.text = talent?.name.uppercaseString
+            nameLabel?.text = talent?.name?.uppercaseString
             roleLabel?.text = talent?.role
             if let imageURL = talent?.thumbnailImageURL {
                 talentImageView.setImageWithURL(imageURL)
@@ -46,8 +46,12 @@ class TalentTableViewCell: UITableViewCell {
         if selected {
             talentImageView.layer.borderWidth = 2
             talentImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            nameLabel?.textColor = UIColor(netHex: 0xffcd14)
+            roleLabel?.textColor = UIColor(netHex: 0xffcd14)
         } else {
             talentImageView.layer.borderWidth = 0
+            nameLabel?.textColor = UIColor.whiteColor()
+            roleLabel?.textColor = UIColor.darkGrayColor()
         }
     }
 

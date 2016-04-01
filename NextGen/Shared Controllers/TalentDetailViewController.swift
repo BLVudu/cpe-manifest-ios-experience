@@ -14,81 +14,84 @@ protocol TalentDetailViewPresenter {
 
 class TalentDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak var talentTypeLabel: UILabel!
+    struct StoryboardSegue {
+        static let ShowActorGallery = "showActorGallery"
+    }
+    
     @IBOutlet weak var talentImageView: UIImageView!
     @IBOutlet weak var talentNameLabel: UILabel!
-    @IBOutlet weak var talentRoleLabel: UILabel!
     @IBOutlet weak var talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak var talentBiographyLabel: UITextView!
     
-    @IBOutlet weak var galleryView: UIView!
     @IBOutlet weak var filmographyContainerView: UIView!
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
     @IBOutlet weak var showGallery: UIButton!
-    @IBOutlet weak var twProfile: SocialButton!
-    @IBOutlet weak var fbProfile: SocialButton!
+    @IBOutlet weak var twitterButton: SocialButton!
+    @IBOutlet weak var facebookButton: SocialButton!
+    
     var images = [String]()
     var talent: Talent? = nil {
         didSet {
-            talentNameLabel.text = talent?.name.uppercaseString
-            talentRoleLabel.text = talent?.role
+            talentNameLabel.text = talent?.name?.uppercaseString
             if let imageURL = talent?.fullImageURL {
                 talentImageView.setImageWithURL(imageURL)
             } else {
                 talentImageView.image = nil
             }
             
-            talentBiographyLabel.text = talent?.biography
-            fbProfile.profileFB = talent?.facebook
-            fbProfile.profileFBID = talent?.facebookID
-            twProfile.profileTW = talent?.twitter
-            if talent != nil && talent!.films.count > 0 {
-                filmographyContainerView.hidden = false
-                filmographyCollectionView.reloadData()
-               
-
-            } else {
-                filmographyContainerView.hidden = true
-            }
+            talent?.getBiography({ (biography) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.talentBiographyLabel.text = biography
+                })
+            })
+            
+            facebookButton.hidden = true
+            twitterButton.hidden = true
+            talent?.getSocialAccounts({ (socialAccounts) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let socialAccounts = socialAccounts {
+                        for socialAccount in socialAccounts {
+                            if socialAccount.type == SocialAccountType.Facebook {
+                                self.facebookButton.hidden = false
+                                self.facebookButton.socialAccount = socialAccount
+                            } else if socialAccount.type == SocialAccountType.Twitter {
+                                self.twitterButton.hidden = false
+                                self.twitterButton.socialAccount = socialAccount
+                            }
+                        }
+                    }
+                })
+            })
+            
+            filmographyContainerView.hidden = true
+            talent?.getFilmography({ (films) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if films.count > 0 {
+                        self.filmographyContainerView.hidden = false
+                        self.filmographyCollectionView.reloadData()
+                    } else {
+                        self.filmographyContainerView.hidden = true
+                    }
+                })
+            })
             
             if talent != nil && talent?.gallery.count > 0{
                 images = (talent?.gallery)!
             } else {
-                self.showGallery.userInteractionEnabled = false
+                showGallery.userInteractionEnabled = false
             }
         }
     }
     
     // MARK: View Lifecycle
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        //self.performSelector(("showIndicators"), withObject: nil, afterDelay: 0.0)
-       
-        
-
-    }
-    
-    func showIndicators(){
-            filmographyCollectionView.flashScrollIndicators()
-            talentBiographyLabel.flashScrollIndicators()
-    }
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filmographyCollectionView.backgroundColor = UIColor.clearColor()
         filmographyCollectionView.showsHorizontalScrollIndicator = true
-        self.twProfile.backgroundColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1.0)
         self.showGallery.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-        
-
-        
-                    }
+    }
     
     // MARK: Actions
     @IBAction func close() {
@@ -99,45 +102,29 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
         }
     }
     
-       @IBAction func displayGallery(sender: AnyObject) {
-        
-               
-        self.performSegueWithIdentifier("showActorGallery", sender: nil)
-       
-    }
-    @IBAction func loadTwitter(sender: SocialButton) {
-        
-        
-        sender.loadProfile("TW")
+    @IBAction func displayGallery(sender: AnyObject) {
+        self.performSegueWithIdentifier(StoryboardSegue.ShowActorGallery, sender: nil)
     }
     
-    
-    @IBAction func loadFacebook(sender: SocialButton) {
-        
-        sender.loadProfile("FB")
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-         if segue.identifier == "showActorGallery"{
-            
-            let actorGalleryVC = segue.destinationViewController as! ActorGalleryViewController
-            
-            actorGalleryVC.images = (talent?.gallery)!
-        }
+    @IBAction func openSocialURL(sender: SocialButton) {
+        sender.openURL()
     }
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if talent != nil {
-            return talent!.films.count
+        if let films = talent?.films {
+            return films.count
         }
         
         return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FilmCollectionViewCell", forIndexPath: indexPath) as! FilmCollectionViewCell
-        cell.film = talent?.films[indexPath.row]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(FilmCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! FilmCollectionViewCell
+        if let films = talent?.films {
+            cell.film = films[indexPath.row]
+        }
+        
         return cell
     }
     
@@ -147,6 +134,15 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
         //if film?.externalURL != nil {
         //    film!.externalURL!.promptLaunchBrowser()
         //}
+    }
+    
+    // MARK: Storyboard Methods
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == StoryboardSegue.ShowActorGallery {
+            if let actorGalleryVC = segue.destinationViewController as? ActorGalleryViewController {
+                actorGalleryVC.images = (talent?.gallery)!
+            }
+        }
     }
 
 }
