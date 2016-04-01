@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import SWRevealViewController
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var backgroundContainerView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
@@ -20,8 +18,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-             backgroundContainerView.sendSubviewToBack(backgroundImageView)
+        backgroundContainerView.sendSubviewToBack(backgroundImageView)
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {

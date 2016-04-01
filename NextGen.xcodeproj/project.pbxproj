@@ -1919,7 +1919,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGen;
-				PROVISIONING_PROFILE = "875223f7-a97a-4b6d-ba3d-4f1c41fcc3eb";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NextGen/NextGen-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 			};
@@ -1942,7 +1942,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGen;
-				PROVISIONING_PROFILE = "875223f7-a97a-4b6d-ba3d-4f1c41fcc3eb";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NextGen/NextGen-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 			};
