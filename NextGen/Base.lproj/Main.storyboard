@@ -837,14 +837,14 @@
                                 <color key="textColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRd-aM-U4T">
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jRd-aM-U4T">
                                 <rect key="frame" x="320" y="52" width="679" height="382"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jRd-aM-U4T" secondAttribute="height" multiplier="16:9" id="S4E-N7-bA2"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-Ev-WDN">
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-Ev-WDN">
                                 <rect key="frame" x="320" y="52" width="679" height="382"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="iVh-Ev-WDN" secondAttribute="height" multiplier="16:9" id="PfE-B1-tm2"/>
@@ -853,8 +853,8 @@
                                     <segue destination="FsK-dw-pgC" kind="embed" id="ir8-OX-j5p"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-Ys-did">
-                                <rect key="frame" x="308" y="624" width="160" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-Ys-did">
+                                <rect key="frame" x="320" y="587" width="160" height="45"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="6QS-Uq-4Yo"/>
@@ -893,14 +893,14 @@
                             <constraint firstItem="jRd-aM-U4T" firstAttribute="leading" secondItem="fGJ-AQ-eTt" secondAttribute="trailing" constant="20" id="XXS-dI-72i"/>
                             <constraint firstItem="Lqt-gp-7il" firstAttribute="trailing" secondItem="gVb-rK-Z1W" secondAttribute="trailing" id="bVB-zy-jOw"/>
                             <constraint firstItem="iVh-Ev-WDN" firstAttribute="leading" secondItem="fGJ-AQ-eTt" secondAttribute="trailing" constant="20" id="dDJ-je-eka"/>
-                            <constraint firstItem="gxh-Ys-did" firstAttribute="top" secondItem="nG0-ho-vG4" secondAttribute="bottom" constant="45" id="eyY-nC-xnc"/>
+                            <constraint firstItem="gxh-Ys-did" firstAttribute="leading" secondItem="fGJ-AQ-eTt" secondAttribute="trailing" constant="20" id="ljK-ai-T3C"/>
                             <constraint firstItem="fGJ-AQ-eTt" firstAttribute="leading" secondItem="OB4-DC-Qqz" secondAttribute="leading" id="noS-ER-vfS"/>
-                            <constraint firstItem="gxh-Ys-did" firstAttribute="leading" secondItem="gVb-rK-Z1W" secondAttribute="leading" id="oeT-TT-Qou"/>
                             <constraint firstItem="gVb-rK-Z1W" firstAttribute="trailing" secondItem="iVh-Ev-WDN" secondAttribute="trailing" id="ohB-fU-9va"/>
                             <constraint firstItem="jRd-aM-U4T" firstAttribute="trailing" secondItem="gVb-rK-Z1W" secondAttribute="trailing" id="pCF-hv-NwR"/>
                             <constraint firstItem="gVb-rK-Z1W" firstAttribute="top" secondItem="jRd-aM-U4T" secondAttribute="bottom" constant="15" id="sZb-bv-FrO"/>
                             <constraint firstItem="jRd-aM-U4T" firstAttribute="leading" secondItem="gVb-rK-Z1W" secondAttribute="leading" id="tXR-AD-jQ6"/>
                             <constraint firstItem="fGJ-AQ-eTt" firstAttribute="top" secondItem="sRb-OQ-3Uc" secondAttribute="bottom" id="tso-D3-BXA"/>
+                            <constraint firstItem="gxh-Ys-did" firstAttribute="top" secondItem="nG0-ho-vG4" secondAttribute="bottom" constant="8" id="uTh-A3-S78"/>
                             <constraint firstAttribute="trailing" secondItem="iVh-Ev-WDN" secondAttribute="trailing" constant="25" id="vdc-fJ-pAg"/>
                         </constraints>
                         <variation key="default">
@@ -2285,6 +2285,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kSL-ff-FXa"/>
-        <segue reference="Vcm-iL-9qf"/>
+        <segue reference="ir8-OX-j5p"/>
     </inferredMetricsTieBreakers>
 </document>

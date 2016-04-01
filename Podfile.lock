@@ -25,7 +25,6 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
-  - SWRevealViewController (2.3.0)
   - TwitterCore (1.15.3):
     - Fabric
   - TwitterKit (1.15.3):
@@ -39,7 +38,6 @@ DEPENDENCIES:
   - HockeySDK
   - MBProgressHUD (~> 0.9.2)
   - MWPhotoBrowser
-  - SWRevealViewController (~> 2.3)
   - TwitterKit (~> 1.15)
 
 SPEC CHECKSUMS:
@@ -54,7 +52,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
-  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
   TwitterKit: 43600f2d2848c227739efea5b2939585e69339c3
 
