@@ -39,9 +39,9 @@ class ClipViewController: UIViewController {
         
         super.viewDidLoad()
 
-         clip = DataManager.sharedInstance.content?.allClips[0]
+         //clip = DataManager.sharedInstance.content?.allClips[0]
         
-        
+        //kWBVideoPlayerItemDurationDidLoadNotification
         
         if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
             if let player = videoPlayerViewController.player {
@@ -53,7 +53,7 @@ class ClipViewController: UIViewController {
             videoPlayerViewController.playerControlsVisible = false
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)
-            self.shareContent = videoURL
+                       self.shareContent = videoURL
             
             
             

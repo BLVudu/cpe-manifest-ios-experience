@@ -47,6 +47,39 @@ class SharingViewController: UIViewController{
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
         clipName.text = clip?.text
         clipThumbnailView.setImageWithURL(clipThumbnail)
+        if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
+            if let player = videoPlayerViewController.player {
+                player.removeAllItems()
+            }
+            
+            videoPlayerViewController.curIndex = 0
+            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.playerControlsVisible = false
+            videoPlayerViewController.lockTopToolbar = true
+            videoPlayerViewController.playVideoWithURL(videoURL)
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemReadyToPlayNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+                
+                videoPlayerViewController.pauseVideo()
+                
+                
+            }
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+                
+                if let userInfo = notification.userInfo{
+                    let duration = userInfo["duration"] as! NSTimeInterval
+                    
+                    self.clipDuration.text = duration.timeString()
+                }
+            }
+            
+            self.shareContent = videoURL
+            
+           
+            
+        }
+
         
         
     }
@@ -68,22 +101,9 @@ class SharingViewController: UIViewController{
         self.clipThumbnailView.hidden = true
         self.playButton.hidden = true
         
-        if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
-            if let player = videoPlayerViewController.player {
-                player.removeAllItems()
-            }
-            
-            videoPlayerViewController.curIndex = 0
-            videoPlayerViewController.indexMax = 1
-            videoPlayerViewController.playerControlsVisible = false
-            videoPlayerViewController.lockTopToolbar = true
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            self.shareContent = videoURL
-            
-            
-            
-        }
-
+        videoPlayerViewController()?.playVideo()
+        
+        
     }
 
     

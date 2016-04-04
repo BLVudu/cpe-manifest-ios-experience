@@ -11,7 +11,9 @@ import UIKit
 class Content: NSObject {
     
     var clipKeys: [Double]?
-    var allClips = [Double: Clip]()
+    var inTimes = [Double: Clip]()
+    var outTimes = [Double: Clip]()
+    var outKeys: [Double]?
     
     required init(info: NSDictionary) {
         super.init()
@@ -20,12 +22,14 @@ class Content: NSObject {
             if let clips = share["clips"] as? NSArray{
                 for aClip in clips{
                     let clipData = Clip(info: aClip as! NSDictionary)
-                    allClips[clipData.inTime!] = clipData
+                    inTimes[clipData.inTime!] = clipData
+                    outTimes[clipData.outTime!] = clipData
                 }
             }
         }
         
-        clipKeys = allClips.keys.sort { $0 < $1 }
+        clipKeys = inTimes.keys.sort { $0 < $1 }
+        outKeys = outTimes.keys.sort { $0 < $1 }
     }
     
         
@@ -34,15 +38,15 @@ class Content: NSObject {
             var closestSceneTime: Double = -1
             if clipKeys != nil {
                 for sceneTime in clipKeys! {
-                    if sceneTime > time {
-                        break
-                    }
-                    
+                        if sceneTime > time{
+                            break
+                        }
+
                     closestSceneTime = sceneTime
                 }
-            }
             
-            return (closestSceneTime >= 0 ? allClips[closestSceneTime] : nil)
+                           }
+            return (closestSceneTime >= 0 ? inTimes[closestSceneTime] : nil)
 
             
         }

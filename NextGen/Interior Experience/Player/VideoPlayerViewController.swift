@@ -127,11 +127,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             }
             
             let newClip = DataManager.sharedInstance.content?.clipToShareAtTime(currentTime)
- 
+    
             if newClip != self.currentClip {
                 currentClip = newClip
             }
-        
             if (newClip == nil){
              self.shareContent.alpha = 0.5
                 self.shareContent.userInteractionEnabled = false
