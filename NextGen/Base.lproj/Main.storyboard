@@ -1164,6 +1164,7 @@
                                             <constraint firstAttribute="height" constant="25" id="hCi-17-X1z"/>
                                         </constraints>
                                         <state key="normal" image="Maximize"/>
+                                        <state key="highlighted" image="Maximize Highlighted"/>
                                         <connections>
                                             <action selector="toggleFullScreen:" destination="FsK-dw-pgC" eventType="touchUpInside" id="BFB-aF-Brb"/>
                                         </connections>
@@ -1175,6 +1176,7 @@
                                             <constraint firstAttribute="height" constant="25" id="CvV-ML-2TG"/>
                                         </constraints>
                                         <state key="normal" image="Share"/>
+                                        <state key="highlighted" image="Share Highlighted"/>
                                         <connections>
                                             <action selector="share:" destination="FsK-dw-pgC" eventType="touchUpInside" id="AOq-Yg-V2Q"/>
                                         </connections>
@@ -2258,10 +2260,12 @@
         <image name="MOSLogo" width="461" height="81"/>
         <image name="MOSPlay" width="490" height="133"/>
         <image name="Maximize" width="25" height="25"/>
+        <image name="Maximize Highlighted" width="25" height="25"/>
         <image name="Pause Button" width="25" height="25"/>
         <image name="Play Button" width="25" height="25"/>
         <image name="Play_Button.png" width="130" height="130"/>
         <image name="Share" width="25" height="25"/>
+        <image name="Share Highlighted" width="25" height="25"/>
         <image name="Twitter Icon" width="75" height="75"/>
         <image name="interior_bg.jpg" width="2048" height="1427"/>
         <image name="thetake-logo-nav.png" width="100" height="25"/>

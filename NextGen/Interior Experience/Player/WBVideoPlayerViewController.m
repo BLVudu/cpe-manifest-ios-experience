@@ -749,6 +749,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 - (void)toggleFullScreen {
     self.isFullScreen = !self.isFullScreen;
     [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize" : @"Maximize")] forState:UIControlStateNormal];
+    [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize Highlighted" : @"Maximize Highlighted")] forState:UIControlStateHighlighted];
     
     [UIView animateWithDuration:0.25 animations:^{
         UIView *videoContainerView = self.view.superview;

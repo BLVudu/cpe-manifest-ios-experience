@@ -34,6 +34,10 @@ class InteriorExperienceViewController: UIViewController {
                 strongSelf._isShowingInterstitial = false
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
         updatePlayerConstraints()
