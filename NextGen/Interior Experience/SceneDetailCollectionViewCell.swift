@@ -19,12 +19,8 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             return titleLabel?.text
         }
         
-        set(v) {
-            if let text = v {
-                titleLabel?.text = text.uppercaseString
-            } else {
-                titleLabel?.text = nil
-            }
+        set {
+            titleLabel?.text = (newValue != nil ? newValue!.uppercaseString : nil)
         }
     }
     
@@ -33,8 +29,8 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             return descriptionLabel.text
         }
         
-        set(v) {
-            descriptionLabel.text = v
+        set {
+            descriptionLabel.text = newValue
         }
     }
     
@@ -43,8 +39,8 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             return extraDescriptionLabel?.text
         }
         
-        set(v) {
-            extraDescriptionLabel?.text = v
+        set {
+            extraDescriptionLabel?.text = newValue
         }
     }
     
@@ -54,13 +50,10 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             return _experience
         }
         
-        set (v) {
-            _experience = v
-            
-            if let experience = _experience {
-                title = experience.metadata?.title
-            } else {
-                title = nil
+        set {
+            if _experience != newValue {
+                _experience = newValue
+                experienceDidChange()
             }
         }
     }
@@ -71,29 +64,34 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
             return _timedEvent
         }
         
-        set(v) {
-            if v == nil {
-                descriptionText = nil
-                extraDescriptionText = nil
-                _timedEvent = nil
-            } else if _timedEvent != v {
-                _timedEvent = v
-                
-                if let event = _timedEvent, experience = experience {
-                    descriptionText = event.getDescriptionText(experience)
-                    extraDescriptionText = event.extraDescriptionText
-                } else {
-                    descriptionText = nil
-                    extraDescriptionText = nil
-                }
+        set {
+            if _timedEvent != newValue {
+                _timedEvent = newValue
+                timedEventDidChange()
             }
         }
     }
+    
+    internal var currentTime: Double = -1.0
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         experience = nil
         timedEvent = nil
+    }
+    
+    func experienceDidChange() {
+        title = experience?.metadata?.title
+    }
+    
+    func timedEventDidChange() {
+        if let timedEvent = timedEvent, experience = experience {
+            descriptionText = timedEvent.getDescriptionText(experience)
+            extraDescriptionText = timedEvent.extraDescriptionText
+        } else {
+            descriptionText = nil
+            extraDescriptionText = nil
+        }
     }
 }
