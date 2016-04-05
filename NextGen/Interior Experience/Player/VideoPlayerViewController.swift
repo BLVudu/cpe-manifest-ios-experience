@@ -14,7 +14,6 @@ struct VideoPlayerNotification {
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
     static let ShouldPause = "VideoPlayerNotificationShouldPause"
     static let ShouldResume = "VideoPlayerNotificationShouldResume"
-    static let ShouldSkipInterstitial = "VideoPlayerNotificationShouldSkipInterstitial"
 }
 
 enum VideoPlayerMode {
@@ -42,13 +41,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     private var _shouldPauseObserver: NSObjectProtocol!
     private var _shouldResumeObserver: NSObjectProtocol!
-    private var _shouldSkipInterstitialObserver: NSObjectProtocol!
     
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(_shouldPauseObserver)
         center.removeObserver(_shouldResumeObserver)
-        center.removeObserver(_shouldSkipInterstitialObserver)
     }
     
     override func viewDidLoad() {
@@ -63,17 +60,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         _shouldResumeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
                 strongSelf.playVideo()
-            }
-        }
-        
-        _shouldSkipInterstitialObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldSkipInterstitial, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) in
-            if let strongSelf = self {
-                if !strongSelf._didPlayInterstitial {
-                    strongSelf.pauseVideo()
-                    strongSelf.player.removeAllItems()
-                    strongSelf._didPlayInterstitial = true
-                    strongSelf.playMainExperience()
-                }
             }
         }
         
@@ -98,6 +84,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         } else {
             self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mov")!))
         }
+    }
+    
+    func skipInterstitial() {
+        self.pauseVideo()
+        self.player.removeAllItems()
+        self._didPlayInterstitial = true
+        self.playMainExperience()
     }
     
     override func playerItemDidReachEnd(notification: NSNotification!) {
@@ -168,6 +161,12 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         if segue.identifier == StoryboardSegue.ShowShare {
             let shareVC = segue.destinationViewController as! SharingViewController
             shareVC.clip = currentClip
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if mode == VideoPlayerMode.MainFeature && !_didPlayInterstitial {
+            skipInterstitial()
         }
     }
 

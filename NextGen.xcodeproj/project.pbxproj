@@ -75,7 +75,6 @@
 		70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */; };
 		70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */; };
 		70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */; };
-		70482E8A1CA99BAB0003ED45 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70482E891CA99BAB0003ED45 /* mos-nextgen-interstitial.mov */; };
 		7065F5461C46FCC500A2C74E /* TalentTableViewCell-Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */; };
 		7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5471C47004100A2C74E /* TalentTableViewCell.swift */; };
 		7071C4911C6BCBF6006F4275 /* NGEAbbreviatedMetadataInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C3D61C6BCBF6006F4275 /* NGEAbbreviatedMetadataInfoType.swift */; };
@@ -296,6 +295,7 @@
 		70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */; };
 		70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */; };
 		70C830B11CB440E200F9E2D6 /* VideoPlayerScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */; };
+		70C830B51CB465D000F9E2D6 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */; };
 		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
 		70C9E9DA1C640A97004DF35B /* interior_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70C9E9D91C640A97004DF35B /* interior_bg.jpg */; };
 		70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */; };
@@ -422,7 +422,6 @@
 		70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextGroup.swift; sourceTree = "<group>"; };
 		70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextObject.swift; sourceTree = "<group>"; };
 		70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAudioVisual.swift; sourceTree = "<group>"; };
-		70482E891CA99BAB0003ED45 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
 		7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Wide.xib"; sourceTree = "<group>"; };
 		7065F5471C47004100A2C74E /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
 		7071C3D51C6BCBF6006F4275 /* libxml-bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libxml-bridging-header.h"; sourceTree = "<group>"; };
@@ -644,6 +643,7 @@
 		70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMLocation.swift; sourceTree = "<group>"; };
 		70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapView+Utils.swift"; sourceTree = "<group>"; };
 		70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerScrubber.swift; sourceTree = "<group>"; };
+		70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
 		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		70C9E9D91C640A97004DF35B /* interior_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = interior_bg.jpg; sourceTree = "<group>"; };
 		70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Narrow.xib"; sourceTree = "<group>"; };
@@ -1234,7 +1234,7 @@
 		70B9FE441C6D54D400CF1A22 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				70482E891CA99BAB0003ED45 /* mos-nextgen-interstitial.mov */,
+				70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -1384,8 +1384,8 @@
 				70DF2F8A1CA5EADF007AD2A0 /* MenuItemCell.xib in Resources */,
 				497733301C597D5D00EC0071 /* home_logo.png in Resources */,
 				498FBC061CA9DEB400B81798 /* ClipCell.xib in Resources */,
+				70C830B51CB465D000F9E2D6 /* mos-nextgen-interstitial.mov in Resources */,
 				70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */,
-				70482E8A1CA99BAB0003ED45 /* mos-nextgen-interstitial.mov in Resources */,
 				6AA9CCC61C883EE2005EBA92 /* RobotoCondensed-Italic.ttf in Resources */,
 				6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */,
 				70C9E9E01C642E6C004DF35B /* extras_header.png in Resources */,

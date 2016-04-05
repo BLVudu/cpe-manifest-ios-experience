@@ -63,15 +63,5 @@ class InteriorExperienceViewController: UIViewController {
             playerViewController.mode = VideoPlayerMode.MainFeature
         }
     }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if _isShowingInterstitial {
-            if let point = touches.first?.locationInView(self.view) {
-                if CGRectContainsPoint(CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 60), point) {
-                    NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldSkipInterstitial, object: nil)
-                }
-            }
-        }
-    }
 
 }
