@@ -281,8 +281,6 @@
 		7085F7861C933A5000DF31B6 /* NGDMExperienceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */; };
 		7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7881C93937800DF31B6 /* UIColor+Utils.swift */; };
 		7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */; };
-		7085F7911C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7901C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift */; };
-		7085F7931C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7085F7921C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib */; };
 		7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7981C97550C00DF31B6 /* WebViewController.swift */; };
 		70A3AC921C9C75860038B60F /* BaselineAPIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */; };
 		70A3AC971C9DDB500038B60F /* NSTimeInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */; };
@@ -296,6 +294,8 @@
 		70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */; };
 		70C830B11CB440E200F9E2D6 /* VideoPlayerScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */; };
 		70C830B51CB465D000F9E2D6 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */; };
+		70C830B81CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830B61CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift */; };
+		70C830B91CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */; };
 		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
 		70C9E9DA1C640A97004DF35B /* interior_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70C9E9D91C640A97004DF35B /* interior_bg.jpg */; };
 		70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */; };
@@ -629,8 +629,6 @@
 		7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMExperienceApp.swift; sourceTree = "<group>"; };
 		7085F7881C93937800DF31B6 /* UIColor+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
-		7085F7901C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
-		7085F7921C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		7085F7981C97550C00DF31B6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaselineAPIUtil.swift; sourceTree = "<group>"; };
 		70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Utils.swift"; sourceTree = "<group>"; };
@@ -644,6 +642,8 @@
 		70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapView+Utils.swift"; sourceTree = "<group>"; };
 		70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerScrubber.swift; sourceTree = "<group>"; };
 		70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
+		70C830B61CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		70C9E9D91C640A97004DF35B /* interior_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = interior_bg.jpg; sourceTree = "<group>"; };
 		70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Narrow.xib"; sourceTree = "<group>"; };
@@ -1145,6 +1145,8 @@
 				492267E91C76A56900B306A2 /* CommentaryViewCell.swift */,
 				490213431C8509DB00071552 /* ExpandedSceneDetailViewController.swift */,
 				490213451C850A0100071552 /* GalleryDetailViewController.swift */,
+				70C830B61CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift */,
+				70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */,
 				70FECF801C6579E4005B1A44 /* ImageSceneDetailCollectionViewCell.swift */,
 				70FECF7E1C6579CD005B1A44 /* ImageSceneDetailCollectionViewCell.xib */,
 				707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */,
@@ -1156,8 +1158,6 @@
 				70FECF821C690C43005B1A44 /* SceneDetailCollectionViewCell.swift */,
 				70FECF761C656707005B1A44 /* SceneDetailCollectionViewController.swift */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
-				7085F7901C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift */,
-				7085F7921C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib */,
 			);
 			path = "Interior Experience";
 			sourceTree = "<group>";
@@ -1389,6 +1389,7 @@
 				6AA9CCC61C883EE2005EBA92 /* RobotoCondensed-Italic.ttf in Resources */,
 				6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */,
 				70C9E9E01C642E6C004DF35B /* extras_header.png in Resources */,
+				70C830B91CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib in Resources */,
 				70D2FC811CAE02E80003FC54 /* CommentaryView.xib in Resources */,
 				4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */,
 				497ABF7B1C894E61005463C9 /* thetake-logo-nav@2x.png in Resources */,
@@ -1396,7 +1397,6 @@
 				70FECF7F1C6579CD005B1A44 /* ImageSceneDetailCollectionViewCell.xib in Resources */,
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
 				6AA9CCC51C883EE2005EBA92 /* RobotoCondensed-Bold.ttf in Resources */,
-				7085F7931C9732F900DF31B6 /* TextSceneDetailCollectionViewCell.xib in Resources */,
 				7077A35D1C4989C200843782 /* menu.png in Resources */,
 				49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */,
 				70DF2F8E1CA5F433007AD2A0 /* MenuSectionCell.xib in Resources */,
@@ -1543,6 +1543,7 @@
 				7071C4A91C6BCBF6006F4275 /* NGEColorTypeTypeEnum.swift in Sources */,
 				7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */,
 				70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */,
+				70C830B81CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift in Sources */,
 				7071C50C1C6BCBF6006F4275 /* NGEMadeForRegionInternalTypeEnum.swift in Sources */,
 				7071C49F1C6BCBF6006F4275 /* NGEAudiovisualClipRefType.swift in Sources */,
 				70DF2F841CA5C8B2007AD2A0 /* MenuItemCell.swift in Sources */,
@@ -1557,7 +1558,6 @@
 				70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */,
 				7071C49D1C6BCBF6006F4275 /* NGEAudioClipRefType.swift in Sources */,
 				7071C50F1C6BCBF6006F4275 /* NGEMediaManifestEditLocRefType.swift in Sources */,
-				7085F7911C9732C500DF31B6 /* TextSceneDetailCollectionViewCell.swift in Sources */,
 				7071C5321C6BCBF6006F4275 /* NGEStringVideoPicFrameRateMultiplierEnum.swift in Sources */,
 				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
 				701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */,

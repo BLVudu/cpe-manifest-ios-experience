@@ -6,9 +6,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
-        </mutableArray>
         <mutableArray key="RobotoCondensed-Regular.ttf">
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
@@ -18,28 +15,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapSceneDetailCollectionViewCellReuseIdentifier" id="14d-xz-h1c" customClass="MapSceneDetailCollectionViewCell" customModule="NextGen" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="283" height="238"/>
+            <rect key="frame" x="0.0" y="0.0" width="283" height="218"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="283" height="238"/>
+                <rect key="frame" x="0.0" y="0.0" width="283" height="218"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLC-sF-B1u" userLabel="Description Label">
                         <rect key="frame" x="8" y="190" width="267" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="LuL-sM-arE"/>
+                            <constraint firstAttribute="height" constant="20" id="LuL-sM-arE"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5K-WS-wOc" userLabel="Extra Description Label">
-                        <rect key="frame" x="8" y="212" width="267" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Aqa-ym-xto"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCENE LOCATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZd-aL-jCC">
@@ -65,30 +53,24 @@
             </view>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="w5K-WS-wOc" firstAttribute="trailing" secondItem="hLC-sF-B1u" secondAttribute="trailing" id="4wP-9a-PL1"/>
-                <constraint firstAttribute="trailing" secondItem="w5K-WS-wOc" secondAttribute="trailing" constant="8" id="5aa-fm-jHT"/>
-                <constraint firstItem="w5K-WS-wOc" firstAttribute="top" secondItem="hLC-sF-B1u" secondAttribute="bottom" constant="2" id="Auu-tw-oix"/>
                 <constraint firstAttribute="trailing" secondItem="OZd-aL-jCC" secondAttribute="trailing" constant="8" id="CkM-Hr-gtv"/>
                 <constraint firstAttribute="trailing" secondItem="hLC-sF-B1u" secondAttribute="trailing" constant="8" id="KPo-A8-zrX"/>
+                <constraint firstAttribute="bottom" secondItem="hLC-sF-B1u" secondAttribute="bottom" constant="8" id="VHD-wc-Sjx"/>
                 <constraint firstItem="GLm-3E-DD7" firstAttribute="top" secondItem="OZd-aL-jCC" secondAttribute="bottom" id="ZRH-vH-Jdx"/>
                 <constraint firstItem="hLC-sF-B1u" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="elX-Ob-YyR"/>
-                <constraint firstItem="w5K-WS-wOc" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="ev4-va-Nkz"/>
                 <constraint firstItem="hLC-sF-B1u" firstAttribute="top" secondItem="GLm-3E-DD7" secondAttribute="bottom" constant="5" id="piL-JG-e8F"/>
                 <constraint firstAttribute="trailing" secondItem="GLm-3E-DD7" secondAttribute="trailing" constant="8" id="qSt-KP-vU4"/>
-                <constraint firstAttribute="bottom" secondItem="w5K-WS-wOc" secondAttribute="bottom" constant="6" id="rBZ-Cg-I1I"/>
                 <constraint firstItem="OZd-aL-jCC" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="sz7-n2-yqu"/>
                 <constraint firstItem="OZd-aL-jCC" firstAttribute="top" secondItem="14d-xz-h1c" secondAttribute="top" constant="5" id="tYY-JC-io1"/>
-                <constraint firstItem="w5K-WS-wOc" firstAttribute="leading" secondItem="hLC-sF-B1u" secondAttribute="leading" id="xlx-J8-Ftb"/>
                 <constraint firstItem="GLm-3E-DD7" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="zWa-O7-Kxq"/>
             </constraints>
             <size key="customSize" width="50" height="120"/>
             <connections>
-                <outlet property="descriptionLabel" destination="hLC-sF-B1u" id="LWM-DD-u01"/>
-                <outlet property="extraDescriptionLabel" destination="w5K-WS-wOc" id="LLp-iF-MjK"/>
+                <outlet property="descriptionLabel" destination="hLC-sF-B1u" id="omO-1I-0Kf"/>
                 <outlet property="mapView" destination="GLm-3E-DD7" id="Uww-dV-1Kk"/>
                 <outlet property="titleLabel" destination="OZd-aL-jCC" id="Xu4-RM-WhD"/>
             </connections>
-            <point key="canvasLocation" x="1023.5" y="484"/>
+            <point key="canvasLocation" x="1107.5" y="607"/>
         </collectionViewCell>
     </objects>
 </document>

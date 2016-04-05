@@ -12,7 +12,6 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var extraDescriptionLabel: UILabel?
     
     var title: String? {
         get {
@@ -31,16 +30,6 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         
         set {
             descriptionLabel.text = newValue
-        }
-    }
-    
-    var extraDescriptionText: String? {
-        get {
-            return extraDescriptionLabel?.text
-        }
-        
-        set {
-            extraDescriptionLabel?.text = newValue
         }
     }
     
@@ -88,10 +77,8 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     func timedEventDidChange() {
         if let timedEvent = timedEvent, experience = experience {
             descriptionText = timedEvent.getDescriptionText(experience)
-            extraDescriptionText = timedEvent.extraDescriptionText
         } else {
             descriptionText = nil
-            extraDescriptionText = nil
         }
     }
 }

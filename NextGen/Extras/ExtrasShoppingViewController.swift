@@ -43,7 +43,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         }
         
         productsCollectionView.backgroundColor = UIColor.clearColor()
-        productsCollectionView.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
+        productsCollectionView.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -90,9 +90,9 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ImageSceneDetailCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ShoppingSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ShoppingSceneDetailCollectionViewCell
         cell.titleLabel?.removeFromSuperview()
-        cell.productImageType = ImageSceneDetailCollectionViewCell.ProductImageType.Scene
+        cell.productImageType = ShoppingSceneDetailCollectionViewCell.ProductImageType.Scene
         
         if let product = _products?[indexPath.row] {
             cell.theTakeProducts = [product]
@@ -103,7 +103,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let shoppingDetailViewController = UIStoryboard.getMainStoryboardViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageSceneDetailCollectionViewCell {
+        if let shoppingDetailViewController = UIStoryboard.getMainStoryboardViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
             shoppingDetailViewController.products = cell.theTakeProducts
             shoppingDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             self.navigationController?.presentViewController(shoppingDetailViewController, animated: true, completion: nil)

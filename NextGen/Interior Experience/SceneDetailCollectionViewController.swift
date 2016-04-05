@@ -19,7 +19,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     struct Constants {
         static let ItemsPerRow: CGFloat = 2.0
-        static let ItemSpacing: CGFloat = 5.0
+        static let ItemSpacing: CGFloat = 10.0
     }
     
     struct ExperienceCellData {
@@ -62,7 +62,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionView?.alpha = 0
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
-        self.collectionView?.registerNib(UINib(nibName: String(TextSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: TextSceneDetailCollectionViewCell.ReuseIdentifier)
+        self.collectionView?.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
         for experience in NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences {
             _experienceCellData.append(ExperienceCellData(experience: experience))
@@ -156,11 +156,13 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         let cellData = activeExperienceCellData[indexPath.row]
         let timedEvent = cellData.timedEvent!
         
-        var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
-        if timedEvent.isTextItem() {
-            reuseIdentifier = TextSceneDetailCollectionViewCell.ReuseIdentifier
-        } else if timedEvent.isLocation() {
+        var reuseIdentifier: String
+        if timedEvent.isLocation() {
             reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
+        } else if timedEvent.isProduct() {
+            reuseIdentifier = ShoppingSceneDetailCollectionViewCell.ReuseIdentifier
+        } else {
+            reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
         }
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
@@ -171,7 +173,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), 250)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        let isShopping = (cell != nil && cell!.isKindOfClass(ShoppingSceneDetailCollectionViewCell))
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), (isShopping ? 245 : 225))
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
@@ -186,7 +190,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isProduct() {
-                if let cell = cell as? ImageSceneDetailCollectionViewCell {
+                if let cell = cell as? ShoppingSceneDetailCollectionViewCell {
                     if cell.theTakeProducts != nil {
                         self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell.theTakeProducts)
                     }
