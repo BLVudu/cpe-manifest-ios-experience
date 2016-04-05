@@ -24,6 +24,7 @@ class CommentaryViewCell: UITableViewCell {
             self.radioBtn.selected = true
             
             
+            
         } else {
             
             self.radioBtn.selected = false
@@ -34,5 +35,10 @@ class CommentaryViewCell: UITableViewCell {
         
     }
 
+    @IBAction func selectedRB(sender: RadioButton) {
+        
+        print("selected")
+        sender.backgroundColor = UIColor.yellowColor()
+    }
     
 }

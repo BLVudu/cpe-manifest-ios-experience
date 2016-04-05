@@ -14,14 +14,14 @@ class RadioButton: UIButton{
     var section:Int?
     var index:Int?
     
-    /*
+    
     override var selected: Bool {
         didSet {
             toggleButon()
         }
 
     }
-*/
+
 
 
     
@@ -47,11 +47,14 @@ class RadioButton: UIButton{
     
     
 
-    /*
+    
     func toggleButon() {
         if self.selected {
+            highlight()
+            print("highlight")
  
         } else{
+            removeHighlight()
 
     }
     }
@@ -70,6 +73,6 @@ class RadioButton: UIButton{
         self.backgroundColor = UIColor.clearColor()
         
     }
-    */
+    
     
 }
