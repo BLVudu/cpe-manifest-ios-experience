@@ -7,30 +7,34 @@
 //
 
 import UIKit
-import FBSDKShareKit
-import FBSDKCoreKit
-import TwitterKit
 import MessageUI
 
 struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
-    static let DidToggleFullScreen = "VideoPlayerNotificationDidToggleFullScreen"
     static let ShouldPause = "VideoPlayerNotificationShouldPause"
     static let ShouldResume = "VideoPlayerNotificationShouldResume"
     static let ShouldSkipInterstitial = "VideoPlayerNotificationShouldSkipInterstitial"
 }
 
+enum VideoPlayerMode {
+    case MainFeature
+    case Supplemental
+}
+
 class VideoPlayerViewController: WBVideoPlayerViewController {
     
-    var showsTopToolbar = true
-    var fullScreen = false
-    var showCountdownTimer = false
-    var currentClip: Clip?
-    var shouldPlayMainExperience = false
+    struct StoryboardSegue {
+        static let ShowShare = "showShare"
+    }
+    
+    var mode = VideoPlayerMode.Supplemental
+    
     private var _didPlayInterstitial = false
     
-    @IBOutlet weak var shareContent: UIButton!
+    var showCountdownTimer = false
+    var currentClip: Clip?
+    
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
     var commentaryPopover: UIPopoverController!
@@ -73,8 +77,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             }
         }
         
-        if shouldPlayMainExperience {
+        if mode == VideoPlayerMode.MainFeature {
+            self.fullScreenButton.removeFromSuperview()
             playMainExperience()
+        } else {
+            self.shareButton.removeFromSuperview()
+            self.playerControlsVisible = false
+            self.lockTopToolbar = true
         }
     }
     
@@ -94,7 +103,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func playerItemDidReachEnd(notification: NSNotification!) {
         super.playerItemDidReachEnd(notification)
         
-        if shouldPlayMainExperience && !_didPlayInterstitial {
+        if mode == VideoPlayerMode.MainFeature && !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
         }
@@ -117,48 +126,32 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func syncScrubber() {
         super.syncScrubber()
         
-        if player != nil {
+        if player != nil && mode == VideoPlayerMode.MainFeature {
             var currentTime = 0.0
-            if shouldPlayMainExperience && _didPlayInterstitial {
+            
+            if _didPlayInterstitial {
                 currentTime = CMTimeGetSeconds(player.currentTime())
                 if currentTime.isNaN {
                     currentTime = 0.0
                 }
             }
             
-            let newClip = DataManager.sharedInstance.content?.clipToShareAtTime(currentTime)
- 
-            if newClip != self.currentClip {
-                currentClip = newClip
+            if let newClip = DataManager.sharedInstance.content?.clipToShareAtTime(currentTime) {
+                if newClip != currentClip {
+                    currentClip = newClip
+                    shareButton.enabled = true
+                }
+            } else {
+                shareButton.enabled = false
             }
-        
-            if (newClip == nil){
-             self.shareContent.alpha = 0.5
-                self.shareContent.userInteractionEnabled = false
-             } else{
-             self.shareContent.alpha = 1
-                self.shareContent.userInteractionEnabled = true
-             }
-             
             
             NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
-                  }
+        }
     }
     
-    
-    @IBAction func showFullScreen(sender: AnyObject) {
-        self.fullScreen = !self.fullScreen
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidToggleFullScreen, object: nil,userInfo: ["toggleFS": self.fullScreen])
-    }
-    
-
-    @IBAction func shareClip(sender: UIButton) {
-
-        
+    @IBAction override func share(sender: AnyObject!) {
         if UIDevice.currentDevice().orientation.isLandscape {
-        
             let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            
             let styledTitle = NSAttributedString(string: "Rotate device to share clip", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor()])
             alert.setValue(styledTitle, forKey: "_attributedTitle")
             let pop = UIPopoverController.init(contentViewController: alert)
@@ -166,23 +159,16 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             let anchor = self.view.frame.size.height - 100
             pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
             alert.view.tintColor = UIColor.yellowColor()
-
-    }
-        else if UIDevice.currentDevice().orientation.isPortrait{
-            
-            self.performSegueWithIdentifier("showShare", sender: nil)
+        } else {
+            self.performSegueWithIdentifier(StoryboardSegue.ShowShare, sender: nil)
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showShare"{
+        if segue.identifier == StoryboardSegue.ShowShare {
             let shareVC = segue.destinationViewController as! SharingViewController
-            shareVC.clip = self.currentClip
-    }
-    
-   
-    
+            shareVC.clip = currentClip
+        }
     }
 
 

@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, WBVideoPlayerState) {
 //=========================================================
 # pragma mark - Constants
 //=========================================================
-static NSString * const kWBVideoPlayerItemDurationDidLoadNotification           = @"kWBVideoPlayerItemDurationDidLoadNotification";
+static NSString * const kWBVideoPlayerItemDurationDidLoadNotification       = @"kWBVideoPlayerItemDurationDidLoadNotification";
 static NSString * const kWBVideoPlayerItemReadyToPlayNotification           = @"kWBVideoPlayerItemReadyToPlayNotification";
 static NSString * const kWBVideoPlayerPlaybackStateDidChangeNotification    = @"kWBVideoPlayerPlaybackStateDidChangeNotification";
 //static NSString * const kWBVideoPlayerScrubberValueUpdatedNotification    = @"kWBVideoPlayerScrubberValueUpdatedNotification";
@@ -90,6 +90,9 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 @property (nonatomic, weak)   IBOutlet  WBVideoPlayerPlaybackView       *playbackView;
 @property (readwrite, nonatomic)        NSInteger                        playerControlsAutoHideTime;
 
+@property (weak, nonatomic)   IBOutlet  UIButton                        *shareButton;
+@property (weak, nonatomic)   IBOutlet  UIButton                        *fullScreenButton;
+
 /**
  * Toggles all player controls visibility.
  * NOTE: There is a difference between enabling/disableing and showing/hiding
@@ -111,10 +114,10 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 @property (nonatomic, assign)           int                             indexMax;
 @property (nonatomic, assign)           int                             curIndex;
 
-
-
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;
+- (IBAction)share:(id)sender;
+- (IBAction)toggleFullScreen:(id)sender;
 - (IBAction)done:(id)sender;
 - (BOOL)isPlaying;
 - (void)displayError:(NSError *)error;

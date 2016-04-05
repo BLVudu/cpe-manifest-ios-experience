@@ -7,34 +7,24 @@
 //
 
 import UIKit
-class CustomScrubber: UISlider{
+
+class VideoPlayerScrubber: UISlider {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)!
-        self.initScrubber()
         
+        self.initScrubber()
     }
     
     override init(frame:CGRect) {
         super.init(frame:frame)
+        
         self.initScrubber()
-        
     }
-
     
-    func initScrubber(){
-        
-        
+    func initScrubber() {
         self.setThumbImage(UIImage(named: "Scrubber Image"), forState: .Normal)
- 
-        
+        self.setThumbImage(UIImage(named: "Scrubber Image"), forState: .Highlighted)
     }
-    
-    
-    override func trackRectForBounds(bounds: CGRect) -> CGRect {
-        
-        return CGRectMake(0,15, self.frame.size.width, 5)
-    }
-    
     
 }

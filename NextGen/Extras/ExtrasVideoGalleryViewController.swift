@@ -22,14 +22,12 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     var experience: NGDMExperience!
     var shareContent: NSURL!
     
-    private var _didToggleFullScreenObserver: NSObjectProtocol!
     private var _willPlayNextItemObserver: NSObjectProtocol!
     
     
     // MARK: Initialization
     deinit {
         let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(_didToggleFullScreenObserver)
         center.removeObserver(_willPlayNextItemObserver)
     }
 
@@ -46,21 +44,6 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         self.mediaDescriptionLabel.hidden = true
         self.mediaRuntimeLabel.hidden = true
         self.shareClip.hidden = true
-
-        _didToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self, userInfo = notification.userInfo, fullScreenEnabled = userInfo["toggleFS"] as? Bool {
-                if fullScreenEnabled {
-                    UIView.animateWithDuration(1, animations: {
-                        strongSelf.videoContainerView.frame = strongSelf.view.frame
-                    }, completion: nil)
-                } else {
-                    UIView.animateWithDuration(1, animations: {
-                        strongSelf.videoContainerView.frame = strongSelf.proxyView.frame
-                    }, completion: nil)
-                }
-            }
-        }
-        
         
         _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
@@ -146,8 +129,6 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
-            videoPlayerViewController.playerControlsVisible = false
-            videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)
             self.shareContent = videoURL
         }

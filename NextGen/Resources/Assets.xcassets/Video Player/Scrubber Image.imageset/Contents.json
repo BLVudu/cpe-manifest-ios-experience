@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "thumbImage.png",
+      "filename" : "Scrubber-32.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Scrubber-64.png",
       "scale" : "2x"
     },
     {

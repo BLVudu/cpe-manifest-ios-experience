@@ -56,7 +56,7 @@ class InteriorExperienceViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.PlayerViewController {
             let playerViewController = segue.destinationViewController as! VideoPlayerViewController
-            playerViewController.shouldPlayMainExperience = true
+            playerViewController.mode = VideoPlayerMode.MainFeature
         }
     }
     
