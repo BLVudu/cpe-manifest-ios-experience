@@ -15,10 +15,6 @@ class ShoppingSceneDetailCollectionViewCell : SceneDetailCollectionViewCell {
         static let Scene = "ProductImageTypeScene"
     }
     
-    struct Constants {
-        static let UpdateInterval: Double = 15000.0
-    }
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var bullseyeView: UIView!
     @IBOutlet weak var extraDescriptionLabel: UILabel!
@@ -85,27 +81,25 @@ class ShoppingSceneDetailCollectionViewCell : SceneDetailCollectionViewCell {
         }
     }
     
-    override var currentTime: Double {
-        didSet {
-            if timedEvent != nil && timedEvent!.isProduct() {
-                let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
-                if _currentProductFrameTime < 0 || newFrameTime - _currentProductFrameTime >= Constants.UpdateInterval {
-                    _currentProductFrameTime = newFrameTime
-                    
-                    if let currentTask = _currentProductSessionDataTask {
-                        currentTask.cancel()
-                    }
-                    
-                    _currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(_currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
-                        if let strongSelf = self {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                strongSelf.theTakeProducts = products
-                            })
-                            
-                            strongSelf._currentProductSessionDataTask = nil
-                        }
-                    })
+    override func currentTimeDidChange() {
+        if timedEvent != nil && timedEvent!.isProduct() {
+            let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
+            if newFrameTime != _currentProductFrameTime {
+                _currentProductFrameTime = newFrameTime
+                
+                if let currentTask = _currentProductSessionDataTask {
+                    currentTask.cancel()
                 }
+                
+                _currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(_currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
+                    if let strongSelf = self {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            strongSelf.theTakeProducts = products
+                        })
+                        
+                        strongSelf._currentProductSessionDataTask = nil
+                    }
+                })
             }
         }
     }

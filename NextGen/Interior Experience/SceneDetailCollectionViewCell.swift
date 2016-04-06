@@ -10,6 +10,10 @@ import UIKit
 
 class SceneDetailCollectionViewCell: UICollectionViewCell {
     
+    struct Constants {
+        static let UpdateInterval: Double = 15
+    }
+    
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -61,7 +65,19 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    internal var currentTime: Double = -1.0
+    internal var _currentTime: Double = -1.0
+    var currentTime: Double {
+        get {
+            return _currentTime
+        }
+        
+        set {
+            if _currentTime == -1 || newValue - _currentTime >= Constants.UpdateInterval {
+                _currentTime = newValue
+                currentTimeDidChange()
+            }
+        }
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -80,5 +96,9 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         } else {
             descriptionText = nil
         }
+    }
+    
+    func currentTimeDidChange() {
+        
     }
 }
