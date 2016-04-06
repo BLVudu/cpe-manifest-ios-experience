@@ -86,22 +86,21 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionViewLayout.invalidateLayout()
     }
     
-    func rowForExperience(experience: NGDMExperience) -> Int? {
-        return activeExperienceCellData.indexOf({ (cellData) -> Bool in
-            cellData.experience == experience
-        })
-    }
-    
     func processExperiencesForTime(time: Double) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             var deleteIndexPaths = [NSIndexPath]()
             var insertIndexPaths = [NSIndexPath]()
             var updateIndexPaths = [NSIndexPath]()
             
+            var experienceCellData = self._experienceCellData
+            let currentlyActiveCellData = self.activeExperienceCellData
             var currentRow = 0
-            for i in 0 ..< self._experienceCellData.count {
-                var cellData = self._experienceCellData[i]
-                let experienceRow = self.rowForExperience(cellData.experience)
+            for i in 0 ..< experienceCellData.count {
+                var cellData = experienceCellData[i]
+                let experienceRow = currentlyActiveCellData.indexOf({ (searchingCellData) -> Bool in
+                    searchingCellData.experience == cellData.experience
+                })
+                
                 let oldTimedEvent = cellData.timedEvent
                 let newTimedEvent = cellData.experience.timedEventSequence?.timedEvent(time)
                 if newTimedEvent != nil {
@@ -117,22 +116,26 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     
                     cellData.timedEvent = newTimedEvent
                     currentRow += 1
-                } else if experienceRow != nil {
+                } else {
+                    if experienceRow != nil {
+                        deleteIndexPaths.append(NSIndexPath(forRow: experienceRow!, inSection: 0))
+                    }
+                    
                     cellData.timedEvent = nil
-                    deleteIndexPaths.append(NSIndexPath(forRow: experienceRow!, inSection: 0))
                 }
                 
-                self._experienceCellData[i] = cellData
+                experienceCellData[i] = cellData
             }
             
             dispatch_async(dispatch_get_main_queue()) {
                 for indexPath in updateIndexPaths {
                     if let cell = self.collectionView?.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell {
-                        cell.timedEvent = self.activeExperienceCellData[indexPath.row].timedEvent
+                        cell.timedEvent = currentlyActiveCellData[indexPath.row].timedEvent
                         cell.currentTime = time
                     }
                 }
                 
+                self._experienceCellData = experienceCellData
                 self.collectionView?.performBatchUpdates({
                     if deleteIndexPaths.count > 0 {
                         self.collectionView?.deleteItemsAtIndexPaths(deleteIndexPaths)

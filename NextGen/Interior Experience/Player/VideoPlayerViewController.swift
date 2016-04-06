@@ -125,13 +125,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         super.syncScrubber()
         
         if player != nil && mode == VideoPlayerMode.MainFeature {
-            var currentTime = 0.0
-            
-            if _didPlayInterstitial {
-                currentTime = CMTimeGetSeconds(player.currentTime())
-                if currentTime.isNaN {
-                    currentTime = 0.0
-                }
+            var currentTime = CMTimeGetSeconds(player.currentTime())
+            if currentTime.isNaN {
+                currentTime = 0.0
             }
             
             if let newClip = DataManager.sharedInstance.content?.clipToShareAtTime(currentTime) {
@@ -143,7 +139,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
                 shareButton.enabled = false
             }
             
-            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
+            if _didPlayInterstitial || (!_didPlayInterstitial && currentTime == 0) {
+                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
+            }
         }
     }
     
