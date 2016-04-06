@@ -13,14 +13,12 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     @IBOutlet weak var galleryTableView: UITableView!
     @IBOutlet weak var proxyView: UIView!
     
-    @IBOutlet weak var shareClip: UIButton!
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaDescriptionLabel: UILabel!
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
     
     var experience: NGDMExperience!
-    var shareContent: NSURL!
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
     
@@ -45,8 +43,9 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         self.mediaTitleLabel.hidden = true
         self.mediaDescriptionLabel.hidden = true
         self.mediaRuntimeLabel.hidden = true
-        self.shareClip.hidden = true
-        
+
+
+              
         _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
                 if index < strongSelf.experience.childExperiences.count {
@@ -110,7 +109,6 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         self.mediaTitleLabel.hidden = false
         self.mediaDescriptionLabel.hidden = false
         self.mediaRuntimeLabel.hidden = false
-        self.shareClip.hidden = false
 
         let thisExperience = experience.childExperiences[indexPath.row]
         
@@ -132,20 +130,7 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
             videoPlayerViewController.playVideoWithURL(videoURL)
-            self.shareContent = videoURL
         }
     }
     
-    @IBAction func shareClip(sender: AnyObject) {
-        
-        
-        let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = sender as? UIView
-        activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard]
-        self.presentViewController(activityViewController, animated: true, completion: nil)
-        
-        
-    }
-
-    
-}
+   }

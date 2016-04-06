@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Off</string>
+		<key>subtitle</key>
+		<string>Turn commentary off</string>
+		<key>selected</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Director Commentary</string>
+		<key>subtitle</key>
+		<string>Hear from the director in his own words about the decisions he made</string>
+		<key>selected</key>
+		<false/>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Actor Commentary</string>
+		<key>subtitle</key>
+		<string>Henry Cavill walks through his approach in various scenes as the Man of Steel</string>
+		<key>selected</key>
+		<false/>
+	</dict>
+</array>
+</plist>

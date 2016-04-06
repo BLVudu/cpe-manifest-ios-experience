@@ -34,6 +34,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var showCountdownTimer = false
     var currentClip: Clip?
     
+    @IBOutlet weak var commentaryView: UIView!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
     var commentaryPopover: UIPopoverController!
@@ -50,6 +51,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.commentaryView.hidden = true
         
         _shouldPauseObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPause, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
@@ -114,12 +117,17 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     }
     
     @IBAction func commentary(sender: AnyObject) {
-        let cpo = self.storyboard?.instantiateViewControllerWithIdentifier("commentary")
-        self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
-        self.commentaryPopover.popoverContentSize = CGSizeMake(320.0, 300.0)
-        self.commentaryPopover.backgroundColor = UIColor.blackColor()
-        self.commentaryPopover.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,200,1,1), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+        self.commentaryView.hidden = !self.commentaryView.hidden
+        //let cpo = self.storyboard?.instantiateViewControllerWithIdentifier("commentary")
+        //self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
+        //self.commentaryPopover.popoverLayoutMargins = UIEdgeInsets(top: -200, left: -200, bottom: -200, right: -200)
+        //self.commentaryPopover.popoverContentSize = CGSizeMake(300.0, 270.0)
+        //self.commentaryPopover.backgroundColor = UIColor.darkGrayColor()
+        //self.commentaryPopover.presentPopoverFromRect(CGRectMake(1000,200,0,0), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+
     }
+    
+    
     
     override func syncScrubber() {
         super.syncScrubber()

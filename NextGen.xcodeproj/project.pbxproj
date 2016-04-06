@@ -32,6 +32,7 @@
 		498FBC061CA9DEB400B81798 /* ClipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498FBC051CA9DEB400B81798 /* ClipCell.xib */; };
 		498FBC081CA9E6D500B81798 /* ClipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498FBC071CA9E6D500B81798 /* ClipCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
+		499871241CB43A4E00606E56 /* Commentary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 499871231CB43A4E00606E56 /* Commentary.plist */; };
 		49B525081CA61452007698DC /* ClipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B525071CA61452007698DC /* ClipViewController.swift */; };
 		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
 		49CB44C91C7CF02400753227 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */; };
@@ -376,6 +377,7 @@
 		498FBC051CA9DEB400B81798 /* ClipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClipCell.xib; sourceTree = "<group>"; };
 		498FBC071CA9E6D500B81798 /* ClipCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		499871231CB43A4E00606E56 /* Commentary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Commentary.plist; sourceTree = "<group>"; };
 		49B525071CA61452007698DC /* ClipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipViewController.swift; sourceTree = "<group>"; };
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
 				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
 				49CC33E41C98B81C000AB801 /* Settings.plist */,
+				499871231CB43A4E00606E56 /* Commentary.plist */,
 				492267D71C73F41300B306A2 /* Shopping.plist */,
 			);
 			path = NextGen;
@@ -1402,6 +1405,7 @@
 				70DF2F8E1CA5F433007AD2A0 /* MenuSectionCell.xib in Resources */,
 				494166EE1C52E8CC0013B94A /* play.png in Resources */,
 				492267D81C73F41300B306A2 /* Shopping.plist in Resources */,
+				499871241CB43A4E00606E56 /* Commentary.plist in Resources */,
 				7065F5461C46FCC500A2C74E /* TalentTableViewCell-Wide.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

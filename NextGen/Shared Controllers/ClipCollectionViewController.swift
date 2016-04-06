@@ -12,7 +12,7 @@ class ClipCollectionViewController: UICollectionViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.collectionView!.registerNib(UINib(nibName: "ClipCell", bundle: nil), forCellWithReuseIdentifier: "clipCell")
+        self.collectionView!.registerNib(UINib(nibName: "ClipCell", bundle: nil), forCellWithReuseIdentifier: "clipCell")
         
     }
     

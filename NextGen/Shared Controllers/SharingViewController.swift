@@ -109,12 +109,12 @@ class SharingViewController: UIViewController{
     
     @IBAction func shareClip(sender: AnyObject) {
         
-        
+        /*
         let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = sender as? UIView
         activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard]
         self.presentViewController(activityViewController, animated: true, completion: nil)
-        
+        */
         
     }
 
