@@ -53,13 +53,17 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         
         _shouldPauseObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPause, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
-                strongSelf.pauseVideo()
+                if strongSelf._didPlayInterstitial {
+                    strongSelf.pauseVideo()
+                }
             }
         }
         
         _shouldResumeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
-                strongSelf.playVideo()
+                if strongSelf._didPlayInterstitial {
+                    strongSelf.playVideo()
+                }
             }
         }
         
@@ -67,6 +71,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             self.fullScreenButton.removeFromSuperview()
             playMainExperience()
         } else {
+            _didPlayInterstitial = true
             self.shareButton.removeFromSuperview()
             self.playerControlsVisible = false
             self.lockTopToolbar = true
@@ -96,7 +101,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func playerItemDidReachEnd(notification: NSNotification!) {
         super.playerItemDidReachEnd(notification)
         
-        if mode == VideoPlayerMode.MainFeature && !_didPlayInterstitial {
+        if !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
         }
@@ -165,7 +170,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if mode == VideoPlayerMode.MainFeature && !_didPlayInterstitial {
+        if !_didPlayInterstitial {
             skipInterstitial()
         }
     }

@@ -190,11 +190,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isProduct() {
-                if let cell = cell as? ShoppingSceneDetailCollectionViewCell {
-                    if cell.theTakeProducts != nil {
-                        self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell.theTakeProducts)
-                    }
-                }
+                self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
             } else if timedEvent.isGallery() {
                 if let galleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController, gallery = timedEvent.getGallery(experience) {
                     galleryViewController.gallery = gallery
@@ -204,7 +200,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     self.presentViewController(galleryViewController, animated: true, completion: nil)
                 }
             } else if timedEvent.isAudioVisual() {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: timedEvent.getAudioVisual(experience))
+                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: cell)
             } else if timedEvent.isAppGroup() {
                 if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
@@ -212,29 +208,38 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
             } else if timedEvent.isLocation() {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: timedEvent)
+                self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: cell)
             }
         }
     }
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == SegueIdentifier.ShowGallery {
-            let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
-            
-            if let gallery = sender as? NGDMGallery {
-                galleryDetailViewController.gallery = gallery
-            } else if let audioVisual = sender as? NGDMAudioVisual {
-                galleryDetailViewController.audioVisual = audioVisual
+        if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
+            if segue.identifier == SegueIdentifier.ShowGallery {
+                let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
+                if timedEvent.isGallery() {
+                    galleryDetailViewController.gallery = timedEvent.getGallery(experience)
+                } else if timedEvent.isAudioVisual() {
+                    galleryDetailViewController.audioVisual = timedEvent.getAudioVisual(experience)
+                }
+            } else if segue.identifier == SegueIdentifier.ShowShop {
+                if let cell = cell as? ShoppingSceneDetailCollectionViewCell, products = cell.theTakeProducts {
+                    let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
+                    shopDetailViewController.experience = experience
+                    shopDetailViewController.products = products
+                    shopDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                    shopDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+                    shopDetailViewController.transitioningDelegate = self
+                }
+            } else if segue.identifier == SegueIdentifier.ShowMap {
+                let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
+                mapDetailViewController.experience = experience
+                mapDetailViewController.timedEvent = timedEvent
+                mapDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                mapDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+                mapDetailViewController.transitioningDelegate = self
             }
-        } else if segue.identifier == SegueIdentifier.ShowShop {
-            let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
-            shopDetailViewController.products = sender as! [TheTakeProduct]
-            shopDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-            shopDetailViewController.transitioningDelegate = self
-        } else if segue.identifier == SegueIdentifier.ShowMap {
-            let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
-            mapDetailViewController.timedEvent = sender as! NGDMTimedEvent
         }
     }
     

@@ -41,13 +41,13 @@ class ShoppingDetailCell: UICollectionViewCell {
     override var selected: Bool {
         didSet {
             self.layer.borderColor = UIColor.whiteColor().CGColor
-            self.layer.borderWidth = (self.selected ? 1 : 0)
+            self.layer.borderWidth = (self.selected ? 2 : 0)
         }
     }
     
 }
 
-class ShoppingDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var productMatchIcon: UIView!
     @IBOutlet weak var productMatchLabel: UILabel!

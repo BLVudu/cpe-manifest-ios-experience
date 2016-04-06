@@ -31,6 +31,12 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell, MKMapView
         mapView.userInteractionEnabled = false
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        mapView.mapType = MKMapType.Hybrid
+    }
+    
     // MARK: MKMapViewDelegate
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")

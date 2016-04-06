@@ -37,8 +37,9 @@ class MapDetailCell: UICollectionViewCell {
         }
         
         set {
-            if newValue {
-                super.selected = true
+            super.selected = true
+            
+            /*if newValue {
                 self.playBtn.hidden = true
                 self.layer.borderWidth = 2
                 self.layer.borderColor = UIColor.whiteColor().CGColor
@@ -52,48 +53,58 @@ class MapDetailCell: UICollectionViewCell {
                 }
                     
                 self.layer.borderWidth = 0
-            }
+            }*/
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        location = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        mapView.mapType = MKMapType.Hybrid
     }
     
 }
 
-class MapDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MKMapViewDelegate {
+class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    var mapAnnotation: MKPointAnnotation!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var mapCollectionView: UICollectionView!
     @IBOutlet weak var videoView: UIView!
     
-    var location: NGDMLocation!
-    var timedEvent: NGDMTimedEvent! {
-        didSet {
-            if let eventLocation = timedEvent.location {
-                location = eventLocation
-            }
-        }
-    }
+    var timedEvent: NGDMTimedEvent!
     
-    var initialLocation = CLLocation(latitude: 0, longitude: 0)
-    let regionRadius: CLLocationDistance = 2000
+    var location: NGDMLocation!
     var locationImages = []
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let center = mapView.setLocation(location.latitude, longitude: location.longitude, zoomLevel: 13, animated: false)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = center
-        annotation.title = location.name
-        annotation.subtitle = location.address
-        mapView.addAnnotation(annotation)
-        mapView.selectAnnotation(annotation, animated: true)
+        location = timedEvent.location!
+        mapView.mapType = MKMapType.Hybrid
+        let center = setInitialMapLocation(animated: false)
+        mapAnnotation = MKPointAnnotation()
+        mapAnnotation.coordinate = center
+        mapAnnotation.title = location.name
+        mapAnnotation.subtitle = location.address
+        mapView.addAnnotation(mapAnnotation)
+        mapView.selectAnnotation(mapAnnotation, animated: true)
         
         self.imageView.hidden = true
         self.videoView.hidden = true
+    }
+    
+    func setInitialMapLocation(animated animated: Bool) -> CLLocationCoordinate2D {
+        return mapView.setLocation(location.latitude, longitude: location.longitude, zoomLevel: 15, animated: animated)
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
@@ -104,12 +115,6 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         
         return nil
-    }
-    
-    // MARK: Actions
-    @IBAction func close(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldResume, object: nil)
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: UICollectionViewDataSource
@@ -129,6 +134,11 @@ class MapDetailViewController: UIViewController, UICollectionViewDataSource, UIC
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 0 { // Map thumbnail
+            setInitialMapLocation(animated: true)
+            mapView.selectAnnotation(mapAnnotation, animated: true)
+        }
+        
         /*if (indexPath.row == locationImages.count+1){
             self.mapView.alpha = 0.5
             NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.PlayerShouldPause, object: nil)
