@@ -73,7 +73,7 @@ class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-         return 100
+         return 80
     }
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionData.count
