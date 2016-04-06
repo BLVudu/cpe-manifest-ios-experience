@@ -21,6 +21,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.showsSelectedMenuItem = false
         
         for category in TheTakeAPIUtil.sharedInstance.productCategories {

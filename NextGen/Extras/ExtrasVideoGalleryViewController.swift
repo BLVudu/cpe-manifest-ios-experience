@@ -35,6 +35,8 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+ 
         self.navigationItem.setBackButton(self, action: #selector(ExtrasVideoGalleryViewController.close))
         
         galleryTableView.registerNib(UINib(nibName: String(VideoCell), bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
@@ -139,6 +141,7 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         
         let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = sender as? UIView
+        activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard]
         self.presentViewController(activityViewController, animated: true, completion: nil)
         
         

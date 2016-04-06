@@ -151,6 +151,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         if UIDevice.currentDevice().orientation.isLandscape {
             let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
             let styledTitle = NSAttributedString(string: "Rotate device to share clip", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor()])
+            let styledTitle = NSAttributedString(string: "Rotate device to share clip", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!])
+
             alert.setValue(styledTitle, forKey: "_attributedTitle")
             let pop = UIPopoverController.init(contentViewController: alert)
             pop.backgroundColor = UIColor.blackColor()

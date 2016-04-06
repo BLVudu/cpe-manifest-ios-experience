@@ -8,11 +8,6 @@
 
 import UIKit
 
-protocol CommentaryViewDelegate{
-    
-    func updateCommButton(comm: UIButton)
-    
-}
 
 
 class CommentaryView: UITableViewController{
@@ -39,6 +34,11 @@ class CommentaryView: UITableViewController{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.options.count
     }
+    
+    //override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    //}
    
     
       }

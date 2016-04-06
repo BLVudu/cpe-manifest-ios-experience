@@ -18,11 +18,14 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         menuTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         menuTableView.backgroundColor = UIColor.clearColor()
         menuTableView.registerNib(UINib(nibName: MenuSectionCell.NibName, bundle: nil), forCellReuseIdentifier: MenuSectionCell.ReuseIdentifier)
         menuTableView.registerNib(UINib(nibName: MenuItemCell.NibName, bundle: nil), forCellReuseIdentifier: MenuItemCell.ReuseIdentifier)
-    }
+        
+          }
     
     // MARK: UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -68,7 +71,7 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
         return 40.0
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let menuSection = menuSections[indexPath.section]
         if indexPath.row == 0 {
             menuSection.toggle()
