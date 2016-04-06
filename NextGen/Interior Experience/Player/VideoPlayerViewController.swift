@@ -42,6 +42,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     private var _shouldPauseObserver: NSObjectProtocol!
     private var _shouldResumeObserver: NSObjectProtocol!
+    private var _playerTapped: NSObjectProtocol!
     
     deinit {
         let center = NSNotificationCenter.defaultCenter()
@@ -62,6 +63,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             }
         }
         
+       _playerTapped = NSNotificationCenter.defaultCenter().addObserverForName("AreaTapped", object: nil, queue:  NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self {
+                
+                if strongSelf.commentaryView.hidden == false{
+                    strongSelf.commentaryView.hidden = true
+                }
+            }
+        }
         _shouldResumeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
                 if strongSelf._didPlayInterstitial {

@@ -60,28 +60,7 @@ class ClipViewController: UIViewController {
         }
  
     }
-    
-        /*
-        NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-        
-        if let userInfo = notification.userInfo{
-        let index = userInfo["index"]as! Int
-        if index >= 1{
-        } else {
-        let indexPath = NSIndexPath(forRow: index, inSection: 0)
-        self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        self.tableView(self.tableView, didSelectRowAtIndexPath: indexPath)
-        
-        
-        
-        }
-        }
-        
-        
-        }
-        
-        */
-    func videoPlayerViewController() -> VideoPlayerViewController? {
+        func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
             if viewController is VideoPlayerViewController {
                 return viewController as? VideoPlayerViewController

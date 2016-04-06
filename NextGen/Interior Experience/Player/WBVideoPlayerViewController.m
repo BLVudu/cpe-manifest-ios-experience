@@ -600,6 +600,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 }
 
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AreaTapped" object:nil];
     self.playerControlsVisible = !self.playerControlsVisible;
     [self initAutoHideTimer];
 }
