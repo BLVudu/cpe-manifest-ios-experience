@@ -19,6 +19,7 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
     
     var experience: NGDMExperience!
+    var didPlayFirstClip = false
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
     
@@ -132,11 +133,19 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             videoPlayerViewController.playVideoWithURL(videoURL)
             NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemReadyToPlayNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
                 
+                if self.didPlayFirstClip == false{
                 videoPlayerViewController.pauseVideo()
+                    self.didPlayFirstClip = true
+                }
                 
                 
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+         let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
+        cell.runtimeLabel.text = "WATCHED"
     }
     
    }

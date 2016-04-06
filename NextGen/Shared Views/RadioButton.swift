@@ -45,7 +45,7 @@ class RadioButton: UIButton{
         self.layer.borderWidth = 3
         self.layer.cornerRadius = 0.5*40
         self.layer.borderColor = UIColor.grayColor().CGColor
-        self.layer.backgroundColor = UIColor.clearColor().CGColor
+        self.layer.backgroundColor = UIColor.blackColor().CGColor
         
         selection.frame = CGRectMake(5, 5, 30, 30)
         selection.borderWidth = 3
