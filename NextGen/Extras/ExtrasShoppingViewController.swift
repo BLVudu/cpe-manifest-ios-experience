@@ -13,14 +13,11 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
-    var experience: NGDMExperience!
-    
     private var _products: [TheTakeProduct]?
     private var _productListSessionDataTask: NSURLSessionDataTask?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         self.showsSelectedMenuItem = false
         
@@ -43,7 +40,6 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
             menuSections.append(MenuSection(info: info))
         }
         
-        productsCollectionView.backgroundColor = UIColor.clearColor()
         productsCollectionView.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
     }
     

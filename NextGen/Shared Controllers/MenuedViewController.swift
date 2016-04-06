@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuedViewController: StylizedViewController, UITableViewDelegate, UITableViewDataSource {
+class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var menuTableView: UITableView!
     var menuSections = [MenuSection]()
@@ -18,14 +18,10 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         menuTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        menuTableView.backgroundColor = UIColor.clearColor()
         menuTableView.registerNib(UINib(nibName: MenuSectionCell.NibName, bundle: nil), forCellReuseIdentifier: MenuSectionCell.ReuseIdentifier)
         menuTableView.registerNib(UINib(nibName: MenuItemCell.NibName, bundle: nil), forCellReuseIdentifier: MenuItemCell.ReuseIdentifier)
-        
-          }
+    }
     
     // MARK: UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

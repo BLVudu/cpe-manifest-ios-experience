@@ -8,17 +8,14 @@
 
 import UIKit
 
-class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
+class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var galleryTableView: UITableView!
-    @IBOutlet weak var proxyView: UIView!
     
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaDescriptionLabel: UILabel!
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
-    
-    var experience: NGDMExperience!
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
     
@@ -33,19 +30,13 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
- 
-        self.navigationItem.setBackButton(self, action: #selector(ExtrasVideoGalleryViewController.close))
-        
         galleryTableView.registerNib(UINib(nibName: String(VideoCell), bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
         
         self.videoContainerView.hidden = true
         self.mediaTitleLabel.hidden = true
         self.mediaDescriptionLabel.hidden = true
         self.mediaRuntimeLabel.hidden = true
-
-
-              
+        
         _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
                 if index < strongSelf.experience.childExperiences.count {
@@ -65,12 +56,6 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         }
         
         return nil
-    }
-    
-    
-    // MARK: Actions
-    func close() {
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     

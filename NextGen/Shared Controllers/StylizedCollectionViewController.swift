@@ -16,7 +16,7 @@ class StylizedCollectionViewController: UICollectionViewController {
         
         self.navigationItem.addTitleStyling()
         
-        let backgroundImageView = UIImageView(image: UIImage(named: "extras_bg.jpg"))
+        let backgroundImageView = UIImageView(image: UIImage(named: "MOSExtrasBackground"))
         backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
         self.collectionView!.backgroundView = backgroundImageView
     }

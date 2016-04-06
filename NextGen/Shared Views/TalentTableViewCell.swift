@@ -51,7 +51,7 @@ class TalentTableViewCell: UITableViewCell {
         } else {
             talentImageView.layer.borderWidth = 0
             nameLabel?.textColor = UIColor.whiteColor()
-            roleLabel?.textColor = UIColor.darkGrayColor()
+            roleLabel?.textColor = UIColor(netHex: 0x999999)
         }
     }
 
