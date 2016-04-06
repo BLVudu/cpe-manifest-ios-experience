@@ -31,12 +31,11 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         super.viewDidLoad()
         
         galleryTableView.registerNib(UINib(nibName: String(VideoCell), bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
-        
-        self.videoContainerView.hidden = true
-        self.mediaTitleLabel.hidden = true
-        self.mediaDescriptionLabel.hidden = true
-        self.mediaRuntimeLabel.hidden = true
-        
+
+        let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
+        self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
+
         _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
                 if index < strongSelf.experience.childExperiences.count {
@@ -90,10 +89,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        self.videoContainerView.hidden = false
-        self.mediaTitleLabel.hidden = false
-        self.mediaDescriptionLabel.hidden = false
-        self.mediaRuntimeLabel.hidden = false
+   
 
         let thisExperience = experience.childExperiences[indexPath.row]
         
@@ -115,6 +111,12 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
             videoPlayerViewController.playVideoWithURL(videoURL)
+            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemReadyToPlayNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+                
+                videoPlayerViewController.pauseVideo()
+                
+                
+            }
         }
     }
     
