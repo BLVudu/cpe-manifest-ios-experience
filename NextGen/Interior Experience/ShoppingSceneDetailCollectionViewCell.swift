@@ -109,6 +109,11 @@ class ShoppingSceneDetailCollectionViewCell : SceneDetailCollectionViewCell {
         
         theTakeProducts = nil
         bullseyeView.hidden = true
+        
+        if let currentTask = _currentProductSessionDataTask {
+            currentTask.cancel()
+            _currentProductSessionDataTask = nil
+        }
     }
     
     override func layoutSubviews() {

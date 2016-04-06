@@ -33,17 +33,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
+    
+    private var _currentTime: Double = -1
     private var _currentExperienceCellData = [ExperienceCellData]()
-    private var _currentProductFrameTime = -1.0
-    private var _currentProductSessionDataTask: NSURLSessionDataTask?
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
-        if let currentTask = _currentProductSessionDataTask {
-            currentTask.cancel()
-        }
-        
-        _currentProductSessionDataTask = nil
     }
     
     // MARK: View Lifecycle
@@ -58,7 +53,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
-                strongSelf.processExperiencesForTime(time)
+                if time != strongSelf._currentTime {
+                    strongSelf.processExperiencesForTime(time)
+                }
             }
         }
     }
@@ -96,6 +93,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     func processExperiencesForTime(time: Double) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            self._currentTime = time
+            
             var deleteIndexPaths = [NSIndexPath]()
             var insertIndexPaths = [NSIndexPath]()
             var reloadIndexPaths = [NSIndexPath]()
@@ -108,24 +107,26 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 let oldCellData = self.currentCellDataForExperience(experience)
                 let oldIndexPath = self.currentIndexPathForExperience(experience)
                 
-                if let newTimedEvent = experience.timedEventSequence?.timedEvent(time) {
+                if let newTimedEvent = experience.timedEventSequence?.timedEvent(self._currentTime) {
                     currentExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
                     let newIndexPath = NSIndexPath(forItem: currentExperienceCellData.count - 1, inSection: 0)
+                    //print("Found \(experience.timedEventSequence!.id)")
+                    
                     if oldCellData != nil {
                         if oldIndexPath!.row != newIndexPath.row {
                             moveIndexPaths.append((oldIndexPath!, newIndexPath))
-                        } else if oldCellData!.timedEvent != newTimedEvent {
+                            //print("Moving \(experience.timedEventSequence!.id)")
+                        } else if newTimedEvent.isProduct() || oldCellData!.timedEvent != newTimedEvent {
                             reloadIndexPaths.append(oldIndexPath!)
-                        } else if newTimedEvent.isProduct() {
-                            if let cell = self.collectionView?.cellForItemAtIndexPath(oldIndexPath!) as? ShoppingSceneDetailCollectionViewCell {
-                                cell.currentTime = time
-                            }
+                            //print("Reloading \(experience.timedEventSequence!.id)")
                         }
                     } else {
                         insertIndexPaths.append(newIndexPath)
+                        //print("Inserting \(experience.timedEventSequence!.id)")
                     }
                 } else if oldIndexPath != nil {
                     deleteIndexPaths.append(oldIndexPath!)
+                    //print("Deleting \(experience.timedEventSequence!.id)")
                 }
             }
             
@@ -143,6 +144,16 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     
                     for indexPaths in moveIndexPaths {
                         self.collectionView?.moveItemAtIndexPath(indexPaths.0, toIndexPath: indexPaths.1)
+                    }
+                    
+                    var indexPaths = reloadIndexPaths
+                    for i in 0 ..< indexPaths.count {
+                        if let cell = self.collectionView?.cellForItemAtIndexPath(indexPaths[i]) as? ShoppingSceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
+                            if timedEvent.isProduct() {
+                                cell.currentTime = self._currentTime
+                                reloadIndexPaths.removeAtIndex(i)
+                            }
+                        }
                     }
                     
                     if reloadIndexPaths.count > 0 {
@@ -174,6 +185,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
         cell.experience = cellData.experience
         cell.timedEvent = cellData.timedEvent
+        cell.currentTime = _currentTime
         return cell
     }
     

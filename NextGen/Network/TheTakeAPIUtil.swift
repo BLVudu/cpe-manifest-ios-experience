@@ -31,7 +31,7 @@ class TheTakeAPIUtil: APIUtil {
     func prefetchProductFrames() {
         _frameTimes.removeAll()
         
-        getJSONWithPath("/frames/listFrames", parameters: ["media": mediaId, "limit": "9999"], successBlock: { (result) -> Void in
+        getJSONWithPath("/frames/listFrames", parameters: ["media": mediaId, "limit": "100000"], successBlock: { (result) -> Void in
             if let frames = result["result"] as? [NSDictionary] {
                 for frameInfo in frames {
                     if let frameTime = frameInfo["frameTime"] as? Double {
@@ -60,8 +60,9 @@ class TheTakeAPIUtil: APIUtil {
         
         if _frameTimes.count > 0 && _frameTimes[timeInMilliseconds] == nil {
             let frameTimeKeys = _frameTimes.keys.sort()
-            let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > timeInMilliseconds })
-            closestFrameTime = frameTimeKeys[max(frameIndex - 1, 0)]
+            if let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > timeInMilliseconds }) {
+                closestFrameTime = frameTimeKeys[max(frameIndex - 1, 0)]
+            }
         } else {
             closestFrameTime = timeInMilliseconds
         }

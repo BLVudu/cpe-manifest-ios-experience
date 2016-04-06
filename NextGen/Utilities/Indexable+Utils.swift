@@ -10,7 +10,7 @@ import Foundation
 
 extension Indexable {
     
-    func indexOfFirstObjectPassingTest(test: (Self._Element -> Bool)) -> Self.Index {
+    func indexOfFirstObjectPassingTest(test: (Self._Element -> Bool)) -> Self.Index? {
         var searchRange = startIndex..<endIndex
         
         while searchRange.count > 0 {
@@ -18,7 +18,7 @@ extension Indexable {
             let passesTest: Bool = test(self[testIndex])
             
             if (searchRange.count == 1) {
-                return passesTest ? searchRange.startIndex : endIndex
+                return passesTest ? searchRange.startIndex : nil
             }
             
             if (passesTest) {
@@ -28,7 +28,7 @@ extension Indexable {
             }
         }
         
-        return endIndex
+        return nil
     }
     
 }

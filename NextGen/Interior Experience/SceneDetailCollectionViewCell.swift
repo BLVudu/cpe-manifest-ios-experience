@@ -72,7 +72,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
         
         set {
-            if _currentTime == -1 || newValue - _currentTime >= Constants.UpdateInterval {
+            if _currentTime == -1 || abs(newValue - _currentTime) >= Constants.UpdateInterval {
                 _currentTime = newValue
                 currentTimeDidChange()
             }
