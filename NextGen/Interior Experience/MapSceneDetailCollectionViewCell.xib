@@ -55,7 +55,6 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="OZd-aL-jCC" secondAttribute="trailing" constant="8" id="CkM-Hr-gtv"/>
                 <constraint firstAttribute="trailing" secondItem="hLC-sF-B1u" secondAttribute="trailing" constant="8" id="KPo-A8-zrX"/>
-                <constraint firstAttribute="bottom" secondItem="hLC-sF-B1u" secondAttribute="bottom" constant="8" id="VHD-wc-Sjx"/>
                 <constraint firstItem="GLm-3E-DD7" firstAttribute="top" secondItem="OZd-aL-jCC" secondAttribute="bottom" id="ZRH-vH-Jdx"/>
                 <constraint firstItem="hLC-sF-B1u" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="elX-Ob-YyR"/>
                 <constraint firstItem="hLC-sF-B1u" firstAttribute="top" secondItem="GLm-3E-DD7" secondAttribute="bottom" constant="5" id="piL-JG-e8F"/>
