@@ -1736,7 +1736,7 @@
                                     <action selector="close:" destination="v1c-4O-jsc" eventType="touchUpInside" id="sij-6f-uC0"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wLr-WP-rI5">
+                            <containerView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLr-WP-rI5">
                                 <rect key="frame" x="8" y="70" width="1008" height="645"/>
                                 <connections>
                                     <segue destination="VDs-4i-RId" kind="embed" id="bDD-de-Ulp"/>
