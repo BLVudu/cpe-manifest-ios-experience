@@ -176,17 +176,21 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
             alert.view.tintColor = UIColor.yellowColor()
         } else {
+            
+            //let shareVC = self.storyboard?.instantiateViewControllerWithIdentifier("share")
+            //self.
             self.performSegueWithIdentifier(StoryboardSegue.ShowShare, sender: nil)
         }
     }
     
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == StoryboardSegue.ShowShare {
             let shareVC = segue.destinationViewController as! SharingViewController
             shareVC.clip = currentClip
         }
     }
-    
+    */
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !_didPlayInterstitial {
             skipInterstitial()

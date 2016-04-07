@@ -78,7 +78,6 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var mapCollectionView: UICollectionView!
-    @IBOutlet weak var videoView: UIView!
     
     var timedEvent: NGDMTimedEvent!
     
@@ -100,7 +99,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         mapView.selectAnnotation(mapAnnotation, animated: true)
         
         self.imageView.hidden = true
-        self.videoView.hidden = true
+       
     }
     
     func setInitialMapLocation(animated animated: Bool) -> CLLocationCoordinate2D {
