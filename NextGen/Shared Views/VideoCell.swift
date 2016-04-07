@@ -61,12 +61,15 @@ class VideoCell: UITableViewCell {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
                 self.runtimeLabel.text = "PLAYING"
+                self.runtimeLabel.layer.borderWidth = 1
+                self.runtimeLabel.layer.borderColor = UIColor.whiteColor().CGColor
             }, completion: nil)
         } else {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 0.5
                 self.captionLabel.alpha = 0.5
                 self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
+                self.runtimeLabel.layer.borderWidth = 0
             }, completion: nil)
         }
     }
