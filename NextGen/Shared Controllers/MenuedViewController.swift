@@ -67,7 +67,7 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
         return 40.0
     }
     
-       func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let menuSection = menuSections[indexPath.section]
         if indexPath.row == 0 {
             menuSection.toggle()
@@ -75,13 +75,13 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuSectionCell {
                 cell.toggleDropDownIcon()
             }
+            
+            tableView.beginUpdates()
+            tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
+            tableView.endUpdates()
         } else {
             selectedItem = menuSection.items[indexPath.row - 1]
         }
-        
-        tableView.beginUpdates()
-        tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
-        tableView.endUpdates()
     }
     
 }

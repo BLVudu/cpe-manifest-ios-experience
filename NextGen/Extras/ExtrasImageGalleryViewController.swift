@@ -11,7 +11,6 @@ import UIKit
 class ExtrasImageGalleryViewController: ExtrasExperienceViewController, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var galleryScrollView: UIScrollView!
     @IBOutlet weak var thumbnailCollectionView: UICollectionView!
     
@@ -22,7 +21,6 @@ class ExtrasImageGalleryViewController: ExtrasExperienceViewController, UIScroll
         super.viewDidLoad()
         
         titleLabel.text = gallery.metadata?.title
-        closeButton.hidden = self.navigationController != nil
         thumbnailCollectionView.backgroundColor = UIColor.clearColor()
     }
     
@@ -58,11 +56,6 @@ class ExtrasImageGalleryViewController: ExtrasExperienceViewController, UIScroll
                 }
             }
         }
-    }
-    
-    // MARK: Actions
-    @IBAction func close(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: UIScrollViewDelegate

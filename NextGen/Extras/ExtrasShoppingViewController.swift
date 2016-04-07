@@ -15,6 +15,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     
     private var _products: [TheTakeProduct]?
     private var _productListSessionDataTask: NSURLSessionDataTask?
+    private var _didAutoSelectCategory = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,25 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         }
         
         productsCollectionView.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !_didAutoSelectCategory {
+            let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
+            self.menuTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+            self.tableView(self.menuTableView, didSelectRowAtIndexPath: selectedPath)
+            if let menuSection = menuSections.first {
+                if menuSection.expandable {
+                    let selectedPath = NSIndexPath(forRow: 1, inSection: 0)
+                    self.menuTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                    self.tableView(self.menuTableView, didSelectRowAtIndexPath: selectedPath)
+                }
+            }
+            
+            _didAutoSelectCategory = true
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -104,7 +124,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
             shoppingDetailViewController.experience = experience
             shoppingDetailViewController.products = cell.theTakeProducts
             shoppingDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            self.navigationController?.presentViewController(shoppingDetailViewController, animated: true, completion: nil)
+            self.presentViewController(shoppingDetailViewController, animated: true, completion: nil)
         }
     }
     

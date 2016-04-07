@@ -27,8 +27,9 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         self.extrasCollectionView.registerNib(UINib(nibName: "TitledImageCell", bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
+        self.talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         
         self.experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience
         showHomeButton()
@@ -154,7 +155,11 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 2) - 10, 235)
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 2) - 25, 230)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(15, 15, 15, 15)
     }
     
     // MARK: Storyboard

@@ -23,14 +23,13 @@ class SceneDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.blackColor()
-
-        let viewWidth = CGRectGetWidth(self.view.frame)
-        titleLabel = UILabel(frame: CGRectMake(kViewMargin, 0, viewWidth - (2 * kViewMargin), kTitleLabelHeight))
+        
+        titleLabel = UILabel()
         titleLabel.font = UIFont(name: "Roboto Condensed", size: 25)!
         titleLabel.textColor = UIColor.whiteColor()
         self.view.addSubview(titleLabel)
         
-        closeButton = UIButton(frame: CGRectMake(viewWidth - kCloseButtonWidth - kViewMargin, 0, kCloseButtonWidth, kTitleLabelHeight))
+        closeButton = UIButton(type: UIButtonType.Custom)
         closeButton.titleLabel?.font = UIFont(name: "Roboto Condensed", size: 17)!
         closeButton.setTitle("Close", forState: UIControlState.Normal)
         closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
@@ -47,6 +46,10 @@ class SceneDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let viewWidth = CGRectGetWidth(self.view.frame)
+        titleLabel.frame = CGRectMake(kViewMargin, 0, viewWidth - (2 * kViewMargin), kTitleLabelHeight)
+        closeButton.frame = CGRectMake(viewWidth - kCloseButtonWidth - kViewMargin, 0, kCloseButtonWidth, kTitleLabelHeight)
         
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
     }

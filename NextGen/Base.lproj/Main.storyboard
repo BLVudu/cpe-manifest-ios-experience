@@ -681,13 +681,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qat-wu-1st">
-                                <rect key="frame" x="15" y="130" width="994" height="513"/>
+                                <rect key="frame" x="15" y="135" width="994" height="508"/>
                                 <connections>
                                     <outlet property="delegate" destination="psv-JP-kVu" id="Ig0-hh-zR9"/>
                                 </connections>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Gallery Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXe-q8-Fl7">
-                                <rect key="frame" x="15" y="90" width="884" height="40"/>
+                                <rect key="frame" x="15" y="90" width="994" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3XV-rd-cuV"/>
                                 </constraints>
@@ -730,40 +730,22 @@
                                     <outlet property="delegate" destination="psv-JP-kVu" id="fxq-6b-S1s"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dks-Mb-r2S">
-                                <rect key="frame" x="899" y="90" width="110" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="FC1-OV-u9O"/>
-                                    <constraint firstAttribute="width" constant="110" id="jpb-HM-UMO"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="110" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Close" image="Close"/>
-                                <connections>
-                                    <action selector="close:" destination="psv-JP-kVu" eventType="touchUpInside" id="ADT-Gf-UkS"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uXe-q8-Fl7" secondAttribute="trailing" constant="15" id="4IR-fK-U18"/>
                             <constraint firstItem="FHV-cE-fU9" firstAttribute="leading" secondItem="NP1-n0-AOK" secondAttribute="leading" constant="15" id="5Kx-Mu-p9O"/>
-                            <constraint firstItem="Qat-wu-1st" firstAttribute="top" secondItem="uXe-q8-Fl7" secondAttribute="bottom" id="Dvn-JF-sfa"/>
-                            <constraint firstItem="dks-Mb-r2S" firstAttribute="top" secondItem="uXe-q8-Fl7" secondAttribute="top" id="F3i-4c-Eca"/>
+                            <constraint firstItem="Qat-wu-1st" firstAttribute="top" secondItem="uXe-q8-Fl7" secondAttribute="bottom" constant="5" id="Dvn-JF-sfa"/>
                             <constraint firstItem="uXe-q8-Fl7" firstAttribute="leading" secondItem="NP1-n0-AOK" secondAttribute="leading" constant="15" id="IWI-Mg-N8G"/>
                             <constraint firstItem="Qat-wu-1st" firstAttribute="leading" secondItem="NP1-n0-AOK" secondAttribute="leading" constant="15" id="NsC-F3-MFB"/>
-                            <constraint firstAttribute="trailing" secondItem="dks-Mb-r2S" secondAttribute="trailing" constant="15" id="UXY-Bl-bsr"/>
                             <constraint firstAttribute="trailing" secondItem="FHV-cE-fU9" secondAttribute="trailing" constant="15" id="UnZ-C3-ecm"/>
                             <constraint firstItem="FHV-cE-fU9" firstAttribute="top" secondItem="Qat-wu-1st" secondAttribute="bottom" constant="30" id="WzB-PL-rNP"/>
                             <constraint firstAttribute="trailing" secondItem="Qat-wu-1st" secondAttribute="trailing" constant="15" id="YgD-rb-kdj"/>
                             <constraint firstItem="Uct-fl-gz8" firstAttribute="top" secondItem="FHV-cE-fU9" secondAttribute="bottom" constant="20" id="baR-Wk-E38"/>
                             <constraint firstItem="uXe-q8-Fl7" firstAttribute="top" secondItem="hSH-eO-JwJ" secondAttribute="bottom" constant="90" id="cyV-9V-UtE"/>
-                            <constraint firstItem="Qat-wu-1st" firstAttribute="top" secondItem="dks-Mb-r2S" secondAttribute="bottom" id="dzf-aK-Ec2"/>
-                            <constraint firstItem="dks-Mb-r2S" firstAttribute="leading" secondItem="uXe-q8-Fl7" secondAttribute="trailing" id="yuf-8I-4Gu"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="dks-Mb-r2S" id="hyD-L7-tnG"/>
                         <outlet property="galleryScrollView" destination="Qat-wu-1st" id="gEf-H0-Tnv"/>
                         <outlet property="thumbnailCollectionView" destination="FHV-cE-fU9" id="7bg-6O-ehy"/>
                         <outlet property="titleLabel" destination="uXe-q8-Fl7" id="7Vc-7r-TLL"/>
@@ -2291,6 +2273,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ir8-OX-j5p"/>
-        <segue reference="W8P-ST-gWA"/>
+        <segue reference="kSL-ff-FXa"/>
     </inferredMetricsTieBreakers>
 </document>
