@@ -32,7 +32,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
                 strongSelf._currentTime = time
-                strongSelf.talentTableView.reloadData()
+                //strongSelf.talentTableView.reloadData()
             }
         }
     }
@@ -85,18 +85,13 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //if let sceneTalent = currentScene?.talent {
-        //    return sceneTalent.count
-        //}
-        
-        return 0
+        return NextGenDataManager.sharedInstance.mainExperience.orderedActors.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        //if let sceneTalent = currentScene?.talent {
-        //    cell.talent = sceneTalent[indexPath.row]
-        //}
+        let talent = NextGenDataManager.sharedInstance.mainExperience.orderedActors[indexPath.row]
+        cell.talent = talent
         
         return cell
     }

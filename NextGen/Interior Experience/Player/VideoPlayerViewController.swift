@@ -30,6 +30,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     var mode = VideoPlayerMode.Supplemental
     
     private var _didPlayInterstitial = false
+    private var _lastNotifiedTime = -1.0
     
     var showCountdownTimer = false
     var currentClip: Clip?
@@ -156,7 +157,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
                 shareButton.enabled = false
             }
             
-            if _didPlayInterstitial || (!_didPlayInterstitial && currentTime == 0) {
+            if _lastNotifiedTime != currentTime {
+                _lastNotifiedTime = currentTime
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
             }
         }

@@ -26,7 +26,6 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
     @IBOutlet weak var filmographyContainerView: UIView!
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
-    @IBOutlet weak var showGallery: UIButton!
     @IBOutlet weak var twitterButton: SocialButton!
     @IBOutlet weak var facebookButton: SocialButton!
     
@@ -78,8 +77,6 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
             
             if talent != nil && talent?.gallery.count > 0{
                 images = (talent?.gallery)!
-            } else {
-                showGallery.userInteractionEnabled = false
             }
         }
     }
@@ -90,7 +87,6 @@ class TalentDetailViewController: UIViewController, UICollectionViewDataSource, 
         
         filmographyCollectionView.backgroundColor = UIColor.clearColor()
         filmographyCollectionView.showsHorizontalScrollIndicator = true
-        self.showGallery.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
     }
     
     // MARK: Actions
