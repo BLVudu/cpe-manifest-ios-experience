@@ -15,6 +15,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ShowGallery = "showGallery"
         static let ShowShop = "showShop"
         static let ShowMap = "showMap"
+        static let ShowShare = "showShare"
     }
     
     struct Constants {
@@ -37,6 +38,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     private var _currentTime: Double = -1
     private var _currentExperienceCellData = [ExperienceCellData]()
     
+    var clip: Clip!
+    
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
     }
@@ -44,7 +47,15 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NSNotificationCenter.defaultCenter().addObserverForName("showShare", object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            
+            if let strongSelf = self, userInfo = notification.userInfo {
+                strongSelf.clip = userInfo["clip"] as! Clip!
+                strongSelf.performSegueWithIdentifier(SegueIdentifier.ShowShare, sender: nil)
+                
+            }
+
+        }
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.alpha = 0
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
@@ -262,6 +273,14 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 mapDetailViewController.transitioningDelegate = self
             }
         }
+            
+             if segue.identifier == SegueIdentifier.ShowShare {
+                let shareDetailViewController = segue.destinationViewController as! SharingViewController
+                shareDetailViewController.clip = clip
+                shareDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+                shareDetailViewController.transitioningDelegate = self
+        }
+    
     }
     
     func cellForExperience(experience: NGDMExperience) -> SceneDetailCollectionViewCell? {
@@ -283,4 +302,5 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         return InteriorExperiencePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
     }
     
+
 }
