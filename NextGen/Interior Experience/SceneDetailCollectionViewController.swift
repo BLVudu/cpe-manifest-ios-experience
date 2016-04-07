@@ -206,13 +206,15 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        //self.performSegueWithIdentifier("showExample", sender: nil)
+        
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isProduct() {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
             } else if timedEvent.isGallery() {
                 if let galleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController, gallery = timedEvent.getGallery(experience) {
                     galleryViewController.gallery = gallery
-                    galleryViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                    //galleryViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
                     galleryViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                     galleryViewController.transitioningDelegate = self
                     self.presentViewController(galleryViewController, animated: true, completion: nil)
@@ -229,6 +231,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: cell)
             }
         }
+ 
     }
     
     // MARK: Storyboard Methods
@@ -246,7 +249,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
                     shopDetailViewController.experience = experience
                     shopDetailViewController.products = products
-                    shopDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                    //shopDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
                     shopDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                     shopDetailViewController.transitioningDelegate = self
                 }
@@ -254,7 +257,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
                 mapDetailViewController.experience = experience
                 mapDetailViewController.timedEvent = timedEvent
-                mapDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                //mapDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
                 mapDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                 mapDetailViewController.transitioningDelegate = self
             }
