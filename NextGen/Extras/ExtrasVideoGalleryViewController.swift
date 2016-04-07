@@ -17,7 +17,11 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak var mediaDescriptionLabel: UILabel!
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
     
-    var didPlayFirstClip = false
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var previewPlayButton: UIButton!
+    
+    private var _didPlayFirstItem = false
+    private var _previewPlayURL: NSURL?
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
     
@@ -90,9 +94,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-   
-
         let thisExperience = experience.childExperiences[indexPath.row]
         
         mediaTitleLabel.text = thisExperience.metadata?.title
@@ -112,22 +113,38 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemReadyToPlayNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            
+            if !_didPlayFirstItem {
+                _previewPlayURL = videoURL
                 
-                if self.didPlayFirstClip == false{
-                videoPlayerViewController.pauseVideo()
-                    self.didPlayFirstClip = true
+                if indexPath.row == 0 {
+                    if let imageURL = thisExperience.imageURL {
+                        previewImageView.setImageWithURL(imageURL)
+                    }
+                } else {
+                    playFirstItem(nil)
                 }
-                
-                
+            } else {
+                videoPlayerViewController.playVideoWithURL(videoURL)
             }
         }
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-         let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
         cell.runtimeLabel.text = "WATCHED"
     }
     
-   }
+    // MARK: Actions
+    @IBAction func playFirstItem(sender: UIButton?) {
+        _didPlayFirstItem = true
+        
+        previewImageView.removeFromSuperview()
+        previewPlayButton.removeFromSuperview()
+        
+        if let videoPlayerViewController = videoPlayerViewController(), videoURL = _previewPlayURL {
+            videoPlayerViewController.playVideoWithURL(videoURL)
+        }
+    }
+    
+}
