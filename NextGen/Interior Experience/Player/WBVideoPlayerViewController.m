@@ -79,7 +79,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 @property (nonatomic, assign)           BOOL                              playerControlsEnabled;
 @property (nonatomic, strong)           NSMutableArray                   *assests;
 
-- (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer;
+
 
 // Player
 - (void)removePlayerTimeObserver;
@@ -591,7 +591,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 }
 
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AreaTapped" object:nil];
     self.playerControlsVisible = !self.playerControlsVisible;
     [self initAutoHideTimer];
 }
