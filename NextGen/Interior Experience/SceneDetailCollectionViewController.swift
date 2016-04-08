@@ -36,6 +36,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     private var _currentTime: Double = -1
     private var _currentExperienceCellData = [ExperienceCellData]()
+    private var _isProcessingNewExperiences = false
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
@@ -53,7 +54,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
-                if time != strongSelf._currentTime {
+                if time != strongSelf._currentTime && !strongSelf._isProcessingNewExperiences {
+                    strongSelf._isProcessingNewExperiences = true
                     strongSelf.processExperiencesForTime(time)
                 }
             }
@@ -92,7 +94,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     func processExperiencesForTime(time: Double) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             self._currentTime = time
             
             var deleteIndexPaths = [NSIndexPath]()
@@ -101,15 +103,15 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             var moveIndexPaths = [(NSIndexPath, NSIndexPath)]()
             
             let allExperiences = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences
-            var currentExperienceCellData = [ExperienceCellData]()
+            var newExperienceCellData = [ExperienceCellData]()
             for i in 0 ..< allExperiences.count {
                 let experience = allExperiences[i]
                 let oldCellData = self.currentCellDataForExperience(experience)
                 let oldIndexPath = self.currentIndexPathForExperience(experience)
                 
                 if let newTimedEvent = experience.timedEventSequence?.timedEvent(self._currentTime) {
-                    currentExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
-                    let newIndexPath = NSIndexPath(forItem: currentExperienceCellData.count - 1, inSection: 0)
+                    newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
+                    let newIndexPath = NSIndexPath(forItem: newExperienceCellData.count - 1, inSection: 0)
                     //print("Found \(experience.timedEventSequence!.id)")
                     
                     if oldCellData != nil {
@@ -130,9 +132,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 }
             }
             
-            self._currentExperienceCellData = currentExperienceCellData
-            
             dispatch_async(dispatch_get_main_queue()) {
+                self._currentExperienceCellData = newExperienceCellData
+                
                 self.collectionView?.performBatchUpdates({
                     if deleteIndexPaths.count > 0 {
                         self.collectionView?.deleteItemsAtIndexPaths(deleteIndexPaths)
@@ -159,7 +161,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     if reloadIndexPaths.count > 0 {
                         self.collectionView?.reloadItemsAtIndexPaths(reloadIndexPaths)
                     }
-                }, completion: nil)
+                }, completion: { (completed) in
+                    self._isProcessingNewExperiences = false
+                })
             }
         }
     }
@@ -214,7 +218,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             } else if timedEvent.isGallery() {
                 if let galleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController, gallery = timedEvent.getGallery(experience) {
                     galleryViewController.gallery = gallery
-                    //galleryViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
                     galleryViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                     galleryViewController.transitioningDelegate = self
                     self.presentViewController(galleryViewController, animated: true, completion: nil)
@@ -249,7 +252,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
                     shopDetailViewController.experience = experience
                     shopDetailViewController.products = products
-                    //shopDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
                     shopDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                     shopDetailViewController.transitioningDelegate = self
                 }
@@ -257,7 +259,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
                 mapDetailViewController.experience = experience
                 mapDetailViewController.timedEvent = timedEvent
-                //mapDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
                 mapDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                 mapDetailViewController.transitioningDelegate = self
             }

@@ -143,7 +143,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         super.syncScrubber()
         
         if player != nil && mode == VideoPlayerMode.MainFeature {
-            var currentTime = CMTimeGetSeconds(player.currentTime())
+            var currentTime = _didPlayInterstitial ? CMTimeGetSeconds(player.currentTime()) : 0.0
             if currentTime.isNaN {
                 currentTime = 0.0
             }
