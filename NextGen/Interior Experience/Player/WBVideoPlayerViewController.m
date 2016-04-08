@@ -86,7 +86,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
 - (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
-- (void)createQueue;
 
 @end
 
@@ -359,17 +358,9 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 
 /* Requests invocation of a given block during media playback to update the movie scrubber control. */
 -(void)initScrubberTimer {
-	
-    double interval = .1f;
-    
     CMTime playerDuration = [self playerItemDuration];
     if (CMTIME_IS_INVALID(playerDuration)) {
         return;
-    }
-    double duration = CMTimeGetSeconds(playerDuration);
-    if (isfinite(duration)) {
-        CGFloat width = CGRectGetWidth([self.scrubber bounds]);
-        interval = 0.5f * duration / width;
     }
     
     /* Update the scrubber during normal playback. */
@@ -439,7 +430,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 	}
 }
 
-- (void)seekPlayerToTime:(CMTime)seekTime{
+- (void)seekPlayerToTime:(CMTime)seekTime {
     // Set instance vars
     isSeeking           = YES;
     
@@ -639,7 +630,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 //=========================================================
 # pragma mark - Player
 //=========================================================
-- (void)setState:(WBVideoPlayerState *)newState {
+- (void)setState:(WBVideoPlayerState)newState {
     // Set _state
     _state  = newState;
     

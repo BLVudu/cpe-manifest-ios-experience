@@ -20,7 +20,6 @@
 		4921D9F31C45ED9D00ED2AA6 /* ExtrasLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9F21C45ED9D00ED2AA6 /* ExtrasLayout.swift */; };
 		492267D81C73F41300B306A2 /* Shopping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 492267D71C73F41300B306A2 /* Shopping.plist */; };
 		492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E91C76A56900B306A2 /* CommentaryViewCell.swift */; };
-		492267EE1C7B911100B306A2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492267ED1C7B911100B306A2 /* Social.framework */; };
 		494166EE1C52E8CC0013B94A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166ED1C52E8CC0013B94A /* play.png */; };
 		494166F21C5306D90013B94A /* Play_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166F11C5306D90013B94A /* Play_Button.png */; };
 		49656F231C49C676001DB9C0 /* StylizedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */; };
@@ -45,8 +44,6 @@
 		49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EADC1C51890A00E09484 /* VideoCell.xib */; };
 		49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADE1C518ABE00E09484 /* VideoCell.swift */; };
 		49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */; };
-		49F502531C890DF500DFAD88 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F502521C890DF500DFAD88 /* TwitterKit.framework */; };
-		49F502551C890E6500DFAD88 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F502541C890E6500DFAD88 /* Twitter.framework */; };
 		49F684A01C8A3FC60066C5A2 /* MediaGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */; };
 		49F684A21C8A5F7F0066C5A2 /* ActorGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F684A11C8A5F7F0066C5A2 /* ActorGalleryViewController.swift */; };
 		6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */; };
@@ -681,10 +678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */,
-				49F502551C890E6500DFAD88 /* Twitter.framework in Frameworks */,
 				49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */,
-				49F502531C890DF500DFAD88 /* TwitterKit.framework in Frameworks */,
-				492267EE1C7B911100B306A2 /* Social.framework in Frameworks */,
 				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
 				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
 				0CE62751C28B08C73E3D9D3C /* Pods_NextGen.framework in Frameworks */,
@@ -1906,10 +1900,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/TwitterKit",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = NextGen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1929,10 +1920,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/TwitterKit",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = NextGen/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

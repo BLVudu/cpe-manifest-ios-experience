@@ -83,7 +83,7 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 }
 
 @property (nonatomic, weak)             id<WBVideoPlayerDelegate>        delegate;
-@property (nonatomic, readonly)         WBVideoPlayerState               state;
+@property (nonatomic, assign)           WBVideoPlayerState               state;
 @property (nonatomic, readonly)         NSURL                           *URL;
 @property (readwrite, strong)           AVQueuePlayer                   *player;
 @property (strong)                      AVPlayerItem                    *playerItem;
@@ -129,6 +129,5 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 - (void)seekPlayerToTime:(CMTime)seekTime;
 - (void)syncScrubber;
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
-- (void)createQueue;
 
 @end

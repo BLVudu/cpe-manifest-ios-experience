@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import FBSDKShareKit
-import FBSDKCoreKit
-import TwitterKit
 import MessageUI
 
 class ClipViewController: UIViewController {
