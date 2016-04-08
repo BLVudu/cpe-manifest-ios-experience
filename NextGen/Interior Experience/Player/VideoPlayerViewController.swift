@@ -43,7 +43,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     private var _shouldPauseObserver: NSObjectProtocol!
     private var _shouldResumeObserver: NSObjectProtocol!
-    private var _playerTapped: NSObjectProtocol!
     
     deinit {
         let center = NSNotificationCenter.defaultCenter()
@@ -64,14 +63,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             }
         }
         
-       _playerTapped = NSNotificationCenter.defaultCenter().addObserverForName("AreaTapped", object: nil, queue:  NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self {
-                
-                if strongSelf.commentaryView.hidden == false{
-                    strongSelf.commentaryView.hidden = true
-                }
-            }
-        }
         _shouldResumeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
                 if strongSelf._didPlayInterstitial {
@@ -114,6 +105,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func playerItemDidReachEnd(notification: NSNotification!) {
         super.playerItemDidReachEnd(notification)
         
+       
+
         if !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
@@ -128,12 +121,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     @IBAction func commentary(sender: AnyObject) {
         self.commentaryView.hidden = !self.commentaryView.hidden
-        //let cpo = self.storyboard?.instantiateViewControllerWithIdentifier("commentary")
-        //self.commentaryPopover = UIPopoverController.init(contentViewController: cpo!)
-        //self.commentaryPopover.popoverLayoutMargins = UIEdgeInsets(top: -200, left: -200, bottom: -200, right: -200)
-        //self.commentaryPopover.popoverContentSize = CGSizeMake(300.0, 270.0)
-        //self.commentaryPopover.backgroundColor = UIColor.darkGrayColor()
-        //self.commentaryPopover.presentPopoverFromRect(CGRectMake(1000,200,0,0), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+       
 
     }
     
@@ -183,14 +171,26 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     }
     
     
- 
+    override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
+        super.handleTap(gestureRecognizer)
+        
+        
+        if self.commentaryView.hidden == false{
+            self.commentaryView.hidden = true
+        }
+        
+        if !_didPlayInterstitial {
+            skipInterstitial()
+        }
+    }
     
+    /*
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !_didPlayInterstitial {
             skipInterstitial()
         }
     }
-
+*/
 
 }
 
