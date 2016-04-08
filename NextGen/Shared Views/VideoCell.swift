@@ -17,6 +17,8 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak var playIconImageView: UIImageView!
     @IBOutlet weak var runtimeLabel: UILabel!
     
+    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    
     var experience: NGDMExperience? {
         didSet {
             captionLabel.text = experience?.metadata?.title
@@ -32,7 +34,7 @@ class VideoCell: UITableViewCell {
             }
             
             if let imageURL = experience?.imageURL {
-                thumbnailImageView.setImageWithURL(imageURL)
+                _setImageSessionDataTask = thumbnailImageView.setImageWithURL(imageURL)
             } else {
                 thumbnailImageView.image = nil
             }
@@ -43,6 +45,11 @@ class VideoCell: UITableViewCell {
         super.prepareForReuse()
         
         experience = nil
+        
+        if let task = _setImageSessionDataTask {
+            task.cancel()
+            _setImageSessionDataTask = nil
+        }
     }
     
     override func layoutSubviews() {

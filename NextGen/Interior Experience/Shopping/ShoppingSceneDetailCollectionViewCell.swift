@@ -6,7 +6,7 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
-class ShoppingSceneDetailCollectionViewCell : SceneDetailCollectionViewCell {
+class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "ShoppingSceneDetailCollectionViewCellReuseIdentifier"
     
@@ -18,65 +18,49 @@ class ShoppingSceneDetailCollectionViewCell : SceneDetailCollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var bullseyeView: UIView!
     @IBOutlet weak var extraDescriptionLabel: UILabel!
-    var productImageType = ProductImageType.Product
     
-    var extraDescriptionText: String? {
-        get {
-            return extraDescriptionLabel?.text
-        }
-        
-        set {
-            extraDescriptionLabel?.text = newValue
+    var productImageType = ProductImageType.Product
+    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    
+    private var _extraDescriptionText: String? {
+        didSet {
+            extraDescriptionLabel?.text = _extraDescriptionText
         }
     }
     
-    private var _imageURL: NSURL!
-    var imageURL: NSURL? {
-        get {
-            return _imageURL
-        }
-        
-        set {
-            if _imageURL != newValue {
-                _imageURL = newValue
-                
-                if let url = _imageURL {
+    private var _imageURL: NSURL? {
+        didSet {
+            if let url = _imageURL {
+                if url != oldValue {
                     imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                    imageView.setImageWithURL(url, completion: { (image) -> Void in
-                        self.imageView!.backgroundColor = image?.getPixelColor(CGPoint.zero)
+                    _setImageSessionDataTask = imageView.setImageWithURL(url, completion: { (image) -> Void in
+                        self.imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                     })
-                } else {
-                    imageView.image = nil
-                    imageView.backgroundColor = UIColor.clearColor()
                 }
+            } else {
+                imageView.image = nil
+                imageView.backgroundColor = UIColor.clearColor()
             }
         }
     }
     
-    private var _theTakeProducts: [TheTakeProduct]!
     private var _currentProduct: TheTakeProduct?
     private var _currentProductFrameTime = -1.0
     private var _currentProductSessionDataTask: NSURLSessionDataTask?
     var theTakeProducts: [TheTakeProduct]? {
-        get {
-            return _theTakeProducts
-        }
-        
-        set {
-            _theTakeProducts = newValue
-            
-            if let products = _theTakeProducts, product = products.first {
+        didSet {
+            if let products = theTakeProducts, product = products.first {
                 if _currentProduct != product {
                     _currentProduct = product
-                    descriptionText = product.brand
-                    extraDescriptionText = product.name
-                    imageURL = (productImageType == ProductImageType.Scene ? product.sceneImageURL : product.productImageURL)
+                    _descriptionText = product.brand
+                    _extraDescriptionText = product.name
+                    _imageURL = (productImageType == ProductImageType.Scene ? product.sceneImageURL : product.productImageURL)
                 }
             } else {
                 _currentProduct = nil
-                imageURL = nil
-                descriptionText = nil
-                extraDescriptionText = nil
+                _imageURL = nil
+                _descriptionText = nil
+                _extraDescriptionText = nil
             }
         }
     }
@@ -110,9 +94,14 @@ class ShoppingSceneDetailCollectionViewCell : SceneDetailCollectionViewCell {
         theTakeProducts = nil
         bullseyeView.hidden = true
         
-        if let currentTask = _currentProductSessionDataTask {
-            currentTask.cancel()
+        if let task = _currentProductSessionDataTask {
+            task.cancel()
             _currentProductSessionDataTask = nil
+        }
+        
+        if let task = _setImageSessionDataTask {
+            task.cancel()
+            _setImageSessionDataTask = nil
         }
     }
     

@@ -16,18 +16,11 @@ class ShoppingDetailCell: UICollectionViewCell {
     @IBOutlet weak var productBrandLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
     
-    private var _product: TheTakeProduct?
     var product: TheTakeProduct? {
-        get {
-            return _product
-        }
-        
-        set(v) {
-            _product = v
-            
-            productBrandLabel.text = _product?.brand
-            productNameLabel.text = _product?.name
-            if let imageURL = _product?.productImageURL {
+        didSet {
+            productBrandLabel.text = product?.brand
+            productNameLabel.text = product?.name
+            if let imageURL = product?.productImageURL {
                 productImageView.setImageWithURL(imageURL, completion: { (image) -> Void in
                     self.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
@@ -62,21 +55,14 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     
     var products: [TheTakeProduct]!
     
-    private var _currentProduct: TheTakeProduct?
     var currentProduct: TheTakeProduct? {
-        get {
-            return _currentProduct
-        }
-
-        set(v) {
-            _currentProduct = v
-            
-            productMatchIcon.backgroundColor = _currentProduct != nil ? (_currentProduct!.exactMatch ? UIColor(netHex: 0x2c97de) : UIColor(netHex: 0xf1c115)) : UIColor.clearColor()
-            productMatchLabel.text = _currentProduct != nil ? (_currentProduct!.exactMatch ? "Exact match" : "Close match") : nil
-            productBrandLabel.text = _currentProduct?.brand
-            productNameLabel.text = _currentProduct?.name
-            productPriceLabel.text = _currentProduct?.price
-            if let imageURL = _currentProduct?.productImageURL {
+        didSet {
+            productMatchIcon.backgroundColor = currentProduct != nil ? (currentProduct!.exactMatch ? UIColor(netHex: 0x2c97de) : UIColor(netHex: 0xf1c115)) : UIColor.clearColor()
+            productMatchLabel.text = currentProduct != nil ? (currentProduct!.exactMatch ? "Exact match" : "Close match") : nil
+            productBrandLabel.text = currentProduct?.brand
+            productNameLabel.text = currentProduct?.name
+            productPriceLabel.text = currentProduct?.price
+            if let imageURL = currentProduct?.productImageURL {
                 productImageView.setImageWithURL(imageURL, completion: { (image) -> Void in
                     self.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })

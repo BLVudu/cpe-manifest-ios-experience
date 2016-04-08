@@ -12,23 +12,17 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    private var _imageURL: NSURL!
-    var imageURL: NSURL? {
-        get {
-            return _imageURL
-        }
-        
-        set {
-            if _imageURL != newValue {
-                _imageURL = newValue
-                
-                if let url = _imageURL {
-                    imageView.contentMode = UIViewContentMode.ScaleAspectFill
-                    imageView.setImageWithURL(url)
-                } else {
-                    imageView.image = nil
-                    imageView.backgroundColor = UIColor.clearColor()
+    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    
+    private var _imageURL: NSURL? {
+        didSet {
+            if let url = _imageURL {
+                if url != oldValue {
+                    _setImageSessionDataTask = imageView.setImageWithURL(url)
                 }
+            } else {
+                imageView.image = UIImage(named: "MOSDefault")
+                imageView.backgroundColor = UIColor.clearColor()
             }
         }
     }
@@ -37,10 +31,25 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.timedEventDidChange()
         
         if let timedEvent = timedEvent, experience = experience {
-            imageURL = timedEvent.getImageURL(experience)
+            _imageURL = timedEvent.getImageURL(experience)
         } else {
-            imageURL = nil
+            _imageURL = nil
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        if let task = _setImageSessionDataTask {
+            task.cancel()
+            _setImageSessionDataTask = nil
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
 }

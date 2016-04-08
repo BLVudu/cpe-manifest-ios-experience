@@ -17,63 +17,37 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var title: String? {
-        get {
-            return titleLabel?.text
-        }
-        
-        set {
-            titleLabel?.text = (newValue != nil ? newValue!.uppercaseString : nil)
+    private var _title: String? {
+        didSet {
+            titleLabel?.text = _title?.uppercaseString
         }
     }
     
-    var descriptionText: String? {
-        get {
-            return descriptionLabel.text
-        }
-        
-        set {
-            descriptionLabel.text = newValue
+    internal var _descriptionText: String? {
+        didSet {
+            descriptionLabel.text = _descriptionText
         }
     }
     
-    private var _experience: NGDMExperience!
     var experience: NGDMExperience? {
-        get {
-            return _experience
-        }
-        
-        set {
-            if _experience != newValue {
-                _experience = newValue
+        didSet {
+            if experience != oldValue {
                 experienceDidChange()
             }
         }
     }
     
-    internal var _timedEvent: NGDMTimedEvent!
     var timedEvent: NGDMTimedEvent? {
-        get {
-            return _timedEvent
-        }
-        
-        set {
-            if _timedEvent != newValue {
-                _timedEvent = newValue
+        didSet {
+            if timedEvent != oldValue {
                 timedEventDidChange()
             }
         }
     }
     
-    internal var _currentTime: Double = -1.0
-    var currentTime: Double {
-        get {
-            return _currentTime
-        }
-        
-        set {
-            if _currentTime == -1 || abs(newValue - _currentTime) >= Constants.UpdateInterval {
-                _currentTime = newValue
+    var currentTime: Double = -1.0 {
+        didSet {
+            if currentTime == -1 || abs(currentTime - oldValue) >= Constants.UpdateInterval {
                 currentTimeDidChange()
             }
         }
@@ -87,14 +61,14 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     }
     
     func experienceDidChange() {
-        title = experience?.metadata?.title
+        _title = experience?.metadata?.title
     }
     
     func timedEventDidChange() {
         if let timedEvent = timedEvent, experience = experience {
-            descriptionText = timedEvent.getDescriptionText(experience)
+            _descriptionText = timedEvent.getDescriptionText(experience)
         } else {
-            descriptionText = nil
+            _descriptionText = nil
         }
     }
     

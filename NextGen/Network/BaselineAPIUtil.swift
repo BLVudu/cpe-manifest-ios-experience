@@ -124,8 +124,8 @@ class BaselineAPIUtil: APIUtil {
         }, errorBlock: nil)
     }
     
-    func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) {
-        getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
+    func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) -> NSURLSessionDataTask {
+        return getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 if results.count > 0 {
                     if let response = results[0] as? NSDictionary, imageURL = response[Keys.FullURL] as? String {

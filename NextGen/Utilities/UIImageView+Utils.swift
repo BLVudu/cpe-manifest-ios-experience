@@ -10,29 +10,38 @@ import UIKit
 
 extension UIImageView {
     
-    func setImageWithURL(url: NSURL) {
-        setImageWithURL(url, placeholderImage: nil, completion: nil)
+    func setImageWithURL(url: NSURL) -> NSURLSessionDataTask {
+        return setImageWithURL(url, placeholderImage: nil, completion: nil)
     }
     
-    func setImageWithURL(url: NSURL, completion: ((image: UIImage?) -> Void)?) {
-        setImageWithURL(url, placeholderImage: nil, completion: completion)
+    func setImageWithURL(url: NSURL, completion: ((image: UIImage?) -> Void)?) -> NSURLSessionDataTask {
+        return setImageWithURL(url, placeholderImage: nil, completion: completion)
     }
     
-    func setImageWithURL(url: NSURL, placeholderImage: UIImage?) {
-        setImageWithURL(url, placeholderImage: placeholderImage, completion: nil)
+    func setImageWithURL(url: NSURL, placeholderImage: UIImage?) -> NSURLSessionDataTask {
+        return setImageWithURL(url, placeholderImage: placeholderImage, completion: nil)
     }
     
-    func setImageWithURL(url: NSURL, placeholderImage: UIImage?, completion: ((image: UIImage?) -> Void)?) {
+    func setImageWithURL(url: NSURL, placeholderImage: UIImage?, completion: ((image: UIImage?) -> Void)?) -> NSURLSessionDataTask {
         self.image = placeholderImage
+        
+        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: nil, delegateQueue: nil)
         let request = NSURLRequest(URL: url)
-        NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.image = UIImage(data: data!)
-                if let image = self.image, completion = completion {
-                    completion(image: image)
-                }
-            })
-        }.resume()
+        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            if let data = data {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.image = UIImage(data: data)
+                    if let completion = completion {
+                        completion(image: self.image)
+                    }
+                })
+            } else if let completion = completion {
+                completion(image: nil)
+            }
+        }
+            
+        task.resume()
+        return task
     }
     
 }

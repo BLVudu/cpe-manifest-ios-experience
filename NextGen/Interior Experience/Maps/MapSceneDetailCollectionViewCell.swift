@@ -17,7 +17,7 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell, MKMapView
     override func timedEventDidChange() {
         super.timedEventDidChange()
         
-        if let event = _timedEvent, location = event.location {
+        if let event = timedEvent, location = event.location {
             let center = mapView.setLocation(location.latitude, longitude: location.longitude, zoomLevel: 14, animated: false)
             
             let annotation = MKPointAnnotation()
