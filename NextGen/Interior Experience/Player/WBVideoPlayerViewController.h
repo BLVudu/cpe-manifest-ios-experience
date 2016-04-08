@@ -107,10 +107,6 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
  */
 @property (nonatomic, assign)           BOOL                            lockTopToolbar;
 
-/**
- * Locks the player controls visibility so showing/hiding is not effective
- */
-@property (nonatomic, assign)           BOOL                            lockPlayerControls;
 @property (nonatomic, assign)           int                             indexMax;
 @property (nonatomic, assign)           int                             curIndex;
 

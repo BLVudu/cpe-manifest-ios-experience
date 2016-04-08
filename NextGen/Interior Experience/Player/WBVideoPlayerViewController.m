@@ -245,10 +245,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 }
 
 - (void)setPlayerControlsVisible:(BOOL)shouldPlayerControlsBeVisible {
-    if (self.lockPlayerControls) {
-        return;
-    }
-    
     // Set instance variable
     _playerControlsVisible      = shouldPlayerControlsBeVisible;
     

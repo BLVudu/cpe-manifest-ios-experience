@@ -84,7 +84,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     func playMainExperience() {
         self.playerControlsVisible = false
-        self.lockPlayerControls = !_didPlayInterstitial
         if _didPlayInterstitial {
             if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayMainExperience, object: nil)
@@ -105,8 +104,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     override func playerItemDidReachEnd(notification: NSNotification!) {
         super.playerItemDidReachEnd(notification)
         
-       
-
         if !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
@@ -121,11 +118,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     @IBAction func commentary(sender: AnyObject) {
         self.commentaryView.hidden = !self.commentaryView.hidden
-       
-
     }
-    
-    
     
     override func syncScrubber() {
         super.syncScrubber()
@@ -170,27 +163,15 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         }
     }
     
-    
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
-        super.handleTap(gestureRecognizer)
-        
-        
-        if self.commentaryView.hidden == false{
-            self.commentaryView.hidden = true
-        }
-        
         if !_didPlayInterstitial {
             skipInterstitial()
+        } else if !self.commentaryView.hidden {
+            self.commentaryView.hidden = true
+        } else {
+            super.handleTap(gestureRecognizer)
         }
     }
     
-    /*
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if !_didPlayInterstitial {
-            skipInterstitial()
-        }
-    }
-*/
-
 }
 
