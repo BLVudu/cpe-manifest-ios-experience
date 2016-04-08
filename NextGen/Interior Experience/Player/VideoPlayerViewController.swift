@@ -177,18 +177,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             alert.view.tintColor = UIColor.yellowColor()
         } else {
             
+            NSNotificationCenter.defaultCenter().postNotificationName(StoryboardSegue.ShowShare, object: nil, userInfo: ["clip": self.currentClip!])
 
-            self.performSegueWithIdentifier(StoryboardSegue.ShowShare, sender: nil)
         }
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == StoryboardSegue.ShowShare {
-            let shareVC = segue.destinationViewController as! SharingViewController
-            shareVC.clip = currentClip
-        }
-    }
+ 
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !_didPlayInterstitial {
