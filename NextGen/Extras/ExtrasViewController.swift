@@ -10,13 +10,13 @@
 import UIKit
 import AVFoundation
 
-class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
+class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
     let ExtrasVideoGallerySegueIdentifier = "ExtrasVideoGallerySegue"
     let ExtrasImageGalleryListSegueIdentifier = "ExtrasImageGalleryListSegue"
     let ExtrasShoppingSegueIdentifier = "ExtrasShoppingSegue"
     
-    @IBOutlet weak var talentTableView: TalentTableView!
+    @IBOutlet weak var talentTableView: UITableView!
     @IBOutlet weak var talentDetailView: UIView!
     @IBOutlet var extrasCollectionView: UICollectionView!
     
@@ -27,10 +27,12 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         self.extrasCollectionView.registerNib(UINib(nibName: "TitledImageCell", bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
+        self.talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         
-        self.navigationItem.setHomeButton(self, action: #selector(ExtrasViewController.close))
+        self.experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience
+        showHomeButton()
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -39,11 +41,11 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     
     // MARK: Actions
-    func close() {
-        if talentDetailView.hidden {
-            dismissViewControllerAnimated(true, completion: nil)
-        } else {
+    override func close() {
+        if !talentDetailView.hidden {
             hideTalentDetailView()
+        } else {
+            super.close()
         }
     }
     
@@ -63,7 +65,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         if talentDetailView.hidden {
             talentDetailView.alpha = 0
             talentDetailView.hidden = false
-            self.navigationItem.setBackButton(self, action: #selector(ExtrasViewController.close))
+            showBackButton()
             
             UIView.animateWithDuration(0.25, animations: {
                 self.extrasCollectionView.alpha = 0
@@ -82,7 +84,7 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         
         extrasCollectionView.hidden = false
         extrasCollectionView.alpha = 0
-        self.navigationItem.setHomeButton(self, action: #selector(ExtrasViewController.close))
+        showHomeButton()
         
         UIView.animateWithDuration(0.25, animations: {
             self.extrasCollectionView.alpha = 1
@@ -139,7 +141,6 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
         return cell
     }
     
-    
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
@@ -154,25 +155,24 @@ class ExtrasViewController: StylizedViewController, UICollectionViewDelegate, UI
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 2) - 10, 235)
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 2) - 25, 230)
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(15, 15, 15, 15)
+    }
     
     // MARK: Storyboard
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let experience = sender as? NGDMExperience {
-            if segue.identifier == ExtrasVideoGallerySegueIdentifier {
-                if let videoGalleryViewController = segue.destinationViewController as? ExtrasVideoGalleryViewController {
-                    videoGalleryViewController.experience = experience
-                }
-            } else if segue.identifier == ExtrasImageGalleryListSegueIdentifier {
-                if let imageGalleryListViewController = segue.destinationViewController as? ExtrasImageGalleryListCollectionViewController {
-                    imageGalleryListViewController.experience = experience
-                }
-            } else if segue.identifier == ExtrasShoppingSegueIdentifier {
-                if let shoppingViewController = segue.destinationViewController as? ExtrasShoppingViewController {
-                    shoppingViewController.experience = experience
-                }
+            if let viewController = segue.destinationViewController as? ExtrasImageGalleryListCollectionViewController {
+                viewController.experience = experience
+                viewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+            } else if let viewController = segue.destinationViewController as? ExtrasExperienceViewController {
+                viewController.experience = experience
+                viewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+                viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             }
         }
     }

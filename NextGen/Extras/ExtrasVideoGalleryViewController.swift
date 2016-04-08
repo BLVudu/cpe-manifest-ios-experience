@@ -8,28 +8,27 @@
 
 import UIKit
 
-class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataSource, UITableViewDelegate {
+class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var galleryTableView: UITableView!
-    @IBOutlet weak var proxyView: UIView!
     
-    @IBOutlet weak var shareClip: UIButton!
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaDescriptionLabel: UILabel!
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
     
-    var experience: NGDMExperience!
-    var shareContent: NSURL!
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var previewPlayButton: UIButton!
     
-    private var _didToggleFullScreenObserver: NSObjectProtocol!
+    private var _didPlayFirstItem = false
+    private var _previewPlayURL: NSURL?
+    
     private var _willPlayNextItemObserver: NSObjectProtocol!
     
     
     // MARK: Initialization
     deinit {
         let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(_didToggleFullScreenObserver)
         center.removeObserver(_willPlayNextItemObserver)
     }
 
@@ -37,31 +36,12 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.setBackButton(self, action: #selector(ExtrasVideoGalleryViewController.close))
-        
         galleryTableView.registerNib(UINib(nibName: String(VideoCell), bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
-        
-        self.videoContainerView.hidden = true
-        self.mediaTitleLabel.hidden = true
-        self.mediaDescriptionLabel.hidden = true
-        self.mediaRuntimeLabel.hidden = true
-        self.shareClip.hidden = true
 
-        _didToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self, userInfo = notification.userInfo, fullScreenEnabled = userInfo["toggleFS"] as? Bool {
-                if fullScreenEnabled {
-                    UIView.animateWithDuration(1, animations: {
-                        strongSelf.videoContainerView.frame = strongSelf.view.frame
-                    }, completion: nil)
-                } else {
-                    UIView.animateWithDuration(1, animations: {
-                        strongSelf.videoContainerView.frame = strongSelf.proxyView.frame
-                    }, completion: nil)
-                }
-            }
-        }
-        
-        
+        let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
+        self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
+
         _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
                 if index < strongSelf.experience.childExperiences.count {
@@ -81,12 +61,6 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
         }
         
         return nil
-    }
-    
-    
-    // MARK: Actions
-    func close() {
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
@@ -120,13 +94,6 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        self.videoContainerView.hidden = false
-        self.mediaTitleLabel.hidden = false
-        self.mediaDescriptionLabel.hidden = false
-        self.mediaRuntimeLabel.hidden = false
-        self.shareClip.hidden = false
-
         let thisExperience = experience.childExperiences[indexPath.row]
         
         mediaTitleLabel.text = thisExperience.metadata?.title
@@ -146,22 +113,38 @@ class ExtrasVideoGalleryViewController: StylizedViewController, UITableViewDataS
             
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
-            videoPlayerViewController.playerControlsVisible = false
-            videoPlayerViewController.lockTopToolbar = true
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            self.shareContent = videoURL
+            
+            if !_didPlayFirstItem {
+                _previewPlayURL = videoURL
+                
+                if indexPath.row == 0 {
+                    if let imageURL = thisExperience.imageURL {
+                        previewImageView.setImageWithURL(imageURL)
+                    }
+                } else {
+                    playFirstItem(nil)
+                }
+            } else {
+                videoPlayerViewController.playVideoWithURL(videoURL)
+            }
         }
     }
     
-    @IBAction func shareClip(sender: AnyObject) {
-        
-        
-        let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = sender as? UIView
-        self.presentViewController(activityViewController, animated: true, completion: nil)
-        
-        
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
+        cell.runtimeLabel.text = "WATCHED"
     }
-
+    
+    // MARK: Actions
+    @IBAction func playFirstItem(sender: UIButton?) {
+        _didPlayFirstItem = true
+        
+        previewImageView.removeFromSuperview()
+        previewPlayButton.removeFromSuperview()
+        
+        if let videoPlayerViewController = videoPlayerViewController(), videoURL = _previewPlayURL {
+            videoPlayerViewController.playVideoWithURL(videoURL)
+        }
+    }
     
 }

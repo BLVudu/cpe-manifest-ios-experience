@@ -32,8 +32,6 @@ static void *VideoPlayerCurrentItemObservationContext            = &VideoPlayerC
 static void *VideoPlayerBufferEmptyObservationContext            = &VideoPlayerBufferEmptyObservationContext;
 static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerPlaybackLikelyToKeepUpObservationContext;
 
-// View Constants
-static NSInteger const kBackTimeInSeconds                       = 10;
 
 //=========================================================
 # pragma mark - Private variables & methods
@@ -45,10 +43,8 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 @property (weak, nonatomic)   IBOutlet  UIView                          *playbackToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *playButton;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *pauseButton;
-@property (weak, nonatomic)   IBOutlet  UIButton                        *backUpButton;
-@property (weak, nonatomic)   IBOutlet  UILabel                         *backUpTimeLabel;
 @property (weak, nonatomic)   IBOutlet  UISlider                        *scrubber;
-@property (weak, nonatomic)   IBOutlet  UILabel                         *timeLabel;
+@property (weak, nonatomic)   IBOutlet  UILabel                         *timeElapsedLabel;
 @property (weak, nonatomic)   IBOutlet  UILabel                         *timeLeftLabel;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *subtitlesButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
@@ -56,8 +52,6 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 @property (strong, nonatomic)           NSTimer                         *countdown;
 @property (assign, nonatomic)           NSUInteger                      countdownSeconds;
 @property (strong, nonatomic)           NSArray                         *videoURLS;
-
-
 
 
 /**
@@ -72,12 +66,18 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 @property (weak, nonatomic)   IBOutlet  UIActivityIndicatorView         *activityIndicator;
 
 /**
+ * Track the status of full screen video
+ */
+@property (assign, nonatomic)           BOOL                             isFullScreen;
+@property (assign, nonatomic)           CGRect                           originalContainerFrame;
+
+/**
  * There is a difference between enabling/disabling and showing/hiding
  * player controls.
  * @see playerControlsVisible:
  */
-@property (nonatomic, assign)           BOOL                             playerControlsEnabled;
-@property (nonatomic, strong)           NSMutableArray                           *assests;
+@property (nonatomic, assign)           BOOL                              playerControlsEnabled;
+@property (nonatomic, strong)           NSMutableArray                   *assests;
 
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer;
 
@@ -87,6 +87,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 - (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
 - (void)createQueue;
+
 @end
 
 //=========================================================
@@ -159,9 +160,13 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     [self pauseVideo];
 }
 
-- (IBAction)backUp:(id)sender {
-    // Go back
-    [self backUpVideo];
+- (IBAction)share:(id)sender {
+    // Override
+}
+
+- (IBAction)toggleFullScreen:(id)sender {
+    // Toggle full screen
+    [self toggleFullScreen];
 }
 
 /**
@@ -214,17 +219,15 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 -(void)enablePlayerButtons {
     self.playButton.enabled         = YES;
     self.pauseButton.enabled        = YES;
-    self.backUpButton.enabled       = YES;
-    self.backUpTimeLabel.enabled    = YES;
     self.subtitlesButton.enabled    = YES;
+    self.fullScreenButton.enabled   = YES;
 }
 
 -(void)disablePlayerButtons {
     self.playButton.enabled         = NO;
     self.pauseButton.enabled        = NO;
-    self.backUpButton.enabled       = NO;
-    self.backUpTimeLabel.enabled    = NO;
     self.subtitlesButton.enabled    = NO;
+    self.fullScreenButton.enabled   = NO;
 }
 
 - (void)setPlayerControlsEnabled:(BOOL)shouldPlayerControlsBeEnabled {
@@ -483,21 +486,8 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 
 - (void)updateTimeLabelsForSlider:(UISlider *)slider withTime:(CGFloat)time andDuration:(CGFloat)duration {
     // Update time labels
-    if (_timeLabel) {
-        _timeLabel.text = [self timeStringFromSecondsValue:time];
-        [_timeLabel sizeToFit];
-        CGRect timeLabelFrame = _timeLabel.frame;
-        timeLabelFrame.size.width += 10;
-        timeLabelFrame.size.height += 2;
-        _timeLabel.frame = timeLabelFrame;
-        
-        CGRect trackRect = [slider trackRectForBounds:slider.bounds];
-        CGRect thumbRect = [slider thumbRectForBounds:slider.bounds trackRect:trackRect value:0];
-        CGFloat thumbWidth = thumbRect.size.width;
-        
-        CGPoint timeLabelCenter = _timeLabel.center;
-        timeLabelCenter.x = CGRectGetMinX(slider.frame) + (thumbWidth / 2.0) + ((CGRectGetWidth(slider.frame) - thumbWidth) * slider.value);
-        _timeLabel.center = timeLabelCenter;
+    if (_timeElapsedLabel) {
+        _timeElapsedLabel.text = [self timeStringFromSecondsValue:time];
     }
     
     if (_timeLeftLabel) {
@@ -514,7 +504,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     int minutes = (seconds / 60) % 60;
     int secs    = seconds % 60;
     if (hours > 0) {
-        retVal  = [NSString stringWithFormat:@"%02d:%02d:%02d", hours, minutes, secs];
+        retVal  = [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes, secs];
     } else {
         retVal  = [NSString stringWithFormat:@"%02d:%02d", minutes, secs];
     }
@@ -572,16 +562,9 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     // Set player controls auto-hide time
     self.playerControlsAutoHideTime = 5;
     
-    // Set back button label
-    self.backUpTimeLabel.text = [@(kBackTimeInSeconds) stringValue];
-    
-    // Set UI properties
-    self.timeLabel.layer.masksToBounds = YES;
-    self.timeLabel.layer.cornerRadius = 3;
-    
     // Set screen lock listener
-    __weak typeof(&*self) weakSelf = self;
-    /*self.applicationResignationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kApplicationWillResignActive
+    /*__weak typeof(&*self) weakSelf = self;
+    self.applicationResignationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kApplicationWillResignActive
                                                                                             object:NULL
                                                                                              queue:NSOperationQueuePriorityNormal
                                                                                         usingBlock:^(NSNotification * _Nonnull note) {
@@ -617,6 +600,7 @@ static NSInteger const kBackTimeInSeconds                       = 10;
 }
 
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AreaTapped" object:nil];
     self.playerControlsVisible = !self.playerControlsVisible;
     [self initAutoHideTimer];
 }
@@ -763,10 +747,22 @@ static NSInteger const kBackTimeInSeconds                       = 10;
     [self showPlayButton];
 }
 
-- (void)backUpVideo {
-    // Seek
-    [self.player seekToTime:CMTimeMakeWithSeconds(CMTimeGetSeconds(self.player.currentTime) - kBackTimeInSeconds, self.player.currentTime.timescale)];
+- (void)toggleFullScreen {
+    self.isFullScreen = !self.isFullScreen;
+    [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize" : @"Maximize")] forState:UIControlStateNormal];
+    [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize Highlighted" : @"Maximize Highlighted")] forState:UIControlStateHighlighted];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        UIView *videoContainerView = self.view.superview;
+        if (self.isFullScreen) {
+            self.originalContainerFrame = videoContainerView.frame;
+            videoContainerView.frame = [UIScreen mainScreen].bounds;
+        } else {
+            videoContainerView.frame = self.originalContainerFrame;
+        }
+    }];
 }
+
 
 //=========================================================
 # pragma mark - Player Item

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuedViewController: StylizedViewController, UITableViewDelegate, UITableViewDataSource {
+class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var menuTableView: UITableView!
     var menuSections = [MenuSection]()
@@ -19,7 +19,6 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         
         menuTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        menuTableView.backgroundColor = UIColor.clearColor()
         menuTableView.registerNib(UINib(nibName: MenuSectionCell.NibName, bundle: nil), forCellReuseIdentifier: MenuSectionCell.ReuseIdentifier)
         menuTableView.registerNib(UINib(nibName: MenuItemCell.NibName, bundle: nil), forCellReuseIdentifier: MenuItemCell.ReuseIdentifier)
     }
@@ -76,13 +75,13 @@ class MenuedViewController: StylizedViewController, UITableViewDelegate, UITable
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuSectionCell {
                 cell.toggleDropDownIcon()
             }
+            
+            tableView.beginUpdates()
+            tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
+            tableView.endUpdates()
         } else {
             selectedItem = menuSection.items[indexPath.row - 1]
         }
-        
-        tableView.beginUpdates()
-        tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
-        tableView.endUpdates()
     }
     
 }

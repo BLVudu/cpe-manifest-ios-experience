@@ -13,10 +13,9 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
-    var experience: NGDMExperience!
-    
     private var _products: [TheTakeProduct]?
     private var _productListSessionDataTask: NSURLSessionDataTask?
+    private var _didAutoSelectCategory = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +41,26 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
             menuSections.append(MenuSection(info: info))
         }
         
-        productsCollectionView.backgroundColor = UIColor.clearColor()
-        productsCollectionView.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
+        productsCollectionView.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !_didAutoSelectCategory {
+            let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
+            self.menuTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+            self.tableView(self.menuTableView, didSelectRowAtIndexPath: selectedPath)
+            if let menuSection = menuSections.first {
+                if menuSection.expandable {
+                    let selectedPath = NSIndexPath(forRow: 1, inSection: 0)
+                    self.menuTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                    self.tableView(self.menuTableView, didSelectRowAtIndexPath: selectedPath)
+                }
+            }
+            
+            _didAutoSelectCategory = true
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -90,9 +107,9 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ImageSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ImageSceneDetailCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ShoppingSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ShoppingSceneDetailCollectionViewCell
         cell.titleLabel?.removeFromSuperview()
-        cell.productImageType = ImageSceneDetailCollectionViewCell.ProductImageType.Scene
+        cell.productImageType = ShoppingSceneDetailCollectionViewCell.ProductImageType.Scene
         
         if let product = _products?[indexPath.row] {
             cell.theTakeProducts = [product]
@@ -103,10 +120,11 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let shoppingDetailViewController = UIStoryboard.getMainStoryboardViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageSceneDetailCollectionViewCell {
+        if let shoppingDetailViewController = UIStoryboard.getMainStoryboardViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
+            shoppingDetailViewController.experience = experience
             shoppingDetailViewController.products = cell.theTakeProducts
             shoppingDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            self.navigationController?.presentViewController(shoppingDetailViewController, animated: true, completion: nil)
+            self.presentViewController(shoppingDetailViewController, animated: true, completion: nil)
         }
     }
     

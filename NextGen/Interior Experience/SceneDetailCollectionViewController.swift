@@ -15,42 +15,60 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ShowGallery = "showGallery"
         static let ShowShop = "showShop"
         static let ShowMap = "showMap"
+        static let ShowShare = "showShare"
     }
     
     struct Constants {
         static let ItemsPerRow: CGFloat = 2.0
-        static let ItemSpacing: CGFloat = 5.0
-        static let UpdateInterval: Double = 15000.0
+        static let ItemSpacing: CGFloat = 10.0
+    }
+    
+    struct ExperienceCellData {
+        var experience: NGDMExperience!
+        var timedEvent: NGDMTimedEvent!
+        
+        init(experience: NGDMExperience, timedEvent: NGDMTimedEvent) {
+            self.experience = experience
+            self.timedEvent = timedEvent
+        }
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
-    private var _currentTime = -1.0
-    private var _currentProductFrameTime = -1.0
-    private var _currentProductSessionDataTask: NSURLSessionDataTask?
+    
+    private var _currentTime: Double = -1
+    private var _currentExperienceCellData = [ExperienceCellData]()
+    private var _isProcessingNewExperiences = false
+    
+    var clip: Clip!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
-        if let currentTask = _currentProductSessionDataTask {
-            currentTask.cancel()
-        }
-        
-        _currentProductSessionDataTask = nil
     }
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NSNotificationCenter.defaultCenter().addObserverForName("showShare", object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            
+            if let strongSelf = self, userInfo = notification.userInfo {
+                strongSelf.clip = userInfo["clip"] as! Clip!
+                strongSelf.performSegueWithIdentifier(SegueIdentifier.ShowShare, sender: nil)
+                
+            }
+
+        }
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.alpha = 0
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
-        self.collectionView?.registerNib(UINib(nibName: String(TextSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: TextSceneDetailCollectionViewCell.ReuseIdentifier)
+        self.collectionView?.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+        _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
-                strongSelf._currentTime = time
-                strongSelf.updateCollectionView()
+                if time != strongSelf._currentTime && !strongSelf._isProcessingNewExperiences {
+                    strongSelf._isProcessingNewExperiences = true
+                    strongSelf.processExperiencesForTime(time)
+                }
             }
         }
     }
@@ -66,90 +84,131 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionViewLayout.invalidateLayout()
     }
     
-    func updateCollectionView() {
-        if let visibleCells = self.collectionView?.visibleCells() {
-            for cell in visibleCells {
-                if let cell = cell as? SceneDetailCollectionViewCell {
-                    updateCollectionViewCell(cell)
-                }
+    func currentIndexPathForExperience(experience: NGDMExperience) -> NSIndexPath? {
+        for i in 0 ..< _currentExperienceCellData.count {
+            if _currentExperienceCellData[i].experience == experience {
+                return NSIndexPath(forItem: i, inSection: 0)
             }
         }
+        
+        return nil
     }
     
-    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell) {
-        if let experience = cell.experience {
-            updateCollectionViewCell(cell, experience: experience, timedEvent: experience.timedEventSequence?.timedEvent(_currentTime))
+    func currentCellDataForExperience(experience: NGDMExperience) -> ExperienceCellData? {
+        for cellData in _currentExperienceCellData {
+            if cellData.experience == experience {
+                return cellData
+            }
         }
+        
+        return nil
     }
     
-    func updateCollectionViewCell(cell: SceneDetailCollectionViewCell, experience: NGDMExperience, timedEvent: NGDMTimedEvent?) {
-        if let timedEvent = timedEvent {
-            if cell.timedEvent == nil || timedEvent != cell.timedEvent {
-                cell.timedEvent = timedEvent
+    func processExperiencesForTime(time: Double) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            self._currentTime = time
+            
+            var deleteIndexPaths = [NSIndexPath]()
+            var insertIndexPaths = [NSIndexPath]()
+            var reloadIndexPaths = [NSIndexPath]()
+            var moveIndexPaths = [(NSIndexPath, NSIndexPath)]()
+            
+            let allExperiences = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences
+            var newExperienceCellData = [ExperienceCellData]()
+            for i in 0 ..< allExperiences.count {
+                let experience = allExperiences[i]
+                let oldCellData = self.currentCellDataForExperience(experience)
+                let oldIndexPath = self.currentIndexPathForExperience(experience)
+                
+                if let newTimedEvent = experience.timedEventSequence?.timedEvent(self._currentTime) {
+                    newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
+                    let newIndexPath = NSIndexPath(forItem: newExperienceCellData.count - 1, inSection: 0)
+                    //print("Found \(experience.timedEventSequence!.id)")
+                    
+                    if oldCellData != nil {
+                        if oldIndexPath!.row != newIndexPath.row {
+                            moveIndexPaths.append((oldIndexPath!, newIndexPath))
+                            //print("Moving \(experience.timedEventSequence!.id)")
+                        } else if newTimedEvent.isProduct() || oldCellData!.timedEvent != newTimedEvent {
+                            reloadIndexPaths.append(oldIndexPath!)
+                            //print("Reloading \(experience.timedEventSequence!.id)")
+                        }
+                    } else {
+                        insertIndexPaths.append(newIndexPath)
+                        //print("Inserting \(experience.timedEventSequence!.id)")
+                    }
+                } else if oldIndexPath != nil {
+                    deleteIndexPaths.append(oldIndexPath!)
+                    //print("Deleting \(experience.timedEventSequence!.id)")
+                }
             }
             
-            if timedEvent.isProduct(kTheTakeIdentifierNamespace) {
-                if let cell = cell as? ImageSceneDetailCollectionViewCell {
-                    let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(_currentTime)
-                    if _currentProductFrameTime < 0 || newFrameTime - _currentProductFrameTime >= Constants.UpdateInterval {
-                        _currentProductFrameTime = newFrameTime
-                        
-                        if let currentTask = _currentProductSessionDataTask {
-                            currentTask.cancel()
-                        }
-                        
-                        _currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(_currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
-                            dispatch_async(dispatch_get_main_queue(), {
-                                if products.count > 0 {
-                                    cell.theTakeProducts = products
-                                }
-                            })
-                            
-                            if let strongSelf = self {
-                                strongSelf._currentProductSessionDataTask = nil
-                            }
-                        })
+            dispatch_async(dispatch_get_main_queue()) {
+                self._currentExperienceCellData = newExperienceCellData
+                
+                self.collectionView?.performBatchUpdates({
+                    if deleteIndexPaths.count > 0 {
+                        self.collectionView?.deleteItemsAtIndexPaths(deleteIndexPaths)
                     }
-                }
-            } else if (timedEvent.isTextItem() && ((timedEvent.hasImage(experience) && cell.reuseIdentifier != ImageSceneDetailCollectionViewCell.ReuseIdentifier) || (!timedEvent.hasImage(experience) && cell.reuseIdentifier != TextSceneDetailCollectionViewCell.ReuseIdentifier))) ||
-                        (timedEvent.isLocation() && cell.reuseIdentifier != MapSceneDetailCollectionViewCell.ReuseIdentifier) {
-                if let indexPath = self.collectionView?.indexPathForCell(cell) {
-                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-                }
+                    
+                    if insertIndexPaths.count > 0 {
+                        self.collectionView?.insertItemsAtIndexPaths(insertIndexPaths)
+                    }
+                    
+                    for indexPaths in moveIndexPaths {
+                        self.collectionView?.moveItemAtIndexPath(indexPaths.0, toIndexPath: indexPaths.1)
+                    }
+                    
+                    var indexPaths = reloadIndexPaths
+                    for i in 0 ..< indexPaths.count {
+                        if let cell = self.collectionView?.cellForItemAtIndexPath(indexPaths[i]) as? ShoppingSceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
+                            if timedEvent.isProduct() {
+                                cell.currentTime = self._currentTime
+                                reloadIndexPaths.removeAtIndex(i)
+                            }
+                        }
+                    }
+                    
+                    if reloadIndexPaths.count > 0 {
+                        self.collectionView?.reloadItemsAtIndexPaths(reloadIndexPaths)
+                    }
+                }, completion: { (completed) in
+                    self._isProcessingNewExperiences = false
+                })
             }
-        } else {
-            cell.timedEvent = nil
         }
     }
     
     
     // MARK: UICollectionViewDataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences.count
+        return _currentExperienceCellData.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences[indexPath.row]
-        let timedEvent = experience.timedEventSequence?.timedEvent(_currentTime)
-        var reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
-        if let timedEvent = timedEvent {
-            if timedEvent.isTextItem() {
-                reuseIdentifier = TextSceneDetailCollectionViewCell.ReuseIdentifier
-            } else if timedEvent.isLocation() {
-                reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
-            }
+        let cellData = _currentExperienceCellData[indexPath.row]
+        
+        var reuseIdentifier: String
+        if cellData.timedEvent.isLocation() {
+            reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
+        } else if cellData.timedEvent.isProduct() {
+            reuseIdentifier = ShoppingSceneDetailCollectionViewCell.ReuseIdentifier
+        } else {
+            reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
         }
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
-        cell.experience = experience
-        updateCollectionViewCell(cell, experience: experience, timedEvent: timedEvent)
-        
+        cell.experience = cellData.experience
+        cell.timedEvent = cellData.timedEvent
+        cell.currentTime = _currentTime
         return cell
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), 250)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        let isShopping = (cell != nil && cell!.isKindOfClass(ShoppingSceneDetailCollectionViewCell))
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), (isShopping ? 245 : 225))
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
@@ -162,23 +221,20 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        //self.performSegueWithIdentifier("showExample", sender: nil)
+        
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isProduct() {
-                if let cell = cell as? ImageSceneDetailCollectionViewCell {
-                    if cell.theTakeProducts != nil {
-                        self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell.theTakeProducts)
-                    }
-                }
+                self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
             } else if timedEvent.isGallery() {
                 if let galleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController, gallery = timedEvent.getGallery(experience) {
                     galleryViewController.gallery = gallery
-                    galleryViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
                     galleryViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                     galleryViewController.transitioningDelegate = self
                     self.presentViewController(galleryViewController, animated: true, completion: nil)
                 }
             } else if timedEvent.isAudioVisual() {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: timedEvent.getAudioVisual(experience))
+                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: cell)
             } else if timedEvent.isAppGroup() {
                 if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
@@ -186,30 +242,46 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
             } else if timedEvent.isLocation() {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: timedEvent)
+                self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: cell)
             }
         }
+ 
     }
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == SegueIdentifier.ShowGallery {
-            let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
-            
-            if let gallery = sender as? NGDMGallery {
-                galleryDetailViewController.gallery = gallery
-            } else if let audioVisual = sender as? NGDMAudioVisual {
-                galleryDetailViewController.audioVisual = audioVisual
+        if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
+            if segue.identifier == SegueIdentifier.ShowGallery {
+                let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
+                if timedEvent.isGallery() {
+                    galleryDetailViewController.gallery = timedEvent.getGallery(experience)
+                } else if timedEvent.isAudioVisual() {
+                    galleryDetailViewController.audioVisual = timedEvent.getAudioVisual(experience)
+                }
+            } else if segue.identifier == SegueIdentifier.ShowShop {
+                if let cell = cell as? ShoppingSceneDetailCollectionViewCell, products = cell.theTakeProducts {
+                    let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
+                    shopDetailViewController.experience = experience
+                    shopDetailViewController.products = products
+                    shopDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+                    shopDetailViewController.transitioningDelegate = self
+                }
+            } else if segue.identifier == SegueIdentifier.ShowMap {
+                let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
+                mapDetailViewController.experience = experience
+                mapDetailViewController.timedEvent = timedEvent
+                mapDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+                mapDetailViewController.transitioningDelegate = self
             }
-        } else if segue.identifier == SegueIdentifier.ShowShop {
-            let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
-            shopDetailViewController.products = sender as! [TheTakeProduct]
-            shopDetailViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-            shopDetailViewController.transitioningDelegate = self
-        } else if segue.identifier == SegueIdentifier.ShowMap {
-            let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
-            mapDetailViewController.timedEvent = sender as! NGDMTimedEvent
         }
+            
+             if segue.identifier == SegueIdentifier.ShowShare {
+                let shareDetailViewController = segue.destinationViewController as! SharingViewController
+                shareDetailViewController.clip = clip
+                shareDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+                shareDetailViewController.transitioningDelegate = self
+        }
+    
     }
     
     func cellForExperience(experience: NGDMExperience) -> SceneDetailCollectionViewCell? {
@@ -231,4 +303,5 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         return InteriorExperiencePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
     }
     
+
 }

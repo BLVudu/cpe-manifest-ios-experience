@@ -8,16 +8,15 @@
 
 import UIKit
 
-class ExtrasImageGalleryListCollectionViewController: StylizedCollectionViewController, UICollectionViewDelegateFlowLayout {
+class ExtrasImageGalleryListCollectionViewController: ExtrasExperienceCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let kExtrasImageGallerySegueIdentifier = "ExtrasImageGallerySegueIdentifier"
     
-    var experience: NGDMExperience!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.registerNib(UINib(nibName: TitledImageCell.NibName, bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
+        self.collectionView?.backgroundColor = UIColor.clearColor()
+        self.collectionView?.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
     }
     
     // MARK: UICollectionViewDataSource
@@ -46,7 +45,7 @@ class ExtrasImageGalleryListCollectionViewController: StylizedCollectionViewCont
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(15, 15, 15, 15)
+        return UIEdgeInsetsMake(90, 15, 15, 15)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -58,6 +57,7 @@ class ExtrasImageGalleryListCollectionViewController: StylizedCollectionViewCont
         if segue.identifier == kExtrasImageGallerySegueIdentifier {
             if let imageGalleryViewController = segue.destinationViewController as? ExtrasImageGalleryViewController, experience = sender as? NGDMExperience, gallery = experience.galleries.values.first  {
                 imageGalleryViewController.gallery = gallery
+                imageGalleryViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             }
         }
     }

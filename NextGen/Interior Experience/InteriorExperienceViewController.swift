@@ -34,6 +34,10 @@ class InteriorExperienceViewController: UIViewController {
                 strongSelf._isShowingInterstitial = false
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
         updatePlayerConstraints()
@@ -56,17 +60,7 @@ class InteriorExperienceViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.PlayerViewController {
             let playerViewController = segue.destinationViewController as! VideoPlayerViewController
-            playerViewController.shouldPlayMainExperience = true
-        }
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if _isShowingInterstitial {
-            if let point = touches.first?.locationInView(self.view) {
-                if CGRectContainsPoint(CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 60), point) {
-                    NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldSkipInterstitial, object: nil)
-                }
-            }
+            playerViewController.mode = VideoPlayerMode.MainFeature
         }
     }
 

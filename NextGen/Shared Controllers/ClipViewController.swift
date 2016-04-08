@@ -39,9 +39,9 @@ class ClipViewController: UIViewController {
         
         super.viewDidLoad()
 
-         clip = DataManager.sharedInstance.content?.allClips[0]
+         //clip = DataManager.sharedInstance.content?.allClips[0]
         
-        
+        //kWBVideoPlayerItemDurationDidLoadNotification
         
         if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
             if let player = videoPlayerViewController.player {
@@ -53,35 +53,14 @@ class ClipViewController: UIViewController {
             videoPlayerViewController.playerControlsVisible = false
             videoPlayerViewController.lockTopToolbar = true
             videoPlayerViewController.playVideoWithURL(videoURL)
-            self.shareContent = videoURL
+                       self.shareContent = videoURL
             
             
             
         }
  
     }
-    
-        /*
-        NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-        
-        if let userInfo = notification.userInfo{
-        let index = userInfo["index"]as! Int
-        if index >= 1{
-        } else {
-        let indexPath = NSIndexPath(forRow: index, inSection: 0)
-        self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        self.tableView(self.tableView, didSelectRowAtIndexPath: indexPath)
-        
-        
-        
-        }
-        }
-        
-        
-        }
-        
-        */
-    func videoPlayerViewController() -> VideoPlayerViewController? {
+        func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
             if viewController is VideoPlayerViewController {
                 return viewController as? VideoPlayerViewController

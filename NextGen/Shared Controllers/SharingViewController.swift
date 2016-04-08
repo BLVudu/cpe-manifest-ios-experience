@@ -47,34 +47,43 @@ class SharingViewController: UIViewController{
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
         clipName.text = clip?.text
         clipThumbnailView.setImageWithURL(clipThumbnail)
+        if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
+            if let player = videoPlayerViewController.player {
+                player.removeAllItems()
+            }
+            
+            videoPlayerViewController.curIndex = 0
+            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.playerControlsVisible = false
+            videoPlayerViewController.lockTopToolbar = true
+            videoPlayerViewController.playVideoWithURL(videoURL)
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemReadyToPlayNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+                
+                videoPlayerViewController.pauseVideo()
+                
+                
+            }
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+                
+                if let userInfo = notification.userInfo{
+                    let duration = userInfo["duration"] as! NSTimeInterval
+                    
+                    self.clipDuration.text = duration.timeString()
+                }
+            }
+            
+            self.shareContent = videoURL
+            
+           
+            
+        }
+
         
         
     }
 
-
-      
-    
-
-    /*
-     NSNotificationCenter.defaultCenter().addObserverForName("playNextItem", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-     
-     if let userInfo = notification.userInfo{
-     let index = userInfo["index"]as! Int
-     if index >= 1{
-     } else {
-     let indexPath = NSIndexPath(forRow: index, inSection: 0)
-     self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-     self.tableView(self.tableView, didSelectRowAtIndexPath: indexPath)
-     
-     
-     
-     }
-     }
-     
-     
-     }
-     
-     */
     func videoPlayerViewController() -> VideoPlayerViewController? {
         for viewController in self.childViewControllers {
             if viewController is VideoPlayerViewController {
@@ -92,32 +101,20 @@ class SharingViewController: UIViewController{
         self.clipThumbnailView.hidden = true
         self.playButton.hidden = true
         
-        if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
-            if let player = videoPlayerViewController.player {
-                player.removeAllItems()
-            }
-            
-            videoPlayerViewController.curIndex = 0
-            videoPlayerViewController.indexMax = 1
-            videoPlayerViewController.playerControlsVisible = false
-            videoPlayerViewController.lockTopToolbar = true
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            self.shareContent = videoURL
-            
-            
-            
-        }
-
+        videoPlayerViewController()?.playVideo()
+        
+        
     }
 
     
     @IBAction func shareClip(sender: AnyObject) {
         
-        
+        /*
         let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = sender as? UIView
+        activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard]
         self.presentViewController(activityViewController, animated: true, completion: nil)
-        
+        */
         
     }
 

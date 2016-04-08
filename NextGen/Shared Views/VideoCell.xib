@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5TR-li-LKC" id="IzL-Yw-hoz">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kcr-fA-Eba">
@@ -44,11 +44,11 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWa-e0-61Q">
-                        <rect key="frame" x="235" y="138" width="70" height="30"/>
+                        <rect key="frame" x="225" y="138" width="80" height="30"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.74700969827586206" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="6Gy-qM-vSk"/>
-                            <constraint firstAttribute="width" constant="70" id="uWD-Ge-rQx"/>
+                            <constraint firstAttribute="width" constant="80" id="uWD-Ge-rQx"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,8 +56,6 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DWa-e0-61Q" firstAttribute="bottom" secondItem="kcr-fA-Eba" secondAttribute="bottom" id="3ZQ-0K-nir"/>
-                    <constraint firstItem="DWa-e0-61Q" firstAttribute="trailing" secondItem="kcr-fA-Eba" secondAttribute="trailing" id="56F-FP-eCb"/>
                     <constraint firstItem="drI-l5-Cju" firstAttribute="centerX" secondItem="kcr-fA-Eba" secondAttribute="centerX" id="ACY-bs-fNR"/>
                     <constraint firstAttribute="trailing" secondItem="9zH-1v-tiT" secondAttribute="trailing" constant="15" id="Mtu-UC-15L"/>
                     <constraint firstAttribute="trailing" secondItem="kcr-fA-Eba" secondAttribute="trailing" constant="15" id="WX0-Gb-KOM"/>
@@ -66,6 +64,8 @@
                     <constraint firstItem="9zH-1v-tiT" firstAttribute="top" secondItem="kcr-fA-Eba" secondAttribute="bottom" constant="5" id="l9t-jp-Zaw"/>
                     <constraint firstItem="kcr-fA-Eba" firstAttribute="top" secondItem="IzL-Yw-hoz" secondAttribute="top" constant="5" id="swT-bP-rLN"/>
                     <constraint firstItem="9zH-1v-tiT" firstAttribute="leading" secondItem="IzL-Yw-hoz" secondAttribute="leading" constant="15" id="xIb-b0-IGA"/>
+                    <constraint firstItem="DWa-e0-61Q" firstAttribute="trailing" secondItem="kcr-fA-Eba" secondAttribute="trailing" id="xQZ-ek-41w"/>
+                    <constraint firstItem="DWa-e0-61Q" firstAttribute="bottom" secondItem="kcr-fA-Eba" secondAttribute="bottom" id="yqh-cs-N0N"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

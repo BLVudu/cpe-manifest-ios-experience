@@ -10,7 +10,6 @@ import UIKit
 
 class TitledImageCell: UICollectionViewCell {
     
-    static let NibName = "TitledImageCell"
     static let ReuseIdentifier = "TitledImageCellReuseIdentifier"
     
     @IBOutlet weak var titleLabel: UILabel!
