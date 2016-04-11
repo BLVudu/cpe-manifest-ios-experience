@@ -38,7 +38,7 @@ class ConfigManager {
                     
                     if let googleMapsAPIKey = configJSON["google_maps_api_key"] as? String {
                         GMSServices.provideAPIKey(googleMapsAPIKey)
-                        self.hasGoogleMaps = false
+                        self.hasGoogleMaps = true
                     }
                 }
             } catch let error as NSError {

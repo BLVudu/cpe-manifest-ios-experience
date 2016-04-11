@@ -42,7 +42,7 @@ class MultiMapView: UIView, MKMapViewDelegate {
         if let mapView = googleMapView {
             mapView.camera = GMSCameraPosition(target: location, zoom: zoomLevel, bearing: 0, viewingAngle: 0)
         } else if let mapView = appleMapView {
-            let span = MKCoordinateSpanMake(0, 360 / pow(2.0, Double(zoomLevel)) * Double(CGRectGetWidth(self.frame)) / 256);
+            let span = MKCoordinateSpanMake(0, 360 / pow(2.0, Double(zoomLevel)) * Double(CGRectGetWidth(mapView.frame)) / 256);
             mapView.setRegion(MKCoordinateRegionMake(location, span), animated: animated)
         }
     }
@@ -79,6 +79,7 @@ class MultiMapView: UIView, MKMapViewDelegate {
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")
         annotationView.image = UIImage(named: "MOSMapPin")
+        annotationView.canShowCallout = true
         return annotationView
     }
 
