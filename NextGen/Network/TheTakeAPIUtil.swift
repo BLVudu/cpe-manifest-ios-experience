@@ -28,16 +28,24 @@ class TheTakeAPIUtil: APIUtil {
         return request
     }
     
-    func prefetchProductFrames() {
-        _frameTimes.removeAll()
+    func prefetchProductFrames(start start: Int) {
+        var limit = 100000
+        if start == 0 {
+            limit = 100
+            _frameTimes.removeAll()
+        }
         
-        getJSONWithPath("/frames/listFrames", parameters: ["media": mediaId, "limit": "100000"], successBlock: { (result) -> Void in
+        getJSONWithPath("/frames/listFrames", parameters: ["media": mediaId, "start": String(start), "limit": String(limit)], successBlock: { (result) -> Void in
             if let frames = result["result"] as? [NSDictionary] {
                 for frameInfo in frames {
                     if let frameTime = frameInfo["frameTime"] as? Double {
                         self._frameTimes[frameTime] = frameInfo
                     }
                 }
+            }
+            
+            if start == 0 {
+                self.prefetchProductFrames(start: limit + 1)
             }
         }, errorBlock: nil)
     }

@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if let configJSON = try NSJSONSerialization.JSONObjectWithData(configData, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
                         if let theTakeAPIKey = configJSON["thetake_api_key"] as? String {
                             TheTakeAPIUtil.sharedInstance.apiKey = theTakeAPIKey
-                            TheTakeAPIUtil.sharedInstance.prefetchProductFrames()
+                            TheTakeAPIUtil.sharedInstance.prefetchProductFrames(start: 0)
                             TheTakeAPIUtil.sharedInstance.prefetchProductCategories()
                         }
                         
