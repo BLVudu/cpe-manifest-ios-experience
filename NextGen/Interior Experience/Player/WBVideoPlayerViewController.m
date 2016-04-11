@@ -47,8 +47,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 @property (weak, nonatomic)   IBOutlet  UILabel                         *timeElapsedLabel;
 @property (weak, nonatomic)   IBOutlet  UILabel                         *durationLabel;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *subtitlesButton;
-@property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
-@property (strong, nonatomic)           NSTimer                         *playerControlsAutoHideTimer;
 @property (strong, nonatomic)           NSTimer                         *countdown;
 @property (assign, nonatomic)           NSUInteger                      countdownSeconds;
 @property (strong, nonatomic)           NSArray                         *videoURLS;
