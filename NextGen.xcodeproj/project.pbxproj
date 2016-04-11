@@ -316,6 +316,8 @@
 		70DF2F901CA5F453007AD2A0 /* MenuSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */; };
 		70DF2F921CA5FBBC007AD2A0 /* MenuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */; };
 		70DF2F961CA640AA007AD2A0 /* TheTakeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */; };
+		70EFFB2C1CBC637000643372 /* MultiMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EFFB2B1CBC637000643372 /* MultiMapView.swift */; };
+		70EFFB2E1CBC6E4500643372 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */; };
 		70FECF6B1C653B72005B1A44 /* UINavigationItem+Stylized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */; };
 		70FECF6D1C65433A005B1A44 /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */; };
 		70FECF731C654FC3005B1A44 /* FadeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF721C654FC3005B1A44 /* FadeSegue.swift */; };
@@ -663,6 +665,8 @@
 		70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSectionCell.swift; sourceTree = "<group>"; };
 		70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuedViewController.swift; sourceTree = "<group>"; };
 		70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeCategory.swift; sourceTree = "<group>"; };
+		70EFFB2B1CBC637000643372 /* MultiMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiMapView.swift; sourceTree = "<group>"; };
+		70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		70FECF6A1C653B72005B1A44 /* UINavigationItem+Stylized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Stylized.swift"; sourceTree = "<group>"; };
 		70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Utils.swift"; sourceTree = "<group>"; };
 		70FECF721C654FC3005B1A44 /* FadeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeSegue.swift; sourceTree = "<group>"; };
@@ -739,6 +743,7 @@
 				707E10831C40796000FCF81C /* Shared Views */,
 				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
+				70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */,
 				4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */,
 				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
 				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
@@ -1167,6 +1172,7 @@
 				70DF2F891CA5EADF007AD2A0 /* MenuItemCell.xib */,
 				70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */,
 				70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */,
+				70EFFB2B1CBC637000643372 /* MultiMapView.swift */,
 				4993D2681C6D07800077220A /* RadioButton.swift */,
 				707E10841C40797400FCF81C /* RoundImageView.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
@@ -1574,7 +1580,9 @@
 				7071C5451C6BCBF6006F4275 /* NGETypeEnum.swift in Sources */,
 				7071C4B41C6BCBF6006F4275 /* NGEContainerMetadataType.swift in Sources */,
 				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
+				70EFFB2C1CBC637000643372 /* MultiMapView.swift in Sources */,
 				7071C4E41C6BCBF6006F4275 /* NGEEventLocationType.swift in Sources */,
+				70EFFB2E1CBC6E4500643372 /* ConfigManager.swift in Sources */,
 				7071C5481C6BCBF6006F4275 /* NextGenDataManager.swift in Sources */,
 				7071C4971C6BCBF6006F4275 /* NGEAncillaryTrackReferenceType.swift in Sources */,
 				7071C4D91C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureProgressiveType.swift in Sources */,

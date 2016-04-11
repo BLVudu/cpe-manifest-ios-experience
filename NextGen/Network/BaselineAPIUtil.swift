@@ -46,10 +46,6 @@ class BaselineAPIUtil: APIUtil {
     var projectId: String!
     var apiKey: String!
     
-    func isActive() -> Bool {
-        return projectId != nil
-    }
-    
     func prefetchCredits(successBlock: (talents: [String: Talent]) -> Void) {
         getJSONWithPath(Endpoints.GetCredits, parameters: ["id": projectId, "apikey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {

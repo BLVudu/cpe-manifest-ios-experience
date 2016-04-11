@@ -8,40 +8,22 @@
 
 import MapKit
 
-class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell, MKMapViewDelegate {
+class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "MapSceneDetailCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: MultiMapView!
     
     override func timedEventDidChange() {
         super.timedEventDidChange()
         
         if let event = timedEvent, location = event.location {
-            let center = mapView.setLocation(location.latitude, longitude: location.longitude, zoomLevel: 14, animated: false)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = center
-            annotation.title = location.name
-            annotation.subtitle = location.address
-            
-            mapView.addAnnotation(annotation)
+            let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+            mapView.setLocation(center, zoomLevel: 14, animated: false)
+            mapView.addMarker(center, title: location.name, subtitle: location.address)
         }
         
         mapView.userInteractionEnabled = false
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        mapView.mapType = MKMapType.Hybrid
-    }
-    
-    // MARK: MKMapViewDelegate
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")
-        annotationView.image = UIImage(named: "MOSMapPin")
-        return annotationView
     }
     
 }

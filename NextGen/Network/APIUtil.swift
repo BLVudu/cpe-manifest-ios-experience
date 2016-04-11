@@ -13,7 +13,6 @@ typealias APIUtilErrorBlock = (error: NSError?) -> Void
 
 class APIUtil: NSObject, NSURLSessionDataDelegate {
     
-
     var apiDomain: String!
     
     init(apiDomain: String) {
@@ -57,7 +56,4 @@ class APIUtil: NSObject, NSURLSessionDataDelegate {
         return task
     }
     
-    
-    
-    
-    }
+}

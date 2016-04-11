@@ -39,37 +39,35 @@
                         <color key="textColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GLm-3E-DD7">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5s-2v-ZqL" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
                         <rect key="frame" x="8" y="35" width="267" height="150"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="GLm-3E-DD7" secondAttribute="height" multiplier="16:9" id="LBa-qN-yeF"/>
+                            <constraint firstAttribute="width" secondItem="G5s-2v-ZqL" secondAttribute="height" multiplier="16:9" id="EfF-Dp-H9D"/>
                         </constraints>
-                        <connections>
-                            <outlet property="delegate" destination="14d-xz-h1c" id="7fh-pS-xEW"/>
-                        </connections>
-                    </mapView>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="G5s-2v-ZqL" firstAttribute="top" secondItem="OZd-aL-jCC" secondAttribute="bottom" id="6iJ-ie-fUF"/>
                 <constraint firstAttribute="trailing" secondItem="OZd-aL-jCC" secondAttribute="trailing" constant="8" id="CkM-Hr-gtv"/>
                 <constraint firstAttribute="trailing" secondItem="hLC-sF-B1u" secondAttribute="trailing" constant="8" id="KPo-A8-zrX"/>
-                <constraint firstItem="GLm-3E-DD7" firstAttribute="top" secondItem="OZd-aL-jCC" secondAttribute="bottom" id="ZRH-vH-Jdx"/>
+                <constraint firstAttribute="trailing" secondItem="G5s-2v-ZqL" secondAttribute="trailing" constant="8" id="dch-Gt-gPL"/>
                 <constraint firstItem="hLC-sF-B1u" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="elX-Ob-YyR"/>
-                <constraint firstItem="hLC-sF-B1u" firstAttribute="top" secondItem="GLm-3E-DD7" secondAttribute="bottom" constant="5" id="piL-JG-e8F"/>
-                <constraint firstAttribute="trailing" secondItem="GLm-3E-DD7" secondAttribute="trailing" constant="8" id="qSt-KP-vU4"/>
+                <constraint firstItem="hLC-sF-B1u" firstAttribute="top" secondItem="G5s-2v-ZqL" secondAttribute="bottom" constant="5" id="glA-ao-gbq"/>
                 <constraint firstItem="OZd-aL-jCC" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="sz7-n2-yqu"/>
                 <constraint firstItem="OZd-aL-jCC" firstAttribute="top" secondItem="14d-xz-h1c" secondAttribute="top" constant="5" id="tYY-JC-io1"/>
-                <constraint firstItem="GLm-3E-DD7" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="zWa-O7-Kxq"/>
+                <constraint firstItem="G5s-2v-ZqL" firstAttribute="leading" secondItem="14d-xz-h1c" secondAttribute="leading" constant="8" id="xwq-aq-bAd"/>
             </constraints>
             <size key="customSize" width="50" height="120"/>
             <connections>
                 <outlet property="descriptionLabel" destination="hLC-sF-B1u" id="omO-1I-0Kf"/>
-                <outlet property="mapView" destination="GLm-3E-DD7" id="Uww-dV-1Kk"/>
+                <outlet property="mapView" destination="G5s-2v-ZqL" id="0sJ-dd-ph4"/>
                 <outlet property="titleLabel" destination="OZd-aL-jCC" id="Xu4-RM-WhD"/>
             </connections>
-            <point key="canvasLocation" x="1107.5" y="607"/>
+            <point key="canvasLocation" x="579.5" y="471"/>
         </collectionViewCell>
     </objects>
 </document>

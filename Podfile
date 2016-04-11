@@ -12,6 +12,6 @@ pod 'HockeySDK'
 pod 'MWPhotoBrowser'
 pod 'MBProgressHUD', '~> 0.9.2'
 
-pod 'Google-Maps-iOS-SDK-for-Business', '~> 1.13.0'
+pod 'GoogleMaps', '~> 1.13.0'
 
 end

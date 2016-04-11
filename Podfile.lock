@@ -1,6 +1,6 @@
 PODS:
   - DACircularProgress (2.3.1)
-  - Google-Maps-iOS-SDK-for-Business (1.13.0)
+  - GoogleMaps (1.13.0)
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
@@ -14,14 +14,14 @@ PODS:
   - SDWebImage/Core (3.7.5)
 
 DEPENDENCIES:
-  - Google-Maps-iOS-SDK-for-Business (~> 1.13.0)
+  - GoogleMaps (~> 1.13.0)
   - HockeySDK
   - MBProgressHUD (~> 0.9.2)
   - MWPhotoBrowser
 
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
-  Google-Maps-iOS-SDK-for-Business: 3484cc7fa796151285e34e07fb272d8168db710f
+  GoogleMaps: 7a6caeb8336d7cb42982e969fc9b1b20a889fe79
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c

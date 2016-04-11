@@ -1312,23 +1312,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KKQ-ID-gPI">
-                                <rect key="frame" x="30" y="70" width="964" height="595"/>
-                            </imageView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2Co-Ss-0K5">
-                                <rect key="frame" x="30" y="70" width="964" height="595"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="208" id="JEL-QM-9qg"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="JEL-QM-9qg"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <outlet property="delegate" destination="MuK-Ns-GCf" id="JBp-YV-uG8"/>
-                                </connections>
-                            </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cvz-sG-gYB">
                                 <rect key="frame" x="45" y="680" width="934" height="68"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1349,12 +1332,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="107" height="68"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TrN-Gh-EAj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="60"/>
-                                                </imageView>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpC-5F-LbR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="60"/>
-                                                </mapView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-S4-ph3" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="68"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrM-tv-eXV">
                                                     <rect key="frame" x="5" y="38" width="40" height="25"/>
                                                     <constraints>
@@ -1364,35 +1345,20 @@
                                                     <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play_Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="y9P-vs-wAN">
-                                                    <rect key="frame" x="38" y="15" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="oDu-DA-4r9"/>
-                                                        <constraint firstAttribute="height" constant="30" id="xOK-dz-nCj"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="fpC-5F-LbR" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leading" id="2cD-fg-fMT"/>
                                             <constraint firstAttribute="bottom" secondItem="LrM-tv-eXV" secondAttribute="bottom" constant="5" id="9lN-hF-jS5"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="TrN-Gh-EAj" secondAttribute="bottom" id="BZx-LJ-n9c"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="fpC-5F-LbR" secondAttribute="bottom" id="Rv2-ku-1VJ"/>
-                                            <constraint firstItem="y9P-vs-wAN" firstAttribute="centerY" secondItem="TrN-Gh-EAj" secondAttribute="centerY" id="Tkx-nT-dRS"/>
-                                            <constraint firstAttribute="trailing" secondItem="TrN-Gh-EAj" secondAttribute="trailing" id="YHN-eP-DhO"/>
-                                            <constraint firstItem="y9P-vs-wAN" firstAttribute="centerX" secondItem="TrN-Gh-EAj" secondAttribute="centerX" id="Ysd-9f-zqI"/>
-                                            <constraint firstItem="fpC-5F-LbR" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="top" id="ZCU-Yu-jE2"/>
-                                            <constraint firstItem="TrN-Gh-EAj" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="top" id="f7I-Sg-o18"/>
+                                            <constraint firstItem="JN3-S4-ph3" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="top" id="AFw-H2-ag6"/>
+                                            <constraint firstAttribute="bottom" secondItem="JN3-S4-ph3" secondAttribute="bottom" id="c45-PI-If9"/>
                                             <constraint firstItem="LrM-tv-eXV" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leading" constant="5" id="fLA-Mm-Igj"/>
-                                            <constraint firstItem="TrN-Gh-EAj" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leading" id="gDQ-lo-CaM"/>
-                                            <constraint firstAttribute="trailing" secondItem="fpC-5F-LbR" secondAttribute="trailing" id="oDz-OB-zvf"/>
+                                            <constraint firstItem="JN3-S4-ph3" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leading" id="oBF-JF-EVX"/>
+                                            <constraint firstAttribute="trailing" secondItem="JN3-S4-ph3" secondAttribute="trailing" id="ouv-8A-IIX"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="label" destination="LrM-tv-eXV" id="Y8e-yt-FMC"/>
-                                            <outlet property="mapImage" destination="TrN-Gh-EAj" id="3XA-vD-K2w"/>
-                                            <outlet property="mapView" destination="fpC-5F-LbR" id="rXq-Tq-Phl"/>
-                                            <outlet property="playBtn" destination="y9P-vs-wAN" id="GZS-vy-v61"/>
+                                            <outlet property="mapLabel" destination="LrM-tv-eXV" id="nwU-GB-2iY"/>
+                                            <outlet property="mapView" destination="JN3-S4-ph3" id="peB-dD-c64"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1401,20 +1367,20 @@
                                     <outlet property="delegate" destination="MuK-Ns-GCf" id="J8l-jG-Hpj"/>
                                 </connections>
                             </collectionView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRz-Qu-THi" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
+                                <rect key="frame" x="30" y="70" width="964" height="595"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="2Co-Ss-0K5" secondAttribute="trailing" constant="30" id="6nW-H4-Tr2"/>
-                            <constraint firstItem="2Co-Ss-0K5" firstAttribute="top" secondItem="U59-Cf-5pS" secondAttribute="bottom" constant="70" id="BWu-kz-1Gz"/>
+                            <constraint firstAttribute="trailing" secondItem="HRz-Qu-THi" secondAttribute="trailing" constant="30" id="020-eF-sZA"/>
+                            <constraint firstItem="HRz-Qu-THi" firstAttribute="top" secondItem="U59-Cf-5pS" secondAttribute="bottom" constant="70" id="2LA-Jn-vB1"/>
                             <constraint firstAttribute="trailing" secondItem="Cvz-sG-gYB" secondAttribute="trailing" constant="45" id="HMM-i8-tRR"/>
-                            <constraint firstItem="KKQ-ID-gPI" firstAttribute="top" secondItem="U59-Cf-5pS" secondAttribute="bottom" constant="70" id="N0Z-aE-Yai"/>
-                            <constraint firstItem="Cvz-sG-gYB" firstAttribute="top" secondItem="2Co-Ss-0K5" secondAttribute="bottom" constant="15" id="PSJ-td-cQH"/>
-                            <constraint firstItem="KKQ-ID-gPI" firstAttribute="leading" secondItem="PFD-LA-pxt" secondAttribute="leading" constant="30" id="RYb-Qs-BVp"/>
-                            <constraint firstItem="Cvz-sG-gYB" firstAttribute="top" secondItem="KKQ-ID-gPI" secondAttribute="bottom" constant="15" id="bje-lB-rbj"/>
-                            <constraint firstItem="2Co-Ss-0K5" firstAttribute="leading" secondItem="PFD-LA-pxt" secondAttribute="leading" constant="30" id="eG1-rk-MLY"/>
                             <constraint firstItem="K6C-vb-ff6" firstAttribute="top" secondItem="Cvz-sG-gYB" secondAttribute="bottom" constant="20" id="eQB-bI-hnT"/>
+                            <constraint firstItem="Cvz-sG-gYB" firstAttribute="top" secondItem="HRz-Qu-THi" secondAttribute="bottom" constant="15" id="kmd-Nv-03f"/>
+                            <constraint firstItem="HRz-Qu-THi" firstAttribute="leading" secondItem="PFD-LA-pxt" secondAttribute="leading" constant="30" id="mjf-Ap-cuT"/>
                             <constraint firstItem="Cvz-sG-gYB" firstAttribute="leading" secondItem="PFD-LA-pxt" secondAttribute="leading" constant="45" id="w4R-Py-0oD"/>
-                            <constraint firstAttribute="trailing" secondItem="KKQ-ID-gPI" secondAttribute="trailing" constant="30" id="yUu-wB-kDi"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -1423,9 +1389,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
-                        <outlet property="imageView" destination="KKQ-ID-gPI" id="FVQ-WP-vw7"/>
                         <outlet property="mapCollectionView" destination="Cvz-sG-gYB" id="NoJ-hT-gEL"/>
-                        <outlet property="mapView" destination="2Co-Ss-0K5" id="ou4-T0-inf"/>
+                        <outlet property="mapView" destination="HRz-Qu-THi" id="kr6-T8-VQB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOZ-Ec-WaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
