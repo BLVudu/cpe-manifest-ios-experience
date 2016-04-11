@@ -89,9 +89,10 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 @property (strong)                      AVPlayerItem                    *playerItem;
 @property (nonatomic, weak)   IBOutlet  WBVideoPlayerPlaybackView       *playbackView;
 @property (readwrite, nonatomic)        NSInteger                        playerControlsAutoHideTime;
-
+@property (strong, nonatomic)           NSTimer                         *playerControlsAutoHideTimer;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *shareButton;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *fullScreenButton;
+@property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
 
 /**
  * Toggles all player controls visibility.
@@ -126,5 +127,6 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 - (void)seekPlayerToTime:(CMTime)seekTime;
 - (void)syncScrubber;
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
+- (void)initAutoHideTimer;
 
 @end

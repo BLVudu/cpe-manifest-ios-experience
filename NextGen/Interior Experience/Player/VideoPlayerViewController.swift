@@ -60,6 +60,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         
         self.commentaryView.hidden = true
         
+        
+        
         _shouldPauseObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPause, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
                 if strongSelf._didPlayInterstitial {
@@ -138,6 +140,15 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     @IBAction func commentary(sender: AnyObject) {
         self.commentaryView.hidden = !self.commentaryView.hidden
+        
+        if self.commentaryView.hidden == false{
+        if((self.playerControlsAutoHideTimer) != nil){
+            self.playerControlsAutoHideTimer.invalidate()
+            }
+        } else {
+            self.initAutoHideTimer()
+
+        }
     }
     
     override func syncScrubber() {
@@ -187,12 +198,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         if !_controlsAreLocked {
             if !_didPlayInterstitial {
                 skipInterstitial()
-            } else if !self.commentaryView.hidden {
-                self.commentaryView.hidden = true
-            } else {
-                super.handleTap(gestureRecognizer)
+            }
+            
+            if commentaryView.hidden == true{
+            super.handleTap(gestureRecognizer)
+
             }
         }
+    
     }
     
 }
