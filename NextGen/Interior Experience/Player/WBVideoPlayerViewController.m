@@ -45,7 +45,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 @property (weak, nonatomic)   IBOutlet  UIButton                        *pauseButton;
 @property (weak, nonatomic)   IBOutlet  UISlider                        *scrubber;
 @property (weak, nonatomic)   IBOutlet  UILabel                         *timeElapsedLabel;
-@property (weak, nonatomic)   IBOutlet  UILabel                         *timeLeftLabel;
+@property (weak, nonatomic)   IBOutlet  UILabel                         *durationLabel;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *subtitlesButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
 @property (strong, nonatomic)           NSTimer                         *playerControlsAutoHideTimer;
@@ -475,10 +475,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     // Update time labels
     if (_timeElapsedLabel) {
         _timeElapsedLabel.text = [self timeStringFromSecondsValue:time];
-    }
-    
-    if (_timeLeftLabel) {
-        _timeLeftLabel.text = [self timeStringFromSecondsValue:(duration - time)];
     }
 }
 
@@ -1095,6 +1091,10 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
     else if (context == VideoPlayerDurationObservationContext) {
         NSNumber *duration = [NSNumber numberWithDouble:CMTimeGetSeconds(self.playerItem.duration)];
         if ([duration floatValue] > 1) {
+            if (_durationLabel) {
+                _durationLabel.text = [self timeStringFromSecondsValue:duration.intValue];
+            }
+            
             NSDictionary *durationInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                           duration, kAVPlayerItemDurationKVO,
                                           nil];

@@ -19,7 +19,7 @@ class TitledImageCell: UICollectionViewCell {
     
     var experience: NGDMExperience? {
         didSet {
-            titleLabel.text = experience?.metadata?.title.uppercaseString
+            titleLabel.text = experience?.metadata?.title?.uppercaseString
             
             if let imageURL = experience?.imageURL {
                 _setImageSessionDataTask = imageView.setImageWithURL(imageURL)

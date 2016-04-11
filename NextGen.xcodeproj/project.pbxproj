@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0CE62751C28B08C73E3D9D3C /* Pods_NextGen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB925CAD4CBE373E778D0949 /* Pods_NextGen.framework */; };
-		490213461C850A0100071552 /* GalleryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213451C850A0100071552 /* GalleryDetailViewController.swift */; };
+		490213461C850A0100071552 /* GallerySceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213451C850A0100071552 /* GallerySceneDetailViewController.swift */; };
 		490213481C860C9A00071552 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213471C860C9A00071552 /* SharingViewController.swift */; };
 		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
 		4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */; };
@@ -341,7 +341,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		490213451C850A0100071552 /* GalleryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryDetailViewController.swift; sourceTree = "<group>"; };
+		490213451C850A0100071552 /* GallerySceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySceneDetailViewController.swift; sourceTree = "<group>"; };
 		490213471C860C9A00071552 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
 		4921D9731C3EFD0B00ED2AA6 /* NextGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1146,7 +1146,7 @@
 				70D2FC7E1CAE02E80003FC54 /* CommentaryView.swift */,
 				70D2FC7F1CAE02E80003FC54 /* CommentaryView.xib */,
 				492267E91C76A56900B306A2 /* CommentaryViewCell.swift */,
-				490213451C850A0100071552 /* GalleryDetailViewController.swift */,
+				490213451C850A0100071552 /* GallerySceneDetailViewController.swift */,
 				707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */,
 				70A5D5701CAB2CE500ACC58F /* InteriorExperiencePresentationController.swift */,
 				49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */,
@@ -1563,7 +1563,7 @@
 				7071C4BC1C6BCBF6006F4275 /* NGEContentRatingDetailType.swift in Sources */,
 				7071C4CD1C6BCBF6006F4275 /* NGEDigitalAssetInteractiveBaseDataType.swift in Sources */,
 				7071C5331C6BCBF6006F4275 /* NGEStringVideoPicPixelAspectEnum.swift in Sources */,
-				490213461C850A0100071552 /* GalleryDetailViewController.swift in Sources */,
+				490213461C850A0100071552 /* GallerySceneDetailViewController.swift in Sources */,
 				7071C5051C6BCBF6006F4275 /* NGEInventorySubtitleType.swift in Sources */,
 				70DF2F801CA5C292007AD2A0 /* MenuSection.swift in Sources */,
 				70D2FC7D1CADC21F0003FC54 /* NGDMPeople.swift in Sources */,

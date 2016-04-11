@@ -13,12 +13,14 @@ struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
     static let ShouldPause = "VideoPlayerNotificationShouldPause"
+    static let ShouldPauseAndLock = "VideoPlayerNotificationShouldPauseAndLock"
     static let ShouldResume = "VideoPlayerNotificationShouldResume"
 }
 
 enum VideoPlayerMode {
     case MainFeature
     case Supplemental
+    case SupplementalInMovie
 }
 
 class VideoPlayerViewController: WBVideoPlayerViewController {
@@ -31,6 +33,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     private var _didPlayInterstitial = false
     private var _lastNotifiedTime = -1.0
+    private var _controlsAreLocked = false
     
     var showCountdownTimer = false
     var currentClip: Clip?
@@ -42,11 +45,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     @IBOutlet weak var countdown: UIView!
     
     private var _shouldPauseObserver: NSObjectProtocol!
+    private var _shouldPauseAndLockObserver: NSObjectProtocol!
     private var _shouldResumeObserver: NSObjectProtocol!
     
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(_shouldPauseObserver)
+        center.removeObserver(_shouldPauseAndLockObserver)
         center.removeObserver(_shouldResumeObserver)
     }
     
@@ -63,10 +68,21 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             }
         }
         
+        _shouldPauseAndLockObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAndLock, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self {
+                if strongSelf._didPlayInterstitial && strongSelf.mode == VideoPlayerMode.MainFeature {
+                    strongSelf.pauseVideo()
+                    strongSelf.playerControlsVisible = false
+                    strongSelf._controlsAreLocked = true
+                }
+            }
+        })
+        
         _shouldResumeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self {
                 if strongSelf._didPlayInterstitial {
                     strongSelf.playVideo()
+                    strongSelf._controlsAreLocked = false
                 }
             }
         }
@@ -79,6 +95,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
             self.shareButton.removeFromSuperview()
             self.playerControlsVisible = false
             self.lockTopToolbar = true
+            
+            if mode == VideoPlayerMode.SupplementalInMovie {
+                self.fullScreenButton.removeFromSuperview()
+            }
         }
     }
     
@@ -164,12 +184,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     }
     
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
-        if !_didPlayInterstitial {
-            skipInterstitial()
-        } else if !self.commentaryView.hidden {
-            self.commentaryView.hidden = true
-        } else {
-            super.handleTap(gestureRecognizer)
+        if !_controlsAreLocked {
+            if !_didPlayInterstitial {
+                skipInterstitial()
+            } else if !self.commentaryView.hidden {
+                self.commentaryView.hidden = true
+            } else {
+                super.handleTap(gestureRecognizer)
+            }
         }
     }
     

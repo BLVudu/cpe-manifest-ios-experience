@@ -226,14 +226,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if timedEvent.isProduct() {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
-            } else if timedEvent.isGallery() {
-                if let galleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController, gallery = timedEvent.getGallery(experience) {
-                    galleryViewController.gallery = gallery
-                    galleryViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-                    galleryViewController.transitioningDelegate = self
-                    self.presentViewController(galleryViewController, animated: true, completion: nil)
-                }
-            } else if timedEvent.isAudioVisual() {
+            } else if timedEvent.isAudioVisual() || timedEvent.isGallery() {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: cell)
             } else if timedEvent.isAppGroup() {
                 if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
@@ -250,14 +243,18 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
+        if segue.identifier == SegueIdentifier.ShowShare {
+            let shareDetailViewController = segue.destinationViewController as! SharingViewController
+            shareDetailViewController.clip = clip
+            shareDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+            shareDetailViewController.transitioningDelegate = self
+        } else if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if segue.identifier == SegueIdentifier.ShowGallery {
-                let galleryDetailViewController = segue.destinationViewController as! GalleryDetailViewController
-                if timedEvent.isGallery() {
-                    galleryDetailViewController.gallery = timedEvent.getGallery(experience)
-                } else if timedEvent.isAudioVisual() {
-                    galleryDetailViewController.audioVisual = timedEvent.getAudioVisual(experience)
-                }
+                let galleryDetailViewController = segue.destinationViewController as! GallerySceneDetailViewController
+                galleryDetailViewController.experience = experience
+                galleryDetailViewController.timedEvent = timedEvent
+                galleryDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+                galleryDetailViewController.transitioningDelegate = self
             } else if segue.identifier == SegueIdentifier.ShowShop {
                 if let cell = cell as? ShoppingSceneDetailCollectionViewCell, products = cell.theTakeProducts {
                     let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
@@ -274,14 +271,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 mapDetailViewController.transitioningDelegate = self
             }
         }
-            
-             if segue.identifier == SegueIdentifier.ShowShare {
-                let shareDetailViewController = segue.destinationViewController as! SharingViewController
-                shareDetailViewController.clip = clip
-                shareDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-                shareDetailViewController.transitioningDelegate = self
-        }
-    
     }
     
     func cellForExperience(experience: NGDMExperience) -> SceneDetailCollectionViewCell? {

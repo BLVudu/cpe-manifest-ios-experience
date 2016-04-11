@@ -51,6 +51,10 @@ class SceneDetailViewController: UIViewController {
         titleLabel.frame = CGRectMake(kViewMargin, 0, viewWidth - (2 * kViewMargin), kTitleLabelHeight)
         closeButton.frame = CGRectMake(viewWidth - kCloseButtonWidth - kViewMargin, 0, kCloseButtonWidth, kTitleLabelHeight)
         
+        sendPauseNotification()
+    }
+    
+    func sendPauseNotification() {
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
     }
     
