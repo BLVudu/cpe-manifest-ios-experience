@@ -23,7 +23,7 @@ enum VideoPlayerMode {
     case SupplementalInMovie
 }
 
-class VideoPlayerViewController: WBVideoPlayerViewController {
+class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControllerDelegate {
     
     struct StoryboardSegue {
         static let ShowShare = "showShare"
@@ -41,7 +41,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     @IBOutlet weak var commentaryView: UIView!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
-    var commentaryPopover: UIPopoverController!
+    var pop: UIPopoverController!
+    var alert: UIAlertController!
     @IBOutlet weak var countdown: UIView!
     
     private var _shouldPauseObserver: NSObjectProtocol!
@@ -59,6 +60,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         super.viewDidLoad()
         
         self.commentaryView.hidden = true
+        self.alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        self.pop = UIPopoverController.init(contentViewController: alert)
+        self.pop.delegate = self
+
+
         
         
         
@@ -178,14 +184,15 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     
     @IBAction override func share(sender: AnyObject!) {
         if UIDevice.currentDevice().orientation.isLandscape {
-            let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
             let styledTitle = NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!])
 
             alert.setValue(styledTitle, forKey: "_attributedTitle")
-            let pop = UIPopoverController.init(contentViewController: alert)
-            pop.backgroundColor = UIColor.blackColor()
-            let anchor = self.view.frame.size.height - 100
+            pop.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+            let anchor = self.view.frame.size.height - 120
             pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+                if((self.playerControlsAutoHideTimer) != nil){
+                    self.playerControlsAutoHideTimer.invalidate()
+            }
             alert.view.tintColor = UIColor.yellowColor()
         } else {
             
@@ -194,13 +201,23 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
         }
     }
     
+    func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
+        
+        if popoverController.popoverVisible{
+            self.initAutoHideTimer()
+            return true
+        }
+        
+        return false
+    }
+    
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
         if !_controlsAreLocked {
             if !_didPlayInterstitial {
                 skipInterstitial()
             }
             
-            if commentaryView.hidden {
+            if commentaryView.hidden == true && pop.popoverVisible == false{
                 super.handleTap(gestureRecognizer)
             }
         }
