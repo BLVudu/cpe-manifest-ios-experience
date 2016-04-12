@@ -14,7 +14,7 @@ class SceneDetailViewController: UIViewController {
     let kTitleLabelHeight: CGFloat = 70
     let kCloseButtonWidth: CGFloat = 110
     
-    var experience: NGDMExperience!
+    var experience: NGDMExperience?
     
     var titleLabel: UILabel!
     var closeButton: UIButton!
@@ -39,19 +39,19 @@ class SceneDetailViewController: UIViewController {
         closeButton.addTarget(self, action: #selector(SceneDetailViewController.close), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(closeButton)
         
-        if let title = experience.metadata?.title {
+        if let title = experience?.metadata?.title {
             titleLabel.text = title.uppercaseString
         }
+        
+        sendPauseNotification()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         let viewWidth = CGRectGetWidth(self.view.frame)
         titleLabel.frame = CGRectMake(kViewMargin, 0, viewWidth - (2 * kViewMargin), kTitleLabelHeight)
         closeButton.frame = CGRectMake(viewWidth - kCloseButtonWidth - kViewMargin, 0, kCloseButtonWidth, kTitleLabelHeight)
-        
-        sendPauseNotification()
     }
     
     func sendPauseNotification() {

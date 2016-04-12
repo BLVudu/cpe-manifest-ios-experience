@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
+class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     struct SegueIdentifier {
         static let ShowGallery = "showGallery"
@@ -49,14 +49,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserverForName("showShare", object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            
             if let strongSelf = self, userInfo = notification.userInfo {
                 strongSelf.clip = userInfo["clip"] as! Clip!
                 strongSelf.performSegueWithIdentifier(SegueIdentifier.ShowShare, sender: nil)
-                
             }
-
         }
+        
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.alpha = 0
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
@@ -246,29 +244,21 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         if segue.identifier == SegueIdentifier.ShowShare {
             let shareDetailViewController = segue.destinationViewController as! SharingViewController
             shareDetailViewController.clip = clip
-            shareDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            shareDetailViewController.transitioningDelegate = self
         } else if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if segue.identifier == SegueIdentifier.ShowGallery {
                 let galleryDetailViewController = segue.destinationViewController as! GallerySceneDetailViewController
                 galleryDetailViewController.experience = experience
                 galleryDetailViewController.timedEvent = timedEvent
-                galleryDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-                galleryDetailViewController.transitioningDelegate = self
             } else if segue.identifier == SegueIdentifier.ShowShop {
                 if let cell = cell as? ShoppingSceneDetailCollectionViewCell, products = cell.theTakeProducts {
                     let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
                     shopDetailViewController.experience = experience
                     shopDetailViewController.products = products
-                    shopDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-                    shopDetailViewController.transitioningDelegate = self
                 }
             } else if segue.identifier == SegueIdentifier.ShowMap {
                 let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
                 mapDetailViewController.experience = experience
                 mapDetailViewController.timedEvent = timedEvent
-                mapDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-                mapDetailViewController.transitioningDelegate = self
             }
         }
     }
@@ -287,10 +277,4 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         return nil
     }
     
-    // MARK: UIViewControllerTransitioningDelegate
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        return InteriorExperiencePresentationController(presentedViewController: presented, presentingViewController: presentingViewController!)
-    }
-    
-
 }

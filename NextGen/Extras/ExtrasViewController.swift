@@ -12,12 +12,16 @@ import AVFoundation
 
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
-    let ExtrasVideoGallerySegueIdentifier = "ExtrasVideoGallerySegue"
-    let ExtrasImageGalleryListSegueIdentifier = "ExtrasImageGalleryListSegue"
-    let ExtrasShoppingSegueIdentifier = "ExtrasShoppingSegue"
+    struct SegueIdentifier {
+        static let ShowTalent = "ShowTalentSegueIdentifier"
+        static let ShowVideoGallery = "ExtrasVideoGallerySegue"
+        static let ShowImageGallery = "ExtrasImageGalleryListSegue"
+        static let ShowShopping = "ExtrasShoppingSegue"
+    }
     
     @IBOutlet weak var talentTableView: UITableView!
     @IBOutlet weak var talentDetailView: UIView!
+    private var _talentDetailViewController: TalentDetailViewController?
     @IBOutlet var extrasCollectionView: UICollectionView!
     
     var selectedIndexPath: NSIndexPath?
@@ -51,28 +55,32 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     
     // MARK: Talent Details
-    func talentDetailViewController() -> TalentDetailViewController? {
-        for viewController in self.childViewControllers {
-            if viewController is TalentDetailViewController {
-                return viewController as? TalentDetailViewController
-            }
-        }
-        
-        return nil
-    }
-    
     func showTalentDetailView() {
-        if talentDetailView.hidden {
-            talentDetailView.alpha = 0
-            talentDetailView.hidden = false
-            showBackButton()
-            
-            UIView.animateWithDuration(0.25, animations: {
-                self.extrasCollectionView.alpha = 0
-                self.talentDetailView.alpha = 1
-            }, completion: { (Bool) -> Void in
-                self.extrasCollectionView.hidden = true
-            })
+        if selectedIndexPath != nil {
+            if let cell = talentTableView.cellForRowAtIndexPath(selectedIndexPath!) as? TalentTableViewCell, talent = cell.talent {
+                if _talentDetailViewController != nil {
+                    _talentDetailViewController!.loadTalent(talent)
+                } else {
+                    if let talentDetailViewController = UIStoryboard.getMainStoryboardViewController(TalentDetailViewController) as? TalentDetailViewController {
+                        talentDetailViewController.talent = talent
+                        
+                        talentDetailViewController.view.frame = talentDetailView.bounds
+                        talentDetailView.addSubview(talentDetailViewController.view)
+                        self.addChildViewController(talentDetailViewController)
+                        talentDetailViewController.didMoveToParentViewController(self)
+                        
+                        talentDetailView.alpha = 0
+                        talentDetailView.hidden = false
+                        showBackButton()
+                        
+                        UIView.animateWithDuration(0.25, animations: {
+                            self.talentDetailView.alpha = 1
+                        })
+                        
+                        _talentDetailViewController = talentDetailViewController
+                    }
+                }
+            }
         }
     }
     
@@ -82,15 +90,16 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
             selectedIndexPath = nil
         }
         
-        extrasCollectionView.hidden = false
-        extrasCollectionView.alpha = 0
         showHomeButton()
         
         UIView.animateWithDuration(0.25, animations: {
-            self.extrasCollectionView.alpha = 1
             self.talentDetailView.alpha = 0
         }, completion: { (Bool) -> Void in
             self.talentDetailView.hidden = true
+            self._talentDetailViewController?.willMoveToParentViewController(nil)
+            self._talentDetailViewController?.view.removeFromSuperview()
+            self._talentDetailViewController?.removeFromParentViewController()
+            self._talentDetailViewController = nil
         })
     }
     
@@ -119,7 +128,6 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndexPath = indexPath
-        talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
         showTalentDetailView()
     }
     
@@ -145,11 +153,11 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
         if experience.isGalleryList() {
-            self.performSegueWithIdentifier(ExtrasImageGalleryListSegueIdentifier, sender: experience)
+            self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
         } else if experience.isShopping() {
-            self.performSegueWithIdentifier(ExtrasShoppingSegueIdentifier, sender: experience)
+            self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
         } else {
-            self.performSegueWithIdentifier(ExtrasVideoGallerySegueIdentifier, sender: experience)
+            self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
         }
     }
     
@@ -167,12 +175,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if let experience = sender as? NGDMExperience {
             if let viewController = segue.destinationViewController as? ExtrasImageGalleryListCollectionViewController {
                 viewController.experience = experience
-                viewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-                viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             } else if let viewController = segue.destinationViewController as? ExtrasExperienceViewController {
                 viewController.experience = experience
-                viewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-                viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             }
         }
     }

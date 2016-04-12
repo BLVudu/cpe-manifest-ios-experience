@@ -8,15 +8,16 @@
 
 import UIKit
 
-class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TalentDetailViewPresenter {
+class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
+    
+    struct SegueIdentifier {
+        static let ShowTalent = "ShowTalentSegueIdentifier"
+    }
     
     @IBOutlet weak var talentTableView: TalentTableView!
-    @IBOutlet weak var talentDetailView: UIView!
-    @IBOutlet weak var sceneDetailView: UIView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     private var _didChangeTimeObserver: NSObjectProtocol!
-    private var _selectedIndexPath: NSIndexPath?
     private var _currentTime = -1.0
     
     deinit {
@@ -32,55 +33,8 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
                 strongSelf._currentTime = time
-                //strongSelf.talentTableView.reloadData()
             }
         }
-    }
-    
-    func talentDetailViewController() -> TalentDetailViewController? {
-        for viewController in self.childViewControllers {
-            if viewController is TalentDetailViewController {
-                return viewController as? TalentDetailViewController
-            }
-        }
-        
-        return nil
-    }
-    
-    func showTalentDetailView() {
-        if talentDetailView.hidden {
-            talentDetailView.alpha = 0
-            talentDetailView.hidden = false
-            
-            UIView.animateWithDuration(0.25, animations: {
-                self.talentDetailView.alpha = 1
-                self.sceneDetailView.alpha = 0
-                self.talentTableView.alpha = 0
-            }, completion: { (Bool) -> Void in
-                self.sceneDetailView.hidden = true
-                self.talentTableView.hidden = true
-            })
-        }
-    }
-    
-    func hideTalentDetailView() {
-        if let indexPath = _selectedIndexPath {
-            talentTableView.deselectRowAtIndexPath(indexPath, animated: true)
-            _selectedIndexPath = nil
-        }
-        
-        sceneDetailView.alpha = 0
-        sceneDetailView.hidden = false
-        talentTableView.alpha = 0
-        talentTableView.hidden = false
-        
-        UIView.animateWithDuration(0.25, animations: {
-            self.talentDetailView.alpha = 0
-            self.sceneDetailView.alpha = 1
-            self.talentTableView.alpha = 1
-        }, completion: { (Bool) -> Void in
-            self.talentDetailView.hidden = true
-        })
     }
     
     // MARK: UITableViewDataSource
@@ -97,33 +51,36 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "ACTORS"
+        return String.localize("label.actors").uppercaseString
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textAlignment = NSTextAlignment.Center
+        header.textLabel?.font = UIFont(name: "Roboto Condensed", size: 18)
         header.textLabel?.textColor = UIColor.whiteColor()
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if indexPath == _selectedIndexPath {
-            hideTalentDetailView()
-            return nil
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TalentTableViewCell, talent = cell.talent {
+            self.performSegueWithIdentifier(SegueIdentifier.ShowTalent, sender: talent)
         }
         
-        return indexPath
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        _selectedIndexPath = indexPath
-        talentDetailViewController()?.talent = (tableView.cellForRowAtIndexPath(indexPath) as! TalentTableViewCell).talent
-        showTalentDetailView()
-    }
-    
-    // MARK: TalentDetailViewPresenter
-    func talentDetailViewShouldClose() {
-        hideTalentDetailView()
+    // MARK: Storyboard Methods
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SegueIdentifier.ShowTalent {
+            let talentDetailViewController = segue.destinationViewController as! TalentDetailViewController
+            talentDetailViewController.talent = sender as! Talent
+            talentDetailViewController.mode = TalentDetailMode.Synced
+        }
     }
 
 }
