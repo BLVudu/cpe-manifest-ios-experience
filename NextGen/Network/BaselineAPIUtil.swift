@@ -8,7 +8,7 @@
 
 import Foundation
 
-let kBaselineIdentifierNamespace = "baseline"
+let kBaselineIdentifierNamespace = "baselineapi.com"
 
 class BaselineAPIUtil: APIUtil {
     

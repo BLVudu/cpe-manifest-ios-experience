@@ -24,16 +24,20 @@ class ConfigManager {
             do {
                 let configData = try NSData(contentsOfURL: NSURL(fileURLWithPath: configDataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
                 if let configJSON = try NSJSONSerialization.JSONObjectWithData(configData, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
-                    if let theTakeAPIKey = configJSON["thetake_api_key"] as? String {
-                        TheTakeAPIUtil.sharedInstance.apiKey = theTakeAPIKey
-                        TheTakeAPIUtil.sharedInstance.prefetchProductFrames(start: 0)
-                        TheTakeAPIUtil.sharedInstance.prefetchProductCategories()
-                        self.hasTheTakeAPI = true
+                    if TheTakeAPIUtil.sharedInstance.mediaId != nil {
+                        if let theTakeAPIKey = configJSON["thetake_api_key"] as? String {
+                            TheTakeAPIUtil.sharedInstance.apiKey = theTakeAPIKey
+                            TheTakeAPIUtil.sharedInstance.prefetchProductFrames(start: 0)
+                            TheTakeAPIUtil.sharedInstance.prefetchProductCategories()
+                            self.hasTheTakeAPI = true
+                        }
                     }
                     
-                    if let baselineAPIKey = configJSON["baseline_api_key"] as? String {
-                        BaselineAPIUtil.sharedInstance.apiKey = baselineAPIKey
-                        self.hasBaselineAPI = true
+                    if BaselineAPIUtil.sharedInstance.projectId != nil {
+                        if let baselineAPIKey = configJSON["baseline_api_key"] as? String {
+                            BaselineAPIUtil.sharedInstance.apiKey = baselineAPIKey
+                            self.hasBaselineAPI = true
+                        }
                     }
                     
                     if let googleMapsAPIKey = configJSON["google_maps_api_key"] as? String {

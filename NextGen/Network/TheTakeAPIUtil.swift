@@ -8,7 +8,7 @@
 
 import Foundation
 
-let kTheTakeIdentifierNamespace = "thetake"
+let kTheTakeIdentifierNamespace = "thetake.com"
 
 class TheTakeAPIUtil: APIUtil {
     
