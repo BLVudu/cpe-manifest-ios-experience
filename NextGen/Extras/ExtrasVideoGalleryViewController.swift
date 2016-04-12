@@ -101,7 +101,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         let runtime = thisExperience.videoRuntime
         if runtime > 0 {
             mediaRuntimeLabel.hidden = false
-            mediaRuntimeLabel.text = "Runtime: " + runtime.timeString()
+            mediaRuntimeLabel.text = String.localize("label.runtime", variables: ["runtime": runtime.timeString()])
         } else {
             mediaRuntimeLabel.hidden = true
         }
@@ -132,7 +132,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
-        cell.runtimeLabel.text = "WATCHED"
+        cell.runtimeLabel.text = String.localize("label.watched")
     }
     
     // MARK: Actions

@@ -58,7 +58,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     var currentProduct: TheTakeProduct? {
         didSet {
             productMatchIcon.backgroundColor = currentProduct != nil ? (currentProduct!.exactMatch ? UIColor(netHex: 0x2c97de) : UIColor(netHex: 0xf1c115)) : UIColor.clearColor()
-            productMatchLabel.text = currentProduct != nil ? (currentProduct!.exactMatch ? "Exact match" : "Close match") : nil
+            productMatchLabel.text = currentProduct != nil ? (currentProduct!.exactMatch ? String.localize("shopping.exact_match") : String.localize("shopping.close_match")) : nil
             productBrandLabel.text = currentProduct?.brand
             productNameLabel.text = currentProduct?.name
             productPriceLabel.text = currentProduct?.price

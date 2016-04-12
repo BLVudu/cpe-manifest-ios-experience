@@ -179,7 +179,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
     @IBAction override func share(sender: AnyObject!) {
         if UIDevice.currentDevice().orientation.isLandscape {
             let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            let styledTitle = NSAttributedString(string: "Rotate device to share clip", attributes: [NSForegroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!])
+            let styledTitle = NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!])
 
             alert.setValue(styledTitle, forKey: "_attributedTitle")
             let pop = UIPopoverController.init(contentViewController: alert)
@@ -200,12 +200,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController {
                 skipInterstitial()
             }
             
-            if commentaryView.hidden == true{
-            super.handleTap(gestureRecognizer)
-
+            if commentaryView.hidden {
+                super.handleTap(gestureRecognizer)
             }
         }
-    
     }
     
 }

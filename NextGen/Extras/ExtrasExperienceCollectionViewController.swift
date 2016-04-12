@@ -34,10 +34,10 @@ class ExtrasExperienceCollectionViewController: UICollectionViewController {
         self.view.addSubview(backgroundImageView)
         self.view.sendSubviewToBack(backgroundImageView)
         
-        _homeButton = headerButton("Home", imageName: "Home")
+        _homeButton = headerButton(String.localize("label.home"), imageName: "Home")
         self.view.addSubview(_homeButton)
         
-        _backButton = headerButton("Back", imageName: "Back Nav")
+        _backButton = headerButton(String.localize("label.back"), imageName: "Back Nav")
         self.view.addSubview(_backButton)
         
         showBackButton()

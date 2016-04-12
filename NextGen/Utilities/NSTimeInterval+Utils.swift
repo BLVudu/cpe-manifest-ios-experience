@@ -33,15 +33,15 @@ extension NSTimeInterval {
         
         var timeStrings = [String]()
         if hours > 0 {
-            timeStrings.append(String(hours) + " hr")
+            timeStrings.append(String.localize("label.time.hours", variables: ["count": String(hours)]))
         }
         
         if minutes > 0 {
-            timeStrings.append(String(minutes) + " min")
+            timeStrings.append(String.localize("label.time.minutes", variables: ["count": String(minutes)]))
         }
         
         if seconds > 0 {
-            timeStrings.append(String(seconds) + " sec")
+            timeStrings.append(String.localize("label.time.seconds", variables: ["count": String(seconds)]))
         }
         
         return timeStrings.joinWithSeparator(" ")

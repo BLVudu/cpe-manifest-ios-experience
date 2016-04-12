@@ -28,7 +28,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         super.viewDidLoad()
         
         self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
-        self.extrasCollectionView.registerNib(UINib(nibName: "TitledImageCell", bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
+        self.extrasCollectionView.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
         self.talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         
         self.experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience

@@ -1,0 +1,29 @@
+// General labels
+"label.yes" = "Да";
+"label.no" = "Нет";
+"label.close" = "Закрыть";
+"label.home" = "Заглавная";
+"label.back" = "Назад";
+
+// Video labels
+"label.runtime" = "Время счета: %{runtime}";
+"label.watched" = "СМОТРЕЛ";
+"label.playing" = "ИГРАЕТ";
+"label.time.hours" = "%{count} час";
+"label.time.minutes" = "%{count} мин";
+"label.time.seconds" = "%{count} сек";
+
+// Menu labels
+"label.all" = "Всё";
+
+// Info text
+"info.leaving_app.title" = "Leaving App";
+"info.leaving_app.message" = "Following this link will exit the app and launch your browser. Would you like to continue?";
+
+// Clip & Share"
+"clipshare.rotate" = "Вращайтесь устройство чтобы делиться клип";
+"clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
+
+// Shopping
+"shopping.exact_match" = "Exact match";
+"shopping.close_match" = "Close match";

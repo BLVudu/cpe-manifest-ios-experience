@@ -46,6 +46,19 @@ extension String {
         return 0
     }
     
+    static func localize(key: String) -> String {
+        return NSLocalizedString(key, comment: "")
+    }
+    
+    static func localize(key: String, variables: [String: String]) -> String {
+        var localizedString = String.localize(key)
+        for (variableName, variableValue) in variables {
+            localizedString = localizedString.stringByReplacingOccurrencesOfString("%{" + variableName + "}", withString: variableValue)
+        }
+        
+        return localizedString
+    }
+    
     subscript (i: Int) -> Character {
         return self[self.startIndex.advancedBy(i)]
     }

@@ -31,7 +31,7 @@ class SceneDetailViewController: UIViewController {
         
         closeButton = UIButton(type: UIButtonType.Custom)
         closeButton.titleLabel?.font = UIFont(name: "Roboto Condensed", size: 17)!
-        closeButton.setTitle("Close", forState: UIControlState.Normal)
+        closeButton.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
         closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
         closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
         closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)

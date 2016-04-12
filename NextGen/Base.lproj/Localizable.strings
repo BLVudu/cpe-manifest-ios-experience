@@ -1,0 +1,29 @@
+// General labels
+"label.yes" = "Yes";
+"label.no" = "No";
+"label.close" = "Close";
+"label.home" = "Home";
+"label.back" = "Back";
+
+// Video labels
+"label.runtime" = "Runtime: %{runtime}";
+"label.watched" = "WATCHED";
+"label.playing" = "PLAYING";
+"label.time.hours" = "%{count} hr";
+"label.time.minutes" = "%{count} min";
+"label.time.seconds" = "%{count} sec";
+
+// Menu labels
+"label.all" = "All";
+
+// Info text
+"info.leaving_app.title" = "Leaving App";
+"info.leaving_app.message" = "Following this link will exit the app and launch your browser. Would you like to continue?";
+
+// Clip & Share"
+"clipshare.rotate" = "Rotate device to share clip";
+"clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
+
+// Shopping
+"shopping.exact_match" = "Exact match";
+"shopping.close_match" = "Close match";

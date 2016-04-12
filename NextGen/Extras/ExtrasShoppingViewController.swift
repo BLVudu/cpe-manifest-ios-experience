@@ -29,7 +29,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
             
             if let children = category.children {
                 if children.count > 1 {
-                    var rows = [[MenuItem.Keys.Title: "All", MenuItem.Keys.Value: String(category.id)]]
+                    var rows = [[MenuItem.Keys.Title: String.localize("label.all"), MenuItem.Keys.Value: String(category.id)]]
                     for child in children {
                         rows.append([MenuItem.Keys.Title: child.name, MenuItem.Keys.Value: String(child.id)])
                     }
