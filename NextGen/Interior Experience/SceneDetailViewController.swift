@@ -39,7 +39,9 @@ class SceneDetailViewController: UIViewController {
         closeButton.addTarget(self, action: #selector(SceneDetailViewController.close), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(closeButton)
         
-        if let title = experience?.metadata?.title {
+        if let title = self.title {
+            titleLabel.text = title.uppercaseString
+        } else if let title = experience?.metadata?.title {
             titleLabel.text = title.uppercaseString
         }
     }

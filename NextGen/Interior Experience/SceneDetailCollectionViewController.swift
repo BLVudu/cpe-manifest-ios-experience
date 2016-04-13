@@ -244,6 +244,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.ShowShare {
             let shareDetailViewController = segue.destinationViewController as! SharingViewController
+            shareDetailViewController.title = String.localize("clipshare.title");
             shareDetailViewController.clip = clip
         } else if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if segue.identifier == SegueIdentifier.ShowGallery {

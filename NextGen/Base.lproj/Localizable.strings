@@ -21,7 +21,11 @@
 "info.leaving_app.title" = "Leaving App";
 "info.leaving_app.message" = "Following this link will exit the app and launch your browser. Would you like to continue?";
 
+// Talent Detail
+"talentdetail.title" = "Actor";
+
 // Clip & Share"
+"clipshare.title" = "Share This Clip";
 "clipshare.rotate" = "Rotate device to share clip";
 "clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
 

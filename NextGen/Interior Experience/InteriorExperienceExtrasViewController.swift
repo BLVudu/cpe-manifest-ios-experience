@@ -78,6 +78,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.ShowTalent {
             let talentDetailViewController = segue.destinationViewController as! TalentDetailViewController
+            talentDetailViewController.title = String.localize("talentdetail.title")
             talentDetailViewController.talent = sender as! Talent
             talentDetailViewController.mode = TalentDetailMode.Synced
         }

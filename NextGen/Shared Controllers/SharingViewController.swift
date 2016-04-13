@@ -8,10 +8,7 @@
 
 import UIKit
 
-
-
-class SharingViewController: UIViewController{
-    
+class SharingViewController: SceneDetailViewController {
     
     @IBOutlet weak var player: UIView!
     
@@ -20,13 +17,14 @@ class SharingViewController: UIViewController{
     @IBOutlet weak var clipName: UILabel!
     @IBOutlet weak var clipThumbnailView: UIImageView!
     
+    private var _durationDidLoadObserver: NSObjectProtocol!
+    
     var clipURL: NSURL!
     var clipThumbnail: NSURL!
     var clipCaption: String!
     
+    private var _shareableURL: NSURL?
     
-    
-    var shareContent: NSURL!
     var clip: Clip? = nil {
         didSet {
             clipURL = clip?.url
@@ -36,48 +34,21 @@ class SharingViewController: UIViewController{
         }
     }
     
-    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(_durationDidLoadObserver)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         clipName.text = clip?.text
         clipThumbnailView.setImageWithURL(clipThumbnail)
-        if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
-            if let player = videoPlayerViewController.player {
-                player.removeAllItems()
+        
+        _durationDidLoadObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+            if let strongSelf = self, userInfo = notification.userInfo, duration = userInfo["duration"] as? NSTimeInterval {
+                strongSelf.clipDuration.text = duration.timeString()
             }
-            
-            videoPlayerViewController.curIndex = 0
-            videoPlayerViewController.indexMax = 1
-            videoPlayerViewController.playerControlsVisible = false
-            videoPlayerViewController.lockTopToolbar = true
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            
-            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemReadyToPlayNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-                
-                videoPlayerViewController.pauseVideo()
-                
-                
-            }
-            
-            NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-                
-                if let userInfo = notification.userInfo{
-                    let duration = userInfo["duration"] as! NSTimeInterval
-                    
-                    self.clipDuration.text = duration.timeString()
-                }
-            }
-            
-            self.shareContent = videoURL
-            
-           
-            
         }
-
-        
-        
     }
 
     func videoPlayerViewController() -> VideoPlayerViewController? {
@@ -89,37 +60,27 @@ class SharingViewController: UIViewController{
         
         return nil
     }
-
     
-
+    // MARK: Actions
     @IBAction func playClip(sender: AnyObject) {
-        
         self.clipThumbnailView.hidden = true
         self.playButton.hidden = true
         
-        videoPlayerViewController()?.playVideo()
-        
-        
+        if let videoURL = clip?.url, videoPlayerViewController = videoPlayerViewController() {
+            videoPlayerViewController.curIndex = 0
+            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
+            videoPlayerViewController.playVideoWithURL(videoURL)
+            _shareableURL = videoURL
+        }
     }
-
     
     @IBAction func shareClip(sender: AnyObject) {
-        
-        /*
-        let activityViewController = UIActivityViewController(activityItems: ["Check out this clip from Man of Steel \(self.shareContent)"], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = sender as? UIView
-        activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard]
-        self.presentViewController(activityViewController, animated: true, completion: nil)
-        */
-        
+        if let url = _shareableURL {
+            let activityViewController = UIActivityViewController(activityItems: [String.localize("clipshare.message", variables: ["movie_name": "Man of Steel", "clip_link": url.absoluteString])], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = sender as? UIView
+            self.presentViewController(activityViewController, animated: true, completion: nil)
+        }
     }
-
-    
-
-    @IBAction func close(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
     
 }
