@@ -71,6 +71,7 @@
 		70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */; };
 		70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */; };
 		70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */; };
+		70460C551CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */; };
 		7046BA911CBDAF8B00EF9612 /* ExtrasPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */; };
 		70517E7B1CB715EF008556EC /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E781CB715EF008556EC /* MapDetailViewController.swift */; };
 		70517E7C1CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */; };
@@ -420,6 +421,7 @@
 		70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextGroup.swift; sourceTree = "<group>"; };
 		70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextObject.swift; sourceTree = "<group>"; };
 		70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAudioVisual.swift; sourceTree = "<group>"; };
+		70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeTextSceneDetailViewController.swift; sourceTree = "<group>"; };
 		7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasPresentationController.swift; sourceTree = "<group>"; };
 		70517E781CB715EF008556EC /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1158,6 +1160,7 @@
 				490213451C850A0100071552 /* GallerySceneDetailViewController.swift */,
 				707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */,
 				49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */,
+				70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */,
 				70FECF761C656707005B1A44 /* SceneDetailCollectionViewController.swift */,
 				70C830BA1CB4823100F9E2D6 /* SceneDetailViewController.swift */,
 				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
@@ -1757,6 +1760,7 @@
 				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
 				7071C5181C6BCBF6006F4275 /* NGENVPairType.swift in Sources */,
 				7071C4EC1C6BCBF6006F4275 /* NGEFictionalStart.swift in Sources */,
+				70460C551CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift in Sources */,
 				7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */,
 				7071C4C31C6BCBF6006F4275 /* NGEDigitalAssetAudioDataType.swift in Sources */,
 				70DF2F921CA5FBBC007AD2A0 /* MenuedViewController.swift in Sources */,

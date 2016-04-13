@@ -16,6 +16,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ShowShop = "showShop"
         static let ShowMap = "showMap"
         static let ShowShare = "showShare"
+        static let ShowLargeText = "ShowLargeTextSegueIdentifier"
     }
     
     struct Constants {
@@ -234,6 +235,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 }
             } else if timedEvent.isLocation() {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: cell)
+            } else if timedEvent.isTextItem() {
+                self.performSegueWithIdentifier(SegueIdentifier.ShowLargeText, sender: cell)
             }
         }
  
@@ -259,6 +262,10 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
                 mapDetailViewController.experience = experience
                 mapDetailViewController.timedEvent = timedEvent
+            } else if segue.identifier == SegueIdentifier.ShowLargeText {
+                let largeTextDetailViewController = segue.destinationViewController as! LargeTextSceneDetailViewController
+                largeTextDetailViewController.experience = experience
+                largeTextDetailViewController.timedEvent = timedEvent
             }
         }
     }
