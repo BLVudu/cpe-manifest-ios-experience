@@ -41,7 +41,7 @@ class MenuItemCell: UITableViewCell {
     }
     
     func updateCellStyle() {
-        titleLabel.textColor = (self.selected ? UIColor(netHex: 0xffcd14) : UIColor.whiteColor())
+        titleLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
     }
 
 }

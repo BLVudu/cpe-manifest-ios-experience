@@ -55,8 +55,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         
         commentaryView.hidden = true
         let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!]), forKey: "_attributedTitle")
-        alertController.view.tintColor = UIColor.yellowColor()
+        alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!]), forKey: "_attributedTitle")
+        alertController.view.tintColor = UIColor.themePrimaryColor()
         _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
         _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         _sharePopoverController.delegate = self

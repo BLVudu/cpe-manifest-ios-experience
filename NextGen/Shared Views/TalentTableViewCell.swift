@@ -81,12 +81,12 @@ class TalentTableViewCell: UITableViewCell {
         if selected {
             talentImageView.layer.borderWidth = 2
             talentImageView.layer.borderColor = UIColor.whiteColor().CGColor
-            nameLabel?.textColor = UIColor(netHex: 0xffcd14)
-            roleLabel?.textColor = UIColor(netHex: 0xffcd14)
+            nameLabel?.textColor = UIColor.themePrimaryColor()
+            roleLabel?.textColor = UIColor.themePrimaryColor()
         } else {
             talentImageView.layer.borderWidth = 0
             nameLabel?.textColor = UIColor.whiteColor()
-            roleLabel?.textColor = UIColor(netHex: 0x999999)
+            roleLabel?.textColor = UIColor.themeLightGreyColor()
         }
     }
 

@@ -22,4 +22,12 @@ extension UIColor {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
     
+    static func themePrimaryColor() -> UIColor {
+        return UIColor(netHex: 0xffcd14)
+    }
+    
+    static func themeLightGreyColor() -> UIColor {
+        return UIColor(netHex: 0x999999)
+    }
+    
 }

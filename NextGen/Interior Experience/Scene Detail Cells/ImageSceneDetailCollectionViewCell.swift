@@ -10,7 +10,8 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak private var _imageView: UIImageView!
+    @IBOutlet weak private var _playButton: UIButton!
     
     private var _setImageSessionDataTask: NSURLSessionDataTask?
     
@@ -18,11 +19,11 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         didSet {
             if let url = _imageURL {
                 if url != oldValue {
-                    _setImageSessionDataTask = imageView.setImageWithURL(url)
+                    _setImageSessionDataTask = _imageView.setImageWithURL(url)
                 }
             } else {
-                imageView.image = UIImage(named: "MOSDefault")
-                imageView.backgroundColor = UIColor.clearColor()
+                _imageView.image = UIImage(named: "MOSDefault")
+                _imageView.backgroundColor = UIColor.clearColor()
             }
         }
     }
@@ -32,8 +33,10 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         
         if let timedEvent = timedEvent, experience = experience {
             _imageURL = timedEvent.getImageURL(experience)
+            _playButton.hidden = !timedEvent.isAudioVisual()
         } else {
             _imageURL = nil
+            _playButton.hidden = true
         }
     }
     
@@ -44,12 +47,15 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
             task.cancel()
             _setImageSessionDataTask = nil
         }
+        
+        _imageURL = nil
+        _playButton.hidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        _imageView.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
 }
