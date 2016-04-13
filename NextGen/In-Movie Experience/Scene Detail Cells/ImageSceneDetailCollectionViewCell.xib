@@ -51,7 +51,7 @@
                             <constraint firstAttribute="width" constant="45" id="Fi0-Ie-R6T"/>
                             <constraint firstAttribute="height" constant="45" id="JbQ-Pt-8UH"/>
                         </constraints>
-                        <state key="normal" image="Play_Button.png"/>
+                        <state key="normal" image="BlackPlayButton"/>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -82,6 +82,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Play_Button.png" width="130" height="130"/>
+        <image name="BlackPlayButton" width="65" height="65"/>
     </resources>
 </document>

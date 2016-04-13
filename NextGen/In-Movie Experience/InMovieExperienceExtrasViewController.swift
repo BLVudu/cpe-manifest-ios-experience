@@ -1,5 +1,5 @@
 //
-//  InteriorExperienceViewController.swift
+//  InMovieExperienceViewController.swift
 //  NextGen
 //
 //  Created by Alec Ananian on 1/8/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
+class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
     
     struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"

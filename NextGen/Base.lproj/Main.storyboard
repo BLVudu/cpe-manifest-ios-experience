@@ -149,10 +149,10 @@
             </objects>
             <point key="canvasLocation" x="922" y="-1498"/>
         </scene>
-        <!--Interior Experience View Controller-->
+        <!--In Movie Experience View Controller-->
         <scene sceneID="WtI-vT-Rth">
             <objects>
-                <viewController id="UvH-hR-t5e" customClass="InteriorExperienceViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UvH-hR-t5e" customClass="InMovieExperienceViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s8l-t7-E5d"/>
                         <viewControllerLayoutGuide type="bottom" id="n6B-Cb-k4k"/>
@@ -200,10 +200,10 @@
             </objects>
             <point key="canvasLocation" x="-742" y="-643"/>
         </scene>
-        <!--Interior Experience Extras View Controller-->
+        <!--In Movie Experience Extras View Controller-->
         <scene sceneID="BVC-ou-VD6">
             <objects>
-                <viewController id="2KS-OB-0Ev" customClass="InteriorExperienceExtrasViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2KS-OB-0Ev" customClass="InMovieExperienceExtrasViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FRX-EG-0Va"/>
                         <viewControllerLayoutGuide type="bottom" id="6Aw-WG-9Xa"/>
@@ -212,7 +212,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interior_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="iwP-Bl-F5c">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MOSIMEBackground" translatesAutoresizingMaskIntoConstraints="NO" id="iwP-Bl-F5c">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="140" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-Pl-Rxu" customClass="TalentTableView" customModule="NextGen" customModuleProvider="target">
@@ -790,7 +790,7 @@
                                     <constraint firstAttribute="width" constant="70" id="PqZ-Aa-F0S"/>
                                     <constraint firstAttribute="height" constant="70" id="VQ5-qY-XMc"/>
                                 </constraints>
-                                <state key="normal" image="Play_Button.png"/>
+                                <state key="normal" image="BlackPlayButton"/>
                                 <connections>
                                     <action selector="playFirstItem:" destination="wpZ-Jt-DDC" eventType="touchUpInside" id="bS6-1E-lEx"/>
                                 </connections>
@@ -1473,7 +1473,7 @@
                                     <constraint firstAttribute="width" constant="50" id="8xa-Dt-RX2"/>
                                     <constraint firstAttribute="height" constant="50" id="R1n-0R-uZD"/>
                                 </constraints>
-                                <state key="normal" image="Play_Button.png"/>
+                                <state key="normal" image="BlackPlayButton"/>
                                 <connections>
                                     <action selector="playClip:" destination="rnf-6M-6TQ" eventType="touchUpInside" id="0ze-li-Ys7"/>
                                 </connections>
@@ -1889,7 +1889,7 @@
                                                 <color key="textColor" red="0.67843137249999996" green="0.67843137249999996" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thetake-logo-nav.png" translatesAutoresizingMaskIntoConstraints="NO" id="VMg-t9-VNl" userLabel="TheTake Logo">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TheTakeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="VMg-t9-VNl" userLabel="TheTake Logo">
                                                 <rect key="frame" x="75" y="3" width="52" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="52" id="9DJ-9I-rVg"/>
@@ -2121,26 +2121,26 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BlackPlayButton" width="65" height="65"/>
         <image name="Close" width="35" height="35"/>
         <image name="Commentary" width="17" height="17"/>
         <image name="Facebook Icon" width="75" height="75"/>
         <image name="Home" width="18" height="18"/>
         <image name="MOSBackground" width="1024" height="768"/>
         <image name="MOSExtras" width="262" height="100"/>
+        <image name="MOSIMEBackground" width="2048" height="1427"/>
         <image name="MOSLogo" width="461" height="81"/>
         <image name="MOSPlay" width="490" height="133"/>
         <image name="Maximize" width="25" height="25"/>
         <image name="Maximize Highlighted" width="25" height="25"/>
         <image name="Pause Button" width="25" height="25"/>
         <image name="Play Button" width="25" height="25"/>
-        <image name="Play_Button.png" width="130" height="130"/>
         <image name="Share" width="25" height="25"/>
         <image name="Share Highlighted" width="25" height="25"/>
+        <image name="TheTakeLogo" width="100" height="25"/>
         <image name="Twitter Icon" width="75" height="75"/>
-        <image name="interior_bg.jpg" width="2048" height="1427"/>
-        <image name="thetake-logo-nav.png" width="100" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vcm-iL-9qf"/>
+        <segue reference="dhm-Xt-tFh"/>
     </inferredMetricsTieBreakers>
 </document>

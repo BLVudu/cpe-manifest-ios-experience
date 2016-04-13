@@ -1,5 +1,5 @@
 //
-//  InteriorExperienceViewController.swift
+//  InMovieExperienceViewController.swift
 //  NextGen
 //
 //  Created by Alec Ananian on 1/12/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InteriorExperienceViewController: UIViewController {
+class InMovieExperienceViewController: UIViewController {
     
     struct SegueIdentifier {
         static let PlayerViewController = "PlayerViewControllerSegue"

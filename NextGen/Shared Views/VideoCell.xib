@@ -36,7 +36,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play_Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="drI-l5-Cju">
+                    <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackPlayButton" translatesAutoresizingMaskIntoConstraints="NO" id="drI-l5-Cju">
                         <rect key="frame" x="138" y="64" width="45" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="TWT-cm-drs"/>
@@ -78,6 +78,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Play_Button.png" width="130" height="130"/>
+        <image name="BlackPlayButton" width="65" height="65"/>
     </resources>
 </document>
