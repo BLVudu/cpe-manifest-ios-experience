@@ -84,6 +84,10 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                         }
                     }
                 }
+                
+                if self.twitterButton.hidden {
+                    self.twitterButton.removeFromSuperview()
+                }
             })
         })
         

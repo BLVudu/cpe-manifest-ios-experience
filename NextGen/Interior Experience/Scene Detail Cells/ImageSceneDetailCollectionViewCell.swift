@@ -12,6 +12,7 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     @IBOutlet weak private var _imageView: UIImageView!
     @IBOutlet weak private var _playButton: UIButton!
+    @IBOutlet weak private var _extraDescriptionLabel: UILabel!
     
     private var _setImageSessionDataTask: NSURLSessionDataTask?
     

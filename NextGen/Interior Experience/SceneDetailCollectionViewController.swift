@@ -205,9 +205,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)
-        let isShopping = (cell != nil && cell!.isKindOfClass(ShoppingSceneDetailCollectionViewCell))
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), (isShopping ? 245 : 225))
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), 220)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
