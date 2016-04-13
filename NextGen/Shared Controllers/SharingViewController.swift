@@ -16,6 +16,7 @@ class SharingViewController: SceneDetailViewController {
     @IBOutlet weak var clipDurationLabel: UILabel!
     @IBOutlet weak var clipNameLabel: UILabel!
     @IBOutlet weak var clipThumbnailImageView: UIImageView!
+    @IBOutlet weak var shareButton: UIButton!
     
     private var _durationDidLoadObserver: NSObjectProtocol!
     
@@ -30,11 +31,18 @@ class SharingViewController: SceneDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Localizations
+        shareButton.setTitle(String.localize("clipshare.send_button").uppercaseString, forState: UIControlState.Normal)
+        
         clipNameLabel.text = timedEvent.getDescriptionText(self.experience!)
         if let imageURL = timedEvent.getImageURL(self.experience!) {
             clipThumbnailImageView.setImageWithURL(imageURL)
         } else {
             clipThumbnailImageView.image = UIImage.themeDefaultImage16By9()
+        }
+        
+        if let audioVisual = timedEvent.getAudioVisual(self.experience!), videoURL = audioVisual.videoURL {
+            _shareableURL = videoURL
         }
         
         _durationDidLoadObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
@@ -59,12 +67,11 @@ class SharingViewController: SceneDetailViewController {
         clipThumbnailImageView.hidden = true
         playButton.hidden = true
         
-        if let audioVisual = timedEvent.getAudioVisual(self.experience!), videoURL = audioVisual.videoURL, videoPlayerViewController = videoPlayerViewController() {
+        if let videoPlayerViewController = videoPlayerViewController() {
             videoPlayerViewController.curIndex = 0
             videoPlayerViewController.indexMax = 1
             videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            _shareableURL = videoURL
+            videoPlayerViewController.playVideoWithURL(_shareableURL)
         }
     }
     

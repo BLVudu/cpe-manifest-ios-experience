@@ -39,11 +39,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     
     var showCountdownTimer = false
     
-    @IBOutlet weak var commentaryView: UIView!
-    @IBOutlet weak var commentaryBtn: UIButton!
-    @IBOutlet weak var toolbar: UIView!
-    private var _sharePopoverController: UIPopoverController!
+    @IBOutlet weak private var _commentaryView: UIView!
+    @IBOutlet weak private var _commentaryButton: UIButton!
+    @IBOutlet weak private var _homeButton: UIButton!
     @IBOutlet weak var countdown: UIView!
+    private var _sharePopoverController: UIPopoverController!
     
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
@@ -56,9 +56,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        commentaryView.hidden = true
+        // Localizations
+        _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
+        _commentaryButton.setTitle(String.localize("label.commentary"), forState: UIControlState.Normal)
+        
+        _commentaryView.hidden = true
         let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!]), forKey: "_attributedTitle")
+        alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
         alertController.view.tintColor = UIColor.themePrimaryColor()
         _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
         _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
@@ -157,9 +161,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     @IBAction func commentary(sender: AnyObject) {
-        self.commentaryView.hidden = !self.commentaryView.hidden
+        _commentaryView.hidden = !_commentaryView.hidden
         
-        if !self.commentaryView.hidden {
+        if !_commentaryView.hidden {
             if let timer = self.playerControlsAutoHideTimer {
                 timer.invalidate()
             }
@@ -186,7 +190,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                 skipInterstitial()
             }
             
-            if commentaryView.hidden && !_sharePopoverController.popoverVisible {
+            if _commentaryView.hidden && !_sharePopoverController.popoverVisible {
                 super.handleTap(gestureRecognizer)
             }
         }

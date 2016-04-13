@@ -157,7 +157,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         } else if experience.isShopping() {
             self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
         } else {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
+            self.performSegueWithIdentifier(SegueIdentifier.ShowVideoGallery, sender: experience)
         }
     }
     

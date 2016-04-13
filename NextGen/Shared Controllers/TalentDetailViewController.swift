@@ -19,22 +19,23 @@ enum TalentDetailMode: String {
 
 class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet var containerViewTopConstraint: NSLayoutConstraint!
-    
     struct StoryboardSegue {
         static let ShowActorGallery = "showActorGallery"
     }
     
-    @IBOutlet weak var talentImageView: UIImageView!
-    @IBOutlet weak var talentNameLabel: UILabel!
-    @IBOutlet weak var talentBiographyHeaderLabel: UILabel!
-    @IBOutlet weak var talentBiographyLabel: UITextView!
+    @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var filmographyContainerView: UIView!
-    @IBOutlet weak var filmographyCollectionView: UICollectionView!
+    @IBOutlet weak private var _talentImageView: UIImageView!
+    @IBOutlet weak private var _talentNameLabel: UILabel!
+    @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
+    @IBOutlet weak private var _talentBiographyLabel: UITextView!
     
-    @IBOutlet weak var twitterButton: SocialButton!
-    @IBOutlet weak var facebookButton: SocialButton!
+    @IBOutlet weak private var _filmographyContainerView: UIView!
+    @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
+    @IBOutlet weak private var _filmographyCollectionView: UICollectionView!
+    
+    @IBOutlet weak private var _twitterButton: SocialButton!
+    @IBOutlet weak private var _facebookButton: SocialButton!
     
     var images = [String]()
     var talent: Talent!
@@ -44,10 +45,14 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Localizations
+        _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
+        _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
+        
         if mode == TalentDetailMode.Extras {
             titleLabel.removeFromSuperview()
             closeButton.removeFromSuperview()
-            containerViewTopConstraint.constant = 20
+            _containerViewTopConstraint.constant = 20
         }
         
         loadTalent(talent)
@@ -56,51 +61,51 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     func loadTalent(talent: Talent) {
         self.talent = talent
         
-        talentNameLabel.text = talent.name?.uppercaseString
+        _talentNameLabel.text = talent.name?.uppercaseString
         if let imageURL = talent.fullImageURL {
-            talentImageView.setImageWithURL(imageURL)
+            _talentImageView.setImageWithURL(imageURL)
         } else {
-            talentImageView.image = nil
+            _talentImageView.image = nil
         }
         
         talent.getBiography({ (biography) in
             dispatch_async(dispatch_get_main_queue(), {
-                self.talentBiographyLabel.text = biography
+                self._talentBiographyLabel.text = biography
             })
         })
         
-        facebookButton.hidden = true
-        twitterButton.hidden = true
+        _facebookButton.hidden = true
+        _twitterButton.hidden = true
         talent.getSocialAccounts({ (socialAccounts) in
             dispatch_async(dispatch_get_main_queue(), {
                 if let socialAccounts = socialAccounts {
                     for socialAccount in socialAccounts {
                         if socialAccount.type == SocialAccountType.Facebook {
-                            self.facebookButton.hidden = false
-                            self.facebookButton.socialAccount = socialAccount
+                            self._facebookButton.hidden = false
+                            self._facebookButton.socialAccount = socialAccount
                         } else if socialAccount.type == SocialAccountType.Twitter {
-                            self.twitterButton.hidden = false
-                            self.twitterButton.socialAccount = socialAccount
+                            self._twitterButton.hidden = false
+                            self._twitterButton.socialAccount = socialAccount
                         }
                     }
                 }
                 
-                if self.twitterButton.hidden {
-                    self.twitterButton.removeFromSuperview()
+                if self._twitterButton.hidden {
+                    self._twitterButton.removeFromSuperview()
                 }
             })
         })
         
-        filmographyCollectionView.backgroundColor = UIColor.clearColor()
-        filmographyCollectionView.showsHorizontalScrollIndicator = true
-        filmographyContainerView.hidden = true
+        _filmographyCollectionView.backgroundColor = UIColor.clearColor()
+        _filmographyCollectionView.showsHorizontalScrollIndicator = true
+        _filmographyContainerView.hidden = true
         talent.getFilmography({ (films) in
             dispatch_async(dispatch_get_main_queue(), {
                 if films.count > 0 {
-                    self.filmographyContainerView.hidden = false
-                    self.filmographyCollectionView.reloadData()
+                    self._filmographyContainerView.hidden = false
+                    self._filmographyCollectionView.reloadData()
                 } else {
-                    self.filmographyContainerView.hidden = true
+                    self._filmographyContainerView.hidden = true
                 }
             })
         })

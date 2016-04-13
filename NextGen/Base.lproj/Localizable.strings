@@ -4,6 +4,7 @@
 "label.close" = "Close";
 "label.home" = "Home";
 "label.back" = "Back";
+"label.commentary" = "Commentary";
 
 // Video labels
 "label.runtime" = "Runtime: %{runtime}";
@@ -23,12 +24,19 @@
 
 // Talent Detail
 "talentdetail.title" = "Actor";
+"talentdetail.biography" = "Biography";
+"talentdetail.filmography" = "Filmography";
 
 // Clip & Share"
 "clipshare.title" = "Share This Clip";
 "clipshare.rotate" = "Rotate device to share clip";
 "clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
+"clipshare.send_button" = "Share this Clip";
 
 // Shopping
 "shopping.exact_match" = "Exact match";
 "shopping.close_match" = "Close match";
+"shopping.shop_button" = "Shop on TheTake.com";
+"shopping.send_button" = "Send the Link";
+"shopping.powered_by" = "Powered by";
+"shopping.disclaimer" = "No endorsement or sponsorship implied by any actor, studio or brand featured on TheTake.com";

@@ -50,6 +50,8 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     @IBOutlet weak var productPriceLabel: UILabel!
     @IBOutlet weak var shopButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var poweredByLabel: UILabel!
+    @IBOutlet weak var disclaimerLabel: UILabel!
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
@@ -77,6 +79,12 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Localizations
+        shopButton.setTitle(String.localize("shopping.shop_button").uppercaseString, forState: UIControlState.Normal)
+        emailButton.setTitle(String.localize("shopping.send_button").uppercaseString, forState: UIControlState.Normal)
+        poweredByLabel.text = String.localize("shopping.powered_by")
+        disclaimerLabel.text = String.localize("shopping.disclaimer").uppercaseString
         
         productMatchIcon.layer.cornerRadius = CGRectGetWidth(productMatchIcon.frame) / 2
     }

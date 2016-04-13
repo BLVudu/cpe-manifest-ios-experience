@@ -459,15 +459,16 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="800" height="600"/>
                     <connections>
-                        <outlet property="containerViewTopConstraint" destination="Q1L-ef-7G7" id="gat-me-glk"/>
-                        <outlet property="facebookButton" destination="Lpb-HK-BKq" id="fe2-Ib-GKV"/>
-                        <outlet property="filmographyCollectionView" destination="uLZ-Nf-NFJ" id="Ci5-1p-w3T"/>
-                        <outlet property="filmographyContainerView" destination="Rja-JM-bvB" id="RG2-xB-nuw"/>
-                        <outlet property="talentBiographyHeaderLabel" destination="B4Z-td-umT" id="B9k-Ve-JGL"/>
-                        <outlet property="talentBiographyLabel" destination="rYN-Hg-IFa" id="RTM-x8-jta"/>
-                        <outlet property="talentImageView" destination="Lwb-KU-cen" id="QNi-uk-aja"/>
-                        <outlet property="talentNameLabel" destination="hnf-g4-8JZ" id="5Sn-r6-QHm"/>
-                        <outlet property="twitterButton" destination="ZTb-fR-a9k" id="uT6-h3-Rt8"/>
+                        <outlet property="_containerViewTopConstraint" destination="Q1L-ef-7G7" id="rdf-vE-2X1"/>
+                        <outlet property="_facebookButton" destination="Lpb-HK-BKq" id="5xg-MD-TOA"/>
+                        <outlet property="_filmographyCollectionView" destination="uLZ-Nf-NFJ" id="Hyz-7C-VgH"/>
+                        <outlet property="_filmographyContainerView" destination="Rja-JM-bvB" id="Xy5-JR-2vX"/>
+                        <outlet property="_filmographyHeaderLabel" destination="12p-Wd-gSB" id="GoK-jK-T5o"/>
+                        <outlet property="_talentBiographyHeaderLabel" destination="B4Z-td-umT" id="yB2-vd-gjq"/>
+                        <outlet property="_talentBiographyLabel" destination="rYN-Hg-IFa" id="Gmc-Sk-yt1"/>
+                        <outlet property="_talentImageView" destination="Lwb-KU-cen" id="fT6-Hi-soR"/>
+                        <outlet property="_talentNameLabel" destination="hnf-g4-8JZ" id="WBt-kC-VrZ"/>
+                        <outlet property="_twitterButton" destination="ZTb-fR-a9k" id="ZtH-Zk-XqJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kJC-If-Wnn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -539,9 +540,9 @@
                         <outlet property="extrasCollectionView" destination="5xC-Cb-zKQ" id="Gl8-dK-2nu"/>
                         <outlet property="talentDetailView" destination="jX7-H2-sDX" id="cGV-af-3dD"/>
                         <outlet property="talentTableView" destination="nfb-lf-5Cb" id="fkG-uc-1N7"/>
-                        <segue destination="wpZ-Jt-DDC" kind="show" identifier="ExtrasVideoGallerySegue" id="eGG-kJ-fSM"/>
-                        <segue destination="zYt-6b-Uxo" kind="show" identifier="ExtrasImageGalleryListSegue" id="KFa-MJ-Ziv"/>
-                        <segue destination="8Rs-86-BDa" kind="show" identifier="ExtrasShoppingSegue" id="KBV-cK-jkC"/>
+                        <segue destination="wpZ-Jt-DDC" kind="presentation" identifier="ExtrasVideoGallerySegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="eGG-kJ-fSM"/>
+                        <segue destination="zYt-6b-Uxo" kind="presentation" identifier="ExtrasImageGalleryListSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="KFa-MJ-Ziv"/>
+                        <segue destination="8Rs-86-BDa" kind="presentation" identifier="ExtrasShoppingSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="KBV-cK-jkC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxE-Et-E7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1206,9 +1207,10 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="_commentaryButton" destination="7Uk-RH-L9W" id="LH8-bk-7Vz"/>
+                        <outlet property="_commentaryView" destination="3ZM-tJ-9zk" id="e9d-SM-nuc"/>
+                        <outlet property="_homeButton" destination="aLt-Qu-Yg8" id="neb-30-wLZ"/>
                         <outlet property="activityIndicator" destination="cbz-fT-NUV" id="2GD-nb-I0M"/>
-                        <outlet property="commentaryBtn" destination="7Uk-RH-L9W" id="mLA-wD-qAt"/>
-                        <outlet property="commentaryView" destination="3ZM-tJ-9zk" id="Bw5-yc-eO6"/>
                         <outlet property="countdown" destination="fUd-3G-JmP" id="ju7-5P-CjX"/>
                         <outlet property="countdownTimer" destination="fUd-3G-JmP" id="3Oz-Dp-1yr"/>
                         <outlet property="durationLabel" destination="c6W-KZ-1CO" id="agC-Tl-gJZ"/>
@@ -1222,7 +1224,6 @@
                         <outlet property="tapGestureRecognizer" destination="r3s-SR-OYc" id="32O-Fs-uuC"/>
                         <outlet property="timeElapsedLabel" destination="uap-nw-qBj" id="Vp9-Te-KOf"/>
                         <outlet property="timer" destination="fUd-3G-JmP" id="NsR-8B-4e9"/>
-                        <outlet property="toolbar" destination="VY7-Vu-ikZ" id="Caf-si-4Ch"/>
                         <outlet property="topToolbar" destination="VY7-Vu-ikZ" id="oK3-nh-CIz"/>
                     </connections>
                 </viewController>
@@ -1480,7 +1481,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKx-eX-a6t">
                                 <rect key="frame" x="432" y="641" width="160" height="45"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.72941176470588232" green="0.058823529411764705" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="McK-jq-gcI"/>
                                     <constraint firstAttribute="width" constant="160" id="Qdl-2D-2HR"/>
@@ -1582,6 +1583,7 @@
                         <outlet property="clipThumbnailImageView" destination="urK-as-M3M" id="6sH-f2-1vx"/>
                         <outlet property="playButton" destination="TTR-b1-2VW" id="UAr-VF-11e"/>
                         <outlet property="player" destination="tLg-2l-20v" id="bkf-gO-gne"/>
+                        <outlet property="shareButton" destination="fKx-eX-a6t" id="aPS-Tc-3CZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3G6-Ir-DR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1956,7 +1958,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
+                        <outlet property="disclaimerLabel" destination="zo1-yZ-804" id="Vd9-C4-xzJ"/>
                         <outlet property="emailButton" destination="90b-8Y-5s8" id="Jfs-dW-uqO"/>
+                        <outlet property="poweredByLabel" destination="QEc-4f-1jD" id="tVs-aP-2si"/>
                         <outlet property="productBrandLabel" destination="zXy-2o-SuG" id="4ua-Rm-SC0"/>
                         <outlet property="productImageView" destination="hbv-yX-uze" id="Hl4-gt-9dw"/>
                         <outlet property="productMatchIcon" destination="bcK-5n-TFL" id="53R-YP-Jzq"/>
@@ -2141,6 +2145,6 @@
         <image name="Twitter Icon" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dhm-Xt-tFh"/>
+        <segue reference="Vcm-iL-9qf"/>
     </inferredMetricsTieBreakers>
 </document>
