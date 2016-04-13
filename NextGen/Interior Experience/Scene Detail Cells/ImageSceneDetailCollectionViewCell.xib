@@ -45,7 +45,7 @@
                             <constraint firstAttribute="width" secondItem="RC2-bx-j7n" secondAttribute="height" multiplier="16:9" id="004-7Y-mcR"/>
                         </constraints>
                     </imageView>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyy-kk-llG">
+                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyy-kk-llG">
                         <rect key="frame" x="119" y="88" width="45" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="Fi0-Ie-R6T"/>

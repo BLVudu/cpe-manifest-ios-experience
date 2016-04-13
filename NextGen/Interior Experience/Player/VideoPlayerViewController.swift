@@ -12,7 +12,9 @@ import MessageUI
 struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
+    static let DidTapShare = "VideoPlayerNotificationDidTapShare"
     static let ShouldPauseAllOtherVideos = "VideoPlayerNotificationShouldPauseAllOtherVideos"
+    static let ShouldUpdateShareButton = "VideoPlayerNotificationShouldUpdateShareButton"
 }
 
 enum VideoPlayerMode {
@@ -36,7 +38,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     private var _controlsAreLocked = false
     
     var showCountdownTimer = false
-    var currentClip: Clip?
     
     @IBOutlet weak var commentaryView: UIView!
     @IBOutlet weak var commentaryBtn: UIButton!
@@ -45,9 +46,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak var countdown: UIView!
     
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
+    private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_shouldPauseAllOtherObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(_shouldUpdateShareButtonObserver)
     }
     
     override func viewDidLoad() {
@@ -65,6 +68,16 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
                 if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
                     strongSelf.pauseVideo()
+                }
+            }
+        })
+        
+        _shouldUpdateShareButtonObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self {
+                if let userInfo = notification.userInfo, enabled = userInfo["enabled"] as? Bool {
+                    strongSelf.shareButton.enabled = enabled
+                } else {
+                    strongSelf.shareButton.enabled = false
                 }
             }
         })
@@ -119,15 +132,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                 currentTime = 0.0
             }
             
-            if let newClip = DataManager.sharedInstance.content?.clipToShareAtTime(currentTime) {
-                if newClip != currentClip {
-                    currentClip = newClip
-                    shareButton.enabled = true
-                }
-            } else {
-                shareButton.enabled = false
-            }
-            
             if _lastNotifiedTime != currentTime {
                 _lastNotifiedTime = currentTime
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidChangeTime, object: nil, userInfo: ["time": Double(currentTime)])
@@ -172,7 +176,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                     self.playerControlsAutoHideTimer.invalidate()
             }
         } else {
-            NSNotificationCenter.defaultCenter().postNotificationName(StoryboardSegue.ShowShare, object: nil, userInfo: ["clip": self.currentClip!])
+            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidTapShare, object: nil)
         }
     }
     

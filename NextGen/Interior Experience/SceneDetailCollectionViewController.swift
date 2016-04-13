@@ -35,26 +35,29 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
+    private var _didTapShareObserver: NSObjectProtocol!
     
     private var _currentTime: Double = -1
     private var _currentExperienceCellData = [ExperienceCellData]()
     private var _isProcessingNewExperiences = false
     
-    var clip: Clip!
+    private var _currentClipTimedEvent: NGDMTimedEvent? {
+        didSet {
+            if _currentClipTimedEvent != oldValue {
+                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, userInfo: ["enabled": _currentClipTimedEvent != nil])
+            }
+        }
+    }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
+        let center = NSNotificationCenter.defaultCenter()
+        center.removeObserver(_didChangeTimeObserver)
+        center.removeObserver(_didTapShareObserver)
     }
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserverForName("showShare", object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self, userInfo = notification.userInfo {
-                strongSelf.clip = userInfo["clip"] as! Clip!
-                strongSelf.performSegueWithIdentifier(SegueIdentifier.ShowShare, sender: nil)
-            }
-        }
         
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.alpha = 0
@@ -70,6 +73,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 }
             }
         }
+        
+        _didTapShareObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidTapShare, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self {
+                strongSelf.performSegueWithIdentifier(SegueIdentifier.ShowShare, sender: nil)
+            }
+        })
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -116,29 +125,35 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             var newExperienceCellData = [ExperienceCellData]()
             for i in 0 ..< allExperiences.count {
                 let experience = allExperiences[i]
-                let oldCellData = self.currentCellDataForExperience(experience)
-                let oldIndexPath = self.currentIndexPathForExperience(experience)
+                let timedEvent = experience.timedEventSequence?.timedEvent(self._currentTime)
                 
-                if let newTimedEvent = experience.timedEventSequence?.timedEvent(self._currentTime) {
-                    newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
-                    let newIndexPath = NSIndexPath(forItem: newExperienceCellData.count - 1, inSection: 0)
-                    //print("Found \(experience.timedEventSequence!.id)")
+                if experience.isClipAndShare() {
+                    self._currentClipTimedEvent = timedEvent
+                } else {
+                    let oldCellData = self.currentCellDataForExperience(experience)
+                    let oldIndexPath = self.currentIndexPathForExperience(experience)
                     
-                    if oldCellData != nil {
-                        if oldIndexPath!.row != newIndexPath.row {
-                            moveIndexPaths.append((oldIndexPath!, newIndexPath))
-                            //print("Moving \(experience.timedEventSequence!.id)")
-                        } else if newTimedEvent.isProduct() || oldCellData!.timedEvent != newTimedEvent {
-                            reloadIndexPaths.append(oldIndexPath!)
-                            //print("Reloading \(experience.timedEventSequence!.id)")
+                    if let newTimedEvent = timedEvent {
+                        newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
+                        let newIndexPath = NSIndexPath(forItem: newExperienceCellData.count - 1, inSection: 0)
+                        //print("Found \(experience.timedEventSequence!.id)")
+                        
+                        if oldCellData != nil {
+                            if oldIndexPath!.row != newIndexPath.row {
+                                moveIndexPaths.append((oldIndexPath!, newIndexPath))
+                                //print("Moving \(experience.timedEventSequence!.id)")
+                            } else if newTimedEvent.isProduct() || oldCellData!.timedEvent != newTimedEvent {
+                                reloadIndexPaths.append(oldIndexPath!)
+                                //print("Reloading \(experience.timedEventSequence!.id)")
+                            }
+                        } else {
+                            insertIndexPaths.append(newIndexPath)
+                            //print("Inserting \(experience.timedEventSequence!.id)")
                         }
-                    } else {
-                        insertIndexPaths.append(newIndexPath)
-                        //print("Inserting \(experience.timedEventSequence!.id)")
+                    } else if oldIndexPath != nil {
+                        deleteIndexPaths.append(oldIndexPath!)
+                        //print("Deleting \(experience.timedEventSequence!.id)")
                     }
-                } else if oldIndexPath != nil {
-                    deleteIndexPaths.append(oldIndexPath!)
-                    //print("Deleting \(experience.timedEventSequence!.id)")
                 }
             }
             
@@ -244,8 +259,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.ShowShare {
             let shareDetailViewController = segue.destinationViewController as! SharingViewController
-            shareDetailViewController.title = String.localize("clipshare.title");
-            shareDetailViewController.clip = clip
+            shareDetailViewController.experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childClipAndShareExperience
+            shareDetailViewController.timedEvent = _currentClipTimedEvent!
         } else if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if segue.identifier == SegueIdentifier.ShowGallery {
                 let galleryDetailViewController = segue.destinationViewController as! GallerySceneDetailViewController

@@ -24,7 +24,7 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
         
         if timedEvent.isAudioVisual() {
             galleryScrollView.removeFromSuperview()
-            if let audioVisual = timedEvent.getAudioVisual(experience!), presentation = audioVisual.presentation, videoURL = presentation.videoURL {
+            if let audioVisual = timedEvent.getAudioVisual(experience!), videoURL = audioVisual.videoURL {
                 descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
                 
                 if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {

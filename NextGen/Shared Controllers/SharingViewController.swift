@@ -13,26 +13,15 @@ class SharingViewController: SceneDetailViewController {
     @IBOutlet weak var player: UIView!
     
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var clipDuration: UILabel!
-    @IBOutlet weak var clipName: UILabel!
-    @IBOutlet weak var clipThumbnailView: UIImageView!
+    @IBOutlet weak var clipDurationLabel: UILabel!
+    @IBOutlet weak var clipNameLabel: UILabel!
+    @IBOutlet weak var clipThumbnailImageView: UIImageView!
     
     private var _durationDidLoadObserver: NSObjectProtocol!
     
-    var clipURL: NSURL!
-    var clipThumbnail: NSURL!
-    var clipCaption: String!
+    var timedEvent: NGDMTimedEvent!
     
     private var _shareableURL: NSURL?
-    
-    var clip: Clip? = nil {
-        didSet {
-            clipURL = clip?.url
-            clipThumbnail = clip?.thumbnailImage
-            clipCaption = (clip?.text)
-            
-        }
-    }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_durationDidLoadObserver)
@@ -41,12 +30,16 @@ class SharingViewController: SceneDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        clipName.text = clip?.text
-        clipThumbnailView.setImageWithURL(clipThumbnail)
+        clipNameLabel.text = timedEvent.getDescriptionText(self.experience!)
+        if let imageURL = timedEvent.getImageURL(self.experience!) {
+            clipThumbnailImageView.setImageWithURL(imageURL)
+        } else {
+            clipThumbnailImageView.image = UIImage(named: "MOSDefault")
+        }
         
         _durationDidLoadObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, duration = userInfo["duration"] as? NSTimeInterval {
-                strongSelf.clipDuration.text = duration.timeString()
+                strongSelf.clipDurationLabel.text = duration.timeString()
             }
         }
     }
@@ -63,10 +56,10 @@ class SharingViewController: SceneDetailViewController {
     
     // MARK: Actions
     @IBAction func playClip(sender: AnyObject) {
-        self.clipThumbnailView.hidden = true
-        self.playButton.hidden = true
+        clipThumbnailImageView.hidden = true
+        playButton.hidden = true
         
-        if let videoURL = clip?.url, videoPlayerViewController = videoPlayerViewController() {
+        if let audioVisual = timedEvent.getAudioVisual(self.experience!), videoURL = audioVisual.videoURL, videoPlayerViewController = videoPlayerViewController() {
             videoPlayerViewController.curIndex = 0
             videoPlayerViewController.indexMax = 1
             videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie

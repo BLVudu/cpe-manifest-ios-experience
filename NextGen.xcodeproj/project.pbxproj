@@ -22,22 +22,16 @@
 		492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E91C76A56900B306A2 /* CommentaryViewCell.swift */; };
 		494166EE1C52E8CC0013B94A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166ED1C52E8CC0013B94A /* play.png */; };
 		494166F21C5306D90013B94A /* Play_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 494166F11C5306D90013B94A /* Play_Button.png */; };
-		49656F231C49C676001DB9C0 /* StylizedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */; };
 		49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49656F241C49C73E001DB9C0 /* CustomSwitch.swift */; };
 		497733301C597D5D00EC0071 /* home_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977332F1C597D5D00EC0071 /* home_logo.png */; };
 		497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */; };
 		497ABF7B1C894E61005463C9 /* thetake-logo-nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 497ABF7A1C894E61005463C9 /* thetake-logo-nav@2x.png */; };
-		498FBC041CA9DB4E00B81798 /* ClipCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498FBC031CA9DB4E00B81798 /* ClipCollectionViewController.swift */; };
-		498FBC061CA9DEB400B81798 /* ClipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498FBC051CA9DEB400B81798 /* ClipCell.xib */; };
-		498FBC081CA9E6D500B81798 /* ClipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498FBC071CA9E6D500B81798 /* ClipCell.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		499871241CB43A4E00606E56 /* Commentary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 499871231CB43A4E00606E56 /* Commentary.plist */; };
-		49B525081CA61452007698DC /* ClipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B525071CA61452007698DC /* ClipViewController.swift */; };
 		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
 		49CB44C91C7CF02400753227 /* InteriorExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */; };
 		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
 		49CC33E51C98B81C000AB801 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49CC33E41C98B81C000AB801 /* Settings.plist */; };
-		49E01B6D1CA20514009AF65C /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E01B6C1CA20514009AF65C /* Clip.swift */; };
 		49F3EAD31C515B3100E09484 /* TitledImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* TitledImageCell.xib */; };
 		49F3EAD51C51639700E09484 /* TitledImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* TitledImageCell.swift */; };
 		49F3EADB1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */; };
@@ -268,8 +262,6 @@
 		7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7071C54B1C6BCC11006F4275 /* libxml2.tbd */; };
 		7077A3151C49897900843782 /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3141C49897900843782 /* Data */; };
 		7077A35D1C4989C200843782 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7077A32F1C4989C200843782 /* menu.png */; };
-		7077A3771C4989DC00843782 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7077A3761C4989DC00843782 /* DataManager.swift */; };
-		7077A37B1C49A4D800843782 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7077A37A1C49A4D800843782 /* Content.swift */; };
 		707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E107E1C4076EC00FCF81C /* TalentTableView.swift */; };
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
 		707E10871C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */; };
@@ -367,22 +359,16 @@
 		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		494166ED1C52E8CC0013B94A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		494166F11C5306D90013B94A /* Play_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Play_Button.png; path = ../Play_Button.png; sourceTree = "<group>"; };
-		49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylizedNavigationController.swift; sourceTree = "<group>"; };
 		49656F241C49C73E001DB9C0 /* CustomSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
 		4977332F1C597D5D00EC0071 /* home_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_logo.png; sourceTree = "<group>"; };
 		497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
 		497ABF7A1C894E61005463C9 /* thetake-logo-nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thetake-logo-nav@2x.png"; sourceTree = "<group>"; };
-		498FBC031CA9DB4E00B81798 /* ClipCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCollectionViewController.swift; sourceTree = "<group>"; };
-		498FBC051CA9DEB400B81798 /* ClipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClipCell.xib; sourceTree = "<group>"; };
-		498FBC071CA9E6D500B81798 /* ClipCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipCell.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		499871231CB43A4E00606E56 /* Commentary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Commentary.plist; sourceTree = "<group>"; };
-		49B525071CA61452007698DC /* ClipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipViewController.swift; sourceTree = "<group>"; };
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49CB44C81C7CF02400753227 /* InteriorExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceViewController.swift; sourceTree = "<group>"; };
 		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		49CC33E41C98B81C000AB801 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
-		49E01B6C1CA20514009AF65C /* Clip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
 		49F3EAD21C515B3100E09484 /* TitledImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitledImageCell.xib; sourceTree = "<group>"; };
 		49F3EAD41C51639700E09484 /* TitledImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitledImageCell.swift; path = ../Extras/TitledImageCell.swift; sourceTree = "<group>"; };
 		49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasVideoGalleryViewController.swift; sourceTree = "<group>"; };
@@ -619,8 +605,6 @@
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		7077A3141C49897900843782 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		7077A32F1C4989C200843782 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
-		7077A3761C4989DC00843782 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		7077A37A1C49A4D800843782 /* Content.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		707E107E1C4076EC00FCF81C /* TalentTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableView.swift; sourceTree = "<group>"; };
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		707E10861C407F6600FCF81C /* InteriorExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteriorExperienceExtrasViewController.swift; sourceTree = "<group>"; };
@@ -837,13 +821,10 @@
 			isa = PBXGroup;
 			children = (
 				49F684A11C8A5F7F0066C5A2 /* ActorGalleryViewController.swift */,
-				498FBC031CA9DB4E00B81798 /* ClipCollectionViewController.swift */,
-				49B525071CA61452007698DC /* ClipViewController.swift */,
 				70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */,
 				49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */,
 				70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */,
 				490213471C860C9A00071552 /* SharingViewController.swift */,
-				49656F221C49C676001DB9C0 /* StylizedNavigationController.swift */,
 				701D69C01C48205B0047A67A /* TalentDetailViewController.swift */,
 				7085F7981C97550C00DF31B6 /* WebViewController.swift */,
 			);
@@ -853,7 +834,6 @@
 		701D69C61C482A900047A67A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				7077A3761C4989DC00843782 /* DataManager.swift */,
 				7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */,
 				7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */,
 				70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */,
@@ -1171,8 +1151,6 @@
 		707E10831C40796000FCF81C /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
-				498FBC071CA9E6D500B81798 /* ClipCell.swift */,
-				498FBC051CA9DEB400B81798 /* ClipCell.xib */,
 				701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */,
 				70DF2F831CA5C8B2007AD2A0 /* MenuItemCell.swift */,
 				70DF2F891CA5EADF007AD2A0 /* MenuItemCell.xib */,
@@ -1196,8 +1174,6 @@
 		707E10881C4081F700FCF81C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				49E01B6C1CA20514009AF65C /* Clip.swift */,
-				7077A37A1C49A4D800843782 /* Content.swift */,
 				49656F241C49C73E001DB9C0 /* CustomSwitch.swift */,
 				70DF2F811CA5C2B5007AD2A0 /* MenuItem.swift */,
 				70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */,
@@ -1395,7 +1371,6 @@
 				49F3EAD31C515B3100E09484 /* TitledImageCell.xib in Resources */,
 				70DF2F8A1CA5EADF007AD2A0 /* MenuItemCell.xib in Resources */,
 				497733301C597D5D00EC0071 /* home_logo.png in Resources */,
-				498FBC061CA9DEB400B81798 /* ClipCell.xib in Resources */,
 				70C830B51CB465D000F9E2D6 /* mos-nextgen-interstitial.mov in Resources */,
 				70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */,
 				70517E7D1CB715EF008556EC /* MapSceneDetailCollectionViewCell.xib in Resources */,
@@ -1504,7 +1479,6 @@
 				70DF2F901CA5F453007AD2A0 /* MenuSectionCell.swift in Sources */,
 				49656F251C49C73E001DB9C0 /* CustomSwitch.swift in Sources */,
 				4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */,
-				498FBC081CA9E6D500B81798 /* ClipCell.swift in Sources */,
 				49F684A01C8A3FC60066C5A2 /* MediaGalleryViewController.swift in Sources */,
 				7071C5031C6BCBF6006F4275 /* NGEInventoryMetadataLocalizedPairType.swift in Sources */,
 				7071C4C11C6BCBF6006F4275 /* NGEDateTimeRangeType.swift in Sources */,
@@ -1519,7 +1493,6 @@
 				7071C4D21C6BCBF6006F4275 /* NGEDigitalAssetSubtitleDataType.swift in Sources */,
 				70367AB71C8F87AE0042B5B5 /* NGDMPresentation.swift in Sources */,
 				7071C5361C6BCBF6006F4275 /* NGESummary190.swift in Sources */,
-				498FBC041CA9DB4E00B81798 /* ClipCollectionViewController.swift in Sources */,
 				7071C4D61C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureFrameRateType.swift in Sources */,
 				7071C4AC1C6BCBF6006F4275 /* NGEComplexSequenceInfoAlternateNumber.swift in Sources */,
 				7071C5241C6BCBF6006F4275 /* NGEPlayableSequenceType.swift in Sources */,
@@ -1537,7 +1510,6 @@
 				7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */,
 				7071C5251C6BCBF6006F4275 /* NGEPresentationLanguagePairType.swift in Sources */,
 				7071C5261C6BCBF6006F4275 /* NGEPresentationListType.swift in Sources */,
-				7077A37B1C49A4D800843782 /* Content.swift in Sources */,
 				7071C52B1C6BCBF6006F4275 /* NGEPrivateDataType.swift in Sources */,
 				7071C49A1C6BCBF6006F4275 /* NGEAppName.swift in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
@@ -1551,7 +1523,6 @@
 				7071C4C91C6BCBF6006F4275 /* NGEDigitalAssetColorEncodingType.swift in Sources */,
 				7071C4BA1C6BCBF6006F4275 /* NGEContentIdentifierType.swift in Sources */,
 				7071C50B1C6BCBF6006F4275 /* NGEJobFunction.swift in Sources */,
-				49B525081CA61452007698DC /* ClipViewController.swift in Sources */,
 				7071C4A91C6BCBF6006F4275 /* NGEColorTypeTypeEnum.swift in Sources */,
 				7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */,
 				70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */,
@@ -1620,7 +1591,6 @@
 				70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */,
 				7071C4FE1C6BCBF6006F4275 /* NGEInventoryAncillaryType.swift in Sources */,
 				49F3EADB1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift in Sources */,
-				7077A3771C4989DC00843782 /* DataManager.swift in Sources */,
 				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
 				7071C4CA1C6BCBF6006F4275 /* NGEDigitalAssetColorVolumeType.swift in Sources */,
 				7071C4B21C6BCBF6006F4275 /* NGECompObjType.swift in Sources */,
@@ -1686,7 +1656,6 @@
 				7071C4CC1C6BCBF6006F4275 /* NGEDigitalAssetImageDataType.swift in Sources */,
 				70DF2F821CA5C2B5007AD2A0 /* MenuItem.swift in Sources */,
 				70FECF6D1C65433A005B1A44 /* UIButton+Utils.swift in Sources */,
-				49E01B6D1CA20514009AF65C /* Clip.swift in Sources */,
 				7071C4B61C6BCBF6006F4275 /* NGEContainerReference.swift in Sources */,
 				7071C49C1C6BCBF6006F4275 /* NGEAssociatedOrgType.swift in Sources */,
 				7071C4CB1C6BCBF6006F4275 /* NGEDigitalAssetExternalTrackReferenceType.swift in Sources */,
@@ -1714,7 +1683,6 @@
 				7071C50A1C6BCBF6006F4275 /* NGEJobDisplay.swift in Sources */,
 				7071C5111C6BCBF6006F4275 /* NGEMediaManifestEditType.swift in Sources */,
 				7071C4F81C6BCBF6006F4275 /* NGEGenre.swift in Sources */,
-				49656F231C49C676001DB9C0 /* StylizedNavigationController.swift in Sources */,
 				7071C4C21C6BCBF6006F4275 /* NGEDigitalAssetAncillaryDataType.swift in Sources */,
 				7071C4DA1C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureType.swift in Sources */,
 				7085F7861C933A5000DF31B6 /* NGDMExperienceApp.swift in Sources */,

@@ -1436,9 +1436,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clip Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qI0-H8-B8x">
-                                <rect key="frame" x="40" y="601" width="250" height="30"/>
+                                <rect key="frame" x="40" y="601" width="250" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="9NR-OM-5uE"/>
+                                    <constraint firstAttribute="height" constant="40" id="9NR-OM-5uE"/>
                                     <constraint firstAttribute="width" constant="250" id="JsE-vL-I1F"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
@@ -1446,10 +1446,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gt-MH-qlj">
-                                <rect key="frame" x="734" y="601" width="250" height="30"/>
+                                <rect key="frame" x="734" y="601" width="250" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="MHv-0L-yrC"/>
-                                    <constraint firstAttribute="height" constant="30" id="d99-Fo-STG"/>
+                                    <constraint firstAttribute="height" constant="40" id="d99-Fo-STG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1467,7 +1467,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="urK-as-M3M">
                                 <rect key="frame" x="40" y="70" width="944" height="531"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTR-b1-2VW">
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTR-b1-2VW">
                                 <rect key="frame" x="487" y="311" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="8xa-Dt-RX2"/>
@@ -1479,7 +1479,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKx-eX-a6t">
-                                <rect key="frame" x="432" y="631" width="160" height="45"/>
+                                <rect key="frame" x="432" y="641" width="160" height="45"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="McK-jq-gcI"/>
@@ -1501,7 +1501,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fKx-eX-a6t" firstAttribute="top" secondItem="tLg-2l-20v" secondAttribute="bottom" constant="30" id="0cT-Q5-kwu"/>
+                            <constraint firstItem="fKx-eX-a6t" firstAttribute="top" secondItem="tLg-2l-20v" secondAttribute="bottom" constant="40" id="0cT-Q5-kwu"/>
                             <constraint firstItem="qI0-H8-B8x" firstAttribute="top" secondItem="urK-as-M3M" secondAttribute="top" constant="550" id="1I2-jK-veZ"/>
                             <constraint firstItem="qI0-H8-B8x" firstAttribute="top" secondItem="tLg-2l-20v" secondAttribute="bottom" id="4aG-eX-oMf"/>
                             <constraint firstItem="5gt-MH-qlj" firstAttribute="trailing" secondItem="tLg-2l-20v" secondAttribute="trailing" id="4l3-cA-RsR"/>
@@ -1577,9 +1577,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
-                        <outlet property="clipDuration" destination="5gt-MH-qlj" id="iVh-G7-6e4"/>
-                        <outlet property="clipName" destination="qI0-H8-B8x" id="uYV-ah-hW3"/>
-                        <outlet property="clipThumbnailView" destination="urK-as-M3M" id="Cyk-qL-NqQ"/>
+                        <outlet property="clipDurationLabel" destination="5gt-MH-qlj" id="8L3-oD-z9Q"/>
+                        <outlet property="clipNameLabel" destination="qI0-H8-B8x" id="8g2-Ap-lVi"/>
+                        <outlet property="clipThumbnailImageView" destination="urK-as-M3M" id="6sH-f2-1vx"/>
                         <outlet property="playButton" destination="TTR-b1-2VW" id="UAr-VF-11e"/>
                         <outlet property="player" destination="tLg-2l-20v" id="bkf-gO-gne"/>
                     </connections>

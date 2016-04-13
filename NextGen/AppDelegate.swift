@@ -18,21 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current film's data file
-        if let metadataPath = NSBundle.mainBundle().pathForResource("Data/mos_timeline_v2", ofType: "json") {
-            do {
-                let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: metadataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
-                DataManager.sharedInstance.loadData(data)
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        }
-
         if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_v3", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
             ConfigManager.sharedInstance.loadConfigs()
             NextGenDataManager.sharedInstance.mainExperience.loadTalent()
         }
- 
+        
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
@@ -43,4 +34,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
