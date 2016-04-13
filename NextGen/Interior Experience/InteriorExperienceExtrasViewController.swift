@@ -62,7 +62,7 @@ class InteriorExperienceExtrasViewController: UIViewController, UITableViewDataS
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textAlignment = NSTextAlignment.Center
-        header.textLabel?.font = UIFont(name: "Roboto Condensed", size: 18)
+        header.textLabel?.font = UIFont.themeCondensedFont(18)
         header.textLabel?.textColor = UIColor.whiteColor()
     }
     

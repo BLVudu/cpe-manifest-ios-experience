@@ -68,6 +68,7 @@
 		70460C551CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */; };
 		70460C5A1CBEF67C0001B6D8 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */; };
 		70460C5C1CBEF6980001B6D8 /* UIImage+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */; };
+		70460C5E1CBEF8630001B6D8 /* UIFont+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C5D1CBEF8630001B6D8 /* UIFont+Theme.swift */; };
 		7046BA911CBDAF8B00EF9612 /* ExtrasPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */; };
 		70517E7B1CB715EF008556EC /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E781CB715EF008556EC /* MapDetailViewController.swift */; };
 		70517E7C1CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */; };
@@ -412,6 +413,7 @@
 		70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeTextSceneDetailViewController.swift; sourceTree = "<group>"; };
 		70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Theme.swift"; sourceTree = "<group>"; };
+		70460C5D1CBEF8630001B6D8 /* UIFont+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Theme.swift"; sourceTree = "<group>"; };
 		7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasPresentationController.swift; sourceTree = "<group>"; };
 		70517E781CB715EF008556EC /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -861,6 +863,7 @@
 			children = (
 				70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */,
 				70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */,
+				70460C5D1CBEF8630001B6D8 /* UIFont+Theme.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -1705,6 +1708,7 @@
 				7071C5041C6BCBF6006F4275 /* NGEInventoryMetadataType.swift in Sources */,
 				7071C5471C6BCBF6006F4275 /* NGEVideoTrackReferenceType.swift in Sources */,
 				7071C4FB1C6BCBF6006F4275 /* NGEImageClipRefType.swift in Sources */,
+				70460C5E1CBEF8630001B6D8 /* UIFont+Theme.swift in Sources */,
 				70367AB11C8F69970042B5B5 /* NGDMMainExperience.swift in Sources */,
 				7071C4A21C6BCBF6006F4275 /* NGEBasicMetadataJobType.swift in Sources */,
 				7071C5191C6BCBF6006F4275 /* NGEOrgNameType.swift in Sources */,

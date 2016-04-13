@@ -50,7 +50,7 @@ class ExtrasExperienceViewController: UIViewController {
         button.contentHorizontalAlignment = .Left
         button.titleEdgeInsets = UIEdgeInsetsMake(0, kHeaderIconPadding + 10, 0, 0)
         button.imageEdgeInsets = UIEdgeInsetsMake(0, kHeaderIconPadding, 0, 0)
-        button.titleLabel?.font = UIFont(name: "Roboto", size: 18)
+        button.titleLabel?.font = UIFont.themeFont(18)
         button.setTitle(title, forState: .Normal)
         button.addTarget(self, action: #selector(self.close), forControlEvents: UIControlEvents.TouchUpInside)
         return button
