@@ -274,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVa-ua-FD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-768" y="825"/>
+            <point key="canvasLocation" x="-742" y="821"/>
         </scene>
         <!--Talent Detail View Controller-->
         <scene sceneID="1uV-mF-x4a">
@@ -1291,9 +1291,9 @@
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <segue destination="MuK-Ns-GCf" kind="presentation" identifier="showMap" modalPresentationStyle="overCurrentContext" id="eQ5-Yo-rrV"/>
-                        <segue destination="v1c-4O-jsc" kind="presentation" identifier="showGallery" modalPresentationStyle="overCurrentContext" id="spb-bK-1jQ"/>
                         <segue destination="bbI-hR-KQu" kind="presentation" identifier="showShop" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="bgg-4x-haH"/>
                         <segue destination="rnf-6M-6TQ" kind="presentation" identifier="showShare" modalPresentationStyle="overCurrentContext" id="Qy4-Cn-PRw"/>
+                        <segue destination="v1c-4O-jsc" kind="presentation" identifier="showGallery" modalPresentationStyle="overCurrentContext" id="whd-oO-iqr"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="87k-ew-RHa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1395,7 +1395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOZ-Ec-WaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3600" y="2455"/>
+            <point key="canvasLocation" x="-3570" y="2661"/>
         </scene>
         <!--Sharing View Controller-->
         <scene sceneID="aEk-xT-Iqa">
@@ -1589,7 +1589,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3G6-Ir-DR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-194" y="2455"/>
+            <point key="canvasLocation" x="-158" y="2661"/>
         </scene>
         <!--Gallery Scene Detail View Controller-->
         <scene sceneID="2wX-pQ-gL2">
@@ -1647,6 +1647,11 @@
                             <constraint firstAttribute="trailing" secondItem="AaG-qF-uaZ" secondAttribute="trailing" constant="40" id="psg-K1-Sdq"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="1024" height="768"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="Ju6-0D-gz2" id="Qeo-mg-tKC"/>
                         <outlet property="galleryScrollView" destination="AaG-qF-uaZ" id="A3v-cC-T7J"/>
@@ -1656,12 +1661,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bml-nr-vpu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2406" y="2455"/>
+            <point key="canvasLocation" x="-2404" y="2661"/>
         </scene>
         <!--Shopping Detail View Controller-->
         <scene sceneID="xAo-fh-KBU">
             <objects>
-                <viewController storyboardIdentifier="ShoppingDetailViewController" autoresizesArchivedViewToFullSize="NO" id="bbI-hR-KQu" customClass="ShoppingDetailViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShoppingDetailViewController" id="bbI-hR-KQu" customClass="ShoppingDetailViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xh6-wQ-TRr"/>
                         <viewControllerLayoutGuide type="bottom" id="qTy-yw-gaA"/>
@@ -1956,6 +1961,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
@@ -1972,7 +1980,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="No3-dS-hMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1319" y="2455"/>
+            <point key="canvasLocation" x="-1289" y="2661"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5S4-rU-8NV">
@@ -1988,7 +1996,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKF-bj-PzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-768" y="117.5"/>
+            <point key="canvasLocation" x="-742" y="115.5"/>
         </scene>
         <!--Actor Gallery View Controller-->
         <scene sceneID="yVb-t7-RUF">
@@ -2144,7 +2152,7 @@
         <image name="thetake-logo-nav.png" width="100" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="W8P-ST-gWA"/>
         <segue reference="Vcm-iL-9qf"/>
-        <segue reference="kSL-ff-FXa"/>
     </inferredMetricsTieBreakers>
 </document>
