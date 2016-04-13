@@ -18,15 +18,9 @@ class SharingViewController: SceneDetailViewController {
     @IBOutlet weak var clipThumbnailImageView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
     
-    private var _durationDidLoadObserver: NSObjectProtocol!
-    
     var timedEvent: NGDMTimedEvent!
     
     private var _shareableURL: NSURL?
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(_durationDidLoadObserver)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +39,7 @@ class SharingViewController: SceneDetailViewController {
             _shareableURL = videoURL
         }
         
-        _durationDidLoadObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self, userInfo = notification.userInfo, duration = userInfo["duration"] as? NSTimeInterval {
-                strongSelf.clipDurationLabel.text = duration.timeString()
-            }
-        }
+        self.clipDurationLabel.text = (timedEvent.endTime - timedEvent.startTime).timeString()
     }
 
     func videoPlayerViewController() -> VideoPlayerViewController? {
