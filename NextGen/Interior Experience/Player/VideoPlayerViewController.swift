@@ -12,9 +12,7 @@ import MessageUI
 struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
-    static let ShouldPause = "VideoPlayerNotificationShouldPause"
-    static let ShouldPauseAndLock = "VideoPlayerNotificationShouldPauseAndLock"
-    static let ShouldResume = "VideoPlayerNotificationShouldResume"
+    static let ShouldPauseAllOtherVideos = "VideoPlayerNotificationShouldPauseAllOtherVideos"
 }
 
 enum VideoPlayerMode {
@@ -29,6 +27,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         static let ShowShare = "showShare"
     }
     
+    let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
+    
     var mode = VideoPlayerMode.Supplemental
     
     private var _didPlayInterstitial = false
@@ -41,59 +41,33 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak var commentaryView: UIView!
     @IBOutlet weak var commentaryBtn: UIButton!
     @IBOutlet weak var toolbar: UIView!
-    var pop: UIPopoverController!
-    var alert: UIAlertController!
+    private var _sharePopoverController: UIPopoverController!
     @IBOutlet weak var countdown: UIView!
     
-    private var _shouldPauseObserver: NSObjectProtocol!
-    private var _shouldPauseAndLockObserver: NSObjectProtocol!
-    private var _shouldResumeObserver: NSObjectProtocol!
+    private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     
     deinit {
-        let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(_shouldPauseObserver)
-        center.removeObserver(_shouldPauseAndLockObserver)
-        center.removeObserver(_shouldResumeObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(_shouldPauseAllOtherObserver)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.commentaryView.hidden = true
-        self.alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        self.pop = UIPopoverController.init(contentViewController: alert)
-        self.pop.delegate = self
-
-
+        commentaryView.hidden = true
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!]), forKey: "_attributedTitle")
+        alertController.view.tintColor = UIColor.yellowColor()
+        _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
+        _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        _sharePopoverController.delegate = self
         
-        
-        
-        _shouldPauseObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPause, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self {
-                if strongSelf._didPlayInterstitial {
+        _shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
+                if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
                     strongSelf.pauseVideo()
-                }
-            }
-        }
-        
-        _shouldPauseAndLockObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAndLock, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self {
-                if strongSelf._didPlayInterstitial && strongSelf.mode == VideoPlayerMode.MainFeature {
-                    strongSelf.pauseVideo()
-                    strongSelf.playerControlsVisible = false
-                    strongSelf._controlsAreLocked = true
                 }
             }
         })
-        
-        _shouldResumeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldResume, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self {
-                if strongSelf._didPlayInterstitial {
-                    strongSelf.playVideo()
-                    strongSelf._controlsAreLocked = false
-                }
-            }
-        }
         
         if mode == VideoPlayerMode.MainFeature {
             self.fullScreenButton.removeFromSuperview()
@@ -110,6 +84,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         }
     }
     
+    // MARK: Video Playback
     func playMainExperience() {
         self.playerControlsVisible = false
         if _didPlayInterstitial {
@@ -129,32 +104,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         self.playMainExperience()
     }
     
-    override func playerItemDidReachEnd(notification: NSNotification!) {
-        super.playerItemDidReachEnd(notification)
+    override func playVideo() {
+        super.playVideo()
         
-        if !_didPlayInterstitial {
-            _didPlayInterstitial = true
-            playMainExperience()
-        }
-    }
-    
-    override func done(sender: AnyObject?) {
-        super.done(sender)
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func commentary(sender: AnyObject) {
-        self.commentaryView.hidden = !self.commentaryView.hidden
-        
-        if self.commentaryView.hidden == false{
-        if((self.playerControlsAutoHideTimer) != nil){
-            self.playerControlsAutoHideTimer.invalidate()
-            }
-        } else {
-            self.initAutoHideTimer()
-
-        }
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, userInfo: [kMasterVideoPlayerViewControllerKey: self])
     }
     
     override func syncScrubber() {
@@ -182,33 +135,45 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         }
     }
     
-    @IBAction override func share(sender: AnyObject!) {
-        if UIDevice.currentDevice().orientation.isLandscape {
-            let styledTitle = NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName: UIFont(name: "RobotoCondensed-Regular",size: 19)!])
-
-            alert.setValue(styledTitle, forKey: "_attributedTitle")
-            pop.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-            let anchor = self.view.frame.size.height - 120
-            pop.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-                if((self.playerControlsAutoHideTimer) != nil){
-                    self.playerControlsAutoHideTimer.invalidate()
-            }
-            alert.view.tintColor = UIColor.yellowColor()
-        } else {
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(StoryboardSegue.ShowShare, object: nil, userInfo: ["clip": self.currentClip!])
-
+    override func playerItemDidReachEnd(notification: NSNotification!) {
+        super.playerItemDidReachEnd(notification)
+        
+        if !_didPlayInterstitial {
+            _didPlayInterstitial = true
+            playMainExperience()
         }
     }
     
-    func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
+    
+    // MARK: Actions
+    override func done(sender: AnyObject?) {
+        super.done(sender)
         
-        if popoverController.popoverVisible{
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func commentary(sender: AnyObject) {
+        self.commentaryView.hidden = !self.commentaryView.hidden
+        
+        if !self.commentaryView.hidden {
+            if let timer = self.playerControlsAutoHideTimer {
+                timer.invalidate()
+            }
+        } else {
             self.initAutoHideTimer()
-            return true
         }
-        
-        return false
+    }
+    
+    @IBAction override func share(sender: AnyObject!) {
+        if UIDevice.currentDevice().orientation.isLandscape {
+            let anchor = self.view.frame.size.height - 120
+            _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+                if((self.playerControlsAutoHideTimer) != nil){
+                    self.playerControlsAutoHideTimer.invalidate()
+            }
+        } else {
+            NSNotificationCenter.defaultCenter().postNotificationName(StoryboardSegue.ShowShare, object: nil, userInfo: ["clip": self.currentClip!])
+        }
     }
     
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
@@ -217,10 +182,20 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                 skipInterstitial()
             }
             
-            if commentaryView.hidden == true && pop.popoverVisible == false{
+            if commentaryView.hidden && !_sharePopoverController.popoverVisible {
                 super.handleTap(gestureRecognizer)
             }
         }
+    }
+    
+    // MARK: UIPopoverControllerDelegate
+    func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
+        if popoverController.popoverVisible {
+            self.initAutoHideTimer()
+            return true
+        }
+        
+        return false
     }
     
 }

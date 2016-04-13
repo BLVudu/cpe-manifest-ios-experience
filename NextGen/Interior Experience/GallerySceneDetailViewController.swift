@@ -45,10 +45,6 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
         }
     }
     
-    override func sendPauseNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPauseAndLock, object: nil)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

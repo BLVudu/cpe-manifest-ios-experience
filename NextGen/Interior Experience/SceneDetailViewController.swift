@@ -42,8 +42,6 @@ class SceneDetailViewController: UIViewController {
         if let title = experience?.metadata?.title {
             titleLabel.text = title.uppercaseString
         }
-        
-        sendPauseNotification()
     }
     
     override func viewWillLayoutSubviews() {
@@ -54,13 +52,8 @@ class SceneDetailViewController: UIViewController {
         closeButton.frame = CGRectMake(viewWidth - kCloseButtonWidth - kViewMargin, 0, kCloseButtonWidth, kTitleLabelHeight)
     }
     
-    func sendPauseNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
-    }
-    
     // MARK: Actions
     func close() {
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldResume, object: nil)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 

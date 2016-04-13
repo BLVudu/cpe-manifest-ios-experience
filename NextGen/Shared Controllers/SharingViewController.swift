@@ -39,12 +39,8 @@ class SharingViewController: UIViewController{
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPause, object: nil)
         clipName.text = clip?.text
         clipThumbnailView.setImageWithURL(clipThumbnail)
         if let videoURL = self.clip?.url, videoPlayerViewController = videoPlayerViewController() {
@@ -121,9 +117,6 @@ class SharingViewController: UIViewController{
     
 
     @IBAction func close(sender: AnyObject) {
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldResume, object: nil)
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
