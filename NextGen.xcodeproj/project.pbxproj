@@ -66,6 +66,8 @@
 		70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */; };
 		70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */; };
 		70460C551CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */; };
+		70460C5A1CBEF67C0001B6D8 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */; };
+		70460C5C1CBEF6980001B6D8 /* UIImage+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */; };
 		7046BA911CBDAF8B00EF9612 /* ExtrasPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */; };
 		70517E7B1CB715EF008556EC /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E781CB715EF008556EC /* MapDetailViewController.swift */; };
 		70517E7C1CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */; };
@@ -408,6 +410,8 @@
 		70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextObject.swift; sourceTree = "<group>"; };
 		70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAudioVisual.swift; sourceTree = "<group>"; };
 		70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeTextSceneDetailViewController.swift; sourceTree = "<group>"; };
+		70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Theme.swift"; sourceTree = "<group>"; };
 		7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasPresentationController.swift; sourceTree = "<group>"; };
 		70517E781CB715EF008556EC /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -730,6 +734,7 @@
 				70FECF711C654FC3005B1A44 /* Segues */,
 				701D69BF1C48205B0047A67A /* Shared Controllers */,
 				707E10831C40796000FCF81C /* Shared Views */,
+				70460C581CBEF6710001B6D8 /* Theme */,
 				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
 				70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */,
@@ -849,6 +854,15 @@
 				70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		70460C581CBEF6710001B6D8 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */,
+				70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		70517E771CB715EF008556EC /* Maps */ = {
@@ -1508,6 +1522,7 @@
 				7071C4A61C6BCBF6006F4275 /* NGECaption.swift in Sources */,
 				7071C4E91C6BCBF6006F4275 /* NGEExperienceListType.swift in Sources */,
 				7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */,
+				70460C5A1CBEF67C0001B6D8 /* UIColor+Theme.swift in Sources */,
 				7071C5251C6BCBF6006F4275 /* NGEPresentationLanguagePairType.swift in Sources */,
 				7071C5261C6BCBF6006F4275 /* NGEPresentationListType.swift in Sources */,
 				7071C52B1C6BCBF6006F4275 /* NGEPrivateDataType.swift in Sources */,
@@ -1671,6 +1686,7 @@
 				70A3AC9B1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift in Sources */,
 				7071C5151C6BCBF6006F4275 /* NGEMoneyType.swift in Sources */,
 				7071C4A51C6BCBF6006F4275 /* NGEBasicMetadataType.swift in Sources */,
+				70460C5C1CBEF6980001B6D8 /* UIImage+Theme.swift in Sources */,
 				70517E7C1CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift in Sources */,
 				7071C5421C6BCBF6006F4275 /* NGETrackMetadata.swift in Sources */,
 				701D69C11C48205B0047A67A /* TalentDetailViewController.swift in Sources */,

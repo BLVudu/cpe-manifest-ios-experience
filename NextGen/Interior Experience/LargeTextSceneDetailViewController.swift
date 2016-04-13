@@ -23,7 +23,7 @@ class LargeTextSceneDetailViewController: SceneDetailViewController {
             if let imageURL = timedEvent.getImageURL(experience) {
                 imageView.setImageWithURL(imageURL)
             } else {
-                imageView.image = UIImage(named: "MOSDefault")
+                imageView.image = UIImage.themeDefaultImage16By9()
             }
         }
     }

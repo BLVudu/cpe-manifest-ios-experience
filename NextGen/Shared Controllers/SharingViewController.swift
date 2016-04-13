@@ -34,7 +34,7 @@ class SharingViewController: SceneDetailViewController {
         if let imageURL = timedEvent.getImageURL(self.experience!) {
             clipThumbnailImageView.setImageWithURL(imageURL)
         } else {
-            clipThumbnailImageView.image = UIImage(named: "MOSDefault")
+            clipThumbnailImageView.image = UIImage.themeDefaultImage16By9()
         }
         
         _durationDidLoadObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
