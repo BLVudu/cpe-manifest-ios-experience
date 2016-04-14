@@ -755,37 +755,8 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
 	/* After the movie has played to its end time, seek back to time zero 
 		to play it again. */
-    /*
-    self.curIndex++;
-    if (self.curIndex < self.indexMax) {
-        //seekToZeroBeforePlay = YES;
-        self.countdownTimer.hidden = NO;
-        self.timer.hidden = NO;
-        self.playerControlsEnabled = NO;
-        [self pauseVideo];
-        self.countdownSeconds = 6;
-        self.countdown = [NSTimer scheduledTimerWithTimeInterval:1.0f
-                                         target:self
-                                       selector:@selector(subtractTime)
-                                       userInfo:nil
-                                        repeats:YES];
-        NSDictionary* dict = [NSDictionary dictionaryWithObject:
-                        [NSNumber numberWithInt:self.curIndex]
-                                                     forKey:@"index"];
-
-        double delayInSeconds = 5.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerWillPlayNextItem object:self userInfo:dict];
-            self.countdownTimer.hidden = YES;
-            self.timer.hidden = YES;
-            self.playerControlsEnabled = YES;
-            self.countdownSeconds = 6;
-    
-        });
+    seekToZeroBeforePlay = YES;
     }
-     */
-}
 
 - (void)subtractTime {
  

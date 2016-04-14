@@ -154,7 +154,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     override func playerItemDidReachEnd(notification: NSNotification!) {
-        //super.playerItemDidReachEnd(notification)
+
         
         if !_didPlayInterstitial {
             _didPlayInterstitial = true
