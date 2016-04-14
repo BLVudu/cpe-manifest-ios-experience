@@ -12,89 +12,111 @@ protocol TalentDetailViewPresenter {
     func talentDetailViewShouldClose()
 }
 
-class TalentDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+enum TalentDetailMode: String {
+    case Synced = "TalentDetailModeSynced"
+    case Extras = "TalentDetailModeExtras"
+}
+
+class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     struct StoryboardSegue {
         static let ShowActorGallery = "showActorGallery"
     }
     
-    @IBOutlet weak var talentImageView: UIImageView!
-    @IBOutlet weak var talentNameLabel: UILabel!
-    @IBOutlet weak var talentBiographyHeaderLabel: UILabel!
-    @IBOutlet weak var talentBiographyLabel: UITextView!
+    @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var filmographyContainerView: UIView!
-    @IBOutlet weak var filmographyCollectionView: UICollectionView!
+    @IBOutlet weak private var _talentImageView: UIImageView!
+    @IBOutlet weak private var _talentNameLabel: UILabel!
+    @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
+    @IBOutlet weak private var _talentBiographyLabel: UITextView!
     
-    @IBOutlet weak var twitterButton: SocialButton!
-    @IBOutlet weak var facebookButton: SocialButton!
+    @IBOutlet weak private var _filmographyContainerView: UIView!
+    @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
+    @IBOutlet weak private var _filmographyCollectionView: UICollectionView!
+    
+    @IBOutlet weak private var _twitterButton: SocialButton!
+    @IBOutlet weak private var _facebookButton: SocialButton!
     
     var images = [String]()
-    var talent: Talent? = nil {
-        didSet {
-            talentNameLabel.text = talent?.name?.uppercaseString
-            if let imageURL = talent?.fullImageURL {
-                talentImageView.setImageWithURL(imageURL)
-            } else {
-                talentImageView.image = nil
-            }
-            
-            talent?.getBiography({ (biography) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.talentBiographyLabel.text = biography
-                })
-            })
-            
-            facebookButton.hidden = true
-            twitterButton.hidden = true
-            talent?.getSocialAccounts({ (socialAccounts) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if let socialAccounts = socialAccounts {
-                        for socialAccount in socialAccounts {
-                            if socialAccount.type == SocialAccountType.Facebook {
-                                self.facebookButton.hidden = false
-                                self.facebookButton.socialAccount = socialAccount
-                            } else if socialAccount.type == SocialAccountType.Twitter {
-                                self.twitterButton.hidden = false
-                                self.twitterButton.socialAccount = socialAccount
-                            }
-                        }
-                    }
-                })
-            })
-            
-            filmographyContainerView.hidden = true
-            talent?.getFilmography({ (films) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if films.count > 0 {
-                        self.filmographyContainerView.hidden = false
-                        self.filmographyCollectionView.reloadData()
-                    } else {
-                        self.filmographyContainerView.hidden = true
-                    }
-                })
-            })
-            
-            if talent != nil && talent?.gallery.count > 0{
-                images = (talent?.gallery)!
-            }
-        }
-    }
+    var talent: Talent!
+    var mode = TalentDetailMode.Extras
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        filmographyCollectionView.backgroundColor = UIColor.clearColor()
-        filmographyCollectionView.showsHorizontalScrollIndicator = true
+        // Localizations
+        _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
+        _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
+        
+        if mode == TalentDetailMode.Extras {
+            titleLabel.removeFromSuperview()
+            closeButton.removeFromSuperview()
+            _containerViewTopConstraint.constant = 20
+        }
+        
+        loadTalent(talent)
+    }
+    
+    func loadTalent(talent: Talent) {
+        self.talent = talent
+        
+        _talentNameLabel.text = talent.name?.uppercaseString
+        if let imageURL = talent.fullImageURL {
+            _talentImageView.setImageWithURL(imageURL)
+        } else {
+            _talentImageView.image = nil
+        }
+        
+        talent.getBiography({ (biography) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self._talentBiographyLabel.text = biography
+            })
+        })
+        
+        _facebookButton.hidden = true
+        _twitterButton.hidden = true
+        talent.getSocialAccounts({ (socialAccounts) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if let socialAccounts = socialAccounts {
+                    for socialAccount in socialAccounts {
+                        if socialAccount.type == SocialAccountType.Facebook {
+                            self._facebookButton.hidden = false
+                            self._facebookButton.socialAccount = socialAccount
+                        } else if socialAccount.type == SocialAccountType.Twitter {
+                            self._twitterButton.hidden = false
+                            self._twitterButton.socialAccount = socialAccount
+                        }
+                    }
+                }
+                
+                if self._twitterButton.hidden {
+                    self._twitterButton.removeFromSuperview()
+                }
+            })
+        })
+        
+        _filmographyCollectionView.backgroundColor = UIColor.clearColor()
+        _filmographyCollectionView.showsHorizontalScrollIndicator = true
+        _filmographyContainerView.hidden = true
+        talent.getFilmography({ (films) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if films.count > 0 {
+                    self._filmographyContainerView.hidden = false
+                    self._filmographyCollectionView.reloadData()
+                } else {
+                    self._filmographyContainerView.hidden = true
+                }
+            })
+        })
     }
     
     // MARK: Actions
-    @IBAction func close() {
+    override func close() {
         if self.parentViewController is TalentDetailViewPresenter {
             (self.parentViewController as! TalentDetailViewPresenter).talentDetailViewShouldClose()
         } else {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            super.close()
         }
     }
     

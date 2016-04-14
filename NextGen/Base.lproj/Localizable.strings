@@ -1,0 +1,41 @@
+// General labels
+"label.yes" = "Yes";
+"label.no" = "No";
+"label.close" = "Close";
+"label.home" = "Home";
+"label.back" = "Back";
+"label.commentary" = "Commentary";
+
+// Video labels
+"label.runtime" = "Runtime: %{runtime}";
+"label.watched" = "WATCHED";
+"label.playing" = "PLAYING";
+"label.time.hours" = "%{count} hr";
+"label.time.minutes" = "%{count} min";
+"label.time.seconds" = "%{count} sec";
+
+// Menu labels
+"label.all" = "All";
+"label.actors" = "Actors";
+
+// Info text
+"info.leaving_app.title" = "Leaving App";
+"info.leaving_app.message" = "Following this link will exit the app and launch your browser. Would you like to continue?";
+
+// Talent Detail
+"talentdetail.title" = "Actor";
+"talentdetail.biography" = "Biography";
+"talentdetail.filmography" = "Filmography";
+
+// Clip & Share"
+"clipshare.rotate" = "Rotate device to share clip";
+"clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
+"clipshare.send_button" = "Share this Clip";
+
+// Shopping
+"shopping.exact_match" = "Exact match";
+"shopping.close_match" = "Close match";
+"shopping.shop_button" = "Shop on TheTake.com";
+"shopping.send_button" = "Send the Link";
+"shopping.powered_by" = "Powered by";
+"shopping.disclaimer" = "No endorsement or sponsorship implied by any actor, studio or brand featured on TheTake.com";

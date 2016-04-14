@@ -16,14 +16,44 @@ class TalentTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel?
     @IBOutlet weak var roleLabel: UILabel?
     
-    var talent: Talent? = nil {
+    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    
+    private var _imageURL: NSURL? {
         didSet {
-            nameLabel?.text = talent?.name?.uppercaseString
-            roleLabel?.text = talent?.role
-            if let imageURL = talent?.thumbnailImageURL {
-                talentImageView.setImageWithURL(imageURL)
+            if let url = _imageURL {
+                if url != oldValue {
+                    _setImageSessionDataTask = talentImageView.setImageWithURL(url)
+                }
             } else {
                 talentImageView.image = nil
+            }
+        }
+    }
+    
+    private var _name: String? {
+        didSet {
+            nameLabel?.text = _name?.uppercaseString
+        }
+    }
+    
+    private var _role: String? {
+        didSet {
+            roleLabel?.text = _role
+        }
+    }
+    
+    var talent: Talent? {
+        didSet {
+            if let talent = talent {
+                if talent != oldValue {
+                    _name = talent.name
+                    _role = talent.role
+                    _imageURL = talent.thumbnailImageURL
+                }
+            } else {
+                _name = nil
+                _role = nil
+                _imageURL = nil
             }
         }
     }
@@ -32,6 +62,11 @@ class TalentTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         talent = nil
+        
+        if let task = _setImageSessionDataTask {
+            task.cancel()
+            _setImageSessionDataTask = nil
+        }
     }
     
     override func layoutSubviews() {
@@ -46,12 +81,12 @@ class TalentTableViewCell: UITableViewCell {
         if selected {
             talentImageView.layer.borderWidth = 2
             talentImageView.layer.borderColor = UIColor.whiteColor().CGColor
-            nameLabel?.textColor = UIColor(netHex: 0xffcd14)
-            roleLabel?.textColor = UIColor(netHex: 0xffcd14)
+            nameLabel?.textColor = UIColor.themePrimaryColor()
+            roleLabel?.textColor = UIColor.themePrimaryColor()
         } else {
             talentImageView.layer.borderWidth = 0
             nameLabel?.textColor = UIColor.whiteColor()
-            roleLabel?.textColor = UIColor(netHex: 0x999999)
+            roleLabel?.textColor = UIColor.themeLightGreyColor()
         }
     }
 

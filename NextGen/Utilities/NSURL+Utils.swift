@@ -11,10 +11,10 @@ import UIKit
 extension NSURL {
     
     func promptLaunchBrowser() {
-        let alertController = UIAlertController(title: "Leaving App", message: "Following this link will exit the app and launch your browser. Would you like to continue?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: String.localize("info.leaving_app.title"), message: String.localize("info.leaving_app.message"), preferredStyle: UIAlertControllerStyle.Alert)
         
-        alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+        alertController.addAction(UIAlertAction(title: String.localize("label.no"), style: UIAlertActionStyle.Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: String.localize("label.yes"), style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
             UIApplication.sharedApplication().openURL(self)
         }))
         

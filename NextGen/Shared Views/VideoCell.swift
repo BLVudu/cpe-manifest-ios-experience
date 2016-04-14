@@ -17,6 +17,8 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak var playIconImageView: UIImageView!
     @IBOutlet weak var runtimeLabel: UILabel!
     
+    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    
     var experience: NGDMExperience? {
         didSet {
             captionLabel.text = experience?.metadata?.title
@@ -32,7 +34,7 @@ class VideoCell: UITableViewCell {
             }
             
             if let imageURL = experience?.imageURL {
-                thumbnailImageView.setImageWithURL(imageURL)
+                _setImageSessionDataTask = thumbnailImageView.setImageWithURL(imageURL)
             } else {
                 thumbnailImageView.image = nil
             }
@@ -43,6 +45,11 @@ class VideoCell: UITableViewCell {
         super.prepareForReuse()
         
         experience = nil
+        
+        if let task = _setImageSessionDataTask {
+            task.cancel()
+            _setImageSessionDataTask = nil
+        }
     }
     
     override func layoutSubviews() {
@@ -60,7 +67,7 @@ class VideoCell: UITableViewCell {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
-                self.runtimeLabel.text = "PLAYING"
+                self.runtimeLabel.text = String.localize("label.playing")
                 self.runtimeLabel.layer.borderWidth = 1
                 self.runtimeLabel.layer.borderColor = UIColor.whiteColor().CGColor
             }, completion: nil)
@@ -77,7 +84,7 @@ class VideoCell: UITableViewCell {
     func updateCellStyle() {
         thumbnailImageView.layer.borderColor = UIColor.whiteColor().CGColor
         thumbnailImageView.layer.borderWidth = (self.selected ? 2 : 0)
-        captionLabel.textColor = (self.selected ? UIColor(netHex: 0xffcd14) : UIColor.whiteColor())
+        captionLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
         playIconImageView.hidden = self.selected
     }
     

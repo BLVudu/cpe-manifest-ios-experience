@@ -12,10 +12,6 @@ pod 'HockeySDK'
 pod 'MWPhotoBrowser'
 pod 'MBProgressHUD', '~> 0.9.2'
 
-pod 'FBSDKCoreKit', '~> 4.10'
-pod 'FBSDKShareKit', '~> 4.10'
-pod 'FBSDKLoginKit', '~> 4.10'
-pod 'TwitterKit', '~> 1.15'
-pod 'Google-Maps-iOS-SDK-for-Business', '~> 1.13.0'
+pod 'GoogleMaps', '~> 1.13.0'
 
 end

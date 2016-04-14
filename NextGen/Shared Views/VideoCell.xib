@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5TR-li-LKC" id="IzL-Yw-hoz">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kcr-fA-Eba">
@@ -36,11 +36,11 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Play_Button.png" translatesAutoresizingMaskIntoConstraints="NO" id="drI-l5-Cju">
-                        <rect key="frame" x="140" y="67" width="40" height="40"/>
+                    <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackPlayButton" translatesAutoresizingMaskIntoConstraints="NO" id="drI-l5-Cju">
+                        <rect key="frame" x="138" y="64" width="45" height="45"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="TWT-cm-drs"/>
-                            <constraint firstAttribute="height" constant="40" id="qdx-BD-nOe"/>
+                            <constraint firstAttribute="width" constant="45" id="TWT-cm-drs"/>
+                            <constraint firstAttribute="height" constant="45" id="qdx-BD-nOe"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWa-e0-61Q">
@@ -78,6 +78,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Play_Button.png" width="130" height="130"/>
+        <image name="BlackPlayButton" width="65" height="65"/>
     </resources>
 </document>

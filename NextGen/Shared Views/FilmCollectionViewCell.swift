@@ -14,13 +14,16 @@ class FilmCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    private var _getFilmImageSessionDataTask: NSURLSessionDataTask?
+    
     var film: TalentFilm? {
         didSet {
             if film != nil {
-                film!.getImageURL({ (imageURL) in
+                _getFilmImageSessionDataTask = film!.getImageURL({ (imageURL) in
                     dispatch_async(dispatch_get_main_queue(), {
                         if imageURL != nil {
-                            self.imageView.setImageWithURL(imageURL!)
+                            self._setImageSessionDataTask = self.imageView.setImageWithURL(imageURL!)
                         } else {
                             self.imageView.image = UIImage(named: "Blank Poster")
                         }
@@ -36,6 +39,16 @@ class FilmCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         film = nil
+        
+        if let task = _setImageSessionDataTask {
+            task.cancel()
+            _setImageSessionDataTask = nil
+        }
+        
+        if let task = _getFilmImageSessionDataTask {
+            task.cancel()
+            _getFilmImageSessionDataTask = nil
+        }
     }
     
 }

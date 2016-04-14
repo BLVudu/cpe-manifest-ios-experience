@@ -9,36 +9,26 @@
 import UIKit
 
 @IBDesignable class RoundImageView: UIImageView {
-    private var _round = false
-    @IBInspectable var round: Bool {
-        set {
-            _round = newValue
+    
+    @IBInspectable var round: Bool = false {
+        didSet {
             makeRound()
-        }
-        
-        get {
-            return _round
         }
     }
     
     override internal var frame: CGRect {
-        set {
-            super.frame = newValue
+        didSet {
             makeRound()
         }
-        
-        get {
-            return super.frame
-        }
-        
     }
     
     private func makeRound() {
-        if self.round {
+        if round {
             self.clipsToBounds = true
             self.layer.cornerRadius = (self.frame.width + self.frame.height) / 4
         } else {
             self.layer.cornerRadius = 0
         }
     }
+    
 }

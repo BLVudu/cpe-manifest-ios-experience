@@ -11,13 +11,12 @@ import Foundation
 typealias APIUtilSuccessBlock = (result: NSDictionary) -> Void
 typealias APIUtilErrorBlock = (error: NSError?) -> Void
 
-class APIUtil: NSObject {
+class APIUtil: NSObject, NSURLSessionDataDelegate {
     
     var apiDomain: String!
     
     init(apiDomain: String) {
         super.init()
-        
         self.apiDomain = apiDomain
     }
     
@@ -34,8 +33,8 @@ class APIUtil: NSObject {
     }
     
     func getJSONWithRequest(request: NSURLRequest, successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) -> NSURLSessionDataTask {
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: nil, delegateQueue: nil)
-        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
+        let task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
             if error == nil {
                 if let data = data {
                     do {

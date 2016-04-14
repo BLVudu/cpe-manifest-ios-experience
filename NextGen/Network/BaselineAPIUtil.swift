@@ -8,7 +8,7 @@
 
 import Foundation
 
-let kBaselineIdentifierNamespace = "baseline"
+let kBaselineIdentifierNamespace = "baselineapi.com"
 
 class BaselineAPIUtil: APIUtil {
     
@@ -45,10 +45,6 @@ class BaselineAPIUtil: APIUtil {
     
     var projectId: String!
     var apiKey: String!
-    
-    func isActive() -> Bool {
-        return projectId != nil
-    }
     
     func prefetchCredits(successBlock: (talents: [String: Talent]) -> Void) {
         getJSONWithPath(Endpoints.GetCredits, parameters: ["id": projectId, "apikey": apiKey], successBlock: { (result) -> Void in
@@ -124,8 +120,8 @@ class BaselineAPIUtil: APIUtil {
         }, errorBlock: nil)
     }
     
-    func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) {
-        getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
+    func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) -> NSURLSessionDataTask {
+        return getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 if results.count > 0 {
                     if let response = results[0] as? NSDictionary, imageURL = response[Keys.FullURL] as? String {
