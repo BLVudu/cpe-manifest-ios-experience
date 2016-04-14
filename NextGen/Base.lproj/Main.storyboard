@@ -282,10 +282,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="720" height="225"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lwb-KU-cen">
-                                                <rect key="frame" x="0.0" y="0.0" width="180" height="225"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="169" height="225"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="height" multiplier="1:1" id="Qwx-1B-uoC"/>
-                                                    <constraint firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="height" multiplier="4:5" id="zHJ-mq-dLp"/>
+                                                    <constraint firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="height" multiplier="3:4" id="zHJ-mq-dLp"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -294,7 +294,7 @@
                                                 </variation>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnf-g4-8JZ">
-                                                <rect key="frame" x="190" y="0.0" width="530" height="35"/>
+                                                <rect key="frame" x="179" y="0.0" width="541" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="IJb-pS-Jwe"/>
                                                 </constraints>
@@ -303,7 +303,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rYN-Hg-IFa">
-                                                <rect key="frame" x="190" y="72" width="530" height="153"/>
+                                                <rect key="frame" x="179" y="72" width="541" height="153"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -311,7 +311,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BIOGRAPHY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4Z-td-umT">
-                                                <rect key="frame" x="190" y="45" width="530" height="27"/>
+                                                <rect key="frame" x="179" y="45" width="541" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="4k9-wO-UUA"/>
                                                 </constraints>
@@ -319,6 +319,17 @@
                                                 <color key="textColor" red="0.61960784310000006" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gS-eh-Xo0" customClass="SocialButton" customModule="NextGen" customModuleProvider="target">
+                                                <rect key="frame" x="586" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Cnc-pr-0ZA"/>
+                                                    <constraint firstAttribute="width" constant="40" id="FBm-Jy-YF7"/>
+                                                </constraints>
+                                                <state key="normal" image="Twitter Icon"/>
+                                                <connections>
+                                                    <action selector="openSocialURL:" destination="enc-ld-Xnm" eventType="touchUpInside" id="3Fy-bQ-VpR"/>
+                                                </connections>
+                                            </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpb-HK-BKq" customClass="SocialButton" customModule="NextGen" customModuleProvider="target">
                                                 <rect key="frame" x="633" y="0.0" width="40" height="40"/>
                                                 <constraints>
@@ -336,7 +347,7 @@
                                                     <constraint firstAttribute="width" constant="40" id="R5R-ra-CXh"/>
                                                     <constraint firstAttribute="height" constant="40" id="XG1-Ch-Fqu"/>
                                                 </constraints>
-                                                <state key="normal" image="Twitter Icon"/>
+                                                <state key="normal" image="Instagram Icon"/>
                                                 <connections>
                                                     <action selector="openSocialURL:" destination="enc-ld-Xnm" eventType="touchUpInside" id="80j-pt-hil"/>
                                                 </connections>
@@ -346,7 +357,9 @@
                                             <constraint firstItem="Lpb-HK-BKq" firstAttribute="top" secondItem="4tt-Nb-jWC" secondAttribute="top" id="0fk-X7-a6k"/>
                                             <constraint firstAttribute="trailing" secondItem="rYN-Hg-IFa" secondAttribute="trailing" id="8RX-0K-LND"/>
                                             <constraint firstAttribute="trailing" secondItem="Lpb-HK-BKq" secondAttribute="trailing" priority="750" id="8Wr-Zd-6NW"/>
+                                            <constraint firstItem="ZTb-fR-a9k" firstAttribute="leading" secondItem="8gS-eh-Xo0" secondAttribute="trailing" priority="750" constant="7" id="DCM-cU-txU"/>
                                             <constraint firstItem="rYN-Hg-IFa" firstAttribute="bottom" secondItem="Lwb-KU-cen" secondAttribute="bottom" id="DPc-Hs-Yo0"/>
+                                            <constraint firstItem="8gS-eh-Xo0" firstAttribute="top" secondItem="4tt-Nb-jWC" secondAttribute="top" id="Dv3-Oa-8zF"/>
                                             <constraint firstAttribute="trailing" secondItem="ZTb-fR-a9k" secondAttribute="trailing" id="FcH-32-7H2"/>
                                             <constraint firstItem="ZTb-fR-a9k" firstAttribute="top" secondItem="4tt-Nb-jWC" secondAttribute="top" id="Fci-Dt-wNe"/>
                                             <constraint firstItem="Lwb-KU-cen" firstAttribute="leading" secondItem="4tt-Nb-jWC" secondAttribute="leading" id="Fsk-PB-EaW"/>
@@ -355,9 +368,11 @@
                                             <constraint firstItem="B4Z-td-umT" firstAttribute="top" secondItem="hnf-g4-8JZ" secondAttribute="bottom" constant="10" id="Ply-98-AlW"/>
                                             <constraint firstItem="rYN-Hg-IFa" firstAttribute="leading" secondItem="Lwb-KU-cen" secondAttribute="trailing" constant="10" id="Pu8-UT-tak"/>
                                             <constraint firstAttribute="bottom" secondItem="Lwb-KU-cen" secondAttribute="bottom" id="Rlc-0Y-6rf"/>
+                                            <constraint firstItem="Lpb-HK-BKq" firstAttribute="leading" secondItem="8gS-eh-Xo0" secondAttribute="trailing" constant="7" id="ULT-gt-ajU"/>
                                             <constraint firstItem="hnf-g4-8JZ" firstAttribute="leading" secondItem="Lwb-KU-cen" secondAttribute="trailing" constant="10" id="Ugi-rg-jd4"/>
                                             <constraint firstAttribute="trailing" secondItem="hnf-g4-8JZ" secondAttribute="trailing" id="Vvy-18-A51"/>
                                             <constraint firstItem="Lwb-KU-cen" firstAttribute="top" secondItem="4tt-Nb-jWC" secondAttribute="top" id="c2s-Zr-iky"/>
+                                            <constraint firstAttribute="trailing" secondItem="8gS-eh-Xo0" secondAttribute="trailing" priority="250" id="frG-fg-PGf"/>
                                             <constraint firstAttribute="trailing" secondItem="B4Z-td-umT" secondAttribute="trailing" id="gsh-WR-kpc"/>
                                             <constraint firstItem="B4Z-td-umT" firstAttribute="leading" secondItem="Lwb-KU-cen" secondAttribute="trailing" constant="10" id="hZd-dW-b9P"/>
                                             <constraint firstItem="ZTb-fR-a9k" firstAttribute="leading" secondItem="Lpb-HK-BKq" secondAttribute="trailing" constant="7" id="qm5-42-ACR"/>
@@ -458,15 +473,21 @@
                     <size key="freeformSize" width="800" height="600"/>
                     <connections>
                         <outlet property="_containerViewTopConstraint" destination="Q1L-ef-7G7" id="rdf-vE-2X1"/>
-                        <outlet property="_facebookButton" destination="Lpb-HK-BKq" id="5xg-MD-TOA"/>
+                        <outlet property="_facebookButton" destination="Lpb-HK-BKq" id="cv4-xF-8uI"/>
+                        <outlet property="_facebookMainConstraint" destination="qm5-42-ACR" id="rSn-Cu-tzI"/>
+                        <outlet property="_facebookNoInstagramConstraint" destination="8Wr-Zd-6NW" id="NKb-Hn-PJw"/>
                         <outlet property="_filmographyCollectionView" destination="uLZ-Nf-NFJ" id="Hyz-7C-VgH"/>
                         <outlet property="_filmographyContainerView" destination="Rja-JM-bvB" id="Xy5-JR-2vX"/>
                         <outlet property="_filmographyHeaderLabel" destination="12p-Wd-gSB" id="GoK-jK-T5o"/>
+                        <outlet property="_instagramButton" destination="ZTb-fR-a9k" id="iDB-J2-pPr"/>
                         <outlet property="_talentBiographyHeaderLabel" destination="B4Z-td-umT" id="yB2-vd-gjq"/>
                         <outlet property="_talentBiographyLabel" destination="rYN-Hg-IFa" id="Gmc-Sk-yt1"/>
                         <outlet property="_talentImageView" destination="Lwb-KU-cen" id="fT6-Hi-soR"/>
                         <outlet property="_talentNameLabel" destination="hnf-g4-8JZ" id="WBt-kC-VrZ"/>
-                        <outlet property="_twitterButton" destination="ZTb-fR-a9k" id="ZtH-Zk-XqJ"/>
+                        <outlet property="_twitterButton" destination="8gS-eh-Xo0" id="OGj-LA-9Ho"/>
+                        <outlet property="_twitterMainConstraint" destination="ULT-gt-ajU" id="l6E-nw-bEs"/>
+                        <outlet property="_twitterNoFacebookConstraint" destination="DCM-cU-txU" id="0wT-jl-FQ0"/>
+                        <outlet property="_twitterNoFacebookNoInstagramConstraint" destination="frG-fg-PGf" id="G5f-Gm-QX0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kJC-If-Wnn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2126,6 +2147,7 @@
         <image name="Commentary" width="17" height="17"/>
         <image name="Facebook Icon" width="75" height="75"/>
         <image name="Home" width="18" height="18"/>
+        <image name="Instagram Icon" width="75" height="75"/>
         <image name="MOSBackground" width="1024" height="768"/>
         <image name="MOSExtras" width="264" height="101"/>
         <image name="MOSIMEBackground" width="2048" height="1427"/>
