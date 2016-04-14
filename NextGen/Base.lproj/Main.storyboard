@@ -67,15 +67,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MOSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-I9-ecR" userLabel="Logo Treatement">
-                                        <rect key="frame" x="120" y="225" width="266" height="36"/>
+                                        <rect key="frame" x="135" y="250" width="330" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="YSS-I9-ecR" secondAttribute="height" multiplier="15:2" id="DQw-oz-4mv"/>
+                                            <constraint firstAttribute="height" constant="50" id="gLo-SG-aOZ"/>
+                                            <constraint firstAttribute="width" constant="330" id="s84-m4-jPU"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-Mu-C6w">
-                                        <rect key="frame" x="120" y="271" width="266" height="73"/>
+                                        <rect key="frame" x="115" y="300" width="370" height="100"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="D1l-Mu-C6w" secondAttribute="height" multiplier="150:41" id="hpb-dg-cQC"/>
+                                            <constraint firstAttribute="width" constant="370" id="2ja-pw-zeJ"/>
+                                            <constraint firstAttribute="height" constant="100" id="SCY-E9-N4d"/>
                                             <constraint firstAttribute="height" constant="82" id="nar-8f-A9w"/>
                                         </constraints>
                                         <state key="normal" image="MOSPlay">
@@ -91,9 +93,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBy-bL-9Wq">
-                                        <rect key="frame" x="165" y="329" width="177" height="67"/>
+                                        <rect key="frame" x="200" y="390" width="200" height="77"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="oBy-bL-9Wq" secondAttribute="height" multiplier="50:19" id="jVu-U8-HB3"/>
+                                            <constraint firstAttribute="height" constant="77" id="AeF-60-gjf"/>
+                                            <constraint firstAttribute="width" constant="200" id="pTP-5G-8ca"/>
                                         </constraints>
                                         <state key="normal" image="MOSExtras">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,17 +107,15 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="top" secondItem="D1l-Mu-C6w" secondAttribute="bottom" constant="-15" id="9NM-5v-OWw"/>
-                                    <constraint firstItem="YSS-I9-ecR" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="top" constant="225" id="GGm-07-xji"/>
+                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="centerX" secondItem="YSS-I9-ecR" secondAttribute="centerX" id="8OQ-MS-61I"/>
                                     <constraint firstAttribute="bottom" secondItem="gA2-16-mAf" secondAttribute="bottom" id="LlW-y3-uxX"/>
-                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="centerX" secondItem="D1l-Mu-C6w" secondAttribute="centerX" id="Upn-rc-DH1"/>
-                                    <constraint firstItem="YSS-I9-ecR" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" constant="120" id="ZH5-9h-FLn"/>
-                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="top" secondItem="YSS-I9-ecR" secondAttribute="bottom" constant="11" id="d29-rd-1wl"/>
-                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="width" secondItem="D1l-Mu-C6w" secondAttribute="width" multiplier="2/3" id="e0T-Cb-Byu"/>
+                                    <constraint firstItem="oBy-bL-9Wq" firstAttribute="top" secondItem="D1l-Mu-C6w" secondAttribute="bottom" constant="-10" id="O7g-A8-tTG"/>
+                                    <constraint firstItem="YSS-I9-ecR" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="top" constant="250" id="OdZ-og-iyf"/>
+                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="top" secondItem="YSS-I9-ecR" secondAttribute="bottom" id="e3m-zX-MjR"/>
+                                    <constraint firstItem="YSS-I9-ecR" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" constant="135" id="eSu-F5-AhX"/>
                                     <constraint firstItem="gA2-16-mAf" firstAttribute="leading" secondItem="gKy-zB-UIg" secondAttribute="leading" id="g7X-UE-nZc"/>
                                     <constraint firstItem="YSS-I9-ecR" firstAttribute="width" secondItem="gKy-zB-UIg" secondAttribute="width" multiplier="0.26" id="neb-Ls-fgb"/>
-                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="width" secondItem="YSS-I9-ecR" secondAttribute="width" id="o6C-X8-qcV"/>
-                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="centerX" secondItem="YSS-I9-ecR" secondAttribute="centerX" id="rJ8-oe-IpG"/>
+                                    <constraint firstItem="D1l-Mu-C6w" firstAttribute="centerX" secondItem="YSS-I9-ecR" secondAttribute="centerX" id="tyD-2E-Nzz"/>
                                     <constraint firstItem="gA2-16-mAf" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="top" id="ucS-G1-kBG"/>
                                     <constraint firstAttribute="trailing" secondItem="gA2-16-mAf" secondAttribute="trailing" id="vTz-ex-Wiv"/>
                                 </constraints>
@@ -129,7 +130,6 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="gKy-zB-UIg" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3ci-gX-Aos"/>
-                            <constraint firstItem="YSS-I9-ecR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.26" id="DQZ-UU-ecU"/>
                             <constraint firstItem="gKy-zB-UIg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UYv-i2-Fjy"/>
                             <constraint firstAttribute="trailing" secondItem="gKy-zB-UIg" secondAttribute="trailing" id="Z0n-8s-4Va"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gKy-zB-UIg" secondAttribute="bottom" priority="750" id="s0f-b4-4Lk"/>
@@ -868,7 +868,7 @@
                                         <rect key="frame" x="0.0" y="28" width="408" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">
@@ -2131,10 +2131,10 @@
         <image name="Facebook Icon" width="75" height="75"/>
         <image name="Home" width="18" height="18"/>
         <image name="MOSBackground" width="1024" height="768"/>
-        <image name="MOSExtras" width="262" height="100"/>
+        <image name="MOSExtras" width="264" height="101"/>
         <image name="MOSIMEBackground" width="2048" height="1427"/>
         <image name="MOSLogo" width="461" height="81"/>
-        <image name="MOSPlay" width="490" height="133"/>
+        <image name="MOSPlay" width="495" height="135"/>
         <image name="Maximize" width="25" height="25"/>
         <image name="Maximize Highlighted" width="25" height="25"/>
         <image name="Pause Button" width="25" height="25"/>
