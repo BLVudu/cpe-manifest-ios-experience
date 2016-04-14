@@ -24,12 +24,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     private var _previewPlayURL: NSURL?
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
+
     
     
     // MARK: Initialization
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(_willPlayNextItemObserver)
+
     }
 
     // MARK: View Lifecycle
@@ -46,11 +48,15 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
                 if index < strongSelf.experience.childExperiences.count {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    let formerIndexPath = NSIndexPath(forItem: index-1, inSection: 0)
                     strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
                     strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
+                    strongSelf.tableView(strongSelf.galleryTableView, didDeselectRowAtIndexPath: formerIndexPath)
+                   
                 }
             }
         }
+        
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
