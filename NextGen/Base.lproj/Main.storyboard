@@ -44,7 +44,6 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
-            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -885,7 +884,7 @@
                                         <rect key="frame" x="0.0" y="28" width="408" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">
@@ -994,33 +993,13 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cbz-fT-NUV" userLabel="Activity Indicator">
                                 <rect key="frame" x="494" y="369" width="37" height="29"/>
                             </activityIndicatorView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxP-Uc-jyH">
-                                <rect key="frame" x="0.0" y="76" width="300" height="40"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUd-3G-JmP">
-                                        <rect key="frame" x="20" y="0.0" width="140" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="140" id="HYt-Ry-hsP"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxP-Uc-jyH" customClass="CircularProgressView" customModule="NextGen" customModuleProvider="target">
+                                <rect key="frame" x="45" y="20" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="fUd-3G-JmP" firstAttribute="top" secondItem="kxP-Uc-jyH" secondAttribute="top" id="KKU-9F-87I"/>
-                                    <constraint firstAttribute="bottom" secondItem="fUd-3G-JmP" secondAttribute="bottom" id="TTG-Tm-LbK"/>
-                                    <constraint firstAttribute="trailing" secondItem="fUd-3G-JmP" secondAttribute="trailing" id="qHo-5l-SsZ"/>
-                                    <constraint firstItem="fUd-3G-JmP" firstAttribute="leading" secondItem="kxP-Uc-jyH" secondAttribute="leading" constant="20" id="sQq-Ii-sDt"/>
                                     <constraint firstAttribute="height" constant="40" id="tAG-kB-uYB"/>
-                                    <constraint firstAttribute="width" constant="300" id="vES-nR-pYc"/>
+                                    <constraint firstAttribute="width" constant="40" id="vES-nR-pYc"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="qHo-5l-SsZ"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-Vu-ikZ" userLabel="Top Toolbar">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="75"/>
@@ -1192,6 +1171,7 @@
                             <constraint firstAttribute="bottom" secondItem="HZD-oz-ZXg" secondAttribute="bottom" id="DzX-Ic-rcn"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="leading" secondItem="cbz-fT-NUV" secondAttribute="trailing" constant="84" id="FDg-kV-KIm"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="74" id="Hgi-El-ngk"/>
+                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="20" id="JSh-yx-EK6"/>
                             <constraint firstAttribute="centerY" secondItem="HZD-oz-ZXg" secondAttribute="centerY" id="NGJ-V2-Xef"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3ZM-tJ-9zk" secondAttribute="trailing" constant="-16" id="PQ3-eq-VT7"/>
                             <constraint firstAttribute="trailing" secondItem="VY7-Vu-ikZ" secondAttribute="trailing" id="TVX-rr-5DP"/>
@@ -1201,13 +1181,13 @@
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leadingMargin" priority="750" constant="600" id="cbf-Yo-Ojk"/>
                             <constraint firstAttribute="bottom" secondItem="tdq-om-9xU" secondAttribute="bottom" id="edM-Ea-fe1"/>
                             <constraint firstItem="tdq-om-9xU" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="etO-mi-IvY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="kxP-Uc-jyH" secondAttribute="trailing" constant="704" id="fcK-Ni-ivB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kxP-Uc-jyH" secondAttribute="trailing" constant="919" id="fcK-Ni-ivB"/>
                             <constraint firstAttribute="trailing" secondItem="tdq-om-9xU" secondAttribute="trailing" id="fyL-K2-PAp"/>
                             <constraint firstAttribute="centerY" secondItem="cbz-fT-NUV" secondAttribute="centerY" constant="0.5" id="g9C-79-alw"/>
                             <constraint firstAttribute="bottom" secondItem="3ZM-tJ-9zk" secondAttribute="bottom" constant="374" id="jU5-Rp-Zvy"/>
                             <constraint firstItem="HZD-oz-ZXg" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="kNv-IZ-Bbp"/>
-                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="bottom" constant="1" id="nUh-rg-ryi"/>
-                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leadingMargin" constant="-20" id="oPL-Ay-SwS"/>
+                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="bottom" priority="250" constant="30" id="nUh-rg-ryi"/>
+                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leadingMargin" constant="25" id="oPL-Ay-SwS"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="74" id="sMR-Ns-nBa"/>
                         </constraints>
                         <variation key="default">
@@ -1228,8 +1208,9 @@
                         <outlet property="_commentaryView" destination="3ZM-tJ-9zk" id="e9d-SM-nuc"/>
                         <outlet property="_homeButton" destination="aLt-Qu-Yg8" id="neb-30-wLZ"/>
                         <outlet property="activityIndicator" destination="cbz-fT-NUV" id="2GD-nb-I0M"/>
-                        <outlet property="countdown" destination="fUd-3G-JmP" id="ju7-5P-CjX"/>
-                        <outlet property="countdownTimer" destination="fUd-3G-JmP" id="3Oz-Dp-1yr"/>
+                        <outlet property="commentaryBtn" destination="7Uk-RH-L9W" id="mLA-wD-qAt"/>
+                        <outlet property="commentaryView" destination="3ZM-tJ-9zk" id="Bw5-yc-eO6"/>
+                        <outlet property="countdown" destination="kxP-Uc-jyH" id="QMm-gr-Td3"/>
                         <outlet property="durationLabel" destination="c6W-KZ-1CO" id="agC-Tl-gJZ"/>
                         <outlet property="fullScreenButton" destination="hQ6-y2-KsL" id="QEK-g6-Bkd"/>
                         <outlet property="pauseButton" destination="Fre-sx-P7e" id="xPZ-ZP-9To"/>
@@ -1240,7 +1221,7 @@
                         <outlet property="shareButton" destination="qXp-GM-Ma6" id="qFn-pG-YML"/>
                         <outlet property="tapGestureRecognizer" destination="r3s-SR-OYc" id="32O-Fs-uuC"/>
                         <outlet property="timeElapsedLabel" destination="uap-nw-qBj" id="Vp9-Te-KOf"/>
-                        <outlet property="timer" destination="fUd-3G-JmP" id="NsR-8B-4e9"/>
+                        <outlet property="toolbar" destination="VY7-Vu-ikZ" id="Caf-si-4Ch"/>
                         <outlet property="topToolbar" destination="VY7-Vu-ikZ" id="oK3-nh-CIz"/>
                     </connections>
                 </viewController>

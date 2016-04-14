@@ -48,7 +48,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 @property (weak, nonatomic)   IBOutlet  UILabel                         *durationLabel;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *subtitlesButton;
 @property (strong, nonatomic)           NSTimer                         *countdown;
-@property (assign, nonatomic)           NSUInteger                      countdownSeconds;
 @property (strong, nonatomic)           NSArray                         *videoURLS;
 
 
@@ -756,7 +755,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
 	/* After the movie has played to its end time, seek back to time zero 
 		to play it again. */
-    
+    /*
     self.curIndex++;
     if (self.curIndex < self.indexMax) {
         //seekToZeroBeforePlay = YES;
@@ -785,6 +784,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     
         });
     }
+     */
 }
 
 - (void)subtractTime {

@@ -102,6 +102,7 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
  * @see setPlayPauseVisible:
  */
 @property (nonatomic, assign)           BOOL                             playerControlsVisible;
+@property (assign, nonatomic)           NSUInteger                      countdownSeconds;
 
 /**
  * Locks the top toolbar visibility so showing/hiding is not effective

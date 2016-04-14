@@ -38,12 +38,20 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     private var _controlsAreLocked = false
     
     var showCountdownTimer = false
-    
     @IBOutlet weak private var _commentaryView: UIView!
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
-    @IBOutlet weak var countdown: UIView!
     private var _sharePopoverController: UIPopoverController!
+
+
+    var countdownTimer: NSTimer!
+    
+    @IBOutlet weak var commentaryView: UIView!
+    @IBOutlet weak var commentaryBtn: UIButton!
+    @IBOutlet weak var toolbar: UIView!
+
+    @IBOutlet weak var countdown: CircularProgressView!
+
     
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
@@ -55,6 +63,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.countdown.hidden = true
         
         // Localizations
         _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
@@ -93,7 +102,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             _didPlayInterstitial = true
             self.shareButton.removeFromSuperview()
             self.playerControlsVisible = false
-            self.lockTopToolbar = true
+            //self.lockTopToolbar = true
+            self.toolbar.removeFromSuperview()
             
             if mode == VideoPlayerMode.SupplementalInMovie {
                 self.fullScreenButton.removeFromSuperview()
@@ -144,16 +154,51 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     override func playerItemDidReachEnd(notification: NSNotification!) {
-        super.playerItemDidReachEnd(notification)
+        //super.playerItemDidReachEnd(notification)
         
         if !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
         }
+        
+        self.curIndex += 1
+        if (self.curIndex < self.indexMax) {
+            
+            self.pauseVideo()
+            self.countdownSeconds = 5;
+            self.countdown.hidden = false
+            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(self.subtractTime), userInfo: nil, repeats: true)
+            self.countdown.animateTimer()
+            let delayInSeconds = 5.0;
+            let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
+            dispatch_after(popTime, dispatch_get_main_queue(), {
+            NSNotificationCenter.defaultCenter().postNotificationName(kWBVideoPlayerWillPlayNextItem, object:self,userInfo:["index": NSNumber(int: self.curIndex)])
+            self.countdown.hidden = true;
+            self.countdownSeconds = 5;
+            
+            });
+
+        }
     }
     
+
     
-    // MARK: Actions
+   
+
+        func subtractTime(){
+        
+        if (self.countdownSeconds == 0) {
+            self.countdownTimer.invalidate();
+            self.countdownSeconds = 5;
+            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+        } else {
+            
+            self.countdownSeconds -= 1;
+            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+            }
+        }
+
+ // MARK: Actions
     override func done(sender: AnyObject?) {
         super.done(sender)
         
@@ -184,6 +229,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         }
     }
     
+
+
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
         if !_controlsAreLocked {
             if !_didPlayInterstitial {
