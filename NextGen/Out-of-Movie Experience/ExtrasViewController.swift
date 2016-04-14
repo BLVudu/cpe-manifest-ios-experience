@@ -12,6 +12,13 @@ import AVFoundation
 
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
+    struct Constants {
+        static let CollectionViewItemSpacing: CGFloat = 12
+        static let CollectionViewLineSpacing: CGFloat = 12
+        static let CollectionViewPadding: CGFloat = 15
+        static let CollectionViewItemAspectRatio: CGFloat = 338 / 230
+    }
+    
     struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
         static let ShowVideoGallery = "ExtrasVideoGallerySegue"
@@ -163,11 +170,20 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 2) - 25, 230)
+        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / 2) - (Constants.CollectionViewItemSpacing * 2)
+        return CGSizeMake(itemWidth, itemWidth / Constants.CollectionViewItemAspectRatio)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewLineSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewItemSpacing
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(15, 15, 15, 15)
+        return UIEdgeInsetsMake(Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding)
     }
     
     // MARK: Storyboard

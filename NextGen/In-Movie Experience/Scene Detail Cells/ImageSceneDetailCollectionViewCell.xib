@@ -23,9 +23,6 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOo-by-sXh" userLabel="Description Label">
                         <rect key="frame" x="8" y="190" width="267" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="xhv-7i-4Ep"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -65,6 +62,7 @@
                 <constraint firstItem="5fk-Fh-dR6" firstAttribute="top" secondItem="fWH-EQ-JgA" secondAttribute="top" constant="5" id="E8r-Gf-Kvm"/>
                 <constraint firstItem="lyy-kk-llG" firstAttribute="centerY" secondItem="RC2-bx-j7n" secondAttribute="centerY" id="F4h-kK-8DI"/>
                 <constraint firstAttribute="trailing" secondItem="VOo-by-sXh" secondAttribute="trailing" constant="8" id="JpM-Vr-kS9"/>
+                <constraint firstAttribute="bottom" secondItem="VOo-by-sXh" secondAttribute="bottom" constant="10" id="QX4-7t-yCW"/>
                 <constraint firstItem="RC2-bx-j7n" firstAttribute="leading" secondItem="fWH-EQ-JgA" secondAttribute="leading" constant="8" id="dZs-Bo-Jf0"/>
                 <constraint firstAttribute="trailing" secondItem="RC2-bx-j7n" secondAttribute="trailing" constant="8" id="e1V-Wd-nLw"/>
                 <constraint firstItem="VOo-by-sXh" firstAttribute="leading" secondItem="fWH-EQ-JgA" secondAttribute="leading" constant="8" id="jSc-W1-c3E"/>

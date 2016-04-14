@@ -32,9 +32,6 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extra Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVU-yc-tFK" userLabel="Extra Description Label">
                         <rect key="frame" x="8" y="190" width="267" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="LQI-1H-9Rj"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="16"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -74,6 +71,7 @@
                 <constraint firstItem="RC2-bx-j7n" firstAttribute="top" secondItem="fWH-EQ-JgA" secondAttribute="top" priority="750" constant="5" id="A2M-F4-1A3"/>
                 <constraint firstItem="5fk-Fh-dR6" firstAttribute="leading" secondItem="fWH-EQ-JgA" secondAttribute="leading" constant="8" id="B2o-Me-hO3"/>
                 <constraint firstItem="5fk-Fh-dR6" firstAttribute="top" secondItem="fWH-EQ-JgA" secondAttribute="top" constant="5" id="E8r-Gf-Kvm"/>
+                <constraint firstAttribute="bottom" secondItem="GVU-yc-tFK" secondAttribute="bottom" constant="10" id="Eoa-4M-x9C"/>
                 <constraint firstAttribute="trailing" secondItem="VOo-by-sXh" secondAttribute="trailing" constant="8" id="JpM-Vr-kS9"/>
                 <constraint firstItem="GVU-yc-tFK" firstAttribute="top" secondItem="RC2-bx-j7n" secondAttribute="bottom" constant="5" id="LJx-fF-0BW"/>
                 <constraint firstItem="RC2-bx-j7n" firstAttribute="leading" secondItem="fWH-EQ-JgA" secondAttribute="leading" constant="8" id="dZs-Bo-Jf0"/>

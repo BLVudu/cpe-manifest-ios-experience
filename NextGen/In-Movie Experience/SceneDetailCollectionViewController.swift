@@ -20,8 +20,10 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     struct Constants {
-        static let ItemsPerRow: CGFloat = 2.0
-        static let ItemSpacing: CGFloat = 10.0
+        static let ItemsPerRow: CGFloat = 2
+        static let ItemSpacing: CGFloat = 10
+        static let LineSpacing: CGFloat = 10
+        static let ItemAspectRatio: CGFloat = 286 / 220
     }
     
     struct ExperienceCellData {
@@ -220,11 +222,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow), 220)
+        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow)
+        return CGSizeMake(itemWidth, itemWidth / Constants.ItemAspectRatio)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return Constants.ItemSpacing
+        return Constants.LineSpacing
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
