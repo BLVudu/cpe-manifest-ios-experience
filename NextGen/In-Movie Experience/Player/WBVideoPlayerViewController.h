@@ -90,6 +90,7 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 @property (nonatomic, weak)   IBOutlet  WBVideoPlayerPlaybackView       *playbackView;
 @property (readwrite, nonatomic)        NSInteger                        playerControlsAutoHideTime;
 @property (strong, nonatomic)           NSTimer                         *playerControlsAutoHideTimer;
+@property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *shareButton;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *fullScreenButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
@@ -103,11 +104,6 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
  */
 @property (nonatomic, assign)           BOOL                             playerControlsVisible;
 @property (assign, nonatomic)           NSUInteger                      countdownSeconds;
-
-/**
- * Locks the top toolbar visibility so showing/hiding is not effective
- */
-@property (nonatomic, assign)           BOOL                            lockTopToolbar;
 
 @property (nonatomic, assign)           int                             indexMax;
 @property (nonatomic, assign)           int                             curIndex;

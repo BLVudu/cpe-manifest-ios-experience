@@ -42,17 +42,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
     private var _sharePopoverController: UIPopoverController!
-
-
-    var countdownTimer: NSTimer!
     
-    @IBOutlet weak var commentaryView: UIView!
-    @IBOutlet weak var commentaryBtn: UIButton!
-    @IBOutlet weak var toolbar: UIView!
-
     @IBOutlet weak var countdown: CircularProgressView!
+    var countdownTimer: NSTimer!
 
-    
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
     
@@ -102,8 +95,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             _didPlayInterstitial = true
             self.shareButton.removeFromSuperview()
             self.playerControlsVisible = false
-            //self.lockTopToolbar = true
-            self.toolbar.removeFromSuperview()
+            self.topToolbar.removeFromSuperview()
             
             if mode == VideoPlayerMode.SupplementalInMovie {
                 self.fullScreenButton.removeFromSuperview()
@@ -181,24 +173,18 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         }
     }
     
-
-    
-   
-
-        func subtractTime(){
-        
+    func subtractTime() {
         if (self.countdownSeconds == 0) {
             self.countdownTimer.invalidate();
             self.countdownSeconds = 5;
-            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
         } else {
-            
             self.countdownSeconds -= 1;
-            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
-            }
         }
+        
+        self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+    }
 
- // MARK: Actions
+    // MARK: Actions
     override func done(sender: AnyObject?) {
         super.done(sender)
         
