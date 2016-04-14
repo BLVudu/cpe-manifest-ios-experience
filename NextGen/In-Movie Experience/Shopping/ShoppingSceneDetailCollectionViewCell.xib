@@ -45,10 +45,6 @@
                         <color key="textColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view hidden="YES" clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oze-va-tSx">
-                        <rect key="frame" x="136" y="114" width="5" height="5"/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOo-by-sXh" userLabel="Description Label">
                         <rect key="frame" x="8" y="160" width="267" height="25"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -60,6 +56,9 @@
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="1" height="1"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Shopping Bullseye" translatesAutoresizingMaskIntoConstraints="NO" id="rVp-92-1V3">
+                        <rect key="frame" x="131" y="100" width="20" height="20"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -84,13 +83,16 @@
             </constraints>
             <size key="customSize" width="50" height="120"/>
             <connections>
-                <outlet property="bullseyeView" destination="Oze-va-tSx" id="75s-ff-Fmv"/>
+                <outlet property="_bullseyeImageView" destination="rVp-92-1V3" id="zTV-qa-Bkg"/>
+                <outlet property="_extraDescriptionLabel" destination="GVU-yc-tFK" id="iv6-L9-mnb"/>
+                <outlet property="_imageView" destination="RC2-bx-j7n" id="hDf-LE-qnO"/>
                 <outlet property="descriptionLabel" destination="VOo-by-sXh" id="qUP-02-lfh"/>
-                <outlet property="extraDescriptionLabel" destination="GVU-yc-tFK" id="hTU-Kg-cYr"/>
-                <outlet property="imageView" destination="RC2-bx-j7n" id="mfg-fD-Xmo"/>
                 <outlet property="titleLabel" destination="5fk-Fh-dR6" id="OmC-0E-dYV"/>
             </connections>
             <point key="canvasLocation" x="479.5" y="436.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Shopping Bullseye" width="30" height="30"/>
+    </resources>
 </document>
