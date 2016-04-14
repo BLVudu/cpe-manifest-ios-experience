@@ -28,7 +28,6 @@
 "talentdetail.filmography" = "Filmography";
 
 // Clip & Share"
-"clipshare.title" = "Share This Clip";
 "clipshare.rotate" = "Rotate device to share clip";
 "clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
 "clipshare.send_button" = "Share this Clip";

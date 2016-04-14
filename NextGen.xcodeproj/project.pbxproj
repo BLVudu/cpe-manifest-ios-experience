@@ -394,6 +394,7 @@
 		70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Theme.swift"; sourceTree = "<group>"; };
 		70460C5D1CBEF8630001B6D8 /* UIFont+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Theme.swift"; sourceTree = "<group>"; };
+		70460C611CBF13EC0001B6D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasPresentationController.swift; sourceTree = "<group>"; };
 		70517E781CB715EF008556EC /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1284,6 +1285,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 4921D96A1C3EFD0B00ED2AA6;
 			productRefGroup = 4921D9741C3EFD0B00ED2AA6 /* Products */;
@@ -1724,6 +1726,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				70DEFCE51CBC79CA00941977 /* Base */,
+				70460C611CBF13EC0001B6D8 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
