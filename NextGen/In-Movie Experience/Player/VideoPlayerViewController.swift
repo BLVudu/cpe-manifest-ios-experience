@@ -222,7 +222,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     func cancel(task:Task?) {
+        if(self.countdownTimer !== nil){
         self.countdownTimer.invalidate()
+        }
         self.countdownSeconds = 5
         self.countdown.countdownString = "  \(self.countdownSeconds) sec"
         self.countdown.hidden = true
