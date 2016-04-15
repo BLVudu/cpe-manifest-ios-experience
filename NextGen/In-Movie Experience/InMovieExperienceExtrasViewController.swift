@@ -14,7 +14,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         static let ShowTalent = "ShowTalentSegueIdentifier"
     }
     
-    @IBOutlet weak var talentTableView: TalentTableView!
+    @IBOutlet weak var talentTableView: UITableView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     private var _didChangeTimeObserver: NSObjectProtocol!

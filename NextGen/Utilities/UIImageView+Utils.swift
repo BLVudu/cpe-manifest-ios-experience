@@ -33,9 +33,11 @@ extension UIImageView {
         
         self.image = placeholderImage
         
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: nil, delegateQueue: nil)
-        let request = NSURLRequest(URL: url)
-        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        sessionConfiguration.requestCachePolicy = NSURLRequestCachePolicy.ReturnCacheDataElseLoad
+        sessionConfiguration.URLCache = NSURLCache(memoryCapacity: 0, diskCapacity: 1024 * 1024 * 256, diskPath: "com.wb.nextgen_image_cache") // 256Mb
+        sessionConfiguration.timeoutIntervalForRequest = 20
+        let task = NSURLSession(configuration: sessionConfiguration).dataTaskWithRequest(NSURLRequest(URL: url)) { (data, response, error) -> Void in
             if let data = data {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.image = UIImage(data: data)

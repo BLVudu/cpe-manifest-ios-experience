@@ -21,7 +21,7 @@ class APIUtil: NSObject, NSURLSessionDataDelegate {
     }
     
     func requestWithURLPath(urlPath: String) -> NSMutableURLRequest {
-        return NSMutableURLRequest(URL: NSURL(string: apiDomain + urlPath)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 60)
+        return NSMutableURLRequest(URL: NSURL(string: apiDomain + urlPath)!)
     }
     
     func getJSONWithPath(urlPath: String, parameters: [String: String], successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) -> NSURLSessionDataTask {
@@ -33,8 +33,11 @@ class APIUtil: NSObject, NSURLSessionDataDelegate {
     }
     
     func getJSONWithRequest(request: NSURLRequest, successBlock: APIUtilSuccessBlock?, errorBlock: APIUtilErrorBlock?) -> NSURLSessionDataTask {
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
-        let task = session.dataTaskWithRequest(request){ (data, response, error) -> Void in
+        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        sessionConfiguration.requestCachePolicy = NSURLRequestCachePolicy.ReturnCacheDataElseLoad
+        sessionConfiguration.URLCache = NSURLCache(memoryCapacity: 0, diskCapacity: 1024 * 1024 * 64, diskPath: "com.wb.nextgen_api_cache") // 64Mb
+        sessionConfiguration.timeoutIntervalForRequest = 60
+        let task = NSURLSession(configuration: sessionConfiguration).dataTaskWithRequest(request) { (data, response, error) -> Void in
             if error == nil {
                 if let data = data {
                     do {

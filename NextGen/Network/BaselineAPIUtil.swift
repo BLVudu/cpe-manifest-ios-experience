@@ -124,7 +124,7 @@ class BaselineAPIUtil: APIUtil {
         return getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 if results.count > 0 {
-                    if let response = results[0] as? NSDictionary, imageURL = response[Keys.FullURL] as? String {
+                    if let response = results[0] as? NSDictionary, imageURL = response[Keys.LargeURL] as? String {
                         successBlock(imageURL: NSURL(string: imageURL))
                     }
                 } else {
