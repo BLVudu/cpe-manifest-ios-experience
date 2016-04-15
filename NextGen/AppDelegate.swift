@@ -9,6 +9,12 @@
 import UIKit
 import HockeySDK
 
+struct CurrentManifest {
+    static var mainExperience: NGDMMainExperience!
+    static var inMovieExperience: NGDMExperience!
+    static var outOfMovieExperience: NGDMExperience!
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,8 +26,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Load current film's data file
         if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_v3", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
-            ConfigManager.sharedInstance.loadConfigs()
-            NextGenDataManager.sharedInstance.mainExperience.loadTalent()
+            
+            do {
+                CurrentManifest.mainExperience = try NextGenDataManager.sharedInstance.getMainExperience()
+                CurrentManifest.inMovieExperience = try CurrentManifest.mainExperience.getInMovieExperience()
+                CurrentManifest.outOfMovieExperience = try CurrentManifest.mainExperience.getOutOfMovieExperience()
+                
+                TheTakeAPIUtil.sharedInstance.mediaId = CurrentManifest.mainExperience.customIdentifier(kTheTakeIdentifierNamespace)
+                BaselineAPIUtil.sharedInstance.projectId = CurrentManifest.mainExperience.customIdentifier(kBaselineIdentifierNamespace)
+                ConfigManager.sharedInstance.loadConfigs()
+                CurrentManifest.mainExperience.loadTalent()
+            } catch NGDMError.MainExperienceMissing {
+                print("Error loading Manifest file: no main Experience found")
+                abort()
+            } catch NGDMError.InMovieExperienceMissing {
+                print("Error loading Manifest file: no in-movie Experience found")
+                abort()
+            } catch NGDMError.OutOfMovieExperienceMissing {
+                print("Error loading Manifest file: no out-of-movie Experience found")
+                abort()
+            } catch {
+                print("Error loading Manifest file: unknown error")
+                abort()
+            }
         }
         
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")

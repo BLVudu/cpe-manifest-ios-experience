@@ -66,7 +66,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     }
     
     override func currentTimeDidChange() {
-        if timedEvent != nil && timedEvent!.isProduct() {
+        if timedEvent != nil && timedEvent!.isProduct {
             let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
             if newFrameTime != _currentProductFrameTime {
                 _currentProductFrameTime = newFrameTime

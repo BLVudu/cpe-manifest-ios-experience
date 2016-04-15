@@ -123,7 +123,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             var reloadIndexPaths = [NSIndexPath]()
             var moveIndexPaths = [(NSIndexPath, NSIndexPath)]()
             
-            let allExperiences = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childExperiences
+            let allExperiences = CurrentManifest.inMovieExperience.childExperiences
             var newExperienceCellData = [ExperienceCellData]()
             for i in 0 ..< allExperiences.count {
                 let experience = allExperiences[i]
@@ -144,7 +144,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                             if oldIndexPath!.row != newIndexPath.row {
                                 moveIndexPaths.append((oldIndexPath!, newIndexPath))
                                 //print("Moving \(experience.timedEventSequence!.id)")
-                            } else if newTimedEvent.isProduct() || oldCellData!.timedEvent != newTimedEvent {
+                            } else if newTimedEvent.isProduct || oldCellData!.timedEvent != newTimedEvent {
                                 reloadIndexPaths.append(oldIndexPath!)
                                 //print("Reloading \(experience.timedEventSequence!.id)")
                             }
@@ -178,7 +178,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     var indexPaths = reloadIndexPaths
                     for i in 0 ..< indexPaths.count {
                         if let cell = self.collectionView?.cellForItemAtIndexPath(indexPaths[i]) as? ShoppingSceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
-                            if timedEvent.isProduct() {
+                            if timedEvent.isProduct {
                                 cell.currentTime = self._currentTime
                                 reloadIndexPaths.removeAtIndex(i)
                             }
@@ -205,9 +205,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         let cellData = _currentExperienceCellData[indexPath.row]
         
         var reuseIdentifier: String
-        if cellData.timedEvent.isLocation() {
+        if cellData.timedEvent.isLocation {
             reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
-        } else if cellData.timedEvent.isProduct() {
+        } else if cellData.timedEvent.isProduct {
             reuseIdentifier = ShoppingSceneDetailCollectionViewCell.ReuseIdentifier
         } else {
             reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
@@ -239,19 +239,19 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         //self.performSegueWithIdentifier("showExample", sender: nil)
         
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
-            if timedEvent.isProduct() {
+            if timedEvent.isProduct {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
-            } else if timedEvent.isAudioVisual() || timedEvent.isGallery() {
+            } else if timedEvent.isAudioVisual || timedEvent.isGallery {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: cell)
-            } else if timedEvent.isAppGroup() {
+            } else if timedEvent.isAppGroup {
                 if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
                     let navigationController = UINavigationController(rootViewController: webViewController)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
-            } else if timedEvent.isLocation() {
+            } else if timedEvent.isLocation {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: cell)
-            } else if timedEvent.isTextItem() {
+            } else if timedEvent.isTextItem {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowLargeText, sender: cell)
             }
         }
@@ -262,7 +262,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SegueIdentifier.ShowShare {
             let shareDetailViewController = segue.destinationViewController as! SharingViewController
-            shareDetailViewController.experience = NextGenDataManager.sharedInstance.mainExperience.syncedExperience.childClipAndShareExperience
+            shareDetailViewController.experience = CurrentManifest.inMovieExperience.childClipAndShareExperience
             shareDetailViewController.timedEvent = _currentClipTimedEvent!
         } else if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
             if segue.identifier == SegueIdentifier.ShowGallery {

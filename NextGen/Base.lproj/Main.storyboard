@@ -216,8 +216,7 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="140" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-Pl-Rxu">
                                 <rect key="frame" x="0.0" y="5" width="177" height="595"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2KS-OB-0Ev" id="04l-vT-u51"/>
                                     <outlet property="delegate" destination="2KS-OB-0Ev" id="MDj-GC-Waw"/>
@@ -2141,6 +2140,6 @@
         <image name="Twitter Icon" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vcm-iL-9qf"/>
+        <segue reference="ir8-OX-j5p"/>
     </inferredMetricsTieBreakers>
 </document>

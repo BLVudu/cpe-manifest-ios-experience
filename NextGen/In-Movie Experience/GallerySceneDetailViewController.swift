@@ -22,7 +22,7 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if timedEvent.isAudioVisual() {
+        if timedEvent.isAudioVisual {
             galleryScrollView.removeFromSuperview()
             if let audioVisual = timedEvent.getAudioVisual(experience!), videoURL = audioVisual.videoURL {
                 descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
@@ -48,8 +48,8 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if let gallery = gallery {
-            let numPictures = gallery.pictures.count
+        if let gallery = gallery, pictures = gallery.pictures {
+            let numPictures = pictures.count
             pageControl.numberOfPages = numPictures
             
             var imageViewX: CGFloat = 0
@@ -71,9 +71,9 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     }
     
     func loadImageForPage(page: Int) {
-        if let gallery = gallery, imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView {
+        if let gallery = gallery, imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView, pictures = gallery.pictures {
             if imageView.image == nil {
-                if let imageURL = gallery.pictures[page].imageURL {
+                if let imageURL = pictures[page].imageURL {
                     imageView.setImageWithURL(imageURL)
                 }
             }

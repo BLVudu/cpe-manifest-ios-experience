@@ -72,16 +72,18 @@ class BaselineAPIUtil: APIUtil {
     func getTalentImages(talentID: String, successBlock: (talentImages: [TalentImage]) -> Void) {
         getJSONWithPath(Endpoints.GetHeadshot, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary {
-                let talentImage = TalentImage()
-                if let thumbnailURL = response[Keys.MediumURL] as? String {
-                    talentImage.thumbnailImageURL = NSURL(string: thumbnailURL)
+                var thumbnailImageURL: NSURL?
+                var imageURL: NSURL?
+                
+                if let thumbnailURLString = response[Keys.MediumURL] as? String {
+                    thumbnailImageURL = NSURL(string: thumbnailURLString)
                 }
                 
-                if let imageURL = response[Keys.FullURL] as? String {
-                    talentImage.imageURL = NSURL(string: imageURL)
+                if let imageURLString = response[Keys.FullURL] as? String {
+                    imageURL = NSURL(string: imageURLString)
                 }
                 
-                successBlock(talentImages: [talentImage])
+                successBlock(talentImages: [TalentImage(thumbnailImageURL: thumbnailImageURL, imageURL: imageURL)])
             }
         }, errorBlock: nil)
     }

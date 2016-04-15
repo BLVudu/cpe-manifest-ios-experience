@@ -15,7 +15,7 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak private var thumbnailContainerView: UIView!
     @IBOutlet weak private var thumbnailImageView: UIImageView!
     @IBOutlet weak private var playIconImageView: UIImageView!
-    @IBOutlet weak private var runtimeLabel: UILabel!
+    @IBOutlet weak var runtimeLabel: UILabel!
     @IBOutlet weak private var captionLabel: UILabel!
     
     private var _setImageSessionDataTask: NSURLSessionDataTask?

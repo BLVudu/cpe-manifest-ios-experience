@@ -107,7 +107,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     func playMainExperience() {
         self.playerControlsVisible = false
         if _didPlayInterstitial {
-            if let audioVisual = NextGenDataManager.sharedInstance.mainExperience.audioVisual {
+            if let audioVisual = CurrentManifest.mainExperience.audioVisual {
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayMainExperience, object: nil)
                 self.playVideoWithURL(audioVisual.videoURL)
             }

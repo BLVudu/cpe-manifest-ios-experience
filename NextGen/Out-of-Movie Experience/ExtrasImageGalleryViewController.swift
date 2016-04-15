@@ -27,7 +27,7 @@ class ExtrasImageGalleryViewController: ExtrasExperienceViewController, UIScroll
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let numPictures = gallery.pictures.count
+        let numPictures = gallery.pictures != nil ? gallery.pictures!.count : 0
         var imageViewX: CGFloat = 0
         _scrollViewPageWidth = CGRectGetWidth(galleryScrollView.bounds)
         for i in 0 ..< numPictures {
@@ -49,9 +49,9 @@ class ExtrasImageGalleryViewController: ExtrasExperienceViewController, UIScroll
     }
     
     func loadImageForPage(page: Int) {
-        if let imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView {
+        if let imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView, pictures = gallery.pictures {
             if imageView.image == nil {
-                if let imageURL = gallery.pictures[page].imageURL {
+                if let imageURL = pictures[page].imageURL {
                     imageView.setImageWithURL(imageURL)
                 }
             }
@@ -67,13 +67,19 @@ class ExtrasImageGalleryViewController: ExtrasExperienceViewController, UIScroll
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return gallery.pictures.count
+        if let pictures = gallery.pictures {
+            return pictures.count
+        }
+        
+        return 0
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ExtrasImageThumbnailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ExtrasImageThumbnailCollectionViewCell
-        cell.picture = gallery.pictures[indexPath.row]
+        if let pictures = gallery.pictures {
+            cell.picture = pictures[indexPath.row]
+        }
         
         return cell
     }
@@ -93,7 +99,7 @@ class ExtrasImageGalleryViewController: ExtrasExperienceViewController, UIScroll
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        let numItems = CGFloat(gallery.pictures.count)
+        let numItems = gallery.pictures != nil ? CGFloat(gallery.pictures!.count) : 0
         let cellsWidth = (numItems * ExtrasImageThumbnailCollectionViewCell.Width) + ((numItems - 1) * ExtrasImageThumbnailCollectionViewCell.Spacing)
         return UIEdgeInsetsMake(0, max(0, (CGRectGetWidth(collectionView.frame) - cellsWidth) / 2), 0, 0);
     }
