@@ -22,6 +22,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     private var _didPlayFirstItem = false
     private var _previewPlayURL: NSURL?
+    private var _userDidSelectNextItem = true
+    
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
 
@@ -50,8 +52,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
                     let formerIndexPath = NSIndexPath(forItem: index-1, inSection: 0)
                     strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                    strongSelf._userDidSelectNextItem = false
                     strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
                     strongSelf.tableView(strongSelf.galleryTableView, didDeselectRowAtIndexPath: formerIndexPath)
+                    
                    
                 }
             }
@@ -120,6 +124,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
             
+            
             if !_didPlayFirstItem {
                 _previewPlayURL = videoURL
                 
@@ -131,7 +136,12 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     playFirstItem(nil)
                 }
             } else {
+                if(_userDidSelectNextItem == true){
+                    videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
+                    
+                }
                 videoPlayerViewController.playVideoWithURL(videoURL)
+                _userDidSelectNextItem = true
             }
         }
     }

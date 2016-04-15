@@ -97,12 +97,12 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                             self._twitterButton.hidden = false
                             self._twitterButton.socialAccount = socialAccount
                             break
-                            
+                          /*
                         case .Instagram:
                             self._instagramButton.hidden = false
                             self._instagramButton.socialAccount = socialAccount
                             break
-                            
+                        */    
                         default:
                             break
                         }

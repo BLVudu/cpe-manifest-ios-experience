@@ -6,6 +6,7 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc.. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import MessageUI
 
@@ -22,6 +23,8 @@ enum VideoPlayerMode {
     case Supplemental
     case SupplementalInMovie
 }
+
+typealias Task = (cancel : Bool) -> ()
 
 class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControllerDelegate {
     
@@ -42,10 +45,16 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
     private var _sharePopoverController: UIPopoverController!
+
+  
     
+    @IBOutlet weak var toolbar: UIView!
+
+
     @IBOutlet weak var countdown: CircularProgressView!
     var countdownTimer: NSTimer!
-
+    var nextItemTask: Task?
+    
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
     
@@ -87,7 +96,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                 }
             }
         })
-        
+
         if mode == VideoPlayerMode.MainFeature {
             self.fullScreenButton.removeFromSuperview()
             playMainExperience()
@@ -162,28 +171,80 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(self.subtractTime), userInfo: nil, repeats: true)
             self.countdown.animateTimer()
             let delayInSeconds = 5.0;
-            let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
-            dispatch_after(popTime, dispatch_get_main_queue(), {
+            nextItemTask = delay(delayInSeconds){
             NSNotificationCenter.defaultCenter().postNotificationName(kWBVideoPlayerWillPlayNextItem, object:self,userInfo:["index": NSNumber(int: self.curIndex)])
             self.countdown.hidden = true;
+            self.countdownTimer.invalidate()
+            self.countdownTimer = nil
             self.countdownSeconds = 5;
+            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
             
-            });
+            }
 
-        }
-    }
-    
-    func subtractTime() {
-        if (self.countdownSeconds == 0) {
-            self.countdownTimer.invalidate();
-            self.countdownSeconds = 5;
-        } else {
-            self.countdownSeconds -= 1;
         }
         
-        self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+        super.playerItemDidReachEnd(notification)
     }
+    
+    func delay(delay:Double, block:()->()) -> Task {
+       
+        func dispatch_later(block:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), block)
+    }
+        var closureBlock: dispatch_block_t? = block
+        var result: Task?
+        
+        let delayedClosure: Task = {
+            cancel in
+            if let internalClosure = closureBlock {
+                if (cancel == false) {
+                    dispatch_async(dispatch_get_main_queue(), internalClosure);
+                }
+            }
+            closureBlock = nil
+            result = nil
+        }
+        
+        result = delayedClosure
+        
+        dispatch_later {
+            if let delayedClosure = result {
+                delayedClosure(cancel: false)
+            }
+        }
+        
+        return result!
+    }
+    
+    func cancel(task:Task?) {
+        self.countdownTimer.invalidate()
+        self.countdownSeconds = 5
+        self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+        self.countdown.hidden = true
+        task?(cancel: true)
+            }
+        
+            
+    func subtractTime(){
+        
+        if (self.countdownSeconds == 0) {
+            self.countdownTimer.invalidate()
+            self.countdownTimer = nil
+            self.countdownSeconds = 5
+            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+        } else {
+            self.countdownSeconds -= 1
+            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+            }
+            }
+        
 
+    
     // MARK: Actions
     override func done(sender: AnyObject?) {
         super.done(sender)
@@ -240,4 +301,5 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
 }
+
 
