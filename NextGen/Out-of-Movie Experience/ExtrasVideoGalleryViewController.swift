@@ -146,9 +146,21 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         }
     }
     
+    
+
+    
+    
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
-        cell.runtimeLabel.text = String.localize("label.watched")
+       
+        let visibleCellIndexes = tableView.indexPathsForVisibleRows
+        
+        for index in visibleCellIndexes!{
+            if index == indexPath{
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
+                cell.runtimeLabel.text = String.localize("label.watched")
+            }
+        }
+        
     }
     
     // MARK: Actions
