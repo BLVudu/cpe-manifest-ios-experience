@@ -42,12 +42,12 @@ class CircularProgressView: UIView{
     time.backgroundColor = UIColor.clearColor().CGColor
     time.foregroundColor = UIColor.whiteColor().CGColor
     time.font = basicFont.fontName
-    time.fontSize = 15
+    time.fontSize = 17
     time.wrapped = true
     time.frame = CGRectMake(bounds.origin.x-2, bounds.origin.y+12, 25, bounds.size.height)
     time.string = "  5 sec"
         
-    radius = 20.0
+    radius = 22.0
         
     progressPath.frame = bounds
     progressPath.lineWidth = 3

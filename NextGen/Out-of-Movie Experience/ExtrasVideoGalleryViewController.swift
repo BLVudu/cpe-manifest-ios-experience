@@ -151,7 +151,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-       
+        
         let visibleCellIndexes = tableView.indexPathsForVisibleRows
         
         for index in visibleCellIndexes!{

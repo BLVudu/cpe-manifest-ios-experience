@@ -9,7 +9,9 @@
 import UIKit
 import MBProgressHUD
 
-class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ExtrasShoppingViewController: MenuedViewController{
+    
+//}, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
@@ -41,7 +43,9 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
             menuSections.append(MenuSection(info: info))
         }
         
+        /*
         productsCollectionView.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
+ */
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -63,21 +67,28 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         }
     }
     
+    /*
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         productsCollectionView.collectionViewLayout.invalidateLayout()
     }
+ */
     
     // MARK: UITableViewDelegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, menuItem = cell.menuItem, categoryId = menuItem.value {
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("reloadCategory", object: nil, userInfo: ["category":categoryId])
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("closeViewIfOpen", object: nil, userInfo: nil)
+            
+            /*
             if let currentTask = _productListSessionDataTask {
                 currentTask.cancel()
             }
-            
             productsCollectionView.userInteractionEnabled = false
             MBProgressHUD.showHUDAddedTo(productsCollectionView, animated: true)
             _productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
@@ -90,10 +101,12 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
                 
                 self._productListSessionDataTask = nil
             })
+ */
         }
     }
     
     // MARK: UICollectionViewDataSource
+    /*
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -123,6 +136,7 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
         if let shoppingDetailViewController = UIStoryboard.getMainStoryboardViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
             shoppingDetailViewController.experience = experience
             shoppingDetailViewController.products = cell.theTakeProducts
+            shoppingDetailViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
             shoppingDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             self.presentViewController(shoppingDetailViewController, animated: true, completion: nil)
         }
@@ -140,5 +154,6 @@ class ExtrasShoppingViewController: MenuedViewController, UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 5.0
     }
+ */
 
 }

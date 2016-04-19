@@ -87,6 +87,13 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         disclaimerLabel.text = String.localize("shopping.disclaimer").uppercaseString
         
         productMatchIcon.layer.cornerRadius = CGRectGetWidth(productMatchIcon.frame) / 2
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("closeViewIfOpen", object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self{
+                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
