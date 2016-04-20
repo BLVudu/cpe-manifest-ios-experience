@@ -17,6 +17,7 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak private var playIconImageView: UIImageView!
     @IBOutlet weak var runtimeLabel: UILabel!
     @IBOutlet weak private var captionLabel: UILabel!
+    var videoPlayed = false
     
     private var _setImageSessionDataTask: NSURLSessionDataTask?
     
@@ -69,12 +70,17 @@ class VideoCell: UITableViewCell {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
                 self.runtimeLabel.text = String.localize("label.playing")
+                self.videoPlayed = true
             }, completion: nil)
         } else {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 0.5
                 self.captionLabel.alpha = 0.5
-                self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
+                if (self.videoPlayed == false){
+                    self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
+                } else {
+                    self.runtimeLabel.text = String.localize("label.watched")
+                }
             }, completion: nil)
         }
     }

@@ -11,7 +11,7 @@ import MBProgressHUD
 
 class ExtrasShoppingViewController: MenuedViewController{
     
-//}, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+//}, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
@@ -74,34 +74,31 @@ class ExtrasShoppingViewController: MenuedViewController{
         productsCollectionView.collectionViewLayout.invalidateLayout()
     }
  */
+ 
     
     // MARK: UITableViewDelegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+        NSNotificationCenter.defaultCenter().postNotificationName("closeViewIfOpen", object: nil, userInfo: nil)
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, menuItem = cell.menuItem, categoryId = menuItem.value {
-            
-            NSNotificationCenter.defaultCenter().postNotificationName("reloadCategory", object: nil, userInfo: ["category":categoryId])
-            
-            NSNotificationCenter.defaultCenter().postNotificationName("closeViewIfOpen", object: nil, userInfo: nil)
-            
-            /*
-            if let currentTask = _productListSessionDataTask {
+                if let currentTask = _productListSessionDataTask {
                 currentTask.cancel()
             }
-            productsCollectionView.userInteractionEnabled = false
-            MBProgressHUD.showHUDAddedTo(productsCollectionView, animated: true)
+            //productsCollectionView.userInteractionEnabled = false
+            //MBProgressHUD.showHUDAddedTo(productsCollectionView, animated: true)
             _productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
                 dispatch_async(dispatch_get_main_queue(), {
-                    self._products = products
-                    self.productsCollectionView.reloadData()
-                    self.productsCollectionView.userInteractionEnabled = true
-                    MBProgressHUD.hideAllHUDsForView(self.productsCollectionView, animated: true)
+                    //self._products = products
+                    NSNotificationCenter.defaultCenter().postNotificationName("reloadCategory", object: nil, userInfo: ["products":products])
+                    //self.productsCollectionView.reloadData()
+                    //self.productsCollectionView.userInteractionEnabled = true
+                    //MBProgressHUD.hideAllHUDsForView(self.productsCollectionView, animated: true)
                 })
                 
                 self._productListSessionDataTask = nil
             })
- */
+ 
         }
     }
     

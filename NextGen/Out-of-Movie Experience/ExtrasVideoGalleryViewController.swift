@@ -50,11 +50,9 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int {
                 if index < strongSelf.experience.childExperiences.count {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                    let formerIndexPath = NSIndexPath(forItem: index-1, inSection: 0)
                     strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
                     strongSelf._userDidSelectNextItem = false
                     strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
-                    strongSelf.tableView(strongSelf.galleryTableView, didDeselectRowAtIndexPath: formerIndexPath)
                     
                    
                 }
@@ -80,6 +78,12 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         cell.backgroundColor = UIColor.clearColor()
         cell.selectionStyle = .None
         cell.experience = experience.childExperiences[indexPath.row]
+        
+        if cell.videoPlayed == true {
+            
+            cell.runtimeLabel.text = String.localize("label.watched")
+            
+        }
         return cell
     }
     
@@ -144,23 +148,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 _userDidSelectNextItem = true
             }
         }
-    }
-    
-    
-
-    
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let visibleCellIndexes = tableView.indexPathsForVisibleRows
-        
-        for index in visibleCellIndexes!{
-            if index == indexPath{
-                let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
-                cell.runtimeLabel.text = String.localize("label.watched")
-            }
-        }
-        
     }
     
     // MARK: Actions
