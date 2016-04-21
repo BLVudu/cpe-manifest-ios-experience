@@ -15,16 +15,16 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         static let Scene = "ProductImageTypeScene"
     }
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var bullseyeView: UIView!
-    @IBOutlet weak var extraDescriptionLabel: UILabel!
+    @IBOutlet weak private var _imageView: UIImageView!
+    @IBOutlet weak private var _bullseyeImageView: UIImageView!
+    @IBOutlet weak private var _extraDescriptionLabel: UILabel!
     
     var productImageType = ProductImageType.Product
     private var _setImageSessionDataTask: NSURLSessionDataTask?
     
     private var _extraDescriptionText: String? {
         didSet {
-            extraDescriptionLabel?.text = _extraDescriptionText
+            _extraDescriptionLabel?.text = _extraDescriptionText
         }
     }
     
@@ -32,14 +32,14 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         didSet {
             if let url = _imageURL {
                 if url != oldValue {
-                    imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                    _setImageSessionDataTask = imageView.setImageWithURL(url, completion: { (image) -> Void in
-                        self.imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
+                    _imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                    _setImageSessionDataTask = _imageView.setImageWithURL(url, completion: { (image) -> Void in
+                        self._imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                     })
                 }
             } else {
-                imageView.image = nil
-                imageView.backgroundColor = UIColor.clearColor()
+                _imageView.image = nil
+                _imageView.backgroundColor = UIColor.clearColor()
             }
         }
     }
@@ -66,7 +66,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     }
     
     override func currentTimeDidChange() {
-        if timedEvent != nil && timedEvent!.isProduct() {
+        if timedEvent != nil && timedEvent!.isProduct {
             let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
             if newFrameTime != _currentProductFrameTime {
                 _currentProductFrameTime = newFrameTime
@@ -92,7 +92,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.prepareForReuse()
         
         theTakeProducts = nil
-        bullseyeView.hidden = true
+        _bullseyeImageView.hidden = true
         
         if let task = _currentProductSessionDataTask {
             task.cancel()
@@ -109,16 +109,21 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.layoutSubviews()
         
         if productImageType == ProductImageType.Scene {
-            bullseyeView.hidden = false
+            _bullseyeImageView.hidden = false
             if let product = _currentProduct {
-                var bullseyeFrame = bullseyeView.frame
-                let bullseyePoint = product.getSceneBullseyePoint(imageView.frame)
-                bullseyeFrame.origin = CGPointMake(bullseyePoint.x + CGRectGetMinX(imageView.frame), bullseyePoint.y + CGRectGetMinY(imageView.frame))
-                bullseyeView.frame = bullseyeFrame
-                bullseyeView.layer.cornerRadius = CGRectGetWidth(bullseyeFrame) / 2
+                var bullseyeFrame = _bullseyeImageView.frame
+                let bullseyePoint = product.getSceneBullseyePoint(_imageView.frame)
+                bullseyeFrame.origin = CGPointMake(bullseyePoint.x + CGRectGetMinX(_imageView.frame) - (CGRectGetWidth(bullseyeFrame) / 2), bullseyePoint.y + CGRectGetMinY(_imageView.frame) - (CGRectGetHeight(bullseyeFrame) / 2))
+                _bullseyeImageView.frame = bullseyeFrame
+                
+                _bullseyeImageView.layer.shadowColor = UIColor.blackColor().CGColor;
+                _bullseyeImageView.layer.shadowOffset = CGSizeMake(1, 1);
+                _bullseyeImageView.layer.shadowOpacity = 0.75;
+                _bullseyeImageView.layer.shadowRadius = 2.0;
+                _bullseyeImageView.clipsToBounds = false;
             }
         } else {
-            bullseyeView.hidden = true
+            _bullseyeImageView.hidden = true
         }
     }
     

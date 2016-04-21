@@ -16,8 +16,8 @@ class ImageGalleryViewController: MWPhotoBrowser, MWPhotoBrowserDelegate {
         didSet {
             _photos.removeAll()
             
-            if let gallery = gallery {
-                for picture in gallery.pictures {
+            if let gallery = gallery, pictures = gallery.pictures {
+                for picture in pictures {
                     _photos.append(MWPhoto(URL: picture.imageURL))
                 }
             }

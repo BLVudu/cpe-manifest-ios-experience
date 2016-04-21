@@ -12,6 +12,13 @@ import AVFoundation
 
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
+    struct Constants {
+        static let CollectionViewItemSpacing: CGFloat = 12
+        static let CollectionViewLineSpacing: CGFloat = 12
+        static let CollectionViewPadding: CGFloat = 15
+        static let CollectionViewItemAspectRatio: CGFloat = 338 / 230
+    }
+    
     struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
         static let ShowVideoGallery = "ExtrasVideoGallerySegue"
@@ -35,7 +42,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         self.extrasCollectionView.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
         self.talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         
-        self.experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience
+        self.experience = CurrentManifest.outOfMovieExperience
         showHomeButton()
     }
     
@@ -105,13 +112,18 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return NextGenDataManager.sharedInstance.mainExperience.orderedActors.count
+        if let actors = CurrentManifest.mainExperience.orderedActors {
+            return actors.count
+        }
+        
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        let talent = NextGenDataManager.sharedInstance.mainExperience.orderedActors[indexPath.row]
-        cell.talent = talent
+        if let actors = CurrentManifest.mainExperience.orderedActors {
+            cell.talent = actors[indexPath.row]
+        }
         
         return cell
     }
@@ -139,19 +151,19 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences.count
+        return CurrentManifest.outOfMovieExperience.childExperiences.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(TitledImageCell.ReuseIdentifier, forIndexPath: indexPath) as! TitledImageCell
-        cell.experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
+        cell.experience = CurrentManifest.outOfMovieExperience.childExperiences[indexPath.row]
         
         return cell
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let experience = NextGenDataManager.sharedInstance.mainExperience.extrasExperience.childExperiences[indexPath.row]
+        let experience = CurrentManifest.outOfMovieExperience.childExperiences[indexPath.row]
         if experience.isGalleryList() {
             self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
         } else if experience.isShopping() {
@@ -163,11 +175,20 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 2) - 25, 230)
+        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / 2) - (Constants.CollectionViewItemSpacing * 2)
+        return CGSizeMake(itemWidth, itemWidth / Constants.CollectionViewItemAspectRatio)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewLineSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewItemSpacing
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(15, 15, 15, 15)
+        return UIEdgeInsetsMake(Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding)
     }
     
     // MARK: Storyboard

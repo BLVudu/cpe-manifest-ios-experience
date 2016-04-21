@@ -18,9 +18,12 @@
 		4921D99A1C3EFD0B00ED2AA6 /* NextGenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9991C3EFD0B00ED2AA6 /* NextGenUITests.swift */; };
 		4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */; };
 		492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E91C76A56900B306A2 /* CommentaryViewCell.swift */; };
+		495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495CF3691CC042BA006AE290 /* CoreText.framework */; };
+		497A9E161CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */; };
 		497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		499871241CB43A4E00606E56 /* Commentary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 499871231CB43A4E00606E56 /* Commentary.plist */; };
+		49B653591CBECFF20006C71D /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B653581CBECFF20006C71D /* CircularProgressView.swift */; };
 		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
 		49CB44C91C7CF02400753227 /* InMovieExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C81C7CF02400753227 /* InMovieExperienceViewController.swift */; };
 		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
@@ -256,7 +259,6 @@
 		7071C5481C6BCBF6006F4275 /* NextGenDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */; };
 		7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7071C54B1C6BCC11006F4275 /* libxml2.tbd */; };
 		7077A3151C49897900843782 /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3141C49897900843782 /* Data */; };
-		707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E107E1C4076EC00FCF81C /* TalentTableView.swift */; };
 		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
 		707E10871C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift */; };
 		7085F76D1C90D83D00DF31B6 /* NGDMVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */; };
@@ -347,9 +349,12 @@
 		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGen/Out-of-Movie Experience/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
 		492267E91C76A56900B306A2 /* CommentaryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryViewCell.swift; sourceTree = "<group>"; };
 		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingItemsViewController.swift; sourceTree = "<group>"; };
 		497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		499871231CB43A4E00606E56 /* Commentary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Commentary.plist; sourceTree = "<group>"; };
+		49B653581CBECFF20006C71D /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49CB44C81C7CF02400753227 /* InMovieExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMovieExperienceViewController.swift; sourceTree = "<group>"; };
 		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
@@ -591,7 +596,6 @@
 		7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataManager.swift; sourceTree = "<group>"; };
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		7077A3141C49897900843782 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
-		707E107E1C4076EC00FCF81C /* TalentTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableView.swift; sourceTree = "<group>"; };
 		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		707E10861C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMovieExperienceExtrasViewController.swift; sourceTree = "<group>"; };
 		7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMVideo.swift; sourceTree = "<group>"; };
@@ -653,6 +657,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */,
 				70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */,
 				49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */,
 				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
@@ -760,6 +765,7 @@
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				495CF3691CC042BA006AE290 /* CoreText.framework */,
 				70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */,
 				49F502541C890E6500DFAD88 /* Twitter.framework */,
 				49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */,
@@ -1104,7 +1110,6 @@
 				70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */,
 				70FECF761C656707005B1A44 /* SceneDetailCollectionViewController.swift */,
 				70C830BA1CB4823100F9E2D6 /* SceneDetailViewController.swift */,
-				707E107E1C4076EC00FCF81C /* TalentTableView.swift */,
 			);
 			path = "In-Movie Experience";
 			sourceTree = "<group>";
@@ -1128,6 +1133,7 @@
 				49F3EAD21C515B3100E09484 /* TitledImageCell.xib */,
 				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
 				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
+				49B653581CBECFF20006C71D /* CircularProgressView.swift */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -1174,6 +1180,7 @@
 				70DF2F7D1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift */,
 				49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */,
 				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
+				497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */,
 			);
 			path = "Out-of-Movie Experience";
 			sourceTree = "<group>";
@@ -1407,6 +1414,7 @@
 				70367ABD1C8F8DA30042B5B5 /* NGDMPictureGroup.swift in Sources */,
 				70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */,
 				7071C4D81C6BCBF6006F4275 /* NGEDigitalAssetVideoPictureLightLevelType.swift in Sources */,
+				49B653591CBECFF20006C71D /* CircularProgressView.swift in Sources */,
 				7071C5381C6BCBF6006F4275 /* NGESummary4000.swift in Sources */,
 				70367AC51C8F9E840042B5B5 /* NGDMTimedEvent.swift in Sources */,
 				7071C53E1C6BCBF6006F4275 /* NGETimedEventSequenceListType.swift in Sources */,
@@ -1461,6 +1469,7 @@
 				70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */,
 				70C830B81CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift in Sources */,
 				7071C50C1C6BCBF6006F4275 /* NGEMadeForRegionInternalTypeEnum.swift in Sources */,
+				497A9E161CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift in Sources */,
 				7071C49F1C6BCBF6006F4275 /* NGEAudiovisualClipRefType.swift in Sources */,
 				70DF2F841CA5C8B2007AD2A0 /* MenuItemCell.swift in Sources */,
 				7085F7821C93359000DF31B6 /* NGDMAppGroup.swift in Sources */,
@@ -1503,7 +1512,6 @@
 				7071C4DE1C6BCBF6006F4275 /* NGEDisplayLabel.swift in Sources */,
 				70DF2F7E1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift in Sources */,
 				7071C4921C6BCBF6006F4275 /* NGEAbbreviatedMetadataType.swift in Sources */,
-				707E107F1C4076EC00FCF81C /* TalentTableView.swift in Sources */,
 				7071C4FA1C6BCBF6006F4275 /* NGEHashType.swift in Sources */,
 				7071C5001C6BCBF6006F4275 /* NGEInventoryImageType.swift in Sources */,
 				4993D2691C6D07800077220A /* RadioButton.swift in Sources */,

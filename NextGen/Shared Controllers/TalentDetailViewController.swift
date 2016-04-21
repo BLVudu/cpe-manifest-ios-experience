@@ -36,6 +36,12 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     @IBOutlet weak private var _twitterButton: SocialButton!
     @IBOutlet weak private var _facebookButton: SocialButton!
+    @IBOutlet weak private var _instagramButton: SocialButton!
+    @IBOutlet private var _facebookMainConstraint: NSLayoutConstraint!
+    @IBOutlet private var _twitterMainConstraint: NSLayoutConstraint!
+    @IBOutlet private var _facebookNoInstagramConstraint: NSLayoutConstraint!
+    @IBOutlet private var _twitterNoFacebookConstraint: NSLayoutConstraint!
+    @IBOutlet private var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint!
     
     var images = [String]()
     var talent: Talent!
@@ -74,25 +80,40 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             })
         })
         
-        _facebookButton.hidden = true
         _twitterButton.hidden = true
+        _facebookButton.hidden = true
+        _instagramButton.hidden = true
         talent.getSocialAccounts({ (socialAccounts) in
             dispatch_async(dispatch_get_main_queue(), {
                 if let socialAccounts = socialAccounts {
                     for socialAccount in socialAccounts {
-                        if socialAccount.type == SocialAccountType.Facebook {
+                        switch (socialAccount.type) {
+                        case .Facebook:
                             self._facebookButton.hidden = false
                             self._facebookButton.socialAccount = socialAccount
-                        } else if socialAccount.type == SocialAccountType.Twitter {
+                            break
+                            
+                        case .Twitter:
                             self._twitterButton.hidden = false
                             self._twitterButton.socialAccount = socialAccount
+                            break
+                          /*
+                        case .Instagram:
+                            self._instagramButton.hidden = false
+                            self._instagramButton.socialAccount = socialAccount
+                            break
+                        */    
+                        default:
+                            break
                         }
                     }
                 }
                 
-                if self._twitterButton.hidden {
-                    self._twitterButton.removeFromSuperview()
-                }
+                self._twitterNoFacebookNoInstagramConstraint.active = self._facebookButton.hidden && self._instagramButton.hidden
+                self._twitterNoFacebookConstraint.active = self._facebookButton.hidden && !self._instagramButton.hidden
+                self._twitterMainConstraint.active = !self._twitterNoFacebookNoInstagramConstraint.active && !self._twitterNoFacebookConstraint.active
+                self._facebookNoInstagramConstraint.active = self._instagramButton.hidden
+                self._facebookMainConstraint.active = !self._facebookNoInstagramConstraint.active
             })
         })
         

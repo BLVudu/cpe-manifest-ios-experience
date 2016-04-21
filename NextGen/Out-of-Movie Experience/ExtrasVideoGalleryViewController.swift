@@ -22,14 +22,18 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     private var _didPlayFirstItem = false
     private var _previewPlayURL: NSURL?
+    private var _userDidSelectNextItem = true
+    
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
+
     
     
     // MARK: Initialization
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(_willPlayNextItemObserver)
+
     }
 
     // MARK: View Lifecycle
@@ -47,10 +51,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 if index < strongSelf.experience.childExperiences.count {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
                     strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+                    strongSelf._userDidSelectNextItem = false
                     strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
+                    
+                   
                 }
             }
         }
+        
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
@@ -70,6 +78,12 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         cell.backgroundColor = UIColor.clearColor()
         cell.selectionStyle = .None
         cell.experience = experience.childExperiences[indexPath.row]
+        
+        if cell.videoPlayed == true {
+            
+            cell.runtimeLabel.text = String.localize("label.watched")
+            
+        }
         return cell
     }
     
@@ -114,6 +128,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             videoPlayerViewController.curIndex = Int32(indexPath.row)
             videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
             
+            
             if !_didPlayFirstItem {
                 _previewPlayURL = videoURL
                 
@@ -125,14 +140,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     playFirstItem(nil)
                 }
             } else {
+                if(_userDidSelectNextItem == true){
+                    videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
+                    
+                }
                 videoPlayerViewController.playVideoWithURL(videoURL)
+                _userDidSelectNextItem = true
             }
         }
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! VideoCell
-        cell.runtimeLabel.text = String.localize("label.watched")
     }
     
     // MARK: Actions

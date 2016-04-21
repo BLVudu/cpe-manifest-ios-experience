@@ -56,6 +56,11 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
     var products: [TheTakeProduct]!
+    private var _closeDetailsViewObserver: NSObjectProtocol!
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(_closeDetailsViewObserver)
+    }
     
     var currentProduct: TheTakeProduct? {
         didSet {
@@ -87,6 +92,12 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         disclaimerLabel.text = String.localize("shopping.disclaimer").uppercaseString
         
         productMatchIcon.layer.cornerRadius = CGRectGetWidth(productMatchIcon.frame) / 2
+        
+        _closeDetailsViewObserver = NSNotificationCenter.defaultCenter().addObserverForName(kShoppingNotificationCloseDetailsView, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self {
+                strongSelf.close(nil)
+            }
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -99,7 +110,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     
     
     // MARK: Actions
-    @IBAction func close(sender: AnyObject) {
+    @IBAction func close(sender: AnyObject?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

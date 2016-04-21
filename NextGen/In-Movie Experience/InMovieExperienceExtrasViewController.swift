@@ -14,7 +14,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         static let ShowTalent = "ShowTalentSegueIdentifier"
     }
     
-    @IBOutlet weak var talentTableView: TalentTableView!
+    @IBOutlet weak var talentTableView: UITableView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     private var _didChangeTimeObserver: NSObjectProtocol!
@@ -39,13 +39,18 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return NextGenDataManager.sharedInstance.mainExperience.orderedActors.count
+        if let actors = CurrentManifest.mainExperience.orderedActors {
+            return actors.count
+        }
+        
+        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        let talent = NextGenDataManager.sharedInstance.mainExperience.orderedActors[indexPath.row]
-        cell.talent = talent
+        if let actors = CurrentManifest.mainExperience.orderedActors {
+            cell.talent = actors[indexPath.row]
+        }
         
         return cell
     }

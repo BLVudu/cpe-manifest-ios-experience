@@ -12,10 +12,12 @@ class VideoCell: UITableViewCell {
     
     static let ReuseIdentifier = "VideoCellReuseIdentifier"
     
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var captionLabel: UILabel!
-    @IBOutlet weak var playIconImageView: UIImageView!
+    @IBOutlet weak private var thumbnailContainerView: UIView!
+    @IBOutlet weak private var thumbnailImageView: UIImageView!
+    @IBOutlet weak private var playIconImageView: UIImageView!
     @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak private var captionLabel: UILabel!
+    var videoPlayed = false
     
     private var _setImageSessionDataTask: NSURLSessionDataTask?
     
@@ -68,22 +70,24 @@ class VideoCell: UITableViewCell {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
                 self.runtimeLabel.text = String.localize("label.playing")
-                self.runtimeLabel.layer.borderWidth = 1
-                self.runtimeLabel.layer.borderColor = UIColor.whiteColor().CGColor
+                self.videoPlayed = true
             }, completion: nil)
         } else {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 0.5
                 self.captionLabel.alpha = 0.5
-                self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
-                self.runtimeLabel.layer.borderWidth = 0
+                if (self.videoPlayed == false){
+                    self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
+                } else {
+                    self.runtimeLabel.text = String.localize("label.watched")
+                }
             }, completion: nil)
         }
     }
     
     func updateCellStyle() {
-        thumbnailImageView.layer.borderColor = UIColor.whiteColor().CGColor
-        thumbnailImageView.layer.borderWidth = (self.selected ? 2 : 0)
+        thumbnailContainerView.layer.borderColor = UIColor.whiteColor().CGColor
+        thumbnailContainerView.layer.borderWidth = (self.selected ? 2 : 0)
         captionLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
         playIconImageView.hidden = self.selected
     }

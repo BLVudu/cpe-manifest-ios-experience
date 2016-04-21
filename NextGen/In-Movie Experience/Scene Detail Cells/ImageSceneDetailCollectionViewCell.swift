@@ -34,7 +34,7 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         
         if let timedEvent = timedEvent, experience = experience {
             _imageURL = timedEvent.getImageURL(experience)
-            _playButton.hidden = !timedEvent.isAudioVisual()
+            _playButton.hidden = !timedEvent.isAudioVisual
         } else {
             _imageURL = nil
             _playButton.hidden = true

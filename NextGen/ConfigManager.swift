@@ -17,9 +17,6 @@ class ConfigManager {
     var hasGoogleMaps = false
     
     func loadConfigs() {
-        TheTakeAPIUtil.sharedInstance.mediaId = NextGenDataManager.sharedInstance.mainExperience.customIdentifier(kTheTakeIdentifierNamespace)
-        BaselineAPIUtil.sharedInstance.projectId = NextGenDataManager.sharedInstance.mainExperience.customIdentifier(kBaselineIdentifierNamespace)
-        
         if let configDataPath = NSBundle.mainBundle().pathForResource("Data/config", ofType: "json") {
             do {
                 let configData = try NSData(contentsOfURL: NSURL(fileURLWithPath: configDataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
