@@ -29,6 +29,7 @@
 
 // Clip & Share"
 "clipshare.rotate" = "Rotate device to share clip";
+"clipshare.next_clip" = "Next clip will be avaliable soon";
 "clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
 "clipshare.send_button" = "Share this Clip";
 

@@ -44,6 +44,8 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
                     dispatch_async(dispatch_get_main_queue(), {
                         strongSelf._products = products
                         strongSelf.productsCollectionView.reloadData()
+                        let newIndex = NSIndexPath(forItem: 0, inSection: 0)
+                        strongSelf.productsCollectionView.scrollToItemAtIndexPath(newIndex, atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
                         strongSelf.productsCollectionView.userInteractionEnabled = true
                         MBProgressHUD.hideAllHUDsForView(strongSelf.productsCollectionView, animated: true)
                     })
