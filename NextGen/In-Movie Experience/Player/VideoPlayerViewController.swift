@@ -87,8 +87,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         
         _shouldUpdateShareButtonObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self {
-                if let userInfo = notification.userInfo, enabled = userInfo["clipAvaliable"] as? Bool {
-                        strongSelf._clipAvaliable = enabled
+                if let userInfo = notification.userInfo, avaliable = userInfo["clipAvaliable"] as? Bool {
+                        strongSelf._clipAvaliable = avaliable
                     } else {
                         strongSelf._clipAvaliable = false
 
@@ -268,26 +268,22 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBAction override func share(sender: AnyObject!) {
         alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         let anchor = self.view.frame.size.height - 120
-        if UIDevice.currentDevice().orientation.isLandscape  {
+        if _clipAvaliable == false {
             
-            if _clipAvaliable == false {
-           
             alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-            } else {
-                
-                alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-            }
             
+        } else if _clipAvaliable == true{
             
-        } else {
-            if _clipAvaliable == false {
-                
-                alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-            } else {
-                
+            if UIDevice.currentDevice().orientation.isLandscape {
+            
+            alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
+        } else{
+            
             NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidTapShare, object: nil)
             }
+
         }
+        
         alertController.view.tintColor = UIColor.themePrimaryColor()
         _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
         _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
