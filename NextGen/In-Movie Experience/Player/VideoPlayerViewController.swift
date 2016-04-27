@@ -54,7 +54,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak var countdown: CircularProgressView!
     var countdownTimer: NSTimer!
     var nextItemTask: Task?
-    var enabled = false
+    private var _clipAvaliable = false
     var alertController: UIAlertController!
     
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
@@ -73,7 +73,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         // Localizations
         _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
         _commentaryButton.setTitle(String.localize("label.commentary"), forState: UIControlState.Normal)
-        //shareString = String.localize("clipshare.next_clip")
         _commentaryView.hidden = true
         shareButton.enabled = true
         alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -88,10 +87,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         
         _shouldUpdateShareButtonObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self {
-                if let userInfo = notification.userInfo, enabled = userInfo["enabled"] as? Bool {
-                    strongSelf.enabled = true
+                if let userInfo = notification.userInfo, enabled = userInfo["clipAvaliable"] as? Bool {
+                        strongSelf._clipAvaliable = enabled
                     } else {
-                        strongSelf.enabled = false
+                        strongSelf._clipAvaliable = false
 
                 }
             }
@@ -269,36 +268,34 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBAction override func share(sender: AnyObject!) {
         alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         let anchor = self.view.frame.size.height - 120
-        if UIDevice.currentDevice().orientation.isLandscape {
+        if UIDevice.currentDevice().orientation.isLandscape  {
             
-            if enabled == false {
+            if _clipAvaliable == false {
            
             alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
             } else {
+                
                 alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
             }
-            alertController.view.tintColor = UIColor.themePrimaryColor()
-            _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
-            _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-            _sharePopoverController.delegate = self
-
-            _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-                if((self.playerControlsAutoHideTimer) != nil){
-                    self.playerControlsAutoHideTimer.invalidate()
-            }
+            
+            
         } else {
-            if enabled == false {
+            if _clipAvaliable == false {
                 
                 alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-                _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
-                _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-                _sharePopoverController.delegate = self
-                
-                _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-
             } else {
+                
             NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidTapShare, object: nil)
+            }
         }
+        alertController.view.tintColor = UIColor.themePrimaryColor()
+        _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
+        _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        _sharePopoverController.delegate = self
+        
+        _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+        if((self.playerControlsAutoHideTimer) != nil){
+            self.playerControlsAutoHideTimer.invalidate()
         }
     }
     
@@ -310,9 +307,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                 skipInterstitial()
             }
             
-            if _commentaryView.hidden
-                //&& !_sharePopoverController.popoverVisible 
-            {
+            if _commentaryView.hidden{
                 super.handleTap(gestureRecognizer)
             }
         }

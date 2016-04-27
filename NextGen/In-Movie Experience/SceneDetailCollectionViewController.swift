@@ -46,7 +46,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     private var _currentClipTimedEvent: NGDMTimedEvent? {
         didSet {
             if _currentClipTimedEvent != oldValue {
-                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, userInfo: ["enabled": _currentClipTimedEvent != nil])
+                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, userInfo: ["clipAvaliable": _currentClipTimedEvent != nil])
             }
         }
     }
