@@ -158,7 +158,7 @@
                         <outlet property="backgroundImageView" destination="gA2-16-mAf" id="UF8-gt-sCz"/>
                         <outlet property="extras" destination="oBy-bL-9Wq" id="lE0-wo-8e8"/>
                         <outlet property="logoTreatment" destination="YSS-I9-ecR" id="yLV-Ib-Afm"/>
-                        <outlet property="playMove" destination="D1l-Mu-C6w" id="Tgb-vp-cr6"/>
+                        <outlet property="playMovie" destination="D1l-Mu-C6w" id="GKN-R2-iaF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -16,12 +16,14 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var logoTreatment: UIImageView!
  
-    @IBOutlet weak var playMove: UIButton!
+    @IBOutlet weak var playMovie: UIButton!
     
     @IBOutlet weak var extras: UIButton!
     @IBOutlet weak var animatedBackground: UIView!
     
+    var appAppearance: NGDMAppearance!
     
+        
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
 
@@ -33,10 +35,15 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         backgroundContainerView.sendSubviewToBack(backgroundImageView)
-
         
-        let background = NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource("mos-nextgen-background", ofType: "mp4")!)
-        let animatedItem = AVPlayerItem(URL: background)
+        appAppearance = NGDMAppearance()
+        
+        self.logoTreatment.frame = appAppearance.titleLogoRect!
+        self.playMovie.frame = appAppearance.playButtonRect!
+        self.extras.frame = appAppearance.extrasButtonRect!
+        
+        let background = appAppearance!.animatedBackground
+        let animatedItem = AVPlayerItem(URL: background!)
         let animatedPlayer = AVPlayer(playerItem: animatedItem)
         let animatedLayer = AVPlayerLayer(player: animatedPlayer)
         
@@ -59,10 +66,10 @@ class HomeViewController: UIViewController {
         
         UIView.animateWithDuration(2.0, animations: {
             self.animatedBackground.alpha = 0.0
-            self.backgroundImageView.image = UIImage(named: "MOSBackground")
-            self.logoTreatment.image = UIImage(named: "MOSLogo")
-            self.playMove.setImage(UIImage(named: "MOSPlay"), forState: .Normal)
-            self.extras.setImage(UIImage(named: "MOSExtras"), forState: .Normal)
+            self.backgroundImageView.image = self.appAppearance!.backgroundImage
+            self.logoTreatment.image = self.appAppearance!.titleLogoImage
+            self.playMovie.setImage(self.appAppearance!.playButtonImage, forState: .Normal)
+            self.extras.setImage(self.appAppearance!.extrasButtonImage, forState: .Normal)
             }, completion: {(Bool) -> Void in
                 self.animatedBackground.removeFromSuperview()
                 

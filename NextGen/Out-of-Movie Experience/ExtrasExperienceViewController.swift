@@ -70,5 +70,9 @@ class ExtrasExperienceViewController: UIViewController {
     func close() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Landscape
+    }
 
 }
