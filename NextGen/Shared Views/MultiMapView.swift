@@ -14,7 +14,8 @@ class MultiMapView: UIView, MKMapViewDelegate {
     
     var appleMapView: MKMapView?
     var googleMapView: GMSMapView?
-
+    var appApperance: NGDMAppearance!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -26,6 +27,7 @@ class MultiMapView: UIView, MKMapViewDelegate {
     }
     
     func setup() {
+        appApperance = NGDMAppearance()
         if ConfigManager.sharedInstance.hasGoogleMaps {
             googleMapView = GMSMapView(frame: self.bounds)
             googleMapView?.mapType = kGMSTypeHybrid
@@ -55,7 +57,7 @@ class MultiMapView: UIView, MKMapViewDelegate {
         if let mapView = googleMapView {
             let marker = GMSMarker(position: location)
             marker.title = title
-            marker.icon = UIImage(named: "MOSMapPin")
+            marker.icon = appApperance.mapPin
             marker.snippet = subtitle
             marker.map = mapView
             
@@ -78,7 +80,7 @@ class MultiMapView: UIView, MKMapViewDelegate {
     // MARK: MKMapViewDelegate
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")
-        annotationView.image = UIImage(named: "MOSMapPin")
+        annotationView.image = appApperance.mapPin
         annotationView.canShowCallout = true
         return annotationView
     }

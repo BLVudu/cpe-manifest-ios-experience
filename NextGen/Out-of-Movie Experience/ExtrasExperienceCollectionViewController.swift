@@ -16,6 +16,7 @@ class ExtrasExperienceCollectionViewController: UICollectionViewController {
     let kTitleImageHeight: CGFloat = 90
     
     var experience: NGDMExperience!
+    var appAppearance: NGDMAppearance!
     
     private var _titleImageView: UIImageView!
     private var _homeButton: UIButton!
@@ -25,11 +26,12 @@ class ExtrasExperienceCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        appAppearance = NGDMAppearance()
         _titleImageView = UIImageView(frame: CGRectMake(CGRectGetWidth(self.view.frame) - kTitleImageWidth, 0, kTitleImageWidth, kTitleImageHeight))
-        _titleImageView.image = UIImage(named: "MOSExtrasTitle")
+        _titleImageView.image = appAppearance.extrasTitleImage
         self.view.addSubview(_titleImageView)
         
-        let backgroundImageView = UIImageView(image: UIImage(named: "MOSExtrasBackground"))
+        let backgroundImageView = UIImageView(image: appAppearance.backgroundExtrasImage)
         backgroundImageView.frame = self.view.bounds
         self.view.addSubview(backgroundImageView)
         self.view.sendSubviewToBack(backgroundImageView)
