@@ -354,7 +354,7 @@
 		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingItemsViewController.swift; sourceTree = "<group>"; };
 		497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
-		49860CE91CD020B4007770F2 /* mos-nextgen-background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mos-nextgen-background.mp4"; path = "../../../../Downloads/mos-nextgen-background.mp4"; sourceTree = "<group>"; };
+		49860CE91CD020B4007770F2 /* mos-nextgen-background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-background.mp4"; sourceTree = "<group>"; };
 		49860CED1CD2D736007770F2 /* NGDMAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAppearance.swift; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		499871231CB43A4E00606E56 /* Commentary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Commentary.plist; sourceTree = "<group>"; };
