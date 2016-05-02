@@ -55,14 +55,17 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     var countdownTimer: NSTimer!
     var nextItemTask: Task?
     private var _clipAvaliable = false
+    var commentaryIndex = 0
     var alertController: UIAlertController!
     
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
+    private var _updateCommentaryButton: NSObjectProtocol!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_shouldPauseAllOtherObserver)
         NSNotificationCenter.defaultCenter().removeObserver(_shouldUpdateShareButtonObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(_updateCommentaryButton)
     }
     
     override func viewDidLoad() {
@@ -92,6 +95,23 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                     } else {
                         strongSelf._clipAvaliable = false
 
+                }
+            }
+        })
+        
+        _updateCommentaryButton = NSNotificationCenter.defaultCenter().addObserverForName("didSelectCommentaryOption", object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self]
+            (notification) in
+            if let strongSelf = self{
+                if let userInfo = notification.userInfo, index = userInfo["option"] as? Int{
+                    strongSelf.commentaryIndex = index
+                    if index > 0 {
+                        strongSelf._commentaryButton.setTitle("Commentary is on", forState: .Normal)
+                        strongSelf._commentaryButton.imageEdgeInsets = UIEdgeInsetsMake(0, 140, 0, 0)
+                        
+                    } else {
+                        strongSelf._commentaryButton.setTitle("Commentary", forState: .Normal)
+                        strongSelf._commentaryButton.imageEdgeInsets = UIEdgeInsetsMake(0, 120, 0, 0)
+                    }
                 }
             }
         })
@@ -253,14 +273,23 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func commentary(sender: AnyObject) {
+    @IBAction func commentary(sender: UIButton) {
+        
+        sender.imageView!.image? = (sender.imageView!.image?.imageWithRenderingMode(.AlwaysTemplate))!
         _commentaryView.hidden = !_commentaryView.hidden
         
         if !_commentaryView.hidden {
+            
+            sender.tintColor = UIColor.themePrimaryColor()
+            
             if let timer = self.playerControlsAutoHideTimer {
                 timer.invalidate()
             }
         } else {
+            if commentaryIndex == 0 {
+                sender.tintColor = UIColor.whiteColor()
+            }
+            
             self.initAutoHideTimer()
         }
     }

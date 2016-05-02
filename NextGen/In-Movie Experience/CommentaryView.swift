@@ -79,19 +79,13 @@ class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelega
         return sectionData.count
     }
     
-    //func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      
-      //  let cell = tableView.cellForRowAtIndexPath(indexPath) as! CommentaryViewCell
-        //cell.selected = true
-        
-        
-    //}
- 
+    
     @IBAction func selectedRB(sender: RadioButton) {
         
         let indexPath = NSIndexPath(forRow: sender.index!, inSection: 0)
         
         self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        NSNotificationCenter.defaultCenter().postNotificationName("didSelectCommentaryOption", object: nil, userInfo: ["option":sender.index!])
 
     }
     
