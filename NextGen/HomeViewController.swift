@@ -11,19 +11,22 @@ import AVKit
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var backgroundContainerView: UIView!
+    private struct SegueIdentifier {
+        static let ShowInMovieExperience = "ShowInMovieExperienceSegueIdentifier"
+        static let ShowOutOfMovieExperience = "ShowOutOfMovieExperienceSegueIdentifier"
+    }
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var animatedBackgroundView: UIView!
+    @IBOutlet weak var backgroundVideoView: UIView!
     
-    @IBOutlet weak var titleTreatmentImageView: UIImageView!
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var extrasButton: UIButton!
-    
-    private var didFinishPlayingObserver: NSObjectProtocol!
-    private var didFadeButtons = false
+    private var didFinishPlayingObserver: NSObjectProtocol?
+    private var didFadeInViews = false
+    private var backgroundVideoPlayer: AVPlayer?
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(didFinishPlayingObserver)
+        if let observer = didFinishPlayingObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+        }
     }
     
     
@@ -31,63 +34,108 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backgroundContainerView.sendSubviewToBack(backgroundImageView)
+        var fadeInViews = [UIView]()
+        var willFadeInViews = false
         
         if let appearance = CurrentManifest.mainExperience.appearance {
-            if let titleTreatmentOrigin = appearance.titleImageOrigin, titleTreatmentSize = appearance.titleImageSize {
-                titleTreatmentImageView.frame = CGRectMake(titleTreatmentOrigin.x, titleTreatmentOrigin.y, titleTreatmentSize.width, titleTreatmentSize.height)
-            }
-            
             if let backgroundVideoURL = appearance.backgroundVideoURL {
-                let animatedItem = AVPlayerItem(URL: backgroundVideoURL)
-                let animatedPlayer = AVPlayer(playerItem: animatedItem)
-                let animatedLayer = AVPlayerLayer(player: animatedPlayer)
-                animatedLayer.frame = animatedBackgroundView.frame
-                animatedBackgroundView.layer.addSublayer(animatedLayer)
-                animatedPlayer.play()
-                
-                titleTreatmentImageView.hidden = true
-                playButton.hidden = true
-                extrasButton.hidden = true
-                
-                animatedPlayer.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(1, Int32(NSEC_PER_SEC)), queue: dispatch_get_main_queue(), usingBlock: { [weak self] (time) in
-                    if let strongSelf = self where !strongSelf.didFadeButtons && round(time.seconds) > appearance.backgroundVideoFadeTime {
-                        strongSelf.didFadeButtons = true
+                backgroundVideoPlayer = AVPlayer(playerItem: AVPlayerItem(URL: backgroundVideoURL))
+                if let videoPlayer = backgroundVideoPlayer {
+                    let videoLayer = AVPlayerLayer(player: videoPlayer)
+                    videoLayer.frame = backgroundVideoView.frame
+                    backgroundVideoView.layer.addSublayer(videoLayer)
+                    
+                    if appearance.backgroundVideoFadeTime > 0 {
+                        willFadeInViews = true
                         
-                        strongSelf.titleTreatmentImageView.alpha = 0
-                        strongSelf.playButton.alpha = 0
-                        strongSelf.extrasButton.alpha = 0
-                        strongSelf.titleTreatmentImageView.hidden = false
-                        strongSelf.playButton.hidden = false
-                        strongSelf.extrasButton.hidden = false
-                        
-                        UIView.animateWithDuration(0.5, animations: {
-                            strongSelf.titleTreatmentImageView.alpha = 1
-                            strongSelf.playButton.alpha = 1
-                            strongSelf.extrasButton.alpha = 1
+                        videoPlayer.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(1, Int32(NSEC_PER_SEC)), queue: dispatch_get_main_queue(), usingBlock: { [weak self] (time) in
+                            if let strongSelf = self where !strongSelf.didFadeInViews && round(time.seconds) > appearance.backgroundVideoFadeTime {
+                                strongSelf.didFadeInViews = true
+                                
+                                for view in fadeInViews {
+                                    view.alpha = 0
+                                    view.hidden = false
+                                }
+                                
+                                UIView.animateWithDuration(0.5, animations: {
+                                    for view in fadeInViews {
+                                        view.alpha = 1
+                                    }
+                                })
+                            }
                         })
                     }
-                })
+                    
+                    if appearance.backgroundVideoLoopTime > 0 {
+                        didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { (notification) in
+                            videoPlayer.muted = true
+                            videoPlayer.seekToTime(CMTimeMakeWithSeconds(appearance.backgroundVideoLoopTime, Int32(NSEC_PER_SEC)))
+                            videoPlayer.play()
+                        })
+                    }
+                }
+            } else if let backgroundImage = appearance.backgroundImage {
+                backgroundImageView.image = backgroundImage
+            }
+            
+            if let origin = appearance.titleImageOrigin, size = appearance.titleImageSize {
+                let imageView = UIImageView(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
+                imageView.image = appearance.titleImage
+                imageView.hidden = true
+                self.view.addSubview(imageView)
                 
-                didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { (notification) in
-                    animatedPlayer.muted = true
-                    animatedPlayer.seekToTime(CMTimeMakeWithSeconds(appearance.backgroundVideoLoopTime, Int32(NSEC_PER_SEC)))
-                    animatedPlayer.play()
-                })
+                fadeInViews.append(imageView)
             }
         }
         
-        if let appearance = CurrentManifest.inMovieExperience.appearance, playButtonOrigin = appearance.buttonOrigin, playButtonSize = appearance.buttonSize {
-            playButton.frame = CGRectMake(playButtonOrigin.x, playButtonOrigin.y, playButtonSize.width, playButtonSize.height)
+        // Play button
+        if let appearance = CurrentManifest.inMovieExperience.appearance, image = appearance.buttonImage, origin = appearance.buttonOrigin, size = appearance.buttonSize {
+            let button = UIButton(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
+            button.setImage(image, forState: UIControlState.Normal)
+            button.addTarget(self, action: #selector(self.onPlay), forControlEvents: UIControlEvents.TouchUpInside)
+            button.hidden = true
+            self.view.addSubview(button)
+            
+            fadeInViews.append(button)
         }
         
-        if let appearance = CurrentManifest.outOfMovieExperience.appearance, extrasButtonOrigin = appearance.buttonOrigin, extrasButtonSize = appearance.buttonSize {
-            extrasButton.frame = CGRectMake(extrasButtonOrigin.x, extrasButtonOrigin.y, extrasButtonSize.width, extrasButtonSize.height)
+        // Extras button
+        if let appearance = CurrentManifest.outOfMovieExperience.appearance, image = appearance.buttonImage, origin = appearance.buttonOrigin, size = appearance.buttonSize {
+            let button = UIButton(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
+            button.setImage(image, forState: UIControlState.Normal)
+            button.addTarget(self, action: #selector(self.onExtras), forControlEvents: UIControlEvents.TouchUpInside)
+            button.hidden = true
+            self.view.addSubview(button)
+            
+            fadeInViews.append(button)
         }
+        
+        if !willFadeInViews {
+            for view in fadeInViews {
+                view.hidden = false
+            }
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        backgroundVideoPlayer?.play()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        backgroundVideoPlayer?.pause()
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
+    }
+    
+    // MARK: Actions
+    func onPlay() {
+        self.performSegueWithIdentifier(SegueIdentifier.ShowInMovieExperience, sender: nil)
+    }
+    
+    func onExtras() {
+        self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: nil)
     }
     
 }
