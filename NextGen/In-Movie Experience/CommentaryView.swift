@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kDidSelectCommetaryOption = "kDidSelectCommetaryOption"
+
 class CommentaryObject:NSObject{
     
     var title: String!
@@ -29,6 +31,8 @@ class CommentaryObject:NSObject{
 
 class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
+    
+
     @IBOutlet weak var tableView: UITableView!
     var sectionData = [CommentaryObject]()
     
@@ -85,7 +89,7 @@ class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelega
         let indexPath = NSIndexPath(forRow: sender.index!, inSection: 0)
         
         self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        NSNotificationCenter.defaultCenter().postNotificationName("didSelectCommentaryOption", object: nil, userInfo: ["option":sender.index!])
+        NSNotificationCenter.defaultCenter().postNotificationName(kDidSelectCommetaryOption, object: nil, userInfo: ["option":sender.index!])
 
     }
     

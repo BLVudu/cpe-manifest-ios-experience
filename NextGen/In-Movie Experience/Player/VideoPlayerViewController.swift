@@ -99,7 +99,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             }
         })
         
-        _updateCommentaryButton = NSNotificationCenter.defaultCenter().addObserverForName("didSelectCommentaryOption", object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self]
+        _updateCommentaryButton = NSNotificationCenter.defaultCenter().addObserverForName(kDidSelectCommetaryOption, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self]
             (notification) in
             if let strongSelf = self{
                 if let userInfo = notification.userInfo, index = userInfo["option"] as? Int{
