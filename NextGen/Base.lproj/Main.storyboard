@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -153,12 +153,12 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
-                        <outlet property="animatedBackground" destination="HaL-aI-A4f" id="CHp-TR-hQS"/>
+                        <outlet property="animatedBackgroundView" destination="HaL-aI-A4f" id="pcQ-y3-dO4"/>
                         <outlet property="backgroundContainerView" destination="gKy-zB-UIg" id="lBw-Pa-Gsh"/>
                         <outlet property="backgroundImageView" destination="gA2-16-mAf" id="UF8-gt-sCz"/>
-                        <outlet property="extras" destination="oBy-bL-9Wq" id="lE0-wo-8e8"/>
-                        <outlet property="logoTreatment" destination="YSS-I9-ecR" id="yLV-Ib-Afm"/>
-                        <outlet property="playMovie" destination="D1l-Mu-C6w" id="GKN-R2-iaF"/>
+                        <outlet property="extrasButton" destination="oBy-bL-9Wq" id="xzc-dB-ffp"/>
+                        <outlet property="playButton" destination="D1l-Mu-C6w" id="gZ6-At-VfC"/>
+                        <outlet property="titleTreatmentImageView" destination="YSS-I9-ecR" id="3lg-hf-1ux"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -946,7 +946,7 @@
                                         <rect key="frame" x="0.0" y="28" width="408" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">

@@ -12,9 +12,13 @@ import GoogleMaps
 
 class MultiMapView: UIView, MKMapViewDelegate {
     
+    struct Constants {
+        static let MarkerAnnotationViewReuseIdentifier = "kMarkerAnnotationViewReuseIdentifier"
+    }
+    
     var appleMapView: MKMapView?
     var googleMapView: GMSMapView?
-    var appApperance: NGDMAppearance!
+    var mapIconImage: UIImage?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +31,6 @@ class MultiMapView: UIView, MKMapViewDelegate {
     }
     
     func setup() {
-        appApperance = NGDMAppearance()
         if ConfigManager.sharedInstance.hasGoogleMaps {
             googleMapView = GMSMapView(frame: self.bounds)
             googleMapView?.mapType = kGMSTypeHybrid
@@ -50,14 +53,14 @@ class MultiMapView: UIView, MKMapViewDelegate {
     }
     
     func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?) {
-        addMarker(location, title: title, subtitle: subtitle, autoSelect: false)
+        addMarker(location, title: title, subtitle: subtitle, icon: nil, autoSelect: false)
     }
     
-    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?, autoSelect: Bool) {
+    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?, icon: UIImage?, autoSelect: Bool) {
         if let mapView = googleMapView {
             let marker = GMSMarker(position: location)
             marker.title = title
-            marker.icon = appApperance.mapPin
+            marker.icon = icon
             marker.snippet = subtitle
             marker.map = mapView
             
@@ -69,6 +72,7 @@ class MultiMapView: UIView, MKMapViewDelegate {
             annotation.coordinate = location
             annotation.title = title
             annotation.subtitle = subtitle
+            mapIconImage = icon
             mapView.addAnnotation(annotation)
             
             if autoSelect {
@@ -79,9 +83,15 @@ class MultiMapView: UIView, MKMapViewDelegate {
     
     // MARK: MKMapViewDelegate
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SceneDetailMapPoint")
-        annotationView.image = appApperance.mapPin
-        annotationView.canShowCallout = true
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MarkerAnnotationViewReuseIdentifier)
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Constants.MarkerAnnotationViewReuseIdentifier)
+            annotationView?.image = mapIconImage
+            annotationView?.canShowCallout = true
+        }
+        
+        annotationView?.annotation = annotation
+        
         return annotationView
     }
 

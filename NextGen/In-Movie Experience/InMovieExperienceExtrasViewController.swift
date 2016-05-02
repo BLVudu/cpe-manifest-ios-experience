@@ -28,8 +28,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appApperance = NGDMAppearance()
-        backgroundImageView.image = appApperance.inMovieBackground
+        backgroundImageView.image = CurrentManifest.inMovieExperience.appearance?.backgroundImage
         
         talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         

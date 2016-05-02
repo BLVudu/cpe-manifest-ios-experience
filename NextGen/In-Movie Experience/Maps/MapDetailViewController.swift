@@ -57,7 +57,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         location = timedEvent.location!
         center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         mapView.setLocation(center, zoomLevel: 15, animated: false)
-        mapView.addMarker(center, title: location.name, subtitle: location.address, autoSelect: true)
+        mapView.addMarker(center, title: location.name, subtitle: location.address, icon: experience?.appearance?.buttonImage, autoSelect: true)
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {

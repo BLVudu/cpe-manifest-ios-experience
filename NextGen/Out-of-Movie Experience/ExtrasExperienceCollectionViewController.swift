@@ -26,12 +26,11 @@ class ExtrasExperienceCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appAppearance = NGDMAppearance()
         _titleImageView = UIImageView(frame: CGRectMake(CGRectGetWidth(self.view.frame) - kTitleImageWidth, 0, kTitleImageWidth, kTitleImageHeight))
-        _titleImageView.image = appAppearance.extrasTitleImage
+        _titleImageView.image = CurrentManifest.outOfMovieExperience.appearance?.titleImage
         self.view.addSubview(_titleImageView)
         
-        let backgroundImageView = UIImageView(image: appAppearance.backgroundExtrasImage)
+        let backgroundImageView = UIImageView(image: CurrentManifest.outOfMovieExperience.appearance?.backgroundImage)
         backgroundImageView.frame = self.view.bounds
         self.view.addSubview(backgroundImageView)
         self.view.sendSubviewToBack(backgroundImageView)
