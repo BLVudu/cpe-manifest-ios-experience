@@ -1000,17 +1000,15 @@
                                             <action selector="done:" destination="FsK-dw-pgC" eventType="touchUpInside" id="c8M-tS-dSn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uk-RH-L9W">
-                                        <rect key="frame" x="859" y="0.0" width="145" height="75"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uk-RH-L9W">
+                                        <rect key="frame" x="843" y="0.0" width="161" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="145" id="cjf-cV-biJ"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="cjf-cV-biJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="120" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Commentary" image="Commentary">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <state key="normal" title="      Commentary         " image="Commentary"/>
                                         <connections>
                                             <action selector="commentary:" destination="FsK-dw-pgC" eventType="touchUpInside" id="brH-Pq-A4D"/>
                                         </connections>

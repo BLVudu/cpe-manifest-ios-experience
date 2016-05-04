@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kDidSelectCommetaryOption = "kDidSelectCommetaryOption"
+
 class CommentaryObject:NSObject{
     
     var title: String!
@@ -29,6 +31,8 @@ class CommentaryObject:NSObject{
 
 class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
+    
+
     @IBOutlet weak var tableView: UITableView!
     var sectionData = [CommentaryObject]()
     
@@ -79,19 +83,13 @@ class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelega
         return sectionData.count
     }
     
-    //func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      
-      //  let cell = tableView.cellForRowAtIndexPath(indexPath) as! CommentaryViewCell
-        //cell.selected = true
-        
-        
-    //}
- 
+    
     @IBAction func selectedRB(sender: RadioButton) {
         
         let indexPath = NSIndexPath(forRow: sender.index!, inSection: 0)
         
         self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        NSNotificationCenter.defaultCenter().postNotificationName(kDidSelectCommetaryOption, object: nil, userInfo: ["option":sender.index!])
 
     }
     
