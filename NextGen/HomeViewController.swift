@@ -142,10 +142,14 @@ class HomeViewController: UIViewController {
                 }
                 
                 backgroundVideoPlayer = videoPlayer
-                backgroundImageView.removeFromSuperview()
+                if backgroundImageView != nil {
+                    backgroundImageView.removeFromSuperview()
+                }
             } else if let backgroundImage = appearance.backgroundImage {
                 backgroundImageView.image = backgroundImage
-                backgroundVideoView.removeFromSuperview()
+                if backgroundVideoView != nil {
+                    backgroundVideoView.removeFromSuperview()
+                }
             }
         }
     }
