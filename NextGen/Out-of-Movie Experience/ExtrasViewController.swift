@@ -164,9 +164,10 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let experience = CurrentManifest.outOfMovieExperience.childExperiences[indexPath.row]
-        if experience.isGalleryList() {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
-        } else if experience.isShopping() {
+        //if experience.isGalleryList() {
+            //self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
+        //} else
+        if experience.isShopping() {
             self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
         } else {
             self.performSegueWithIdentifier(SegueIdentifier.ShowVideoGallery, sender: experience)

@@ -90,6 +90,11 @@ class HomeViewController: UIViewController {
         unloadVideoPlayer()
     }
     
+    override func didReceiveMemoryWarning() {
+        
+        super.didReceiveMemoryWarning()
+    }
+    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
     }
