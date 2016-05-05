@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current film's data file
-        if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_v3", ofType: "xml") {
+        if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.2", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
             
             do {
