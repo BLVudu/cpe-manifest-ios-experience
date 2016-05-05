@@ -18,6 +18,7 @@
 		4921D99A1C3EFD0B00ED2AA6 /* NextGenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9991C3EFD0B00ED2AA6 /* NextGenUITests.swift */; };
 		4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */; };
 		492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E91C76A56900B306A2 /* CommentaryViewCell.swift */; };
+		493043A71CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493043A61CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift */; };
 		495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495CF3691CC042BA006AE290 /* CoreText.framework */; };
 		497A9E161CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */; };
 		497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */; };
@@ -351,6 +352,7 @@
 		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGen/Out-of-Movie Experience/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
 		492267E91C76A56900B306A2 /* CommentaryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryViewCell.swift; sourceTree = "<group>"; };
 		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		493043A61CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasSceneLocationsViewController.swift; sourceTree = "<group>"; };
 		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingItemsViewController.swift; sourceTree = "<group>"; };
 		497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
@@ -1186,6 +1188,7 @@
 				49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */,
 				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
 				497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */,
+				493043A61CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift */,
 			);
 			path = "Out-of-Movie Experience";
 			sourceTree = "<group>";
@@ -1460,6 +1463,7 @@
 				7071C5251C6BCBF6006F4275 /* NGEPresentationLanguagePairType.swift in Sources */,
 				7071C5261C6BCBF6006F4275 /* NGEPresentationListType.swift in Sources */,
 				7071C52B1C6BCBF6006F4275 /* NGEPrivateDataType.swift in Sources */,
+				493043A71CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift in Sources */,
 				7071C49A1C6BCBF6006F4275 /* NGEAppName.swift in Sources */,
 				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
 				7071C4ED1C6BCBF6006F4275 /* NGEFileDeleteManifestType+File.swift in Sources */,
