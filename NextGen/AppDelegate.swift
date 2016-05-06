@@ -13,6 +13,7 @@ struct CurrentManifest {
     static var mainExperience: NGDMMainExperience!
     static var inMovieExperience: NGDMExperience!
     static var outOfMovieExperience: NGDMExperience!
+    static var allAppData: [String: NGDMAppData]?
 }
 
 @UIApplicationMain
@@ -22,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Load current film's data file
-        if let xmlPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.2", ofType: "xml") {
-            NextGenDataManager.sharedInstance.loadXMLFile(xmlPath)
+        // Load current Manifest file
+        if let manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.2", ofType: "xml") {
+            NextGenDataManager.sharedInstance.loadManifestXMLFile(manifestXMLPath)
             
             do {
                 CurrentManifest.mainExperience = try NextGenDataManager.sharedInstance.getMainExperience()
@@ -50,6 +51,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } catch {
                 print("Error loading Manifest file: unknown error")
                 abort()
+            }
+        }
+        
+        // Load current AppData file
+        if let appDataXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_appdata", ofType: "xml") {
+            NextGenDataManager.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
+            
+            do {
+                CurrentManifest.allAppData = try NextGenDataManager.sharedInstance.getAllAppData()
+            } catch {
+                print("Error loading AppData file")
             }
         }
         
