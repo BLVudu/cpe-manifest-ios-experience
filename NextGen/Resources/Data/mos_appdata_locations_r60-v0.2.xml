@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifestdata:ManifestAppDataSet xmlns:manifestdata="http://www.movielabs.com/schema/md/manifestdata/v1.0/manifestdata" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:md="http://www.movielabs.com/schema/md/v2.4/md" xmlns:manifest="http://www.movielabs.com/schema/manifest/v1.5/manifest">
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.1">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>1</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Vancouver</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location icon="md:imageid:eidr-x:C80F-C561-EE65-C5E4-C039-U:locations.pin_icon">
+        <manifest:Type/>
+        <manifest:Name>Mammoth Studios</manifest:Name>
+        <manifest:Address>2880 Underhill Ave, Burnaby, BC V5A 3C5, Canada</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>49.2596395</manifest:Latitude>
+          <manifest:Longitude>-122.9276701</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.2">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>2</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Vancouver</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Mammoth Studios</manifest:Name>
+        <manifest:Address>2880 Underhill Ave, Burnaby, BC V5A 3C5, Canada</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>49.2596395</manifest:Latitude>
+          <manifest:Longitude>-122.9276701</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.3">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>3</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Vancouver</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Mammoth Studios</manifest:Name>
+        <manifest:Address>2880 Underhill Ave, Burnaby, BC V5A 3C5, Canada</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>49.2596395</manifest:Latitude>
+          <manifest:Longitude>-122.9276701</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.4">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>4</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Vancouver</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Mammoth Studios</manifest:Name>
+        <manifest:Address>2880 Underhill Ave, Burnaby, BC V5A 3C5, Canada</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>49.2596395</manifest:Latitude>
+          <manifest:Longitude>-122.9276701</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.5">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>5</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Vancouver</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Mammoth Studios</manifest:Name>
+        <manifest:Address>2880 Underhill Ave, Burnaby, BC V5A 3C5, Canada</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>49.2596395</manifest:Latitude>
+          <manifest:Longitude>-122.9276701</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.6">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>6</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Vancouver</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Mammoth Studios</manifest:Name>
+        <manifest:Address>2880 Underhill Ave, Burnaby, BC V5A 3C5, Canada</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>49.2596395</manifest:Latitude>
+          <manifest:Longitude>-122.9276701</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.7">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>7</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Bering Sea</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Vancouver Island</manifest:Name>
+        <manifest:Address>The waters of Vancouver Island, British Columbia</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>48.6861195</manifest:Latitude>
+          <manifest:Longitude>-133.9445055</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The fishing boat and oil rig sequences were filmed off the coast of Vancouver Island.</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.8">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>8</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Smallville</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Plano, IL</manifest:Name>
+        <manifest:Address>Centennial Elementary School
+800 S. West St. Plano IL 60545</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.655697</manifest:Latitude>
+          <manifest:Longitude>-88.536779</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The town of Plano, IL was transformed into Smallville </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.9">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>9</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>U.S. Northcom</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Edwards Air Force Base</manifest:Name>
+        <manifest:Address>Edwards Air Force Base Palmdale, CA </manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>34.918692</manifest:Latitude>
+          <manifest:Longitude>-117.889631</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The U.S. Military granted filmmakers permission to film on Edwards Air Force Base</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.10">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>10</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>U.S. Northcom</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Edwards Air Force Base</manifest:Name>
+        <manifest:Address>Edwards Air Force Base Palmdale, CA </manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>34.918692</manifest:Latitude>
+          <manifest:Longitude>-117.889631</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The U.S. Military granted filmmakers permission to film on Edwards Air Force Base</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.11">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>11</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Smallville</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Plano, IL</manifest:Name>
+        <manifest:Address>Main St. 
+Plano, IL 60545</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.662711</manifest:Latitude>
+          <manifest:Longitude>-88.537236</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The town of Plano, IL was transformed into Smallville </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.12">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>12</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Smallville</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Plano, IL</manifest:Name>
+        <manifest:Address>Main St. 
+Plano, IL 60545</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.662711</manifest:Latitude>
+          <manifest:Longitude>-88.537236</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The town of Plano, IL was transformed into Smallville </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.13">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>13</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Smallville</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Plano, IL</manifest:Name>
+        <manifest:Address>Main St. 
+Plano, IL 60545</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.662711</manifest:Latitude>
+          <manifest:Longitude>-88.537236</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The town of Plano, IL was transformed into Smallville </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.14">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>14</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Smallville</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Plano, IL</manifest:Name>
+        <manifest:Address>Main St. 
+Plano, IL 60545</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.662711</manifest:Latitude>
+          <manifest:Longitude>-88.537236</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The town of Plano, IL was transformed into Smallville </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.15">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Smallville</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Plano, IL</manifest:Name>
+        <manifest:Address>Main St. 
+Plano, IL 60545</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.662711</manifest:Latitude>
+          <manifest:Longitude>-88.537236</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The town of Plano, IL was transformed into Smallville </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.16">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>16</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Smallville</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Plano, IL</manifest:Name>
+        <manifest:Address>Main St. 
+Plano, IL 60545</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.662711</manifest:Latitude>
+          <manifest:Longitude>-88.537236</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The town of Plano, IL was transformed into Smallville </manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.17">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>17</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Metropolis</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Streets of Chicago</manifest:Name>
+        <manifest:Address>118 N. Clark St.
+Chicago, IL 60602</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.883872</manifest:Latitude>
+          <manifest:Longitude>-87.631292</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>Chicago, IL doubled as the city of Metropolis</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.18">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>18</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>U.S. Northcom</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Edwards Air Force Base</manifest:Name>
+        <manifest:Address>Edwards Air Force Base Palmdale, CA </manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>34.918692</manifest:Latitude>
+          <manifest:Longitude>-117.889631</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The U.S. Military granted filmmakers permission to film on Edwards Air Force Base</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.19">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>19</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Metropolis</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>The Daily Planet</manifest:Name>
+        <manifest:Address>111 E. Wacker Ave. Chicago, IL 60601</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.88756</manifest:Latitude>
+          <manifest:Longitude>-87.623576</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The exteriors of the iconic Daily Planet were filmed in Chicago</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.20">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>20</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Metropolis</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>Chicago Union Station</manifest:Name>
+        <manifest:Address>210 S Canal St. 
+Chicago, IL 60606</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.879152</manifest:Latitude>
+          <manifest:Longitude>-87.6396024</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>Chicago Union Station hosted the climactic final battle</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+  <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.21">
+    <manifestdata:NVPair Name="display_order">
+      <manifestdata:Integer>21</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="type">
+      <manifestdata:Text>Metropolis</manifestdata:Text>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="location">
+      <manifestdata:Location>
+        <manifest:Type/>
+        <manifest:Name>The Daily Planet</manifest:Name>
+        <manifest:Address>111 E. Wacker Ave. Chicago, IL 60601</manifest:Address>
+        <manifest:EarthCoordinate>
+          <manifest:Latitude>41.88756</manifest:Latitude>
+          <manifest:Longitude>-87.623576</manifest:Longitude>
+        </manifest:EarthCoordinate>
+      </manifestdata:Location>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="zoom">
+      <manifestdata:Integer>15</manifestdata:Integer>
+    </manifestdata:NVPair>
+    <manifestdata:NVPair Name="text">
+      <manifestdata:Text>The exteriors of the iconic Daily Planet were filmed in Chicago</manifestdata:Text>
+    </manifestdata:NVPair>
+  </manifestdata:ManifestAppData>
+</manifestdata:ManifestAppDataSet>

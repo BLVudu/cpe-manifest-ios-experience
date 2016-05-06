@@ -1506,6 +1506,11 @@
                 <manifest:ContainerLocation priority='1'>http://cdn.theplatform.services/u/ContentServer/WarnerBros/Static/mos/NextGEN/video/ManOfSteel_EC_TheMilitaryMightOfManOfSteel_HD_2ch_en-US.m3u8</manifest:ContainerLocation>
             </manifest:ContainerReference>
         </manifest:Video>
+        <manifest:Image ImageID="md:imageid:eidr-x:C80F-C561-EE65-C5E4-C039-U:locations.pin_icon">
+            <manifest:ContainerReference>
+                <manifest:ContainerLocation>http://fv-static-cdn-integration.s3.amazonaws.com/nextgen/MOSMapPin.png</manifest:ContainerLocation>
+            </manifest:ContainerReference>
+        </manifest:Image>
         <manifest:Image ImageID='md:imageid:eidr-x:C80F-C561-EE65-C5E4-C039-U:main.chapter.1'>
             <Width>1076</Width>
             <Height>614</Height>
@@ -11677,8 +11682,8 @@
         <manifest:TimedEventSequence TimedSequenceID='md:timedsequenceid:eidr-x:C80F-C561-EE65-C5E4-C039-U:bonus.locations.1'>
             <manifest:PresentationID>md:presentationid:eidr-x:C80F-C561-EE65-C5E4-C039-U:main</manifest:PresentationID>
             <manifest:TimedEvent>
-                <manifest:StartTimecode>59.0</manifest:StartTimecode>
-                <manifest:EndTimecode>130.0</manifest:EndTimecode>
+                <manifest:StartTimecode>0</manifest:StartTimecode>
+                <manifest:EndTimecode>1300.0</manifest:EndTimecode>
                 <manifest:Type>Synchronous</manifest:Type>
                 <manifest:OtherID>
                     <Namespace>AppID</Namespace>

@@ -45,8 +45,9 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     @IBOutlet weak var mapCollectionView: UICollectionView!
     
     var timedEvent: NGDMTimedEvent!
-    
+    var appData: NGDMAppData!
     var location: NGDMLocation!
+    
     var center: CLLocationCoordinate2D!
     var locationImages = []
     
@@ -54,10 +55,12 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        location = timedEvent.location!
+        appData = timedEvent.appData!
+        location = appData.location!
+        
         center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-        mapView.setLocation(center, zoomLevel: 15, animated: false)
-        mapView.addMarker(center, title: location.name, subtitle: location.address, icon: experience?.appearance?.buttonImage, autoSelect: true)
+        mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: false)
+        mapView.addMarker(center, title: location.name, subtitle: location.address, icon: nil, autoSelect: true)
     }
     
     func videoPlayerViewController() -> VideoPlayerViewController? {
@@ -84,7 +87,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        mapView.setLocation(center, zoomLevel: 15, animated: true)
+        mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: true)
     }
     
 }

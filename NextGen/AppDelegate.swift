@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Load current AppData file
-        if let appDataXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_appdata", ofType: "xml") {
+        if let appDataXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_appdata_locations_r60-v0.2", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
             
             do {
