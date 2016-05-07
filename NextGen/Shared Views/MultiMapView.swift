@@ -81,13 +81,16 @@ class MultiMapView: UIView, MKMapViewDelegate {
         }
     }
     
+    
     // MARK: MKMapViewDelegate
+    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MarkerAnnotationViewReuseIdentifier)
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Constants.MarkerAnnotationViewReuseIdentifier)
             annotationView?.image = mapIconImage
-            annotationView?.canShowCallout = true
+            //annotationView?.canShowCallout = true
+        
         }
         
         annotationView?.annotation = annotation
