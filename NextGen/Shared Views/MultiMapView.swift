@@ -31,11 +31,11 @@ class MultiMapView: UIView, MKMapViewDelegate {
     }
     
     func setup() {
-        if ConfigManager.sharedInstance.hasGoogleMaps {
+        if ConfigManager.sharedInstance.hasGoogleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
             googleMapView?.mapType = kGMSTypeHybrid
             self.addSubview(googleMapView!)
-        } else {
+        } else if appleMapView == nil {
             appleMapView = MKMapView(frame: self.bounds)
             appleMapView?.delegate = self
             appleMapView?.mapType = MKMapType.Hybrid
@@ -83,7 +83,6 @@ class MultiMapView: UIView, MKMapViewDelegate {
     
     
     // MARK: MKMapViewDelegate
-    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MarkerAnnotationViewReuseIdentifier)
         if annotationView == nil {
