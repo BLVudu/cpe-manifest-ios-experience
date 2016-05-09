@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate {
+class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate {
     
     @IBOutlet weak var galleryTableView: UITableView!
     
+  
     @IBOutlet weak var galleryContainerView: UIView!
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var mediaTitleLabel: UILabel!
@@ -23,7 +24,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak var galleryPageControl: UIPageControl!
     @IBOutlet weak var galleryPageLabel: UILabel!
     
-    private var _didPlayFirstItem = false
+      private var _didPlayFirstItem = false
     private var _previewPlayURL: NSURL?
     private var _userDidSelectNextItem = true
     
@@ -157,13 +158,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             previewImageView.hidden = true
             previewPlayButton.hidden = true
             mediaRuntimeLabel.hidden = true
-         
-         if let gallery = thisExperience.imageGallery, imageGalleryViewController = galleryViewController(){
-            imageGalleryViewController.gallery = gallery
-            galleryPageControl.numberOfPages = (gallery.pictures?.count)!
-            galleryPageControl.currentPage = 0
-            galleryPageLabel.text = "\(1) / \(galleryPageControl.numberOfPages)"
-            NSNotificationCenter.defaultCenter().postNotificationName(GalleryNotification.reloadGallery, object: nil)
+            
+        
+            if let gallery = thisExperience.imageGallery, imageGalleryViewController = galleryViewController(){
+                imageGalleryViewController.gallery = gallery
+                galleryPageControl.numberOfPages = (gallery.pictures?.count)!
+                galleryPageControl.currentPage = 0
+                galleryPageLabel.text = "\(1) / \(galleryPageControl.numberOfPages)"
+                NSNotificationCenter.defaultCenter().postNotificationName(GalleryNotification.reloadGallery, object: nil)
  
          }
          
@@ -223,5 +225,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             videoPlayerViewController.playVideoWithURL(videoURL)
         }
     }
+    
     
 }
