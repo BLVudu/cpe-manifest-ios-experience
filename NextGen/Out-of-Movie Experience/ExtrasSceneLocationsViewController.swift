@@ -24,7 +24,7 @@ class LocationObject: NSObject{
     
 }
 
-class ExtrasSceneLocationsViewController: MenuedViewController{
+class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
     
     @IBOutlet weak var mapView: MultiMapView!
@@ -84,7 +84,8 @@ class ExtrasSceneLocationsViewController: MenuedViewController{
         menuTableView.backgroundColor = UIColor.clearColor()
         
     }
-    
+   
+    //MARK: Overriding MenuedViewController functions
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.row == 0{
@@ -115,6 +116,22 @@ class ExtrasSceneLocationsViewController: MenuedViewController{
         
     }
     
+    
+    //MARK: UICollectionViewDataSource
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return locationInfo.count
+    }
+    
+    
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MapItemCellReuseIdentifier", forIndexPath: indexPath) as! MapItemCell
+        
+        return cell
+    }
  
     
     

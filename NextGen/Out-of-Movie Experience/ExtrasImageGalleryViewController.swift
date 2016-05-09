@@ -55,6 +55,12 @@ class ExtrasImageGalleryViewController: UIViewController, UIScrollViewDelegate{
         super.viewDidLayoutSubviews()
          self.view.backgroundColor = UIColor.blackColor()
         
+        if self.isFullScreen {
+            
+            self.view.superview!.frame = UIScreen.mainScreen().bounds
+
+        }
+
         
         if gallery == nil {
             return
@@ -82,18 +88,21 @@ class ExtrasImageGalleryViewController: UIViewController, UIScrollViewDelegate{
         galleryPageControl.numberOfPages = (gallery!.pictures?.count)!
         
         
-        galleryScrollView.contentSize = CGSizeMake(CGRectGetWidth((galleryScrollView.superview?.bounds)!) * CGFloat(numPictures), CGRectGetHeight(galleryScrollView.bounds))
+        galleryScrollView.contentSize = CGSizeMake(CGRectGetWidth(UIScreen.mainScreen().bounds) * CGFloat(numPictures), CGRectGetHeight(UIScreen.mainScreen().bounds))
         loadImageForPage(currentIndex)
         galleryScrollView.setContentOffset(CGPointMake(CGFloat(currentIndex) * _scrollViewPageWidth, 0), animated: false)
+
         }
 
     }
     
     func loadImageForPage(page: Int) {
+        
         if let imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView, pictures = gallery!.pictures {
             if imageView.image == nil {
                 if let imageURL = pictures[page].imageURL {
                     imageView.setImageWithURL(imageURL)
+                    imageView.userInteractionEnabled = true
                 }
             }
             
@@ -128,21 +137,25 @@ class ExtrasImageGalleryViewController: UIViewController, UIScrollViewDelegate{
             let galleryContainerView = self.view.superview
             let galleryScrollView = self.galleryScrollView.superview
             if self.isFullScreen {
+                    self.view.bringSubviewToFront(galleryScrollView!)
                     self.originalFrame = galleryContainerView?.frame
                     self.originalScrollViewFrame = galleryScrollView?.frame
-                    galleryContainerView?.frame = UIScreen.mainScreen().bounds
                     //galleryScrollView?.frame = UIScreen.mainScreen().bounds
+                    galleryContainerView?.frame = UIScreen.mainScreen().bounds
+                    //self.galleryScrollView.contentSize = CGSizeMake(CGRectGetWidth((UIScreen.mainScreen().bounds)) * CGFloat(self.gallery!.pictures!.count), CGRectGetHeight(UIScreen.mainScreen().bounds))
 
             } else {
-                galleryContainerView?.frame = self.originalFrame
+                
                 //galleryScrollView?.frame = self.originalScrollViewFrame
+                galleryContainerView?.frame = self.originalFrame
 
             }
                 
             
           
         })
-           }
-    
-   }
+}
+}
+
+
 
