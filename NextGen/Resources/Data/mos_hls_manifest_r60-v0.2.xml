@@ -3740,6 +3740,7 @@
             </manifest:ContainerReference>
         </manifest:Image>
         <!-- TEST -->
+        <manifest:Interactive InteractiveTrackID='md:interactiveid:eidr-x:C80F-C561-EE65-C5E4-C039-U:other.locations.1' />
         <manifest:Interactive InteractiveTrackID='md:interactiveid:eidr-x:C80F-C561-EE65-C5E4-C039-U:other.placestab.1'>
             <Type>other</Type>
             <Encoding>
@@ -5549,9 +5550,10 @@
         <manifest:Metadata ContentID='md:cid:eidr-x:C80F-C561-EE65-C5E4-C039-U:experience.locations.1'>
             <manifest:BasicMetadata ContentID='md:cid:eidr-x:C80F-C561-EE65-C5E4-C039-U:experience.locations.1'>
                 <LocalizedInfo language='en'>
-                    <TitleDisplayUnlimited>Locations</TitleDisplayUnlimited>
-                    <TitleSort>Locations</TitleSort>
+                    <TitleDisplayUnlimited>Scene Locations</TitleDisplayUnlimited>
+                    <TitleSort>Scene Locations</TitleSort>
                     <Summary190/>
+                <ArtReference resolution='892x502'>http://fv-static-cdn-integration.s3.amazonaws.com/nextgen/SceneLocations.png</ArtReference>
                 </LocalizedInfo>
                 <ReleaseYear>2013</ReleaseYear>
                 <WorkType>Supplemental</WorkType>
@@ -7509,6 +7511,14 @@
     </manifest:PictureGroups>
     <!-- TEST -->
     <manifest:AppGroups>
+        <manifest:AppGroup AppGroupID='md:appgroupid:eidr-x:C80F-C561-EE65-C5E4-C039-U:other.locations.1'>
+            <manifest:InteractiveTrackReference>
+                <manifest:InteractiveTrackID>md:interactiveid:eidr-x:C80F-C561-EE65-C5E4-C039-U:other.locations.1</manifest:InteractiveTrackID>
+                <manifest:Compatibility>
+                    <RuntimeEnvironment>iOS</RuntimeEnvironment>
+                </manifest:Compatibility>
+            </manifest:InteractiveTrackReference>
+        </manifest:AppGroup>
         <manifest:AppGroup AppGroupID='md:appgroupid:eidr-x:C80F-C561-EE65-C5E4-C039-U:other.placestab.1'>
             <manifest:InteractiveTrackReference>
                 <manifest:InteractiveTrackID>md:interactiveid:eidr-x:C80F-C561-EE65-C5E4-C039-U:other.placestab.1</manifest:InteractiveTrackID>
@@ -7597,6 +7607,13 @@
                     <Number>6</Number>
                 </manifest:SequenceInfo>
                 <manifest:ExperienceID>md:experiencedid:eidr-x:C80F-C561-EE65-C5E4-C039-U:bonus.20</manifest:ExperienceID>
+            </manifest:ExperienceChild>
+            <manifest:ExperienceChild>
+                <manifest:Relationship>ispartof</manifest:Relationship>
+                <manifest:SequenceInfo>
+                    <Number>7</Number>
+                </manifest:SequenceInfo>
+                <manifest:ExperienceID>md:experiencedid:eidr-x:C80F-C561-EE65-C5E4-C039-U:locations.1</manifest:ExperienceID>
             </manifest:ExperienceChild>
         </manifest:Experience>
         <manifest:Experience ExperienceID='md:experiencedid:eidr-x:C80F-C561-EE65-C5E4-C039-U:bonus.3' version='1'>
@@ -9380,6 +9397,19 @@
         <manifest:Experience ExperienceID='md:experiencedid:eidr-x:C80F-C561-EE65-C5E4-C039-U:locations.1' version='1'>
             <manifest:ContentID>md:cid:eidr-x:C80F-C561-EE65-C5E4-C039-U:experience.locations.1</manifest:ContentID>
             <manifest:TimedSequenceID>md:timedsequenceid:eidr-x:C80F-C561-EE65-C5E4-C039-U:bonus.locations.1</manifest:TimedSequenceID>
+            <manifest:ExperienceChild>
+                <manifest:Relationship>ispartof</manifest:Relationship>
+                <manifest:SequenceInfo>
+                    <Number>1</Number>
+                </manifest:SequenceInfo>
+                <manifest:ExperienceID>md:experiencedid:eidr-x:C80F-C561-EE65-C5E4-C039-U:locations.1.ce.1</manifest:ExperienceID>
+            </manifest:ExperienceChild>
+        </manifest:Experience>
+        <manifest:Experience ExperienceID="md:experiencedid:eidr-x:C80F-C561-EE65-C5E4-C039-U:locations.1.ce.1">
+            <manifest:App AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.1">
+                <manifest:Type>other</manifest:Type>
+                <manifest:AppGroupID>md:appgroupid:eidr-x:C80F-C561-EE65-C5E4-C039-U:other.locations.1</manifest:AppGroupID>
+            </manifest:App>
         </manifest:Experience>
     </manifest:Experiences>
     <manifest:TimedEventSequences>
