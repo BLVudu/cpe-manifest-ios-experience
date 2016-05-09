@@ -16,7 +16,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     
     @IBOutlet weak var talentTableView: UITableView!
     @IBOutlet weak var backgroundImageView: UIImageView!
-    
+    var appApperance: NGDMAppearance!
     private var _didChangeTimeObserver: NSObjectProtocol!
     private var _currentTime = -1.0
     
@@ -27,6 +27,8 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        backgroundImageView.image = CurrentManifest.inMovieExperience.appearance?.backgroundImage
         
         talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
         

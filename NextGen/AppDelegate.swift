@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-    let charSet = NSCharacterSet.URLQueryAllowedCharacterSet()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current film's data file
@@ -29,8 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             do {
                 CurrentManifest.mainExperience = try NextGenDataManager.sharedInstance.getMainExperience()
+                CurrentManifest.mainExperience.appearance = NGDMAppearance(type: .Main)
                 CurrentManifest.inMovieExperience = try CurrentManifest.mainExperience.getInMovieExperience()
+                CurrentManifest.inMovieExperience.appearance = NGDMAppearance(type: .InMovie)
                 CurrentManifest.outOfMovieExperience = try CurrentManifest.mainExperience.getOutOfMovieExperience()
+                CurrentManifest.outOfMovieExperience.appearance = NGDMAppearance(type: .OutOfMovie)
                 
                 TheTakeAPIUtil.sharedInstance.mediaId = CurrentManifest.mainExperience.customIdentifier(kTheTakeIdentifierNamespace)
                 BaselineAPIUtil.sharedInstance.projectId = CurrentManifest.mainExperience.customIdentifier(kBaselineIdentifierNamespace)

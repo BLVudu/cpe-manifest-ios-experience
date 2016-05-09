@@ -7,7 +7,6 @@
     <customFonts key="customFonts">
         <mutableArray key="RobotoCondensed-Regular.ttf">
             <string>RobotoCondensed-Regular</string>
-            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -20,19 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="541" height="60.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmG-2I-HV0">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Audio Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmG-2I-HV0">
                         <rect key="frame" x="20" y="0.0" width="365" height="60"/>
                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7b-1A-LHo">
-                        <rect key="frame" x="385" y="0.0" width="100" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="j6S-QD-USb"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
-                        <color key="textColor" red="0.73108974360000001" green="0.7299446879" blue="0.0020759141390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dropdown Icon" translatesAutoresizingMaskIntoConstraints="NO" id="0Y0-pW-JkU">
@@ -49,20 +39,15 @@
                     <constraint firstItem="0Y0-pW-JkU" firstAttribute="top" secondItem="qf2-SQ-lmI" secondAttribute="top" constant="22" id="C5W-R5-pse"/>
                     <constraint firstAttribute="trailing" secondItem="0Y0-pW-JkU" secondAttribute="trailing" constant="20" id="Pul-AO-LlD"/>
                     <constraint firstAttribute="bottom" secondItem="UmG-2I-HV0" secondAttribute="bottom" id="VGk-MR-T0b"/>
-                    <constraint firstAttribute="bottom" secondItem="R7b-1A-LHo" secondAttribute="bottom" id="anw-1V-0hY"/>
-                    <constraint firstItem="R7b-1A-LHo" firstAttribute="leading" secondItem="UmG-2I-HV0" secondAttribute="trailing" id="er8-wn-yNx"/>
-                    <constraint firstItem="0Y0-pW-JkU" firstAttribute="leading" secondItem="R7b-1A-LHo" secondAttribute="trailing" constant="20" id="f9t-uQ-Cdv"/>
-                    <constraint firstItem="0Y0-pW-JkU" firstAttribute="leading" secondItem="UmG-2I-HV0" secondAttribute="trailing" priority="750" constant="20" id="n5N-4r-sP9"/>
+                    <constraint firstItem="0Y0-pW-JkU" firstAttribute="leading" secondItem="UmG-2I-HV0" secondAttribute="trailing" priority="250" constant="120" id="n5N-4r-sP9"/>
                     <constraint firstAttribute="bottom" secondItem="0Y0-pW-JkU" secondAttribute="bottom" constant="22" id="tPb-Jd-O7M"/>
                     <constraint firstItem="UmG-2I-HV0" firstAttribute="top" secondItem="qf2-SQ-lmI" secondAttribute="top" id="uFw-zu-r87"/>
-                    <constraint firstItem="R7b-1A-LHo" firstAttribute="top" secondItem="qf2-SQ-lmI" secondAttribute="top" id="whE-yV-GAi"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="dropDownImageView" destination="0Y0-pW-JkU" id="sIW-5w-toV"/>
                 <outlet property="primaryLabel" destination="UmG-2I-HV0" id="lU4-lj-sJc"/>
-                <outlet property="secondaryLabel" destination="R7b-1A-LHo" id="lFo-El-fGm"/>
             </connections>
         </tableViewCell>
     </objects>

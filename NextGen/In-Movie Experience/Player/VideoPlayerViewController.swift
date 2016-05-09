@@ -54,31 +54,31 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak var countdown: CircularProgressView!
     var countdownTimer: NSTimer!
     var nextItemTask: Task?
+    private var _clipAvaliable = false
+    var commentaryIndex = 0
+    var alertController: UIAlertController!
     
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
+    private var _updateCommentaryButton: NSObjectProtocol!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_shouldPauseAllOtherObserver)
         NSNotificationCenter.defaultCenter().removeObserver(_shouldUpdateShareButtonObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(_updateCommentaryButton)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.countdown.hidden = true
         
+        
         // Localizations
         _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
         _commentaryButton.setTitle(String.localize("label.commentary"), forState: UIControlState.Normal)
-        
         _commentaryView.hidden = true
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-        alertController.view.tintColor = UIColor.themePrimaryColor()
-        _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
-        _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-        _sharePopoverController.delegate = self
-        
+        shareButton.enabled = true
+        alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         _shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
                 if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
@@ -87,12 +87,31 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             }
         })
         
+        
         _shouldUpdateShareButtonObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self {
-                if let userInfo = notification.userInfo, enabled = userInfo["enabled"] as? Bool {
-                    strongSelf.shareButton.enabled = enabled
-                } else {
-                    strongSelf.shareButton.enabled = false
+                if let userInfo = notification.userInfo, avaliable = userInfo["clipAvaliable"] as? Bool {
+                        strongSelf._clipAvaliable = avaliable
+                    } else {
+                        strongSelf._clipAvaliable = false
+
+                }
+            }
+        })
+        
+        _updateCommentaryButton = NSNotificationCenter.defaultCenter().addObserverForName(kDidSelectCommetaryOption, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self]
+            (notification) in
+            if let strongSelf = self{
+                if let userInfo = notification.userInfo, index = userInfo["option"] as? Int{
+                    strongSelf.commentaryIndex = index
+                    if index > 0 {
+                        strongSelf._commentaryButton.setTitle("Commentary is on", forState: .Normal)
+                        strongSelf._commentaryButton.imageEdgeInsets = UIEdgeInsetsMake(0, 140, 0, 0)
+                        
+                    } else {
+                        strongSelf._commentaryButton.setTitle("Commentary", forState: .Normal)
+                        strongSelf._commentaryButton.imageEdgeInsets = UIEdgeInsetsMake(0, 120, 0, 0)
+                    }
                 }
             }
         })
@@ -254,27 +273,54 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func commentary(sender: AnyObject) {
+    @IBAction func commentary(sender: UIButton) {
+        
+        sender.imageView!.image? = (sender.imageView!.image?.imageWithRenderingMode(.AlwaysTemplate))!
         _commentaryView.hidden = !_commentaryView.hidden
         
         if !_commentaryView.hidden {
+            
+            sender.tintColor = UIColor.themePrimaryColor()
+            
             if let timer = self.playerControlsAutoHideTimer {
                 timer.invalidate()
             }
         } else {
+            if commentaryIndex == 0 {
+                sender.tintColor = UIColor.whiteColor()
+            }
+            
             self.initAutoHideTimer()
         }
     }
     
     @IBAction override func share(sender: AnyObject!) {
-        if UIDevice.currentDevice().orientation.isLandscape {
-            let anchor = self.view.frame.size.height - 120
-            _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-                if((self.playerControlsAutoHideTimer) != nil){
-                    self.playerControlsAutoHideTimer.invalidate()
-            }
-        } else {
+        alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let anchor = self.view.frame.size.height - 120
+        if _clipAvaliable == false {
+            
+            alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
+            
+        } else if _clipAvaliable == true{
+            
+            if UIDevice.currentDevice().orientation.isLandscape {
+            
+            alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
+        } else{
+            
             NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidTapShare, object: nil)
+            }
+
+        }
+        
+        alertController.view.tintColor = UIColor.themePrimaryColor()
+        _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
+        _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        _sharePopoverController.delegate = self
+        
+        _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
+        if((self.playerControlsAutoHideTimer) != nil){
+            self.playerControlsAutoHideTimer.invalidate()
         }
     }
     
@@ -286,7 +332,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
                 skipInterstitial()
             }
             
-            if _commentaryView.hidden && !_sharePopoverController.popoverVisible {
+            if _commentaryView.hidden{
                 super.handleTap(gestureRecognizer)
             }
         }

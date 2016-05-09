@@ -20,7 +20,7 @@ class CommentaryViewCell: UITableViewCell {
         
         if (selected){
             
-            
+            NSNotificationCenter.defaultCenter().postNotificationName(kDidSelectCommetaryOption, object: nil, userInfo: ["option":self.radioBtn.index!])
             self.radioBtn.selected = true
             self.option.textColor = UIColor.init(red: 255/255, green: 205/255, blue: 77/255, alpha: 1)
             //self.subtitle.textColor = UIColor.init(red: 255/255, green: 205/255, blue: 77/255, alpha: 1)

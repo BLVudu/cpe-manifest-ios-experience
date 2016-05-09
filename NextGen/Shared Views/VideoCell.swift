@@ -89,7 +89,12 @@ class VideoCell: UITableViewCell {
         thumbnailContainerView.layer.borderColor = UIColor.whiteColor().CGColor
         thumbnailContainerView.layer.borderWidth = (self.selected ? 2 : 0)
         captionLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
-        playIconImageView.hidden = self.selected
+        
+        if experience?.isGallery() == true {
+            playIconImageView.hidden = true
+        } else {
+            playIconImageView.hidden = self.selected
+        }
     }
     
 }
