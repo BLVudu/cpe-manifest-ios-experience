@@ -24,6 +24,9 @@
     <manifestdata:NVPair Name="text">
       <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
     </manifestdata:NVPair>
+    <manfiestdata:NVPair Name="video_id">
+			<manifestdata:PresentationID>md:presentationid:eidr-x:C80F-C561-EE65-C5E4-C039-U:bonus.characters_and_story.1</manifestdata:PresentationID> 
+    </manifestdata:NVPair>
   </manifestdata:ManifestAppData>
   <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.2">
     <manifestdata:NVPair Name="display_order">
@@ -48,6 +51,9 @@
     </manifestdata:NVPair>
     <manifestdata:NVPair Name="text">
       <manifestdata:Text>The locations of Krypton were actually filmed at Mammoth Studios in Vancouver. </manifestdata:Text>
+    </manifestdata:NVPair>
+    <manfiestdata:NVPair Name="video_id">
+			<manifestdata:PresentationID>md:presentationid:eidr-x:C80F-C561-EE65-C5E4-C039-U:bonus.on_the_set.1</manifestdata:PresentationID> 
     </manifestdata:NVPair>
   </manifestdata:ManifestAppData>
   <manifestdata:ManifestAppData AppID="md:appid:eidr-x:C80F-C561-EE65-C5E4-C039-U:app.locations.3">
