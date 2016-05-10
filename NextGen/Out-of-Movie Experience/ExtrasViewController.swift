@@ -21,8 +21,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
-        static let ShowVideoGallery = "ExtrasVideoGallerySegue"
-        static let ShowImageGallery = "ExtrasImageGalleryListSegue"
+        static let ShowGallery = "ExtrasGallerySegue"
+        static let ShowMap = "ExtrasMapSegue"
         static let ShowShopping = "ExtrasShoppingSegue"
     }
     
@@ -164,13 +164,12 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let experience = CurrentManifest.outOfMovieExperience.childExperiences[indexPath.row]
-        //if experience.isGalleryList() {
-            //self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
-        //} else
-        if experience.isShopping() {
+        if experience.isShopping {
             self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
+        } else if experience.isLocation {
+            self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: experience)
         } else {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowVideoGallery, sender: experience)
+            self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: experience)
         }
     }
     

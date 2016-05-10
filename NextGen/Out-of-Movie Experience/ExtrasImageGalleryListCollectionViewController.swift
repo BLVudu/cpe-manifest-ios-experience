@@ -55,7 +55,7 @@ class ExtrasImageGalleryListCollectionViewController: ExtrasExperienceCollection
     // MARK: Storyboard
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == kExtrasImageGallerySegueIdentifier {
-            if let imageGalleryViewController = segue.destinationViewController as? ExtrasImageGalleryViewController, experience = sender as? NGDMExperience, gallery = experience.galleries.values.first  {
+            if let imageGalleryViewController = segue.destinationViewController as? ExtrasImageGalleryViewController, gallery = (sender as? NGDMExperience)?.imageGallery  {
                 imageGalleryViewController.gallery = gallery
                 imageGalleryViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             }

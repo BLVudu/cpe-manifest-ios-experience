@@ -8,23 +8,49 @@
 
 import UIKit
 
-
-class MapItemCell : UICollectionViewCell{
+class MapItemCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
-  
     
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var childLocationsCount: UILabel!
     
-    var location: NGDMLocation?
+    var childCount = 0
     
-    var latitude: Double?
-    var longitude: Double?
+    var appData: NGDMAppData? {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
-    var childLocations :[LocationObject]?
+    var appDataType: NGDMAppData? {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if let appDataType = appDataType {
+            locationName.text = appDataType.type
+            locationImage.image = appDataType.thumbnailImage
+            childLocationsCount.text = childCount > 0 ? "\(childCount) locations" : nil
+        } else {
+            locationName.text = appData?.location?.name
+            locationImage.image = appData?.thumbnailImage
+            childLocationsCount.text = nil
+        }
+    }
     
-   
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        locationName.text = nil
+        locationImage.image = nil
+        childLocationsCount.text = nil
+        childCount = 0
+    }
+    
 }

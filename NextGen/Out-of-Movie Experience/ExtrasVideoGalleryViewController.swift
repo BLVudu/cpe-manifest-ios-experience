@@ -152,7 +152,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         mediaTitleLabel.text = thisExperience.metadata?.title
         mediaDescriptionLabel.text = thisExperience.metadata?.description
     
-         if thisExperience.isGallery(){
+         if thisExperience.isGallery {
             
             videoContainerView.hidden = true
             previewImageView.hidden = true
@@ -170,7 +170,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
          }
          
          
-         } else if thisExperience.isAudioVisual() {
+         } else if thisExperience.isAudioVisual {
             galleryContainerView.hidden = true
             galleryPageControl.hidden = true
             galleryPageLabel.hidden = true

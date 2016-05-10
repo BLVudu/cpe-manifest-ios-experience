@@ -129,7 +129,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 let experience = allExperiences[i]
                 let timedEvent = experience.timedEventSequence?.timedEvent(self._currentTime)
                 
-                if experience.isClipAndShare() {
+                if experience.isClipAndShare {
                     self._currentClipTimedEvent = timedEvent
                 } else {
                     let oldCellData = self.currentCellDataForExperience(experience)
