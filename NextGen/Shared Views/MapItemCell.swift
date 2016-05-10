@@ -11,8 +11,20 @@ import UIKit
 
 class MapItemCell : UICollectionViewCell{
     
+    static let ReuseIdentifier = "MapItemCellReuseIdentifier"
   
     
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var locationImage: UIImageView!
+    @IBOutlet weak var childLocationsCount: UILabel!
+    
+    var location: NGDMLocation?
+    
+    var latitude: Double?
+    var longitude: Double?
+    
+    var childLocations :[LocationObject]?
+    
+    
+   
 }
