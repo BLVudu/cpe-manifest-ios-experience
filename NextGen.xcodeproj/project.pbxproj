@@ -103,7 +103,6 @@
 		70A5D5731CAB437700ACC58F /* UIStoryboard+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */; };
-		70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */; };
 		70BFA5AB1CBD651F00F674FA /* NSLocale+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFA5AA1CBD651F00F674FA /* NSLocale+Utils.swift */; };
 		70C830B11CB440E200F9E2D6 /* VideoPlayerScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */; };
 		70C830B51CB465D000F9E2D6 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */; };
@@ -463,7 +462,6 @@
 		70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Utils.swift"; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMLocation.swift; sourceTree = "<group>"; };
-		70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapView+Utils.swift"; sourceTree = "<group>"; };
 		70BFA5AA1CBD651F00F674FA /* NSLocale+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocale+Utils.swift"; sourceTree = "<group>"; };
 		70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerScrubber.swift; sourceTree = "<group>"; };
 		70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
@@ -869,7 +867,6 @@
 			children = (
 				7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */,
 				7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */,
-				70BEC1FE1C98BAD800CC2F3D /* MKMapView+Utils.swift */,
 				70BFA5AA1CBD651F00F674FA /* NSLocale+Utils.swift */,
 				70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */,
 				701D69C71C482AF70047A67A /* NSURL+Utils.swift */,
@@ -1491,7 +1488,6 @@
 				70367ABD1C8F8DA30042B5B5 /* NGDMPictureGroup.swift in Sources */,
 				70E296C41CDCFD9D00B0B022 /* NGECompObjClassType.swift in Sources */,
 				70E296AE1CDCFD9D00B0B022 /* NGEAppName.swift in Sources */,
-				70BEC1FF1C98BAD800CC2F3D /* MKMapView+Utils.swift in Sources */,
 				49B653591CBECFF20006C71D /* CircularProgressView.swift in Sources */,
 				70367AC51C8F9E840042B5B5 /* NGDMTimedEvent.swift in Sources */,
 				70E2970A1CDCFD9D00B0B022 /* NGEFrameAverageMax.swift in Sources */,

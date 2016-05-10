@@ -10,15 +10,22 @@ import UIKit
 import MapKit
 import GoogleMaps
 
+struct MultiMapMarker {
+    var appleMapAnnotation: MKAnnotation?
+    var googleMapMarker: GMSMarker?
+    var location: CLLocationCoordinate2D!
+}
+
 class MultiMapView: UIView, MKMapViewDelegate {
     
     struct Constants {
         static let MarkerAnnotationViewReuseIdentifier = "kMarkerAnnotationViewReuseIdentifier"
     }
     
-    var appleMapView: MKMapView?
-    var googleMapView: GMSMapView?
-    var mapIconImage: UIImage?
+    private var appleMapView: MKMapView?
+    private var googleMapView: GMSMapView?
+    private var mapIconImage: UIImage?
+    private var mapMarkers = [MultiMapMarker]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,21 +59,21 @@ class MultiMapView: UIView, MKMapViewDelegate {
         }
     }
     
-    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?) {
-        addMarker(location, title: title, subtitle: subtitle, icon: nil, autoSelect: false)
+    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?) -> MultiMapMarker {
+        return addMarker(location, title: title, subtitle: subtitle, icon: nil, autoSelect: false)
     }
     
-    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?, icon: UIImage?, autoSelect: Bool) {
+    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?, icon: UIImage?, autoSelect: Bool) -> MultiMapMarker {
+        var multiMapMarker = MultiMapMarker()
+        multiMapMarker.location = location
+        
         if let mapView = googleMapView {
             let marker = GMSMarker(position: location)
             marker.title = title
             marker.icon = icon
             marker.snippet = subtitle
             marker.map = mapView
-            
-            if autoSelect {
-                mapView.selectedMarker = marker
-            }
+            multiMapMarker.googleMapMarker = marker
         } else if let mapView = appleMapView {
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
@@ -74,10 +81,45 @@ class MultiMapView: UIView, MKMapViewDelegate {
             annotation.subtitle = subtitle
             mapIconImage = icon
             mapView.addAnnotation(annotation)
-            
-            if autoSelect {
-                mapView.selectAnnotation(annotation, animated: true)
+            multiMapMarker.appleMapAnnotation = annotation
+        }
+        
+        if autoSelect {
+            selectMarker(multiMapMarker)
+        }
+        
+        mapMarkers.append(multiMapMarker)
+        return multiMapMarker
+    }
+    
+    func selectMarker(marker: MultiMapMarker) {
+        selectMarker(marker, zoomLevel: 0)
+    }
+    
+    func selectMarker(marker: MultiMapMarker, zoomLevel: Float) {
+        setLocation(marker.location, zoomLevel: zoomLevel, animated: true)
+        
+        if let mapView = googleMapView, mapMarker = marker.googleMapMarker {
+            mapView.selectedMarker = mapMarker
+        } else if let mapView = appleMapView, mapMarker = marker.appleMapAnnotation {
+            mapView.selectAnnotation(mapMarker, animated: true)
+        }
+    }
+    
+    func zoomToFitAllMarkers() {
+        zoomToFitMarkers(mapMarkers)
+    }
+    
+    func zoomToFitMarkers(markers: [MultiMapMarker]) {
+        if let mapView = googleMapView {
+            var bounds = GMSCoordinateBounds()
+            for marker in markers {
+                if let mapMarker = marker.googleMapMarker {
+                    bounds = bounds.includingCoordinate(mapMarker.position)
+                }
             }
+            
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
         }
     }
     
@@ -88,8 +130,6 @@ class MultiMapView: UIView, MKMapViewDelegate {
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Constants.MarkerAnnotationViewReuseIdentifier)
             annotationView?.image = mapIconImage
-            //annotationView?.canShowCallout = true
-        
         }
         
         annotationView?.annotation = annotation
