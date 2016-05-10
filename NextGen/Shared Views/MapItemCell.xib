@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RobotoCondensed-Regular.ttf">
+            <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
@@ -21,30 +22,56 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e1w-sH-MR4">
                         <rect key="frame" x="0.0" y="0.0" width="249" height="136"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="136" id="5eV-bE-TiA"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hj0-1A-vmW">
-                        <rect key="frame" x="8" y="142" width="233" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="locations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38b-5m-9My">
+                        <rect key="frame" x="8" y="164" width="70" height="16"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAa-0v-Q9C">
+                        <rect key="frame" x="8" y="140" width="241" height="24"/>
                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="38b-5m-9My" secondAttribute="trailing" constant="171" id="1Y7-b1-8Iw"/>
                 <constraint firstAttribute="trailing" secondItem="e1w-sH-MR4" secondAttribute="trailing" id="4Oc-G8-cYM"/>
-                <constraint firstItem="Hj0-1A-vmW" firstAttribute="top" secondItem="e1w-sH-MR4" secondAttribute="top" constant="142" id="BpJ-mD-ROv"/>
-                <constraint firstAttribute="bottom" secondItem="Hj0-1A-vmW" secondAttribute="bottom" constant="17" id="Icm-7D-yGk"/>
+                <constraint firstItem="uAa-0v-Q9C" firstAttribute="leading" secondItem="DPe-U7-WOX" secondAttribute="leading" constant="8" id="AOw-KS-jdk"/>
+                <constraint firstAttribute="bottom" secondItem="38b-5m-9My" secondAttribute="bottom" id="DfW-ce-l26"/>
+                <constraint firstItem="38b-5m-9My" firstAttribute="top" secondItem="e1w-sH-MR4" secondAttribute="bottom" constant="28" id="HvC-t7-Fiv"/>
                 <constraint firstItem="e1w-sH-MR4" firstAttribute="leading" secondItem="DPe-U7-WOX" secondAttribute="leading" id="KVX-Qh-SBO"/>
-                <constraint firstItem="e1w-sH-MR4" firstAttribute="bottom" secondItem="Hj0-1A-vmW" secondAttribute="bottom" constant="-27" id="UTs-rh-Oop"/>
-                <constraint firstAttribute="trailing" secondItem="Hj0-1A-vmW" secondAttribute="trailing" constant="8" id="VRg-UQ-Od3"/>
-                <constraint firstItem="Hj0-1A-vmW" firstAttribute="leading" secondItem="DPe-U7-WOX" secondAttribute="leading" constant="8" id="mrM-Gt-aIL"/>
+                <constraint firstAttribute="bottom" secondItem="e1w-sH-MR4" secondAttribute="bottom" constant="44" id="QMb-G2-8AG"/>
+                <constraint firstAttribute="bottom" secondItem="uAa-0v-Q9C" secondAttribute="bottom" constant="16" id="T4K-oo-pbp"/>
+                <constraint firstItem="38b-5m-9My" firstAttribute="top" secondItem="DPe-U7-WOX" secondAttribute="top" constant="164" id="aUL-Mc-1KP"/>
+                <constraint firstItem="38b-5m-9My" firstAttribute="top" secondItem="uAa-0v-Q9C" secondAttribute="bottom" constant="3" id="arD-h8-k51"/>
+                <constraint firstAttribute="trailing" secondItem="uAa-0v-Q9C" secondAttribute="trailing" id="jOU-gP-aVg"/>
+                <constraint firstItem="38b-5m-9My" firstAttribute="leading" secondItem="DPe-U7-WOX" secondAttribute="leading" constant="8" id="nEa-Td-8xn"/>
+                <constraint firstItem="uAa-0v-Q9C" firstAttribute="top" secondItem="e1w-sH-MR4" secondAttribute="bottom" constant="4" id="nJR-7A-ad2"/>
                 <constraint firstItem="e1w-sH-MR4" firstAttribute="top" secondItem="DPe-U7-WOX" secondAttribute="top" id="s1k-Jk-E1y"/>
+                <constraint firstItem="38b-5m-9My" firstAttribute="top" secondItem="uAa-0v-Q9C" secondAttribute="bottom" id="uN0-PS-t8g"/>
+                <constraint firstItem="uAa-0v-Q9C" firstAttribute="top" secondItem="DPe-U7-WOX" secondAttribute="top" constant="140" id="uUw-Ks-3aY"/>
             </constraints>
             <size key="customSize" width="249" height="180"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="nJR-7A-ad2"/>
+                    <exclude reference="HvC-t7-Fiv"/>
+                    <exclude reference="arD-h8-k51"/>
+                    <exclude reference="uN0-PS-t8g"/>
+                </mask>
+            </variation>
             <connections>
+                <outlet property="childLocationsCount" destination="38b-5m-9My" id="xyy-tz-E9k"/>
                 <outlet property="locationImage" destination="e1w-sH-MR4" id="291-y0-tp0"/>
-                <outlet property="locationName" destination="Hj0-1A-vmW" id="wUq-Yl-cqI"/>
+                <outlet property="locationName" destination="uAa-0v-Q9C" id="08D-UY-F68"/>
             </connections>
             <point key="canvasLocation" x="271.5" y="278"/>
         </collectionViewCell>
