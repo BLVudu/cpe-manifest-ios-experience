@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,6 +19,8 @@
             <string>RobotoCondensed-Italic</string>
         </mutableArray>
         <mutableArray key="RobotoCondensed-Regular.ttf">
+            <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
@@ -623,11 +625,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-ng-H5p" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-ng-H5p" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
                                 <rect key="frame" x="11" y="95" width="1003" height="427"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="33" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gpg-6z-RVF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="33" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gpg-6z-RVF">
                                 <rect key="frame" x="20" y="115" width="300" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -651,6 +653,46 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqS-F4-2UN">
+                                <rect key="frame" x="11" y="95" width="1003" height="427"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXD-8R-BUF">
+                                        <rect key="frame" x="18" y="366" width="977" height="50"/>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cLE-X9-Xys">
+                                        <rect key="frame" x="93" y="65" width="827" height="293"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVx-xJ-n5n">
+                                        <rect key="frame" x="914" y="8" width="81" height="35"/>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
+                                        <inset key="contentEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="85" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Close" image="Close"/>
+                                        <connections>
+                                            <action selector="dismissGallery:" destination="JyP-nX-0rW" eventType="touchUpInside" id="yw1-Fn-kxI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="SVx-xJ-n5n" secondAttribute="bottom" constant="384" id="1C3-Bp-AyB"/>
+                                    <constraint firstAttribute="trailing" secondItem="PXD-8R-BUF" secondAttribute="trailing" constant="8" id="AmZ-L8-2sB"/>
+                                    <constraint firstAttribute="bottom" secondItem="cLE-X9-Xys" secondAttribute="bottom" constant="69" id="Hh6-7C-LqM"/>
+                                    <constraint firstItem="cLE-X9-Xys" firstAttribute="leading" secondItem="fqS-F4-2UN" secondAttribute="leading" constant="93" id="LJr-0D-CmE"/>
+                                    <constraint firstAttribute="bottom" secondItem="PXD-8R-BUF" secondAttribute="bottom" constant="11" id="LUd-rW-k1O"/>
+                                    <constraint firstItem="SVx-xJ-n5n" firstAttribute="top" secondItem="fqS-F4-2UN" secondAttribute="top" constant="8" id="Qou-Nk-XiQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="SVx-xJ-n5n" secondAttribute="trailing" constant="8" id="StZ-zw-GTV"/>
+                                    <constraint firstItem="PXD-8R-BUF" firstAttribute="top" secondItem="fqS-F4-2UN" secondAttribute="top" constant="366" id="TeL-Ng-atL"/>
+                                    <constraint firstAttribute="trailing" secondItem="cLE-X9-Xys" secondAttribute="trailing" constant="83" id="TsD-iw-e7r"/>
+                                    <constraint firstItem="cLE-X9-Xys" firstAttribute="top" secondItem="fqS-F4-2UN" secondAttribute="top" constant="65" id="URJ-Ro-sBq"/>
+                                    <constraint firstItem="SVx-xJ-n5n" firstAttribute="leading" secondItem="fqS-F4-2UN" secondAttribute="leading" constant="914" id="hns-ar-rYe"/>
+                                    <constraint firstItem="PXD-8R-BUF" firstAttribute="leading" secondItem="fqS-F4-2UN" secondAttribute="leading" constant="18" id="pXa-8i-fOg"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e1H-fl-pll">
                                 <rect key="frame" x="11" y="580" width="1003" height="180"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -676,22 +718,31 @@
                             <constraint firstItem="e1H-fl-pll" firstAttribute="leading" secondItem="6WQ-Jr-AOQ" secondAttribute="leadingMargin" constant="-9" id="FaL-ec-ySG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="e1H-fl-pll" secondAttribute="trailing" constant="-10" id="LQH-MG-Vtr"/>
                             <constraint firstItem="X5M-AR-HWB" firstAttribute="bottom" secondItem="e1H-fl-pll" secondAttribute="bottom" constant="-188" id="Rm5-jS-tCV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fqS-F4-2UN" secondAttribute="trailing" constant="-10" id="S6F-DE-20z"/>
+                            <constraint firstItem="X5M-AR-HWB" firstAttribute="top" secondItem="fqS-F4-2UN" secondAttribute="bottom" constant="8" id="aRW-9M-2EL"/>
                             <constraint firstItem="Mbu-ng-H5p" firstAttribute="top" secondItem="Gpg-6z-RVF" secondAttribute="top" constant="-20" id="gua-FI-IdN"/>
                             <constraint firstItem="Jyt-nG-irv" firstAttribute="top" secondItem="e1H-fl-pll" secondAttribute="bottom" constant="8" symbolic="YES" id="ipF-A1-TCO"/>
+                            <constraint firstItem="fqS-F4-2UN" firstAttribute="leading" secondItem="6WQ-Jr-AOQ" secondAttribute="leadingMargin" constant="-9" id="kE8-0L-LPc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mbu-ng-H5p" secondAttribute="trailing" constant="-10" id="nVt-9H-4F2"/>
                             <constraint firstItem="X5M-AR-HWB" firstAttribute="top" secondItem="Mbu-ng-H5p" secondAttribute="bottom" constant="8" id="ogl-Vc-LLI"/>
                             <constraint firstItem="Mbu-ng-H5p" firstAttribute="trailing" secondItem="X5M-AR-HWB" secondAttribute="trailing" id="s6A-TK-d8d"/>
-                            <constraint firstItem="Mbu-ng-H5p" firstAttribute="top" secondItem="OUa-wa-S5m" secondAttribute="bottom" constant="75" id="sL2-AD-sAa"/>
+                            <constraint firstItem="Mbu-ng-H5p" firstAttribute="top" secondItem="OUa-wa-S5m" secondAttribute="bottom" constant="95" id="sL2-AD-sAa"/>
                             <constraint firstItem="Mbu-ng-H5p" firstAttribute="leading" secondItem="X5M-AR-HWB" secondAttribute="leading" id="v3F-sL-B36"/>
+                            <constraint firstItem="fqS-F4-2UN" firstAttribute="top" secondItem="OUa-wa-S5m" secondAttribute="bottom" constant="95" id="w5x-no-N7T"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
+                        <outlet property="closeButton" destination="SVx-xJ-n5n" id="1EV-b7-cf5"/>
                         <outlet property="collectionView" destination="e1H-fl-pll" id="lIk-dX-8s6"/>
+                        <outlet property="galleryName" destination="X5M-AR-HWB" id="GqV-cx-Lsq"/>
+                        <outlet property="imageView" destination="cLE-X9-Xys" id="kf9-7V-er2"/>
                         <outlet property="mapView" destination="Mbu-ng-H5p" id="14u-62-AN5"/>
                         <outlet property="menuTableView" destination="Gpg-6z-RVF" id="j67-vb-h9c"/>
                         <outlet property="tableViewHeight" destination="D0n-Z8-t9e" id="weq-Of-e5I"/>
+                        <outlet property="textView" destination="fqS-F4-2UN" id="ycy-CW-1lI"/>
+                        <outlet property="triviaText" destination="PXD-8R-BUF" id="ICa-Dh-PGI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFT-Bt-Gxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -803,7 +854,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3jK-Pw-Bvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3435.25" y="999"/>
+            <point key="canvasLocation" x="3559.25" y="999"/>
         </scene>
         <!--Extras Video Gallery View Controller-->
         <scene sceneID="MV1-Sx-b77">

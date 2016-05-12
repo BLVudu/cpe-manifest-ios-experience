@@ -8,14 +8,23 @@
 
 import UIKit
 
+enum ChildMediaType {
+    case Unknown
+    case Text
+    case Video
+    case Image
+}
+
 class MapItemCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
     
+    var childMediaType = ChildMediaType.Unknown
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var childLocationsCount: UILabel!
     
+
     var childCount = 0
     
     var appData: NGDMAppData? {
@@ -30,6 +39,12 @@ class MapItemCell: UICollectionViewCell {
         }
     }
     
+    var childMedia: NGDMAppData? {
+        didSet{
+            setNeedsLayout()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -37,7 +52,18 @@ class MapItemCell: UICollectionViewCell {
             locationName.text = appDataType.type
             locationImage.image = appDataType.thumbnailImage
             childLocationsCount.text = childCount > 0 ? "\(childCount) locations" : nil
-        } else {
+        } else if let childMedia = childMedia{
+            switch childMediaType {
+            case .Text:
+                locationName.text = "TRIVIA"
+                locationImage.image = appData?.thumbnailImage
+            default:
+                locationName.text = ""
+            }
+            
+            childLocationsCount.text = nil
+
+        } else  {
             locationName.text = appData?.location?.name
             locationImage.image = appData?.thumbnailImage
             childLocationsCount.text = nil
