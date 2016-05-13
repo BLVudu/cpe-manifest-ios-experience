@@ -9,6 +9,16 @@
 import UIKit
 import MapKit
 
+struct ExperienceCellData {
+    var experience: NGDMExperience!
+    var timedEvent: NGDMTimedEvent!
+    
+    init(experience: NGDMExperience, timedEvent: NGDMTimedEvent) {
+        self.experience = experience
+        self.timedEvent = timedEvent
+    }
+}
+
 class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     struct SegueIdentifier {
@@ -24,16 +34,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10
         static let ItemAspectRatio: CGFloat = 286 / 220
-    }
-    
-    struct ExperienceCellData {
-        var experience: NGDMExperience!
-        var timedEvent: NGDMTimedEvent!
-        
-        init(experience: NGDMExperience, timedEvent: NGDMTimedEvent) {
-            self.experience = experience
-            self.timedEvent = timedEvent
-        }
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
@@ -131,7 +131,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 
                 if experience.isClipAndShare {
                     self._currentClipTimedEvent = timedEvent
-                } else {
+                } else if !experience.isTalentData {
                     let oldCellData = self.currentCellDataForExperience(experience)
                     let oldIndexPath = self.currentIndexPathForExperience(experience)
                     

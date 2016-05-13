@@ -121,14 +121,16 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         _filmographyCollectionView.showsHorizontalScrollIndicator = true
         _filmographyContainerView.hidden = true
         talent.getFilmography({ (films) in
-            dispatch_async(dispatch_get_main_queue(), {
-                if films.count > 0 {
-                    self._filmographyContainerView.hidden = false
-                    self._filmographyCollectionView.reloadData()
-                } else {
-                    self._filmographyContainerView.hidden = true
-                }
-            })
+            if let films = films {
+                dispatch_async(dispatch_get_main_queue(), {
+                    if films.count > 0 {
+                        self._filmographyContainerView.hidden = false
+                        self._filmographyCollectionView.reloadData()
+                    } else {
+                        self._filmographyContainerView.hidden = true
+                    }
+                })
+            }
         })
     }
     

@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current Manifest file
-        if let manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.2", ofType: "xml") {
+        if let manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.3", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadManifestXMLFile(manifestXMLPath)
             
             do {
@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Load current AppData file
-        if let appDataXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_appdata_locations_r60-v0.2", ofType: "xml") {
+        if let appDataXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_appdata_locations_r60-v0.3", ofType: "xml") {
             NextGenDataManager.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
             
             do {
