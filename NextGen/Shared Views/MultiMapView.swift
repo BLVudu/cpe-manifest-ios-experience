@@ -16,7 +16,7 @@ struct MultiMapMarker {
     var location: CLLocationCoordinate2D!
 }
 
-class MultiMapView: UIView, MKMapViewDelegate {
+class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
     struct Constants {
         static let MarkerAnnotationViewReuseIdentifier = "kMarkerAnnotationViewReuseIdentifier"
@@ -40,6 +40,7 @@ class MultiMapView: UIView, MKMapViewDelegate {
     func setup() {
         if ConfigManager.sharedInstance.hasGoogleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
+            googleMapView?.delegate = self
             googleMapView?.mapType = kGMSTypeHybrid
             self.addSubview(googleMapView!)
         } else if appleMapView == nil {
@@ -132,15 +133,41 @@ class MultiMapView: UIView, MKMapViewDelegate {
     
     // MARK: MKMapViewDelegate
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MarkerAnnotationViewReuseIdentifier)
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Constants.MarkerAnnotationViewReuseIdentifier)
             annotationView?.image = mapIconImage
+
         }
         
         annotationView?.annotation = annotation
         
         return annotationView
     }
-
+    
+    func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        
+       let customView = UIView(frame: CGRectMake(0,0,200,80))
+        customView.backgroundColor = UIColor.whiteColor()
+       let titleLabel = UILabel(frame: CGRectMake(10,5,200,30))
+        titleLabel.text = marker.title
+        titleLabel.font = UIFont.themeFont(17)
+        let addressLabel = UILabel(frame: CGRectMake(10,30,200,50))
+        addressLabel.text = marker.snippet
+        addressLabel.font = UIFont.themeCondensedFont(15)
+        addressLabel.numberOfLines = 3
+        customView.addSubview(addressLabel)
+        customView.addSubview(titleLabel)
+        customView.layer.cornerRadius = 5
+        customView.layer.masksToBounds = true
+        customView.layer.shadowColor = UIColor.blackColor().CGColor
+        customView.layer.shadowRadius = 10
+        
+        customView.layer.shadowOpacity = 1
+        customView.layer.shadowOffset = CGSizeMake(0.0, 0.0)
+ 
+        return customView
+    }
+  
 }
