@@ -123,6 +123,12 @@ class MultiMapView: UIView, MKMapViewDelegate {
         }
     }
     
+    func setZoomLevel(zoomLevel: Float) {
+        if let mapView = googleMapView {
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.zoomTo(zoomLevel))
+        }
+    }
+    
     
     // MARK: MKMapViewDelegate
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {

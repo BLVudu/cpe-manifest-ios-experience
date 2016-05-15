@@ -18,22 +18,34 @@ class MapItemCell: UICollectionViewCell {
     
     var experience: NGDMExperience? {
         didSet {
-            locationName.text = experience?.title
-            
-            if let imageURL = experience?.imageURL {
-                locationImage.setImageWithURL(imageURL)
+            if let appData = experience?.appData {
+                locationName.text = appData.title
+                
+                if let imageURL = appData.imageURL {
+                    locationImage.setImageWithURL(imageURL)
+                } else {
+                    locationImage.image = nil
+                }
+                
+                childLocationsCount.text = nil
             } else {
-                locationImage.image = nil
-            }
-            
-            if let childExperiences = experience?.childExperiences {
-                if childExperiences.count > 0 {
-                    childLocationsCount.text = String(childExperiences.count) + (childExperiences.count == 1 ? " location" : " locations")
+                locationName.text = experience?.title
+                
+                if let imageURL = experience?.imageURL {
+                    locationImage.setImageWithURL(imageURL)
+                } else {
+                    locationImage.image = nil
+                }
+                
+                if let childExperiences = experience?.childExperiences {
+                    if childExperiences.count > 0 {
+                        childLocationsCount.text = String(childExperiences.count) + (childExperiences.count == 1 ? " location" : " locations")
+                    } else {
+                        childLocationsCount.text = nil
+                    }
                 } else {
                     childLocationsCount.text = nil
                 }
-            } else {
-                childLocationsCount.text = nil
             }
         }
     }

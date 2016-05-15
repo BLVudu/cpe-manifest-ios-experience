@@ -21,6 +21,11 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var locationDetailView: UIView!
+    @IBOutlet weak var locationDetailContainerView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
+    private var videoPlayerViewController: VideoPlayerViewController?
+    
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
     private var selectedExperience: NGDMExperience?
     
@@ -30,6 +35,12 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
         menuTableView.backgroundColor = UIColor.clearColor()
         collectionViewTitleLabel.text = experience.title.uppercaseString
         collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
+        closeButton.titleLabel?.font = UIFont.themeCondensedFont(17)
+        closeButton.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
+        closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
+        closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
+        closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
+        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
         
         let info = NSMutableDictionary()
         info[MenuSection.Keys.Title] = "Location: Full Map"
@@ -56,22 +67,56 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     }
     
     func selectExperience(experience: NGDMExperience) {
-        var selectedMarkers = [MultiMapMarker]()
-        for childExperience in experience.childExperiences {
-            if let childChildExperience = childExperience.childExperiences.first where childChildExperience.isLocation {
+        if experience.childExperiences.count <= 1 {
+            var appData = experience.childExperiences.first?.appData
+            if appData == nil {
+                appData = experience.childExperiences.first?.childExperiences.first?.appData
+            }
+            
+            if let appData = appData, location = appData.location {
+                mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
+            }
+        } else {
+            var selectedMarkers = [MultiMapMarker]()
+            for childExperience in experience.childExperiences {
                 for childChildExperience in childExperience.childExperiences {
                     if let marker = markers[childChildExperience.id] {
                         selectedMarkers.append(marker)
                     }
                 }
-            } else if let marker = markers[childExperience.id] {
-                selectedMarkers.append(marker)
             }
+            
+            mapView.zoomToFitMarkers(selectedMarkers)
         }
         
-        mapView.zoomToFitMarkers(selectedMarkers)
+        collectionViewTitleLabel.text = experience.title.uppercaseString
         selectedExperience = experience
         collectionView.reloadData()
+    }
+    
+    func playVideo(videoURL: NSURL) {
+        if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+            videoPlayerViewController.mode = VideoPlayerMode.Supplemental
+            
+            videoPlayerViewController.view.frame = locationDetailContainerView.bounds
+            locationDetailContainerView.addSubview(videoPlayerViewController.view)
+            self.addChildViewController(videoPlayerViewController)
+            videoPlayerViewController.didMoveToParentViewController(self)
+            
+            videoPlayerViewController.playVideoWithURL(videoURL)
+            
+            locationDetailView.hidden = false
+            self.videoPlayerViewController = videoPlayerViewController
+        }
+    }
+    
+    @IBAction func closeDetailView() {
+        locationDetailView.hidden = true
+        
+        videoPlayerViewController?.willMoveToParentViewController(nil)
+        videoPlayerViewController?.view.removeFromSuperview()
+        videoPlayerViewController?.removeFromParentViewController()
+        videoPlayerViewController = nil
     }
    
     //MARK: Overriding MenuedViewController functions
@@ -109,13 +154,20 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let experience = (collectionView.cellForItemAtIndexPath(indexPath) as? MapItemCell)?.experience {
-            selectExperience(experience)
+            if let appData = experience.appData {
+                if let videoURL = appData.presentation?.videoURL {
+                    playVideo(videoURL)
+                } else if let gallery = appData.gallery {
+                    print(gallery)
+                }
+            } else {
+                selectExperience(experience)
+            }
         }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / 4)
-        return CGSizeMake(itemWidth, itemWidth + 30)
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
     }
     
 }
