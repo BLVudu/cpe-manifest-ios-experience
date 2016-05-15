@@ -16,31 +16,25 @@ class MapItemCell: UICollectionViewCell {
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var childLocationsCount: UILabel!
     
-    var childCount = 0
-    
-    var appData: NGDMAppData? {
+    var experience: NGDMExperience? {
         didSet {
-            setNeedsLayout()
-        }
-    }
-    
-    var appDataType: NGDMAppData? {
-        didSet {
-            setNeedsLayout()
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if let appDataType = appDataType {
-            locationName.text = appDataType.type
-            locationImage.image = appDataType.thumbnailImage
-            childLocationsCount.text = childCount > 0 ? "\(childCount) locations" : nil
-        } else {
-            locationName.text = appData?.location?.name
-            locationImage.image = appData?.thumbnailImage
-            childLocationsCount.text = nil
+            locationName.text = experience?.title
+            
+            if let imageURL = experience?.imageURL {
+                locationImage.setImageWithURL(imageURL)
+            } else {
+                locationImage.image = nil
+            }
+            
+            if let childExperiences = experience?.childExperiences {
+                if childExperiences.count > 0 {
+                    childLocationsCount.text = String(childExperiences.count) + (childExperiences.count == 1 ? " location" : " locations")
+                } else {
+                    childLocationsCount.text = nil
+                }
+            } else {
+                childLocationsCount.text = nil
+            }
         }
     }
     
@@ -50,7 +44,6 @@ class MapItemCell: UICollectionViewCell {
         locationName.text = nil
         locationImage.image = nil
         childLocationsCount.text = nil
-        childCount = 0
     }
     
 }

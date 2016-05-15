@@ -17,47 +17,61 @@ struct MapAppDataItem {
 class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var mapView: MultiMapView!
+    @IBOutlet weak var collectionViewTitleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
-    private var mapAppDataItems = [String: [MapAppDataItem]]()
-    private var selectedAppDataItems: [MapAppDataItem]?
+    private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
+    private var selectedExperience: NGDMExperience?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         menuTableView.backgroundColor = UIColor.clearColor()
+        collectionViewTitleLabel.text = experience.title.uppercaseString
         collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
         
         let info = NSMutableDictionary()
         info[MenuSection.Keys.Title] = "Location: Full Map"
         
         var rows = [[String: String]]()
-        for experience in self.experience.childExperiences {
-            if let appData = experience.appData, type = appData.type, location = appData.location {
-                if mapAppDataItems[type] == nil {
-                    mapAppDataItems[type] = [MapAppDataItem]()
-                    rows.append([MenuItem.Keys.Title: type, MenuItem.Keys.Value: type])
+        for categoryExperience in experience.childExperiences {
+            rows.append([MenuItem.Keys.Title: categoryExperience.title, MenuItem.Keys.Value: categoryExperience.id])
+            
+            for subcategoryExperience in categoryExperience.childExperiences {
+                for locationExperience in subcategoryExperience.childExperiences {
+                    if let location = locationExperience.appData?.location {
+                        let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                        markers[locationExperience.id] = mapView.addMarker(center, title: location.name, subtitle: "", icon: UIImage(named: "MOSMapPin"), autoSelect: false)
+                    }
                 }
-                
-                let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-                let marker = mapView.addMarker(center, title: location.name, subtitle: "", icon: UIImage(named: "MOSMapPin"), autoSelect: false)
-                mapAppDataItems[type]!.append(MapAppDataItem(appData: appData, marker: marker))
             }
         }
         
         info[MenuSection.Keys.Rows] = rows
         menuSections.append(MenuSection(info: info))
         
+        selectedExperience = experience
         mapView.zoomToFitAllMarkers()
     }
     
-    func selectAppDataType(appDataType: String) {
-        if let mapAppDataItems = mapAppDataItems[appDataType] {
-            mapView.zoomToFitMarkers(mapAppDataItems.map({ $0.marker }))
-            selectedAppDataItems = mapAppDataItems
-            collectionView.reloadData()
+    func selectExperience(experience: NGDMExperience) {
+        var selectedMarkers = [MultiMapMarker]()
+        for childExperience in experience.childExperiences {
+            if let childChildExperience = childExperience.childExperiences.first where childChildExperience.isLocation {
+                for childChildExperience in childExperience.childExperiences {
+                    if let marker = markers[childChildExperience.id] {
+                        selectedMarkers.append(marker)
+                    }
+                }
+            } else if let marker = markers[childExperience.id] {
+                selectedMarkers.append(marker)
+            }
         }
+        
+        mapView.zoomToFitMarkers(selectedMarkers)
+        selectedExperience = experience
+        collectionView.reloadData()
     }
    
     //MARK: Overriding MenuedViewController functions
@@ -76,41 +90,26 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(menuTableView, didSelectRowAtIndexPath: indexPath)
         
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, appDataType = cell.menuItem?.value {
-            selectAppDataType(appDataType)
+        if let experienceId = (tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell)?.menuItem?.value, experience = NGDMExperience.getById(experienceId) {
+            selectExperience(experience)
         }
     }
     
     //MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let selectedAppDataItems = selectedAppDataItems {
-            return selectedAppDataItems.count
-        }
-        
-        return mapAppDataItems.count
+        return selectedExperience?.childExperiences.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MapItemCell.ReuseIdentifier, forIndexPath: indexPath) as! MapItemCell
         cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-        
-        if let appData = selectedAppDataItems?[indexPath.row].appData {
-            cell.appDataType = nil
-            cell.appData = appData
-        } else {
-            let mapAppDataItemList = Array(mapAppDataItems.values)[indexPath.row]
-            cell.childCount = mapAppDataItemList.count
-            cell.appDataType = mapAppDataItemList.first?.appData
-        }
-        
+        cell.experience = selectedExperience?.childExperiences[indexPath.row]
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? MapItemCell {
-            if let appDataType = cell.appDataType?.type {
-                selectAppDataType(appDataType)
-            }
+        if let experience = (collectionView.cellForItemAtIndexPath(indexPath) as? MapItemCell)?.experience {
+            selectExperience(experience)
         }
     }
     
