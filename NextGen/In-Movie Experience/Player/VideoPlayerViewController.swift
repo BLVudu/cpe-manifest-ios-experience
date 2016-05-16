@@ -132,6 +132,12 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     // MARK: Video Playback
+    override func playVideoWithURL(url: NSURL!) {
+        super.playVideoWithURL(url)
+        
+        SettingsManager.setVideoAsWatched(url)
+    }
+    
     func playMainExperience() {
         self.playerControlsVisible = false
         if _didPlayInterstitial {
