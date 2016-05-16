@@ -8,47 +8,39 @@
 
 import UIKit
 
-class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate {
+class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var galleryTableView: UITableView!
     
-  
-    @IBOutlet weak var galleryContainerView: UIView!
     @IBOutlet weak var videoContainerView: UIView!
+    @IBOutlet weak var previewImageView: UIImageView?
+    @IBOutlet weak var previewPlayButton: UIButton?
     @IBOutlet weak var mediaTitleLabel: UILabel!
     @IBOutlet weak var mediaDescriptionLabel: UILabel!
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
+    private var _videoPlayerViewController: VideoPlayerViewController?
     
-    @IBOutlet weak var previewImageView: UIImageView!
-    @IBOutlet weak var previewPlayButton: UIButton!
+    @IBOutlet weak var galleryScrollView: UIScrollView!
     @IBOutlet weak var galleryPageControl: UIPageControl!
-    @IBOutlet weak var galleryPageLabel: UILabel!
+    @IBOutlet weak var galleryFullScreenButton: UIButton!
+    private var _scrollViewPageWidth: CGFloat = 0
+    private var _imageGallery: NGDMGallery?
     
-      private var _didPlayFirstItem = false
+    private var _didPlayFirstItem = false
     private var _previewPlayURL: NSURL?
     private var _userDidSelectNextItem = true
     
-    
     private var _willPlayNextItemObserver: NSObjectProtocol!
-    
-    private var _didUpdatePageControlObserver: NSObjectProtocol!
-    private var _didDisplayPageControlObserver: NSObjectProtocol!
 
-    
     
     // MARK: Initialization
     deinit {
-        let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(_willPlayNextItemObserver)
-        center.removeObserver(_didUpdatePageControlObserver)
-        center.removeObserver(_didDisplayPageControlObserver)
-
+        NSNotificationCenter.defaultCenter().removeObserver(_willPlayNextItemObserver)
     }
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         galleryTableView.registerNib(UINib(nibName: String(VideoCell), bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
 
@@ -63,51 +55,9 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
                     strongSelf._userDidSelectNextItem = false
                     strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
-                    
-                   
                 }
             }
         }
-        
-        _didUpdatePageControlObserver = NSNotificationCenter.defaultCenter().addObserverForName(GalleryNotification.updatePageControl, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            
-            if let strongSelf = self, userInfo = notification.userInfo, page = userInfo["currentPage"] as? Int{
-                strongSelf.galleryPageControl.currentPage = page
-                strongSelf.galleryPageLabel.text = "\(page+1) / \(strongSelf.galleryPageControl.numberOfPages)"
-            }
-        }
-        
-        
-        _didDisplayPageControlObserver = NSNotificationCenter.defaultCenter().addObserverForName(GalleryNotification.showPageControl, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            
-            if let strongSelf = self, userInfo = notification.userInfo, toggleDisplay = userInfo["showPageControl"] as? Bool{
-               strongSelf.galleryPageControl.hidden = toggleDisplay
-                strongSelf.galleryPageLabel.hidden = toggleDisplay
-                
-            }
-        }
-        
-    }
-    
-    func videoPlayerViewController() -> VideoPlayerViewController? {
-        for viewController in self.childViewControllers {
-            if viewController is VideoPlayerViewController {
-                return viewController as? VideoPlayerViewController
-            }
-        }
-        
-        return nil
-    }
-    
-    
-    func galleryViewController() -> ExtrasImageGalleryViewController?{
-        for viewController in self.childViewControllers{
-            if viewController is ExtrasImageGalleryViewController {
-                return viewController as? ExtrasImageGalleryViewController
-            }
-        }
-        
-        return nil
     }
     
     
@@ -117,12 +67,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         cell.backgroundColor = UIColor.clearColor()
         cell.selectionStyle = .None
         cell.experience = experience.childExperiences[indexPath.row]
-    
-        if cell.videoPlayed == true {
-            
-            cell.runtimeLabel.text = String.localize("label.watched")
-            
-        }
         return cell
     }
     
@@ -151,80 +95,131 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         
         mediaTitleLabel.text = thisExperience.metadata?.title
         mediaDescriptionLabel.text = thisExperience.metadata?.description
-    
-         if thisExperience.isGallery {
-            
-            videoContainerView.hidden = true
-            previewImageView.hidden = true
-            previewPlayButton.hidden = true
-            mediaRuntimeLabel.hidden = true
-            
         
-            if let gallery = thisExperience.imageGallery, imageGalleryViewController = galleryViewController(){
-                imageGalleryViewController.gallery = gallery
-                galleryPageControl.numberOfPages = (gallery.pictures?.count)!
-                galleryPageControl.currentPage = 0
-                galleryPageLabel.text = "\(1) / \(galleryPageControl.numberOfPages)"
-                NSNotificationCenter.defaultCenter().postNotificationName(GalleryNotification.reloadGallery, object: nil)
- 
-         }
-         
-         
-         } else if thisExperience.isAudioVisual {
-            galleryContainerView.hidden = true
-            galleryPageControl.hidden = true
-            galleryPageLabel.hidden = true
+        // Reset media detail views
+        galleryPageControl.hidden = true
+        galleryScrollView.hidden = true
+        videoContainerView.hidden = false
+        previewImageView?.hidden = _didPlayFirstItem
+        previewPlayButton?.hidden = _didPlayFirstItem
+        mediaRuntimeLabel.text = nil
+        
+        let galleryScrollViewPages = galleryScrollView.subviews
+        for pageView in galleryScrollViewPages {
+            pageView.removeFromSuperview()
+        }
+        
+        galleryScrollView.contentOffset = CGPointZero
+        _imageGallery = nil
+        
+        // Set new media detail views
+        if let gallery = thisExperience.imageGallery, pictures = gallery.pictures {
+            galleryPageControl.hidden = false
+            galleryScrollView.hidden = false
+            videoContainerView.hidden = true
+            previewImageView?.hidden = true
+            previewPlayButton?.hidden = true
+            
+            let numPictures = pictures.count
+            galleryPageControl.numberOfPages = numPictures
+            
+            var imageViewX: CGFloat = 0
+            _scrollViewPageWidth = CGRectGetWidth(galleryScrollView.bounds)
+            for i in 0 ..< numPictures {
+                let imageView = UIImageView()
+                imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                imageView.frame = CGRectMake(imageViewX, 0, _scrollViewPageWidth, CGRectGetHeight(galleryScrollView.bounds))
+                imageView.clipsToBounds = true
+                imageView.tag = i + 1
+                galleryScrollView.addSubview(imageView)
+                imageViewX += _scrollViewPageWidth
+            }
+            
+            galleryScrollView.contentSize = CGSizeMake(CGRectGetWidth(galleryScrollView.bounds) * CGFloat(numPictures), CGRectGetHeight(galleryScrollView.bounds))
+            _imageGallery = gallery
+            loadGalleryImageForPage(0)
+        } else if thisExperience.isAudioVisual {
             let runtime = thisExperience.videoRuntime
             if runtime > 0 {
-                mediaRuntimeLabel.hidden = false
                 mediaRuntimeLabel.text = String.localize("label.runtime", variables: ["runtime": runtime.timeString()])
-            } else {
-                mediaRuntimeLabel.hidden = true
             }
         
-            if let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController() {
+            if let videoURL = thisExperience.videoURL, videoPlayerViewController = _videoPlayerViewController ?? UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                 if let player = videoPlayerViewController.player {
                     player.removeAllItems()
                 }
-            
+                
+                videoPlayerViewController.mode = VideoPlayerMode.Supplemental
                 videoPlayerViewController.curIndex = Int32(indexPath.row)
                 videoPlayerViewController.indexMax = Int32(experience.childExperiences.count)
-            
-            
+                
+                videoPlayerViewController.view.frame = videoContainerView.bounds
+                videoContainerView.addSubview(videoPlayerViewController.view)
+                self.addChildViewController(videoPlayerViewController)
+                videoPlayerViewController.didMoveToParentViewController(self)
+                _videoPlayerViewController = videoPlayerViewController
+                
                 if !_didPlayFirstItem {
                     _previewPlayURL = videoURL
                 
-                if indexPath.row == 0 {
-                    if let imageURL = thisExperience.imageURL {
-                        previewImageView.setImageWithURL(imageURL)
+                    if indexPath.row == 0 {
+                        if let imageURL = thisExperience.imageURL {
+                            previewImageView?.setImageWithURL(imageURL)
+                        }
+                    } else {
+                        playFirstItem(nil)
                     }
                 } else {
-                    playFirstItem(nil)
-                }
-            } else {
-                if(_userDidSelectNextItem == true){
-                    videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
-                    
-                }
-                videoPlayerViewController.playVideoWithURL(videoURL)
-                _userDidSelectNextItem = true
-            
+                    if _userDidSelectNextItem {
+                        videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
+                    }
+                        
+                    videoPlayerViewController.playVideoWithURL(videoURL)
+                    _userDidSelectNextItem = true
+                
                 }
             }
         }
     }
+    
+    // MARK: Image Gallery
+    func loadGalleryImageForPage(page: Int) {
+        if let gallery = _imageGallery, imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView, pictures = gallery.pictures {
+            if imageView.image == nil {
+                if let imageURL = pictures[page].imageURL {
+                    imageView.setImageWithURL(imageURL)
+                }
+            }
+            
+            galleryPageControl.currentPage = page
+        }
+    }
+    
+    @IBAction func toggleGalleryFullScreen() {
+        
+    }
+    
+    
+    // MARK: UIScrollViewDelegate
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView == galleryScrollView {
+            loadGalleryImageForPage(Int(targetContentOffset.memory.x / _scrollViewPageWidth))
+        }
+    }
+    
     
     // MARK: Actions
     @IBAction func playFirstItem(sender: UIButton?) {
         _didPlayFirstItem = true
         
-        previewImageView.removeFromSuperview()
-        previewPlayButton.removeFromSuperview()
+        previewImageView?.removeFromSuperview()
+        previewPlayButton?.removeFromSuperview()
+        previewImageView = nil
+        previewPlayButton = nil
         
-        if let videoPlayerViewController = videoPlayerViewController(), videoURL = _previewPlayURL {
-            videoPlayerViewController.playVideoWithURL(videoURL)
+        if let videoURL = _previewPlayURL {
+            _videoPlayerViewController?.playVideoWithURL(videoURL)
         }
     }
-    
     
 }

@@ -99,8 +99,6 @@
 		7099B9DB1CEA4CE5000274F7 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7099B9DA1CEA4CE5000274F7 /* SettingsManager.swift */; };
 		70A3AC921C9C75860038B60F /* BaselineAPIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */; };
 		70A3AC971C9DDB500038B60F /* NSTimeInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */; };
-		70A3AC9B1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9A1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift */; };
-		70A3AC9F1C9E56350038B60F /* ExtrasImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */; };
 		70A5D5731CAB437700ACC58F /* UIStoryboard+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */; };
 		70B9FE381C6D1FD900CF1A22 /* ImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */; };
 		70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */; };
@@ -459,8 +457,6 @@
 		7099B9DA1CEA4CE5000274F7 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaselineAPIUtil.swift; sourceTree = "<group>"; };
 		70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Utils.swift"; sourceTree = "<group>"; };
-		70A3AC9A1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasImageGalleryListCollectionViewController.swift; sourceTree = "<group>"; };
-		70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Utils.swift"; sourceTree = "<group>"; };
 		70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMLocation.swift; sourceTree = "<group>"; };
@@ -1043,8 +1039,6 @@
 			children = (
 				70C830BE1CB6A2F200F9E2D6 /* ExtrasExperienceCollectionViewController.swift */,
 				70C830BC1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift */,
-				70A3AC9A1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift */,
-				70A3AC9E1C9E56350038B60F /* ExtrasImageGalleryViewController.swift */,
 				7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */,
 				70DF2F7D1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift */,
 				49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */,
@@ -1699,7 +1693,6 @@
 				70E297051CDCFD9D00B0B022 /* NGEFileDeliveryType.swift in Sources */,
 				490213481C860C9A00071552 /* SharingViewController.swift in Sources */,
 				70E297241CDCFD9D00B0B022 /* NGELocationType.swift in Sources */,
-				70A3AC9B1C9DE6700038B60F /* ExtrasImageGalleryListCollectionViewController.swift in Sources */,
 				70E297451CDCFD9D00B0B022 /* NGEPresentationType.swift in Sources */,
 				70E296A81CDCFD9D00B0B022 /* NGEAppDataLocationType.swift in Sources */,
 				70E297071CDCFD9D00B0B022 /* NGEFileManifestInfoType.swift in Sources */,
@@ -1745,7 +1738,6 @@
 				70367AB91C8F8BDE0042B5B5 /* NGDMGallery.swift in Sources */,
 				70E296CD1CDCFD9D00B0B022 /* NGEContainerSpecificType.swift in Sources */,
 				70E296BB1CDCFD9D00B0B022 /* NGECaption.swift in Sources */,
-				70A3AC9F1C9E56350038B60F /* ExtrasImageGalleryViewController.swift in Sources */,
 				70E296D71CDCFD9D00B0B022 /* NGEDigitalAssetAncillaryDataType.swift in Sources */,
 				70E296DA1CDCFD9D00B0B022 /* NGEDigitalAssetAudioLanguageType.swift in Sources */,
 				70A3AC921C9C75860038B60F /* BaselineAPIUtil.swift in Sources */,

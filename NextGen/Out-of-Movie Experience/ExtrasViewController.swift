@@ -193,12 +193,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: Storyboard
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let experience = sender as? NGDMExperience {
-            if let viewController = segue.destinationViewController as? ExtrasImageGalleryListCollectionViewController {
-                viewController.experience = experience
-            } else if let viewController = segue.destinationViewController as? ExtrasExperienceViewController {
-                viewController.experience = experience
-            }
+        if let viewController = segue.destinationViewController as? ExtrasExperienceViewController, experience = sender as? NGDMExperience {
+            viewController.experience = experience
         }
     }
     
