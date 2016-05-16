@@ -93,7 +93,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         return multiMapMarker
     }
     
-    func selectMarker(marker: MultiMapMarker) {
+     func selectMarker(marker: MultiMapMarker) {
         selectMarker(marker, zoomLevel: 0)
     }
     
@@ -148,7 +148,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
     func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         
-       let customView = UIView(frame: CGRectMake(0,0,200,80))
+       let customView = UIView(frame: CGRectMake(0,0,230,80))
         customView.backgroundColor = UIColor.whiteColor()
        let titleLabel = UILabel(frame: CGRectMake(10,5,200,30))
         titleLabel.text = marker.title
@@ -157,8 +157,17 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         addressLabel.text = marker.snippet
         addressLabel.font = UIFont.themeCondensedFont(15)
         addressLabel.numberOfLines = 3
+        let locationButton = UIButton(frame: CGRectMake(205, 30, 20,20))
+        locationButton.layer.cornerRadius = 0.5*20
+        locationButton.setTitle(">", forState: UIControlState.Normal)
+        locationButton.titleLabel?.font = UIFont.themeFont(17)
+        locationButton.titleLabel?.textColor = UIColor.blackColor()
+        locationButton.backgroundColor = UIColor.blueColor()
+      
+        
         customView.addSubview(addressLabel)
         customView.addSubview(titleLabel)
+        customView.addSubview(locationButton)
         customView.layer.cornerRadius = 5
         customView.layer.masksToBounds = true
         customView.layer.shadowColor = UIColor.blackColor().CGColor
@@ -169,5 +178,13 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
  
         return customView
     }
-  
-}
+    
+    func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
+        
+        
+        setLocation(marker.position, zoomLevel: 18, animated: true)
+        NSNotificationCenter.defaultCenter().postNotificationName("loadChildGallery", object: nil, userInfo: ["marker" : marker])
+    }
+    
+    
+    }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class MapItemCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
@@ -16,6 +18,7 @@ class MapItemCell: UICollectionViewCell {
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var childLocationsCount: UILabel!
     
+    @IBOutlet weak var runtimeLabel: UILabel!
     var experience: NGDMExperience? {
         didSet {
             if let appData = experience?.appData {
@@ -36,21 +39,19 @@ class MapItemCell: UICollectionViewCell {
                 } else {
                     locationImage.image = nil
                 }
-                
                 if let childExperiences = experience?.childExperiences {
                     if childExperiences.count > 0 {
                         childLocationsCount.text = String(childExperiences.count) + (childExperiences.count == 1 ? " location" : " locations")
-                    } else {
-                        childLocationsCount.text = nil
-                    }
+
                 } else {
                     childLocationsCount.text = nil
                 }
             }
         }
+        }
     }
     
-    override func prepareForReuse() {
+         override func prepareForReuse() {
         super.prepareForReuse()
         
         locationName.text = nil

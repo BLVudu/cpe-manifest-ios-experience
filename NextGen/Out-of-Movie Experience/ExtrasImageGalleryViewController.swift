@@ -58,7 +58,7 @@ class ExtrasImageGalleryViewController: UIViewController, UIScrollViewDelegate{
         if self.isFullScreen {
             
             self.view.superview!.frame = UIScreen.mainScreen().bounds
-
+           
         }
 
         
@@ -87,7 +87,7 @@ class ExtrasImageGalleryViewController: UIViewController, UIScrollViewDelegate{
         }
         galleryPageControl.numberOfPages = (gallery!.pictures?.count)!
         
-        
+        galleryScrollView.directionalLockEnabled = true
         galleryScrollView.contentSize = CGSizeMake(CGRectGetWidth(UIScreen.mainScreen().bounds) * CGFloat(numPictures), CGRectGetHeight(UIScreen.mainScreen().bounds))
         loadImageForPage(currentIndex)
         galleryScrollView.setContentOffset(CGPointMake(CGFloat(currentIndex) * _scrollViewPageWidth, 0), animated: false)
