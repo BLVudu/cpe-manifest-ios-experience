@@ -26,7 +26,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.hidden = true
+        
         menuTableView.backgroundColor = UIColor.clearColor()
         collectionViewTitleLabel.text = experience.title.uppercaseString
         collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
@@ -36,12 +36,6 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
         closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
         closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
         closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
-        
-        if childGalleryItems != nil{
-            let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-            collectionView.selectItemAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.Left)
-            
-        }
         
         let info = NSMutableDictionary()
         info[MenuSection.Keys.Title] = "Location: Full Map"
@@ -169,25 +163,6 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
-    }
-    
-    func loadChildGallery(appData: NGDMAppData){
-        childGalleryItems = []
-        if appData.displayText != nil {
-            childGalleryItems?.append(appData)
-        }
-        tempSelectedAppDataItems = selectedAppDataItems
-        selectedAppDataItems = nil
-        collectionView.reloadData()
-        
-    }
-    @IBAction func dismissGallery(sender: AnyObject) {
-        
-        textView.hidden = true
-        childGalleryItems = nil
-        selectedAppDataItems = tempSelectedAppDataItems
-        tempSelectedAppDataItems = nil
-        collectionView.reloadData()
     }
     
 }
