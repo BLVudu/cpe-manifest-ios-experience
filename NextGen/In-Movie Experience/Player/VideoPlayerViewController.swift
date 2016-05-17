@@ -104,14 +104,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             if let strongSelf = self{
                 if let userInfo = notification.userInfo, index = userInfo["option"] as? Int{
                     strongSelf.commentaryIndex = index
-                    if index > 0 {
-                        strongSelf._commentaryButton.setTitle("Commentary is on", forState: .Normal)
-                        strongSelf._commentaryButton.imageEdgeInsets = UIEdgeInsetsMake(0, 140, 0, 0)
-                        
-                    } else {
-                        strongSelf._commentaryButton.setTitle("Commentary", forState: .Normal)
-                        strongSelf._commentaryButton.imageEdgeInsets = UIEdgeInsetsMake(0, 120, 0, 0)
-                    }
+                    strongSelf._commentaryButton.setTitle(index > 0 ? String.localize("label.commentary.on") : String.localize("label.commentary"), forState: .Normal)
                 }
             }
         })
@@ -132,6 +125,12 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     // MARK: Video Playback
+    override func playVideoWithURL(url: NSURL!) {
+        super.playVideoWithURL(url)
+        
+        SettingsManager.setVideoAsWatched(url)
+    }
+    
     func playMainExperience() {
         self.playerControlsVisible = false
         if _didPlayInterstitial {

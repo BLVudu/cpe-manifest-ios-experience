@@ -17,17 +17,16 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak private var playIconImageView: UIImageView!
     @IBOutlet weak var runtimeLabel: UILabel!
     @IBOutlet weak private var captionLabel: UILabel!
-    var videoPlayed = false
     
     private var _setImageSessionDataTask: NSURLSessionDataTask?
     
     var experience: NGDMExperience? {
         didSet {
             captionLabel.text = experience?.metadata?.title
-            if let runtime = experience?.videoRuntime {
+            if let runtime = experience?.videoRuntime, videoURL = experience?.videoURL {
                 if runtime > 0 {
                     runtimeLabel.hidden = false
-                    runtimeLabel.text = runtime.formattedTime()
+                    runtimeLabel.text = SettingsManager.didWatchVideo(videoURL) ? String.localize("label.watched") : runtime.formattedTime()
                 } else {
                     runtimeLabel.hidden = true
                 }
@@ -52,6 +51,8 @@ class VideoCell: UITableViewCell {
             task.cancel()
             _setImageSessionDataTask = nil
         }
+        
+        runtimeLabel.text = nil
     }
     
     override func layoutSubviews() {
@@ -70,16 +71,15 @@ class VideoCell: UITableViewCell {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
                 self.runtimeLabel.text = String.localize("label.playing")
-                self.videoPlayed = true
             }, completion: nil)
         } else {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 0.5
                 self.captionLabel.alpha = 0.5
-                if (self.videoPlayed == false){
-                    self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
+                if let videoURL = self.experience?.videoURL {
+                    self.runtimeLabel.text = SettingsManager.didWatchVideo(videoURL) ? String.localize("label.watched") : self.experience?.videoRuntime.formattedTime()
                 } else {
-                    self.runtimeLabel.text = String.localize("label.watched")
+                    self.runtimeLabel.text = self.experience?.videoRuntime.formattedTime()
                 }
             }, completion: nil)
         }
@@ -89,12 +89,7 @@ class VideoCell: UITableViewCell {
         thumbnailContainerView.layer.borderColor = UIColor.whiteColor().CGColor
         thumbnailContainerView.layer.borderWidth = (self.selected ? 2 : 0)
         captionLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
-        
-        if experience?.isGallery() == true {
-            playIconImageView.hidden = true
-        } else {
-            playIconImageView.hidden = self.selected
-        }
+        playIconImageView.hidden = (experience == nil || experience!.isGallery) || self.selected
     }
     
 }

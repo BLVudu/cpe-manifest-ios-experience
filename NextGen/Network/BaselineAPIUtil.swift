@@ -26,6 +26,7 @@ class BaselineAPIUtil: APIUtil {
         static let FullName = "FULL_NAME"
         static let Credit = "CREDIT"
         static let CreditGroup = "CREDIT_GROUP"
+        static let Role = "ROLE"
         static let ShortBio = "SHORT_BIO"
         static let MediumURL = "MEDIUM_URL"
         static let LargeURL = "LARGE_URL"
@@ -111,9 +112,14 @@ class BaselineAPIUtil: APIUtil {
         getJSONWithPath(Endpoints.GetFilmography, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 var films = [TalentFilm]()
-                for filmInfo in (results.reverse() as NSArray).subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxFilmography, results.count))) {
-                    if let filmInfo = filmInfo as? NSDictionary {
+                
+                for filmInfo in (results.reverse() as NSArray) {
+                    if let filmInfo = filmInfo as? NSDictionary where filmInfo[Keys.Role] as? String == "Actor" && filmInfo[Keys.ProjectID] as? Int != 5423190 {
                         films.append(TalentFilm(baselineInfo: filmInfo))
+                    }
+                    
+                    if films.count >= Constants.MaxFilmography {
+                        break
                     }
                 }
                 

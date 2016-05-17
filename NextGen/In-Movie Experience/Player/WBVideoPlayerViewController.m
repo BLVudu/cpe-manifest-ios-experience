@@ -63,7 +63,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
  * Track the status of full screen video
  */
 @property (assign, nonatomic)           BOOL                             isFullScreen;
-@property (assign, nonatomic)           CGRect                           originalContainerFrame;
+@property (strong, nonatomic)           UIView                          *originalContainerView;
 
 /**
  * There is a difference between enabling/disabling and showing/hiding
@@ -724,15 +724,36 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize" : @"Maximize")] forState:UIControlStateNormal];
     [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize Highlighted" : @"Maximize Highlighted")] forState:UIControlStateHighlighted];
     
-    [UIView animateWithDuration:0.25 animations:^{
-        UIView *videoContainerView = self.view.superview;
-        if (self.isFullScreen) {
-            self.originalContainerFrame = videoContainerView.frame;
-            videoContainerView.frame = [UIScreen mainScreen].bounds;
-        } else {
-            videoContainerView.frame = self.originalContainerFrame;
-        }
-    }];
+    if (self.isFullScreen) {
+        self.originalContainerView = self.view.superview;
+        [[UIApplication sharedApplication].keyWindow addSubview:self.view];
+    } else {
+        [self.originalContainerView addSubview:self.view];
+        self.originalContainerView = nil;
+    }
+    
+    self.view.frame = self.view.superview.bounds;
+    
+    /*UIView *sourceView = self.view.superview;
+    UIView *destinationView;
+    if (self.isFullScreen) {
+        self.originalContainerView = sourceView;
+        destinationView = [UIApplication sharedApplication].keyWindow;
+        [destinationView addSubview:self.view];
+        self.view.center = destinationView.center;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.view.frame = destinationView.bounds;
+        }];
+    } else {
+        destinationView = self.originalContainerView;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.view.center = [self.originalContainerView convertPoint:self.originalContainerView.center toView:destinationView];
+            self.view.frame = self.originalContainerView.bounds;
+        } completion:^(BOOL finished) {
+            [self.originalContainerView addSubview:self.view];
+            self.originalContainerView = nil;
+        }];
+    }*/
 }
 
 

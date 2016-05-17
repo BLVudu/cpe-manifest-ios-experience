@@ -10,15 +10,17 @@ import UIKit
 
 class ExtrasExperienceViewController: UIViewController {
     
-    let kHeaderButtonWidth: CGFloat = 250
-    let kHeaderIconPadding: CGFloat = 30
-    let kTitleImageWidth: CGFloat = 300
-    let kTitleImageHeight: CGFloat = 90
+    private struct Constants {
+        static let HeaderButtonWidth: CGFloat = 250
+        static let HeaderIconPadding: CGFloat = 30
+        static let TitleImageWidth: CGFloat = 300
+        static let TitleImageHeight: CGFloat = 90
+        static let TitleLabelXOffset: CGFloat = -30
+        static let TitleLabelYOffset: CGFloat = 5
+    }
     
     var experience: NGDMExperience!
-    var appAppearance: NGDMAppearance!
     
-    private var _titleImageView: UIImageView!
     private var _homeButton: UIButton!
     private var _backButton: UIButton!
     
@@ -26,9 +28,21 @@ class ExtrasExperienceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _titleImageView = UIImageView(frame: CGRectMake(CGRectGetWidth(self.view.frame) - kTitleImageWidth, 0, kTitleImageWidth, kTitleImageHeight))
-        _titleImageView.image = CurrentManifest.outOfMovieExperience.appearance?.titleImage
-        self.view.addSubview(_titleImageView)
+        var titleFrame = CGRectMake(CGRectGetWidth(self.view.frame) - Constants.TitleImageWidth, 0, Constants.TitleImageWidth, Constants.TitleImageHeight)
+        if experience == CurrentManifest.outOfMovieExperience {
+            let titleImageView = UIImageView(frame: titleFrame)
+            titleImageView.image = experience.appearance?.titleImage
+            self.view.addSubview(titleImageView)
+        } else {
+            titleFrame.origin.x += Constants.TitleLabelXOffset
+            titleFrame.origin.y += Constants.TitleLabelYOffset
+            let titleLabel = UILabel(frame: titleFrame)
+            titleLabel.textAlignment = NSTextAlignment.Right
+            titleLabel.textColor = UIColor(netHex: 0xdddddd)
+            titleLabel.font = UIFont.themeCondensedBoldFont(30)
+            titleLabel.text = experience.title.uppercaseString
+            self.view.addSubview(titleLabel)
+        }
         
         let backgroundImageView = UIImageView(image: CurrentManifest.outOfMovieExperience.appearance?.backgroundImage)
         backgroundImageView.frame = self.view.bounds
@@ -47,10 +61,10 @@ class ExtrasExperienceViewController: UIViewController {
     func headerButton(title: String, imageName: String) -> UIButton {
         let button = UIButton.buttonWithImage(UIImage(named: imageName))
         button.hidden = true
-        button.frame = CGRectMake(0, 0, kHeaderButtonWidth, kTitleImageHeight)
+        button.frame = CGRectMake(0, 0, Constants.HeaderButtonWidth, Constants.TitleImageHeight)
         button.contentHorizontalAlignment = .Left
-        button.titleEdgeInsets = UIEdgeInsetsMake(0, kHeaderIconPadding + 10, 0, 0)
-        button.imageEdgeInsets = UIEdgeInsetsMake(0, kHeaderIconPadding, 0, 0)
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding + 10, 0, 0)
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding, 0, 0)
         button.titleLabel?.font = UIFont.themeFont(18)
         button.setTitle(title, forState: .Normal)
         button.addTarget(self, action: #selector(self.close), forControlEvents: UIControlEvents.TouchUpInside)

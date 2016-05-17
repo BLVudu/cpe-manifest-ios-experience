@@ -21,8 +21,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
-        static let ShowVideoGallery = "ExtrasVideoGallerySegue"
-        static let ShowImageGallery = "ExtrasImageGalleryListSegue"
+        static let ShowGallery = "ExtrasGallerySegue"
+        static let ShowMap = "ExtrasMapSegue"
         static let ShowShopping = "ExtrasShoppingSegue"
     }
     
@@ -42,7 +42,6 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         self.extrasCollectionView.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
         self.talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         
-        self.experience = CurrentManifest.outOfMovieExperience
         showHomeButton()
     }
     
@@ -164,13 +163,12 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let experience = CurrentManifest.outOfMovieExperience.childExperiences[indexPath.row]
-        //if experience.isGalleryList() {
-            //self.performSegueWithIdentifier(SegueIdentifier.ShowImageGallery, sender: experience)
-        //} else
-        if experience.isShopping() {
+        if experience.isShopping {
             self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
+        } else if experience.isLocation {
+            self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: experience)
         } else {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowVideoGallery, sender: experience)
+            self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: experience)
         }
     }
     
@@ -194,12 +192,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: Storyboard
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let experience = sender as? NGDMExperience {
-            if let viewController = segue.destinationViewController as? ExtrasImageGalleryListCollectionViewController {
-                viewController.experience = experience
-            } else if let viewController = segue.destinationViewController as? ExtrasExperienceViewController {
-                viewController.experience = experience
-            }
+        if let viewController = segue.destinationViewController as? ExtrasExperienceViewController, experience = sender as? NGDMExperience {
+            viewController.experience = experience
         }
     }
     

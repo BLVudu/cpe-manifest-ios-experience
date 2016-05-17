@@ -9,85 +9,164 @@
 import UIKit
 import MapKit
 
-class LocationObject: NSObject{
-    
-    var name: String!
-    var latitude: Double!
-    var longitude: Double!
-    
-    
-    required init(info: NSDictionary){
-        name = info["name"] as! String
-        latitude = info["lat"] as! Double
-        longitude = info ["long"] as! Double
-    }
-    
-}
-
-class ExtrasSceneLocationsViewController: MenuedViewController{
-    
+class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var mapView: MultiMapView!
-    
+    @IBOutlet weak var collectionViewTitleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-  
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-  
-    var locationInfo = [
-        ["name": "Metropolis",
-        "lat" : 41.8781,
-        "long" : -87.6298],
+    
+    @IBOutlet weak var locationDetailView: UIView!
+    @IBOutlet weak var videoContainerView: UIView!
+    @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
+    @IBOutlet weak var closeButton: UIButton!
+    private var videoPlayerViewController: VideoPlayerViewController?
+    
+    private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
+    private var locationExperienceMapping = [String: NGDMExperience]() // ExperienceID: Parent Experience
+    private var selectedExperience: NGDMExperience? {
+        didSet {
+            if let experience = selectedExperience {
+                if let appDataExperience = experience.childExperiences.first, appData = appDataExperience.appData, location = appData.location {
+                    mapView.selectedMarker = markers[appDataExperience.id]
+                    mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
+                } else {
+                    var selectedMarkers = [MultiMapMarker]()
+                    if experience == self.experience {
+                        selectedMarkers = Array(markers.values)
+                    } else {
+                        for childExperience in experience.childExperiences {
+                            for childChildExperience in childExperience.childExperiences {
+                                if let marker = markers[childChildExperience.id] {
+                                    selectedMarkers.append(marker)
+                                }
+                            }
+                        }
+                    }
+                    
+                    if experience.childExperiences.count > 1 && selectedMarkers.count > 1 {
+                        mapView.selectedMarker = nil
+                        mapView.zoomToFitMarkers(selectedMarkers)
+                    } else if let appDataExperience = experience.childExperiences.first?.childExperiences.first, appData = appDataExperience.appData, location = appData.location {
+                        mapView.selectedMarker = markers[appDataExperience.id]
+                        mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
+                    }
+                    
+                    menuSections.first?.title = experience == self.experience ? String.localize("locations.full_map") : experience.title
+                    self.menuTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                }
+                
+                collectionViewTitleLabel.text = experience.title.uppercaseString
+            }
+            
+            collectionView.reloadData()
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
         
-        ["name": "Smallville",
-        "lat" : 41.630501,
-        "long" : -88.438485],
-        
-        ["name": "US Northcom",
-        "lat" : 38.8239,
-        "long" : -104.7001],
-        
-       ["name": "Artic Circle",
-        "lat" : 49.282729,
-        "long" : -123.120738]
-    ]
-  
+        galleryScrollView.cleanInvisibleImages()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        menuTableView.backgroundColor = UIColor.clearColor()
+        collectionViewTitleLabel.text = experience.title.uppercaseString
+        collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
+        closeButton.titleLabel?.font = UIFont.themeCondensedFont(17)
+        closeButton.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
+        closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
+        closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
+        closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
+        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
+        
         let info = NSMutableDictionary()
-        info[MenuSection.Keys.Title] = "Location : Full Map"
-        var rows: [Dictionary<String, String>] = []
+        info[MenuSection.Keys.Title] = String.localize("locations.full_map")
         
-        let locations = NSArray(array: locationInfo)
+        var rows = [[String: String]]()
+        rows.append([MenuItem.Keys.Title: String.localize("locations.full_map"), MenuItem.Keys.Value: experience.id])
         
-        for location in locations  {
-            if let locationData = location as? NSDictionary{
-                let location = LocationObject(info: locationData)
-                rows.append([MenuItem.Keys.Title:location.name, MenuItem.Keys.Latitude: String(location.latitude), MenuItem.Keys.Longitude: String(location.longitude)])
-                let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-                mapView.addMarker(center, title: location.name, subtitle: "", icon: UIImage(named: "MOSMapPin"), autoSelect: false)
+        for categoryExperience in experience.childExperiences {
+            rows.append([MenuItem.Keys.Title: categoryExperience.title, MenuItem.Keys.Value: categoryExperience.id])
+            
+            for subcategoryExperience in categoryExperience.childExperiences {
+                for locationExperience in subcategoryExperience.childExperiences {
+                    if let location = locationExperience.appData?.location {
+                        let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                        markers[locationExperience.id] = mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: false)
+                        locationExperienceMapping[locationExperience.id] = subcategoryExperience
+                    }
+                }
             }
         }
         
-             /*
-        for location in locations{
-            rows.append([MenuSection.Keys.Title:location.name])
-            let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-            mapView.addMarker(center, title: location.name, subtitle: "", icon: UIImage(named: "MOSMapPin"), autoSelect: false)
-            
-        }
-        */
- 
         info[MenuSection.Keys.Rows] = rows
         menuSections.append(MenuSection(info: info))
         
-        menuTableView.backgroundColor = UIColor.clearColor()
-        
+        selectedExperience = experience
+        mapView.zoomToFitAllMarkers()
+        mapView.delegate = self
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func playVideo(videoURL: NSURL) {
+        closeDetailView()
         
-        if indexPath.row == 0{
+        if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+            videoPlayerViewController.mode = VideoPlayerMode.Supplemental
+            
+            videoPlayerViewController.view.frame = videoContainerView.bounds
+            videoContainerView.addSubview(videoPlayerViewController.view)
+            self.addChildViewController(videoPlayerViewController)
+            videoPlayerViewController.didMoveToParentViewController(self)
+            
+            videoPlayerViewController.playVideoWithURL(videoURL)
+            
+            locationDetailView.hidden = false
+            self.videoPlayerViewController = videoPlayerViewController
+        }
+    }
+    
+    func showGallery(gallery: NGDMGallery) {
+        closeDetailView()
+        
+        galleryScrollView.gallery = gallery
+        galleryScrollView.hidden = false
+        
+        locationDetailView.hidden = false
+    }
+    
+    @IBAction func closeDetailView() {
+        locationDetailView.hidden = true
+        
+        galleryScrollView.gallery = nil
+        galleryScrollView.hidden = true
+        
+        videoPlayerViewController?.willMoveToParentViewController(nil)
+        videoPlayerViewController?.view.removeFromSuperview()
+        videoPlayerViewController?.removeFromParentViewController()
+        videoPlayerViewController = nil
+    }
+    
+    // MARK: Actions
+    override func close() {
+        mapView.destroy()
+        mapView = nil
+        
+        super.close()
+    }
+    
+    // MARK: MultiMapViewDelegate
+    func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
+        if let experienceId = markers.filter({ $0.1 == marker }).map({ $0.0 }).first, experience = locationExperienceMapping[experienceId] where experience != selectedExperience {
+            selectedExperience = experience
+        }
+    }
+   
+    // MARK: Overriding MenuedViewController functions
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 0 {
             cell.backgroundColor = UIColor.init(netHex: 0xba0f0f)
         } else {
             cell.backgroundColor = UIColor.blackColor()
@@ -95,27 +174,49 @@ class ExtrasSceneLocationsViewController: MenuedViewController{
         
         
         tableViewHeight.constant += cell.frame.height
-        
-        tableView.setNeedsUpdateConstraints()
-
+        //tableViewBottomSpace.constant -= cell.frame.height
+        tableView.updateConstraints()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(menuTableView, didSelectRowAtIndexPath: indexPath)
-        let menuSection = self.menuSections[indexPath.section]
-         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, menuItem = cell.menuItem, latitude = menuItem.latitude, longitude = menuItem.longitude{
-         
-            mapView.setLocation(CLLocationCoordinate2DMake(Double(latitude)!, Double(longitude)!), zoomLevel: 15, animated: true)
-            
-            //menuSection.title = menuItem.title
-            
-            
+        
+        if let experienceId = (tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell)?.menuItem?.value, experience = NGDMExperience.getById(experienceId) {
+            selectedExperience = experience
         }
-        
-        
     }
     
- 
+    //MARK: UICollectionViewDataSource
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectedExperience?.childExperiences.count ?? 0
+    }
     
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MapItemCell.ReuseIdentifier, forIndexPath: indexPath) as! MapItemCell
+        cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        cell.experience = selectedExperience?.childExperiences[indexPath.row]
+        
+        return cell
+    }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if let experience = (collectionView.cellForItemAtIndexPath(indexPath) as? MapItemCell)?.experience {
+            if let appData = experience.appData {
+                if let videoURL = appData.presentation?.videoURL {
+                    playVideo(videoURL)
+                } else if let gallery = appData.gallery {
+                    showGallery(gallery)
+                }
+            } else {
+                selectedExperience = experience
+            }
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
+    }
 }
+
+    
+     

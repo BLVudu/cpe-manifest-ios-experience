@@ -22,9 +22,9 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if timedEvent.isAudioVisual {
+        if timedEvent.isType(.AudioVisual) {
             galleryScrollView.removeFromSuperview()
-            if let audioVisual = timedEvent.getAudioVisual(experience!), videoURL = audioVisual.videoURL {
+            if let audioVisual = timedEvent.audioVisual, videoURL = audioVisual.videoURL {
                 descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
                 
                 if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
@@ -40,8 +40,8 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
             }
         } else {
             videoContainerView.removeFromSuperview()
-            gallery = timedEvent.getGallery(experience!)
-            descriptionLabel.text = gallery?.metadata?.description != nil ? gallery?.metadata?.description : gallery?.metadata?.title
+            gallery = timedEvent.gallery
+            descriptionLabel.text = gallery?.description
         }
     }
     

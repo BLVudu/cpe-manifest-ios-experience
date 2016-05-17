@@ -181,7 +181,14 @@ class HomeViewController: UIViewController {
     }
     
     func onExtras() {
-        self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: nil)
+        self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: CurrentManifest.outOfMovieExperience)
+    }
+    
+    // MARK: Storyboard
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let viewController = segue.destinationViewController as? ExtrasExperienceViewController, experience = sender as? NGDMExperience {
+            viewController.experience = experience
+        }
     }
     
 }
