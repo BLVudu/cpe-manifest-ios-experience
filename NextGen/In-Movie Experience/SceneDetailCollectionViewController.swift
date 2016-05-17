@@ -144,7 +144,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                             if oldIndexPath!.row != newIndexPath.row {
                                 moveIndexPaths.append((oldIndexPath!, newIndexPath))
                                 //print("Moving \(experience.timedEventSequence!.id)")
-                            } else if newTimedEvent.isProduct || oldCellData!.timedEvent != newTimedEvent {
+                            } else if newTimedEvent.isType(.Product) || oldCellData!.timedEvent != newTimedEvent {
                                 reloadIndexPaths.append(oldIndexPath!)
                                 //print("Reloading \(experience.timedEventSequence!.id)")
                             }
@@ -178,7 +178,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     var indexPaths = reloadIndexPaths
                     for i in 0 ..< indexPaths.count {
                         if let cell = self.collectionView?.cellForItemAtIndexPath(indexPaths[i]) as? ShoppingSceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
-                            if timedEvent.isProduct {
+                            if timedEvent.isType(.Product) {
                                 cell.currentTime = self._currentTime
                                 reloadIndexPaths.removeAtIndex(i)
                             }
@@ -205,9 +205,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         let cellData = _currentExperienceCellData[indexPath.row]
         
         var reuseIdentifier: String
-        if cellData.timedEvent.isLocation {
+        if cellData.timedEvent.isType(.Location) {
             reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
-        } else if cellData.timedEvent.isProduct {
+        } else if cellData.timedEvent.isType(.Product) {
             reuseIdentifier = ShoppingSceneDetailCollectionViewCell.ReuseIdentifier
         } else {
             reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
@@ -239,19 +239,19 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         //self.performSegueWithIdentifier("showExample", sender: nil)
         
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
-            if timedEvent.isProduct {
+            if timedEvent.isType(.Product) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
-            } else if timedEvent.isAudioVisual || timedEvent.isGallery {
+            } else if timedEvent.isType(.AudioVisual) || timedEvent.isType(.Gallery) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: cell)
-            } else if timedEvent.isAppGroup {
+            } else if timedEvent.isType(.AppGroup) {
                 if let experienceApp = timedEvent.experienceApp, url = timedEvent.appGroup?.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
                     let navigationController = UINavigationController(rootViewController: webViewController)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
-            } else if timedEvent.isLocation {
+            } else if timedEvent.isType(.Location) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: cell)
-            } else if timedEvent.isTextItem {
+            } else if timedEvent.isType(.TextItem) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowLargeText, sender: cell)
             }
         }

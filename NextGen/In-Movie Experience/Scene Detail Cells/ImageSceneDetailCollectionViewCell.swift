@@ -32,13 +32,8 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     override func timedEventDidChange() {
         super.timedEventDidChange()
         
-        if let timedEvent = timedEvent, experience = experience {
-            _imageURL = timedEvent.getImageURL(experience)
-            _playButton.hidden = !timedEvent.isAudioVisual
-        } else {
-            _imageURL = nil
-            _playButton.hidden = true
-        }
+        _imageURL = timedEvent?.imageURL
+        _playButton.hidden = timedEvent == nil || !timedEvent!.isType(.AudioVisual)
     }
     
     override func prepareForReuse() {

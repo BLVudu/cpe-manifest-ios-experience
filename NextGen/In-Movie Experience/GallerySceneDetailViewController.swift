@@ -22,7 +22,7 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if timedEvent.isAudioVisual {
+        if timedEvent.isType(.AudioVisual) {
             galleryScrollView.removeFromSuperview()
             if let audioVisual = timedEvent.audioVisual, videoURL = audioVisual.videoURL {
                 descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title

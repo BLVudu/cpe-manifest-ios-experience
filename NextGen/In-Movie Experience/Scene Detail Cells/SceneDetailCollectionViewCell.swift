@@ -61,15 +61,11 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     }
     
     func experienceDidChange() {
-        _title = experience?.metadata?.title
+        _title = experience?.title
     }
     
     func timedEventDidChange() {
-        if let timedEvent = timedEvent, experience = experience {
-            _descriptionText = timedEvent.getDescriptionText(experience)
-        } else {
-            _descriptionText = nil
-        }
+        _descriptionText = timedEvent?.descriptionText
     }
     
     func currentTimeDidChange() {
