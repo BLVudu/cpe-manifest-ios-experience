@@ -5,6 +5,7 @@
 "label.home" = "Home";
 "label.back" = "Back";
 "label.commentary" = "Commentary";
+"label.commentary.on" = "Commentary is on";
 
 // Video labels
 "label.runtime" = "Runtime: %{runtime}";
@@ -27,11 +28,16 @@
 "talentdetail.biography" = "Biography";
 "talentdetail.filmography" = "Filmography";
 
-// Clip & Share"
+// Clip & Share
 "clipshare.rotate" = "Rotate device to share clip";
 "clipshare.next_clip" = "Next clip will be avaliable soon";
 "clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
 "clipshare.send_button" = "Share this Clip";
+
+// Locations
+"locations.full_map" = "Location: Full Map";
+"locations.count.one" = "%{count} location";
+"locations.count.other" = "%{count} locations";
 
 // Shopping
 "shopping.exact_match" = "Exact match";

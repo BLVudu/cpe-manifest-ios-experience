@@ -14,39 +14,39 @@ class MapItemCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
     
-    @IBOutlet weak var locationName: UILabel!
-    @IBOutlet weak var locationImage: UIImageView!
-    @IBOutlet weak var childLocationsCount: UILabel!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var subtitleLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
     
     var experience: NGDMExperience? {
         didSet {
             if let appData = experience?.appData {
-                locationName.text = appData.title
+                titleLabel.text = appData.title
                 
                 if let imageURL = appData.imageURL {
-                    locationImage.setImageWithURL(imageURL)
+                    imageView.setImageWithURL(imageURL)
                 } else {
-                    locationImage.image = nil
+                    imageView.image = nil
                 }
                 
-                childLocationsCount.text = nil
+                subtitleLabel.text = nil
             } else {
-                locationName.text = experience?.title
+                titleLabel.text = experience?.title
                 
                 if let imageURL = experience?.imageURL {
-                    locationImage.setImageWithURL(imageURL)
+                    imageView.setImageWithURL(imageURL)
                 } else {
-                    locationImage.image = nil
+                    imageView.image = nil
                 }
                 
                 if let childExperiences = experience?.childExperiences {
                     if childExperiences.count > 0 && childExperiences.first?.appData == nil {
-                        childLocationsCount.text = String(childExperiences.count) + (childExperiences.count == 1 ? " location" : " locations")
+                        subtitleLabel.text = String.localize((childExperiences.count == 1 ? "locations.count.one" : "locations.count.other"), variables: ["count": String(childExperiences.count)])
                     } else {
-                        childLocationsCount.text = nil
+                        subtitleLabel.text = nil
                     }
                 } else {
-                    childLocationsCount.text = nil
+                    subtitleLabel.text = nil
                 }
             }
         }
@@ -55,9 +55,9 @@ class MapItemCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        locationName.text = nil
-        locationImage.image = nil
-        childLocationsCount.text = nil
+        titleLabel.text = nil
+        imageView.image = nil
+        subtitleLabel.text = nil
     }
     
 }

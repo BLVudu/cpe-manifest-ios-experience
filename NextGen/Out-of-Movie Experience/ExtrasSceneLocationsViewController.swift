@@ -32,10 +32,14 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
                     mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
                 } else {
                     var selectedMarkers = [MultiMapMarker]()
-                    for childExperience in experience.childExperiences {
-                        for childChildExperience in childExperience.childExperiences {
-                            if let marker = markers[childChildExperience.id] {
-                                selectedMarkers.append(marker)
+                    if experience == self.experience {
+                        selectedMarkers = Array(markers.values)
+                    } else {
+                        for childExperience in experience.childExperiences {
+                            for childChildExperience in childExperience.childExperiences {
+                                if let marker = markers[childChildExperience.id] {
+                                    selectedMarkers.append(marker)
+                                }
                             }
                         }
                     }
@@ -47,6 +51,9 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
                         mapView.selectedMarker = markers[appDataExperience.id]
                         mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
                     }
+                    
+                    menuSections.first?.title = experience == self.experience ? String.localize("locations.full_map") : experience.title
+                    self.menuTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                 }
                 
                 collectionViewTitleLabel.text = experience.title.uppercaseString
@@ -76,9 +83,11 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
         
         let info = NSMutableDictionary()
-        info[MenuSection.Keys.Title] = "Location: Full Map"
+        info[MenuSection.Keys.Title] = String.localize("locations.full_map")
         
         var rows = [[String: String]]()
+        rows.append([MenuItem.Keys.Title: String.localize("locations.full_map"), MenuItem.Keys.Value: experience.id])
+        
         for categoryExperience in experience.childExperiences {
             rows.append([MenuItem.Keys.Title: categoryExperience.title, MenuItem.Keys.Value: categoryExperience.id])
             

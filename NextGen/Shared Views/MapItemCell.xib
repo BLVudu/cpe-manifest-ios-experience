@@ -75,9 +75,9 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="childLocationsCount" destination="38b-5m-9My" id="xyy-tz-E9k"/>
-                <outlet property="locationImage" destination="e1w-sH-MR4" id="291-y0-tp0"/>
-                <outlet property="locationName" destination="uAa-0v-Q9C" id="08D-UY-F68"/>
+                <outlet property="imageView" destination="e1w-sH-MR4" id="9SL-7X-O7n"/>
+                <outlet property="subtitleLabel" destination="38b-5m-9My" id="oCG-JH-rSj"/>
+                <outlet property="titleLabel" destination="uAa-0v-Q9C" id="awk-ZR-Amo"/>
             </connections>
             <point key="canvasLocation" x="271.5" y="311.5"/>
         </collectionViewCell>

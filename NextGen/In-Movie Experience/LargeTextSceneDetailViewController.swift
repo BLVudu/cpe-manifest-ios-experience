@@ -18,13 +18,12 @@ class LargeTextSceneDetailViewController: SceneDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let experience = self.experience {
-            textLabel.text = timedEvent.getDescriptionText(self.experience!)
-            if let imageURL = timedEvent.getImageURL(experience) {
-                imageView.setImageWithURL(imageURL)
-            } else {
-                imageView.image = UIImage.themeDefaultImage16By9()
-            }
+        textLabel.text = timedEvent.descriptionText
+        
+        if let imageURL = timedEvent.imageURL {
+            imageView.setImageWithURL(imageURL)
+        } else {
+            imageView.image = UIImage.themeDefaultImage16By9()
         }
     }
 

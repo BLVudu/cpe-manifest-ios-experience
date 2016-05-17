@@ -28,8 +28,9 @@ class SharingViewController: SceneDetailViewController {
         // Localizations
         shareButton.setTitle(String.localize("clipshare.send_button").uppercaseString, forState: UIControlState.Normal)
         
-        clipNameLabel.text = timedEvent.getDescriptionText(self.experience!)
-        if let imageURL = timedEvent.getImageURL(self.experience!) {
+        clipNameLabel.text = timedEvent.descriptionText
+        
+        if let imageURL = timedEvent.imageURL {
             clipThumbnailImageView.setImageWithURL(imageURL)
         } else {
             clipThumbnailImageView.image = UIImage.themeDefaultImage16By9()
