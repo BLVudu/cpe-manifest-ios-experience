@@ -52,7 +52,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         setup()
     }
     
-    func setup() {
+    private func setup() {
         if ConfigManager.sharedInstance.hasGoogleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
             googleMapView?.delegate = self
@@ -64,6 +64,12 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             appleMapView?.mapType = MKMapType.Hybrid
             self.addSubview(appleMapView!)
         }
+    }
+    
+    func destroy() {
+        delegate = nil
+        googleMapView = nil
+        appleMapView = nil
     }
 
     func setLocation(location: CLLocationCoordinate2D, zoomLevel: Float, animated: Bool) {

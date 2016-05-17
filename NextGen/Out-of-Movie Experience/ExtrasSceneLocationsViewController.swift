@@ -140,6 +140,14 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         videoPlayerViewController = nil
     }
     
+    // MARK: Actions
+    override func close() {
+        mapView.destroy()
+        mapView = nil
+        
+        super.close()
+    }
+    
     // MARK: MultiMapViewDelegate
     func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
         if let experienceId = markers.filter({ $0.1 == marker }).map({ $0.0 }).first, experience = locationExperienceMapping[experienceId] where experience != selectedExperience {
