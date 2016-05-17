@@ -10,7 +10,11 @@ import UIKit
 import MapKit
 import GoogleMaps
 
-struct MultiMapMarker {
+protocol MultiMapViewDelegate {
+    func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker)
+}
+
+class MultiMapMarker: NSObject {
     var appleMapAnnotation: MKAnnotation?
     var googleMapMarker: GMSMarker?
     var location: CLLocationCoordinate2D!
@@ -26,6 +30,17 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     private var googleMapView: GMSMapView?
     private var mapIconImage: UIImage?
     private var mapMarkers = [MultiMapMarker]()
+    var delegate: MultiMapViewDelegate?
+    
+    var selectedMarker: MultiMapMarker? {
+        didSet {
+            if let mapView = googleMapView {
+                mapView.selectedMarker = selectedMarker?.googleMapMarker
+            } else if let mapView = appleMapView, marker = selectedMarker?.appleMapAnnotation {
+                mapView.selectAnnotation(marker, animated: true)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,7 +55,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     func setup() {
         if ConfigManager.sharedInstance.hasGoogleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
-            //googleMapView?.delegate = self
+            googleMapView?.delegate = self
             googleMapView?.mapType = kGMSTypeHybrid
             self.addSubview(googleMapView!)
         } else if appleMapView == nil {
@@ -65,7 +80,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     }
     
     func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?, icon: UIImage?, autoSelect: Bool) -> MultiMapMarker {
-        var multiMapMarker = MultiMapMarker()
+        let multiMapMarker = MultiMapMarker()
         multiMapMarker.location = location
         
         if let mapView = googleMapView {
@@ -126,6 +141,39 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         annotationView?.annotation = annotation
         
         return annotationView
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        /*if let delegate = delegate {
+            var selectedMarker: MultiMapMarker
+            for mapMarker in mapMarkers {
+                if mapMarker.appleMapAnnotation == view.annotation {
+                    selectedMarker = mapMarker
+                    break
+                }
+            }
+            
+            delegate.didTapMarker(selectedMarker)
+        }*/
+    }
+    
+    // MARK: GMSMapViewDelegate
+    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+        if let delegate = delegate {
+            var selectedMarker: MultiMapMarker?
+            for mapMarker in mapMarkers {
+                if mapMarker.googleMapMarker == marker {
+                    selectedMarker = mapMarker
+                    break
+                }
+            }
+            
+            if let marker = selectedMarker {
+                delegate.mapView(self, didTapMarker: marker)
+            }
+        }
+        
+        return true
     }
     
     /*func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {

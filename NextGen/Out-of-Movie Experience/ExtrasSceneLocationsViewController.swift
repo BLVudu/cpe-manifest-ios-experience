@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var mapView: MultiMapView!
     @IBOutlet weak var collectionViewTitleLabel: UILabel!
@@ -23,7 +23,38 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     private var videoPlayerViewController: VideoPlayerViewController?
     
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
-    private var selectedExperience: NGDMExperience?
+    private var locationExperienceMapping = [String: NGDMExperience]() // ExperienceID: Parent Experience
+    private var selectedExperience: NGDMExperience? {
+        didSet {
+            if let experience = selectedExperience {
+                if let appDataExperience = experience.childExperiences.first, appData = appDataExperience.appData, location = appData.location {
+                    mapView.selectedMarker = markers[appDataExperience.id]
+                    mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
+                } else {
+                    var selectedMarkers = [MultiMapMarker]()
+                    for childExperience in experience.childExperiences {
+                        for childChildExperience in childExperience.childExperiences {
+                            if let marker = markers[childChildExperience.id] {
+                                selectedMarkers.append(marker)
+                            }
+                        }
+                    }
+                    
+                    if experience.childExperiences.count > 1 && selectedMarkers.count > 1 {
+                        mapView.selectedMarker = nil
+                        mapView.zoomToFitMarkers(selectedMarkers)
+                    } else if let appDataExperience = experience.childExperiences.first?.childExperiences.first, appData = appDataExperience.appData, location = appData.location {
+                        mapView.selectedMarker = markers[appDataExperience.id]
+                        mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
+                    }
+                }
+                
+                collectionViewTitleLabel.text = experience.title.uppercaseString
+            }
+            
+            collectionView.reloadData()
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -56,6 +87,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
                     if let location = locationExperience.appData?.location {
                         let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
                         markers[locationExperience.id] = mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: false)
+                        locationExperienceMapping[locationExperience.id] = subcategoryExperience
                     }
                 }
             }
@@ -66,34 +98,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
         
         selectedExperience = experience
         mapView.zoomToFitAllMarkers()
-    }
-    
-    func selectExperience(experience: NGDMExperience) {
-        if experience.childExperiences.count <= 1 {
-            var appData = experience.childExperiences.first?.appData
-            if appData == nil {
-                appData = experience.childExperiences.first?.childExperiences.first?.appData
-            }
-            
-            if let appData = appData, location = appData.location {
-                mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
-            }
-        } else {
-            var selectedMarkers = [MultiMapMarker]()
-            for childExperience in experience.childExperiences {
-                for childChildExperience in childExperience.childExperiences {
-                    if let marker = markers[childChildExperience.id] {
-                        selectedMarkers.append(marker)
-                    }
-                }
-            }
-            
-            mapView.zoomToFitMarkers(selectedMarkers)
-        }
-        
-        collectionViewTitleLabel.text = experience.title.uppercaseString
-        selectedExperience = experience
-        collectionView.reloadData()
+        mapView.delegate = self
     }
     
     func playVideo(videoURL: NSURL) {
@@ -134,8 +139,15 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
         videoPlayerViewController?.removeFromParentViewController()
         videoPlayerViewController = nil
     }
+    
+    // MARK: MultiMapViewDelegate
+    func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
+        if let experienceId = markers.filter({ $0.1 == marker }).map({ $0.0 }).first, experience = locationExperienceMapping[experienceId] where experience != selectedExperience {
+            selectedExperience = experience
+        }
+    }
    
-    //MARK: Overriding MenuedViewController functions
+    // MARK: Overriding MenuedViewController functions
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 {
             cell.backgroundColor = UIColor.init(netHex: 0xba0f0f)
@@ -153,7 +165,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
         super.tableView(menuTableView, didSelectRowAtIndexPath: indexPath)
         
         if let experienceId = (tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell)?.menuItem?.value, experience = NGDMExperience.getById(experienceId) {
-            selectExperience(experience)
+            selectedExperience = experience
         }
     }
     
@@ -179,7 +191,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
                     showGallery(gallery)
                 }
             } else {
-                selectExperience(experience)
+                selectedExperience = experience
             }
         }
     }
