@@ -114,7 +114,7 @@ class BaselineAPIUtil: APIUtil {
                 var films = [TalentFilm]()
                 
                 for filmInfo in (results.reverse() as NSArray) {
-                    if let filmInfo = filmInfo as? NSDictionary where filmInfo[Keys.Role] as? String == "Actor" {
+                    if let filmInfo = filmInfo as? NSDictionary where filmInfo[Keys.Role] as? String == "Actor" && filmInfo[Keys.ProjectID] as? Int != 5423190 {
                         films.append(TalentFilm(baselineInfo: filmInfo))
                     }
                     

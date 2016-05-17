@@ -5,6 +5,7 @@
 "label.home" = "Home";
 "label.back" = "Back";
 "label.commentary" = "Commentary";
+"label.commentary.on" = "Commentary is on";
 
 // Video labels
 "label.runtime" = "Runtime: %{runtime}";
