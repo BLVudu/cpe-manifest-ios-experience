@@ -16,26 +16,24 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
-
     @IBOutlet weak var locationDetailView: UIView!
-    @IBOutlet weak var locationDetailContainerView: UIView!
-
-  
-   
-
+    @IBOutlet weak var videoContainerView: UIView!
+    @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak var closeButton: UIButton!
     private var videoPlayerViewController: VideoPlayerViewController?
-    private var imageGalleryViewController: ExtrasImageGalleryViewController?
     
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
     private var selectedExperience: NGDMExperience?
     
-    var isFullScreen = false
-    var originalFrame: CGRect!
-    var originalContainerFrame: CGRect!
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        galleryScrollView.cleanInvisibleImages()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        originalContainerFrame = locationDetailContainerView.frame
+        
         menuTableView.backgroundColor = UIColor.clearColor()
         collectionViewTitleLabel.text = experience.title.uppercaseString
         collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
@@ -99,87 +97,42 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     }
     
     func playVideo(videoURL: NSURL) {
+        closeDetailView()
         
-        if imageGalleryViewController != nil {
-            imageGalleryViewController?.willMoveToParentViewController(nil)
-            imageGalleryViewController?.view.removeFromSuperview()
-            imageGalleryViewController?.removeFromParentViewController()
-            imageGalleryViewController = nil
-        }
         if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
             videoPlayerViewController.mode = VideoPlayerMode.Supplemental
             
-            videoPlayerViewController.view.frame = locationDetailContainerView.bounds
-            locationDetailContainerView.addSubview(videoPlayerViewController.view)
+            videoPlayerViewController.view.frame = videoContainerView.bounds
+            videoContainerView.addSubview(videoPlayerViewController.view)
             self.addChildViewController(videoPlayerViewController)
             videoPlayerViewController.didMoveToParentViewController(self)
             
             videoPlayerViewController.playVideoWithURL(videoURL)
             
-            videoPlayerViewController.fullScreenButton.addTarget(self, action: #selector(fullScreen(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             locationDetailView.hidden = false
             self.videoPlayerViewController = videoPlayerViewController
         }
     }
     
-    func showGallery(gallery: NGDMGallery){
-        if videoPlayerViewController != nil {
-            
-            videoPlayerViewController?.willMoveToParentViewController(nil)
-            videoPlayerViewController?.view.removeFromSuperview()
-            videoPlayerViewController?.removeFromParentViewController()
-            videoPlayerViewController = nil
-
-            
-        }
+    func showGallery(gallery: NGDMGallery) {
+        closeDetailView()
         
-        if let imagaGalleryViewController = UIStoryboard.getMainStoryboardViewController(ExtrasImageGalleryViewController) as? ExtrasImageGalleryViewController {
-            imagaGalleryViewController.view.frame = locationDetailContainerView.bounds
-            locationDetailContainerView.addSubview(imagaGalleryViewController.view)
-            self.addChildViewController(imagaGalleryViewController)
-            imagaGalleryViewController.didMoveToParentViewController(self)
-            imagaGalleryViewController.gallery = gallery
-            imagaGalleryViewController.galleryPageLabel.hidden = false
-            imagaGalleryViewController.galleryPageControl.hidden = false
-            imagaGalleryViewController.fullScreenButton.addTarget(self, action: #selector(fullScreen(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            
-            locationDetailView.hidden = false
-            self.imageGalleryViewController = imagaGalleryViewController
-            
-        }
+        galleryScrollView.gallery = gallery
+        galleryScrollView.hidden = false
+        
+        locationDetailView.hidden = false
     }
     
     @IBAction func closeDetailView() {
         locationDetailView.hidden = true
         
-        imageGalleryViewController?.willMoveToParentViewController(nil)
-        imageGalleryViewController?.view.removeFromSuperview()
-        imageGalleryViewController?.removeFromParentViewController()
-        imageGalleryViewController = nil
+        galleryScrollView.gallery = nil
+        galleryScrollView.hidden = true
         
         videoPlayerViewController?.willMoveToParentViewController(nil)
         videoPlayerViewController?.view.removeFromSuperview()
         videoPlayerViewController?.removeFromParentViewController()
         videoPlayerViewController = nil
-    }
-    
-    func fullScreen(sender: AnyObject){
-        self.isFullScreen = !self.isFullScreen
-        if imageGalleryViewController != nil {
-            imageGalleryViewController?.galleryPageControl.hidden = false
-            imageGalleryViewController!.galleryPageLabel.hidden = false
-        }
-            UIView.animateWithDuration(0.25, animations: {
-                if self.isFullScreen {
-                self.locationDetailContainerView.frame = UIScreen.mainScreen().bounds
-            } else {
-                    
-                self.locationDetailContainerView.frame = self.originalContainerFrame
-                
-            }
-   
-        })
-        
     }
    
     //MARK: Overriding MenuedViewController functions
@@ -212,15 +165,12 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MapItemCell.ReuseIdentifier, forIndexPath: indexPath) as! MapItemCell
         cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-
         cell.experience = selectedExperience?.childExperiences[indexPath.row]
-
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
         if let experience = (collectionView.cellForItemAtIndexPath(indexPath) as? MapItemCell)?.experience {
             if let appData = experience.appData {
                 if let videoURL = appData.presentation?.videoURL {
@@ -235,10 +185,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, UICollectionView
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
         return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
-
-
     }
 }
 

@@ -20,11 +20,11 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak var mediaRuntimeLabel: UILabel!
     private var _videoPlayerViewController: VideoPlayerViewController?
     
-    @IBOutlet weak var galleryScrollView: UIScrollView!
+    @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak var galleryPageControl: UIPageControl!
     @IBOutlet weak var galleryFullScreenButton: UIButton!
-    private var _scrollViewPageWidth: CGFloat = 0
     private var _imageGallery: NGDMGallery?
+    private var _galleryDidScrollToPageObserver: NSObjectProtocol?
     
     private var _didPlayFirstItem = false
     private var _previewPlayURL: NSURL?
@@ -35,9 +35,21 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     // MARK: Initialization
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(_willPlayNextItemObserver)
+        let center = NSNotificationCenter.defaultCenter()
+        center.removeObserver(_willPlayNextItemObserver)
+        
+        if let observer = _galleryDidScrollToPageObserver {
+            center.removeObserver(observer)
+        }
     }
-
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        galleryScrollView.cleanInvisibleImages()
+    }
+    
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,13 +115,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         previewImageView?.hidden = _didPlayFirstItem
         previewPlayButton?.hidden = _didPlayFirstItem
         mediaRuntimeLabel.text = nil
-        
-        let galleryScrollViewPages = galleryScrollView.subviews
-        for pageView in galleryScrollViewPages {
-            pageView.removeFromSuperview()
-        }
-        
-        galleryScrollView.contentOffset = CGPointZero
         _imageGallery = nil
         
         // Set new media detail views
@@ -123,21 +128,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             let numPictures = pictures.count
             galleryPageControl.numberOfPages = numPictures
             
-            var imageViewX: CGFloat = 0
-            _scrollViewPageWidth = CGRectGetWidth(galleryScrollView.bounds)
-            for i in 0 ..< numPictures {
-                let imageView = UIImageView()
-                imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                imageView.frame = CGRectMake(imageViewX, 0, _scrollViewPageWidth, CGRectGetHeight(galleryScrollView.bounds))
-                imageView.clipsToBounds = true
-                imageView.tag = i + 1
-                galleryScrollView.addSubview(imageView)
-                imageViewX += _scrollViewPageWidth
-            }
+            _galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+                if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
+                    strongSelf.galleryPageControl.currentPage = page
+                }
+            })
             
-            galleryScrollView.contentSize = CGSizeMake(CGRectGetWidth(galleryScrollView.bounds) * CGFloat(numPictures), CGRectGetHeight(galleryScrollView.bounds))
             _imageGallery = gallery
-            loadGalleryImageForPage(0)
+            galleryScrollView.gallery = _imageGallery
         } else if thisExperience.isAudioVisual {
             let runtime = thisExperience.videoRuntime
             if runtime > 0 {
@@ -179,31 +177,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 
                 }
             }
-        }
-    }
-    
-    // MARK: Image Gallery
-    func loadGalleryImageForPage(page: Int) {
-        if let gallery = _imageGallery, imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView, pictures = gallery.pictures {
-            if imageView.image == nil {
-                if let imageURL = pictures[page].imageURL {
-                    imageView.setImageWithURL(imageURL)
-                }
-            }
-            
-            galleryPageControl.currentPage = page
-        }
-    }
-    
-    @IBAction func toggleGalleryFullScreen() {
-        
-    }
-    
-    
-    // MARK: UIScrollViewDelegate
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView == galleryScrollView {
-            loadGalleryImageForPage(Int(targetContentOffset.memory.x / _scrollViewPageWidth))
         }
     }
     
