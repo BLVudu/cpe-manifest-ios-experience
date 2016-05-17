@@ -13,7 +13,11 @@ extension UIFont {
     }
     
     static func themeCondensedFont(size: CGFloat) -> UIFont {
-        return UIFont(name: "Roboto Condensed", size: size)!
+        return UIFont(name: "RobotoCondensed-Regular", size: size)!
+    }
+    
+    static func themeCondensedBoldFont(size: CGFloat) -> UIFont {
+        return UIFont(name: "RobotoCondensed-Bold", size: size)!
     }
     
 }

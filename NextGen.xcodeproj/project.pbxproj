@@ -110,7 +110,6 @@
 		70C830B91CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */; };
 		70C830BB1CB4823100F9E2D6 /* SceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830BA1CB4823100F9E2D6 /* SceneDetailViewController.swift */; };
 		70C830BD1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830BC1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift */; };
-		70C830BF1CB6A2F200F9E2D6 /* ExtrasExperienceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830BE1CB6A2F200F9E2D6 /* ExtrasExperienceCollectionViewController.swift */; };
 		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
 		70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */; };
 		70D2FC7D1CADC21F0003FC54 /* NGDMPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC7C1CADC21F0003FC54 /* NGDMPeople.swift */; };
@@ -469,7 +468,6 @@
 		70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		70C830BA1CB4823100F9E2D6 /* SceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailViewController.swift; sourceTree = "<group>"; };
 		70C830BC1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasExperienceViewController.swift; sourceTree = "<group>"; };
-		70C830BE1CB6A2F200F9E2D6 /* ExtrasExperienceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasExperienceCollectionViewController.swift; sourceTree = "<group>"; };
 		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Narrow.xib"; sourceTree = "<group>"; };
 		70D2FC7C1CADC21F0003FC54 /* NGDMPeople.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPeople.swift; sourceTree = "<group>"; };
@@ -1040,7 +1038,6 @@
 		70A1E08B1C486BCD0079779A /* Out-of-Movie Experience */ = {
 			isa = PBXGroup;
 			children = (
-				70C830BE1CB6A2F200F9E2D6 /* ExtrasExperienceCollectionViewController.swift */,
 				70C830BC1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift */,
 				7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */,
 				493043A61CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift */,
@@ -1747,7 +1744,6 @@
 				70A3AC921C9C75860038B60F /* BaselineAPIUtil.swift in Sources */,
 				70E2969C1CDCFD9D00B0B022 /* NGEAbbreviatedMetadataType.swift in Sources */,
 				7046BA911CBDAF8B00EF9612 /* ExtrasPresentationController.swift in Sources */,
-				70C830BF1CB6A2F200F9E2D6 /* ExtrasExperienceCollectionViewController.swift in Sources */,
 				70E296FD1CDCFD9D00B0B022 /* NGEExperienceChildType.swift in Sources */,
 				70E2971D1CDCFD9D00B0B022 /* NGEInventoryTextObjectType.swift in Sources */,
 				70E296D11CDCFD9D00B0B022 /* NGEContentRatingDetailType.swift in Sources */,

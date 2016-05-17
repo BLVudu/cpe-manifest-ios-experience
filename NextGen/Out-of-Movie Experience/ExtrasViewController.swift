@@ -42,7 +42,6 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         self.extrasCollectionView.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
         self.talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         
-        self.experience = CurrentManifest.outOfMovieExperience
         showHomeButton()
     }
     
