@@ -40,7 +40,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     func setup() {
         if ConfigManager.sharedInstance.hasGoogleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
-            googleMapView?.delegate = self
+            //googleMapView?.delegate = self
             googleMapView?.mapType = kGMSTypeHybrid
             self.addSubview(googleMapView!)
         } else if appleMapView == nil {
@@ -75,6 +75,10 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             marker.snippet = subtitle
             marker.map = mapView
             multiMapMarker.googleMapMarker = marker
+            
+            if autoSelect {
+                mapView.selectedMarker = marker
+            }
         } else if let mapView = appleMapView {
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
@@ -83,28 +87,14 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             mapIconImage = icon
             mapView.addAnnotation(annotation)
             multiMapMarker.appleMapAnnotation = annotation
-        }
-        
-        if autoSelect {
-            selectMarker(multiMapMarker)
+            
+            if autoSelect {
+                mapView.selectAnnotation(annotation, animated: true)
+            }
         }
         
         mapMarkers.append(multiMapMarker)
         return multiMapMarker
-    }
-    
-     func selectMarker(marker: MultiMapMarker) {
-        selectMarker(marker, zoomLevel: 0)
-    }
-    
-    func selectMarker(marker: MultiMapMarker, zoomLevel: Float) {
-        setLocation(marker.location, zoomLevel: zoomLevel, animated: true)
-        
-        if let mapView = googleMapView, mapMarker = marker.googleMapMarker {
-            mapView.selectedMarker = mapMarker
-        } else if let mapView = appleMapView, mapMarker = marker.appleMapAnnotation {
-            mapView.selectAnnotation(mapMarker, animated: true)
-        }
     }
     
     func zoomToFitAllMarkers() {
@@ -124,21 +114,13 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         }
     }
     
-    func setZoomLevel(zoomLevel: Float) {
-        if let mapView = googleMapView {
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.zoomTo(zoomLevel))
-        }
-    }
-    
     
     // MARK: MKMapViewDelegate
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MarkerAnnotationViewReuseIdentifier)
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Constants.MarkerAnnotationViewReuseIdentifier)
             annotationView?.image = mapIconImage
-
         }
         
         annotationView?.annotation = annotation
@@ -146,45 +128,29 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         return annotationView
     }
     
-    func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        
-       let customView = UIView(frame: CGRectMake(0,0,230,80))
+    /*func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        let customView = UIView(frame: CGRectMake(0, 0, 230, 80))
         customView.backgroundColor = UIColor.whiteColor()
-       let titleLabel = UILabel(frame: CGRectMake(10,5,200,30))
+        
+        let titleLabel = UILabel(frame: CGRectMake(10, 5, 200, 30))
         titleLabel.text = marker.title
         titleLabel.font = UIFont.themeFont(17)
-        let addressLabel = UILabel(frame: CGRectMake(10,30,200,50))
+        
+        let addressLabel = UILabel(frame: CGRectMake(10, 30, 200, 50))
         addressLabel.text = marker.snippet
         addressLabel.font = UIFont.themeCondensedFont(15)
         addressLabel.numberOfLines = 3
-        let locationButton = UIButton(frame: CGRectMake(205, 30, 20,20))
-        locationButton.layer.cornerRadius = 0.5*20
-        locationButton.setTitle(">", forState: UIControlState.Normal)
-        locationButton.titleLabel?.font = UIFont.themeFont(17)
-        locationButton.titleLabel?.textColor = UIColor.blackColor()
-        locationButton.backgroundColor = UIColor.blueColor()
-      
         
         customView.addSubview(addressLabel)
         customView.addSubview(titleLabel)
-        customView.addSubview(locationButton)
         customView.layer.cornerRadius = 5
         customView.layer.masksToBounds = true
         customView.layer.shadowColor = UIColor.blackColor().CGColor
         customView.layer.shadowRadius = 10
-        
         customView.layer.shadowOpacity = 1
-        customView.layer.shadowOffset = CGSizeMake(0.0, 0.0)
+        customView.layer.shadowOffset = CGSizeMake(0, 0)
  
         return customView
-    }
+    }*/
     
-    func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
-        
-        
-        setLocation(marker.position, zoomLevel: 18, animated: true)
-        NSNotificationCenter.defaultCenter().postNotificationName("loadChildGallery", object: nil, userInfo: ["marker" : marker])
-    }
-    
-    
-    }
+}

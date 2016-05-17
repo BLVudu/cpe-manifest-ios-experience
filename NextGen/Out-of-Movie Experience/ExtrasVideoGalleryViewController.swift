@@ -23,7 +23,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak var galleryPageControl: UIPageControl!
     @IBOutlet weak var galleryFullScreenButton: UIButton!
-    private var _imageGallery: NGDMGallery?
     private var _galleryDidScrollToPageObserver: NSObjectProtocol?
     
     private var _didPlayFirstItem = false
@@ -70,6 +69,12 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 }
             }
         }
+        
+        _galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
+                strongSelf.galleryPageControl.currentPage = page
+            }
+        })
     }
     
     
@@ -115,27 +120,17 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         previewImageView?.hidden = _didPlayFirstItem
         previewPlayButton?.hidden = _didPlayFirstItem
         mediaRuntimeLabel.text = nil
-        _imageGallery = nil
         
         // Set new media detail views
-        if let gallery = thisExperience.imageGallery, pictures = gallery.pictures {
+        if let gallery = thisExperience.imageGallery {
             galleryPageControl.hidden = false
             galleryScrollView.hidden = false
             videoContainerView.hidden = true
             previewImageView?.hidden = true
             previewPlayButton?.hidden = true
             
-            let numPictures = pictures.count
-            galleryPageControl.numberOfPages = numPictures
-            
-            _galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-                if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
-                    strongSelf.galleryPageControl.currentPage = page
-                }
-            })
-            
-            _imageGallery = gallery
-            galleryScrollView.gallery = _imageGallery
+            galleryPageControl.numberOfPages = gallery.pictures?.count ?? 0
+            galleryScrollView.gallery = gallery
         } else if thisExperience.isAudioVisual {
             let runtime = thisExperience.videoRuntime
             if runtime > 0 {

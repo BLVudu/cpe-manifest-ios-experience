@@ -1365,75 +1365,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cvz-sG-gYB">
-                                <rect key="frame" x="45" y="680" width="934" height="68"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="68" id="NXv-uj-0uO"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="RKD-5U-i3U">
-                                    <size key="itemSize" width="107" height="68"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapDetailCellReuseIdentifier" id="Y5b-hq-Q2k" customClass="MapDetailCell" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="107" height="68"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="107" height="68"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-S4-ph3" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="68"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrM-tv-eXV">
-                                                    <rect key="frame" x="5" y="38" width="40" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="U7d-bu-yJN"/>
-                                                        <constraint firstAttribute="width" constant="40" id="s0k-aO-5Jg"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="LrM-tv-eXV" secondAttribute="bottom" constant="5" id="9lN-hF-jS5"/>
-                                            <constraint firstItem="JN3-S4-ph3" firstAttribute="top" secondItem="Y5b-hq-Q2k" secondAttribute="top" id="AFw-H2-ag6"/>
-                                            <constraint firstAttribute="bottom" secondItem="JN3-S4-ph3" secondAttribute="bottom" id="c45-PI-If9"/>
-                                            <constraint firstItem="LrM-tv-eXV" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leading" constant="5" id="fLA-Mm-Igj"/>
-                                            <constraint firstItem="JN3-S4-ph3" firstAttribute="leading" secondItem="Y5b-hq-Q2k" secondAttribute="leading" id="oBF-JF-EVX"/>
-                                            <constraint firstAttribute="trailing" secondItem="JN3-S4-ph3" secondAttribute="trailing" id="ouv-8A-IIX"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="mapLabel" destination="LrM-tv-eXV" id="nwU-GB-2iY"/>
-                                            <outlet property="mapView" destination="JN3-S4-ph3" id="peB-dD-c64"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="MuK-Ns-GCf" id="soN-yj-DRc"/>
-                                    <outlet property="delegate" destination="MuK-Ns-GCf" id="J8l-jG-Hpj"/>
-                                </connections>
-                            </collectionView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRz-Qu-THi" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
-                                <rect key="frame" x="30" y="70" width="964" height="595"/>
+                                <rect key="frame" x="30" y="70" width="964" height="588"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLb-ef-0sB">
+                                <rect key="frame" x="30" y="673" width="964" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="cbK-h4-G9v"/>
+                                </constraints>
+                                <string key="text">Nam feugiat erat non magna laoreet, quis tempus eros consequat. Nullam quis diam quis velit malesuada luctus. Etiam tincidunt dui eget magna sodales egestas.</string>
+                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="26"/>
+                                <color key="textColor" red="1" green="0.80392156859999997" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="HRz-Qu-THi" secondAttribute="trailing" constant="30" id="020-eF-sZA"/>
                             <constraint firstItem="HRz-Qu-THi" firstAttribute="top" secondItem="U59-Cf-5pS" secondAttribute="bottom" constant="70" id="2LA-Jn-vB1"/>
-                            <constraint firstAttribute="trailing" secondItem="Cvz-sG-gYB" secondAttribute="trailing" constant="45" id="HMM-i8-tRR"/>
-                            <constraint firstItem="K6C-vb-ff6" firstAttribute="top" secondItem="Cvz-sG-gYB" secondAttribute="bottom" constant="20" id="eQB-bI-hnT"/>
-                            <constraint firstItem="Cvz-sG-gYB" firstAttribute="top" secondItem="HRz-Qu-THi" secondAttribute="bottom" constant="15" id="kmd-Nv-03f"/>
+                            <constraint firstItem="lLb-ef-0sB" firstAttribute="trailing" secondItem="HRz-Qu-THi" secondAttribute="trailing" id="CB3-FE-Emg"/>
+                            <constraint firstItem="K6C-vb-ff6" firstAttribute="top" secondItem="HRz-Qu-THi" secondAttribute="bottom" priority="750" constant="30" id="EUR-m0-z2B"/>
+                            <constraint firstItem="K6C-vb-ff6" firstAttribute="top" secondItem="lLb-ef-0sB" secondAttribute="bottom" constant="30" id="No1-RH-nHa"/>
+                            <constraint firstItem="lLb-ef-0sB" firstAttribute="leading" secondItem="HRz-Qu-THi" secondAttribute="leading" id="O2D-cE-lk2"/>
+                            <constraint firstItem="lLb-ef-0sB" firstAttribute="top" secondItem="HRz-Qu-THi" secondAttribute="bottom" constant="15" id="iuO-Ca-uCt"/>
                             <constraint firstItem="HRz-Qu-THi" firstAttribute="leading" secondItem="PFD-LA-pxt" secondAttribute="leading" constant="30" id="mjf-Ap-cuT"/>
-                            <constraint firstItem="Cvz-sG-gYB" firstAttribute="leading" secondItem="PFD-LA-pxt" secondAttribute="leading" constant="45" id="w4R-Py-0oD"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -1442,7 +1398,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
-                        <outlet property="mapCollectionView" destination="Cvz-sG-gYB" id="NoJ-hT-gEL"/>
+                        <outlet property="mapDescriptionLabel" destination="lLb-ef-0sB" id="sD5-yN-hs9"/>
                         <outlet property="mapView" destination="HRz-Qu-THi" id="kr6-T8-VQB"/>
                     </connections>
                 </viewController>
