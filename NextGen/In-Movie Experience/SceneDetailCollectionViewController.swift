@@ -123,74 +123,75 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             var reloadIndexPaths = [NSIndexPath]()
             var moveIndexPaths = [(NSIndexPath, NSIndexPath)]()
             
-            let allExperiences = CurrentManifest.inMovieExperience.childExperiences
-            var newExperienceCellData = [ExperienceCellData]()
-            for i in 0 ..< allExperiences.count {
-                let experience = allExperiences[i]
-                let timedEvent = experience.timedEventSequence?.timedEvent(self._currentTime)
-                
-                if experience.isClipAndShare {
-                    self._currentClipTimedEvent = timedEvent
-                } else if !experience.isTalentData {
-                    let oldCellData = self.currentCellDataForExperience(experience)
-                    let oldIndexPath = self.currentIndexPathForExperience(experience)
+            if let allExperiences = CurrentManifest.inMovieExperience.childExperiences {
+                var newExperienceCellData = [ExperienceCellData]()
+                for i in 0 ..< allExperiences.count {
+                    let experience = allExperiences[i]
+                    let timedEvent = experience.timedEventSequence?.timedEvent(self._currentTime)
                     
-                    if let newTimedEvent = timedEvent {
-                        newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
-                        let newIndexPath = NSIndexPath(forItem: newExperienceCellData.count - 1, inSection: 0)
-                        //print("Found \(experience.timedEventSequence!.id)")
+                    if experience.isType(.ClipAndShare) {
+                        self._currentClipTimedEvent = timedEvent
+                    } else if !experience.isType(.TalentData) {
+                        let oldCellData = self.currentCellDataForExperience(experience)
+                        let oldIndexPath = self.currentIndexPathForExperience(experience)
                         
-                        if oldCellData != nil {
-                            if oldIndexPath!.row != newIndexPath.row {
-                                moveIndexPaths.append((oldIndexPath!, newIndexPath))
-                                //print("Moving \(experience.timedEventSequence!.id)")
-                            } else if newTimedEvent.isType(.Product) || oldCellData!.timedEvent != newTimedEvent {
-                                reloadIndexPaths.append(oldIndexPath!)
-                                //print("Reloading \(experience.timedEventSequence!.id)")
+                        if let newTimedEvent = timedEvent {
+                            newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
+                            let newIndexPath = NSIndexPath(forItem: newExperienceCellData.count - 1, inSection: 0)
+                            //print("Found \(experience.timedEventSequence!.id)")
+                            
+                            if oldCellData != nil {
+                                if oldIndexPath!.row != newIndexPath.row {
+                                    moveIndexPaths.append((oldIndexPath!, newIndexPath))
+                                    //print("Moving \(experience.timedEventSequence!.id)")
+                                } else if newTimedEvent.isType(.Product) || oldCellData!.timedEvent != newTimedEvent {
+                                    reloadIndexPaths.append(oldIndexPath!)
+                                    //print("Reloading \(experience.timedEventSequence!.id)")
+                                }
+                            } else {
+                                insertIndexPaths.append(newIndexPath)
+                                //print("Inserting \(experience.timedEventSequence!.id)")
                             }
-                        } else {
-                            insertIndexPaths.append(newIndexPath)
-                            //print("Inserting \(experience.timedEventSequence!.id)")
+                        } else if oldIndexPath != nil {
+                            deleteIndexPaths.append(oldIndexPath!)
+                            //print("Deleting \(experience.timedEventSequence!.id)")
                         }
-                    } else if oldIndexPath != nil {
-                        deleteIndexPaths.append(oldIndexPath!)
-                        //print("Deleting \(experience.timedEventSequence!.id)")
                     }
                 }
-            }
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                self._currentExperienceCellData = newExperienceCellData
                 
-                self.collectionView?.performBatchUpdates({
-                    if deleteIndexPaths.count > 0 {
-                        self.collectionView?.deleteItemsAtIndexPaths(deleteIndexPaths)
-                    }
+                dispatch_async(dispatch_get_main_queue()) {
+                    self._currentExperienceCellData = newExperienceCellData
                     
-                    if insertIndexPaths.count > 0 {
-                        self.collectionView?.insertItemsAtIndexPaths(insertIndexPaths)
-                    }
-                    
-                    for indexPaths in moveIndexPaths {
-                        self.collectionView?.moveItemAtIndexPath(indexPaths.0, toIndexPath: indexPaths.1)
-                    }
-                    
-                    var indexPaths = reloadIndexPaths
-                    for i in 0 ..< indexPaths.count {
-                        if let cell = self.collectionView?.cellForItemAtIndexPath(indexPaths[i]) as? ShoppingSceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
-                            if timedEvent.isType(.Product) {
-                                cell.currentTime = self._currentTime
-                                reloadIndexPaths.removeAtIndex(i)
+                    self.collectionView?.performBatchUpdates({
+                        if deleteIndexPaths.count > 0 {
+                            self.collectionView?.deleteItemsAtIndexPaths(deleteIndexPaths)
+                        }
+                        
+                        if insertIndexPaths.count > 0 {
+                            self.collectionView?.insertItemsAtIndexPaths(insertIndexPaths)
+                        }
+                        
+                        for indexPaths in moveIndexPaths {
+                            self.collectionView?.moveItemAtIndexPath(indexPaths.0, toIndexPath: indexPaths.1)
+                        }
+                        
+                        var indexPaths = reloadIndexPaths
+                        for i in 0 ..< indexPaths.count {
+                            if let cell = self.collectionView?.cellForItemAtIndexPath(indexPaths[i]) as? ShoppingSceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
+                                if timedEvent.isType(.Product) {
+                                    cell.currentTime = self._currentTime
+                                    reloadIndexPaths.removeAtIndex(i)
+                                }
                             }
                         }
-                    }
-                    
-                    if reloadIndexPaths.count > 0 {
-                        self.collectionView?.reloadItemsAtIndexPaths(reloadIndexPaths)
-                    }
-                }, completion: { (completed) in
-                    self._isProcessingNewExperiences = false
-                })
+                        
+                        if reloadIndexPaths.count > 0 {
+                            self.collectionView?.reloadItemsAtIndexPaths(reloadIndexPaths)
+                        }
+                    }, completion: { (completed) in
+                        self._isProcessingNewExperiences = false
+                    })
+                }
             }
         }
     }

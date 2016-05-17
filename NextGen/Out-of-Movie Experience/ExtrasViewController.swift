@@ -150,25 +150,26 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CurrentManifest.outOfMovieExperience.childExperiences.count
+        return CurrentManifest.outOfMovieExperience.childExperiences?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(TitledImageCell.ReuseIdentifier, forIndexPath: indexPath) as! TitledImageCell
-        cell.experience = CurrentManifest.outOfMovieExperience.childExperiences[indexPath.row]
+        cell.experience = CurrentManifest.outOfMovieExperience.childExperiences?[indexPath.row]
         
         return cell
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let experience = CurrentManifest.outOfMovieExperience.childExperiences[indexPath.row]
-        if experience.isShopping {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
-        } else if experience.isLocation {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: experience)
-        } else {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: experience)
+        if let experience = CurrentManifest.outOfMovieExperience.childExperiences?[indexPath.row] {
+            if experience.isType(.Shopping) {
+                self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
+            } else if experience.isType(.Location) {
+                self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: experience)
+            } else {
+                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: experience)
+            }
         }
     }
     
