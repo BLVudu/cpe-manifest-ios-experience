@@ -238,13 +238,13 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //self.performSegueWithIdentifier("showExample", sender: nil)
         
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
             if timedEvent.isProduct {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
             } else if timedEvent.isAudioVisual || timedEvent.isGallery {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: cell)
             } else if timedEvent.isAppGroup {
-                if let experienceApp = timedEvent.getExperienceApp(experience), appGroup = timedEvent.appGroup, url = appGroup.url {
+                if let experienceApp = timedEvent.experienceApp, url = timedEvent.appGroup?.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
                     let navigationController = UINavigationController(rootViewController: webViewController)
                     self.presentViewController(navigationController, animated: true, completion: nil)

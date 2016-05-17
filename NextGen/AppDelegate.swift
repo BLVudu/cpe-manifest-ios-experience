@@ -56,10 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Load current AppData file
         if let appDataXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_appdata_locations_r60-v0.3", ofType: "xml") {
-            NextGenDataManager.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
-            
             do {
-                CurrentManifest.allAppData = try NextGenDataManager.sharedInstance.getAllAppData()
+                CurrentManifest.allAppData = try NextGenDataManager.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
             } catch {
                 print("Error loading AppData file")
             }

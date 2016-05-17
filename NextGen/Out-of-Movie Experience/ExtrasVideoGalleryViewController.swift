@@ -122,7 +122,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         mediaRuntimeLabel.text = nil
         
         // Set new media detail views
-        if let gallery = thisExperience.imageGallery {
+        if let gallery = thisExperience.gallery {
             galleryPageControl.hidden = false
             galleryScrollView.hidden = false
             videoContainerView.hidden = true

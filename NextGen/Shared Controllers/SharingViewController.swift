@@ -35,7 +35,7 @@ class SharingViewController: SceneDetailViewController {
             clipThumbnailImageView.image = UIImage.themeDefaultImage16By9()
         }
         
-        if let audioVisual = timedEvent.getAudioVisual(self.experience!), videoURL = audioVisual.videoURL {
+        if let videoURL = timedEvent.audioVisual?.videoURL {
             _shareableURL = videoURL
         }
         
