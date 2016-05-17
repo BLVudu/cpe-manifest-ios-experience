@@ -17,14 +17,19 @@ class SharingViewController: SceneDetailViewController {
     @IBOutlet weak var clipNameLabel: UILabel!
     @IBOutlet weak var clipThumbnailImageView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
+    private var _videoPlayerViewController: VideoPlayerViewController?
     
     var timedEvent: NGDMTimedEvent!
+    
+    private var _clips = [NSURL]?()
+    private var _index = 0
     
     private var _shareableURL: NSURL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        _clips = []
+        self.view.translatesAutoresizingMaskIntoConstraints = true
         // Localizations
         shareButton.setTitle(String.localize("clipshare.send_button").uppercaseString, forState: UIControlState.Normal)
         
@@ -38,32 +43,40 @@ class SharingViewController: SceneDetailViewController {
         
         if let videoURL = timedEvent.audioVisual?.videoURL {
             _shareableURL = videoURL
+            for i in 0...3{
+                _clips!.append( _shareableURL!)
+            }
         }
         
         self.clipDurationLabel.text = (timedEvent.endTime - timedEvent.startTime).timeString()
     }
 
-    func videoPlayerViewController() -> VideoPlayerViewController? {
-        for viewController in self.childViewControllers {
-            if viewController is VideoPlayerViewController {
-                return viewController as? VideoPlayerViewController
-            }
-        }
+    func replaceClip(){
         
-        return nil
+        if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
+            videoPlayerViewController.curIndex = 0
+            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
+            videoPlayerViewController.view.frame = player.bounds
+            player.addSubview(videoPlayerViewController.view)
+            self.addChildViewController(videoPlayerViewController)
+            videoPlayerViewController.didMoveToParentViewController(self)
+            _videoPlayerViewController = videoPlayerViewController
+            
+        }
+
+        
+    
     }
+    
     
     // MARK: Actions
     @IBAction func playClip(sender: AnyObject) {
         clipThumbnailImageView.hidden = true
         playButton.hidden = true
         
-        if let videoPlayerViewController = videoPlayerViewController() {
-            videoPlayerViewController.curIndex = 0
-            videoPlayerViewController.indexMax = 1
-            videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
-            videoPlayerViewController.playVideoWithURL(_shareableURL)
-        }
+        replaceClip()
+        _videoPlayerViewController!.playVideoWithURL(_clips![_index])
     }
     
     @IBAction func shareClip(sender: AnyObject) {
@@ -73,5 +86,30 @@ class SharingViewController: SceneDetailViewController {
             self.presentViewController(activityViewController, animated: true, completion: nil)
         }
     }
+    @IBAction func prevClip(sender: AnyObject) {
+        
+        //Move array index by -1. Check for bounds
+        if _index <= 0 {
+            return
+        }
+        
+        clipThumbnailImageView.hidden = false
+        playButton.hidden = false
+        _index -= 1
+        replaceClip()
+        
+    }
     
+    @IBAction func nextClip(sender: AnyObject) {
+        
+        //Move array index by +1. Check for bounds
+        if _index >= _clips?.count {
+            return
+        }
+        
+        clipThumbnailImageView.hidden = false
+        playButton.hidden = false
+        _index += 1
+        replaceClip()
+    }
 }

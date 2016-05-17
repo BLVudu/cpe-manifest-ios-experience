@@ -164,7 +164,9 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     }
     
     // MARK: GMSMapViewDelegate
+    /*
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+     
         if let delegate = delegate {
             var selectedMarker: MultiMapMarker?
             for mapMarker in mapMarkers {
@@ -180,6 +182,24 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         }
         
         return true
+    }
+    */
+    func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
+        
+        if let delegate = delegate {
+            var selectedMarker: MultiMapMarker?
+            for mapMarker in mapMarkers {
+                if mapMarker.googleMapMarker == marker {
+                    selectedMarker = mapMarker
+                    break
+                }
+            }
+            
+            if let marker = selectedMarker {
+                delegate.mapView(self, didTapMarker: marker)
+            }
+        }
+
     }
     
     /*func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
