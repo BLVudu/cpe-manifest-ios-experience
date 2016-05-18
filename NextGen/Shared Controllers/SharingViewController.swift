@@ -17,17 +17,20 @@ class SharingViewController: SceneDetailViewController {
     @IBOutlet weak var clipNameLabel: UILabel!
     @IBOutlet weak var clipThumbnailImageView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var videoBackgroundView: UIView!
     private var _videoPlayerViewController: VideoPlayerViewController?
     
     var timedEvent: NGDMTimedEvent!
     
     private var _clips = [NSURL]?()
+    //private var _clips = [NGDMTimedEvent]?()
     private var _index = 0
     
     private var _shareableURL: NSURL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        videoBackgroundView.backgroundColor = UIColor.init(red: 17/255, green: 17/255, blue: 19/255, alpha: 1)
         _clips = []
         self.view.translatesAutoresizingMaskIntoConstraints = true
         // Localizations
@@ -54,6 +57,10 @@ class SharingViewController: SceneDetailViewController {
     func replaceClip(){
         
         if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
+            if let player = videoPlayerViewController.player {
+                player.removeAllItems()
+            }
+
             videoPlayerViewController.curIndex = 0
             videoPlayerViewController.indexMax = 1
             videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
