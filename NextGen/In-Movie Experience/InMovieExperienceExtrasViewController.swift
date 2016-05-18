@@ -105,15 +105,15 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 35
     }
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textAlignment = NSTextAlignment.Center
-        header.textLabel?.font = UIFont.themeCondensedFont(18)
-        header.textLabel?.textColor = UIColor.whiteColor()
+        header.textLabel?.font = UIFont.themeCondensedFont(19)
+        header.textLabel?.textColor = UIColor(netHex: 0xe5e5e5)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

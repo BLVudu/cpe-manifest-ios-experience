@@ -11,7 +11,7 @@ import UIKit
 class SceneDetailCollectionViewCell: UICollectionViewCell {
     
     struct Constants {
-        static let UpdateInterval: Double = 10
+        static let UpdateInterval: Double = 15
     }
     
     @IBOutlet weak var titleLabel: UILabel?
