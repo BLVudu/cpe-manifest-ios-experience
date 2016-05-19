@@ -44,6 +44,18 @@ class MenuSectionCell: UITableViewCell {
         if let section = menuSection {
             dropDownImageView.transform = CGAffineTransformMakeRotation(section.expanded ? CGFloat(-M_PI) : 0.0)
         }
+        
+        updateCellStyle()
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        updateCellStyle()
+    }
+    
+    func updateCellStyle() {
+        primaryLabel.textColor = self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor()
     }
     
     func toggleDropDownIcon() {

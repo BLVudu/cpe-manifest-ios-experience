@@ -63,9 +63,16 @@ class ExtrasShoppingViewController: MenuedViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell, menuItem = cell.menuItem, categoryId = menuItem.value {
+        var categoryId: String?
+        if let menuSection = (tableView.cellForRowAtIndexPath(indexPath) as? MenuSectionCell)?.menuSection where !menuSection.expandable {
+            categoryId = menuSection.value
+        } else {
+            categoryId = (tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell)?.menuItem?.value
+        }
+        
+        if categoryId != nil {
             NSNotificationCenter.defaultCenter().postNotificationName(kShoppingNotificationCloseDetailsView, object: nil, userInfo: nil)
-            NSNotificationCenter.defaultCenter().postNotificationName(kShoppingNotificationDidSelectCategory, object: nil, userInfo: ["categoryId": categoryId])
+            NSNotificationCenter.defaultCenter().postNotificationName(kShoppingNotificationDidSelectCategory, object: nil, userInfo: ["categoryId": categoryId!])
         }
     }
 
