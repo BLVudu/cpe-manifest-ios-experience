@@ -10,37 +10,48 @@ import UIKit
 
 struct ImageGalleryNotification {
     static let DidScrollToPage = "kImageGalleryNotificationDidScrollToPage"
+    static let DidToggleFullScreen = "kImageGalleryNotificationDidToggleFullScreen"
 }
 
 class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
+    private struct Constants {
+        static let ToolbarHeight: CGFloat = 44
+        static let CloseButtonSize: CGFloat = 44
+        static let CloseButtonPadding: CGFloat = 15
+    }
+    
     private var scrollViewPageWidth: CGFloat = 0
+    private var currentPage = 0
+    
+    private var toolbar: UIToolbar!
+    private var isFullScreen = false
+    private var originalFrame: CGRect?
+    private var originalContainerFrame: CGRect?
+    private var closeButton: UIButton!
     
     var gallery: NGDMGallery? {
         didSet {
+            // Reset gallery
             for subview in self.subviews {
-                subview.removeFromSuperview()
-            }
-            
-            self.contentOffset = CGPointZero
-            
-            let numPictures = gallery?.pictures?.count ?? 0
-            if numPictures > 0 {
-                var imageViewX: CGFloat = 0
-                scrollViewPageWidth = CGRectGetWidth(self.bounds)
-                for i in 0 ..< numPictures {
-                    let imageView = UIImageView()
-                    imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                    imageView.frame = CGRectMake(imageViewX, 0, scrollViewPageWidth, CGRectGetHeight(self.bounds))
-                    imageView.clipsToBounds = true
-                    imageView.tag = i + 1
-                    self.addSubview(imageView)
-                    imageViewX += scrollViewPageWidth
+                if let subview = subview as? UIImageView {
+                    subview.removeFromSuperview()
                 }
-                
-                self.contentSize = CGSizeMake(CGRectGetWidth(self.bounds) * CGFloat(numPictures), CGRectGetHeight(self.bounds))
-                loadGalleryImageForPage(0)
             }
+            
+            if let frame = originalContainerFrame {
+                self.superview?.frame = frame
+            }
+            
+            if let frame = originalFrame {
+                self.frame = frame
+            }
+            
+            isFullScreen = false
+            toolbar.hidden = isFullScreen
+            closeButton.hidden = !isFullScreen
+            currentPage = 0
+            layoutPages()
         }
     }
     
@@ -48,26 +59,128 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.delegate = self
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        self.delegate = self
+        setup()
     }
     
+    private func setup() {
+        self.delegate = self
+        
+        toolbar = UIToolbar()
+        toolbar.barStyle = .Black
+        toolbar.translucent = true
+        
+        let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
+        fullScreenButton.tintColor = UIColor.whiteColor()
+        fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
+        fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
+        fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
+        toolbar.items = [UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(customView: fullScreenButton)]
+        
+        closeButton = UIButton()
+        closeButton.tintColor = UIColor.whiteColor()
+        closeButton.alpha = 0.75
+        closeButton.hidden = true
+        closeButton.setImage(UIImage(named: "Close"), forState: .Normal)
+        closeButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        var toolbarFrame = toolbar.frame
+        toolbarFrame.origin.x = self.contentOffset.x
+        toolbar.frame = toolbarFrame
+        self.bringSubviewToFront(toolbar)
+        
+        var closeButtonFrame = closeButton.frame
+        closeButtonFrame.origin.x = self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding
+        closeButton.frame = closeButtonFrame
+        self.bringSubviewToFront(closeButton)
+    }
+    
+    func layoutPages() {
+        let numPictures = gallery?.pictures?.count ?? 0
+        var imageViewX: CGFloat = 0
+        scrollViewPageWidth = CGRectGetWidth(self.bounds)
+        for i in 0 ..< numPictures {
+            if let imageView = self.viewWithTag(i + 1) as? UIImageView {
+                imageView.frame = CGRectMake(imageViewX, 0, scrollViewPageWidth, CGRectGetHeight(self.frame))
+            } else {
+                let imageView = UIImageView()
+                imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                imageView.frame = CGRectMake(imageViewX, 0, scrollViewPageWidth, CGRectGetHeight(self.frame))
+                imageView.clipsToBounds = true
+                imageView.tag = i + 1
+                self.addSubview(imageView)
+            }
+            
+            imageViewX += scrollViewPageWidth
+        }
+        
+        self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * CGFloat(numPictures), CGRectGetHeight(self.frame))
+        self.contentOffset.x = scrollViewPageWidth * CGFloat(currentPage)
+        
+        toolbar.frame = CGRectMake(self.contentOffset.x, CGRectGetHeight(self.frame) - Constants.ToolbarHeight, CGRectGetWidth(self.frame), Constants.ToolbarHeight)
+        self.addSubview(toolbar)
+        
+        closeButton.frame = CGRectMake(self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding, Constants.CloseButtonPadding, Constants.CloseButtonSize, Constants.CloseButtonSize)
+        self.addSubview(closeButton)
+        
+        loadGalleryImageForPage(currentPage)
+    }
+    
+    // MARK: Actions
+    func toggleFullScreen() {
+        isFullScreen = !isFullScreen
+        toolbar.hidden = isFullScreen
+        closeButton.hidden = !isFullScreen
+        
+        if isFullScreen {
+            if let superview = self.superview {
+                originalContainerFrame = superview.frame
+                superview.frame = UIScreen.mainScreen().bounds
+            }
+            
+            originalFrame = self.frame
+            
+            // FIXME: I have no idea why this hack works
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.01 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.frame = UIScreen.mainScreen().bounds
+                self.layoutPages()
+            }
+        } else {
+            if let frame = originalContainerFrame {
+                self.superview?.frame = frame
+                originalContainerFrame = nil
+            }
+            
+            if let frame = originalFrame {
+                self.frame = frame
+                originalFrame = nil
+            }
+            
+            layoutPages()
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidToggleFullScreen, object: nil, userInfo: ["isFullScreen": isFullScreen])
+    }
     
     // MARK: Image Gallery
     private func loadGalleryImageForPage(page: Int) {
-        if let imageView = self.viewWithTag(page + 1) as? UIImageView where imageView.image == nil {
-            if let imageURL = gallery?.pictures?[page].imageURL {
+        currentPage = page
+        
+        if let imageView = self.viewWithTag(currentPage + 1) as? UIImageView where imageView.image == nil {
+            if let imageURL = gallery?.pictures?[currentPage].imageURL {
                 imageView.setImageWithURL(imageURL)
             }
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidScrollToPage, object: nil, userInfo: ["page": page])
+        NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidScrollToPage, object: nil, userInfo: ["page": currentPage])
     }
     
     func cleanInvisibleImages() {

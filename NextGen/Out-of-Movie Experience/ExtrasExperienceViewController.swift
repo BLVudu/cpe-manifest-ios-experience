@@ -33,6 +33,7 @@ class ExtrasExperienceViewController: UIViewController {
             let titleImageView = UIImageView(frame: titleFrame)
             titleImageView.image = experience.appearance?.titleImage
             self.view.addSubview(titleImageView)
+            self.view.sendSubviewToBack(titleImageView)
         } else {
             titleFrame.origin.x += Constants.TitleLabelXOffset
             titleFrame.origin.y += Constants.TitleLabelYOffset
@@ -42,18 +43,21 @@ class ExtrasExperienceViewController: UIViewController {
             titleLabel.font = UIFont.themeCondensedBoldFont(30)
             titleLabel.text = experience.title.uppercaseString
             self.view.addSubview(titleLabel)
+            self.view.sendSubviewToBack(titleLabel)
         }
+        
+        _homeButton = headerButton(String.localize("label.home"), imageName: "Home")
+        self.view.addSubview(_homeButton)
+        self.view.sendSubviewToBack(_homeButton)
+        
+        _backButton = headerButton(String.localize("label.back"), imageName: "Back Nav")
+        self.view.addSubview(_backButton)
+        self.view.sendSubviewToBack(_backButton)
         
         let backgroundImageView = UIImageView(image: CurrentManifest.outOfMovieExperience.appearance?.backgroundImage)
         backgroundImageView.frame = self.view.bounds
         self.view.addSubview(backgroundImageView)
         self.view.sendSubviewToBack(backgroundImageView)
-        
-        _homeButton = headerButton(String.localize("label.home"), imageName: "Home")
-        self.view.addSubview(_homeButton)
-        
-        _backButton = headerButton(String.localize("label.back"), imageName: "Back Nav")
-        self.view.addSubview(_backButton)
         
         showBackButton()
     }

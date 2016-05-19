@@ -18,9 +18,11 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     
     @IBOutlet weak var locationDetailView: UIView!
     @IBOutlet weak var videoContainerView: UIView!
+    private var videoPlayerViewController: VideoPlayerViewController?
+    
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak var closeButton: UIButton!
-    private var videoPlayerViewController: VideoPlayerViewController?
+    private var _galleryDidToggleFullScreenObserver: NSObjectProtocol?
     
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
     private var locationExperienceMapping = [String: NGDMExperience]() // ExperienceID: Parent Experience
@@ -65,6 +67,12 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         }
     }
     
+    deinit {
+        if let observer = _galleryDidToggleFullScreenObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -83,6 +91,12 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
         closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
         closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
+        
+        _galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self, isFullScreen = notification.userInfo?["isFullScreen"] as? Bool {
+                strongSelf.closeButton.hidden = isFullScreen
+            }
+        })
         
         let info = NSMutableDictionary()
         info[MenuSection.Keys.Title] = String.localize("locations.full_map")
