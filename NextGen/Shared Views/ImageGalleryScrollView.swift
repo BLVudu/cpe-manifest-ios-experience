@@ -21,14 +21,20 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         static let CloseButtonPadding: CGFloat = 15
     }
     
-    private var scrollViewPageWidth: CGFloat = 0
-    private var currentPage = 0
-    
     private var toolbar: UIToolbar!
     private var isFullScreen = false
     private var originalFrame: CGRect?
     private var originalContainerFrame: CGRect?
     private var closeButton: UIButton!
+    
+    private var scrollViewPageWidth: CGFloat = 0
+    private var currentPage = 0 {
+        didSet {
+            loadGalleryImageForPage(currentPage)
+            loadGalleryImageForPage(currentPage + 1)
+            NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidScrollToPage, object: nil, userInfo: ["page": currentPage])
+        }
+    }
     
     var gallery: NGDMGallery? {
         didSet {
@@ -172,15 +178,13 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     // MARK: Image Gallery
     private func loadGalleryImageForPage(page: Int) {
-        currentPage = page
-        
-        if let imageView = self.viewWithTag(currentPage + 1) as? UIImageView where imageView.image == nil {
-            if let imageURL = gallery?.pictures?[currentPage].imageURL {
-                imageView.setImageWithURL(imageURL)
+        if let pictures = gallery?.pictures where pictures.count > page {
+            if let imageView = self.viewWithTag(page + 1) as? UIImageView where imageView.image == nil {
+                if let imageURL = pictures[page].imageURL {
+                    imageView.setImageWithURL(imageURL)
+                }
             }
         }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidScrollToPage, object: nil, userInfo: ["page": currentPage])
     }
     
     func cleanInvisibleImages() {
@@ -195,7 +199,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     // MARK: UIScrollViewDelegate
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        loadGalleryImageForPage(Int(targetContentOffset.memory.x / scrollViewPageWidth))
+        currentPage = Int(targetContentOffset.memory.x / scrollViewPageWidth)
     }
 
 }
