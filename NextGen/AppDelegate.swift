@@ -25,10 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current Manifest file
         if let manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.4", ofType: "xml") {
-            NextGenDataManager.sharedInstance.loadManifestXMLFile(manifestXMLPath)
+            
             
             do {
-                CurrentManifest.mainExperience = try NextGenDataManager.sharedInstance.getMainExperience()
+                try NextGenDataManager.sharedInstance.loadManifestXMLFile(manifestXMLPath)
+                CurrentManifest.mainExperience = NextGenDataManager.sharedInstance.mainExperience
                 CurrentManifest.mainExperience.appearance = NGDMAppearance(type: .Main)
                 CurrentManifest.inMovieExperience = try CurrentManifest.mainExperience.getInMovieExperience()
                 CurrentManifest.inMovieExperience.appearance = NGDMAppearance(type: .InMovie)

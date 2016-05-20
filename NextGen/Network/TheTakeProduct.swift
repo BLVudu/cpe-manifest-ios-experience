@@ -82,6 +82,10 @@ class TheTakeProduct: NSObject {
     
     var theTakeURLString: String {
         get {
+            /*if let link = _data["purchaseLink"] as? String {
+                return link
+            }*/
+            
             return "http://www.thetake.com/product/" + id
         }
     }

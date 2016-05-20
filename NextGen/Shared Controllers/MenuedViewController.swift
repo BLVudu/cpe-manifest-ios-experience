@@ -12,6 +12,7 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
     
     @IBOutlet weak var menuTableView: UITableView!
     var menuSections = [MenuSection]()
+    var selectedSection: MenuSection?
     var selectedItem: MenuItem?
     var showsSelectedMenuItem = true
     
@@ -43,6 +44,8 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
             } else {
                 cell.secondaryLabel?.removeFromSuperview()
             }
+            
+            cell.selected = selectedSection != nil && selectedSection == cell.menuSection
             
             return cell
         }
@@ -76,10 +79,16 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
                 cell.toggleDropDownIcon()
             }
             
+            if !menuSection.expandable {
+                selectedSection = menuSection
+                selectedItem = nil
+            }
+            
             tableView.beginUpdates()
             tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
             tableView.endUpdates()
         } else {
+            selectedSection = nil
             selectedItem = menuSection.items[indexPath.row - 1]
         }
     }
