@@ -333,6 +333,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             
             if _commentaryView.hidden{
                 super.handleTap(gestureRecognizer)
+            } else {
+                commentary(_commentaryButton)
             }
         }
     }
