@@ -915,7 +915,7 @@
                                         <rect key="frame" x="0.0" y="28" width="408" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">
@@ -1079,7 +1079,7 @@
                                 <rect key="frame" x="0.0" y="693" width="1024" height="75"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yBz-nT-qfC" customClass="VideoPlayerScrubber" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="153" y="23" width="668" height="31"/>
+                                        <rect key="frame" x="153" y="23" width="638" height="31"/>
                                         <connections>
                                             <action selector="beginScrubbing:" destination="FsK-dw-pgC" eventType="touchDown" id="RN9-Kl-8aZ"/>
                                             <action selector="endScrubbing:" destination="FsK-dw-pgC" eventType="touchUpInside" id="9mC-FJ-7wc"/>
@@ -1088,7 +1088,7 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6W-KZ-1CO" userLabel="Duration Time">
-                                        <rect key="frame" x="819" y="0.0" width="75" height="75"/>
+                                        <rect key="frame" x="789" y="0.0" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="qXq-vE-bus"/>
                                         </constraints>
@@ -1106,33 +1106,36 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fre-sx-P7e">
-                                        <rect key="frame" x="25" y="25" width="25" height="25"/>
+                                        <rect key="frame" x="0.0" y="13" width="80" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="LPP-Hj-XAl"/>
-                                            <constraint firstAttribute="height" constant="25" id="bKn-ml-fnm"/>
+                                            <constraint firstAttribute="width" constant="80" id="LPP-Hj-XAl"/>
+                                            <constraint firstAttribute="height" constant="50" id="bKn-ml-fnm"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="Pause Button"/>
                                         <connections>
                                             <action selector="pause:" destination="FsK-dw-pgC" eventType="touchUpInside" id="OYj-Fe-qYC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3j-NO-iAX">
-                                        <rect key="frame" x="25" y="25" width="25" height="25"/>
+                                        <rect key="frame" x="0.0" y="13" width="80" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="0My-R4-zWD"/>
-                                            <constraint firstAttribute="height" constant="25" id="NXs-q2-cbk"/>
+                                            <constraint firstAttribute="width" constant="80" id="0My-R4-zWD"/>
+                                            <constraint firstAttribute="height" constant="50" id="NXs-q2-cbk"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="Play Button"/>
                                         <connections>
                                             <action selector="play:" destination="FsK-dw-pgC" eventType="touchUpInside" id="So1-SV-4RS"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQ6-y2-KsL">
-                                        <rect key="frame" x="974" y="25" width="25" height="25"/>
+                                        <rect key="frame" x="944" y="13" width="80" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="EwQ-wB-lrH"/>
-                                            <constraint firstAttribute="height" constant="25" id="hCi-17-X1z"/>
+                                            <constraint firstAttribute="width" constant="80" id="EwQ-wB-lrH"/>
+                                            <constraint firstAttribute="height" constant="50" id="hCi-17-X1z"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal" image="Maximize"/>
                                         <state key="highlighted" image="Maximize Highlighted"/>
                                         <connections>
@@ -1140,11 +1143,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXp-GM-Ma6" userLabel="CC Button">
-                                        <rect key="frame" x="924" y="25" width="25" height="25"/>
+                                        <rect key="frame" x="864" y="13" width="80" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="1ag-eb-qqS"/>
-                                            <constraint firstAttribute="height" constant="25" id="CvV-ML-2TG"/>
+                                            <constraint firstAttribute="width" constant="80" id="1ag-eb-qqS"/>
+                                            <constraint firstAttribute="height" constant="50" id="CvV-ML-2TG"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal" image="Share"/>
                                         <state key="highlighted" image="Share Highlighted"/>
                                         <connections>
@@ -1157,14 +1161,14 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="uap-nw-qBj" secondAttribute="bottom" id="3l3-qA-aPy"/>
                                     <constraint firstItem="Fre-sx-P7e" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="702-LB-pdn"/>
-                                    <constraint firstAttribute="trailing" secondItem="qXp-GM-Ma6" secondAttribute="trailing" priority="750" constant="30" id="7Rg-Pb-Ldt"/>
-                                    <constraint firstAttribute="trailing" secondItem="hQ6-y2-KsL" secondAttribute="trailing" constant="25" id="Cuk-Qy-gR3"/>
-                                    <constraint firstItem="Fre-sx-P7e" firstAttribute="leading" secondItem="tdq-om-9xU" secondAttribute="leading" constant="25" id="DjV-sH-Tcg"/>
-                                    <constraint firstItem="uap-nw-qBj" firstAttribute="leading" secondItem="r3j-NO-iAX" secondAttribute="trailing" constant="30" id="Krx-8J-5eP"/>
-                                    <constraint firstItem="hQ6-y2-KsL" firstAttribute="leading" secondItem="qXp-GM-Ma6" secondAttribute="trailing" constant="25" id="RIh-we-sZa"/>
+                                    <constraint firstAttribute="trailing" secondItem="qXp-GM-Ma6" secondAttribute="trailing" priority="750" id="7Rg-Pb-Ldt"/>
+                                    <constraint firstAttribute="trailing" secondItem="hQ6-y2-KsL" secondAttribute="trailing" id="Cuk-Qy-gR3"/>
+                                    <constraint firstItem="Fre-sx-P7e" firstAttribute="leading" secondItem="tdq-om-9xU" secondAttribute="leading" id="DjV-sH-Tcg"/>
+                                    <constraint firstItem="uap-nw-qBj" firstAttribute="leading" secondItem="r3j-NO-iAX" secondAttribute="trailing" id="Krx-8J-5eP"/>
+                                    <constraint firstItem="hQ6-y2-KsL" firstAttribute="leading" secondItem="qXp-GM-Ma6" secondAttribute="trailing" id="RIh-we-sZa"/>
                                     <constraint firstItem="hQ6-y2-KsL" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="cOV-sB-2ta"/>
                                     <constraint firstItem="c6W-KZ-1CO" firstAttribute="top" secondItem="tdq-om-9xU" secondAttribute="top" id="cV8-Et-hSQ"/>
-                                    <constraint firstItem="qXp-GM-Ma6" firstAttribute="leading" secondItem="c6W-KZ-1CO" secondAttribute="trailing" constant="30" id="eEp-vC-KFM"/>
+                                    <constraint firstItem="qXp-GM-Ma6" firstAttribute="leading" secondItem="c6W-KZ-1CO" secondAttribute="trailing" id="eEp-vC-KFM"/>
                                     <constraint firstItem="r3j-NO-iAX" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="fcz-BG-Cbh"/>
                                     <constraint firstItem="uap-nw-qBj" firstAttribute="top" secondItem="tdq-om-9xU" secondAttribute="top" id="fjX-EC-SFE"/>
                                     <constraint firstItem="c6W-KZ-1CO" firstAttribute="leading" secondItem="yBz-nT-qfC" secondAttribute="trailing" id="jdR-oD-S8U"/>
@@ -1173,8 +1177,9 @@
                                     <constraint firstAttribute="bottom" secondItem="c6W-KZ-1CO" secondAttribute="bottom" id="m8O-EA-h4D"/>
                                     <constraint firstItem="yBz-nT-qfC" firstAttribute="leading" secondItem="uap-nw-qBj" secondAttribute="trailing" id="plS-BJ-gtK"/>
                                     <constraint firstItem="qXp-GM-Ma6" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="q5U-7C-2NF"/>
-                                    <constraint firstItem="r3j-NO-iAX" firstAttribute="leading" secondItem="tdq-om-9xU" secondAttribute="leading" constant="25" id="qqr-zz-B97"/>
-                                    <constraint firstItem="hQ6-y2-KsL" firstAttribute="leading" secondItem="c6W-KZ-1CO" secondAttribute="trailing" priority="750" constant="30" id="ttS-wk-A2T"/>
+                                    <constraint firstItem="r3j-NO-iAX" firstAttribute="leading" secondItem="tdq-om-9xU" secondAttribute="leading" id="qqr-zz-B97"/>
+                                    <constraint firstItem="uap-nw-qBj" firstAttribute="leading" secondItem="Fre-sx-P7e" secondAttribute="trailing" id="rs9-xF-cyb"/>
+                                    <constraint firstItem="hQ6-y2-KsL" firstAttribute="leading" secondItem="c6W-KZ-1CO" secondAttribute="trailing" priority="750" id="ttS-wk-A2T"/>
                                     <constraint firstItem="yBz-nT-qfC" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="y4a-g7-H3D"/>
                                 </constraints>
                             </view>

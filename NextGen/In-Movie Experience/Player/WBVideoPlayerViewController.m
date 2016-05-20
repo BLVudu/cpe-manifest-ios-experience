@@ -369,15 +369,26 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 
 	double duration = CMTimeGetSeconds(playerDuration);
 	if (isfinite(duration)) {
-		float minValue = [self.scrubber minimumValue];
-		float maxValue = [self.scrubber maximumValue];
-		double time = CMTimeGetSeconds([self.player currentTime]);
-		
-		[self.scrubber setValue:(maxValue - minValue) * time / duration + minValue];
+        float minValue = self.scrubber.minimumValue;
+		double time = CMTimeGetSeconds(self.player.currentTime);
+        self.scrubber.value = (self.scrubber.maximumValue - minValue) * time / duration + minValue;
         
         // Update time labels
-        [self updateTimeLabelsForSlider:self.scrubber withTime:time andDuration:duration];
+        [self updateTimeLabelsWithTime:time];
 	}
+}
+
+- (double)timeValueForSlider:(UISlider *)slider {
+    CMTime playerDuration = [self playerItemDuration];
+    if (!CMTIME_IS_INVALID(playerDuration)) {
+        double duration = CMTimeGetSeconds(playerDuration);
+        if (isfinite(duration)) {
+            float minValue = slider.minimumValue;
+            return duration * (slider.value - minValue) / (slider.maximumValue - minValue);
+        }
+    }
+    
+    return 0;
 }
 
 /* The user is dragging the movie controller thumb to scrub through the movie. */
@@ -392,27 +403,8 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 /* Set the player current time to match the scrubber position. */
 - (IBAction)scrub:(id)sender {
 	if ([sender isKindOfClass:[UISlider class]]) {
-        // Seek logic
-		UISlider *slider    = sender;
-		
-		CMTime playerDuration = [self playerItemDuration];
-		if (CMTIME_IS_INVALID(playerDuration)) {
-			return;
-		} 
-		
-		double duration     = CMTimeGetSeconds(playerDuration);
-		if (isfinite(duration)) {
-			float minValue  = [slider minimumValue];
-			float maxValue  = [slider maximumValue];
-			float value     = [slider value];
-			double time     = duration * (value - minValue) / (maxValue - minValue);
-            
-            // Update tiem labels
-            [self updateTimeLabelsForSlider:slider withTime:time andDuration:duration];
-			
-            // Seek
-            [self seekPlayerToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC)];
-        }
+        // Update time labels
+        [self updateTimeLabelsWithTime:[self timeValueForSlider:sender]];
 	}
 }
 
@@ -442,6 +434,16 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 	if (!mTimeObserver) {
         [self initScrubberTimer];
 	}
+    
+    if ([sender isKindOfClass:[UISlider class]]) {
+        float time = [self timeValueForSlider:sender];
+        
+        // Update time labels
+        [self updateTimeLabelsWithTime:time];
+        
+        // Seek
+        [self seekPlayerToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC)];
+    }
 
 	if (mRestoreAfterScrubbingRate) {
 		[self.player setRate:mRestoreAfterScrubbingRate];
@@ -461,7 +463,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     self.scrubber.enabled = NO;    
 }
 
-- (void)updateTimeLabelsForSlider:(UISlider *)slider withTime:(CGFloat)time andDuration:(CGFloat)duration {
+- (void)updateTimeLabelsWithTime:(CGFloat)time {
     // Update time labels
     if (_timeElapsedLabel) {
         _timeElapsedLabel.text = [self timeStringFromSecondsValue:time];
