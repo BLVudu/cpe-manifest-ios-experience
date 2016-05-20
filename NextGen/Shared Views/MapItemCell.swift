@@ -17,6 +17,7 @@ class MapItemCell: UICollectionViewCell {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var subtitleLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
+    private var imageDataTask: NSURLSessionDataTask?
     
     var experience: NGDMExperience? {
         didSet {
@@ -24,7 +25,7 @@ class MapItemCell: UICollectionViewCell {
                 titleLabel.text = appData.title
                 
                 if let imageURL = appData.imageURL {
-                    imageView.setImageWithURL(imageURL)
+                    imageDataTask = imageView.setImageWithURL(imageURL)
                 } else {
                     imageView.image = nil
                 }
@@ -34,7 +35,7 @@ class MapItemCell: UICollectionViewCell {
                 titleLabel.text = experience?.title
                 
                 if let imageURL = experience?.imageURL {
-                    imageView.setImageWithURL(imageURL)
+                    imageDataTask = imageView.setImageWithURL(imageURL)
                 } else {
                     imageView.image = nil
                 }
@@ -58,6 +59,10 @@ class MapItemCell: UICollectionViewCell {
         titleLabel.text = nil
         imageView.image = nil
         subtitleLabel.text = nil
+        if let task = imageDataTask {
+            task.cancel()
+            imageDataTask = nil
+        }
     }
     
 }

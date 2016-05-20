@@ -22,7 +22,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak var galleryPageControl: UIPageControl!
-    @IBOutlet weak var galleryFullScreenButton: UIButton!
     private var _galleryDidScrollToPageObserver: NSObjectProtocol?
     
     private var _didPlayFirstItem = false

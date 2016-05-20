@@ -45,9 +45,10 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private var _lastSavedTime: Double = -1.0
     var currentTime: Double = -1.0 {
         didSet {
-            if oldValue == -1 || abs(currentTime - oldValue) >= Constants.UpdateInterval {
+            if _lastSavedTime == -1 || abs(currentTime - _lastSavedTime) >= Constants.UpdateInterval {
                 currentTimeDidChange()
             }
         }
