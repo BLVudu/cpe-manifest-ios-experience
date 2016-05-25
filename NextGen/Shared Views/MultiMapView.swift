@@ -86,6 +86,8 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         
         mapTypeSegmentedControl = UISegmentedControl(items: ["Map", "Satellite"])
         if let mapTypeSegmentedControl = mapTypeSegmentedControl {
+            let textAttributes = NSDictionary(object: UIFont.themeCondensedFont(16), forKey: NSFontAttributeName)
+            mapTypeSegmentedControl.setTitleTextAttributes(textAttributes as [NSObject : AnyObject], forState: UIControlState.Normal)
             mapTypeSegmentedControl.backgroundColor = UIColor.whiteColor()
             mapTypeSegmentedControl.selectedSegmentIndex = MultiMapType.Satellite.rawValue
             mapTypeSegmentedControl.layer.cornerRadius = 5

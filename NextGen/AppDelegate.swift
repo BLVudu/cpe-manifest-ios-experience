@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Load current Manifest file
+        /*
         if let manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.4", ofType: "xml") {
             
             
@@ -63,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Error loading AppData file")
             }
         }
-        
+        */
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("d95d0b2a68ba4bb2b066c854a5c18c60")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()

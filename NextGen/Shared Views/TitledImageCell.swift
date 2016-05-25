@@ -33,11 +33,20 @@ class TitledImageCell: UICollectionViewCell {
         super.prepareForReuse()
         
         experience = nil
-        
         if let task = _setImageSessionDataTask {
             task.cancel()
             _setImageSessionDataTask = nil
         }
+        
     }
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            
+            self.layer.borderColor = UIColor.darkGrayColor().CGColor
+            self.layer.borderWidth = 2.0
+        }
+        
+        
+    
     
 }

@@ -26,6 +26,8 @@
 		497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */; };
 		49860CEA1CD020B4007770F2 /* mos-nextgen-background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 49860CE91CD020B4007770F2 /* mos-nextgen-background.mp4 */; };
 		49860CEE1CD2D736007770F2 /* NGDMAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49860CED1CD2D736007770F2 /* NGDMAppearance.swift */; };
+		4993BACC1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993BACB1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift */; };
+		4993BACE1CF4C50300AE5B70 /* EnhancedTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */; };
 		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
 		499871241CB43A4E00606E56 /* Commentary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 499871231CB43A4E00606E56 /* Commentary.plist */; };
 		49B653591CBECFF20006C71D /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B653581CBECFF20006C71D /* CircularProgressView.swift */; };
@@ -379,6 +381,8 @@
 		497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
 		49860CE91CD020B4007770F2 /* mos-nextgen-background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-background.mp4"; sourceTree = "<group>"; };
 		49860CED1CD2D736007770F2 /* NGDMAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAppearance.swift; sourceTree = "<group>"; };
+		4993BACB1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTitlesCollectionViewController.swift; sourceTree = "<group>"; };
+		4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnhancedTitleCell.xib; sourceTree = "<group>"; };
 		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		499871231CB43A4E00606E56 /* Commentary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Commentary.plist; sourceTree = "<group>"; };
 		49B653581CBECFF20006C71D /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
@@ -765,6 +769,7 @@
 				70460C581CBEF6710001B6D8 /* Theme */,
 				701D69C61C482A900047A67A /* Utilities */,
 				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
+				4993BACB1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift */,
 				70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */,
 				4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */,
 				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
@@ -992,6 +997,7 @@
 				49F3EAD21C515B3100E09484 /* TitledImageCell.xib */,
 				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
 				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
+				4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -1399,6 +1405,7 @@
 				70D2FC811CAE02E80003FC54 /* CommentaryView.xib in Resources */,
 				4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */,
 				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
+				4993BACE1CF4C50300AE5B70 /* EnhancedTitleCell.xib in Resources */,
 				6AA9CCC51C883EE2005EBA92 /* RobotoCondensed-Bold.ttf in Resources */,
 				49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */,
 				70517E831CB717AC008556EC /* ImageSceneDetailCollectionViewCell.xib in Resources */,
@@ -1693,6 +1700,7 @@
 				70E296E61CDCFD9D00B0B022 /* NGEDigitalAssetSetType.swift in Sources */,
 				70E297051CDCFD9D00B0B022 /* NGEFileDeliveryType.swift in Sources */,
 				490213481C860C9A00071552 /* SharingViewController.swift in Sources */,
+				4993BACC1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift in Sources */,
 				70E297241CDCFD9D00B0B022 /* NGELocationType.swift in Sources */,
 				70E297451CDCFD9D00B0B022 /* NGEPresentationType.swift in Sources */,
 				70E296A81CDCFD9D00B0B022 /* NGEAppDataLocationType.swift in Sources */,
