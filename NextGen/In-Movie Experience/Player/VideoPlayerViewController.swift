@@ -200,8 +200,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             }
 
         }
-        
-        super.playerItemDidReachEnd(notification)
+
+        if mode == VideoPlayerMode.Supplemental{
+            super.playerItemDidReachEnd(notification)
+            
+        }
     }
     
     func delay(delay:Double, block:()->()) -> Task {
