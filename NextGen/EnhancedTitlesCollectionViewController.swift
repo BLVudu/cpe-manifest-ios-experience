@@ -7,79 +7,64 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-
-class EnhancedTitlesCollectionViewCell: UICollectionViewCell{
+class EnhancedTitlesCollectionViewCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "EnhancedTitlesCollectionViewCellReuseIdentifier"
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     
-    
-    
-    @IBOutlet weak var movieTitle: UILabel!
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+        titleLabel.text = nil
+    }
 }
 
-
-class EnhancedTitlesCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate{
+class EnhancedTitlesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var titlesCollectionView: UICollectionView!
-    var manifestXMLPath: String!
+    private let ManifestData = [[
+        "title": "Man of Steel",
+        "image": "MOS-Onesheet",
+        "manifest": "Data/mos_hls_manifest_r60-v0.4",
+        "appdata": "Data/mos_appdata_locations_r60-v0.4"
+    ], [
+        "title": "Sisters",
+        "image": "Sisters-Onesheet",
+        "manifest": "Data/sisters_hls_manifest_v2-R60-generated-spec1.5"
+    ], [
+        "title": "Sisters (Unrated)",
+        "image": "SistersUnrated-Onesheet",
+        "manifest": "Data/sisters_extended_hls_manifest_v3-generated-spec1.5"
+    ], [
+        "title": "Minions",
+        "image": "Minions-Onesheet",
+        "manifest": "Data/minions_hls_manifest_v6-R60-generated-spec1.5"
+    ]]
+    
+    private struct Constants {
+        static let CollectionViewItemSpacing: CGFloat = 12
+        static let CollectionViewLineSpacing: CGFloat = 12
+        static let CollectionViewPadding: CGFloat = 15
+        static let CollectionViewItemAspectRatio: CGFloat = 135 / 240
+    }
+    
     override func viewDidLoad() {
-        titlesCollectionView.registerNib(UINib(nibName: "EnhancedTitleCell", bundle: nil), forCellWithReuseIdentifier: EnhancedTitlesCollectionViewCell.ReuseIdentifier)
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-         let cell = titlesCollectionView.dequeueReusableCellWithReuseIdentifier(EnhancedTitlesCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! EnhancedTitlesCollectionViewCell
-        switch indexPath.row {
-        case 0:
-            cell.movieTitle.text = "Sisters"
-            break
-        case 1:
-            cell.movieTitle.text = "Minions"
-            break
-        case 2:
-            cell.movieTitle.text = "Man Of Steel"
-            break
-        default:
-            cell.movieTitle.text = "Man Of Steel"
-        }
-        return cell
-    
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.row {
-        case 0:
-            manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/sisters_hls_manifest_v2-R60-generated-spec1.5", ofType: "xml")
-            break
-        case 1:
-            manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/minions_hls_manifest_v6-R60-generated-spec1.5", ofType: "xml")
-            break
-        case 2:
-            manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.4", ofType: "xml")
-            break
-        default:
-            manifestXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_hls_manifest_r60-v0.4", ofType: "xml")
-        }
-     
-        loadExperience()
+        collectionView?.registerNib(UINib(nibName: "EnhancedTitleCell", bundle: nil), forCellWithReuseIdentifier: EnhancedTitlesCollectionViewCell.ReuseIdentifier)
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 3), CGRectGetHeight(collectionView.frame))
-    }
-    
-    func loadExperience(){
+    func loadTitle(titleData: [String: String]) {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
+        // Load current Manifest file
+        if let manifestXMLPath = NSBundle.mainBundle().pathForResource(titleData["manifest"], ofType: "xml") {
             do {
                 try NextGenDataManager.sharedInstance.loadManifestXMLFile(manifestXMLPath)
                 CurrentManifest.mainExperience = NextGenDataManager.sharedInstance.mainExperience
@@ -106,10 +91,10 @@ class EnhancedTitlesCollectionViewController: UIViewController, UICollectionView
                 print("Error loading Manifest file: unknown error")
                 abort()
             }
-        
+        }
         
         // Load current AppData file
-        if let appDataXMLPath = NSBundle.mainBundle().pathForResource("Data/mos_appdata_locations_r60-v0.4", ofType: "xml") {
+        if let appDataXMLPath = NSBundle.mainBundle().pathForResource(titleData["appdata"], ofType: "xml") {
             do {
                 CurrentManifest.allAppData = try NextGenDataManager.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
             } catch {
@@ -118,11 +103,44 @@ class EnhancedTitlesCollectionViewController: UIViewController, UICollectionView
         }
         
         self.performSegueWithIdentifier("FullExperienceSegue", sender: nil)
-        
     }
-
     
+    // MARK: UICollectionViewDataSource
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return ManifestData.count
+    }
     
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(EnhancedTitlesCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! EnhancedTitlesCollectionViewCell
+        cell.titleLabel.text = ManifestData[indexPath.row]["title"]
+        if let imageName = ManifestData[indexPath.row]["image"] {
+            cell.imageView.image = UIImage(named: imageName)
+        }
+        
+        return cell
+    }
     
+    // MARK: UICollectionViewDelegate
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        loadTitle(ManifestData[indexPath.row])
+    }
+    
+    // MARK: UICollectionViewFlowLayoutDelegate
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / 4) - (Constants.CollectionViewItemSpacing * 2)
+        return CGSizeMake(itemWidth, itemWidth / Constants.CollectionViewItemAspectRatio)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewLineSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewItemSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding)
+    }
     
 }
