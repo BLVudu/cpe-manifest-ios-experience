@@ -37,9 +37,9 @@ class HomeViewController: UIViewController {
         if let appearance = CurrentManifest.mainExperience.appearance {
             willFadeInViews = appearance.backgroundVideoFadeTime > 0
             
-            if let origin = appearance.titleImageOrigin, size = appearance.titleImageSize {
+            if let origin = appearance.titleImageOrigin, size = appearance.titleImageSize, titleImageURL = appearance.titleImageURL {
                 let imageView = UIImageView(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
-                imageView.image = appearance.titleImage
+                imageView.setImageWithURL(titleImageURL)
                 imageView.hidden = true
                 self.view.addSubview(imageView)
                 
@@ -48,9 +48,15 @@ class HomeViewController: UIViewController {
         }
         
         // Play button
-        if let appearance = CurrentManifest.inMovieExperience.appearance, image = appearance.buttonImage, origin = appearance.buttonOrigin, size = appearance.buttonSize {
+        if let appearance = CurrentManifest.inMovieExperience.appearance, origin = appearance.buttonOrigin, size = appearance.buttonSize {
             let button = UIButton(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
-            button.setImage(image, forState: UIControlState.Normal)
+            if let imageURL = appearance.buttonImageURL {
+                button.setImageWithURL(imageURL)
+            } else {
+                button.setTitle("Play Movie", forState: .Normal)
+                button.backgroundColor = UIColor.redColor()
+            }
+            
             button.addTarget(self, action: #selector(self.onPlay), forControlEvents: UIControlEvents.TouchUpInside)
             button.hidden = true
             self.view.addSubview(button)
@@ -59,9 +65,15 @@ class HomeViewController: UIViewController {
         }
         
         // Extras button
-        if let appearance = CurrentManifest.outOfMovieExperience.appearance, image = appearance.buttonImage, origin = appearance.buttonOrigin, size = appearance.buttonSize {
+        if let appearance = CurrentManifest.outOfMovieExperience.appearance, origin = appearance.buttonOrigin, size = appearance.buttonSize {
             let button = UIButton(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
-            button.setImage(image, forState: UIControlState.Normal)
+            if let imageURL = appearance.buttonImageURL {
+                button.setImageWithURL(imageURL)
+            } else {
+                button.setTitle("Extras", forState: .Normal)
+                button.backgroundColor = UIColor.grayColor()
+            }
+            
             button.addTarget(self, action: #selector(self.onExtras), forControlEvents: UIControlEvents.TouchUpInside)
             button.hidden = true
             self.view.addSubview(button)
@@ -150,8 +162,8 @@ class HomeViewController: UIViewController {
                 if backgroundImageView != nil {
                     backgroundImageView.removeFromSuperview()
                 }
-            } else if let backgroundImage = appearance.backgroundImage {
-                backgroundImageView.image = backgroundImage
+            } else if let backgroundImageURL = appearance.backgroundImageURL {
+                backgroundImageView.setImageWithURL(backgroundImageURL)
                 if backgroundVideoView != nil {
                     backgroundVideoView.removeFromSuperview()
                 }
