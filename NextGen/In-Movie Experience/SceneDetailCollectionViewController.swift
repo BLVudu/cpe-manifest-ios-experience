@@ -247,7 +247,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             } else if timedEvent.isType(.AppGroup) {
                 if let experienceApp = timedEvent.experienceApp, url = timedEvent.appGroup?.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
-                    let navigationController = UINavigationController(rootViewController: webViewController)
+                    let navigationController = LandscapeNavigationController(rootViewController: webViewController)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
             } else if timedEvent.isType(.Location) {

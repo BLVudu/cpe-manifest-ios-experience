@@ -11,7 +11,7 @@ import UIKit
 class VideoPlayerScrubber: UISlider {
     
     private struct Constants {
-        static let ThumbRectAdjustment: CGFloat = 40
+        static let ThumbRectAdjustment: CGFloat = 15
     }
     
     required init(coder aDecoder: NSCoder) {

@@ -98,6 +98,7 @@
 		7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7881C93937800DF31B6 /* UIColor+Utils.swift */; };
 		7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */; };
 		7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7981C97550C00DF31B6 /* WebViewController.swift */; };
+		7094F3B71CFF423100F1B10D /* LandscapeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7094F3B61CFF423100F1B10D /* LandscapeNavigationController.swift */; };
 		7099B9DB1CEA4CE5000274F7 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7099B9DA1CEA4CE5000274F7 /* SettingsManager.swift */; };
 		7099B9DF1CEA835C000274F7 /* ImageGalleryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7099B9DE1CEA835C000274F7 /* ImageGalleryScrollView.swift */; };
 		70A3AC921C9C75860038B60F /* BaselineAPIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */; };
@@ -458,6 +459,7 @@
 		7085F7881C93937800DF31B6 /* UIColor+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		7085F7981C97550C00DF31B6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		7094F3B61CFF423100F1B10D /* LandscapeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeNavigationController.swift; sourceTree = "<group>"; };
 		7099B9DA1CEA4CE5000274F7 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		7099B9DE1CEA835C000274F7 /* ImageGalleryScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryScrollView.swift; sourceTree = "<group>"; };
 		70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaselineAPIUtil.swift; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 			children = (
 				49F684A11C8A5F7F0066C5A2 /* ActorGalleryViewController.swift */,
 				70B9FE371C6D1FD900CF1A22 /* ImageGalleryViewController.swift */,
+				7094F3B61CFF423100F1B10D /* LandscapeNavigationController.swift */,
 				49F6849F1C8A3FC50066C5A2 /* MediaGalleryViewController.swift */,
 				70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */,
 				490213471C860C9A00071552 /* SharingViewController.swift */,
@@ -1620,6 +1623,7 @@
 				70E296A41CDCFD9D00B0B022 /* NGEAppDataFeedProprietaryType.swift in Sources */,
 				70E2971A1CDCFD9D00B0B022 /* NGEInventoryMetadataLocalizedPairType.swift in Sources */,
 				70E2973F1CDCFD9D00B0B022 /* NGEPlayableSequenceType.swift in Sources */,
+				7094F3B71CFF423100F1B10D /* LandscapeNavigationController.swift in Sources */,
 				70DF2F961CA640AA007AD2A0 /* TheTakeCategory.swift in Sources */,
 				70E297501CDCFD9D00B0B022 /* NGESubtitleTrackReferenceType.swift in Sources */,
 				70E296E01CDCFD9D00B0B022 /* NGEDigitalAssetExternalTrackReferenceType.swift in Sources */,
