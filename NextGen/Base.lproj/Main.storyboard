@@ -206,7 +206,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="rYn-yB-xQG" secondAttribute="trailing" id="05g-Kf-WRF"/>
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="width" secondItem="76N-G4-UE0" secondAttribute="width" multiplier="0.23" id="5L3-yA-RXQ"/>
-                            <constraint firstItem="rYn-yB-xQG" firstAttribute="top" secondItem="tfi-Pl-Rxu" secondAttribute="top" id="6w7-4P-gQ1"/>
+                            <constraint firstItem="rYn-yB-xQG" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leadingMargin" priority="750" id="Agp-1X-RgN"/>
                             <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="rYn-yB-xQG" secondAttribute="bottom" id="KkM-8D-pEb"/>
                             <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="tfi-Pl-Rxu" secondAttribute="bottom" id="PGI-fN-ZfU"/>
                             <constraint firstAttribute="trailing" secondItem="iwP-Bl-F5c" secondAttribute="trailing" id="YYR-ck-6HE"/>
@@ -215,6 +215,7 @@
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="top" secondItem="76N-G4-UE0" secondAttribute="top" constant="5" id="mCp-yC-1Bj"/>
                             <constraint firstItem="rYn-yB-xQG" firstAttribute="leading" secondItem="tfi-Pl-Rxu" secondAttribute="trailing" constant="10" id="oTc-02-jR9"/>
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leading" id="px0-3Q-0Ha"/>
+                            <constraint firstItem="rYn-yB-xQG" firstAttribute="top" secondItem="FRX-EG-0Va" secondAttribute="bottom" constant="5" id="wgd-vR-Muj"/>
                             <constraint firstItem="iwP-Bl-F5c" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leading" id="wj1-mV-buS"/>
                         </constraints>
                     </view>
@@ -507,11 +508,12 @@
                         <constraints>
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="top" secondItem="1Qn-Pd-QBx" secondAttribute="bottom" constant="90" id="0HR-0f-Hee"/>
                             <constraint firstItem="jX7-H2-sDX" firstAttribute="leading" secondItem="nfb-lf-5Cb" secondAttribute="trailing" id="2VV-wp-Ler"/>
-                            <constraint firstItem="5xC-Cb-zKQ" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="top" id="EsJ-zy-DhF"/>
-                            <constraint firstItem="jX7-H2-sDX" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="top" id="Oin-dQ-Nbh"/>
+                            <constraint firstItem="5xC-Cb-zKQ" firstAttribute="leading" secondItem="7Nn-Gk-Fn3" secondAttribute="leadingMargin" priority="750" id="RZ8-27-NLd"/>
                             <constraint firstAttribute="trailing" secondItem="5xC-Cb-zKQ" secondAttribute="trailing" id="W3c-GQ-ueg"/>
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="leading" secondItem="7Nn-Gk-Fn3" secondAttribute="leading" id="ZmJ-vN-5RR"/>
                             <constraint firstItem="JqG-I8-Xjt" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="bottom" id="crn-yw-kQL"/>
+                            <constraint firstItem="5xC-Cb-zKQ" firstAttribute="top" secondItem="1Qn-Pd-QBx" secondAttribute="bottom" constant="90" id="fBp-6N-n4S"/>
+                            <constraint firstItem="jX7-H2-sDX" firstAttribute="top" secondItem="nfb-lf-5Cb" secondAttribute="top" id="g6g-Cb-sI5"/>
                             <constraint firstItem="5xC-Cb-zKQ" firstAttribute="leading" secondItem="nfb-lf-5Cb" secondAttribute="trailing" id="iSk-M7-6oS"/>
                             <constraint firstAttribute="trailing" secondItem="jX7-H2-sDX" secondAttribute="trailing" id="jCK-ST-Y4g"/>
                             <constraint firstItem="nfb-lf-5Cb" firstAttribute="width" secondItem="7Nn-Gk-Fn3" secondAttribute="width" multiplier="0.29" id="nWO-JQ-5kA"/>

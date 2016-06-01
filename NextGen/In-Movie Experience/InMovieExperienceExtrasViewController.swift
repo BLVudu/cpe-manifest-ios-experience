@@ -14,7 +14,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         static let ShowTalent = "ShowTalentSegueIdentifier"
     }
     
-    @IBOutlet weak var talentTableView: UITableView!
+    @IBOutlet weak var talentTableView: UITableView?
     @IBOutlet weak var backgroundImageView: UIImageView!
     var appApperance: NGDMAppearance!
     
@@ -35,7 +35,12 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
             backgroundImageView.setImageWithURL(backgroundImageURL)
         }
         
-        talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        if let actors = CurrentManifest.mainExperience.orderedActors where actors.count > 0 {
+            talentTableView?.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: "TalentTableViewCell")
+        } else {
+            talentTableView?.removeFromSuperview()
+            talentTableView = nil
+        }
         
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
@@ -80,7 +85,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
                 if hasNewData {
                     dispatch_async(dispatch_get_main_queue()) {
                         self._currentExperienceCellData = newExperienceCellData
-                        self.talentTableView.reloadData()
+                        self.talentTableView?.reloadData()
                     }
                 }
             }

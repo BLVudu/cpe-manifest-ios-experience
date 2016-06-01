@@ -34,11 +34,15 @@ class HomeViewController: UIViewController {
         var homeScreenViews = [UIView]()
         var willFadeInViews = false
         
+        let frameWidth = CGRectGetWidth(self.view.frame)
+        let frameHeight = CGRectGetHeight(self.view.frame)
+        
         if let appearance = CurrentManifest.mainExperience.appearance {
             willFadeInViews = appearance.backgroundVideoFadeTime > 0
             
-            if let origin = appearance.titleImageOrigin, size = appearance.titleImageSize, titleImageURL = appearance.titleImageURL {
-                let imageView = UIImageView(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
+            if let centerOffset = appearance.titleImageCenterOffset, sizeOffset = appearance.titleImageSizeOffset, titleImageURL = appearance.titleImageURL {
+                let imageView = UIImageView(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
+                imageView.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
                 imageView.setImageWithURL(titleImageURL)
                 imageView.hidden = true
                 self.view.addSubview(imageView)
@@ -48,8 +52,10 @@ class HomeViewController: UIViewController {
         }
         
         // Play button
-        if let appearance = CurrentManifest.inMovieExperience.appearance, origin = appearance.buttonOrigin, size = appearance.buttonSize {
-            let button = UIButton(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
+        if let appearance = CurrentManifest.inMovieExperience.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
+            let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
+            button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
+            
             if let imageURL = appearance.buttonImageURL {
                 button.setImageWithURL(imageURL)
             } else {
@@ -65,8 +71,10 @@ class HomeViewController: UIViewController {
         }
         
         // Extras button
-        if let appearance = CurrentManifest.outOfMovieExperience.appearance, origin = appearance.buttonOrigin, size = appearance.buttonSize {
-            let button = UIButton(frame: CGRectMake(origin.x, origin.y, size.width, size.height))
+        if let appearance = CurrentManifest.outOfMovieExperience.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
+            let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
+            button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
+            
             if let imageURL = appearance.buttonImageURL {
                 button.setImageWithURL(imageURL)
             } else {
