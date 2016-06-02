@@ -64,15 +64,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-16-mAf" userLabel="Background Image">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gA2-16-mAf" userLabel="Background Image">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-aI-A4f">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-aI-A4f">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="gA2-16-mAf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="BFk-Fk-eQG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HaL-aI-A4f" secondAttribute="bottom" id="DKX-e2-1mZ"/>
+                            <constraint firstItem="HaL-aI-A4f" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Er1-Cs-fea"/>
+                            <constraint firstItem="HaL-aI-A4f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jah-9g-l5r"/>
+                            <constraint firstAttribute="trailing" secondItem="gA2-16-mAf" secondAttribute="trailing" id="PlC-ZR-BvV"/>
+                            <constraint firstItem="gA2-16-mAf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="WET-V8-KkC"/>
+                            <constraint firstAttribute="trailing" secondItem="HaL-aI-A4f" secondAttribute="trailing" id="lof-kZ-pt6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gA2-16-mAf" secondAttribute="bottom" id="x4B-CQ-6hg"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>

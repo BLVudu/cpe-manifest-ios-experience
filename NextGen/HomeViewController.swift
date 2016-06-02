@@ -110,11 +110,6 @@ class HomeViewController: UIViewController {
         unloadVideoPlayer()
     }
     
-    override func didReceiveMemoryWarning() {
-        
-        super.didReceiveMemoryWarning()
-    }
-    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Landscape
     }
@@ -125,8 +120,10 @@ class HomeViewController: UIViewController {
             if let backgroundVideoURL = appearance.backgroundVideoURL {
                 let videoPlayer = AVPlayer(playerItem: AVPlayerItem(URL: backgroundVideoURL))
                 backgroundVideoLayer = AVPlayerLayer(player: videoPlayer)
-                backgroundVideoLayer!.frame = backgroundVideoView.frame
-                backgroundVideoView.layer.addSublayer(backgroundVideoLayer!)
+                backgroundVideoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+                backgroundVideoLayer?.frame = self.view.bounds
+                backgroundVideoView?.frame = self.view.bounds
+                backgroundVideoView?.layer.addSublayer(backgroundVideoLayer!)
                 
                 didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { (notification) in
                     videoPlayer.muted = true
