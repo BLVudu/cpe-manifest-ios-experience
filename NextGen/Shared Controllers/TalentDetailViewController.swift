@@ -19,10 +19,6 @@ enum TalentDetailMode: String {
 
 class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    struct StoryboardSegue {
-        static let ShowActorGallery = "showActorGallery"
-    }
-    
     @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak private var _talentImageView: UIImageView!
@@ -143,10 +139,6 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         }
     }
     
-    @IBAction func displayGallery(sender: AnyObject) {
-        self.performSegueWithIdentifier(StoryboardSegue.ShowActorGallery, sender: nil)
-    }
-    
     @IBAction func openSocialURL(sender: SocialButton) {
         sender.openURL()
     }
@@ -179,11 +171,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == StoryboardSegue.ShowActorGallery {
-            if let actorGalleryVC = segue.destinationViewController as? ActorGalleryViewController {
-                actorGalleryVC.images = (talent?.gallery)!
-            }
-        }
+        
     }
 
 }

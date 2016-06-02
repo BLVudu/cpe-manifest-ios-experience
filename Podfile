@@ -1,17 +1,14 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '6.0'
+platform :ios, '8.0'
 
-target 'NextGen' do
+project 'NextGenExample'
+workspace 'NextGenExampleWorkspace'
+
+target 'NextGenExample' do
     
-use_frameworks!
+    use_frameworks!
 
-pod 'HockeySDK'
-
-# pod 'NextGenDataManager', path: '~/Documents/nextgen-data/ios'
-
-pod 'MWPhotoBrowser'
-pod 'MBProgressHUD', '~> 0.9.2'
-
-pod 'GoogleMaps', '~> 1.13.0'
+    pod 'HockeySDK'
+    pod 'MBProgressHUD', '~> 0.9.2'
+    pod 'GoogleMaps', '~> 1.13.0'
 
 end
