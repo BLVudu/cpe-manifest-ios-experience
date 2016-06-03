@@ -26,6 +26,9 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak private var _talentBiographyLabel: UITextView!
     
+    @IBOutlet weak private var _galleryHeaderLabel: UILabel!
+    @IBOutlet weak private var _galleryCollectionView: UICollectionView!
+    
     @IBOutlet weak private var _filmographyContainerView: UIView!
     @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
     @IBOutlet weak private var _filmographyCollectionView: UICollectionView!
@@ -49,6 +52,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         // Localizations
         _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
+        _galleryHeaderLabel.text = String.localize("talentdetail.gallery").uppercaseString
         _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
         
         if mode == TalentDetailMode.Extras {
@@ -128,6 +132,8 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                 })
             }
         })
+        
+        _galleryCollectionView.reloadData()
     }
     
     // MARK: Actions
@@ -145,19 +151,22 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let films = talent?.films {
-            return films.count
+        if collectionView == _filmographyCollectionView {
+            return talent?.films?.count ?? 0
         }
         
-        return 0
+        return talent?.additionalImages?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(FilmCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! FilmCollectionViewCell
-        if let films = talent?.films {
-            cell.film = films[indexPath.row]
+        if collectionView == _filmographyCollectionView {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(FilmCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! FilmCollectionViewCell
+            cell.film = talent?.films?[indexPath.row]
+            return cell
         }
         
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleImageCollectionViewCell.BaseReuseIdentifier, forIndexPath: indexPath) as! SimpleImageCollectionViewCell
+        cell.imageURL = talent?.additionalImages?[indexPath.row].thumbnailImageURL
         return cell
     }
     

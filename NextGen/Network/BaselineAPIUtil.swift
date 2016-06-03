@@ -15,7 +15,7 @@ class BaselineAPIUtil: APIUtil {
     struct Endpoints {
         static let GetCredits = "/ProjectAllCredits"
         static let GetBio = "/ParticipantBioShort"
-        static let GetHeadshot = "/ParticipantHeadshot"
+        static let GetImages = "/ParticipantProfileImages"
         static let GetSocialMedia = "/ParticipantSocialMedia"
         static let GetFilmography = "/ParticipantFilmCredit"
         static let GetFilmPoster = "/ProjectFilmPoster"
@@ -70,21 +70,31 @@ class BaselineAPIUtil: APIUtil {
         }, errorBlock: nil)
     }
     
-    func getTalentImages(talentID: String, successBlock: (talentImages: [TalentImage]) -> Void) {
-        getJSONWithPath(Endpoints.GetHeadshot, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
-            if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary {
-                var thumbnailImageURL: NSURL?
-                var imageURL: NSURL?
-                
-                if let thumbnailURLString = response[Keys.MediumURL] as? String {
-                    thumbnailImageURL = NSURL(string: thumbnailURLString)
+    func getTalentImages(talentID: String, successBlock: (talentImages: [TalentImage]?) -> Void) {
+        getJSONWithPath(Endpoints.GetImages, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
+            if let results = result["result"] as? NSArray {
+                if results.count > 0 {
+                    var talentImages = [TalentImage]()
+                    for talentImageInfo in results {
+                        if let talentImageInfo = talentImageInfo as? NSDictionary {
+                            var talentImage = TalentImage()
+                            
+                            if let thumbnailURLString = talentImageInfo[Keys.MediumURL] as? String {
+                                talentImage.thumbnailImageURL = NSURL(string: thumbnailURLString)
+                            }
+                            
+                            if let imageURLString = talentImageInfo[Keys.FullURL] as? String {
+                                talentImage.imageURL = NSURL(string: imageURLString)
+                            }
+                            
+                            talentImages.append(talentImage)
+                        }
+                    }
+                    
+                    successBlock(talentImages: talentImages)
+                } else {
+                    successBlock(talentImages: nil)
                 }
-                
-                if let imageURLString = response[Keys.FullURL] as? String {
-                    imageURL = NSURL(string: imageURLString)
-                }
-                
-                successBlock(talentImages: [TalentImage(thumbnailImageURL: thumbnailImageURL, imageURL: imageURL)])
             }
         }, errorBlock: nil)
     }

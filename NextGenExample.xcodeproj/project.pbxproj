@@ -112,6 +112,7 @@
 		70D2FC7D1CADC21F0003FC54 /* NGDMPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC7C1CADC21F0003FC54 /* NGDMPeople.swift */; };
 		70D2FC801CAE02E80003FC54 /* CommentaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC7E1CAE02E80003FC54 /* CommentaryView.swift */; };
 		70D2FC811CAE02E80003FC54 /* CommentaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FC7F1CAE02E80003FC54 /* CommentaryView.xib */; };
+		70DBE73E1D02366600182C80 /* SimpleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DBE73C1D02366600182C80 /* SimpleImageCollectionViewCell.swift */; };
 		70DEFCE61CBC79CA00941977 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70DEFCE41CBC79CA00941977 /* Localizable.strings */; };
 		70DF2F7E1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F7D1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift */; };
 		70DF2F801CA5C292007AD2A0 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */; };
@@ -447,6 +448,7 @@
 		70D2FC7C1CADC21F0003FC54 /* NGDMPeople.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPeople.swift; sourceTree = "<group>"; };
 		70D2FC7E1CAE02E80003FC54 /* CommentaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryView.swift; sourceTree = "<group>"; };
 		70D2FC7F1CAE02E80003FC54 /* CommentaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryView.xib; sourceTree = "<group>"; };
+		70DBE73C1D02366600182C80 /* SimpleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		70DEFCE51CBC79CA00941977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		70DF2F7D1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingViewController.swift; sourceTree = "<group>"; };
 		70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 			isa = PBXGroup;
 			children = (
 				49B653581CBECFF20006C71D /* CircularProgressView.swift */,
+				4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */,
 				701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */,
 				7099B9DE1CEA835C000274F7 /* ImageGalleryScrollView.swift */,
 				493043AE1CE0F389000A9EBC /* MapItemCell.swift */,
@@ -921,6 +924,7 @@
 				70EFFB2B1CBC637000643372 /* MultiMapView.swift */,
 				4993D2681C6D07800077220A /* RadioButton.swift */,
 				707E10841C40797400FCF81C /* RoundImageView.swift */,
+				70DBE73C1D02366600182C80 /* SimpleImageCollectionViewCell.swift */,
 				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
 				70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */,
 				7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */,
@@ -929,7 +933,6 @@
 				49F3EAD21C515B3100E09484 /* TitledImageCell.xib */,
 				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
 				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
-				4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -1609,6 +1612,7 @@
 				70E2969E1CDCFD9D00B0B022 /* NGEALIDExperienceMapListType.swift in Sources */,
 				70E297521CDCFD9D00B0B022 /* NGESummary400.swift in Sources */,
 				70E297511CDCFD9D00B0B022 /* NGESummary190.swift in Sources */,
+				70DBE73E1D02366600182C80 /* SimpleImageCollectionViewCell.swift in Sources */,
 				70E296C71CDCFD9D00B0B022 /* NGECompObjType.swift in Sources */,
 				70E296B51CDCFD9D00B0B022 /* NGEAudiovisualType.swift in Sources */,
 				70E2973E1CDCFD9D00B0B022 /* NGEPlayableSequenceListType.swift in Sources */,
