@@ -40,7 +40,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         didSet {
             // Reset gallery
             for subview in self.subviews {
-                if let subview = subview as? UIImageView {
+                if let subview = subview as? UIScrollView {
                     subview.removeFromSuperview()
                 }
             }
@@ -100,6 +100,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         
         var toolbarFrame = toolbar.frame
         toolbarFrame.origin.x = self.contentOffset.x
+        toolbarFrame.origin.y = self.contentOffset.y + (CGRectGetHeight(self.frame) - Constants.ToolbarHeight) + 1
         toolbar.frame = toolbarFrame
         self.bringSubviewToFront(toolbar)
         
@@ -111,21 +112,32 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     func layoutPages() {
         let numPictures = gallery?.pictures?.count ?? 0
-        var imageViewX: CGFloat = 0
         scrollViewPageWidth = CGRectGetWidth(self.bounds)
         for i in 0 ..< numPictures {
-            if let imageView = self.viewWithTag(i + 1) as? UIImageView {
-                imageView.frame = CGRectMake(imageViewX, 0, scrollViewPageWidth, CGRectGetHeight(self.frame))
-            } else {
-                let imageView = UIImageView()
-                imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                imageView.frame = CGRectMake(imageViewX, 0, scrollViewPageWidth, CGRectGetHeight(self.frame))
-                imageView.clipsToBounds = true
-                imageView.tag = i + 1
-                self.addSubview(imageView)
+            var pageView = self.viewWithTag(i + 1) as? UIScrollView
+            var imageView = pageView?.subviews.first as? UIImageView
+            if pageView == nil {
+                pageView = UIScrollView()
+                pageView!.delegate = self
+                pageView!.clipsToBounds = true
+                pageView!.minimumZoomScale = 1
+                pageView!.maximumZoomScale = 3
+                pageView!.bounces = false
+                pageView!.bouncesZoom = false
+                pageView!.showsVerticalScrollIndicator = false
+                pageView!.showsHorizontalScrollIndicator = false
+                pageView!.tag = i + 1
+                
+                imageView = UIImageView()
+                imageView!.contentMode = UIViewContentMode.ScaleAspectFit
+                pageView!.addSubview(imageView!)
+                
+                self.addSubview(pageView!)
             }
             
-            imageViewX += scrollViewPageWidth
+            pageView!.zoomScale = 1
+            pageView!.frame = CGRectMake(CGFloat(i) * scrollViewPageWidth, 0, scrollViewPageWidth, CGRectGetHeight(self.frame))
+            imageView!.frame = pageView!.bounds
         }
         
         self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * CGFloat(numPictures), CGRectGetHeight(self.frame))
@@ -179,7 +191,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Image Gallery
     private func loadGalleryImageForPage(page: Int) {
         if let pictures = gallery?.pictures where pictures.count > page {
-            if let imageView = self.viewWithTag(page + 1) as? UIImageView where imageView.image == nil {
+            if let pageView = self.viewWithTag(page + 1) as? UIScrollView, imageView = pageView.subviews.first as? UIImageView where imageView.image == nil {
                 if let imageURL = pictures[page].imageURL {
                     imageView.setImageWithURL(imageURL)
                 }
@@ -187,10 +199,20 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    private func imageViewForPage(page: Int) -> UIImageView? {
+        if let pictures = gallery?.pictures where pictures.count > page {
+            if let pageView = self.viewWithTag(page + 1) as? UIScrollView {
+                return pageView.subviews.first as? UIImageView
+            }
+        }
+        
+        return nil
+    }
+    
     func cleanInvisibleImages() {
         let page = Int(self.contentOffset.x / scrollViewPageWidth)
         for subview in self.subviews {
-            if subview.tag != page + 1, let imageView = subview as? UIImageView {
+            if subview.tag != page + 1, let imageView = subview.subviews.first as? UIImageView {
                 imageView.image = nil
             }
         }
@@ -199,7 +221,13 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     // MARK: UIScrollViewDelegate
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        currentPage = Int(targetContentOffset.memory.x / scrollViewPageWidth)
+        if scrollView == self {
+            currentPage = Int(targetContentOffset.memory.x / scrollViewPageWidth)
+        }
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return imageViewForPage(currentPage)
     }
 
 }
