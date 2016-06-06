@@ -33,7 +33,6 @@ class TitledImageCell: UICollectionViewCell {
         super.prepareForReuse()
         
         experience = nil
-        
         if let task = _setImageSessionDataTask {
             task.cancel()
             _setImageSessionDataTask = nil

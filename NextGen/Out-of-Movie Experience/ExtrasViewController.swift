@@ -12,21 +12,21 @@ import AVFoundation
 
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
-    struct Constants {
+    private struct Constants {
         static let CollectionViewItemSpacing: CGFloat = 12
         static let CollectionViewLineSpacing: CGFloat = 12
         static let CollectionViewPadding: CGFloat = 15
         static let CollectionViewItemAspectRatio: CGFloat = 338 / 230
     }
     
-    struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
         static let ShowGallery = "ExtrasGallerySegue"
         static let ShowMap = "ExtrasMapSegue"
         static let ShowShopping = "ExtrasShoppingSegue"
     }
     
-    @IBOutlet weak var talentTableView: UITableView!
+    @IBOutlet weak var talentTableView: UITableView?
     @IBOutlet weak var talentDetailView: UIView!
     private var _talentDetailViewController: TalentDetailViewController?
     @IBOutlet var extrasCollectionView: UICollectionView!
@@ -38,9 +38,15 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
-        self.extrasCollectionView.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
-        self.talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
+        if let actors = CurrentManifest.mainExperience.orderedActors where actors.count > 0 {
+            talentTableView?.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+            talentTableView?.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
+        } else {
+            talentTableView?.removeFromSuperview()
+            talentTableView = nil
+        }
+        
+        extrasCollectionView.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
         
         showHomeButton()
     }
@@ -63,7 +69,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     // MARK: Talent Details
     func showTalentDetailView() {
         if selectedIndexPath != nil {
-            if let cell = talentTableView.cellForRowAtIndexPath(selectedIndexPath!) as? TalentTableViewCell, talent = cell.talent {
+            if let cell = talentTableView?.cellForRowAtIndexPath(selectedIndexPath!) as? TalentTableViewCell, talent = cell.talent {
                 if _talentDetailViewController != nil {
                     _talentDetailViewController!.loadTalent(talent)
                 } else {
@@ -92,7 +98,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     func hideTalentDetailView() {
         if selectedIndexPath != nil {
-            talentTableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
+            talentTableView?.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
             selectedIndexPath = nil
         }
         

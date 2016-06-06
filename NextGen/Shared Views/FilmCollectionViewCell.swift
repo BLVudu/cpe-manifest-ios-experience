@@ -8,29 +8,22 @@
 
 import UIKit
 
-class FilmCollectionViewCell: UICollectionViewCell {
+class FilmCollectionViewCell: SimpleImageCollectionViewCell {
     
     static let ReuseIdentifier = "FilmCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak var imageView: UIImageView!
-    
-    private var _setImageSessionDataTask: NSURLSessionDataTask?
-    private var _getFilmImageSessionDataTask: NSURLSessionDataTask?
+    private var getFilmImageSessionDataTask: NSURLSessionDataTask?
     
     var film: TalentFilm? {
         didSet {
             if film != nil {
-                _getFilmImageSessionDataTask = film!.getImageURL({ (imageURL) in
+                getFilmImageSessionDataTask = film!.getImageURL({ (imageURL) in
                     dispatch_async(dispatch_get_main_queue(), {
-                        if imageURL != nil {
-                            self._setImageSessionDataTask = self.imageView.setImageWithURL(imageURL!)
-                        } else {
-                            self.imageView.image = UIImage(named: "Blank Poster")
-                        }
+                        self.imageURL = imageURL
                     })
                 })
             } else {
-                imageView.image = nil
+                image = nil
             }
         }
     }
@@ -40,14 +33,9 @@ class FilmCollectionViewCell: UICollectionViewCell {
         
         film = nil
         
-        if let task = _setImageSessionDataTask {
+        if let task = getFilmImageSessionDataTask {
             task.cancel()
-            _setImageSessionDataTask = nil
-        }
-        
-        if let task = _getFilmImageSessionDataTask {
-            task.cancel()
-            _getFilmImageSessionDataTask = nil
+            getFilmImageSessionDataTask = nil
         }
     }
     

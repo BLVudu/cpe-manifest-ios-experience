@@ -14,6 +14,12 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     @IBOutlet weak var mapView: MultiMapView!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        mapView.removeControls()
+    }
+    
     override func timedEventDidChange() {
         super.timedEventDidChange()
         

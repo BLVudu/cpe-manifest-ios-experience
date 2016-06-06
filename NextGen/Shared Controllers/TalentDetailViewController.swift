@@ -19,16 +19,22 @@ enum TalentDetailMode: String {
 
 class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    struct StoryboardSegue {
-        static let ShowActorGallery = "showActorGallery"
+    private struct SegueIdentifier {
+        static let TalentImageGallery = "TalentImageGallerySegueIdentifier"
     }
     
     @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak private var _talentImageView: UIImageView!
+    @IBOutlet weak private var _talentGalleryButton: UIButton!
     @IBOutlet weak private var _talentNameLabel: UILabel!
     @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak private var _talentBiographyLabel: UITextView!
+    @IBOutlet private var _talentNoGalleryConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak private var _galleryContainerView: UIView?
+    @IBOutlet weak private var _galleryHeaderLabel: UILabel?
+    @IBOutlet weak private var _galleryCollectionView: UICollectionView?
     
     @IBOutlet weak private var _filmographyContainerView: UIView!
     @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
@@ -53,12 +59,21 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         // Localizations
         _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
+        _galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercaseString
         _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
         
-        if mode == TalentDetailMode.Extras {
+        if mode == .Extras {
             titleLabel.removeFromSuperview()
             closeButton.removeFromSuperview()
             _containerViewTopConstraint.constant = 20
+        } else {
+            _galleryHeaderLabel?.removeFromSuperview()
+            _galleryCollectionView?.removeFromSuperview()
+            _galleryContainerView?.removeFromSuperview()
+            _galleryHeaderLabel = nil
+            _galleryCollectionView = nil
+            _galleryContainerView = nil
+            _talentNoGalleryConstraint.priority = UILayoutPriorityRequired
         }
         
         loadTalent(talent)
@@ -66,6 +81,8 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     func loadTalent(talent: Talent) {
         self.talent = talent
+        
+        _talentGalleryButton.hidden = mode != .Synced || talent.images == nil || talent.images!.count == 1
         
         _talentNameLabel.text = talent.name?.uppercaseString
         if let imageURL = talent.fullImageURL {
@@ -97,12 +114,12 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                             self._twitterButton.hidden = false
                             self._twitterButton.socialAccount = socialAccount
                             break
-                          /*
+                            
                         case .Instagram:
                             self._instagramButton.hidden = false
                             self._instagramButton.socialAccount = socialAccount
                             break
-                        */    
+                            
                         default:
                             break
                         }
@@ -132,6 +149,8 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                 })
             }
         })
+        
+        _galleryCollectionView?.reloadData()
     }
     
     // MARK: Actions
@@ -143,46 +162,47 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         }
     }
     
-    @IBAction func displayGallery(sender: AnyObject) {
-        self.performSegueWithIdentifier(StoryboardSegue.ShowActorGallery, sender: nil)
-    }
-    
     @IBAction func openSocialURL(sender: SocialButton) {
         sender.openURL()
     }
     
+    @IBAction func onLaunchGallery() {
+        self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: nil)
+    }
+    
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let films = talent?.films {
-            return films.count
+        if collectionView == _filmographyCollectionView {
+            return talent?.films?.count ?? 0
         }
         
-        return 0
+        return talent?.additionalImages?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(FilmCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! FilmCollectionViewCell
-        if let films = talent?.films {
-            cell.film = films[indexPath.row]
+        if collectionView == _filmographyCollectionView {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(FilmCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! FilmCollectionViewCell
+            cell.film = talent?.films?[indexPath.row]
+            return cell
         }
         
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleImageCollectionViewCell.BaseReuseIdentifier, forIndexPath: indexPath) as! SimpleImageCollectionViewCell
+        cell.imageURL = talent?.additionalImages?[indexPath.row].thumbnailImageURL
         return cell
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //let film = (collectionView.cellForItemAtIndexPath(indexPath) as! FilmCollectionViewCell).film
-        //if film?.externalURL != nil {
-        //    film!.externalURL!.promptLaunchBrowser()
-        //}
+        if collectionView == _galleryCollectionView {
+            self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: indexPath.row + 1)
+        }
     }
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == StoryboardSegue.ShowActorGallery {
-            if let actorGalleryVC = segue.destinationViewController as? ActorGalleryViewController {
-                actorGalleryVC.images = (talent?.gallery)!
-            }
+        if segue.identifier == SegueIdentifier.TalentImageGallery, let talentImageGalleryViewController = segue.destinationViewController as? TalentImageGalleryViewController {
+            talentImageGalleryViewController.talent = talent
+            talentImageGalleryViewController.initialPage = (sender as? Int) ?? 0
         }
     }
 

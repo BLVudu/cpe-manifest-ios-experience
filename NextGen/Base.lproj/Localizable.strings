@@ -26,6 +26,7 @@
 // Talent Detail
 "talentdetail.title" = "Actor";
 "talentdetail.biography" = "Biography";
+"talentdetail.gallery" = "Actor Gallery";
 "talentdetail.filmography" = "Filmography";
 
 // Clip & Share

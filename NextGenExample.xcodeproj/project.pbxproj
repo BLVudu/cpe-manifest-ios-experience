@@ -1,0 +1,1847 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		490213461C850A0100071552 /* GallerySceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213451C850A0100071552 /* GallerySceneDetailViewController.swift */; };
+		490213481C860C9A00071552 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490213471C860C9A00071552 /* SharingViewController.swift */; };
+		4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */; };
+		4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */; };
+		4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */; };
+		4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */; };
+		4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */; };
+		492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492267E91C76A56900B306A2 /* CommentaryViewCell.swift */; };
+		493043A71CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493043A61CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift */; };
+		493043AD1CE0F367000A9EBC /* MapItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493043AC1CE0F367000A9EBC /* MapItemCell.xib */; };
+		493043AF1CE0F389000A9EBC /* MapItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493043AE1CE0F389000A9EBC /* MapItemCell.swift */; };
+		495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495CF3691CC042BA006AE290 /* CoreText.framework */; };
+		497A9E161CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */; };
+		497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */; };
+		49860CEA1CD020B4007770F2 /* mos-nextgen-background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 49860CE91CD020B4007770F2 /* mos-nextgen-background.mp4 */; };
+		49860CEE1CD2D736007770F2 /* NGDMAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49860CED1CD2D736007770F2 /* NGDMAppearance.swift */; };
+		4993BACC1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993BACB1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift */; };
+		4993BACE1CF4C50300AE5B70 /* EnhancedTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */; };
+		4993D2691C6D07800077220A /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4993D2681C6D07800077220A /* RadioButton.swift */; };
+		499871241CB43A4E00606E56 /* Commentary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 499871231CB43A4E00606E56 /* Commentary.plist */; };
+		49B653591CBECFF20006C71D /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B653581CBECFF20006C71D /* CircularProgressView.swift */; };
+		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
+		49CB44C91C7CF02400753227 /* InMovieExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44C81C7CF02400753227 /* InMovieExperienceViewController.swift */; };
+		49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB44CA1C7D0CD800753227 /* SocialButton.swift */; };
+		49F3EAD31C515B3100E09484 /* TitledImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EAD21C515B3100E09484 /* TitledImageCell.xib */; };
+		49F3EAD51C51639700E09484 /* TitledImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EAD41C51639700E09484 /* TitledImageCell.swift */; };
+		49F3EADB1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */; };
+		49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F3EADC1C51890A00E09484 /* VideoCell.xib */; };
+		49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F3EADE1C518ABE00E09484 /* VideoCell.swift */; };
+		49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */; };
+		6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */; };
+		6AA9CCC51C883EE2005EBA92 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC11C883E91005EBA92 /* RobotoCondensed-Bold.ttf */; };
+		6AA9CCC61C883EE2005EBA92 /* RobotoCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC21C883E91005EBA92 /* RobotoCondensed-Italic.ttf */; };
+		6AA9CCC71C883EE2005EBA92 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA9CCC31C883E91005EBA92 /* RobotoCondensed-Regular.ttf */; };
+		701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */; };
+		701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */; };
+		701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */; };
+		701D69C11C48205B0047A67A /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C01C48205B0047A67A /* TalentDetailViewController.swift */; };
+		701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */; };
+		701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C71C482AF70047A67A /* NSURL+Utils.swift */; };
+		701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69C91C482C210047A67A /* UIAlertController+Utils.swift */; };
+		701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701D69CB1C482E060047A67A /* UIImageView+Utils.swift */; };
+		70367AAF1C8F67B30042B5B5 /* NGDMExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AAE1C8F67B30042B5B5 /* NGDMExperience.swift */; };
+		70367AB11C8F69970042B5B5 /* NGDMMainExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB01C8F69970042B5B5 /* NGDMMainExperience.swift */; };
+		70367AB51C8F74560042B5B5 /* NGDMMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB41C8F74560042B5B5 /* NGDMMetadata.swift */; };
+		70367AB71C8F87AE0042B5B5 /* NGDMPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB61C8F87AE0042B5B5 /* NGDMPresentation.swift */; };
+		70367AB91C8F8BDE0042B5B5 /* NGDMGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AB81C8F8BDE0042B5B5 /* NGDMGallery.swift */; };
+		70367ABD1C8F8DA30042B5B5 /* NGDMPictureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ABC1C8F8DA30042B5B5 /* NGDMPictureGroup.swift */; };
+		70367ABF1C8F8E9E0042B5B5 /* NGDMPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ABE1C8F8E9E0042B5B5 /* NGDMPicture.swift */; };
+		70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC01C8F8F420042B5B5 /* NGDMImage.swift */; };
+		70367AC31C8F9D450042B5B5 /* NGDMTimedEventSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC21C8F9D450042B5B5 /* NGDMTimedEventSequence.swift */; };
+		70367AC51C8F9E840042B5B5 /* NGDMTimedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC41C8F9E840042B5B5 /* NGDMTimedEvent.swift */; };
+		70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */; };
+		70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */; };
+		70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */; };
+		70460C551CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */; };
+		70460C5A1CBEF67C0001B6D8 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */; };
+		70460C5C1CBEF6980001B6D8 /* UIImage+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */; };
+		70460C5E1CBEF8630001B6D8 /* UIFont+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460C5D1CBEF8630001B6D8 /* UIFont+Theme.swift */; };
+		7046BA911CBDAF8B00EF9612 /* ExtrasPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */; };
+		70517E7B1CB715EF008556EC /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E781CB715EF008556EC /* MapDetailViewController.swift */; };
+		70517E7C1CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */; };
+		70517E7D1CB715EF008556EC /* MapSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70517E7A1CB715EF008556EC /* MapSceneDetailCollectionViewCell.xib */; };
+		70517E821CB717AC008556EC /* ImageSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E7F1CB717AC008556EC /* ImageSceneDetailCollectionViewCell.swift */; };
+		70517E831CB717AC008556EC /* ImageSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70517E801CB717AC008556EC /* ImageSceneDetailCollectionViewCell.xib */; };
+		70517E841CB717AC008556EC /* SceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70517E811CB717AC008556EC /* SceneDetailCollectionViewCell.swift */; };
+		7065F5461C46FCC500A2C74E /* TalentTableViewCell-Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */; };
+		7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7065F5471C47004100A2C74E /* TalentTableViewCell.swift */; };
+		7071C5481C6BCBF6006F4275 /* NextGenDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */; };
+		7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7071C54B1C6BCC11006F4275 /* libxml2.tbd */; };
+		7077A3151C49897900843782 /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 7077A3141C49897900843782 /* Data */; };
+		707E10851C40797400FCF81C /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10841C40797400FCF81C /* RoundImageView.swift */; };
+		707E10871C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E10861C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift */; };
+		7085F76D1C90D83D00DF31B6 /* NGDMVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */; };
+		7085F7721C91E4C000DF31B6 /* APIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7711C91E4C000DF31B6 /* APIUtil.swift */; };
+		7085F7741C920A7500DF31B6 /* TheTakeAPIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7731C920A7500DF31B6 /* TheTakeAPIUtil.swift */; };
+		7085F7781C920E4F00DF31B6 /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */; };
+		7085F77A1C920E7500DF31B6 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7791C920E7500DF31B6 /* String+Utils.swift */; };
+		7085F77C1C92200700DF31B6 /* TheTakeProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F77B1C92200700DF31B6 /* TheTakeProduct.swift */; };
+		7085F7801C923BE100DF31B6 /* Indexable+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */; };
+		7085F7821C93359000DF31B6 /* NGDMAppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7811C93359000DF31B6 /* NGDMAppGroup.swift */; };
+		7085F7841C9336C600DF31B6 /* NGDMInteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7831C9336C600DF31B6 /* NGDMInteractive.swift */; };
+		7085F7861C933A5000DF31B6 /* NGDMExperienceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */; };
+		7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7881C93937800DF31B6 /* UIColor+Utils.swift */; };
+		7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */; };
+		7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085F7981C97550C00DF31B6 /* WebViewController.swift */; };
+		7094F3B71CFF423100F1B10D /* LandscapeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7094F3B61CFF423100F1B10D /* LandscapeNavigationController.swift */; };
+		7099B9DB1CEA4CE5000274F7 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7099B9DA1CEA4CE5000274F7 /* SettingsManager.swift */; };
+		7099B9DF1CEA835C000274F7 /* ImageGalleryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7099B9DE1CEA835C000274F7 /* ImageGalleryScrollView.swift */; };
+		70A3AC921C9C75860038B60F /* BaselineAPIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */; };
+		70A3AC971C9DDB500038B60F /* NSTimeInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */; };
+		70A5D5731CAB437700ACC58F /* UIStoryboard+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */; };
+		70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */; };
+		70BFA5AB1CBD651F00F674FA /* NSLocale+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFA5AA1CBD651F00F674FA /* NSLocale+Utils.swift */; };
+		70C830B11CB440E200F9E2D6 /* VideoPlayerScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */; };
+		70C830B51CB465D000F9E2D6 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */; };
+		70C830B81CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830B61CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift */; };
+		70C830B91CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */; };
+		70C830BB1CB4823100F9E2D6 /* SceneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830BA1CB4823100F9E2D6 /* SceneDetailViewController.swift */; };
+		70C830BD1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C830BC1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift */; };
+		70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */; };
+		70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */; };
+		70D2FC7D1CADC21F0003FC54 /* NGDMPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC7C1CADC21F0003FC54 /* NGDMPeople.swift */; };
+		70D2FC801CAE02E80003FC54 /* CommentaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2FC7E1CAE02E80003FC54 /* CommentaryView.swift */; };
+		70D2FC811CAE02E80003FC54 /* CommentaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D2FC7F1CAE02E80003FC54 /* CommentaryView.xib */; };
+		70DBE73E1D02366600182C80 /* SimpleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DBE73C1D02366600182C80 /* SimpleImageCollectionViewCell.swift */; };
+		70DEFCE61CBC79CA00941977 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70DEFCE41CBC79CA00941977 /* Localizable.strings */; };
+		70DF2F7E1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F7D1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift */; };
+		70DF2F801CA5C292007AD2A0 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */; };
+		70DF2F821CA5C2B5007AD2A0 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F811CA5C2B5007AD2A0 /* MenuItem.swift */; };
+		70DF2F841CA5C8B2007AD2A0 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F831CA5C8B2007AD2A0 /* MenuItemCell.swift */; };
+		70DF2F8A1CA5EADF007AD2A0 /* MenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DF2F891CA5EADF007AD2A0 /* MenuItemCell.xib */; };
+		70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */; };
+		70DF2F8E1CA5F433007AD2A0 /* MenuSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */; };
+		70DF2F901CA5F453007AD2A0 /* MenuSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */; };
+		70DF2F921CA5FBBC007AD2A0 /* MenuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */; };
+		70DF2F961CA640AA007AD2A0 /* TheTakeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */; };
+		70E2969B1CDCFD9D00B0B022 /* NGEAbbreviatedMetadataInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D21CDCFD9D00B0B022 /* NGEAbbreviatedMetadataInfoType.swift */; };
+		70E2969C1CDCFD9D00B0B022 /* NGEAbbreviatedMetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D31CDCFD9D00B0B022 /* NGEAbbreviatedMetadataType.swift */; };
+		70E2969D1CDCFD9D00B0B022 /* NGEAdaptationSetID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D41CDCFD9D00B0B022 /* NGEAdaptationSetID.swift */; };
+		70E2969E1CDCFD9D00B0B022 /* NGEALIDExperienceMapListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D51CDCFD9D00B0B022 /* NGEALIDExperienceMapListType.swift */; };
+		70E2969F1CDCFD9D00B0B022 /* NGEALIDExperienceMapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D61CDCFD9D00B0B022 /* NGEALIDExperienceMapType.swift */; };
+		70E296A01CDCFD9D00B0B022 /* NGEAlternateText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D71CDCFD9D00B0B022 /* NGEAlternateText.swift */; };
+		70E296A11CDCFD9D00B0B022 /* NGEAncillaryTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D81CDCFD9D00B0B022 /* NGEAncillaryTrackReferenceType.swift */; };
+		70E296A21CDCFD9D00B0B022 /* NGEAppDataAcquireAssetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295D91CDCFD9D00B0B022 /* NGEAppDataAcquireAssetType.swift */; };
+		70E296A31CDCFD9D00B0B022 /* NGEAppDataFeedGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295DA1CDCFD9D00B0B022 /* NGEAppDataFeedGeneric.swift */; };
+		70E296A41CDCFD9D00B0B022 /* NGEAppDataFeedProprietaryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295DB1CDCFD9D00B0B022 /* NGEAppDataFeedProprietaryType.swift */; };
+		70E296A51CDCFD9D00B0B022 /* NGEAppDataFeedSetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295DC1CDCFD9D00B0B022 /* NGEAppDataFeedSetType.swift */; };
+		70E296A61CDCFD9D00B0B022 /* NGEAppDataGalleryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295DD1CDCFD9D00B0B022 /* NGEAppDataGalleryType.swift */; };
+		70E296A71CDCFD9D00B0B022 /* NGEAppDataKMLType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295DE1CDCFD9D00B0B022 /* NGEAppDataKMLType.swift */; };
+		70E296A81CDCFD9D00B0B022 /* NGEAppDataLocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295DF1CDCFD9D00B0B022 /* NGEAppDataLocationType.swift */; };
+		70E296A91CDCFD9D00B0B022 /* NGEAppDataSpecialBehaviorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E01CDCFD9D00B0B022 /* NGEAppDataSpecialBehaviorType.swift */; };
+		70E296AA1CDCFD9D00B0B022 /* NGEAppDataTrackSelectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E11CDCFD9D00B0B022 /* NGEAppDataTrackSelectionType.swift */; };
+		70E296AB1CDCFD9D00B0B022 /* NGEAppDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E21CDCFD9D00B0B022 /* NGEAppDataType.swift */; };
+		70E296AC1CDCFD9D00B0B022 /* NGEAppGroupListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E31CDCFD9D00B0B022 /* NGEAppGroupListType.swift */; };
+		70E296AD1CDCFD9D00B0B022 /* NGEAppGroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E41CDCFD9D00B0B022 /* NGEAppGroupType.swift */; };
+		70E296AE1CDCFD9D00B0B022 /* NGEAppName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E51CDCFD9D00B0B022 /* NGEAppName.swift */; };
+		70E296AF1CDCFD9D00B0B022 /* NGEAppNVPairType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E61CDCFD9D00B0B022 /* NGEAppNVPairType.swift */; };
+		70E296B01CDCFD9D00B0B022 /* NGEArtReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E71CDCFD9D00B0B022 /* NGEArtReference.swift */; };
+		70E296B11CDCFD9D00B0B022 /* NGEAssociatedOrgType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E81CDCFD9D00B0B022 /* NGEAssociatedOrgType.swift */; };
+		70E296B21CDCFD9D00B0B022 /* NGEAudioClipRefType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295E91CDCFD9D00B0B022 /* NGEAudioClipRefType.swift */; };
+		70E296B31CDCFD9D00B0B022 /* NGEAudioTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295EA1CDCFD9D00B0B022 /* NGEAudioTrackReferenceType.swift */; };
+		70E296B41CDCFD9D00B0B022 /* NGEAudiovisualClipRefType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295EB1CDCFD9D00B0B022 /* NGEAudiovisualClipRefType.swift */; };
+		70E296B51CDCFD9D00B0B022 /* NGEAudiovisualType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295EC1CDCFD9D00B0B022 /* NGEAudiovisualType.swift */; };
+		70E296B61CDCFD9D00B0B022 /* NGEBasicMetadataInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295ED1CDCFD9D00B0B022 /* NGEBasicMetadataInfoType.swift */; };
+		70E296B71CDCFD9D00B0B022 /* NGEBasicMetadataJobType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295EE1CDCFD9D00B0B022 /* NGEBasicMetadataJobType.swift */; };
+		70E296B81CDCFD9D00B0B022 /* NGEBasicMetadataParentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295EF1CDCFD9D00B0B022 /* NGEBasicMetadataParentType.swift */; };
+		70E296B91CDCFD9D00B0B022 /* NGEBasicMetadataPeopleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F01CDCFD9D00B0B022 /* NGEBasicMetadataPeopleType.swift */; };
+		70E296BA1CDCFD9D00B0B022 /* NGEBasicMetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F11CDCFD9D00B0B022 /* NGEBasicMetadataType.swift */; };
+		70E296BB1CDCFD9D00B0B022 /* NGECaption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F21CDCFD9D00B0B022 /* NGECaption.swift */; };
+		70E296BC1CDCFD9D00B0B022 /* NGEChapterListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F31CDCFD9D00B0B022 /* NGEChapterListType.swift */; };
+		70E296BD1CDCFD9D00B0B022 /* NGEChapterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F41CDCFD9D00B0B022 /* NGEChapterType.swift */; };
+		70E296BE1CDCFD9D00B0B022 /* NGEColorTypeTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F51CDCFD9D00B0B022 /* NGEColorTypeTypeEnum.swift */; };
+		70E296BF1CDCFD9D00B0B022 /* NGECompanyCreditsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F61CDCFD9D00B0B022 /* NGECompanyCreditsType.swift */; };
+		70E296C01CDCFD9D00B0B022 /* NGECompatibilityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F71CDCFD9D00B0B022 /* NGECompatibilityType.swift */; };
+		70E296C11CDCFD9D00B0B022 /* NGEComplexSequenceInfoAlternateNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F81CDCFD9D00B0B022 /* NGEComplexSequenceInfoAlternateNumber.swift */; };
+		70E296C21CDCFD9D00B0B022 /* NGEComplexSequenceInfoDistributionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295F91CDCFD9D00B0B022 /* NGEComplexSequenceInfoDistributionNumber.swift */; };
+		70E296C31CDCFD9D00B0B022 /* NGEComplexSequenceInfoHouseSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295FA1CDCFD9D00B0B022 /* NGEComplexSequenceInfoHouseSequence.swift */; };
+		70E296C41CDCFD9D00B0B022 /* NGECompObjClassType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295FB1CDCFD9D00B0B022 /* NGECompObjClassType.swift */; };
+		70E296C51CDCFD9D00B0B022 /* NGECompObjDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295FC1CDCFD9D00B0B022 /* NGECompObjDataType.swift */; };
+		70E296C61CDCFD9D00B0B022 /* NGECompObjEntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295FD1CDCFD9D00B0B022 /* NGECompObjEntryType.swift */; };
+		70E296C71CDCFD9D00B0B022 /* NGECompObjType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295FE1CDCFD9D00B0B022 /* NGECompObjType.swift */; };
+		70E296C81CDCFD9D00B0B022 /* NGEContactInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E295FF1CDCFD9D00B0B022 /* NGEContactInfoType.swift */; };
+		70E296C91CDCFD9D00B0B022 /* NGEContainerMetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296001CDCFD9D00B0B022 /* NGEContainerMetadataType.swift */; };
+		70E296CA1CDCFD9D00B0B022 /* NGEContainerMetadataWithIDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296011CDCFD9D00B0B022 /* NGEContainerMetadataWithIDType.swift */; };
+		70E296CB1CDCFD9D00B0B022 /* NGEContainerReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296021CDCFD9D00B0B022 /* NGEContainerReference.swift */; };
+		70E296CC1CDCFD9D00B0B022 /* NGEContainerReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296031CDCFD9D00B0B022 /* NGEContainerReferenceType.swift */; };
+		70E296CD1CDCFD9D00B0B022 /* NGEContainerSpecificType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296041CDCFD9D00B0B022 /* NGEContainerSpecificType.swift */; };
+		70E296CE1CDCFD9D00B0B022 /* NGEContainerTrackMetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296051CDCFD9D00B0B022 /* NGEContainerTrackMetadataType.swift */; };
+		70E296CF1CDCFD9D00B0B022 /* NGEContentIdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296061CDCFD9D00B0B022 /* NGEContentIdentifierType.swift */; };
+		70E296D01CDCFD9D00B0B022 /* NGEContentMax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296071CDCFD9D00B0B022 /* NGEContentMax.swift */; };
+		70E296D11CDCFD9D00B0B022 /* NGEContentRatingDetailType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296081CDCFD9D00B0B022 /* NGEContentRatingDetailType.swift */; };
+		70E296D21CDCFD9D00B0B022 /* NGEContentRatingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296091CDCFD9D00B0B022 /* NGEContentRatingType.swift */; };
+		70E296D31CDCFD9D00B0B022 /* NGEContentSequenceInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2960A1CDCFD9D00B0B022 /* NGEContentSequenceInfoType.swift */; };
+		70E296D41CDCFD9D00B0B022 /* NGECoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2960B1CDCFD9D00B0B022 /* NGECoordinate.swift */; };
+		70E296D51CDCFD9D00B0B022 /* NGEDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2960C1CDCFD9D00B0B022 /* NGEDate.swift */; };
+		70E296D61CDCFD9D00B0B022 /* NGEDateTimeRangeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2960D1CDCFD9D00B0B022 /* NGEDateTimeRangeType.swift */; };
+		70E296D71CDCFD9D00B0B022 /* NGEDigitalAssetAncillaryDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2960E1CDCFD9D00B0B022 /* NGEDigitalAssetAncillaryDataType.swift */; };
+		70E296D81CDCFD9D00B0B022 /* NGEDigitalAssetAudioDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2960F1CDCFD9D00B0B022 /* NGEDigitalAssetAudioDataType.swift */; };
+		70E296D91CDCFD9D00B0B022 /* NGEDigitalAssetAudioEncodingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296101CDCFD9D00B0B022 /* NGEDigitalAssetAudioEncodingType.swift */; };
+		70E296DA1CDCFD9D00B0B022 /* NGEDigitalAssetAudioLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296111CDCFD9D00B0B022 /* NGEDigitalAssetAudioLanguageType.swift */; };
+		70E296DB1CDCFD9D00B0B022 /* NGEDigitalAssetCardsetListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296121CDCFD9D00B0B022 /* NGEDigitalAssetCardsetListType.swift */; };
+		70E296DC1CDCFD9D00B0B022 /* NGEDigitalAssetCardsetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296131CDCFD9D00B0B022 /* NGEDigitalAssetCardsetType.swift */; };
+		70E296DD1CDCFD9D00B0B022 /* NGEDigitalAssetChromaticityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296141CDCFD9D00B0B022 /* NGEDigitalAssetChromaticityType.swift */; };
+		70E296DE1CDCFD9D00B0B022 /* NGEDigitalAssetColorEncodingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296151CDCFD9D00B0B022 /* NGEDigitalAssetColorEncodingType.swift */; };
+		70E296DF1CDCFD9D00B0B022 /* NGEDigitalAssetColorVolumeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296161CDCFD9D00B0B022 /* NGEDigitalAssetColorVolumeType.swift */; };
+		70E296E01CDCFD9D00B0B022 /* NGEDigitalAssetExternalTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296171CDCFD9D00B0B022 /* NGEDigitalAssetExternalTrackReferenceType.swift */; };
+		70E296E11CDCFD9D00B0B022 /* NGEDigitalAssetImageDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296181CDCFD9D00B0B022 /* NGEDigitalAssetImageDataType.swift */; };
+		70E296E21CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveBaseDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296191CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveBaseDataType.swift */; };
+		70E296E31CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2961A1CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveDataType.swift */; };
+		70E296E41CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveEncodingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2961B1CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveEncodingType.swift */; };
+		70E296E51CDCFD9D00B0B022 /* NGEDigitalAssetMetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2961C1CDCFD9D00B0B022 /* NGEDigitalAssetMetadataType.swift */; };
+		70E296E61CDCFD9D00B0B022 /* NGEDigitalAssetSetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2961D1CDCFD9D00B0B022 /* NGEDigitalAssetSetType.swift */; };
+		70E296E71CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2961E1CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleDataType.swift */; };
+		70E296E81CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleFormatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2961F1CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleFormatType.swift */; };
+		70E296E91CDCFD9D00B0B022 /* NGEDigitalAssetVideoDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296201CDCFD9D00B0B022 /* NGEDigitalAssetVideoDataType.swift */; };
+		70E296EA1CDCFD9D00B0B022 /* NGEDigitalAssetVideoEncodingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296211CDCFD9D00B0B022 /* NGEDigitalAssetVideoEncodingType.swift */; };
+		70E296EB1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureFrameRateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296221CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureFrameRateType.swift */; };
+		70E296EC1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296231CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift */; };
+		70E296ED1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureLightLevelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296241CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureLightLevelType.swift */; };
+		70E296EE1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureProgressiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296251CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureProgressiveType.swift */; };
+		70E296EF1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296261CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureType.swift */; };
+		70E296F01CDCFD9D00B0B022 /* NGEDigitalAssetVideoSubtitleLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296271CDCFD9D00B0B022 /* NGEDigitalAssetVideoSubtitleLanguageType.swift */; };
+		70E296F11CDCFD9D00B0B022 /* NGEDigitalAssetWatermarkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296281CDCFD9D00B0B022 /* NGEDigitalAssetWatermarkType.swift */; };
+		70E296F21CDCFD9D00B0B022 /* NGEDisplayIndicatorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296291CDCFD9D00B0B022 /* NGEDisplayIndicatorsEnum.swift */; };
+		70E296F31CDCFD9D00B0B022 /* NGEDisplayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2962A1CDCFD9D00B0B022 /* NGEDisplayLabel.swift */; };
+		70E296F41CDCFD9D00B0B022 /* NGEDisplayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2962B1CDCFD9D00B0B022 /* NGEDisplayName.swift */; };
+		70E296F51CDCFD9D00B0B022 /* NGEDisplayString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2962C1CDCFD9D00B0B022 /* NGEDisplayString.swift */; };
+		70E296F61CDCFD9D00B0B022 /* NGEEANUPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2962D1CDCFD9D00B0B022 /* NGEEANUPC.swift */; };
+		70E296F71CDCFD9D00B0B022 /* NGEEarthCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2962E1CDCFD9D00B0B022 /* NGEEarthCoordinate.swift */; };
+		70E296F81CDCFD9D00B0B022 /* NGEEventLocationEarthCoordinateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2962F1CDCFD9D00B0B022 /* NGEEventLocationEarthCoordinateType.swift */; };
+		70E296F91CDCFD9D00B0B022 /* NGEEventLocationOtherCoordinateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296301CDCFD9D00B0B022 /* NGEEventLocationOtherCoordinateType.swift */; };
+		70E296FA1CDCFD9D00B0B022 /* NGEEventLocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296311CDCFD9D00B0B022 /* NGEEventLocationType.swift */; };
+		70E296FB1CDCFD9D00B0B022 /* NGEEventPeriodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296321CDCFD9D00B0B022 /* NGEEventPeriodType.swift */; };
+		70E296FC1CDCFD9D00B0B022 /* NGEExperienceAppType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296331CDCFD9D00B0B022 /* NGEExperienceAppType.swift */; };
+		70E296FD1CDCFD9D00B0B022 /* NGEExperienceChildType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296341CDCFD9D00B0B022 /* NGEExperienceChildType.swift */; };
+		70E296FE1CDCFD9D00B0B022 /* NGEExperienceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296351CDCFD9D00B0B022 /* NGEExperienceID.swift */; };
+		70E296FF1CDCFD9D00B0B022 /* NGEExperienceListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296361CDCFD9D00B0B022 /* NGEExperienceListType.swift */; };
+		70E297001CDCFD9D00B0B022 /* NGEExperienceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296371CDCFD9D00B0B022 /* NGEExperienceType.swift */; };
+		70E297011CDCFD9D00B0B022 /* NGEFictionalEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296381CDCFD9D00B0B022 /* NGEFictionalEnd.swift */; };
+		70E297021CDCFD9D00B0B022 /* NGEFictionalStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296391CDCFD9D00B0B022 /* NGEFictionalStart.swift */; };
+		70E297031CDCFD9D00B0B022 /* NGEFileDeleteManifestType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2963A1CDCFD9D00B0B022 /* NGEFileDeleteManifestType+File.swift */; };
+		70E297041CDCFD9D00B0B022 /* NGEFileDeleteManifestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2963B1CDCFD9D00B0B022 /* NGEFileDeleteManifestType.swift */; };
+		70E297051CDCFD9D00B0B022 /* NGEFileDeliveryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2963C1CDCFD9D00B0B022 /* NGEFileDeliveryType.swift */; };
+		70E297061CDCFD9D00B0B022 /* NGEFileInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2963D1CDCFD9D00B0B022 /* NGEFileInfoType.swift */; };
+		70E297071CDCFD9D00B0B022 /* NGEFileManifestInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2963E1CDCFD9D00B0B022 /* NGEFileManifestInfoType.swift */; };
+		70E297081CDCFD9D00B0B022 /* NGEFileManifestType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2963F1CDCFD9D00B0B022 /* NGEFileManifestType+File.swift */; };
+		70E297091CDCFD9D00B0B022 /* NGEFileManifestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296401CDCFD9D00B0B022 /* NGEFileManifestType.swift */; };
+		70E2970A1CDCFD9D00B0B022 /* NGEFrameAverageMax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296411CDCFD9D00B0B022 /* NGEFrameAverageMax.swift */; };
+		70E2970B1CDCFD9D00B0B022 /* NGEGalleryName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296421CDCFD9D00B0B022 /* NGEGalleryName.swift */; };
+		70E2970C1CDCFD9D00B0B022 /* NGEGalleryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296431CDCFD9D00B0B022 /* NGEGalleryType.swift */; };
+		70E2970D1CDCFD9D00B0B022 /* NGEGenderEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296441CDCFD9D00B0B022 /* NGEGenderEnum.swift */; };
+		70E2970E1CDCFD9D00B0B022 /* NGEGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296451CDCFD9D00B0B022 /* NGEGenre.swift */; };
+		70E2970F1CDCFD9D00B0B022 /* NGEGroupingEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296461CDCFD9D00B0B022 /* NGEGroupingEntityType.swift */; };
+		70E297101CDCFD9D00B0B022 /* NGEHashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296471CDCFD9D00B0B022 /* NGEHashType.swift */; };
+		70E297111CDCFD9D00B0B022 /* NGEImageClipRefType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296481CDCFD9D00B0B022 /* NGEImageClipRefType.swift */; };
+		70E297121CDCFD9D00B0B022 /* NGEImageID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296491CDCFD9D00B0B022 /* NGEImageID.swift */; };
+		70E297131CDCFD9D00B0B022 /* NGEInteractiveTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2964A1CDCFD9D00B0B022 /* NGEInteractiveTrackReferenceType.swift */; };
+		70E297141CDCFD9D00B0B022 /* NGEInventoryAncillaryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2964B1CDCFD9D00B0B022 /* NGEInventoryAncillaryType.swift */; };
+		70E297151CDCFD9D00B0B022 /* NGEInventoryAudioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2964C1CDCFD9D00B0B022 /* NGEInventoryAudioType.swift */; };
+		70E297161CDCFD9D00B0B022 /* NGEInventoryImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2964D1CDCFD9D00B0B022 /* NGEInventoryImageType.swift */; };
+		70E297171CDCFD9D00B0B022 /* NGEInventoryInteractiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2964E1CDCFD9D00B0B022 /* NGEInventoryInteractiveType.swift */; };
+		70E297181CDCFD9D00B0B022 /* NGEInventoryMediaManifestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2964F1CDCFD9D00B0B022 /* NGEInventoryMediaManifestType.swift */; };
+		70E297191CDCFD9D00B0B022 /* NGEInventoryMetadataAliasType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296501CDCFD9D00B0B022 /* NGEInventoryMetadataAliasType.swift */; };
+		70E2971A1CDCFD9D00B0B022 /* NGEInventoryMetadataLocalizedPairType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296511CDCFD9D00B0B022 /* NGEInventoryMetadataLocalizedPairType.swift */; };
+		70E2971B1CDCFD9D00B0B022 /* NGEInventoryMetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296521CDCFD9D00B0B022 /* NGEInventoryMetadataType.swift */; };
+		70E2971C1CDCFD9D00B0B022 /* NGEInventorySubtitleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296531CDCFD9D00B0B022 /* NGEInventorySubtitleType.swift */; };
+		70E2971D1CDCFD9D00B0B022 /* NGEInventoryTextObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296541CDCFD9D00B0B022 /* NGEInventoryTextObjectType.swift */; };
+		70E2971E1CDCFD9D00B0B022 /* NGEInventoryType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296551CDCFD9D00B0B022 /* NGEInventoryType+File.swift */; };
+		70E2971F1CDCFD9D00B0B022 /* NGEInventoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296561CDCFD9D00B0B022 /* NGEInventoryType.swift */; };
+		70E297201CDCFD9D00B0B022 /* NGEInventoryVideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296571CDCFD9D00B0B022 /* NGEInventoryVideoType.swift */; };
+		70E297211CDCFD9D00B0B022 /* NGEJobDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296581CDCFD9D00B0B022 /* NGEJobDisplay.swift */; };
+		70E297221CDCFD9D00B0B022 /* NGEJobFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296591CDCFD9D00B0B022 /* NGEJobFunction.swift */; };
+		70E297231CDCFD9D00B0B022 /* NGELocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2965A1CDCFD9D00B0B022 /* NGELocation.swift */; };
+		70E297241CDCFD9D00B0B022 /* NGELocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2965B1CDCFD9D00B0B022 /* NGELocationType.swift */; };
+		70E297251CDCFD9D00B0B022 /* NGEMadeForRegionInternalTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2965C1CDCFD9D00B0B022 /* NGEMadeForRegionInternalTypeEnum.swift */; };
+		70E297261CDCFD9D00B0B022 /* NGEManifestAppDataSetType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2965D1CDCFD9D00B0B022 /* NGEManifestAppDataSetType+File.swift */; };
+		70E297271CDCFD9D00B0B022 /* NGEManifestAppDataSetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2965E1CDCFD9D00B0B022 /* NGEManifestAppDataSetType.swift */; };
+		70E297281CDCFD9D00B0B022 /* NGEMediaManifestEditAddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2965F1CDCFD9D00B0B022 /* NGEMediaManifestEditAddType.swift */; };
+		70E297291CDCFD9D00B0B022 /* NGEMediaManifestEditDeleteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296601CDCFD9D00B0B022 /* NGEMediaManifestEditDeleteType.swift */; };
+		70E2972A1CDCFD9D00B0B022 /* NGEMediaManifestEditLocRefType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296611CDCFD9D00B0B022 /* NGEMediaManifestEditLocRefType.swift */; };
+		70E2972B1CDCFD9D00B0B022 /* NGEMediaManifestEditType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296621CDCFD9D00B0B022 /* NGEMediaManifestEditType+File.swift */; };
+		70E2972C1CDCFD9D00B0B022 /* NGEMediaManifestEditType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296631CDCFD9D00B0B022 /* NGEMediaManifestEditType.swift */; };
+		70E2972D1CDCFD9D00B0B022 /* NGEMediaManifestType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296641CDCFD9D00B0B022 /* NGEMediaManifestType+File.swift */; };
+		70E2972E1CDCFD9D00B0B022 /* NGEMediaManifestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296651CDCFD9D00B0B022 /* NGEMediaManifestType.swift */; };
+		70E2972F1CDCFD9D00B0B022 /* NGEMediaProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296661CDCFD9D00B0B022 /* NGEMediaProfileType.swift */; };
+		70E297301CDCFD9D00B0B022 /* NGEMoneyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296671CDCFD9D00B0B022 /* NGEMoneyType.swift */; };
+		70E297311CDCFD9D00B0B022 /* NGENotRated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296681CDCFD9D00B0B022 /* NGENotRated.swift */; };
+		70E297321CDCFD9D00B0B022 /* NGENVPairMoneyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296691CDCFD9D00B0B022 /* NGENVPairMoneyType.swift */; };
+		70E297331CDCFD9D00B0B022 /* NGENVPairType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2966A1CDCFD9D00B0B022 /* NGENVPairType.swift */; };
+		70E297341CDCFD9D00B0B022 /* NGEOrgNameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2966B1CDCFD9D00B0B022 /* NGEOrgNameType.swift */; };
+		70E297351CDCFD9D00B0B022 /* NGEOtherCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2966C1CDCFD9D00B0B022 /* NGEOtherCoordinates.swift */; };
+		70E297361CDCFD9D00B0B022 /* NGEOtherIDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2966D1CDCFD9D00B0B022 /* NGEOtherIDType.swift */; };
+		70E297371CDCFD9D00B0B022 /* NGEPersonIdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2966E1CDCFD9D00B0B022 /* NGEPersonIdentifierType.swift */; };
+		70E297381CDCFD9D00B0B022 /* NGEPersonNameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2966F1CDCFD9D00B0B022 /* NGEPersonNameType.swift */; };
+		70E297391CDCFD9D00B0B022 /* NGEPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296701CDCFD9D00B0B022 /* NGEPhone.swift */; };
+		70E2973A1CDCFD9D00B0B022 /* NGEPictureGroupListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296711CDCFD9D00B0B022 /* NGEPictureGroupListType.swift */; };
+		70E2973B1CDCFD9D00B0B022 /* NGEPictureGroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296721CDCFD9D00B0B022 /* NGEPictureGroupType.swift */; };
+		70E2973C1CDCFD9D00B0B022 /* NGEPictureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296731CDCFD9D00B0B022 /* NGEPictureType.swift */; };
+		70E2973D1CDCFD9D00B0B022 /* NGEPlayableSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296741CDCFD9D00B0B022 /* NGEPlayableSequence.swift */; };
+		70E2973E1CDCFD9D00B0B022 /* NGEPlayableSequenceListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296751CDCFD9D00B0B022 /* NGEPlayableSequenceListType.swift */; };
+		70E2973F1CDCFD9D00B0B022 /* NGEPlayableSequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296761CDCFD9D00B0B022 /* NGEPlayableSequenceType.swift */; };
+		70E297401CDCFD9D00B0B022 /* NGEPresentationLanguagePairType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296771CDCFD9D00B0B022 /* NGEPresentationLanguagePairType.swift */; };
+		70E297411CDCFD9D00B0B022 /* NGEPresentationListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296781CDCFD9D00B0B022 /* NGEPresentationListType.swift */; };
+		70E297421CDCFD9D00B0B022 /* NGEPresentationManifestType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296791CDCFD9D00B0B022 /* NGEPresentationManifestType+File.swift */; };
+		70E297431CDCFD9D00B0B022 /* NGEPresentationManifestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2967A1CDCFD9D00B0B022 /* NGEPresentationManifestType.swift */; };
+		70E297441CDCFD9D00B0B022 /* NGEPresentationType+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2967B1CDCFD9D00B0B022 /* NGEPresentationType+File.swift */; };
+		70E297451CDCFD9D00B0B022 /* NGEPresentationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2967C1CDCFD9D00B0B022 /* NGEPresentationType.swift */; };
+		70E297461CDCFD9D00B0B022 /* NGEPrivateDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2967D1CDCFD9D00B0B022 /* NGEPrivateDataType.swift */; };
+		70E297471CDCFD9D00B0B022 /* NGEProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2967E1CDCFD9D00B0B022 /* NGEProfile.swift */; };
+		70E297481CDCFD9D00B0B022 /* NGERegionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2967F1CDCFD9D00B0B022 /* NGERegionType.swift */; };
+		70E297491CDCFD9D00B0B022 /* NGEReleaseHistoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296801CDCFD9D00B0B022 /* NGEReleaseHistoryType.swift */; };
+		70E2974A1CDCFD9D00B0B022 /* NGEReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296811CDCFD9D00B0B022 /* NGEReleaseType.swift */; };
+		70E2974B1CDCFD9D00B0B022 /* NGEStringAndLanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296821CDCFD9D00B0B022 /* NGEStringAndLanguageType.swift */; };
+		70E2974C1CDCFD9D00B0B022 /* NGEStringDisplayIndicatorsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296831CDCFD9D00B0B022 /* NGEStringDisplayIndicatorsEnum.swift */; };
+		70E2974D1CDCFD9D00B0B022 /* NGEStringVideoPicFrameRateMultiplierEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296841CDCFD9D00B0B022 /* NGEStringVideoPicFrameRateMultiplierEnum.swift */; };
+		70E2974E1CDCFD9D00B0B022 /* NGEStringVideoPicPixelAspectEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296851CDCFD9D00B0B022 /* NGEStringVideoPicPixelAspectEnum.swift */; };
+		70E2974F1CDCFD9D00B0B022 /* NGEStringVideoPicProgressiveScanOrderEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296861CDCFD9D00B0B022 /* NGEStringVideoPicProgressiveScanOrderEnum.swift */; };
+		70E297501CDCFD9D00B0B022 /* NGESubtitleTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296871CDCFD9D00B0B022 /* NGESubtitleTrackReferenceType.swift */; };
+		70E297511CDCFD9D00B0B022 /* NGESummary190.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296881CDCFD9D00B0B022 /* NGESummary190.swift */; };
+		70E297521CDCFD9D00B0B022 /* NGESummary400.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296891CDCFD9D00B0B022 /* NGESummary400.swift */; };
+		70E297531CDCFD9D00B0B022 /* NGESummary4000.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2968A1CDCFD9D00B0B022 /* NGESummary4000.swift */; };
+		70E297541CDCFD9D00B0B022 /* NGETextGroupID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2968B1CDCFD9D00B0B022 /* NGETextGroupID.swift */; };
+		70E297551CDCFD9D00B0B022 /* NGETextGroupListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2968C1CDCFD9D00B0B022 /* NGETextGroupListType.swift */; };
+		70E297561CDCFD9D00B0B022 /* NGETextGroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2968D1CDCFD9D00B0B022 /* NGETextGroupType.swift */; };
+		70E297571CDCFD9D00B0B022 /* NGETextString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2968E1CDCFD9D00B0B022 /* NGETextString.swift */; };
+		70E297581CDCFD9D00B0B022 /* NGETimecodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2968F1CDCFD9D00B0B022 /* NGETimecodeType.swift */; };
+		70E297591CDCFD9D00B0B022 /* NGETimedEventSequenceListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296901CDCFD9D00B0B022 /* NGETimedEventSequenceListType.swift */; };
+		70E2975A1CDCFD9D00B0B022 /* NGETimedEventSequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296911CDCFD9D00B0B022 /* NGETimedEventSequenceType.swift */; };
+		70E2975B1CDCFD9D00B0B022 /* NGETimedEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296921CDCFD9D00B0B022 /* NGETimedEventType.swift */; };
+		70E2975C1CDCFD9D00B0B022 /* NGETimelineStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296931CDCFD9D00B0B022 /* NGETimelineStyleType.swift */; };
+		70E2975D1CDCFD9D00B0B022 /* NGETitleAlternate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296941CDCFD9D00B0B022 /* NGETitleAlternate.swift */; };
+		70E2975E1CDCFD9D00B0B022 /* NGETrackMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296951CDCFD9D00B0B022 /* NGETrackMetadata.swift */; };
+		70E2975F1CDCFD9D00B0B022 /* NGETrackMetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296961CDCFD9D00B0B022 /* NGETrackMetadataType.swift */; };
+		70E297601CDCFD9D00B0B022 /* NGEType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296971CDCFD9D00B0B022 /* NGEType.swift */; };
+		70E297611CDCFD9D00B0B022 /* NGETypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296981CDCFD9D00B0B022 /* NGETypeEnum.swift */; };
+		70E297621CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296991CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift */; };
+		70E297631CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2969A1CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift */; };
+		70E297651CDD178200B0B022 /* NGDMAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E297641CDD178200B0B022 /* NGDMAppData.swift */; };
+		70E9F6C01D05F1060010613E /* TalentImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9F6BF1D05F1060010613E /* TalentImageGalleryViewController.swift */; };
+		70EFFB2C1CBC637000643372 /* MultiMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EFFB2B1CBC637000643372 /* MultiMapView.swift */; };
+		70EFFB2E1CBC6E4500643372 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */; };
+		70FECF6D1C65433A005B1A44 /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */; };
+		70FECF771C656707005B1A44 /* SceneDetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF761C656707005B1A44 /* SceneDetailCollectionViewController.swift */; };
+		70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70FECF7C1C657976005B1A44 /* MapKit.framework */; };
+		A7CA836CCC8C043A4AC75B98 /* Pods_NextGenExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B12FE4232619740870843F /* Pods_NextGenExample.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		29EBFFD493A43292101F1452 /* Pods-NextGenExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGenExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextGenExample/Pods-NextGenExample.release.xcconfig"; sourceTree = "<group>"; };
+		490213451C850A0100071552 /* GallerySceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySceneDetailViewController.swift; sourceTree = "<group>"; };
+		490213471C860C9A00071552 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
+		4921D9731C3EFD0B00ED2AA6 /* NextGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4921D97B1C3EFD0B00ED2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4921D9831C3EFD0B00ED2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4921D9851C3EFD0B00ED2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtrasViewController.swift; path = "NextGen/Out-of-Movie Experience/ExtrasViewController.swift"; sourceTree = SOURCE_ROOT; };
+		492267E91C76A56900B306A2 /* CommentaryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryViewCell.swift; sourceTree = "<group>"; };
+		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		493043A61CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasSceneLocationsViewController.swift; sourceTree = "<group>"; };
+		493043AC1CE0F367000A9EBC /* MapItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapItemCell.xib; sourceTree = "<group>"; };
+		493043AE1CE0F389000A9EBC /* MapItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapItemCell.swift; sourceTree = "<group>"; };
+		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingItemsViewController.swift; sourceTree = "<group>"; };
+		497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
+		49860CE91CD020B4007770F2 /* mos-nextgen-background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-background.mp4"; sourceTree = "<group>"; };
+		49860CED1CD2D736007770F2 /* NGDMAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAppearance.swift; sourceTree = "<group>"; };
+		4993BACB1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTitlesCollectionViewController.swift; sourceTree = "<group>"; };
+		4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnhancedTitleCell.xib; sourceTree = "<group>"; };
+		4993D2681C6D07800077220A /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		499871231CB43A4E00606E56 /* Commentary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Commentary.plist; sourceTree = "<group>"; };
+		49B653581CBECFF20006C71D /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		49CB44C81C7CF02400753227 /* InMovieExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMovieExperienceViewController.swift; sourceTree = "<group>"; };
+		49CB44CA1C7D0CD800753227 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
+		49F3EAD21C515B3100E09484 /* TitledImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitledImageCell.xib; sourceTree = "<group>"; };
+		49F3EAD41C51639700E09484 /* TitledImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledImageCell.swift; sourceTree = "<group>"; };
+		49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasVideoGalleryViewController.swift; sourceTree = "<group>"; };
+		49F3EADC1C51890A00E09484 /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
+		49F3EADE1C518ABE00E09484 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		49F502541C890E6500DFAD88 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		6AA9CCC11C883E91005EBA92 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
+		6AA9CCC21C883E91005EBA92 /* RobotoCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Italic.ttf"; sourceTree = "<group>"; };
+		6AA9CCC31C883E91005EBA92 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WBVideoPlayerExtensions.swift; sourceTree = "<group>"; };
+		701B028C1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBVideoPlayerPlaybackView.h; sourceTree = "<group>"; };
+		701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBVideoPlayerPlaybackView.m; sourceTree = "<group>"; };
+		701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBVideoPlayerViewController.h; sourceTree = "<group>"; };
+		701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBVideoPlayerViewController.m; sourceTree = "<group>"; };
+		701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NextGen-Bridging-Header.h"; sourceTree = "<group>"; };
+		701D69C01C48205B0047A67A /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailViewController.swift; sourceTree = "<group>"; };
+		701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmCollectionViewCell.swift; sourceTree = "<group>"; };
+		701D69C71C482AF70047A67A /* NSURL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Utils.swift"; sourceTree = "<group>"; };
+		701D69C91C482C210047A67A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utils.swift"; sourceTree = "<group>"; };
+		701D69CB1C482E060047A67A /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
+		70367AAE1C8F67B30042B5B5 /* NGDMExperience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMExperience.swift; sourceTree = "<group>"; };
+		70367AB01C8F69970042B5B5 /* NGDMMainExperience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMMainExperience.swift; sourceTree = "<group>"; };
+		70367AB41C8F74560042B5B5 /* NGDMMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMMetadata.swift; sourceTree = "<group>"; };
+		70367AB61C8F87AE0042B5B5 /* NGDMPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPresentation.swift; sourceTree = "<group>"; };
+		70367AB81C8F8BDE0042B5B5 /* NGDMGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMGallery.swift; sourceTree = "<group>"; };
+		70367ABC1C8F8DA30042B5B5 /* NGDMPictureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPictureGroup.swift; sourceTree = "<group>"; };
+		70367ABE1C8F8E9E0042B5B5 /* NGDMPicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPicture.swift; sourceTree = "<group>"; };
+		70367AC01C8F8F420042B5B5 /* NGDMImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMImage.swift; sourceTree = "<group>"; };
+		70367AC21C8F9D450042B5B5 /* NGDMTimedEventSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTimedEventSequence.swift; sourceTree = "<group>"; };
+		70367AC41C8F9E840042B5B5 /* NGDMTimedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTimedEvent.swift; sourceTree = "<group>"; };
+		70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextGroup.swift; sourceTree = "<group>"; };
+		70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMTextObject.swift; sourceTree = "<group>"; };
+		70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAudioVisual.swift; sourceTree = "<group>"; };
+		70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeTextSceneDetailViewController.swift; sourceTree = "<group>"; };
+		70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Theme.swift"; sourceTree = "<group>"; };
+		70460C5D1CBEF8630001B6D8 /* UIFont+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Theme.swift"; sourceTree = "<group>"; };
+		7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasPresentationController.swift; sourceTree = "<group>"; };
+		70517E781CB715EF008556EC /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
+		70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		70517E7A1CB715EF008556EC /* MapSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		70517E7F1CB717AC008556EC /* ImageSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		70517E801CB717AC008556EC /* ImageSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		70517E811CB717AC008556EC /* SceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Wide.xib"; sourceTree = "<group>"; };
+		7065F5471C47004100A2C74E /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
+		7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataManager.swift; sourceTree = "<group>"; };
+		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		7077A3141C49897900843782 /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
+		707E10841C40797400FCF81C /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
+		707E10861C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMovieExperienceExtrasViewController.swift; sourceTree = "<group>"; };
+		7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMVideo.swift; sourceTree = "<group>"; };
+		7085F7711C91E4C000DF31B6 /* APIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUtil.swift; sourceTree = "<group>"; };
+		7085F7731C920A7500DF31B6 /* TheTakeAPIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeAPIUtil.swift; sourceTree = "<group>"; };
+		7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
+		7085F7791C920E7500DF31B6 /* String+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
+		7085F77B1C92200700DF31B6 /* TheTakeProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeProduct.swift; sourceTree = "<group>"; };
+		7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Indexable+Utils.swift"; sourceTree = "<group>"; };
+		7085F7811C93359000DF31B6 /* NGDMAppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAppGroup.swift; sourceTree = "<group>"; };
+		7085F7831C9336C600DF31B6 /* NGDMInteractive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMInteractive.swift; sourceTree = "<group>"; };
+		7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMExperienceApp.swift; sourceTree = "<group>"; };
+		7085F7881C93937800DF31B6 /* UIColor+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+		7085F7981C97550C00DF31B6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		7094F3B61CFF423100F1B10D /* LandscapeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeNavigationController.swift; sourceTree = "<group>"; };
+		7099B9DA1CEA4CE5000274F7 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		7099B9DE1CEA835C000274F7 /* ImageGalleryScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryScrollView.swift; sourceTree = "<group>"; };
+		70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaselineAPIUtil.swift; sourceTree = "<group>"; };
+		70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Utils.swift"; sourceTree = "<group>"; };
+		70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Utils.swift"; sourceTree = "<group>"; };
+		70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMLocation.swift; sourceTree = "<group>"; };
+		70BFA5AA1CBD651F00F674FA /* NSLocale+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocale+Utils.swift"; sourceTree = "<group>"; };
+		70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerScrubber.swift; sourceTree = "<group>"; };
+		70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
+		70C830B61CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingSceneDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		70C830BA1CB4823100F9E2D6 /* SceneDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailViewController.swift; sourceTree = "<group>"; };
+		70C830BC1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasExperienceViewController.swift; sourceTree = "<group>"; };
+		70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TalentTableViewCell-Narrow.xib"; sourceTree = "<group>"; };
+		70D2FC7C1CADC21F0003FC54 /* NGDMPeople.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMPeople.swift; sourceTree = "<group>"; };
+		70D2FC7E1CAE02E80003FC54 /* CommentaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentaryView.swift; sourceTree = "<group>"; };
+		70D2FC7F1CAE02E80003FC54 /* CommentaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryView.xib; sourceTree = "<group>"; };
+		70DBE73C1D02366600182C80 /* SimpleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		70DEFCE51CBC79CA00941977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		70DF2F7D1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingViewController.swift; sourceTree = "<group>"; };
+		70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
+		70DF2F811CA5C2B5007AD2A0 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		70DF2F831CA5C8B2007AD2A0 /* MenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		70DF2F891CA5EADF007AD2A0 /* MenuItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemCell.xib; sourceTree = "<group>"; };
+		70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuSectionCell.xib; sourceTree = "<group>"; };
+		70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSectionCell.swift; sourceTree = "<group>"; };
+		70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuedViewController.swift; sourceTree = "<group>"; };
+		70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeCategory.swift; sourceTree = "<group>"; };
+		70E295D11CDCFD9D00B0B022 /* libxml-bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libxml-bridging-header.h"; sourceTree = "<group>"; };
+		70E295D21CDCFD9D00B0B022 /* NGEAbbreviatedMetadataInfoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAbbreviatedMetadataInfoType.swift; sourceTree = "<group>"; };
+		70E295D31CDCFD9D00B0B022 /* NGEAbbreviatedMetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAbbreviatedMetadataType.swift; sourceTree = "<group>"; };
+		70E295D41CDCFD9D00B0B022 /* NGEAdaptationSetID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAdaptationSetID.swift; sourceTree = "<group>"; };
+		70E295D51CDCFD9D00B0B022 /* NGEALIDExperienceMapListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEALIDExperienceMapListType.swift; sourceTree = "<group>"; };
+		70E295D61CDCFD9D00B0B022 /* NGEALIDExperienceMapType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEALIDExperienceMapType.swift; sourceTree = "<group>"; };
+		70E295D71CDCFD9D00B0B022 /* NGEAlternateText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAlternateText.swift; sourceTree = "<group>"; };
+		70E295D81CDCFD9D00B0B022 /* NGEAncillaryTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAncillaryTrackReferenceType.swift; sourceTree = "<group>"; };
+		70E295D91CDCFD9D00B0B022 /* NGEAppDataAcquireAssetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataAcquireAssetType.swift; sourceTree = "<group>"; };
+		70E295DA1CDCFD9D00B0B022 /* NGEAppDataFeedGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataFeedGeneric.swift; sourceTree = "<group>"; };
+		70E295DB1CDCFD9D00B0B022 /* NGEAppDataFeedProprietaryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataFeedProprietaryType.swift; sourceTree = "<group>"; };
+		70E295DC1CDCFD9D00B0B022 /* NGEAppDataFeedSetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataFeedSetType.swift; sourceTree = "<group>"; };
+		70E295DD1CDCFD9D00B0B022 /* NGEAppDataGalleryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataGalleryType.swift; sourceTree = "<group>"; };
+		70E295DE1CDCFD9D00B0B022 /* NGEAppDataKMLType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataKMLType.swift; sourceTree = "<group>"; };
+		70E295DF1CDCFD9D00B0B022 /* NGEAppDataLocationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataLocationType.swift; sourceTree = "<group>"; };
+		70E295E01CDCFD9D00B0B022 /* NGEAppDataSpecialBehaviorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataSpecialBehaviorType.swift; sourceTree = "<group>"; };
+		70E295E11CDCFD9D00B0B022 /* NGEAppDataTrackSelectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataTrackSelectionType.swift; sourceTree = "<group>"; };
+		70E295E21CDCFD9D00B0B022 /* NGEAppDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppDataType.swift; sourceTree = "<group>"; };
+		70E295E31CDCFD9D00B0B022 /* NGEAppGroupListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppGroupListType.swift; sourceTree = "<group>"; };
+		70E295E41CDCFD9D00B0B022 /* NGEAppGroupType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppGroupType.swift; sourceTree = "<group>"; };
+		70E295E51CDCFD9D00B0B022 /* NGEAppName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppName.swift; sourceTree = "<group>"; };
+		70E295E61CDCFD9D00B0B022 /* NGEAppNVPairType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAppNVPairType.swift; sourceTree = "<group>"; };
+		70E295E71CDCFD9D00B0B022 /* NGEArtReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEArtReference.swift; sourceTree = "<group>"; };
+		70E295E81CDCFD9D00B0B022 /* NGEAssociatedOrgType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAssociatedOrgType.swift; sourceTree = "<group>"; };
+		70E295E91CDCFD9D00B0B022 /* NGEAudioClipRefType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAudioClipRefType.swift; sourceTree = "<group>"; };
+		70E295EA1CDCFD9D00B0B022 /* NGEAudioTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAudioTrackReferenceType.swift; sourceTree = "<group>"; };
+		70E295EB1CDCFD9D00B0B022 /* NGEAudiovisualClipRefType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAudiovisualClipRefType.swift; sourceTree = "<group>"; };
+		70E295EC1CDCFD9D00B0B022 /* NGEAudiovisualType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEAudiovisualType.swift; sourceTree = "<group>"; };
+		70E295ED1CDCFD9D00B0B022 /* NGEBasicMetadataInfoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEBasicMetadataInfoType.swift; sourceTree = "<group>"; };
+		70E295EE1CDCFD9D00B0B022 /* NGEBasicMetadataJobType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEBasicMetadataJobType.swift; sourceTree = "<group>"; };
+		70E295EF1CDCFD9D00B0B022 /* NGEBasicMetadataParentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEBasicMetadataParentType.swift; sourceTree = "<group>"; };
+		70E295F01CDCFD9D00B0B022 /* NGEBasicMetadataPeopleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEBasicMetadataPeopleType.swift; sourceTree = "<group>"; };
+		70E295F11CDCFD9D00B0B022 /* NGEBasicMetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEBasicMetadataType.swift; sourceTree = "<group>"; };
+		70E295F21CDCFD9D00B0B022 /* NGECaption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECaption.swift; sourceTree = "<group>"; };
+		70E295F31CDCFD9D00B0B022 /* NGEChapterListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEChapterListType.swift; sourceTree = "<group>"; };
+		70E295F41CDCFD9D00B0B022 /* NGEChapterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEChapterType.swift; sourceTree = "<group>"; };
+		70E295F51CDCFD9D00B0B022 /* NGEColorTypeTypeEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEColorTypeTypeEnum.swift; sourceTree = "<group>"; };
+		70E295F61CDCFD9D00B0B022 /* NGECompanyCreditsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECompanyCreditsType.swift; sourceTree = "<group>"; };
+		70E295F71CDCFD9D00B0B022 /* NGECompatibilityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECompatibilityType.swift; sourceTree = "<group>"; };
+		70E295F81CDCFD9D00B0B022 /* NGEComplexSequenceInfoAlternateNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEComplexSequenceInfoAlternateNumber.swift; sourceTree = "<group>"; };
+		70E295F91CDCFD9D00B0B022 /* NGEComplexSequenceInfoDistributionNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEComplexSequenceInfoDistributionNumber.swift; sourceTree = "<group>"; };
+		70E295FA1CDCFD9D00B0B022 /* NGEComplexSequenceInfoHouseSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEComplexSequenceInfoHouseSequence.swift; sourceTree = "<group>"; };
+		70E295FB1CDCFD9D00B0B022 /* NGECompObjClassType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECompObjClassType.swift; sourceTree = "<group>"; };
+		70E295FC1CDCFD9D00B0B022 /* NGECompObjDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECompObjDataType.swift; sourceTree = "<group>"; };
+		70E295FD1CDCFD9D00B0B022 /* NGECompObjEntryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECompObjEntryType.swift; sourceTree = "<group>"; };
+		70E295FE1CDCFD9D00B0B022 /* NGECompObjType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECompObjType.swift; sourceTree = "<group>"; };
+		70E295FF1CDCFD9D00B0B022 /* NGEContactInfoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContactInfoType.swift; sourceTree = "<group>"; };
+		70E296001CDCFD9D00B0B022 /* NGEContainerMetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContainerMetadataType.swift; sourceTree = "<group>"; };
+		70E296011CDCFD9D00B0B022 /* NGEContainerMetadataWithIDType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContainerMetadataWithIDType.swift; sourceTree = "<group>"; };
+		70E296021CDCFD9D00B0B022 /* NGEContainerReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContainerReference.swift; sourceTree = "<group>"; };
+		70E296031CDCFD9D00B0B022 /* NGEContainerReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContainerReferenceType.swift; sourceTree = "<group>"; };
+		70E296041CDCFD9D00B0B022 /* NGEContainerSpecificType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContainerSpecificType.swift; sourceTree = "<group>"; };
+		70E296051CDCFD9D00B0B022 /* NGEContainerTrackMetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContainerTrackMetadataType.swift; sourceTree = "<group>"; };
+		70E296061CDCFD9D00B0B022 /* NGEContentIdentifierType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContentIdentifierType.swift; sourceTree = "<group>"; };
+		70E296071CDCFD9D00B0B022 /* NGEContentMax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContentMax.swift; sourceTree = "<group>"; };
+		70E296081CDCFD9D00B0B022 /* NGEContentRatingDetailType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContentRatingDetailType.swift; sourceTree = "<group>"; };
+		70E296091CDCFD9D00B0B022 /* NGEContentRatingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContentRatingType.swift; sourceTree = "<group>"; };
+		70E2960A1CDCFD9D00B0B022 /* NGEContentSequenceInfoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEContentSequenceInfoType.swift; sourceTree = "<group>"; };
+		70E2960B1CDCFD9D00B0B022 /* NGECoordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGECoordinate.swift; sourceTree = "<group>"; };
+		70E2960C1CDCFD9D00B0B022 /* NGEDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDate.swift; sourceTree = "<group>"; };
+		70E2960D1CDCFD9D00B0B022 /* NGEDateTimeRangeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDateTimeRangeType.swift; sourceTree = "<group>"; };
+		70E2960E1CDCFD9D00B0B022 /* NGEDigitalAssetAncillaryDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetAncillaryDataType.swift; sourceTree = "<group>"; };
+		70E2960F1CDCFD9D00B0B022 /* NGEDigitalAssetAudioDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetAudioDataType.swift; sourceTree = "<group>"; };
+		70E296101CDCFD9D00B0B022 /* NGEDigitalAssetAudioEncodingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetAudioEncodingType.swift; sourceTree = "<group>"; };
+		70E296111CDCFD9D00B0B022 /* NGEDigitalAssetAudioLanguageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetAudioLanguageType.swift; sourceTree = "<group>"; };
+		70E296121CDCFD9D00B0B022 /* NGEDigitalAssetCardsetListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetCardsetListType.swift; sourceTree = "<group>"; };
+		70E296131CDCFD9D00B0B022 /* NGEDigitalAssetCardsetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetCardsetType.swift; sourceTree = "<group>"; };
+		70E296141CDCFD9D00B0B022 /* NGEDigitalAssetChromaticityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetChromaticityType.swift; sourceTree = "<group>"; };
+		70E296151CDCFD9D00B0B022 /* NGEDigitalAssetColorEncodingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetColorEncodingType.swift; sourceTree = "<group>"; };
+		70E296161CDCFD9D00B0B022 /* NGEDigitalAssetColorVolumeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetColorVolumeType.swift; sourceTree = "<group>"; };
+		70E296171CDCFD9D00B0B022 /* NGEDigitalAssetExternalTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetExternalTrackReferenceType.swift; sourceTree = "<group>"; };
+		70E296181CDCFD9D00B0B022 /* NGEDigitalAssetImageDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetImageDataType.swift; sourceTree = "<group>"; };
+		70E296191CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveBaseDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetInteractiveBaseDataType.swift; sourceTree = "<group>"; };
+		70E2961A1CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetInteractiveDataType.swift; sourceTree = "<group>"; };
+		70E2961B1CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveEncodingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetInteractiveEncodingType.swift; sourceTree = "<group>"; };
+		70E2961C1CDCFD9D00B0B022 /* NGEDigitalAssetMetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetMetadataType.swift; sourceTree = "<group>"; };
+		70E2961D1CDCFD9D00B0B022 /* NGEDigitalAssetSetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetSetType.swift; sourceTree = "<group>"; };
+		70E2961E1CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetSubtitleDataType.swift; sourceTree = "<group>"; };
+		70E2961F1CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleFormatType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetSubtitleFormatType.swift; sourceTree = "<group>"; };
+		70E296201CDCFD9D00B0B022 /* NGEDigitalAssetVideoDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoDataType.swift; sourceTree = "<group>"; };
+		70E296211CDCFD9D00B0B022 /* NGEDigitalAssetVideoEncodingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoEncodingType.swift; sourceTree = "<group>"; };
+		70E296221CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureFrameRateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoPictureFrameRateType.swift; sourceTree = "<group>"; };
+		70E296231CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift; sourceTree = "<group>"; };
+		70E296241CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureLightLevelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoPictureLightLevelType.swift; sourceTree = "<group>"; };
+		70E296251CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureProgressiveType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoPictureProgressiveType.swift; sourceTree = "<group>"; };
+		70E296261CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoPictureType.swift; sourceTree = "<group>"; };
+		70E296271CDCFD9D00B0B022 /* NGEDigitalAssetVideoSubtitleLanguageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetVideoSubtitleLanguageType.swift; sourceTree = "<group>"; };
+		70E296281CDCFD9D00B0B022 /* NGEDigitalAssetWatermarkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDigitalAssetWatermarkType.swift; sourceTree = "<group>"; };
+		70E296291CDCFD9D00B0B022 /* NGEDisplayIndicatorsEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDisplayIndicatorsEnum.swift; sourceTree = "<group>"; };
+		70E2962A1CDCFD9D00B0B022 /* NGEDisplayLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDisplayLabel.swift; sourceTree = "<group>"; };
+		70E2962B1CDCFD9D00B0B022 /* NGEDisplayName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDisplayName.swift; sourceTree = "<group>"; };
+		70E2962C1CDCFD9D00B0B022 /* NGEDisplayString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEDisplayString.swift; sourceTree = "<group>"; };
+		70E2962D1CDCFD9D00B0B022 /* NGEEANUPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEEANUPC.swift; sourceTree = "<group>"; };
+		70E2962E1CDCFD9D00B0B022 /* NGEEarthCoordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEEarthCoordinate.swift; sourceTree = "<group>"; };
+		70E2962F1CDCFD9D00B0B022 /* NGEEventLocationEarthCoordinateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEEventLocationEarthCoordinateType.swift; sourceTree = "<group>"; };
+		70E296301CDCFD9D00B0B022 /* NGEEventLocationOtherCoordinateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEEventLocationOtherCoordinateType.swift; sourceTree = "<group>"; };
+		70E296311CDCFD9D00B0B022 /* NGEEventLocationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEEventLocationType.swift; sourceTree = "<group>"; };
+		70E296321CDCFD9D00B0B022 /* NGEEventPeriodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEEventPeriodType.swift; sourceTree = "<group>"; };
+		70E296331CDCFD9D00B0B022 /* NGEExperienceAppType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEExperienceAppType.swift; sourceTree = "<group>"; };
+		70E296341CDCFD9D00B0B022 /* NGEExperienceChildType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEExperienceChildType.swift; sourceTree = "<group>"; };
+		70E296351CDCFD9D00B0B022 /* NGEExperienceID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEExperienceID.swift; sourceTree = "<group>"; };
+		70E296361CDCFD9D00B0B022 /* NGEExperienceListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEExperienceListType.swift; sourceTree = "<group>"; };
+		70E296371CDCFD9D00B0B022 /* NGEExperienceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEExperienceType.swift; sourceTree = "<group>"; };
+		70E296381CDCFD9D00B0B022 /* NGEFictionalEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFictionalEnd.swift; sourceTree = "<group>"; };
+		70E296391CDCFD9D00B0B022 /* NGEFictionalStart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFictionalStart.swift; sourceTree = "<group>"; };
+		70E2963A1CDCFD9D00B0B022 /* NGEFileDeleteManifestType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEFileDeleteManifestType+File.swift"; sourceTree = "<group>"; };
+		70E2963B1CDCFD9D00B0B022 /* NGEFileDeleteManifestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFileDeleteManifestType.swift; sourceTree = "<group>"; };
+		70E2963C1CDCFD9D00B0B022 /* NGEFileDeliveryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFileDeliveryType.swift; sourceTree = "<group>"; };
+		70E2963D1CDCFD9D00B0B022 /* NGEFileInfoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFileInfoType.swift; sourceTree = "<group>"; };
+		70E2963E1CDCFD9D00B0B022 /* NGEFileManifestInfoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFileManifestInfoType.swift; sourceTree = "<group>"; };
+		70E2963F1CDCFD9D00B0B022 /* NGEFileManifestType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEFileManifestType+File.swift"; sourceTree = "<group>"; };
+		70E296401CDCFD9D00B0B022 /* NGEFileManifestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFileManifestType.swift; sourceTree = "<group>"; };
+		70E296411CDCFD9D00B0B022 /* NGEFrameAverageMax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEFrameAverageMax.swift; sourceTree = "<group>"; };
+		70E296421CDCFD9D00B0B022 /* NGEGalleryName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEGalleryName.swift; sourceTree = "<group>"; };
+		70E296431CDCFD9D00B0B022 /* NGEGalleryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEGalleryType.swift; sourceTree = "<group>"; };
+		70E296441CDCFD9D00B0B022 /* NGEGenderEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEGenderEnum.swift; sourceTree = "<group>"; };
+		70E296451CDCFD9D00B0B022 /* NGEGenre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEGenre.swift; sourceTree = "<group>"; };
+		70E296461CDCFD9D00B0B022 /* NGEGroupingEntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEGroupingEntityType.swift; sourceTree = "<group>"; };
+		70E296471CDCFD9D00B0B022 /* NGEHashType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEHashType.swift; sourceTree = "<group>"; };
+		70E296481CDCFD9D00B0B022 /* NGEImageClipRefType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEImageClipRefType.swift; sourceTree = "<group>"; };
+		70E296491CDCFD9D00B0B022 /* NGEImageID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEImageID.swift; sourceTree = "<group>"; };
+		70E2964A1CDCFD9D00B0B022 /* NGEInteractiveTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInteractiveTrackReferenceType.swift; sourceTree = "<group>"; };
+		70E2964B1CDCFD9D00B0B022 /* NGEInventoryAncillaryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryAncillaryType.swift; sourceTree = "<group>"; };
+		70E2964C1CDCFD9D00B0B022 /* NGEInventoryAudioType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryAudioType.swift; sourceTree = "<group>"; };
+		70E2964D1CDCFD9D00B0B022 /* NGEInventoryImageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryImageType.swift; sourceTree = "<group>"; };
+		70E2964E1CDCFD9D00B0B022 /* NGEInventoryInteractiveType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryInteractiveType.swift; sourceTree = "<group>"; };
+		70E2964F1CDCFD9D00B0B022 /* NGEInventoryMediaManifestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryMediaManifestType.swift; sourceTree = "<group>"; };
+		70E296501CDCFD9D00B0B022 /* NGEInventoryMetadataAliasType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryMetadataAliasType.swift; sourceTree = "<group>"; };
+		70E296511CDCFD9D00B0B022 /* NGEInventoryMetadataLocalizedPairType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryMetadataLocalizedPairType.swift; sourceTree = "<group>"; };
+		70E296521CDCFD9D00B0B022 /* NGEInventoryMetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryMetadataType.swift; sourceTree = "<group>"; };
+		70E296531CDCFD9D00B0B022 /* NGEInventorySubtitleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventorySubtitleType.swift; sourceTree = "<group>"; };
+		70E296541CDCFD9D00B0B022 /* NGEInventoryTextObjectType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryTextObjectType.swift; sourceTree = "<group>"; };
+		70E296551CDCFD9D00B0B022 /* NGEInventoryType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEInventoryType+File.swift"; sourceTree = "<group>"; };
+		70E296561CDCFD9D00B0B022 /* NGEInventoryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryType.swift; sourceTree = "<group>"; };
+		70E296571CDCFD9D00B0B022 /* NGEInventoryVideoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEInventoryVideoType.swift; sourceTree = "<group>"; };
+		70E296581CDCFD9D00B0B022 /* NGEJobDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEJobDisplay.swift; sourceTree = "<group>"; };
+		70E296591CDCFD9D00B0B022 /* NGEJobFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEJobFunction.swift; sourceTree = "<group>"; };
+		70E2965A1CDCFD9D00B0B022 /* NGELocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGELocation.swift; sourceTree = "<group>"; };
+		70E2965B1CDCFD9D00B0B022 /* NGELocationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGELocationType.swift; sourceTree = "<group>"; };
+		70E2965C1CDCFD9D00B0B022 /* NGEMadeForRegionInternalTypeEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMadeForRegionInternalTypeEnum.swift; sourceTree = "<group>"; };
+		70E2965D1CDCFD9D00B0B022 /* NGEManifestAppDataSetType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEManifestAppDataSetType+File.swift"; sourceTree = "<group>"; };
+		70E2965E1CDCFD9D00B0B022 /* NGEManifestAppDataSetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEManifestAppDataSetType.swift; sourceTree = "<group>"; };
+		70E2965F1CDCFD9D00B0B022 /* NGEMediaManifestEditAddType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMediaManifestEditAddType.swift; sourceTree = "<group>"; };
+		70E296601CDCFD9D00B0B022 /* NGEMediaManifestEditDeleteType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMediaManifestEditDeleteType.swift; sourceTree = "<group>"; };
+		70E296611CDCFD9D00B0B022 /* NGEMediaManifestEditLocRefType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMediaManifestEditLocRefType.swift; sourceTree = "<group>"; };
+		70E296621CDCFD9D00B0B022 /* NGEMediaManifestEditType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEMediaManifestEditType+File.swift"; sourceTree = "<group>"; };
+		70E296631CDCFD9D00B0B022 /* NGEMediaManifestEditType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMediaManifestEditType.swift; sourceTree = "<group>"; };
+		70E296641CDCFD9D00B0B022 /* NGEMediaManifestType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEMediaManifestType+File.swift"; sourceTree = "<group>"; };
+		70E296651CDCFD9D00B0B022 /* NGEMediaManifestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMediaManifestType.swift; sourceTree = "<group>"; };
+		70E296661CDCFD9D00B0B022 /* NGEMediaProfileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMediaProfileType.swift; sourceTree = "<group>"; };
+		70E296671CDCFD9D00B0B022 /* NGEMoneyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEMoneyType.swift; sourceTree = "<group>"; };
+		70E296681CDCFD9D00B0B022 /* NGENotRated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGENotRated.swift; sourceTree = "<group>"; };
+		70E296691CDCFD9D00B0B022 /* NGENVPairMoneyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGENVPairMoneyType.swift; sourceTree = "<group>"; };
+		70E2966A1CDCFD9D00B0B022 /* NGENVPairType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGENVPairType.swift; sourceTree = "<group>"; };
+		70E2966B1CDCFD9D00B0B022 /* NGEOrgNameType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEOrgNameType.swift; sourceTree = "<group>"; };
+		70E2966C1CDCFD9D00B0B022 /* NGEOtherCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEOtherCoordinates.swift; sourceTree = "<group>"; };
+		70E2966D1CDCFD9D00B0B022 /* NGEOtherIDType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEOtherIDType.swift; sourceTree = "<group>"; };
+		70E2966E1CDCFD9D00B0B022 /* NGEPersonIdentifierType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPersonIdentifierType.swift; sourceTree = "<group>"; };
+		70E2966F1CDCFD9D00B0B022 /* NGEPersonNameType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPersonNameType.swift; sourceTree = "<group>"; };
+		70E296701CDCFD9D00B0B022 /* NGEPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPhone.swift; sourceTree = "<group>"; };
+		70E296711CDCFD9D00B0B022 /* NGEPictureGroupListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPictureGroupListType.swift; sourceTree = "<group>"; };
+		70E296721CDCFD9D00B0B022 /* NGEPictureGroupType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPictureGroupType.swift; sourceTree = "<group>"; };
+		70E296731CDCFD9D00B0B022 /* NGEPictureType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPictureType.swift; sourceTree = "<group>"; };
+		70E296741CDCFD9D00B0B022 /* NGEPlayableSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPlayableSequence.swift; sourceTree = "<group>"; };
+		70E296751CDCFD9D00B0B022 /* NGEPlayableSequenceListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPlayableSequenceListType.swift; sourceTree = "<group>"; };
+		70E296761CDCFD9D00B0B022 /* NGEPlayableSequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPlayableSequenceType.swift; sourceTree = "<group>"; };
+		70E296771CDCFD9D00B0B022 /* NGEPresentationLanguagePairType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPresentationLanguagePairType.swift; sourceTree = "<group>"; };
+		70E296781CDCFD9D00B0B022 /* NGEPresentationListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPresentationListType.swift; sourceTree = "<group>"; };
+		70E296791CDCFD9D00B0B022 /* NGEPresentationManifestType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEPresentationManifestType+File.swift"; sourceTree = "<group>"; };
+		70E2967A1CDCFD9D00B0B022 /* NGEPresentationManifestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPresentationManifestType.swift; sourceTree = "<group>"; };
+		70E2967B1CDCFD9D00B0B022 /* NGEPresentationType+File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NGEPresentationType+File.swift"; sourceTree = "<group>"; };
+		70E2967C1CDCFD9D00B0B022 /* NGEPresentationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPresentationType.swift; sourceTree = "<group>"; };
+		70E2967D1CDCFD9D00B0B022 /* NGEPrivateDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEPrivateDataType.swift; sourceTree = "<group>"; };
+		70E2967E1CDCFD9D00B0B022 /* NGEProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEProfile.swift; sourceTree = "<group>"; };
+		70E2967F1CDCFD9D00B0B022 /* NGERegionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGERegionType.swift; sourceTree = "<group>"; };
+		70E296801CDCFD9D00B0B022 /* NGEReleaseHistoryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEReleaseHistoryType.swift; sourceTree = "<group>"; };
+		70E296811CDCFD9D00B0B022 /* NGEReleaseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEReleaseType.swift; sourceTree = "<group>"; };
+		70E296821CDCFD9D00B0B022 /* NGEStringAndLanguageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEStringAndLanguageType.swift; sourceTree = "<group>"; };
+		70E296831CDCFD9D00B0B022 /* NGEStringDisplayIndicatorsEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEStringDisplayIndicatorsEnum.swift; sourceTree = "<group>"; };
+		70E296841CDCFD9D00B0B022 /* NGEStringVideoPicFrameRateMultiplierEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEStringVideoPicFrameRateMultiplierEnum.swift; sourceTree = "<group>"; };
+		70E296851CDCFD9D00B0B022 /* NGEStringVideoPicPixelAspectEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEStringVideoPicPixelAspectEnum.swift; sourceTree = "<group>"; };
+		70E296861CDCFD9D00B0B022 /* NGEStringVideoPicProgressiveScanOrderEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEStringVideoPicProgressiveScanOrderEnum.swift; sourceTree = "<group>"; };
+		70E296871CDCFD9D00B0B022 /* NGESubtitleTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGESubtitleTrackReferenceType.swift; sourceTree = "<group>"; };
+		70E296881CDCFD9D00B0B022 /* NGESummary190.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGESummary190.swift; sourceTree = "<group>"; };
+		70E296891CDCFD9D00B0B022 /* NGESummary400.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGESummary400.swift; sourceTree = "<group>"; };
+		70E2968A1CDCFD9D00B0B022 /* NGESummary4000.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGESummary4000.swift; sourceTree = "<group>"; };
+		70E2968B1CDCFD9D00B0B022 /* NGETextGroupID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETextGroupID.swift; sourceTree = "<group>"; };
+		70E2968C1CDCFD9D00B0B022 /* NGETextGroupListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETextGroupListType.swift; sourceTree = "<group>"; };
+		70E2968D1CDCFD9D00B0B022 /* NGETextGroupType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETextGroupType.swift; sourceTree = "<group>"; };
+		70E2968E1CDCFD9D00B0B022 /* NGETextString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETextString.swift; sourceTree = "<group>"; };
+		70E2968F1CDCFD9D00B0B022 /* NGETimecodeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETimecodeType.swift; sourceTree = "<group>"; };
+		70E296901CDCFD9D00B0B022 /* NGETimedEventSequenceListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETimedEventSequenceListType.swift; sourceTree = "<group>"; };
+		70E296911CDCFD9D00B0B022 /* NGETimedEventSequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETimedEventSequenceType.swift; sourceTree = "<group>"; };
+		70E296921CDCFD9D00B0B022 /* NGETimedEventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETimedEventType.swift; sourceTree = "<group>"; };
+		70E296931CDCFD9D00B0B022 /* NGETimelineStyleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETimelineStyleType.swift; sourceTree = "<group>"; };
+		70E296941CDCFD9D00B0B022 /* NGETitleAlternate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETitleAlternate.swift; sourceTree = "<group>"; };
+		70E296951CDCFD9D00B0B022 /* NGETrackMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETrackMetadata.swift; sourceTree = "<group>"; };
+		70E296961CDCFD9D00B0B022 /* NGETrackMetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETrackMetadataType.swift; sourceTree = "<group>"; };
+		70E296971CDCFD9D00B0B022 /* NGEType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEType.swift; sourceTree = "<group>"; };
+		70E296981CDCFD9D00B0B022 /* NGETypeEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGETypeEnum.swift; sourceTree = "<group>"; };
+		70E296991CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEVideoFrameTimecode.swift; sourceTree = "<group>"; };
+		70E2969A1CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEVideoTrackReferenceType.swift; sourceTree = "<group>"; };
+		70E297641CDD178200B0B022 /* NGDMAppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAppData.swift; sourceTree = "<group>"; };
+		70E9F6BF1D05F1060010613E /* TalentImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentImageGalleryViewController.swift; sourceTree = "<group>"; };
+		70EFFB2B1CBC637000643372 /* MultiMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiMapView.swift; sourceTree = "<group>"; };
+		70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Utils.swift"; sourceTree = "<group>"; };
+		70FECF761C656707005B1A44 /* SceneDetailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDetailCollectionViewController.swift; sourceTree = "<group>"; };
+		70FECF7C1C657976005B1A44 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A9B12FE4232619740870843F /* Pods_NextGenExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextGenExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C0E3512E4E5C0412D7D1AA /* Pods-NextGenExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGenExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextGenExample/Pods-NextGenExample.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4921D9701C3EFD0B00ED2AA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */,
+				70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */,
+				49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */,
+				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
+				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
+				A7CA836CCC8C043A4AC75B98 /* Pods_NextGenExample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4921D96A1C3EFD0B00ED2AA6 = {
+			isa = PBXGroup;
+			children = (
+				7071C3D31C6BCBF6006F4275 /* Manifest Models */,
+				7071C48D1C6BCBF6006F4275 /* NextGenDataManager */,
+				4921D9751C3EFD0B00ED2AA6 /* NextGen */,
+				4921D9C51C3F04EE00ED2AA6 /* Resources */,
+				4921D9741C3EFD0B00ED2AA6 /* Products */,
+				5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */,
+				C5B88FB65E435B0DA97926CD /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		4921D9741C3EFD0B00ED2AA6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4921D9731C3EFD0B00ED2AA6 /* NextGen.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4921D9751C3EFD0B00ED2AA6 /* NextGen */ = {
+			isa = PBXGroup;
+			children = (
+				70A1E08B1C486BCD0079779A /* Out-of-Movie Experience */,
+				707E107D1C4076BF00FCF81C /* In-Movie Experience */,
+				7099B9D91CEA4CD7000274F7 /* Managers */,
+				707E10881C4081F700FCF81C /* Models */,
+				7085F76E1C91DDDE00DF31B6 /* Network */,
+				701D69BF1C48205B0047A67A /* Shared Controllers */,
+				707E10831C40796000FCF81C /* Shared Views */,
+				70460C581CBEF6710001B6D8 /* Theme */,
+				701D69C61C482A900047A67A /* Utilities */,
+				4921D9761C3EFD0B00ED2AA6 /* AppDelegate.swift */,
+				4993BACB1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift */,
+				70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */,
+				4921D9781C3EFD0B00ED2AA6 /* HomeViewController.swift */,
+				701B02A01C45CE280020DCD1 /* NextGen-Bridging-Header.h */,
+				4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */,
+				4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */,
+				70DEFCE41CBC79CA00941977 /* Localizable.strings */,
+				4921D9851C3EFD0B00ED2AA6 /* Info.plist */,
+				499871231CB43A4E00606E56 /* Commentary.plist */,
+			);
+			path = NextGen;
+			sourceTree = "<group>";
+		};
+		4921D9C51C3F04EE00ED2AA6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7077A3141C49897900843782 /* Data */,
+				4921D9801C3EFD0B00ED2AA6 /* Assets.xcassets */,
+				6AA9CCBF1C883E91005EBA92 /* Fonts */,
+				70B9FE441C6D54D400CF1A22 /* Videos */,
+			);
+			name = Resources;
+			path = NextGen/Resources;
+			sourceTree = "<group>";
+		};
+		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				495CF3691CC042BA006AE290 /* CoreText.framework */,
+				70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */,
+				49F502541C890E6500DFAD88 /* Twitter.framework */,
+				49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */,
+				492267ED1C7B911100B306A2 /* Social.framework */,
+				7071C54B1C6BCC11006F4275 /* libxml2.tbd */,
+				70FECF7C1C657976005B1A44 /* MapKit.framework */,
+				A9B12FE4232619740870843F /* Pods_NextGenExample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6AA9CCBF1C883E91005EBA92 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6AA9CCC01C883E91005EBA92 /* Roboto-Regular.ttf */,
+				6AA9CCC11C883E91005EBA92 /* RobotoCondensed-Bold.ttf */,
+				6AA9CCC21C883E91005EBA92 /* RobotoCondensed-Italic.ttf */,
+				6AA9CCC31C883E91005EBA92 /* RobotoCondensed-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		701B02711C45C8990020DCD1 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				70C830B01CB440E200F9E2D6 /* VideoPlayerScrubber.swift */,
+				70C9E0B01C46CE8A002D3B5A /* VideoPlayerViewController.swift */,
+				701B028B1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift */,
+				701B028C1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.h */,
+				701B028D1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m */,
+				701B028E1C45C8990020DCD1 /* WBVideoPlayerViewController.h */,
+				701B028F1C45C8990020DCD1 /* WBVideoPlayerViewController.m */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		701D69BF1C48205B0047A67A /* Shared Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7094F3B61CFF423100F1B10D /* LandscapeNavigationController.swift */,
+				70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */,
+				490213471C860C9A00071552 /* SharingViewController.swift */,
+				701D69C01C48205B0047A67A /* TalentDetailViewController.swift */,
+				70E9F6BF1D05F1060010613E /* TalentImageGalleryViewController.swift */,
+				7085F7981C97550C00DF31B6 /* WebViewController.swift */,
+			);
+			path = "Shared Controllers";
+			sourceTree = "<group>";
+		};
+		701D69C61C482A900047A67A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7085F7771C920E4F00DF31B6 /* Dictionary+Utils.swift */,
+				7085F77F1C923BE100DF31B6 /* Indexable+Utils.swift */,
+				70BFA5AA1CBD651F00F674FA /* NSLocale+Utils.swift */,
+				70A3AC961C9DDB500038B60F /* NSTimeInterval+Utils.swift */,
+				701D69C71C482AF70047A67A /* NSURL+Utils.swift */,
+				7085F7791C920E7500DF31B6 /* String+Utils.swift */,
+				701D69C91C482C210047A67A /* UIAlertController+Utils.swift */,
+				70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */,
+				7085F7881C93937800DF31B6 /* UIColor+Utils.swift */,
+				7085F78A1C939AC300DF31B6 /* UIImage+Utils.swift */,
+				701D69CB1C482E060047A67A /* UIImageView+Utils.swift */,
+				70A5D5721CAB437700ACC58F /* UIStoryboard+Utils.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		70460C581CBEF6710001B6D8 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				70460C591CBEF67C0001B6D8 /* UIColor+Theme.swift */,
+				70460C5B1CBEF6980001B6D8 /* UIImage+Theme.swift */,
+				70460C5D1CBEF8630001B6D8 /* UIFont+Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		70517E771CB715EF008556EC /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				70517E781CB715EF008556EC /* MapDetailViewController.swift */,
+				70517E791CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift */,
+				70517E7A1CB715EF008556EC /* MapSceneDetailCollectionViewCell.xib */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
+		70517E7E1CB717AC008556EC /* Scene Detail Cells */ = {
+			isa = PBXGroup;
+			children = (
+				70517E7F1CB717AC008556EC /* ImageSceneDetailCollectionViewCell.swift */,
+				70517E801CB717AC008556EC /* ImageSceneDetailCollectionViewCell.xib */,
+				70517E811CB717AC008556EC /* SceneDetailCollectionViewCell.swift */,
+			);
+			path = "Scene Detail Cells";
+			sourceTree = "<group>";
+		};
+		7071C3D31C6BCBF6006F4275 /* Manifest Models */ = {
+			isa = PBXGroup;
+			children = (
+				70E295D01CDCFD9D00B0B022 /* Sources */,
+			);
+			name = "Manifest Models";
+			path = "../nextgen-data/ios/Manifest Models";
+			sourceTree = "<group>";
+		};
+		7071C48D1C6BCBF6006F4275 /* NextGenDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				7071C48E1C6BCBF6006F4275 /* NextGenDataManager.swift */,
+				70E297641CDD178200B0B022 /* NGDMAppData.swift */,
+				49860CED1CD2D736007770F2 /* NGDMAppearance.swift */,
+				7085F7811C93359000DF31B6 /* NGDMAppGroup.swift */,
+				70367ACA1C90C47E0042B5B5 /* NGDMAudioVisual.swift */,
+				70367AAE1C8F67B30042B5B5 /* NGDMExperience.swift */,
+				7085F7851C933A5000DF31B6 /* NGDMExperienceApp.swift */,
+				70367AB81C8F8BDE0042B5B5 /* NGDMGallery.swift */,
+				70367AC01C8F8F420042B5B5 /* NGDMImage.swift */,
+				7085F7831C9336C600DF31B6 /* NGDMInteractive.swift */,
+				70BEC1FC1C98A63A00CC2F3D /* NGDMLocation.swift */,
+				70367AB01C8F69970042B5B5 /* NGDMMainExperience.swift */,
+				70367AB41C8F74560042B5B5 /* NGDMMetadata.swift */,
+				70D2FC7C1CADC21F0003FC54 /* NGDMPeople.swift */,
+				70367ABE1C8F8E9E0042B5B5 /* NGDMPicture.swift */,
+				70367ABC1C8F8DA30042B5B5 /* NGDMPictureGroup.swift */,
+				70367AB61C8F87AE0042B5B5 /* NGDMPresentation.swift */,
+				70367AC61C90AA770042B5B5 /* NGDMTextGroup.swift */,
+				70367AC81C90AEFF0042B5B5 /* NGDMTextObject.swift */,
+				70367AC41C8F9E840042B5B5 /* NGDMTimedEvent.swift */,
+				70367AC21C8F9D450042B5B5 /* NGDMTimedEventSequence.swift */,
+				7085F76C1C90D83D00DF31B6 /* NGDMVideo.swift */,
+			);
+			name = NextGenDataManager;
+			path = "../nextgen-data/ios/NextGenDataManager";
+			sourceTree = "<group>";
+		};
+		707E107D1C4076BF00FCF81C /* In-Movie Experience */ = {
+			isa = PBXGroup;
+			children = (
+				70517E771CB715EF008556EC /* Maps */,
+				701B02711C45C8990020DCD1 /* Player */,
+				70517E7E1CB717AC008556EC /* Scene Detail Cells */,
+				7085F7871C936DA900DF31B6 /* Shopping */,
+				70D2FC7E1CAE02E80003FC54 /* CommentaryView.swift */,
+				70D2FC7F1CAE02E80003FC54 /* CommentaryView.xib */,
+				492267E91C76A56900B306A2 /* CommentaryViewCell.swift */,
+				490213451C850A0100071552 /* GallerySceneDetailViewController.swift */,
+				707E10861C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift */,
+				49CB44C81C7CF02400753227 /* InMovieExperienceViewController.swift */,
+				70460C541CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift */,
+				70FECF761C656707005B1A44 /* SceneDetailCollectionViewController.swift */,
+				70C830BA1CB4823100F9E2D6 /* SceneDetailViewController.swift */,
+			);
+			path = "In-Movie Experience";
+			sourceTree = "<group>";
+		};
+		707E10831C40796000FCF81C /* Shared Views */ = {
+			isa = PBXGroup;
+			children = (
+				49B653581CBECFF20006C71D /* CircularProgressView.swift */,
+				4993BACD1CF4C50300AE5B70 /* EnhancedTitleCell.xib */,
+				701D69C21C4823870047A67A /* FilmCollectionViewCell.swift */,
+				7099B9DE1CEA835C000274F7 /* ImageGalleryScrollView.swift */,
+				493043AE1CE0F389000A9EBC /* MapItemCell.swift */,
+				493043AC1CE0F367000A9EBC /* MapItemCell.xib */,
+				70DF2F831CA5C8B2007AD2A0 /* MenuItemCell.swift */,
+				70DF2F891CA5EADF007AD2A0 /* MenuItemCell.xib */,
+				70DF2F8F1CA5F453007AD2A0 /* MenuSectionCell.swift */,
+				70DF2F8D1CA5F433007AD2A0 /* MenuSectionCell.xib */,
+				70EFFB2B1CBC637000643372 /* MultiMapView.swift */,
+				4993D2681C6D07800077220A /* RadioButton.swift */,
+				707E10841C40797400FCF81C /* RoundImageView.swift */,
+				70DBE73C1D02366600182C80 /* SimpleImageCollectionViewCell.swift */,
+				49CB44CA1C7D0CD800753227 /* SocialButton.swift */,
+				70C9E9DB1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib */,
+				7065F5451C46FCC500A2C74E /* TalentTableViewCell-Wide.xib */,
+				7065F5471C47004100A2C74E /* TalentTableViewCell.swift */,
+				49F3EAD41C51639700E09484 /* TitledImageCell.swift */,
+				49F3EAD21C515B3100E09484 /* TitledImageCell.xib */,
+				49F3EADE1C518ABE00E09484 /* VideoCell.swift */,
+				49F3EADC1C51890A00E09484 /* VideoCell.xib */,
+			);
+			path = "Shared Views";
+			sourceTree = "<group>";
+		};
+		707E10881C4081F700FCF81C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				70DF2F811CA5C2B5007AD2A0 /* MenuItem.swift */,
+				70DF2F7F1CA5C292007AD2A0 /* MenuSection.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7085F76E1C91DDDE00DF31B6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7085F7711C91E4C000DF31B6 /* APIUtil.swift */,
+				70A3AC911C9C75860038B60F /* BaselineAPIUtil.swift */,
+				7085F7731C920A7500DF31B6 /* TheTakeAPIUtil.swift */,
+				70DF2F951CA640AA007AD2A0 /* TheTakeCategory.swift */,
+				7085F77B1C92200700DF31B6 /* TheTakeProduct.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7085F7871C936DA900DF31B6 /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				497ABF761C8920E1005463C9 /* ShoppingDetailViewController.swift */,
+				70C830B61CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift */,
+				70C830B71CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib */,
+			);
+			path = Shopping;
+			sourceTree = "<group>";
+		};
+		7099B9D91CEA4CD7000274F7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7099B9DA1CEA4CE5000274F7 /* SettingsManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		70A1E08B1C486BCD0079779A /* Out-of-Movie Experience */ = {
+			isa = PBXGroup;
+			children = (
+				70C830BC1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift */,
+				7046BA901CBDAF8B00EF9612 /* ExtrasPresentationController.swift */,
+				493043A61CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift */,
+				497A9E151CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift */,
+				70DF2F7D1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift */,
+				49F3EADA1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift */,
+				4921D9C81C40676600ED2AA6 /* ExtrasViewController.swift */,
+			);
+			path = "Out-of-Movie Experience";
+			sourceTree = "<group>";
+		};
+		70B9FE441C6D54D400CF1A22 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				49860CE91CD020B4007770F2 /* mos-nextgen-background.mp4 */,
+				70C830B41CB465D000F9E2D6 /* mos-nextgen-interstitial.mov */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		70E295D01CDCFD9D00B0B022 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				70E295D11CDCFD9D00B0B022 /* libxml-bridging-header.h */,
+				70E295D21CDCFD9D00B0B022 /* NGEAbbreviatedMetadataInfoType.swift */,
+				70E295D31CDCFD9D00B0B022 /* NGEAbbreviatedMetadataType.swift */,
+				70E295D41CDCFD9D00B0B022 /* NGEAdaptationSetID.swift */,
+				70E295D51CDCFD9D00B0B022 /* NGEALIDExperienceMapListType.swift */,
+				70E295D61CDCFD9D00B0B022 /* NGEALIDExperienceMapType.swift */,
+				70E295D71CDCFD9D00B0B022 /* NGEAlternateText.swift */,
+				70E295D81CDCFD9D00B0B022 /* NGEAncillaryTrackReferenceType.swift */,
+				70E295D91CDCFD9D00B0B022 /* NGEAppDataAcquireAssetType.swift */,
+				70E295DA1CDCFD9D00B0B022 /* NGEAppDataFeedGeneric.swift */,
+				70E295DB1CDCFD9D00B0B022 /* NGEAppDataFeedProprietaryType.swift */,
+				70E295DC1CDCFD9D00B0B022 /* NGEAppDataFeedSetType.swift */,
+				70E295DD1CDCFD9D00B0B022 /* NGEAppDataGalleryType.swift */,
+				70E295DE1CDCFD9D00B0B022 /* NGEAppDataKMLType.swift */,
+				70E295DF1CDCFD9D00B0B022 /* NGEAppDataLocationType.swift */,
+				70E295E01CDCFD9D00B0B022 /* NGEAppDataSpecialBehaviorType.swift */,
+				70E295E11CDCFD9D00B0B022 /* NGEAppDataTrackSelectionType.swift */,
+				70E295E21CDCFD9D00B0B022 /* NGEAppDataType.swift */,
+				70E295E31CDCFD9D00B0B022 /* NGEAppGroupListType.swift */,
+				70E295E41CDCFD9D00B0B022 /* NGEAppGroupType.swift */,
+				70E295E51CDCFD9D00B0B022 /* NGEAppName.swift */,
+				70E295E61CDCFD9D00B0B022 /* NGEAppNVPairType.swift */,
+				70E295E71CDCFD9D00B0B022 /* NGEArtReference.swift */,
+				70E295E81CDCFD9D00B0B022 /* NGEAssociatedOrgType.swift */,
+				70E295E91CDCFD9D00B0B022 /* NGEAudioClipRefType.swift */,
+				70E295EA1CDCFD9D00B0B022 /* NGEAudioTrackReferenceType.swift */,
+				70E295EB1CDCFD9D00B0B022 /* NGEAudiovisualClipRefType.swift */,
+				70E295EC1CDCFD9D00B0B022 /* NGEAudiovisualType.swift */,
+				70E295ED1CDCFD9D00B0B022 /* NGEBasicMetadataInfoType.swift */,
+				70E295EE1CDCFD9D00B0B022 /* NGEBasicMetadataJobType.swift */,
+				70E295EF1CDCFD9D00B0B022 /* NGEBasicMetadataParentType.swift */,
+				70E295F01CDCFD9D00B0B022 /* NGEBasicMetadataPeopleType.swift */,
+				70E295F11CDCFD9D00B0B022 /* NGEBasicMetadataType.swift */,
+				70E295F21CDCFD9D00B0B022 /* NGECaption.swift */,
+				70E295F31CDCFD9D00B0B022 /* NGEChapterListType.swift */,
+				70E295F41CDCFD9D00B0B022 /* NGEChapterType.swift */,
+				70E295F51CDCFD9D00B0B022 /* NGEColorTypeTypeEnum.swift */,
+				70E295F61CDCFD9D00B0B022 /* NGECompanyCreditsType.swift */,
+				70E295F71CDCFD9D00B0B022 /* NGECompatibilityType.swift */,
+				70E295F81CDCFD9D00B0B022 /* NGEComplexSequenceInfoAlternateNumber.swift */,
+				70E295F91CDCFD9D00B0B022 /* NGEComplexSequenceInfoDistributionNumber.swift */,
+				70E295FA1CDCFD9D00B0B022 /* NGEComplexSequenceInfoHouseSequence.swift */,
+				70E295FB1CDCFD9D00B0B022 /* NGECompObjClassType.swift */,
+				70E295FC1CDCFD9D00B0B022 /* NGECompObjDataType.swift */,
+				70E295FD1CDCFD9D00B0B022 /* NGECompObjEntryType.swift */,
+				70E295FE1CDCFD9D00B0B022 /* NGECompObjType.swift */,
+				70E295FF1CDCFD9D00B0B022 /* NGEContactInfoType.swift */,
+				70E296001CDCFD9D00B0B022 /* NGEContainerMetadataType.swift */,
+				70E296011CDCFD9D00B0B022 /* NGEContainerMetadataWithIDType.swift */,
+				70E296021CDCFD9D00B0B022 /* NGEContainerReference.swift */,
+				70E296031CDCFD9D00B0B022 /* NGEContainerReferenceType.swift */,
+				70E296041CDCFD9D00B0B022 /* NGEContainerSpecificType.swift */,
+				70E296051CDCFD9D00B0B022 /* NGEContainerTrackMetadataType.swift */,
+				70E296061CDCFD9D00B0B022 /* NGEContentIdentifierType.swift */,
+				70E296071CDCFD9D00B0B022 /* NGEContentMax.swift */,
+				70E296081CDCFD9D00B0B022 /* NGEContentRatingDetailType.swift */,
+				70E296091CDCFD9D00B0B022 /* NGEContentRatingType.swift */,
+				70E2960A1CDCFD9D00B0B022 /* NGEContentSequenceInfoType.swift */,
+				70E2960B1CDCFD9D00B0B022 /* NGECoordinate.swift */,
+				70E2960C1CDCFD9D00B0B022 /* NGEDate.swift */,
+				70E2960D1CDCFD9D00B0B022 /* NGEDateTimeRangeType.swift */,
+				70E2960E1CDCFD9D00B0B022 /* NGEDigitalAssetAncillaryDataType.swift */,
+				70E2960F1CDCFD9D00B0B022 /* NGEDigitalAssetAudioDataType.swift */,
+				70E296101CDCFD9D00B0B022 /* NGEDigitalAssetAudioEncodingType.swift */,
+				70E296111CDCFD9D00B0B022 /* NGEDigitalAssetAudioLanguageType.swift */,
+				70E296121CDCFD9D00B0B022 /* NGEDigitalAssetCardsetListType.swift */,
+				70E296131CDCFD9D00B0B022 /* NGEDigitalAssetCardsetType.swift */,
+				70E296141CDCFD9D00B0B022 /* NGEDigitalAssetChromaticityType.swift */,
+				70E296151CDCFD9D00B0B022 /* NGEDigitalAssetColorEncodingType.swift */,
+				70E296161CDCFD9D00B0B022 /* NGEDigitalAssetColorVolumeType.swift */,
+				70E296171CDCFD9D00B0B022 /* NGEDigitalAssetExternalTrackReferenceType.swift */,
+				70E296181CDCFD9D00B0B022 /* NGEDigitalAssetImageDataType.swift */,
+				70E296191CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveBaseDataType.swift */,
+				70E2961A1CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveDataType.swift */,
+				70E2961B1CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveEncodingType.swift */,
+				70E2961C1CDCFD9D00B0B022 /* NGEDigitalAssetMetadataType.swift */,
+				70E2961D1CDCFD9D00B0B022 /* NGEDigitalAssetSetType.swift */,
+				70E2961E1CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleDataType.swift */,
+				70E2961F1CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleFormatType.swift */,
+				70E296201CDCFD9D00B0B022 /* NGEDigitalAssetVideoDataType.swift */,
+				70E296211CDCFD9D00B0B022 /* NGEDigitalAssetVideoEncodingType.swift */,
+				70E296221CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureFrameRateType.swift */,
+				70E296231CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift */,
+				70E296241CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureLightLevelType.swift */,
+				70E296251CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureProgressiveType.swift */,
+				70E296261CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureType.swift */,
+				70E296271CDCFD9D00B0B022 /* NGEDigitalAssetVideoSubtitleLanguageType.swift */,
+				70E296281CDCFD9D00B0B022 /* NGEDigitalAssetWatermarkType.swift */,
+				70E296291CDCFD9D00B0B022 /* NGEDisplayIndicatorsEnum.swift */,
+				70E2962A1CDCFD9D00B0B022 /* NGEDisplayLabel.swift */,
+				70E2962B1CDCFD9D00B0B022 /* NGEDisplayName.swift */,
+				70E2962C1CDCFD9D00B0B022 /* NGEDisplayString.swift */,
+				70E2962D1CDCFD9D00B0B022 /* NGEEANUPC.swift */,
+				70E2962E1CDCFD9D00B0B022 /* NGEEarthCoordinate.swift */,
+				70E2962F1CDCFD9D00B0B022 /* NGEEventLocationEarthCoordinateType.swift */,
+				70E296301CDCFD9D00B0B022 /* NGEEventLocationOtherCoordinateType.swift */,
+				70E296311CDCFD9D00B0B022 /* NGEEventLocationType.swift */,
+				70E296321CDCFD9D00B0B022 /* NGEEventPeriodType.swift */,
+				70E296331CDCFD9D00B0B022 /* NGEExperienceAppType.swift */,
+				70E296341CDCFD9D00B0B022 /* NGEExperienceChildType.swift */,
+				70E296351CDCFD9D00B0B022 /* NGEExperienceID.swift */,
+				70E296361CDCFD9D00B0B022 /* NGEExperienceListType.swift */,
+				70E296371CDCFD9D00B0B022 /* NGEExperienceType.swift */,
+				70E296381CDCFD9D00B0B022 /* NGEFictionalEnd.swift */,
+				70E296391CDCFD9D00B0B022 /* NGEFictionalStart.swift */,
+				70E2963A1CDCFD9D00B0B022 /* NGEFileDeleteManifestType+File.swift */,
+				70E2963B1CDCFD9D00B0B022 /* NGEFileDeleteManifestType.swift */,
+				70E2963C1CDCFD9D00B0B022 /* NGEFileDeliveryType.swift */,
+				70E2963D1CDCFD9D00B0B022 /* NGEFileInfoType.swift */,
+				70E2963E1CDCFD9D00B0B022 /* NGEFileManifestInfoType.swift */,
+				70E2963F1CDCFD9D00B0B022 /* NGEFileManifestType+File.swift */,
+				70E296401CDCFD9D00B0B022 /* NGEFileManifestType.swift */,
+				70E296411CDCFD9D00B0B022 /* NGEFrameAverageMax.swift */,
+				70E296421CDCFD9D00B0B022 /* NGEGalleryName.swift */,
+				70E296431CDCFD9D00B0B022 /* NGEGalleryType.swift */,
+				70E296441CDCFD9D00B0B022 /* NGEGenderEnum.swift */,
+				70E296451CDCFD9D00B0B022 /* NGEGenre.swift */,
+				70E296461CDCFD9D00B0B022 /* NGEGroupingEntityType.swift */,
+				70E296471CDCFD9D00B0B022 /* NGEHashType.swift */,
+				70E296481CDCFD9D00B0B022 /* NGEImageClipRefType.swift */,
+				70E296491CDCFD9D00B0B022 /* NGEImageID.swift */,
+				70E2964A1CDCFD9D00B0B022 /* NGEInteractiveTrackReferenceType.swift */,
+				70E2964B1CDCFD9D00B0B022 /* NGEInventoryAncillaryType.swift */,
+				70E2964C1CDCFD9D00B0B022 /* NGEInventoryAudioType.swift */,
+				70E2964D1CDCFD9D00B0B022 /* NGEInventoryImageType.swift */,
+				70E2964E1CDCFD9D00B0B022 /* NGEInventoryInteractiveType.swift */,
+				70E2964F1CDCFD9D00B0B022 /* NGEInventoryMediaManifestType.swift */,
+				70E296501CDCFD9D00B0B022 /* NGEInventoryMetadataAliasType.swift */,
+				70E296511CDCFD9D00B0B022 /* NGEInventoryMetadataLocalizedPairType.swift */,
+				70E296521CDCFD9D00B0B022 /* NGEInventoryMetadataType.swift */,
+				70E296531CDCFD9D00B0B022 /* NGEInventorySubtitleType.swift */,
+				70E296541CDCFD9D00B0B022 /* NGEInventoryTextObjectType.swift */,
+				70E296551CDCFD9D00B0B022 /* NGEInventoryType+File.swift */,
+				70E296561CDCFD9D00B0B022 /* NGEInventoryType.swift */,
+				70E296571CDCFD9D00B0B022 /* NGEInventoryVideoType.swift */,
+				70E296581CDCFD9D00B0B022 /* NGEJobDisplay.swift */,
+				70E296591CDCFD9D00B0B022 /* NGEJobFunction.swift */,
+				70E2965A1CDCFD9D00B0B022 /* NGELocation.swift */,
+				70E2965B1CDCFD9D00B0B022 /* NGELocationType.swift */,
+				70E2965C1CDCFD9D00B0B022 /* NGEMadeForRegionInternalTypeEnum.swift */,
+				70E2965D1CDCFD9D00B0B022 /* NGEManifestAppDataSetType+File.swift */,
+				70E2965E1CDCFD9D00B0B022 /* NGEManifestAppDataSetType.swift */,
+				70E2965F1CDCFD9D00B0B022 /* NGEMediaManifestEditAddType.swift */,
+				70E296601CDCFD9D00B0B022 /* NGEMediaManifestEditDeleteType.swift */,
+				70E296611CDCFD9D00B0B022 /* NGEMediaManifestEditLocRefType.swift */,
+				70E296621CDCFD9D00B0B022 /* NGEMediaManifestEditType+File.swift */,
+				70E296631CDCFD9D00B0B022 /* NGEMediaManifestEditType.swift */,
+				70E296641CDCFD9D00B0B022 /* NGEMediaManifestType+File.swift */,
+				70E296651CDCFD9D00B0B022 /* NGEMediaManifestType.swift */,
+				70E296661CDCFD9D00B0B022 /* NGEMediaProfileType.swift */,
+				70E296671CDCFD9D00B0B022 /* NGEMoneyType.swift */,
+				70E296681CDCFD9D00B0B022 /* NGENotRated.swift */,
+				70E296691CDCFD9D00B0B022 /* NGENVPairMoneyType.swift */,
+				70E2966A1CDCFD9D00B0B022 /* NGENVPairType.swift */,
+				70E2966B1CDCFD9D00B0B022 /* NGEOrgNameType.swift */,
+				70E2966C1CDCFD9D00B0B022 /* NGEOtherCoordinates.swift */,
+				70E2966D1CDCFD9D00B0B022 /* NGEOtherIDType.swift */,
+				70E2966E1CDCFD9D00B0B022 /* NGEPersonIdentifierType.swift */,
+				70E2966F1CDCFD9D00B0B022 /* NGEPersonNameType.swift */,
+				70E296701CDCFD9D00B0B022 /* NGEPhone.swift */,
+				70E296711CDCFD9D00B0B022 /* NGEPictureGroupListType.swift */,
+				70E296721CDCFD9D00B0B022 /* NGEPictureGroupType.swift */,
+				70E296731CDCFD9D00B0B022 /* NGEPictureType.swift */,
+				70E296741CDCFD9D00B0B022 /* NGEPlayableSequence.swift */,
+				70E296751CDCFD9D00B0B022 /* NGEPlayableSequenceListType.swift */,
+				70E296761CDCFD9D00B0B022 /* NGEPlayableSequenceType.swift */,
+				70E296771CDCFD9D00B0B022 /* NGEPresentationLanguagePairType.swift */,
+				70E296781CDCFD9D00B0B022 /* NGEPresentationListType.swift */,
+				70E296791CDCFD9D00B0B022 /* NGEPresentationManifestType+File.swift */,
+				70E2967A1CDCFD9D00B0B022 /* NGEPresentationManifestType.swift */,
+				70E2967B1CDCFD9D00B0B022 /* NGEPresentationType+File.swift */,
+				70E2967C1CDCFD9D00B0B022 /* NGEPresentationType.swift */,
+				70E2967D1CDCFD9D00B0B022 /* NGEPrivateDataType.swift */,
+				70E2967E1CDCFD9D00B0B022 /* NGEProfile.swift */,
+				70E2967F1CDCFD9D00B0B022 /* NGERegionType.swift */,
+				70E296801CDCFD9D00B0B022 /* NGEReleaseHistoryType.swift */,
+				70E296811CDCFD9D00B0B022 /* NGEReleaseType.swift */,
+				70E296821CDCFD9D00B0B022 /* NGEStringAndLanguageType.swift */,
+				70E296831CDCFD9D00B0B022 /* NGEStringDisplayIndicatorsEnum.swift */,
+				70E296841CDCFD9D00B0B022 /* NGEStringVideoPicFrameRateMultiplierEnum.swift */,
+				70E296851CDCFD9D00B0B022 /* NGEStringVideoPicPixelAspectEnum.swift */,
+				70E296861CDCFD9D00B0B022 /* NGEStringVideoPicProgressiveScanOrderEnum.swift */,
+				70E296871CDCFD9D00B0B022 /* NGESubtitleTrackReferenceType.swift */,
+				70E296881CDCFD9D00B0B022 /* NGESummary190.swift */,
+				70E296891CDCFD9D00B0B022 /* NGESummary400.swift */,
+				70E2968A1CDCFD9D00B0B022 /* NGESummary4000.swift */,
+				70E2968B1CDCFD9D00B0B022 /* NGETextGroupID.swift */,
+				70E2968C1CDCFD9D00B0B022 /* NGETextGroupListType.swift */,
+				70E2968D1CDCFD9D00B0B022 /* NGETextGroupType.swift */,
+				70E2968E1CDCFD9D00B0B022 /* NGETextString.swift */,
+				70E2968F1CDCFD9D00B0B022 /* NGETimecodeType.swift */,
+				70E296901CDCFD9D00B0B022 /* NGETimedEventSequenceListType.swift */,
+				70E296911CDCFD9D00B0B022 /* NGETimedEventSequenceType.swift */,
+				70E296921CDCFD9D00B0B022 /* NGETimedEventType.swift */,
+				70E296931CDCFD9D00B0B022 /* NGETimelineStyleType.swift */,
+				70E296941CDCFD9D00B0B022 /* NGETitleAlternate.swift */,
+				70E296951CDCFD9D00B0B022 /* NGETrackMetadata.swift */,
+				70E296961CDCFD9D00B0B022 /* NGETrackMetadataType.swift */,
+				70E296971CDCFD9D00B0B022 /* NGEType.swift */,
+				70E296981CDCFD9D00B0B022 /* NGETypeEnum.swift */,
+				70E296991CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift */,
+				70E2969A1CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C5B88FB65E435B0DA97926CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C8C0E3512E4E5C0412D7D1AA /* Pods-NextGenExample.debug.xcconfig */,
+				29EBFFD493A43292101F1452 /* Pods-NextGenExample.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4921D9721C3EFD0B00ED2AA6 /* NextGenExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4921D99E1C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenExample" */;
+			buildPhases = (
+				3002657E57EB0B913B78654A /* 📦 Check Pods Manifest.lock */,
+				4921D96F1C3EFD0B00ED2AA6 /* Sources */,
+				4921D9701C3EFD0B00ED2AA6 /* Frameworks */,
+				4921D9711C3EFD0B00ED2AA6 /* Resources */,
+				FAD03E2525E3A21852F62079 /* 📦 Embed Pods Frameworks */,
+				D7ADE3024655F45E292014A5 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NextGenExample;
+			productName = "NextGenPOC-Native";
+			productReference = 4921D9731C3EFD0B00ED2AA6 /* NextGen.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4921D96B1C3EFD0B00ED2AA6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Warner Bros. Entertainment, Inc.";
+				TargetAttributes = {
+					4921D9721C3EFD0B00ED2AA6 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = CE7D7D92E2;
+					};
+				};
+			};
+			buildConfigurationList = 4921D96E1C3EFD0B00ED2AA6 /* Build configuration list for PBXProject "NextGenExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4921D96A1C3EFD0B00ED2AA6;
+			productRefGroup = 4921D9741C3EFD0B00ED2AA6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4921D9721C3EFD0B00ED2AA6 /* NextGenExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4921D9711C3EFD0B00ED2AA6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7077A3151C49897900843782 /* Data in Resources */,
+				49F5024F1C890D1700DFAD88 /* Main.storyboard in Resources */,
+				6AA9CCC71C883EE2005EBA92 /* RobotoCondensed-Regular.ttf in Resources */,
+				49F3EAD31C515B3100E09484 /* TitledImageCell.xib in Resources */,
+				70DF2F8A1CA5EADF007AD2A0 /* MenuItemCell.xib in Resources */,
+				70C830B51CB465D000F9E2D6 /* mos-nextgen-interstitial.mov in Resources */,
+				70C9E9DC1C640D9B004DF35B /* TalentTableViewCell-Narrow.xib in Resources */,
+				70517E7D1CB715EF008556EC /* MapSceneDetailCollectionViewCell.xib in Resources */,
+				6AA9CCC61C883EE2005EBA92 /* RobotoCondensed-Italic.ttf in Resources */,
+				6AA9CCC41C883EDD005EBA92 /* Roboto-Regular.ttf in Resources */,
+				70C830B91CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.xib in Resources */,
+				70D2FC811CAE02E80003FC54 /* CommentaryView.xib in Resources */,
+				4921D9841C3EFD0B00ED2AA6 /* LaunchScreen.storyboard in Resources */,
+				4921D9811C3EFD0B00ED2AA6 /* Assets.xcassets in Resources */,
+				4993BACE1CF4C50300AE5B70 /* EnhancedTitleCell.xib in Resources */,
+				6AA9CCC51C883EE2005EBA92 /* RobotoCondensed-Bold.ttf in Resources */,
+				49F3EADD1C51890A00E09484 /* VideoCell.xib in Resources */,
+				70517E831CB717AC008556EC /* ImageSceneDetailCollectionViewCell.xib in Resources */,
+				70DF2F8E1CA5F433007AD2A0 /* MenuSectionCell.xib in Resources */,
+				493043AD1CE0F367000A9EBC /* MapItemCell.xib in Resources */,
+				70DEFCE61CBC79CA00941977 /* Localizable.strings in Resources */,
+				49860CEA1CD020B4007770F2 /* mos-nextgen-background.mp4 in Resources */,
+				499871241CB43A4E00606E56 /* Commentary.plist in Resources */,
+				7065F5461C46FCC500A2C74E /* TalentTableViewCell-Wide.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3002657E57EB0B913B78654A /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D7ADE3024655F45E292014A5 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NextGenExample/Pods-NextGenExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAD03E2525E3A21852F62079 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NextGenExample/Pods-NextGenExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4921D96F1C3EFD0B00ED2AA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70E297041CDCFD9D00B0B022 /* NGEFileDeleteManifestType.swift in Sources */,
+				70E2971E1CDCFD9D00B0B022 /* NGEInventoryType+File.swift in Sources */,
+				70E2970D1CDCFD9D00B0B022 /* NGEGenderEnum.swift in Sources */,
+				70E296A51CDCFD9D00B0B022 /* NGEAppDataFeedSetType.swift in Sources */,
+				70E296CF1CDCFD9D00B0B022 /* NGEContentIdentifierType.swift in Sources */,
+				701D69C81C482AF70047A67A /* NSURL+Utils.swift in Sources */,
+				70E297031CDCFD9D00B0B022 /* NGEFileDeleteManifestType+File.swift in Sources */,
+				492267EA1C76A56900B306A2 /* CommentaryViewCell.swift in Sources */,
+				70E296D81CDCFD9D00B0B022 /* NGEDigitalAssetAudioDataType.swift in Sources */,
+				70E296F11CDCFD9D00B0B022 /* NGEDigitalAssetWatermarkType.swift in Sources */,
+				70367ABD1C8F8DA30042B5B5 /* NGDMPictureGroup.swift in Sources */,
+				70E296C41CDCFD9D00B0B022 /* NGECompObjClassType.swift in Sources */,
+				70E296AE1CDCFD9D00B0B022 /* NGEAppName.swift in Sources */,
+				49B653591CBECFF20006C71D /* CircularProgressView.swift in Sources */,
+				70367AC51C8F9E840042B5B5 /* NGDMTimedEvent.swift in Sources */,
+				70E2970A1CDCFD9D00B0B022 /* NGEFrameAverageMax.swift in Sources */,
+				70DF2F901CA5F453007AD2A0 /* MenuSectionCell.swift in Sources */,
+				70E297541CDCFD9D00B0B022 /* NGETextGroupID.swift in Sources */,
+				70E2975B1CDCFD9D00B0B022 /* NGETimedEventType.swift in Sources */,
+				70E296EF1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureType.swift in Sources */,
+				70E296DE1CDCFD9D00B0B022 /* NGEDigitalAssetColorEncodingType.swift in Sources */,
+				70E297391CDCFD9D00B0B022 /* NGEPhone.swift in Sources */,
+				4921D9791C3EFD0B00ED2AA6 /* HomeViewController.swift in Sources */,
+				70E296E81CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleFormatType.swift in Sources */,
+				70E296FA1CDCFD9D00B0B022 /* NGEEventLocationType.swift in Sources */,
+				70517E821CB717AC008556EC /* ImageSceneDetailCollectionViewCell.swift in Sources */,
+				70E2975D1CDCFD9D00B0B022 /* NGETitleAlternate.swift in Sources */,
+				70E9F6C01D05F1060010613E /* TalentImageGalleryViewController.swift in Sources */,
+				70E2975E1CDCFD9D00B0B022 /* NGETrackMetadata.swift in Sources */,
+				70E297651CDD178200B0B022 /* NGDMAppData.swift in Sources */,
+				70E296B21CDCFD9D00B0B022 /* NGEAudioClipRefType.swift in Sources */,
+				70E2970E1CDCFD9D00B0B022 /* NGEGenre.swift in Sources */,
+				49860CEE1CD2D736007770F2 /* NGDMAppearance.swift in Sources */,
+				70367AB71C8F87AE0042B5B5 /* NGDMPresentation.swift in Sources */,
+				493043AF1CE0F389000A9EBC /* MapItemCell.swift in Sources */,
+				70FECF771C656707005B1A44 /* SceneDetailCollectionViewController.swift in Sources */,
+				70367ABF1C8F8E9E0042B5B5 /* NGDMPicture.swift in Sources */,
+				7085F7891C93937800DF31B6 /* UIColor+Utils.swift in Sources */,
+				70E296F71CDCFD9D00B0B022 /* NGEEarthCoordinate.swift in Sources */,
+				70E296B41CDCFD9D00B0B022 /* NGEAudiovisualClipRefType.swift in Sources */,
+				70E297321CDCFD9D00B0B022 /* NGENVPairMoneyType.swift in Sources */,
+				70E2975A1CDCFD9D00B0B022 /* NGETimedEventSequenceType.swift in Sources */,
+				70460C5A1CBEF67C0001B6D8 /* UIColor+Theme.swift in Sources */,
+				493043A71CDBB531000A9EBC /* ExtrasSceneLocationsViewController.swift in Sources */,
+				4921D9771C3EFD0B00ED2AA6 /* AppDelegate.swift in Sources */,
+				70E296D01CDCFD9D00B0B022 /* NGEContentMax.swift in Sources */,
+				70367AC91C90AEFF0042B5B5 /* NGDMTextObject.swift in Sources */,
+				70E296A01CDCFD9D00B0B022 /* NGEAlternateText.swift in Sources */,
+				70E296B61CDCFD9D00B0B022 /* NGEBasicMetadataInfoType.swift in Sources */,
+				70E297371CDCFD9D00B0B022 /* NGEPersonIdentifierType.swift in Sources */,
+				70A5D5731CAB437700ACC58F /* UIStoryboard+Utils.swift in Sources */,
+				70E297101CDCFD9D00B0B022 /* NGEHashType.swift in Sources */,
+				70E297631CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift in Sources */,
+				7085F7991C97550C00DF31B6 /* WebViewController.swift in Sources */,
+				70E2971C1CDCFD9D00B0B022 /* NGEInventorySubtitleType.swift in Sources */,
+				70E297401CDCFD9D00B0B022 /* NGEPresentationLanguagePairType.swift in Sources */,
+				70367AC11C8F8F420042B5B5 /* NGDMImage.swift in Sources */,
+				7099B9DF1CEA835C000274F7 /* ImageGalleryScrollView.swift in Sources */,
+				70E297271CDCFD9D00B0B022 /* NGEManifestAppDataSetType.swift in Sources */,
+				70E296B81CDCFD9D00B0B022 /* NGEBasicMetadataParentType.swift in Sources */,
+				70C830B81CB46F2000F9E2D6 /* ShoppingSceneDetailCollectionViewCell.swift in Sources */,
+				70E2969F1CDCFD9D00B0B022 /* NGEALIDExperienceMapType.swift in Sources */,
+				70E2974F1CDCFD9D00B0B022 /* NGEStringVideoPicProgressiveScanOrderEnum.swift in Sources */,
+				70E296EE1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureProgressiveType.swift in Sources */,
+				70E296D61CDCFD9D00B0B022 /* NGEDateTimeRangeType.swift in Sources */,
+				70E297261CDCFD9D00B0B022 /* NGEManifestAppDataSetType+File.swift in Sources */,
+				70E296E91CDCFD9D00B0B022 /* NGEDigitalAssetVideoDataType.swift in Sources */,
+				70E296DB1CDCFD9D00B0B022 /* NGEDigitalAssetCardsetListType.swift in Sources */,
+				70E2972E1CDCFD9D00B0B022 /* NGEMediaManifestType.swift in Sources */,
+				70E296BF1CDCFD9D00B0B022 /* NGECompanyCreditsType.swift in Sources */,
+				70E2972F1CDCFD9D00B0B022 /* NGEMediaProfileType.swift in Sources */,
+				70E296E71CDCFD9D00B0B022 /* NGEDigitalAssetSubtitleDataType.swift in Sources */,
+				497A9E161CC567A700DC11F6 /* ExtrasShoppingItemsViewController.swift in Sources */,
+				70E297181CDCFD9D00B0B022 /* NGEInventoryMediaManifestType.swift in Sources */,
+				70E297611CDCFD9D00B0B022 /* NGETypeEnum.swift in Sources */,
+				70E296A21CDCFD9D00B0B022 /* NGEAppDataAcquireAssetType.swift in Sources */,
+				70E2974D1CDCFD9D00B0B022 /* NGEStringVideoPicFrameRateMultiplierEnum.swift in Sources */,
+				70E296C31CDCFD9D00B0B022 /* NGEComplexSequenceInfoHouseSequence.swift in Sources */,
+				70E296B01CDCFD9D00B0B022 /* NGEArtReference.swift in Sources */,
+				70DF2F841CA5C8B2007AD2A0 /* MenuItemCell.swift in Sources */,
+				7085F7821C93359000DF31B6 /* NGDMAppGroup.swift in Sources */,
+				70E297561CDCFD9D00B0B022 /* NGETextGroupType.swift in Sources */,
+				70E297551CDCFD9D00B0B022 /* NGETextGroupListType.swift in Sources */,
+				70E296CA1CDCFD9D00B0B022 /* NGEContainerMetadataWithIDType.swift in Sources */,
+				70E297301CDCFD9D00B0B022 /* NGEMoneyType.swift in Sources */,
+				70E297461CDCFD9D00B0B022 /* NGEPrivateDataType.swift in Sources */,
+				7085F77A1C920E7500DF31B6 /* String+Utils.swift in Sources */,
+				70E296F81CDCFD9D00B0B022 /* NGEEventLocationEarthCoordinateType.swift in Sources */,
+				70E2974B1CDCFD9D00B0B022 /* NGEStringAndLanguageType.swift in Sources */,
+				70E297161CDCFD9D00B0B022 /* NGEInventoryImageType.swift in Sources */,
+				70367AC71C90AA770042B5B5 /* NGDMTextGroup.swift in Sources */,
+				70E296BC1CDCFD9D00B0B022 /* NGEChapterListType.swift in Sources */,
+				70E297311CDCFD9D00B0B022 /* NGENotRated.swift in Sources */,
+				70E297151CDCFD9D00B0B022 /* NGEInventoryAudioType.swift in Sources */,
+				70E296E21CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveBaseDataType.swift in Sources */,
+				70E296D51CDCFD9D00B0B022 /* NGEDate.swift in Sources */,
+				70C830BD1CB5C10A00F9E2D6 /* ExtrasExperienceViewController.swift in Sources */,
+				701B029D1C45C8990020DCD1 /* WBVideoPlayerExtensions.swift in Sources */,
+				701D69C31C4823870047A67A /* FilmCollectionViewCell.swift in Sources */,
+				490213461C850A0100071552 /* GallerySceneDetailViewController.swift in Sources */,
+				70E297081CDCFD9D00B0B022 /* NGEFileManifestType+File.swift in Sources */,
+				70DF2F801CA5C292007AD2A0 /* MenuSection.swift in Sources */,
+				70E297131CDCFD9D00B0B022 /* NGEInteractiveTrackReferenceType.swift in Sources */,
+				70E297341CDCFD9D00B0B022 /* NGEOrgNameType.swift in Sources */,
+				70E297211CDCFD9D00B0B022 /* NGEJobDisplay.swift in Sources */,
+				70D2FC7D1CADC21F0003FC54 /* NGDMPeople.swift in Sources */,
+				70E297441CDCFD9D00B0B022 /* NGEPresentationType+File.swift in Sources */,
+				70517E841CB717AC008556EC /* SceneDetailCollectionViewCell.swift in Sources */,
+				70E296AA1CDCFD9D00B0B022 /* NGEAppDataTrackSelectionType.swift in Sources */,
+				70E296C11CDCFD9D00B0B022 /* NGEComplexSequenceInfoAlternateNumber.swift in Sources */,
+				701B029F1C45C8990020DCD1 /* WBVideoPlayerViewController.m in Sources */,
+				70E2969D1CDCFD9D00B0B022 /* NGEAdaptationSetID.swift in Sources */,
+				70E296DD1CDCFD9D00B0B022 /* NGEDigitalAssetChromaticityType.swift in Sources */,
+				70E296FC1CDCFD9D00B0B022 /* NGEExperienceAppType.swift in Sources */,
+				70EFFB2C1CBC637000643372 /* MultiMapView.swift in Sources */,
+				70E296E31CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveDataType.swift in Sources */,
+				70E297361CDCFD9D00B0B022 /* NGEOtherIDType.swift in Sources */,
+				70E296E41CDCFD9D00B0B022 /* NGEDigitalAssetInteractiveEncodingType.swift in Sources */,
+				70E296AB1CDCFD9D00B0B022 /* NGEAppDataType.swift in Sources */,
+				70EFFB2E1CBC6E4500643372 /* ConfigManager.swift in Sources */,
+				70E296B31CDCFD9D00B0B022 /* NGEAudioTrackReferenceType.swift in Sources */,
+				7071C5481C6BCBF6006F4275 /* NextGenDataManager.swift in Sources */,
+				70DF2F7E1CA5BB7B007AD2A0 /* ExtrasShoppingViewController.swift in Sources */,
+				4993D2691C6D07800077220A /* RadioButton.swift in Sources */,
+				70E296C81CDCFD9D00B0B022 /* NGEContactInfoType.swift in Sources */,
+				70E296D21CDCFD9D00B0B022 /* NGEContentRatingType.swift in Sources */,
+				70E296CB1CDCFD9D00B0B022 /* NGEContainerReference.swift in Sources */,
+				70E2972D1CDCFD9D00B0B022 /* NGEMediaManifestType+File.swift in Sources */,
+				70367AAF1C8F67B30042B5B5 /* NGDMExperience.swift in Sources */,
+				70E297571CDCFD9D00B0B022 /* NGETextString.swift in Sources */,
+				70E296A41CDCFD9D00B0B022 /* NGEAppDataFeedProprietaryType.swift in Sources */,
+				70E2971A1CDCFD9D00B0B022 /* NGEInventoryMetadataLocalizedPairType.swift in Sources */,
+				70E2973F1CDCFD9D00B0B022 /* NGEPlayableSequenceType.swift in Sources */,
+				7094F3B71CFF423100F1B10D /* LandscapeNavigationController.swift in Sources */,
+				70DF2F961CA640AA007AD2A0 /* TheTakeCategory.swift in Sources */,
+				70E297501CDCFD9D00B0B022 /* NGESubtitleTrackReferenceType.swift in Sources */,
+				70E296E01CDCFD9D00B0B022 /* NGEDigitalAssetExternalTrackReferenceType.swift in Sources */,
+				49CB44C91C7CF02400753227 /* InMovieExperienceViewController.swift in Sources */,
+				70E2974A1CDCFD9D00B0B022 /* NGEReleaseType.swift in Sources */,
+				70E2973B1CDCFD9D00B0B022 /* NGEPictureGroupType.swift in Sources */,
+				70E296A11CDCFD9D00B0B022 /* NGEAncillaryTrackReferenceType.swift in Sources */,
+				70E297011CDCFD9D00B0B022 /* NGEFictionalEnd.swift in Sources */,
+				70BEC1FD1C98A63A00CC2F3D /* NGDMLocation.swift in Sources */,
+				70E296C51CDCFD9D00B0B022 /* NGECompObjDataType.swift in Sources */,
+				70E296C21CDCFD9D00B0B022 /* NGEComplexSequenceInfoDistributionNumber.swift in Sources */,
+				49F3EADB1C517ADA00E09484 /* ExtrasVideoGalleryViewController.swift in Sources */,
+				70E296D91CDCFD9D00B0B022 /* NGEDigitalAssetAudioEncodingType.swift in Sources */,
+				70E296FB1CDCFD9D00B0B022 /* NGEEventPeriodType.swift in Sources */,
+				70E297581CDCFD9D00B0B022 /* NGETimecodeType.swift in Sources */,
+				70E297091CDCFD9D00B0B022 /* NGEFileManifestType.swift in Sources */,
+				70E297531CDCFD9D00B0B022 /* NGESummary4000.swift in Sources */,
+				70E297001CDCFD9D00B0B022 /* NGEExperienceType.swift in Sources */,
+				70E296C61CDCFD9D00B0B022 /* NGECompObjEntryType.swift in Sources */,
+				7099B9DB1CEA4CE5000274F7 /* SettingsManager.swift in Sources */,
+				70E296B11CDCFD9D00B0B022 /* NGEAssociatedOrgType.swift in Sources */,
+				70E296DF1CDCFD9D00B0B022 /* NGEDigitalAssetColorVolumeType.swift in Sources */,
+				701D69CC1C482E060047A67A /* UIImageView+Utils.swift in Sources */,
+				70BFA5AB1CBD651F00F674FA /* NSLocale+Utils.swift in Sources */,
+				7085F7841C9336C600DF31B6 /* NGDMInteractive.swift in Sources */,
+				70E296F21CDCFD9D00B0B022 /* NGEDisplayIndicatorsEnum.swift in Sources */,
+				70C830BB1CB4823100F9E2D6 /* SceneDetailViewController.swift in Sources */,
+				70E297191CDCFD9D00B0B022 /* NGEInventoryMetadataAliasType.swift in Sources */,
+				701D69CA1C482C210047A67A /* UIAlertController+Utils.swift in Sources */,
+				70367ACB1C90C47E0042B5B5 /* NGDMAudioVisual.swift in Sources */,
+				70E297591CDCFD9D00B0B022 /* NGETimedEventSequenceListType.swift in Sources */,
+				70E297141CDCFD9D00B0B022 /* NGEInventoryAncillaryType.swift in Sources */,
+				70E296EA1CDCFD9D00B0B022 /* NGEDigitalAssetVideoEncodingType.swift in Sources */,
+				70E296BE1CDCFD9D00B0B022 /* NGEColorTypeTypeEnum.swift in Sources */,
+				70E296A71CDCFD9D00B0B022 /* NGEAppDataKMLType.swift in Sources */,
+				70E296CE1CDCFD9D00B0B022 /* NGEContainerTrackMetadataType.swift in Sources */,
+				70E2970F1CDCFD9D00B0B022 /* NGEGroupingEntityType.swift in Sources */,
+				70E296B91CDCFD9D00B0B022 /* NGEBasicMetadataPeopleType.swift in Sources */,
+				70E297291CDCFD9D00B0B022 /* NGEMediaManifestEditDeleteType.swift in Sources */,
+				707E10871C407F6600FCF81C /* InMovieExperienceExtrasViewController.swift in Sources */,
+				7085F76D1C90D83D00DF31B6 /* NGDMVideo.swift in Sources */,
+				70E297201CDCFD9D00B0B022 /* NGEInventoryVideoType.swift in Sources */,
+				70E296CC1CDCFD9D00B0B022 /* NGEContainerReferenceType.swift in Sources */,
+				7085F7781C920E4F00DF31B6 /* Dictionary+Utils.swift in Sources */,
+				70E296F61CDCFD9D00B0B022 /* NGEEANUPC.swift in Sources */,
+				70E297601CDCFD9D00B0B022 /* NGEType.swift in Sources */,
+				70E296A31CDCFD9D00B0B022 /* NGEAppDataFeedGeneric.swift in Sources */,
+				70E2973A1CDCFD9D00B0B022 /* NGEPictureGroupListType.swift in Sources */,
+				70E296AC1CDCFD9D00B0B022 /* NGEAppGroupListType.swift in Sources */,
+				7065F5481C47004100A2C74E /* TalentTableViewCell.swift in Sources */,
+				70517E7B1CB715EF008556EC /* MapDetailViewController.swift in Sources */,
+				70A3AC971C9DDB500038B60F /* NSTimeInterval+Utils.swift in Sources */,
+				70E296F51CDCFD9D00B0B022 /* NGEDisplayString.swift in Sources */,
+				7085F7801C923BE100DF31B6 /* Indexable+Utils.swift in Sources */,
+				70E296C91CDCFD9D00B0B022 /* NGEContainerMetadataType.swift in Sources */,
+				70E296EB1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureFrameRateType.swift in Sources */,
+				70E2970C1CDCFD9D00B0B022 /* NGEGalleryType.swift in Sources */,
+				70E296BD1CDCFD9D00B0B022 /* NGEChapterType.swift in Sources */,
+				70E2970B1CDCFD9D00B0B022 /* NGEGalleryName.swift in Sources */,
+				70E296A61CDCFD9D00B0B022 /* NGEAppDataGalleryType.swift in Sources */,
+				70C9E0B11C46CE8A002D3B5A /* VideoPlayerViewController.swift in Sources */,
+				70E2971B1CDCFD9D00B0B022 /* NGEInventoryMetadataType.swift in Sources */,
+				70367AB51C8F74560042B5B5 /* NGDMMetadata.swift in Sources */,
+				7085F7721C91E4C000DF31B6 /* APIUtil.swift in Sources */,
+				70E2975C1CDCFD9D00B0B022 /* NGETimelineStyleType.swift in Sources */,
+				70E296F41CDCFD9D00B0B022 /* NGEDisplayName.swift in Sources */,
+				70E2972B1CDCFD9D00B0B022 /* NGEMediaManifestEditType+File.swift in Sources */,
+				707E10851C40797400FCF81C /* RoundImageView.swift in Sources */,
+				70D2FC801CAE02E80003FC54 /* CommentaryView.swift in Sources */,
+				70E296D41CDCFD9D00B0B022 /* NGECoordinate.swift in Sources */,
+				70E297471CDCFD9D00B0B022 /* NGEProfile.swift in Sources */,
+				70E297021CDCFD9D00B0B022 /* NGEFictionalStart.swift in Sources */,
+				70E297171CDCFD9D00B0B022 /* NGEInventoryInteractiveType.swift in Sources */,
+				70E297331CDCFD9D00B0B022 /* NGENVPairType.swift in Sources */,
+				70DF2F821CA5C2B5007AD2A0 /* MenuItem.swift in Sources */,
+				70FECF6D1C65433A005B1A44 /* UIButton+Utils.swift in Sources */,
+				70E296E61CDCFD9D00B0B022 /* NGEDigitalAssetSetType.swift in Sources */,
+				70E297051CDCFD9D00B0B022 /* NGEFileDeliveryType.swift in Sources */,
+				490213481C860C9A00071552 /* SharingViewController.swift in Sources */,
+				4993BACC1CF4C47B00AE5B70 /* EnhancedTitlesCollectionViewController.swift in Sources */,
+				70E297241CDCFD9D00B0B022 /* NGELocationType.swift in Sources */,
+				70E297451CDCFD9D00B0B022 /* NGEPresentationType.swift in Sources */,
+				70E296A81CDCFD9D00B0B022 /* NGEAppDataLocationType.swift in Sources */,
+				70E297071CDCFD9D00B0B022 /* NGEFileManifestInfoType.swift in Sources */,
+				70460C5C1CBEF6980001B6D8 /* UIImage+Theme.swift in Sources */,
+				70E296EC1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureHDRPlaybackInfoType.swift in Sources */,
+				70E297421CDCFD9D00B0B022 /* NGEPresentationManifestType+File.swift in Sources */,
+				70517E7C1CB715EF008556EC /* MapSceneDetailCollectionViewCell.swift in Sources */,
+				70E296BA1CDCFD9D00B0B022 /* NGEBasicMetadataType.swift in Sources */,
+				701D69C11C48205B0047A67A /* TalentDetailViewController.swift in Sources */,
+				70E296D31CDCFD9D00B0B022 /* NGEContentSequenceInfoType.swift in Sources */,
+				49F3EADF1C518ABE00E09484 /* VideoCell.swift in Sources */,
+				7085F7861C933A5000DF31B6 /* NGDMExperienceApp.swift in Sources */,
+				70E296E51CDCFD9D00B0B022 /* NGEDigitalAssetMetadataType.swift in Sources */,
+				70E297351CDCFD9D00B0B022 /* NGEOtherCoordinates.swift in Sources */,
+				70E296A91CDCFD9D00B0B022 /* NGEAppDataSpecialBehaviorType.swift in Sources */,
+				70460C5E1CBEF8630001B6D8 /* UIFont+Theme.swift in Sources */,
+				70367AB11C8F69970042B5B5 /* NGDMMainExperience.swift in Sources */,
+				70E297411CDCFD9D00B0B022 /* NGEPresentationListType.swift in Sources */,
+				701B029E1C45C8990020DCD1 /* WBVideoPlayerPlaybackView.m in Sources */,
+				70E2973C1CDCFD9D00B0B022 /* NGEPictureType.swift in Sources */,
+				70E297061CDCFD9D00B0B022 /* NGEFileInfoType.swift in Sources */,
+				70E297121CDCFD9D00B0B022 /* NGEImageID.swift in Sources */,
+				49F3EAD51C51639700E09484 /* TitledImageCell.swift in Sources */,
+				70E296DC1CDCFD9D00B0B022 /* NGEDigitalAssetCardsetType.swift in Sources */,
+				49CB44CB1C7D0CD800753227 /* SocialButton.swift in Sources */,
+				70E296F31CDCFD9D00B0B022 /* NGEDisplayLabel.swift in Sources */,
+				70E2973D1CDCFD9D00B0B022 /* NGEPlayableSequence.swift in Sources */,
+				70E297381CDCFD9D00B0B022 /* NGEPersonNameType.swift in Sources */,
+				70E296E11CDCFD9D00B0B022 /* NGEDigitalAssetImageDataType.swift in Sources */,
+				70E296F01CDCFD9D00B0B022 /* NGEDigitalAssetVideoSubtitleLanguageType.swift in Sources */,
+				70E2969B1CDCFD9D00B0B022 /* NGEAbbreviatedMetadataInfoType.swift in Sources */,
+				7085F7741C920A7500DF31B6 /* TheTakeAPIUtil.swift in Sources */,
+				70E2972A1CDCFD9D00B0B022 /* NGEMediaManifestEditLocRefType.swift in Sources */,
+				70E297281CDCFD9D00B0B022 /* NGEMediaManifestEditAddType.swift in Sources */,
+				70E2969E1CDCFD9D00B0B022 /* NGEALIDExperienceMapListType.swift in Sources */,
+				70E297521CDCFD9D00B0B022 /* NGESummary400.swift in Sources */,
+				70E297511CDCFD9D00B0B022 /* NGESummary190.swift in Sources */,
+				70DBE73E1D02366600182C80 /* SimpleImageCollectionViewCell.swift in Sources */,
+				70E296C71CDCFD9D00B0B022 /* NGECompObjType.swift in Sources */,
+				70E296B51CDCFD9D00B0B022 /* NGEAudiovisualType.swift in Sources */,
+				70E2973E1CDCFD9D00B0B022 /* NGEPlayableSequenceListType.swift in Sources */,
+				497ABF771C8920E1005463C9 /* ShoppingDetailViewController.swift in Sources */,
+				70367AB91C8F8BDE0042B5B5 /* NGDMGallery.swift in Sources */,
+				70E296CD1CDCFD9D00B0B022 /* NGEContainerSpecificType.swift in Sources */,
+				70E296BB1CDCFD9D00B0B022 /* NGECaption.swift in Sources */,
+				70E296D71CDCFD9D00B0B022 /* NGEDigitalAssetAncillaryDataType.swift in Sources */,
+				70E296DA1CDCFD9D00B0B022 /* NGEDigitalAssetAudioLanguageType.swift in Sources */,
+				70A3AC921C9C75860038B60F /* BaselineAPIUtil.swift in Sources */,
+				70E2969C1CDCFD9D00B0B022 /* NGEAbbreviatedMetadataType.swift in Sources */,
+				7046BA911CBDAF8B00EF9612 /* ExtrasPresentationController.swift in Sources */,
+				70E296FD1CDCFD9D00B0B022 /* NGEExperienceChildType.swift in Sources */,
+				70E2971D1CDCFD9D00B0B022 /* NGEInventoryTextObjectType.swift in Sources */,
+				70E296D11CDCFD9D00B0B022 /* NGEContentRatingDetailType.swift in Sources */,
+				70C830B11CB440E200F9E2D6 /* VideoPlayerScrubber.swift in Sources */,
+				70367AC31C8F9D450042B5B5 /* NGDMTimedEventSequence.swift in Sources */,
+				70E296ED1CDCFD9D00B0B022 /* NGEDigitalAssetVideoPictureLightLevelType.swift in Sources */,
+				70E296F91CDCFD9D00B0B022 /* NGEEventLocationOtherCoordinateType.swift in Sources */,
+				4921D9C91C40676600ED2AA6 /* ExtrasViewController.swift in Sources */,
+				70E296FF1CDCFD9D00B0B022 /* NGEExperienceListType.swift in Sources */,
+				70E2971F1CDCFD9D00B0B022 /* NGEInventoryType.swift in Sources */,
+				70E297481CDCFD9D00B0B022 /* NGERegionType.swift in Sources */,
+				70E297431CDCFD9D00B0B022 /* NGEPresentationManifestType.swift in Sources */,
+				70E296AF1CDCFD9D00B0B022 /* NGEAppNVPairType.swift in Sources */,
+				70E297621CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift in Sources */,
+				70E2974E1CDCFD9D00B0B022 /* NGEStringVideoPicPixelAspectEnum.swift in Sources */,
+				70E297221CDCFD9D00B0B022 /* NGEJobFunction.swift in Sources */,
+				70E296AD1CDCFD9D00B0B022 /* NGEAppGroupType.swift in Sources */,
+				70E2972C1CDCFD9D00B0B022 /* NGEMediaManifestEditType.swift in Sources */,
+				70E297231CDCFD9D00B0B022 /* NGELocation.swift in Sources */,
+				70E296C01CDCFD9D00B0B022 /* NGECompatibilityType.swift in Sources */,
+				70460C551CBEA3BB0001B6D8 /* LargeTextSceneDetailViewController.swift in Sources */,
+				70E297111CDCFD9D00B0B022 /* NGEImageClipRefType.swift in Sources */,
+				70E296B71CDCFD9D00B0B022 /* NGEBasicMetadataJobType.swift in Sources */,
+				70E2975F1CDCFD9D00B0B022 /* NGETrackMetadataType.swift in Sources */,
+				7085F78B1C939AC300DF31B6 /* UIImage+Utils.swift in Sources */,
+				70DF2F921CA5FBBC007AD2A0 /* MenuedViewController.swift in Sources */,
+				7085F77C1C92200700DF31B6 /* TheTakeProduct.swift in Sources */,
+				70E296FE1CDCFD9D00B0B022 /* NGEExperienceID.swift in Sources */,
+				70E297491CDCFD9D00B0B022 /* NGEReleaseHistoryType.swift in Sources */,
+				70E2974C1CDCFD9D00B0B022 /* NGEStringDisplayIndicatorsEnum.swift in Sources */,
+				70E297251CDCFD9D00B0B022 /* NGEMadeForRegionInternalTypeEnum.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4921D97A1C3EFD0B00ED2AA6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4921D97B1C3EFD0B00ED2AA6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4921D9821C3EFD0B00ED2AA6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4921D9831C3EFD0B00ED2AA6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		70DEFCE41CBC79CA00941977 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				70DEFCE51CBC79CA00941977 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4921D99C1C3EFD0B00ED2AA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "$(inherited)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		4921D99D1C3EFD0B00ED2AA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "$(inherited)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4921D99F1C3EFD0B00ED2AA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8C0E3512E4E5C0412D7D1AA /* Pods-NextGenExample.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = NextGen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
+				PRODUCT_NAME = NextGen;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextGen/NextGen-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
+			};
+			name = Debug;
+		};
+		4921D9A01C3EFD0B00ED2AA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29EBFFD493A43292101F1452 /* Pods-NextGenExample.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = NextGen/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
+				PRODUCT_NAME = NextGen;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NextGen/NextGen-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4921D96E1C3EFD0B00ED2AA6 /* Build configuration list for PBXProject "NextGenExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4921D99C1C3EFD0B00ED2AA6 /* Debug */,
+				4921D99D1C3EFD0B00ED2AA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4921D99E1C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4921D99F1C3EFD0B00ED2AA6 /* Debug */,
+				4921D9A01C3EFD0B00ED2AA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4921D96B1C3EFD0B00ED2AA6 /* Project object */;
+}

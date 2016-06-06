@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -47,10 +47,19 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1h-Bc-9TM">
+                        <rect key="frame" x="102" y="47" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="11L-f5-aAW"/>
+                            <constraint firstAttribute="height" constant="45" id="XKB-nc-76V"/>
+                        </constraints>
+                        <state key="normal" image="BlackPlayButton"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="h1h-Bc-9TM" firstAttribute="centerY" secondItem="e1w-sH-MR4" secondAttribute="centerY" id="14n-mG-d2e"/>
                 <constraint firstAttribute="trailing" secondItem="e1w-sH-MR4" secondAttribute="trailing" id="4Oc-G8-cYM"/>
                 <constraint firstItem="uAa-0v-Q9C" firstAttribute="leading" secondItem="DPe-U7-WOX" secondAttribute="leading" constant="8" id="AOw-KS-jdk"/>
                 <constraint firstItem="38b-5m-9My" firstAttribute="top" secondItem="e1w-sH-MR4" secondAttribute="bottom" constant="28" id="HvC-t7-Fiv"/>
@@ -63,6 +72,7 @@
                 <constraint firstAttribute="trailing" secondItem="uAa-0v-Q9C" secondAttribute="trailing" constant="8" id="jOU-gP-aVg"/>
                 <constraint firstItem="uAa-0v-Q9C" firstAttribute="top" secondItem="e1w-sH-MR4" secondAttribute="bottom" constant="4" id="nJR-7A-ad2"/>
                 <constraint firstItem="e1w-sH-MR4" firstAttribute="top" secondItem="DPe-U7-WOX" secondAttribute="top" id="s1k-Jk-E1y"/>
+                <constraint firstItem="h1h-Bc-9TM" firstAttribute="centerX" secondItem="e1w-sH-MR4" secondAttribute="centerX" id="sPi-0T-HmP"/>
                 <constraint firstItem="38b-5m-9My" firstAttribute="top" secondItem="uAa-0v-Q9C" secondAttribute="bottom" id="uN0-PS-t8g"/>
             </constraints>
             <size key="customSize" width="249" height="248"/>
@@ -76,10 +86,14 @@
             </variation>
             <connections>
                 <outlet property="imageView" destination="e1w-sH-MR4" id="9SL-7X-O7n"/>
+                <outlet property="playButton" destination="h1h-Bc-9TM" id="JYR-KB-Ua4"/>
                 <outlet property="subtitleLabel" destination="38b-5m-9My" id="oCG-JH-rSj"/>
                 <outlet property="titleLabel" destination="uAa-0v-Q9C" id="awk-ZR-Amo"/>
             </connections>
             <point key="canvasLocation" x="271.5" y="311.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="BlackPlayButton" width="65" height="65"/>
+    </resources>
 </document>

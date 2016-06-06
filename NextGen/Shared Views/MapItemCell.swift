@@ -17,6 +17,7 @@ class MapItemCell: UICollectionViewCell {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var subtitleLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var playButton: UIButton!
     private var imageDataTask: NSURLSessionDataTask?
     
     var experience: NGDMExperience? {
@@ -31,6 +32,7 @@ class MapItemCell: UICollectionViewCell {
                 }
                 
                 subtitleLabel.text = nil
+                playButton.hidden = appData.audioVisual == nil
             } else {
                 titleLabel.text = experience?.title
                 
@@ -49,6 +51,8 @@ class MapItemCell: UICollectionViewCell {
                 } else {
                     subtitleLabel.text = nil
                 }
+                
+                playButton.hidden = true
             }
         }
     }
@@ -59,6 +63,7 @@ class MapItemCell: UICollectionViewCell {
         titleLabel.text = nil
         imageView.image = nil
         subtitleLabel.text = nil
+        playButton.hidden = true
         if let task = imageDataTask {
             task.cancel()
             imageDataTask = nil

@@ -49,6 +49,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     var currentTime: Double = -1.0 {
         didSet {
             if _lastSavedTime == -1 || abs(currentTime - _lastSavedTime) >= Constants.UpdateInterval {
+                _lastSavedTime = currentTime
                 currentTimeDidChange()
             }
         }
@@ -70,6 +71,6 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     }
     
     func currentTimeDidChange() {
-        
+        // Override
     }
 }

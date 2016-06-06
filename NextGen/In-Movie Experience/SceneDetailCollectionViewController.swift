@@ -237,8 +237,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //self.performSegueWithIdentifier("showExample", sender: nil)
-        
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
             if timedEvent.isType(.Product) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
@@ -247,7 +245,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             } else if timedEvent.isType(.AppGroup) {
                 if let experienceApp = timedEvent.experienceApp, url = timedEvent.appGroup?.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
-                    let navigationController = UINavigationController(rootViewController: webViewController)
+                    let navigationController = LandscapeNavigationController(rootViewController: webViewController)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
             } else if timedEvent.isType(.Location) {
