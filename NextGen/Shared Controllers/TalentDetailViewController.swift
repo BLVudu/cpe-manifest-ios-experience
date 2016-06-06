@@ -26,12 +26,15 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak private var _talentImageView: UIImageView!
+    @IBOutlet weak private var _talentGalleryButton: UIButton!
     @IBOutlet weak private var _talentNameLabel: UILabel!
     @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak private var _talentBiographyLabel: UITextView!
+    @IBOutlet private var _talentNoGalleryConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak private var _galleryHeaderLabel: UILabel!
-    @IBOutlet weak private var _galleryCollectionView: UICollectionView!
+    @IBOutlet weak private var _galleryContainerView: UIView?
+    @IBOutlet weak private var _galleryHeaderLabel: UILabel?
+    @IBOutlet weak private var _galleryCollectionView: UICollectionView?
     
     @IBOutlet weak private var _filmographyContainerView: UIView!
     @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
@@ -56,13 +59,21 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         // Localizations
         _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
-        _galleryHeaderLabel.text = String.localize("talentdetail.gallery").uppercaseString
+        _galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercaseString
         _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
         
-        if mode == TalentDetailMode.Extras {
+        if mode == .Extras {
             titleLabel.removeFromSuperview()
             closeButton.removeFromSuperview()
             _containerViewTopConstraint.constant = 20
+        } else {
+            _galleryHeaderLabel?.removeFromSuperview()
+            _galleryCollectionView?.removeFromSuperview()
+            _galleryContainerView?.removeFromSuperview()
+            _galleryHeaderLabel = nil
+            _galleryCollectionView = nil
+            _galleryContainerView = nil
+            _talentNoGalleryConstraint.priority = UILayoutPriorityRequired
         }
         
         loadTalent(talent)
@@ -70,6 +81,8 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     func loadTalent(talent: Talent) {
         self.talent = talent
+        
+        _talentGalleryButton.hidden = mode != .Synced || talent.images == nil || talent.images!.count == 1
         
         _talentNameLabel.text = talent.name?.uppercaseString
         if let imageURL = talent.fullImageURL {
@@ -101,12 +114,12 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                             self._twitterButton.hidden = false
                             self._twitterButton.socialAccount = socialAccount
                             break
-                          /*
+                            
                         case .Instagram:
                             self._instagramButton.hidden = false
                             self._instagramButton.socialAccount = socialAccount
                             break
-                        */    
+                            
                         default:
                             break
                         }
@@ -137,7 +150,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             }
         })
         
-        _galleryCollectionView.reloadData()
+        _galleryCollectionView?.reloadData()
     }
     
     // MARK: Actions
@@ -151,6 +164,10 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     @IBAction func openSocialURL(sender: SocialButton) {
         sender.openURL()
+    }
+    
+    @IBAction func onLaunchGallery() {
+        self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: nil)
     }
     
     // MARK: UICollectionViewDataSource
@@ -176,14 +193,16 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: indexPath.row + 1)
+        if collectionView == _galleryCollectionView {
+            self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: indexPath.row + 1)
+        }
     }
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == SegueIdentifier.TalentImageGallery, let talentImageGalleryViewController = segue.destinationViewController as? TalentImageGalleryViewController, initialPage = sender as? Int {
+        if segue.identifier == SegueIdentifier.TalentImageGallery, let talentImageGalleryViewController = segue.destinationViewController as? TalentImageGalleryViewController {
             talentImageGalleryViewController.talent = talent
-            talentImageGalleryViewController.initialPage = initialPage
+            talentImageGalleryViewController.initialPage = (sender as? Int) ?? 0
         }
     }
 

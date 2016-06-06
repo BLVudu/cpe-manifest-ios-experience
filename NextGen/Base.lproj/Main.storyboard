@@ -261,14 +261,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6e7-Wm-GG8" userLabel="Container View">
                                 <rect key="frame" x="40" y="70" width="944" height="688"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-Nb-jWC" userLabel="Biography Container View">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-Nb-jWC" userLabel="Biography Container View">
                                         <rect key="frame" x="0.0" y="0.0" width="944" height="248"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lwb-KU-cen">
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="248"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="height" multiplier="1:1" id="Qwx-1B-uoC"/>
-                                                    <constraint firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="height" multiplier="8:9" id="zHJ-mq-dLp"/>
+                                                    <constraint firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="height" multiplier="8:9" id="ohU-3B-Qzi"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -276,6 +276,17 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjk-No-7sv">
+                                                <rect key="frame" x="165" y="201" width="55" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="hjk-No-7sv" secondAttribute="height" multiplier="29:25" id="OkG-qE-R4S"/>
+                                                </constraints>
+                                                <state key="normal" image="Gallery"/>
+                                                <connections>
+                                                    <action selector="onLaunchGallery" destination="enc-ld-Xnm" eventType="touchUpInside" id="q4i-fE-ZGe"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnf-g4-8JZ">
                                                 <rect key="frame" x="230" y="0.0" width="714" height="35"/>
                                                 <constraints>
@@ -353,10 +364,13 @@
                                             <constraint firstItem="Lpb-HK-BKq" firstAttribute="leading" secondItem="8gS-eh-Xo0" secondAttribute="trailing" constant="7" id="ULT-gt-ajU"/>
                                             <constraint firstItem="hnf-g4-8JZ" firstAttribute="leading" secondItem="Lwb-KU-cen" secondAttribute="trailing" constant="10" id="Ugi-rg-jd4"/>
                                             <constraint firstAttribute="trailing" secondItem="hnf-g4-8JZ" secondAttribute="trailing" id="Vvy-18-A51"/>
+                                            <constraint firstItem="hjk-No-7sv" firstAttribute="bottom" secondItem="Lwb-KU-cen" secondAttribute="bottom" id="Y0l-OL-zeg"/>
                                             <constraint firstItem="Lwb-KU-cen" firstAttribute="top" secondItem="4tt-Nb-jWC" secondAttribute="top" id="c2s-Zr-iky"/>
                                             <constraint firstAttribute="trailing" secondItem="8gS-eh-Xo0" secondAttribute="trailing" priority="250" id="frG-fg-PGf"/>
                                             <constraint firstAttribute="trailing" secondItem="B4Z-td-umT" secondAttribute="trailing" id="gsh-WR-kpc"/>
                                             <constraint firstItem="B4Z-td-umT" firstAttribute="leading" secondItem="Lwb-KU-cen" secondAttribute="trailing" constant="10" id="hZd-dW-b9P"/>
+                                            <constraint firstItem="hjk-No-7sv" firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="width" multiplier="0.25" id="nP2-lI-EFX"/>
+                                            <constraint firstItem="hjk-No-7sv" firstAttribute="trailing" secondItem="Lwb-KU-cen" secondAttribute="trailing" id="pC0-BV-zxT"/>
                                             <constraint firstItem="ZTb-fR-a9k" firstAttribute="leading" secondItem="Lpb-HK-BKq" secondAttribute="trailing" constant="7" id="qm5-42-ACR"/>
                                             <constraint firstItem="rYN-Hg-IFa" firstAttribute="top" secondItem="B4Z-td-umT" secondAttribute="bottom" id="tvd-ce-fcC"/>
                                         </constraints>
@@ -497,6 +511,7 @@
                                     <constraint firstItem="4tt-Nb-jWC" firstAttribute="top" secondItem="6e7-Wm-GG8" secondAttribute="top" id="Hz3-Ar-sAe"/>
                                     <constraint firstItem="RCv-yA-FCU" firstAttribute="top" secondItem="4tt-Nb-jWC" secondAttribute="bottom" constant="20" id="K8R-ch-ZvO"/>
                                     <constraint firstItem="Rja-JM-bvB" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="RQw-dw-jf4"/>
+                                    <constraint firstItem="Rja-JM-bvB" firstAttribute="top" secondItem="4tt-Nb-jWC" secondAttribute="bottom" priority="750" constant="20" id="TGP-ye-EGg"/>
                                     <constraint firstItem="4tt-Nb-jWC" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="YZv-ue-5Fb"/>
                                     <constraint firstAttribute="trailing" secondItem="Rja-JM-bvB" secondAttribute="trailing" id="lG5-Yj-xc4"/>
                                     <constraint firstItem="Rja-JM-bvB" firstAttribute="top" secondItem="RCv-yA-FCU" secondAttribute="bottom" constant="20" id="lOr-42-KFr"/>
@@ -525,12 +540,15 @@
                         <outlet property="_filmographyContainerView" destination="Rja-JM-bvB" id="Xy5-JR-2vX"/>
                         <outlet property="_filmographyHeaderLabel" destination="12p-Wd-gSB" id="GoK-jK-T5o"/>
                         <outlet property="_galleryCollectionView" destination="AnL-HH-Bw6" id="xog-6R-lx3"/>
+                        <outlet property="_galleryContainerView" destination="RCv-yA-FCU" id="9qY-fr-ZKt"/>
                         <outlet property="_galleryHeaderLabel" destination="D7o-G3-t6w" id="ZKz-TH-LGf"/>
                         <outlet property="_instagramButton" destination="ZTb-fR-a9k" id="iDB-J2-pPr"/>
                         <outlet property="_talentBiographyHeaderLabel" destination="B4Z-td-umT" id="yB2-vd-gjq"/>
                         <outlet property="_talentBiographyLabel" destination="rYN-Hg-IFa" id="Gmc-Sk-yt1"/>
+                        <outlet property="_talentGalleryButton" destination="hjk-No-7sv" id="cEX-DQ-FLO"/>
                         <outlet property="_talentImageView" destination="Lwb-KU-cen" id="fT6-Hi-soR"/>
                         <outlet property="_talentNameLabel" destination="hnf-g4-8JZ" id="WBt-kC-VrZ"/>
+                        <outlet property="_talentNoGalleryConstraint" destination="TGP-ye-EGg" id="dUG-Sa-QHq"/>
                         <outlet property="_twitterButton" destination="8gS-eh-Xo0" id="OGj-LA-9Ho"/>
                         <outlet property="_twitterMainConstraint" destination="ULT-gt-ajU" id="l6E-nw-bEs"/>
                         <outlet property="_twitterNoFacebookConstraint" destination="DCM-cU-txU" id="0wT-jl-FQ0"/>
@@ -561,7 +579,7 @@
                                     <constraint firstAttribute="width" secondItem="x6d-Bq-g0Z" secondAttribute="height" multiplier="16:9" id="jig-Hx-iO4"/>
                                 </constraints>
                             </scrollView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hVf-9P-8zi">
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hVf-9P-8zi">
                                 <rect key="frame" x="40" y="621" width="944" height="127"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="x8w-7U-UJs">
                                     <size key="itemSize" width="127" height="127"/>
@@ -2220,6 +2238,7 @@
         <image name="BlackPlayButton" width="65" height="65"/>
         <image name="Commentary" width="17" height="17"/>
         <image name="Facebook Icon" width="75" height="75"/>
+        <image name="Gallery" width="24" height="24"/>
         <image name="Home" width="18" height="18"/>
         <image name="Instagram Icon" width="75" height="75"/>
         <image name="Maximize" width="25" height="25"/>
