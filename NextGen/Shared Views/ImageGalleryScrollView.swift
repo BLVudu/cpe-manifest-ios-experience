@@ -21,14 +21,14 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         static let CloseButtonPadding: CGFloat = 15
     }
     
-    private var toolbar: UIToolbar!
+    private var toolbar: UIToolbar?
     private var isFullScreen = false
     private var originalFrame: CGRect?
     private var originalContainerFrame: CGRect?
     private var closeButton: UIButton!
     
     private var scrollViewPageWidth: CGFloat = 0
-    private var currentPage = 0 {
+    var currentPage = 0 {
         didSet {
             loadGalleryImageForPage(currentPage)
             loadGalleryImageForPage(currentPage + 1)
@@ -38,26 +38,13 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     var gallery: NGDMGallery? {
         didSet {
-            // Reset gallery
-            for subview in self.subviews {
-                if let subview = subview as? UIScrollView {
-                    subview.removeFromSuperview()
-                }
-            }
-            
-            if let frame = originalContainerFrame {
-                self.superview?.frame = frame
-            }
-            
-            if let frame = originalFrame {
-                self.frame = frame
-            }
-            
-            isFullScreen = false
-            toolbar.hidden = isFullScreen
-            closeButton.hidden = !isFullScreen
-            currentPage = 0
-            layoutPages()
+            resetScrollView()
+        }
+    }
+    
+    var imageURLs: [NSURL]? {
+        didSet {
+            resetScrollView()
         }
     }
     
@@ -77,15 +64,15 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         self.delegate = self
         
         toolbar = UIToolbar()
-        toolbar.barStyle = .Black
-        toolbar.translucent = true
+        toolbar!.barStyle = .Black
+        toolbar!.translucent = true
         
         let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
         fullScreenButton.tintColor = UIColor.whiteColor()
         fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
         fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
         fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
-        toolbar.items = [UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(customView: fullScreenButton)]
+        toolbar!.items = [UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(customView: fullScreenButton)]
         
         closeButton = UIButton()
         closeButton.tintColor = UIColor.whiteColor()
@@ -98,11 +85,13 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        var toolbarFrame = toolbar.frame
-        toolbarFrame.origin.x = self.contentOffset.x
-        toolbarFrame.origin.y = self.contentOffset.y + (CGRectGetHeight(self.frame) - Constants.ToolbarHeight) + 1
-        toolbar.frame = toolbarFrame
-        self.bringSubviewToFront(toolbar)
+        if let toolbar = toolbar {
+            var toolbarFrame = toolbar.frame
+            toolbarFrame.origin.x = self.contentOffset.x
+            toolbarFrame.origin.y = self.contentOffset.y + (CGRectGetHeight(self.frame) - Constants.ToolbarHeight) + 1
+            toolbar.frame = toolbarFrame
+            self.bringSubviewToFront(toolbar)
+        }
         
         var closeButtonFrame = closeButton.frame
         closeButtonFrame.origin.x = self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding
@@ -110,8 +99,35 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         self.bringSubviewToFront(closeButton)
     }
     
+    func removeToolbar() {
+        toolbar?.removeFromSuperview()
+        toolbar = nil
+    }
+    
+    private func resetScrollView() {
+        for subview in self.subviews {
+            if let subview = subview as? UIScrollView {
+                subview.removeFromSuperview()
+            }
+        }
+        
+        if let frame = originalContainerFrame {
+            self.superview?.frame = frame
+        }
+        
+        if let frame = originalFrame {
+            self.frame = frame
+        }
+        
+        isFullScreen = false
+        toolbar?.hidden = false
+        closeButton.hidden = true
+        currentPage = 0
+        layoutPages()
+    }
+    
     func layoutPages() {
-        let numPictures = gallery?.pictures?.count ?? 0
+        let numPictures = gallery?.pictures?.count ?? imageURLs?.count ?? 0
         scrollViewPageWidth = CGRectGetWidth(self.bounds)
         for i in 0 ..< numPictures {
             var pageView = self.viewWithTag(i + 1) as? UIScrollView
@@ -143,8 +159,10 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * CGFloat(numPictures), CGRectGetHeight(self.frame))
         self.contentOffset.x = scrollViewPageWidth * CGFloat(currentPage)
         
-        toolbar.frame = CGRectMake(self.contentOffset.x, CGRectGetHeight(self.frame) - Constants.ToolbarHeight, CGRectGetWidth(self.frame), Constants.ToolbarHeight)
-        self.addSubview(toolbar)
+        if let toolbar = toolbar {
+            toolbar.frame = CGRectMake(self.contentOffset.x, CGRectGetHeight(self.frame) - Constants.ToolbarHeight, CGRectGetWidth(self.frame), Constants.ToolbarHeight)
+            self.addSubview(toolbar)
+        }
         
         closeButton.frame = CGRectMake(self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding, Constants.CloseButtonPadding, Constants.CloseButtonSize, Constants.CloseButtonSize)
         self.addSubview(closeButton)
@@ -155,7 +173,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Actions
     func toggleFullScreen() {
         isFullScreen = !isFullScreen
-        toolbar.hidden = isFullScreen
+        toolbar?.hidden = isFullScreen
         closeButton.hidden = !isFullScreen
         
         if isFullScreen {
@@ -189,21 +207,27 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     // MARK: Image Gallery
-    private func loadGalleryImageForPage(page: Int) {
+    private func imageURLForPage(page: Int) -> NSURL? {
         if let pictures = gallery?.pictures where pictures.count > page {
-            if let pageView = self.viewWithTag(page + 1) as? UIScrollView, imageView = pageView.subviews.first as? UIImageView where imageView.image == nil {
-                if let imageURL = pictures[page].imageURL {
-                    imageView.setImageWithURL(imageURL)
-                }
-            }
+            return pictures[page].imageURL
+        }
+        
+        if let imageURLs = imageURLs where imageURLs.count > page {
+            return imageURLs[page]
+        }
+        
+        return nil
+    }
+    
+    private func loadGalleryImageForPage(page: Int) {
+        if let imageURL = imageURLForPage(page), pageView = self.viewWithTag(page + 1) as? UIScrollView, imageView = pageView.subviews.first as? UIImageView where imageView.image == nil {
+            imageView.setImageWithURL(imageURL)
         }
     }
     
     private func imageViewForPage(page: Int) -> UIImageView? {
-        if let pictures = gallery?.pictures where pictures.count > page {
-            if let pageView = self.viewWithTag(page + 1) as? UIScrollView {
-                return pageView.subviews.first as? UIImageView
-            }
+        if let pageView = self.viewWithTag(page + 1) as? UIScrollView {
+            return pageView.subviews.first as? UIImageView
         }
         
         return nil
@@ -218,6 +242,10 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    func gotoPage(page: Int, animated: Bool) {
+        currentPage = page
+        self.setContentOffset(CGPointMake(CGFloat(currentPage) * scrollViewPageWidth, 0), animated: animated)
+    }
     
     // MARK: UIScrollViewDelegate
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

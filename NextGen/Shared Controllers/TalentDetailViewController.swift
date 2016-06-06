@@ -19,6 +19,10 @@ enum TalentDetailMode: String {
 
 class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    private struct SegueIdentifier {
+        static let TalentImageGallery = "TalentImageGallerySegueIdentifier"
+    }
+    
     @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak private var _talentImageView: UIImageView!
@@ -172,15 +176,15 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //let film = (collectionView.cellForItemAtIndexPath(indexPath) as! FilmCollectionViewCell).film
-        //if film?.externalURL != nil {
-        //    film!.externalURL!.promptLaunchBrowser()
-        //}
+        self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: indexPath.row + 1)
     }
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        if segue.identifier == SegueIdentifier.TalentImageGallery, let talentImageGalleryViewController = segue.destinationViewController as? TalentImageGalleryViewController, initialPage = sender as? Int {
+            talentImageGalleryViewController.talent = talent
+            talentImageGalleryViewController.initialPage = initialPage
+        }
     }
 
 }

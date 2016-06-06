@@ -8,8 +8,6 @@
 
 import Foundation
 
-let kTheTakeIdentifierNamespace = "thetake.com"
-
 class TheTakeAPIUtil: APIUtil {
     
     static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")

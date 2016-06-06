@@ -74,7 +74,7 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
                 CurrentManifest.outOfMovieExperience = try CurrentManifest.mainExperience.getOutOfMovieExperience()
                 CurrentManifest.outOfMovieExperience.appearance = NGDMAppearance(type: .OutOfMovie)
                 
-                TheTakeAPIUtil.sharedInstance.mediaId = CurrentManifest.mainExperience.customIdentifier(kTheTakeIdentifierNamespace)
+                TheTakeAPIUtil.sharedInstance.mediaId = CurrentManifest.mainExperience.customIdentifier(Namespaces.TheTake)
                 BaselineAPIUtil.sharedInstance.projectId = CurrentManifest.mainExperience.customIdentifier(kBaselineIdentifierNamespace)
                 ConfigManager.sharedInstance.loadConfigs()
                 CurrentManifest.mainExperience.loadTalent()

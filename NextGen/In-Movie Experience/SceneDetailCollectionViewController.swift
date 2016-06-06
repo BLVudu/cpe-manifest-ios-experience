@@ -237,8 +237,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //self.performSegueWithIdentifier("showExample", sender: nil)
-        
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
             if timedEvent.isType(.Product) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)

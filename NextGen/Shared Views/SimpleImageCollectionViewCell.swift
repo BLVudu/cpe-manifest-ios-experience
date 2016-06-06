@@ -15,6 +15,8 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak private var imageView: UIImageView!
     private var setImageSessionDataTask: NSURLSessionDataTask?
     
+    var showsSelectedBorder = false
+    
     var imageURL: NSURL? {
         didSet {
             if let url = imageURL {
@@ -35,8 +37,22 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    override var selected: Bool {
+        didSet {
+            if self.selected && showsSelectedBorder {
+                self.layer.borderWidth = 2
+                self.layer.borderColor = UIColor.whiteColor().CGColor
+            } else {
+                self.layer.borderWidth = 0
+                self.layer.borderColor = nil
+            }
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        self.selected = false
         
         image = nil
         

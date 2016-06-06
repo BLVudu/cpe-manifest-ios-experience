@@ -326,6 +326,7 @@
 		70E297621CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E296991CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift */; };
 		70E297631CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2969A1CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift */; };
 		70E297651CDD178200B0B022 /* NGDMAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E297641CDD178200B0B022 /* NGDMAppData.swift */; };
+		70E9F6C01D05F1060010613E /* TalentImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E9F6BF1D05F1060010613E /* TalentImageGalleryViewController.swift */; };
 		70EFFB2C1CBC637000643372 /* MultiMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EFFB2B1CBC637000643372 /* MultiMapView.swift */; };
 		70EFFB2E1CBC6E4500643372 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */; };
 		70FECF6D1C65433A005B1A44 /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */; };
@@ -663,6 +664,7 @@
 		70E296991CDCFD9D00B0B022 /* NGEVideoFrameTimecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEVideoFrameTimecode.swift; sourceTree = "<group>"; };
 		70E2969A1CDCFD9D00B0B022 /* NGEVideoTrackReferenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGEVideoTrackReferenceType.swift; sourceTree = "<group>"; };
 		70E297641CDD178200B0B022 /* NGDMAppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NGDMAppData.swift; sourceTree = "<group>"; };
+		70E9F6BF1D05F1060010613E /* TalentImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70EFFB2B1CBC637000643372 /* MultiMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiMapView.swift; sourceTree = "<group>"; };
 		70EFFB2D1CBC6E4500643372 /* ConfigManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		70FECF6C1C65433A005B1A44 /* UIButton+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Utils.swift"; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 				70DF2F911CA5FBBC007AD2A0 /* MenuedViewController.swift */,
 				490213471C860C9A00071552 /* SharingViewController.swift */,
 				701D69C01C48205B0047A67A /* TalentDetailViewController.swift */,
+				70E9F6BF1D05F1060010613E /* TalentImageGalleryViewController.swift */,
 				7085F7981C97550C00DF31B6 /* WebViewController.swift */,
 			);
 			path = "Shared Controllers";
@@ -1388,6 +1391,7 @@
 				70E296FA1CDCFD9D00B0B022 /* NGEEventLocationType.swift in Sources */,
 				70517E821CB717AC008556EC /* ImageSceneDetailCollectionViewCell.swift in Sources */,
 				70E2975D1CDCFD9D00B0B022 /* NGETitleAlternate.swift in Sources */,
+				70E9F6C01D05F1060010613E /* TalentImageGalleryViewController.swift in Sources */,
 				70E2975E1CDCFD9D00B0B022 /* NGETrackMetadata.swift in Sources */,
 				70E297651CDD178200B0B022 /* NGDMAppData.swift in Sources */,
 				70E296B21CDCFD9D00B0B022 /* NGEAudioClipRefType.swift in Sources */,

@@ -9,13 +9,6 @@
 import UIKit
 import HockeySDK
 
-struct CurrentManifest {
-    static var mainExperience: NGDMMainExperience!
-    static var inMovieExperience: NGDMExperience!
-    static var outOfMovieExperience: NGDMExperience!
-    static var allAppData: [String: NGDMAppData]?
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
