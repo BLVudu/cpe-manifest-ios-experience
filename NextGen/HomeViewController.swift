@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import AVKit
+import AVFoundation
+import NextGenDataManager
 
 class HomeViewController: UIViewController {
     

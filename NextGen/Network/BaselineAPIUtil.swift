@@ -7,10 +7,9 @@
 //
 
 import Foundation
+import NextGenDataManager
 
-let kBaselineIdentifierNamespace = "baselineapi.com"
-
-class BaselineAPIUtil: APIUtil {
+class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     
     struct Endpoints {
         static let GetCredits = "/ProjectAllCredits"

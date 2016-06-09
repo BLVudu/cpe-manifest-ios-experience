@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-import GoogleMaps
+//import GoogleMaps
 
 protocol MultiMapViewDelegate {
     func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker)
