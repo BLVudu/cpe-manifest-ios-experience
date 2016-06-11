@@ -14,17 +14,17 @@ NextGen Extras is an _enhanced_ 'extras' experience around user owned content. T
 This codebase is open-source under the Apache 2.0 license. See [LICENSE](LICENSE)
 
 ## Diagrams
-### iPad & Android Tablet Flowchart
+### Flowchart
 A high-level flowchart on how the library operates when embedded in a partner retailer's app.
-![Architectural Flowchart](./Docs/NextGen_Flowchart.svg?raw=true)
+[Architectural Flowchart](./Docs/NextGen_Flowchart.svg)
 
 ### Data binding + UI layers
 The reference code for iPad & Android Tablets is being built to be modular; e.g. a partner retailer can choose to use just the manifest-to-native data-binding layer and/or the UI layer. Each layer is customizable by retailer is they choose to do so.
-![Architectural Layers](./Docs/NextGen_Data_and_UI_Layers.svg?raw=true)
+[Architectural Layers](./Docs/NextGen_Data_and_UI_Layers.svg?raw=true)
 
 ### iOS CocoaPods Library Diagram
 A iOS specific architecture diagram.
-![iOS Architecture Diagram](./Docs/NextGen_iOS_Library_Diagram.svg?raw=true)
+[iOS Architecture Diagram](./Docs/NextGen_iOS_Library_Diagram.svg?raw=true)
 
 ## Getting Started
 ### Dependency Management
