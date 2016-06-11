@@ -6,7 +6,7 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
-import GoogleMaps
+//import GoogleMaps
 
 class ConfigManager {
     
@@ -38,7 +38,7 @@ class ConfigManager {
                     }
                     
                     if let googleMapsAPIKey = configJSON["google_maps_api_key"] as? String {
-                        GMSServices.provideAPIKey(googleMapsAPIKey)
+                        //GMSServices.provideAPIKey(googleMapsAPIKey)
                         self.hasGoogleMaps = true
                     }
                 }

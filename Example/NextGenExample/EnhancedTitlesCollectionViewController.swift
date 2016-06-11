@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import NextGenDataManager
 
 class EnhancedTitlesCollectionViewCell: UICollectionViewCell {
     
@@ -66,7 +67,7 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         // Load current Manifest file
         if let manifestXMLPath = NSBundle.mainBundle().pathForResource(titleData["manifest"], ofType: "xml") {
             do {
-                try NextGenDataManager.sharedInstance.loadManifestXMLFile(manifestXMLPath)
+                try NGDMManifest.sharedInstance.loadManifestXMLFile(manifestXMLPath)
                 CurrentManifest.mainExperience = NextGenDataManager.sharedInstance.mainExperience
                 CurrentManifest.mainExperience.appearance = NGDMAppearance(type: .Main)
                 CurrentManifest.inMovieExperience = try CurrentManifest.mainExperience.getInMovieExperience()
@@ -75,7 +76,7 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
                 CurrentManifest.outOfMovieExperience.appearance = NGDMAppearance(type: .OutOfMovie)
                 
                 TheTakeAPIUtil.sharedInstance.mediaId = CurrentManifest.mainExperience.customIdentifier(Namespaces.TheTake)
-                BaselineAPIUtil.sharedInstance.projectId = CurrentManifest.mainExperience.customIdentifier(kBaselineIdentifierNamespace)
+                BaselineAPIUtil.sharedInstance.projectId = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline)
                 ConfigManager.sharedInstance.loadConfigs()
                 CurrentManifest.mainExperience.loadTalent()
             } catch NGDMError.MainExperienceMissing {

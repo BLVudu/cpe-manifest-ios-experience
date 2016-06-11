@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NextGenDataManager
 
 struct ImageGalleryNotification {
     static let DidScrollToPage = "kImageGalleryNotificationDidScrollToPage"
