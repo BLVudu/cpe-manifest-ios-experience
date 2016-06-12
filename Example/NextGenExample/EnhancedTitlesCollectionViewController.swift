@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import NextGenDataManager
+import NextGen
 
 class EnhancedTitlesCollectionViewCell: UICollectionViewCell {
     
@@ -68,7 +69,7 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         if let manifestXMLPath = NSBundle.mainBundle().pathForResource(titleData["manifest"], ofType: "xml") {
             do {
                 try NGDMManifest.sharedInstance.loadManifestXMLFile(manifestXMLPath)
-                CurrentManifest.mainExperience = NextGenDataManager.sharedInstance.mainExperience
+                CurrentManifest.mainExperience = NGDMManifest.sharedInstance.mainExperience
                 CurrentManifest.mainExperience.appearance = NGDMAppearance(type: .Main)
                 CurrentManifest.inMovieExperience = try CurrentManifest.mainExperience.getInMovieExperience()
                 CurrentManifest.inMovieExperience.appearance = NGDMAppearance(type: .InMovie)
@@ -97,7 +98,7 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         // Load current AppData file
         if let appDataXMLPath = NSBundle.mainBundle().pathForResource(titleData["appdata"], ofType: "xml") {
             do {
-                CurrentManifest.allAppData = try NextGenDataManager.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
+                CurrentManifest.allAppData = try NGDMManifest.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
             } catch {
                 print("Error loading AppData file")
             }

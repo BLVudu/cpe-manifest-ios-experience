@@ -9,6 +9,7 @@
 
 import UIKit
 import AVFoundation
+import NextGenDataManager
 
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     

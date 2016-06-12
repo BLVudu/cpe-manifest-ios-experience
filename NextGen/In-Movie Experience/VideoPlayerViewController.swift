@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import MessageUI
+import CoreMedia
+import NextGenDataManager
 
 struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
@@ -45,8 +47,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
     private var _sharePopoverController: UIPopoverController!
-
-  
     
     @IBOutlet weak var toolbar: UIView!
 
@@ -61,6 +61,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
     private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
     private var _updateCommentaryButton: NSObjectProtocol!
+    
+    private var countdownSeconds = 0
+    var curIndex = 0
+    var indexMax = 0
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_shouldPauseAllOtherObserver)
@@ -77,7 +81,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
         _commentaryButton.setTitle(String.localize("label.commentary"), forState: UIControlState.Normal)
         _commentaryView.hidden = true
-        shareButton.enabled = true
+        self.shareButton.enabled = true
         alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         _shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
@@ -115,7 +119,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         } else {
             _didPlayInterstitial = true
             self.shareButton.removeFromSuperview()
-            self.playerControlsVisible = false
+            self.setPlayerControlsVisible(false)
             self.topToolbar.removeFromSuperview()
             
             if mode == VideoPlayerMode.SupplementalInMovie {
@@ -132,7 +136,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     func playMainExperience() {
-        self.playerControlsVisible = false
+        self.setPlayerControlsVisible(false)
         if _didPlayInterstitial {
             if let audioVisual = CurrentManifest.mainExperience.audioVisual {
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayMainExperience, object: nil)
@@ -145,7 +149,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     
     func skipInterstitial() {
         self.pauseVideo()
-        self.player.removeAllItems()
+        self.player?.removeAllItems()
         self._didPlayInterstitial = true
         self.playMainExperience()
     }
@@ -160,7 +164,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         super.syncScrubber()
         
         if player != nil && mode == VideoPlayerMode.MainFeature {
-            var currentTime = _didPlayInterstitial ? CMTimeGetSeconds(player.currentTime()) : 0.0
+            var currentTime = _didPlayInterstitial ? CMTimeGetSeconds(self.player?.currentTime() ?? kCMTimeZero) : 0
             if currentTime.isNaN {
                 currentTime = 0.0
             }
@@ -173,8 +177,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     override func playerItemDidReachEnd(notification: NSNotification!) {
-
-        
         if !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
@@ -182,28 +184,23 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         
         self.curIndex += 1
         if (self.curIndex < self.indexMax) {
-            
             self.pauseVideo()
             self.countdownSeconds = 5;
             self.countdown.hidden = false
-            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(self.subtractTime), userInfo: nil, repeats: true)
+            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.subtractTime), userInfo: nil, repeats: true)
             self.countdown.animateTimer()
-            let delayInSeconds = 5.0;
-            nextItemTask = delay(delayInSeconds){
-            NSNotificationCenter.defaultCenter().postNotificationName(kWBVideoPlayerWillPlayNextItem, object:self,userInfo:["index": NSNumber(int: self.curIndex)])
-            self.countdown.hidden = true;
-            self.countdownTimer.invalidate()
-            self.countdownTimer = nil
-            self.countdownSeconds = 5;
-            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
-            
+            nextItemTask = delay(5) {
+                NSNotificationCenter.defaultCenter().postNotificationName(WBVideoPlayerConstants.Notification.WillPlayNextItem, object:self, userInfo:["index": self.curIndex])
+                self.countdown.hidden = true;
+                self.countdownTimer.invalidate()
+                self.countdownTimer = nil
+                self.countdownSeconds = 5;
+                self.countdown.countdownString = "  \(self.countdownSeconds) sec"
             }
-
         }
 
-        if mode == VideoPlayerMode.Supplemental{
+        if mode == .Supplemental {
             super.playerItemDidReachEnd(notification)
-            
         }
     }
     
@@ -269,8 +266,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
 
     
     // MARK: Actions
-    override func done(sender: AnyObject?) {
-        super.done(sender)
+    override func done() {
+        super.done()
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -299,20 +296,14 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBAction override func share(sender: AnyObject!) {
         alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         let anchor = self.view.frame.size.height - 120
-        if _clipAvaliable == false {
-            
-            alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-            
-        } else if _clipAvaliable == true{
-            
+        if _clipAvaliable {
             if UIDevice.currentDevice().orientation.isLandscape {
-            
-            alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-        } else{
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidTapShare, object: nil)
+                alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidTapShare, object: nil)
             }
-
+        } else {
+            alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
         }
         
         alertController.view.tintColor = UIColor.themePrimaryColor()
@@ -321,13 +312,13 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         _sharePopoverController.delegate = self
         
         _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-        if((self.playerControlsAutoHideTimer) != nil){
-            self.playerControlsAutoHideTimer.invalidate()
+        if let timer = self.playerControlsAutoHideTimer {
+            timer.invalidate()
         }
+        
+        self.playerControlsAutoHideTimer = nil
     }
     
-
-
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
         if !_controlsAreLocked {
             if !_didPlayInterstitial {

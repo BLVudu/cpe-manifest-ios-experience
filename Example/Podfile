@@ -10,6 +10,7 @@ target 'NextGenExample' do
     
     use_frameworks!
     
+    pod 'NextGenDataManager', :path => '../../nextgen-data'
     pod 'NextGen', :path => '../'
     
     pod 'HockeySDK'

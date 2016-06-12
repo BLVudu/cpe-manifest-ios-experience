@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-
+import NextGenDataManager
 
 class MapItemCell: UICollectionViewCell {
     

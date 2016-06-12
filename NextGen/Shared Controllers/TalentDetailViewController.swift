@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NextGenDataManager
 
 protocol TalentDetailViewPresenter {
     func talentDetailViewShouldClose()

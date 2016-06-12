@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NextGenDataManager
 
 class SharingViewController: SceneDetailViewController {
     
