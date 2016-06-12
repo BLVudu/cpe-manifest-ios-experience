@@ -29,7 +29,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     private var _userDidSelectNextItem = true
     
     private var _willPlayNextItemObserver: NSObjectProtocol!
-
     
     // MARK: Initialization
     deinit {
@@ -58,7 +57,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
 
-        _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+        _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(WBVideoPlayerConstants.Notification.WillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int where index < (strongSelf.experience.childExperiences?.count ?? 0) {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
@@ -139,8 +138,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     }
                     
                     videoPlayerViewController.mode = VideoPlayerMode.Supplemental
-                    videoPlayerViewController.curIndex = Int32(indexPath.row)
-                    videoPlayerViewController.indexMax = Int32(experience.childExperiences?.count ?? 0)
+                    videoPlayerViewController.curIndex = indexPath.row
+                    videoPlayerViewController.indexMax = experience.childExperiences?.count ?? 0
                     
                     videoPlayerViewController.view.frame = videoContainerView.bounds
                     videoContainerView.addSubview(videoPlayerViewController.view)

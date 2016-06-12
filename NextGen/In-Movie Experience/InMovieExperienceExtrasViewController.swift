@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NextGenDataManager
 
 class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
     

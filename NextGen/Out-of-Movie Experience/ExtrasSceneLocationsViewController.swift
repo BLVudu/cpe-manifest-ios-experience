@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import NextGenDataManager
 
 class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     

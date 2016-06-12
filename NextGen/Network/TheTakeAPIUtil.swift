@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import NextGenDataManager
 
-class TheTakeAPIUtil: APIUtil {
+public class TheTakeAPIUtil: APIUtil {
     
-    static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")
+    public static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")
     
     var mediaId: String!
     var apiKey: String!
@@ -18,7 +19,7 @@ class TheTakeAPIUtil: APIUtil {
     private var _frameTimes = [Double: NSDictionary]()
     var productCategories = [TheTakeCategory]()
     
-    override func requestWithURLPath(urlPath: String) -> NSMutableURLRequest {
+    override public func requestWithURLPath(urlPath: String) -> NSMutableURLRequest {
         let request = super.requestWithURLPath(urlPath)
         request.addValue(apiKey, forHTTPHeaderField: "X-Mashape-Key")
         request.addValue("application/json", forHTTPHeaderField: "Accept")

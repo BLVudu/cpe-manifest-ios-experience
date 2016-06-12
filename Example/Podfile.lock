@@ -3,25 +3,28 @@ PODS:
     - HockeySDK/AllFeaturesLib (= 4.0.1)
   - HockeySDK/AllFeaturesLib (4.0.1)
   - MBProgressHUD (0.9.2)
-  - NextGen (0.0.1):
+  - NextGen (0.0.2):
     - MBProgressHUD (~> 0.9.2)
-    - NextGenDataManager (~> 0.0.4)
-  - NextGenDataManager (0.0.4)
+    - NextGenDataManager (~> 1.0.0)
+  - NextGenDataManager (1.0.0)
 
 DEPENDENCIES:
   - HockeySDK
   - NextGen (from `../`)
+  - NextGenDataManager (from `../../nextgen-data`)
 
 EXTERNAL SOURCES:
   NextGen:
     :path: "../"
+  NextGenDataManager:
+    :path: "../../nextgen-data"
 
 SPEC CHECKSUMS:
   HockeySDK: 1b69a82782f6a3d4a1c0b1f04dca4bca83fc8c82
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
-  NextGen: 4c389ac5eb248ac022e1f387a59e091cd4cbe333
-  NextGenDataManager: 2ed3ab9203dca2ad62d0ad9c8e019941c12c033b
+  NextGen: b5010c63e53b7a4d22762787c33b7ea1ecd5d789
+  NextGenDataManager: 68700c12b4db507f6db1b8698ab0edcfc1d0146a
 
-PODFILE CHECKSUM: 69cc2ee9bd03d2d33fc907d38ff3b7b8e42afa7c
+PODFILE CHECKSUM: 24aed28e00efe2ea9dc914661de9fa135a6c6a3f
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1

@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		29EBFFD493A43292101F1452 /* Pods-NextGenExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextGenExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextGenExample/Pods-NextGenExample.release.xcconfig"; sourceTree = "<group>"; };
-		4921D9731C3EFD0B00ED2AA6 /* NextGen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4921D9731C3EFD0B00ED2AA6 /* NextGenExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextGenExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -84,7 +84,7 @@
 		4921D9741C3EFD0B00ED2AA6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4921D9731C3EFD0B00ED2AA6 /* NextGen.app */,
+				4921D9731C3EFD0B00ED2AA6 /* NextGenExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,12 +154,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4921D99E1C3EFD0B00ED2AA6 /* Build configuration list for PBXNativeTarget "NextGenExample" */;
 			buildPhases = (
-				3002657E57EB0B913B78654A /* 📦 Check Pods Manifest.lock */,
+				3002657E57EB0B913B78654A /* [CP] Check Pods Manifest.lock */,
 				4921D96F1C3EFD0B00ED2AA6 /* Sources */,
 				4921D9701C3EFD0B00ED2AA6 /* Frameworks */,
 				4921D9711C3EFD0B00ED2AA6 /* Resources */,
-				FAD03E2525E3A21852F62079 /* 📦 Embed Pods Frameworks */,
-				D7ADE3024655F45E292014A5 /* 📦 Copy Pods Resources */,
+				FAD03E2525E3A21852F62079 /* [CP] Embed Pods Frameworks */,
+				D7ADE3024655F45E292014A5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,7 +167,7 @@
 			);
 			name = NextGenExample;
 			productName = "NextGenPOC-Native";
-			productReference = 4921D9731C3EFD0B00ED2AA6 /* NextGen.app */;
+			productReference = 4921D9731C3EFD0B00ED2AA6 /* NextGenExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -225,14 +225,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3002657E57EB0B913B78654A /* 📦 Check Pods Manifest.lock */ = {
+		3002657E57EB0B913B78654A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,14 +240,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D7ADE3024655F45E292014A5 /* 📦 Copy Pods Resources */ = {
+		D7ADE3024655F45E292014A5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,14 +255,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NextGenExample/Pods-NextGenExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FAD03E2525E3A21852F62079 /* 📦 Embed Pods Frameworks */ = {
+		FAD03E2525E3A21852F62079 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +385,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
-				PRODUCT_NAME = NextGen;
+				PRODUCT_NAME = NextGenExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(inherited)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(inherited)";
@@ -406,7 +406,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
-				PRODUCT_NAME = NextGen;
+				PRODUCT_NAME = NextGenExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(inherited)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(inherited)";

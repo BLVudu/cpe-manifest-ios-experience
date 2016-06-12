@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import NextGenDataManager
 
 struct ExperienceCellData {
     var experience: NGDMExperience!

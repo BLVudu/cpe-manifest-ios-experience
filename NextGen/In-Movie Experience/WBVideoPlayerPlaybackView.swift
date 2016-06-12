@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 /* ---------------------------------------------------------
  **  To play the visual component of an asset, you need a view
@@ -17,7 +18,7 @@ import Foundation
  **  that is used for this purpose.
  ** ------------------------------------------------------- */
 
-class WBVideoPlayerPlaybackView {
+class WBVideoPlayerPlaybackView: UIView {
     
     var layerClass: AnyClass {
         return AVPlayerLayer.self
@@ -49,7 +50,9 @@ class WBVideoPlayerPlaybackView {
         }
         
         set {
-            playerLayer?.videoGravity = fillMode
+            if newValue != nil {
+                playerLayer?.videoGravity = newValue!
+            }
         }
     }
 }
