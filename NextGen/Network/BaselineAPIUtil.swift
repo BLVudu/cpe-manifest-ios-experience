@@ -43,7 +43,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     
     public static let sharedInstance = BaselineAPIUtil(apiDomain: "http://baselineapi.com/api")
     
-    var projectId: String!
+    public var projectId: String!
     var apiKey: String!
     
     public func prefetchCredits(successBlock: (talents: [String: Talent]) -> Void) {

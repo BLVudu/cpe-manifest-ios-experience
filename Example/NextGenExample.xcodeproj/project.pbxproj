@@ -9,15 +9,9 @@
 /* Begin PBXBuildFile section */
 		495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495CF3691CC042BA006AE290 /* CoreText.framework */; };
 		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
-		7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7071C54B1C6BCC11006F4275 /* libxml2.tbd */; };
+		7084E1E51D0F18EE00B1B5B7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7084E1E41D0F18EE00B1B5B7 /* Info.plist */; };
 		70C9EA601D08A18C002299B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA571D08A18C002299B3 /* Assets.xcassets */; };
-		70C9EA611D08A18C002299B3 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA591D08A18C002299B3 /* config.json */; };
 		70C9EA621D08A18C002299B3 /* config.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA5A1D08A18C002299B3 /* config.json.example */; };
-		70C9EA631D08A18C002299B3 /* minions_hls_manifest_v6-R60-generated-spec1.5.xml in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA5B1D08A18C002299B3 /* minions_hls_manifest_v6-R60-generated-spec1.5.xml */; };
-		70C9EA641D08A18C002299B3 /* mos_appdata_locations_r60-v0.4.xml in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA5C1D08A18C002299B3 /* mos_appdata_locations_r60-v0.4.xml */; };
-		70C9EA651D08A18C002299B3 /* mos_hls_manifest_r60-v0.4.xml in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA5D1D08A18C002299B3 /* mos_hls_manifest_r60-v0.4.xml */; };
-		70C9EA661D08A18C002299B3 /* sisters_extended_hls_manifest_v3-generated-spec1.5.xml in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA5E1D08A18C002299B3 /* sisters_extended_hls_manifest_v3-generated-spec1.5.xml */; };
-		70C9EA671D08A18C002299B3 /* sisters_hls_manifest_v2-R60-generated-spec1.5.xml in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA5F1D08A18C002299B3 /* sisters_hls_manifest_v2-R60-generated-spec1.5.xml */; };
 		70C9EA6B1D08A2D7002299B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9EA691D08A2D7002299B3 /* AppDelegate.swift */; };
 		70C9EA6C1D08A2D7002299B3 /* EnhancedTitlesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C9EA6A1D08A2D7002299B3 /* EnhancedTitlesCollectionViewController.swift */; };
 		70C9EA6F1D08A3C5002299B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA6D1D08A3C5002299B3 /* LaunchScreen.storyboard */; };
@@ -35,14 +29,11 @@
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49F502541C890E6500DFAD88 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		7084E1E41D0F18EE00B1B5B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		70C0929E1D0F2DC400BFC1E4 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		70C092A41D0F52E100BFC1E4 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Dependencies/GoogleMaps.framework; sourceTree = "<group>"; };
 		70C9EA571D08A18C002299B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		70C9EA591D08A18C002299B3 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		70C9EA5A1D08A18C002299B3 /* config.json.example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.json.example; sourceTree = "<group>"; };
-		70C9EA5B1D08A18C002299B3 /* minions_hls_manifest_v6-R60-generated-spec1.5.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "minions_hls_manifest_v6-R60-generated-spec1.5.xml"; sourceTree = "<group>"; };
-		70C9EA5C1D08A18C002299B3 /* mos_appdata_locations_r60-v0.4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "mos_appdata_locations_r60-v0.4.xml"; sourceTree = "<group>"; };
-		70C9EA5D1D08A18C002299B3 /* mos_hls_manifest_r60-v0.4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "mos_hls_manifest_r60-v0.4.xml"; sourceTree = "<group>"; };
-		70C9EA5E1D08A18C002299B3 /* sisters_extended_hls_manifest_v3-generated-spec1.5.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "sisters_extended_hls_manifest_v3-generated-spec1.5.xml"; sourceTree = "<group>"; };
-		70C9EA5F1D08A18C002299B3 /* sisters_hls_manifest_v2-R60-generated-spec1.5.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "sisters_hls_manifest_v2-R60-generated-spec1.5.xml"; sourceTree = "<group>"; };
 		70C9EA691D08A2D7002299B3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70C9EA6A1D08A2D7002299B3 /* EnhancedTitlesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTitlesCollectionViewController.swift; sourceTree = "<group>"; };
 		70C9EA6D1D08A3C5002299B3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -61,7 +52,6 @@
 				495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */,
 				70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */,
 				49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */,
-				7071C54C1C6BCC11006F4275 /* libxml2.tbd in Frameworks */,
 				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
 				A7CA836CCC8C043A4AC75B98 /* Pods_NextGenExample.framework in Frameworks */,
 			);
@@ -92,6 +82,8 @@
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				70C092A41D0F52E100BFC1E4 /* GoogleMaps.framework */,
+				70C0929E1D0F2DC400BFC1E4 /* libxml2.2.tbd */,
 				495CF3691CC042BA006AE290 /* CoreText.framework */,
 				70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */,
 				49F502541C890E6500DFAD88 /* Twitter.framework */,
@@ -116,13 +108,7 @@
 		70C9EA581D08A18C002299B3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				70C9EA591D08A18C002299B3 /* config.json */,
 				70C9EA5A1D08A18C002299B3 /* config.json.example */,
-				70C9EA5B1D08A18C002299B3 /* minions_hls_manifest_v6-R60-generated-spec1.5.xml */,
-				70C9EA5C1D08A18C002299B3 /* mos_appdata_locations_r60-v0.4.xml */,
-				70C9EA5D1D08A18C002299B3 /* mos_hls_manifest_r60-v0.4.xml */,
-				70C9EA5E1D08A18C002299B3 /* sisters_extended_hls_manifest_v3-generated-spec1.5.xml */,
-				70C9EA5F1D08A18C002299B3 /* sisters_hls_manifest_v2-R60-generated-spec1.5.xml */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -134,6 +120,7 @@
 				70C9EA6A1D08A2D7002299B3 /* EnhancedTitlesCollectionViewController.swift */,
 				70C9EA6D1D08A3C5002299B3 /* LaunchScreen.storyboard */,
 				70C9EA6E1D08A3C5002299B3 /* Main.storyboard */,
+				7084E1E41D0F18EE00B1B5B7 /* Info.plist */,
 			);
 			path = NextGenExample;
 			sourceTree = "<group>";
@@ -212,13 +199,8 @@
 				70C9EA6F1D08A3C5002299B3 /* LaunchScreen.storyboard in Resources */,
 				70C9EA701D08A3C5002299B3 /* Main.storyboard in Resources */,
 				70C9EA621D08A18C002299B3 /* config.json.example in Resources */,
-				70C9EA651D08A18C002299B3 /* mos_hls_manifest_r60-v0.4.xml in Resources */,
-				70C9EA661D08A18C002299B3 /* sisters_extended_hls_manifest_v3-generated-spec1.5.xml in Resources */,
-				70C9EA641D08A18C002299B3 /* mos_appdata_locations_r60-v0.4.xml in Resources */,
-				70C9EA631D08A18C002299B3 /* minions_hls_manifest_v6-R60-generated-spec1.5.xml in Resources */,
-				70C9EA671D08A18C002299B3 /* sisters_hls_manifest_v2-R60-generated-spec1.5.xml in Resources */,
+				7084E1E51D0F18EE00B1B5B7 /* Info.plist in Resources */,
 				70C9EA601D08A18C002299B3 /* Assets.xcassets in Resources */,
-				70C9EA611D08A18C002299B3 /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,14 +358,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8C0E3512E4E5C0412D7D1AA /* Pods-NextGenExample.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = NextGen/Info.plist;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/HockeySDK\"",
+				);
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGenExample;
 				PROVISIONING_PROFILE = "";
@@ -397,14 +384,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 29EBFFD493A43292101F1452 /* Pods-NextGenExample.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = NextGen/Info.plist;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/HockeySDK\"",
+				);
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGenExample;
 				PROVISIONING_PROFILE = "";

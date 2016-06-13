@@ -1,4 +1,3 @@
-source 'git@bitbucket.org:wbdigital/cocoapods-specs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '8.0'

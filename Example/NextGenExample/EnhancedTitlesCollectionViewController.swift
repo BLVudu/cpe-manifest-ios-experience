@@ -76,9 +76,9 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
                 CurrentManifest.outOfMovieExperience = try CurrentManifest.mainExperience.getOutOfMovieExperience()
                 CurrentManifest.outOfMovieExperience.appearance = NGDMAppearance(type: .OutOfMovie)
                 
-                TheTakeAPIUtil.sharedInstance.mediaId = CurrentManifest.mainExperience.customIdentifier(Namespaces.TheTake)
-                BaselineAPIUtil.sharedInstance.projectId = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline)
-                ConfigManager.sharedInstance.loadConfigs()
+                //TheTakeAPIUtil.sharedInstance.mediaId = CurrentManifest.mainExperience.customIdentifier(Namespaces.TheTake)
+                //BaselineAPIUtil.sharedInstance.projectId = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline)
+                //ConfigManager.sharedInstance.loadConfigs()
                 CurrentManifest.mainExperience.loadTalent()
             } catch NGDMError.MainExperienceMissing {
                 print("Error loading Manifest file: no main Experience found")

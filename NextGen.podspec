@@ -16,9 +16,11 @@ Pod::Spec.new do |s|
   s.source_files    = 'NextGen/**/*.swift', 'NextGen/*.swift'
   s.resources       = 'NextGen/*.lproj', 'NextGen/XIBs/*.xib', 'NextGen/Resources/**/*'
 
+  s.pod_target_xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
+
   # GoogleMaps.framework
   s.vendored_frameworks = 'Dependencies/GoogleMaps.framework'
   s.frameworks      = 'Accelerate', 'AVFoundation', 'CoreBluetooth', 'CoreData', 'CoreLocation', 'CoreText', 'GLKit', 'ImageIO', 'OpenGLES', 'QuartzCore', 'Security', 'SystemConfiguration', 'CoreGraphics'
-  s.libraries       = 'icucore', 'c++' ,'z'
+  s.libraries       = 'icucore', 'c++', 'z'
 
 end

@@ -6,17 +6,17 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
-//import GoogleMaps
+import GoogleMaps
 
-class ConfigManager {
+public class ConfigManager {
     
-    static let sharedInstance = ConfigManager()
+    public static let sharedInstance = ConfigManager()
     
     var hasTheTakeAPI = false
     var hasBaselineAPI = false
     var hasGoogleMaps = false
     
-    func loadConfigs() {
+    public func loadConfigs() {
         if let configDataPath = NSBundle.mainBundle().pathForResource("Data/config", ofType: "json") {
             do {
                 let configData = try NSData(contentsOfURL: NSURL(fileURLWithPath: configDataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
@@ -38,7 +38,7 @@ class ConfigManager {
                     }
                     
                     if let googleMapsAPIKey = configJSON["google_maps_api_key"] as? String {
-                        //GMSServices.provideAPIKey(googleMapsAPIKey)
+                        GMSServices.provideAPIKey(googleMapsAPIKey)
                         self.hasGoogleMaps = true
                     }
                 }
