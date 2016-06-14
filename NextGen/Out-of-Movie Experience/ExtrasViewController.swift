@@ -74,7 +74,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                 if _talentDetailViewController != nil {
                     _talentDetailViewController!.loadTalent(talent)
                 } else {
-                    if let talentDetailViewController = UIStoryboard.getMainStoryboardViewController(TalentDetailViewController) as? TalentDetailViewController {
+                    if let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController) as? TalentDetailViewController {
                         talentDetailViewController.talent = talent
                         
                         talentDetailViewController.view.frame = talentDetailView.bounds

@@ -6,6 +6,9 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
+import Foundation
+import UIKit
+
 class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "ShoppingSceneDetailCollectionViewCellReuseIdentifier"

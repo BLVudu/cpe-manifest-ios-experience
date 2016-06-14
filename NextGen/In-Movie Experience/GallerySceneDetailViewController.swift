@@ -28,7 +28,7 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
             if let audioVisual = timedEvent.audioVisual, videoURL = audioVisual.videoURL {
                 descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
                 
-                if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                     videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
                     
                     videoPlayerViewController.view.frame = videoContainerView.bounds

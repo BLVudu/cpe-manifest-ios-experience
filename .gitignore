@@ -1,6 +1,6 @@
 # NextGen
-NextGen/Resources/Data/config.json
-Dependencies/*
+config.json
+**/Manifests/*.xml
 
 ### Xcode ###
 # Xcode

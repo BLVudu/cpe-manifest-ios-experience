@@ -103,10 +103,6 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
  * @see setPlayPauseVisible:
  */
 @property (nonatomic, assign)           BOOL                             playerControlsVisible;
-@property (assign, nonatomic)           NSUInteger                      countdownSeconds;
-
-@property (nonatomic, assign)           int                             indexMax;
-@property (nonatomic, assign)           int                             curIndex;
 
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;

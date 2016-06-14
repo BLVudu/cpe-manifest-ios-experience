@@ -89,7 +89,7 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
     
     // MARK: UICollectionViewDelegate
      func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let shoppingDetailViewController = UIStoryboard.getMainStoryboardViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
+        if let shoppingDetailViewController = UIStoryboard.getNextGenViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
             shoppingDetailViewController.experience = experience
             shoppingDetailViewController.products = cell.theTakeProducts
             shoppingDetailViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext

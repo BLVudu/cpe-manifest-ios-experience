@@ -6,6 +6,8 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
+import UIKit
+
 extension UIColor {
     
     static func themePrimaryColor() -> UIColor {

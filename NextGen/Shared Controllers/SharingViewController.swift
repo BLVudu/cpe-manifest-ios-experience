@@ -57,7 +57,7 @@ class SharingViewController: SceneDetailViewController {
 
     func replaceClip(){
         
-        if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
+        if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
             }

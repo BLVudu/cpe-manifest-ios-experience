@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import GoogleMaps
+import NextGenDataManager
 
 protocol MultiMapViewDelegate {
     func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker)
@@ -72,7 +73,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     }
     
     private func setup() {
-        if ConfigManager.sharedInstance.hasGoogleMaps && googleMapView == nil {
+        if NGDMConfiguration.mapService == .GoogleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
             googleMapView?.delegate = self
             self.addSubview(googleMapView!)

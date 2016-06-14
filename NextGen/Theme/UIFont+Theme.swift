@@ -6,6 +6,8 @@
 //  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
+import UIKit
+
 extension UIFont {
     
     static func themeFont(size: CGFloat) -> UIFont {

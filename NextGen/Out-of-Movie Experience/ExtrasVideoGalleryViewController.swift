@@ -57,7 +57,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
 
-        _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(WBVideoPlayerConstants.Notification.WillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+        _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int where index < (strongSelf.experience.childExperiences?.count ?? 0) {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
@@ -132,7 +132,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     mediaRuntimeLabel.text = String.localize("label.runtime", variables: ["runtime": runtime.timeString()])
                 }
             
-                if let videoURL = thisExperience.videoURL, videoPlayerViewController = _videoPlayerViewController ?? UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                if let videoURL = thisExperience.videoURL, videoPlayerViewController = _videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                     if let player = videoPlayerViewController.player {
                         player.removeAllItems()
                     }

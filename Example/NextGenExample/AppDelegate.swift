@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
         
+        NextGenDataLoader.loadConfig()
+        
         application.statusBarHidden = true
         
         return true

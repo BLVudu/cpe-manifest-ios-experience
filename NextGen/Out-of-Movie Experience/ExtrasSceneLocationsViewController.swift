@@ -136,7 +136,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     func playVideo(videoURL: NSURL) {
         closeDetailView()
         
-        if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+        if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
             videoPlayerViewController.mode = VideoPlayerMode.Supplemental
             
             videoPlayerViewController.view.frame = videoContainerView.bounds

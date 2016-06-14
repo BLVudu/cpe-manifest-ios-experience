@@ -119,7 +119,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         } else {
             _didPlayInterstitial = true
             self.shareButton.removeFromSuperview()
-            self.setPlayerControlsVisible(false)
+            self.playerControlsVisible = false
             self.topToolbar.removeFromSuperview()
             
             if mode == VideoPlayerMode.SupplementalInMovie {
@@ -136,7 +136,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     }
     
     func playMainExperience() {
-        self.setPlayerControlsVisible(false)
+        self.playerControlsVisible = false
         if _didPlayInterstitial {
             if let audioVisual = CurrentManifest.mainExperience.audioVisual {
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayMainExperience, object: nil)
@@ -190,7 +190,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.subtractTime), userInfo: nil, repeats: true)
             self.countdown.animateTimer()
             nextItemTask = delay(5) {
-                NSNotificationCenter.defaultCenter().postNotificationName(WBVideoPlayerConstants.Notification.WillPlayNextItem, object:self, userInfo:["index": self.curIndex])
+                NSNotificationCenter.defaultCenter().postNotificationName(kWBVideoPlayerWillPlayNextItem, object:self, userInfo:["index": self.curIndex])
                 self.countdown.hidden = true;
                 self.countdownTimer.invalidate()
                 self.countdownTimer = nil
@@ -266,8 +266,8 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
 
     
     // MARK: Actions
-    override func done() {
-        super.done()
+    override func done(sender: AnyObject?) {
+        super.done(sender)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
