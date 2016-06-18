@@ -1,7 +1,5 @@
 //
 //  WBVideoPlayerViewController.h
-//  Flixster
-//
 //  Fork of Apple's AVPlayerDemoPlaybackViewController.h
 //
 

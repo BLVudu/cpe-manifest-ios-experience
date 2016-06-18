@@ -55,7 +55,6 @@
 		70C093441D0F60DF00BFC1E4 /* LandscapeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */; };
 		70C093451D0F60DF00BFC1E4 /* MenuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */; };
 		70C093461D0F60DF00BFC1E4 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E51D0F60DF00BFC1E4 /* SharingViewController.swift */; };
-		70C093471D0F60DF00BFC1E4 /* StylizedClipNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E61D0F60DF00BFC1E4 /* StylizedClipNavigationController.swift */; };
 		70C093481D0F60DF00BFC1E4 /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E71D0F60DF00BFC1E4 /* TalentDetailViewController.swift */; };
 		70C093491D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E81D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift */; };
 		70C0934A1D0F60DF00BFC1E4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E91D0F60DF00BFC1E4 /* WebViewController.swift */; };
@@ -169,7 +168,6 @@
 		70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeNavigationController.swift; sourceTree = "<group>"; };
 		70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuedViewController.swift; sourceTree = "<group>"; };
 		70C092E51D0F60DF00BFC1E4 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
-		70C092E61D0F60DF00BFC1E4 /* StylizedClipNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylizedClipNavigationController.swift; sourceTree = "<group>"; };
 		70C092E71D0F60DF00BFC1E4 /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailViewController.swift; sourceTree = "<group>"; };
 		70C092E81D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70C092E91D0F60DF00BFC1E4 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -410,7 +408,6 @@
 				70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */,
 				70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */,
 				70C092E51D0F60DF00BFC1E4 /* SharingViewController.swift */,
-				70C092E61D0F60DF00BFC1E4 /* StylizedClipNavigationController.swift */,
 				70C092E71D0F60DF00BFC1E4 /* TalentDetailViewController.swift */,
 				70C092E81D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift */,
 				70C092E91D0F60DF00BFC1E4 /* WebViewController.swift */,
@@ -723,7 +720,6 @@
 				70C0934B1D0F60DF00BFC1E4 /* CircularProgressView.swift in Sources */,
 				70C093631D0F60DF00BFC1E4 /* UIColor+Utils.swift in Sources */,
 				70C0935C1D0F60DF00BFC1E4 /* Indexable+Utils.swift in Sources */,
-				70C093471D0F60DF00BFC1E4 /* StylizedClipNavigationController.swift in Sources */,
 				70C093641D0F60DF00BFC1E4 /* UIImage+Utils.swift in Sources */,
 				70C0932A1D0F60DF00BFC1E4 /* VideoPlayerViewController.swift in Sources */,
 				70C093331D0F60DF00BFC1E4 /* TheTakeCategory.swift in Sources */,

@@ -1,9 +1,5 @@
 //
 //  EnhancedTitlesCollectionViewController.swift
-//  NextGen
-//
-//  Created by Sedinam Gadzekpo on 5/24/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit

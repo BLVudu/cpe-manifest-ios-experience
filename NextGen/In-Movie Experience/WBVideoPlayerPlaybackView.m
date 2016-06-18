@@ -1,7 +1,5 @@
 //
 //  WBVideoPlayerPlaybackView.m
-//  Flixster
-//
 //  Fork of Apple's AVPlayerDemoPlaybackView.m
 //
 
