@@ -8,6 +8,7 @@ import UIKit
 class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
+    static let ClipShareReuseIdentifier = "ClipShareSceneDetailCollectionViewCellReuseIdentifier"
     
     @IBOutlet weak private var _imageView: UIImageView!
     @IBOutlet weak private var _playButton: UIButton!
@@ -32,7 +33,7 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.timedEventDidChange()
         
         _imageURL = timedEvent?.imageURL
-        _playButton.hidden = timedEvent == nil || !timedEvent!.isType(.AudioVisual)
+        _playButton.hidden = timedEvent == nil || (!timedEvent!.isType(.AudioVisual) && !timedEvent!.isType(.ClipShare))
     }
     
     override func prepareForReuse() {

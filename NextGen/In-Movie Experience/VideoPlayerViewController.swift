@@ -11,9 +11,7 @@ import NextGenDataManager
 struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
-    static let DidTapShare = "VideoPlayerNotificationDidTapShare"
     static let ShouldPauseAllOtherVideos = "VideoPlayerNotificationShouldPauseAllOtherVideos"
-    static let ShouldUpdateShareButton = "VideoPlayerNotificationShouldUpdateShareButton"
 }
 
 enum VideoPlayerMode {
@@ -25,10 +23,6 @@ enum VideoPlayerMode {
 typealias Task = (cancel : Bool) -> ()
 
 class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControllerDelegate {
-    
-    struct StoryboardSegue {
-        static let ShowShare = "showShare"
-    }
     
     let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
     
@@ -42,7 +36,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak private var _commentaryView: UIView!
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
-    private var _sharePopoverController: UIPopoverController!
     
     @IBOutlet weak var toolbar: UIView!
 
@@ -50,12 +43,10 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak var countdown: CircularProgressView!
     var countdownTimer: NSTimer!
     var nextItemTask: Task?
-    private var _clipAvaliable = false
     var commentaryIndex = 0
     var alertController: UIAlertController!
     
     private var _shouldPauseAllOtherObserver: NSObjectProtocol!
-    private var _shouldUpdateShareButtonObserver: NSObjectProtocol!
     private var _updateCommentaryButton: NSObjectProtocol!
     
     private var countdownSeconds = 0
@@ -64,7 +55,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_shouldPauseAllOtherObserver)
-        NSNotificationCenter.defaultCenter().removeObserver(_shouldUpdateShareButtonObserver)
         NSNotificationCenter.defaultCenter().removeObserver(_updateCommentaryButton)
     }
     
@@ -77,24 +67,11 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
         _commentaryButton.setTitle(String.localize("label.commentary"), forState: UIControlState.Normal)
         _commentaryView.hidden = true
-        self.shareButton.enabled = true
         alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         _shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
                 if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
                     strongSelf.pauseVideo()
-                }
-            }
-        })
-        
-        
-        _shouldUpdateShareButtonObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self {
-                if let userInfo = notification.userInfo, avaliable = userInfo["clipAvaliable"] as? Bool {
-                        strongSelf._clipAvaliable = avaliable
-                    } else {
-                        strongSelf._clipAvaliable = false
-
                 }
             }
         })
@@ -114,7 +91,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             playMainExperience()
         } else {
             _didPlayInterstitial = true
-            self.shareButton.removeFromSuperview()
             self.playerControlsVisible = false
             self.topToolbar.removeFromSuperview()
             
@@ -287,32 +263,6 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             
             self.initAutoHideTimer()
         }
-    }
-    
-    @IBAction override func share(sender: AnyObject!) {
-        alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let anchor = self.view.frame.size.height - 120
-        if _clipAvaliable {
-            if UIDevice.currentDevice().orientation.isLandscape {
-                alertController.setValue(NSAttributedString(string: String.localize("clipshare.rotate"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-            } else {
-                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidTapShare, object: nil)
-            }
-        } else {
-            alertController.setValue(NSAttributedString(string: String.localize("clipshare.next_clip"), attributes: [NSForegroundColorAttributeName: UIColor.themePrimaryColor(), NSFontAttributeName: UIFont.themeCondensedFont(19)]), forKey: "_attributedTitle")
-        }
-        
-        alertController.view.tintColor = UIColor.themePrimaryColor()
-        _sharePopoverController = UIPopoverController.init(contentViewController: alertController)
-        _sharePopoverController.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-        _sharePopoverController.delegate = self
-        
-        _sharePopoverController.presentPopoverFromRect(CGRectMake(sender.frame.origin.x,anchor, 300, 100), inView: self.view, permittedArrowDirections: UIPopoverArrowDirection(rawValue: 0), animated: true)
-        if let timer = self.playerControlsAutoHideTimer {
-            timer.invalidate()
-        }
-        
-        self.playerControlsAutoHideTimer = nil
     }
     
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {

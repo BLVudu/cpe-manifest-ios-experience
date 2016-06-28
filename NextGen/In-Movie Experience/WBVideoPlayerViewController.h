@@ -89,7 +89,6 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 @property (readwrite, nonatomic)        NSInteger                        playerControlsAutoHideTime;
 @property (strong, nonatomic)           NSTimer                         *playerControlsAutoHideTimer;
 @property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
-@property (weak, nonatomic)   IBOutlet  UIButton                        *shareButton;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *fullScreenButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
 

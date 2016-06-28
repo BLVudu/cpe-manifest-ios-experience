@@ -52,7 +52,11 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     
     func timedEventDidChange() {
         _title = timedEvent?.experience?.title
-        _descriptionText = timedEvent?.descriptionText
+        if timedEvent != nil && timedEvent!.isType(.ClipShare) {
+            _descriptionText = String.localize("clipshare.description")
+        } else {
+            _descriptionText = timedEvent?.descriptionText
+        }
     }
     
     func currentTimeDidChange() {

@@ -12,6 +12,7 @@ class SceneDetailViewController: UIViewController {
     let kCloseButtonWidth: CGFloat = 110
     
     var experience: NGDMExperience?
+    var timedEvent: NGDMTimedEvent?
     
     var titleLabel: UILabel!
     var closeButton: UIButton!

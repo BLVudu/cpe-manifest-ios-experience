@@ -34,24 +34,14 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
-    private var _didTapShareObserver: NSObjectProtocol!
     
     private var _currentTime: Double = -1
     private var _currentTimedEvents = [NGDMTimedEvent]()
     private var _isProcessingTimedEvents = false
     
-    private var _currentClipTimedEvent: NGDMTimedEvent? {
-        didSet {
-            if _currentClipTimedEvent != oldValue {
-                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldUpdateShareButton, object: nil, userInfo: ["clipAvaliable": _currentClipTimedEvent != nil])
-            }
-        }
-    }
-    
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(_didChangeTimeObserver)
-        center.removeObserver(_didTapShareObserver)
     }
     
     // MARK: View Lifecycle
@@ -60,8 +50,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.alpha = 0
-        self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
+        self.collectionView?.registerNib(UINib(nibName: "ClipShareSceneDetailCollectionViewCell", bundle:nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ClipShareReuseIdentifier)
+        self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
@@ -72,12 +63,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 }
             }
         }
-        
-        _didTapShareObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidTapShare, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self {
-                strongSelf.performSegueWithIdentifier(SegueIdentifier.ShowShare, sender: nil)
-            }
-        })
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -162,6 +147,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
         } else if timedEvent.isType(.Product) {
             reuseIdentifier = ShoppingSceneDetailCollectionViewCell.ReuseIdentifier
+        } else if timedEvent.isType(.ClipShare) {
+            reuseIdentifier = ImageSceneDetailCollectionViewCell.ClipShareReuseIdentifier
         } else {
             reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
         }
@@ -189,20 +176,29 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
-            if timedEvent.isType(.Product) {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowShop, sender: cell)
-            } else if timedEvent.isType(.AudioVisual) || timedEvent.isType(.Gallery) {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: cell)
-            } else if timedEvent.isType(.AppGroup) {
+            if timedEvent.isType(.AppGroup) {
                 if let experienceApp = timedEvent.experienceApp, url = timedEvent.appGroup?.url {
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
                     let navigationController = LandscapeNavigationController(rootViewController: webViewController)
                     self.presentViewController(navigationController, animated: true, completion: nil)
                 }
-            } else if timedEvent.isType(.Location) {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: cell)
-            } else if timedEvent.isType(.TextItem) {
-                self.performSegueWithIdentifier(SegueIdentifier.ShowLargeText, sender: cell)
+            } else {
+                var segueIdentifier: String?
+                if timedEvent.isType(.AudioVisual) || timedEvent.isType(.Gallery) {
+                    segueIdentifier = SegueIdentifier.ShowGallery
+                } else if timedEvent.isType(.ClipShare) {
+                    segueIdentifier = SegueIdentifier.ShowShare
+                } else if timedEvent.isType(.Location) {
+                    segueIdentifier = SegueIdentifier.ShowMap
+                } else if timedEvent.isType(.Product) {
+                    segueIdentifier = SegueIdentifier.ShowShop
+                } else if timedEvent.isType(.TextItem) {
+                    segueIdentifier = SegueIdentifier.ShowLargeText
+                }
+                
+                if let identifier = segueIdentifier {
+                    self.performSegueWithIdentifier(identifier, sender: cell)
+                }
             }
         }
  
@@ -210,29 +206,16 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == SegueIdentifier.ShowShare {
-            let shareDetailViewController = segue.destinationViewController as! SharingViewController
-            shareDetailViewController.experience = CurrentManifest.inMovieExperience.childClipAndShareExperience
-            shareDetailViewController.timedEvent = _currentClipTimedEvent!
-        } else if let cell = sender as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent, experience = timedEvent.experience {
-            if segue.identifier == SegueIdentifier.ShowGallery {
-                let galleryDetailViewController = segue.destinationViewController as! GallerySceneDetailViewController
-                galleryDetailViewController.experience = experience
-                galleryDetailViewController.timedEvent = timedEvent
-            } else if segue.identifier == SegueIdentifier.ShowShop {
+        if let cell = sender as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent, experience = timedEvent.experience {
+            if segue.identifier == SegueIdentifier.ShowShop {
                 if let cell = cell as? ShoppingSceneDetailCollectionViewCell, products = cell.theTakeProducts {
                     let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
                     shopDetailViewController.experience = experience
                     shopDetailViewController.products = products
                 }
-            } else if segue.identifier == SegueIdentifier.ShowMap {
-                let mapDetailViewController = segue.destinationViewController as! MapDetailViewController
-                mapDetailViewController.experience = experience
-                mapDetailViewController.timedEvent = timedEvent
-            } else if segue.identifier == SegueIdentifier.ShowLargeText {
-                let largeTextDetailViewController = segue.destinationViewController as! LargeTextSceneDetailViewController
-                largeTextDetailViewController.experience = experience
-                largeTextDetailViewController.timedEvent = timedEvent
+            } else if let sceneDetailViewController = segue.destinationViewController as? SceneDetailViewController {
+                sceneDetailViewController.experience = experience
+                sceneDetailViewController.timedEvent = timedEvent
             }
         }
     }

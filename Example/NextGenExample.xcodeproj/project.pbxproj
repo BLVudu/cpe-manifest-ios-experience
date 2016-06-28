@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495CF3691CC042BA006AE290 /* CoreText.framework */; };
 		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
+		7021D3691D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */; };
 		708488DC1D0F7EC900670B45 /* NextGenDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */; };
 		70C093161D0F60DF00BFC1E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70C092A91D0F60DF00BFC1E4 /* Localizable.strings */; };
 		70C093171D0F60DF00BFC1E4 /* NextGen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70C092AB1D0F60DF00BFC1E4 /* NextGen.storyboard */; };
@@ -117,6 +118,7 @@
 		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49F502541C890E6500DFAD88 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClipShareSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataLoader.swift; sourceTree = "<group>"; };
 		7084E1E41D0F18EE00B1B5B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
@@ -467,6 +469,7 @@
 		70C093091D0F60DF00BFC1E4 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */,
 				70C0930A1D0F60DF00BFC1E4 /* CommentaryView.xib */,
 				70C0930B1D0F60DF00BFC1E4 /* EnhancedTitlesCollectionViewCell.xib */,
 				70C0930C1D0F60DF00BFC1E4 /* ImageSceneDetailCollectionViewCell.xib */,
@@ -587,6 +590,7 @@
 				70C093171D0F60DF00BFC1E4 /* NextGen.storyboard in Resources */,
 				70C093161D0F60DF00BFC1E4 /* Localizable.strings in Resources */,
 				70C0936F1D0F60DF00BFC1E4 /* TalentTableViewCell-Narrow.xib in Resources */,
+				7021D3691D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib in Resources */,
 				70C093401D0F60DF00BFC1E4 /* RobotoCondensed-Italic.ttf in Resources */,
 				70C093431D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov in Resources */,
 				70C0936A1D0F60DF00BFC1E4 /* MapItemCell.xib in Resources */,

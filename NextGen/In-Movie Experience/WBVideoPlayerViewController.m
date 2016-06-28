@@ -151,10 +151,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     [self pauseVideo];
 }
 
-- (IBAction)share:(id)sender {
-    // Override
-}
-
 - (IBAction)toggleFullScreen:(id)sender {
     // Toggle full screen
     [self toggleFullScreen];
