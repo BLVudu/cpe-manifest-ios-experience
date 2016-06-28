@@ -26,14 +26,6 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    var experience: NGDMExperience? {
-        didSet {
-            if experience != oldValue {
-                experienceDidChange()
-            }
-        }
-    }
-    
     var timedEvent: NGDMTimedEvent? {
         didSet {
             if timedEvent != oldValue {
@@ -55,15 +47,11 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        experience = nil
         timedEvent = nil
     }
     
-    func experienceDidChange() {
-        _title = experience?.title
-    }
-    
     func timedEventDidChange() {
+        _title = timedEvent?.experience?.title
         _descriptionText = timedEvent?.descriptionText
     }
     

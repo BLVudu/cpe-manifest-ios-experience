@@ -18,7 +18,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     private var _didChangeTimeObserver: NSObjectProtocol!
     
     private var _currentTime: Double = -1
-    private var _currentExperienceCellData = [ExperienceCellData]()
+    private var _currentTimedEvents = [NGDMTimedEvent]()
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(_didChangeTimeObserver)
@@ -42,48 +42,34 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
                 if time != strongSelf._currentTime {
-                    strongSelf.processExperiencesForTime(time)
+                    strongSelf.processTimedEvents(time)
                 }
             }
         }
     }
     
-    func currentCellDataForExperience(experience: NGDMExperience) -> ExperienceCellData? {
-        for cellData in _currentExperienceCellData {
-            if cellData.experience == experience {
-                return cellData
-            }
-        }
-        
-        return nil
-    }
-    
-    func processExperiencesForTime(time: Double) {
+    func processTimedEvents(time: Double) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             self._currentTime = time
             
-            if let allExperiences = CurrentManifest.inMovieExperience.childTalentDataExperience?.childExperiences {
-                var hasNewData = false
-                var newExperienceCellData = [ExperienceCellData]()
-                
-                for i in 0 ..< allExperiences.count {
-                    let experience = allExperiences[i]
-                    let timedEvent = experience.timedEventSequence?.timedEvent(self._currentTime)
-                    let oldCellData = self.currentCellDataForExperience(experience)
-                    
-                    if let newTimedEvent = timedEvent {
-                        newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
-                        hasNewData = hasNewData || oldCellData == nil || oldCellData!.timedEvent != newTimedEvent
-                    } else if oldCellData != nil {
+            let newTimedEvents = NGDMTimedEvent.findByTimecode(time, type: .Talent).sort({ (timedEvent1, timedEvent2) -> Bool in
+                return timedEvent1.talent!.billingBlockOrder < timedEvent2.talent!.billingBlockOrder
+            })
+            
+            var hasNewData = newTimedEvents.count != self._currentTimedEvents.count
+            if !hasNewData {
+                for timedEvent in newTimedEvents {
+                    if !self._currentTimedEvents.contains(timedEvent) {
                         hasNewData = true
+                        break
                     }
                 }
+            }
                 
-                if hasNewData {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self._currentExperienceCellData = newExperienceCellData
-                        self.talentTableView?.reloadData()
-                    }
+            if hasNewData {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self._currentTimedEvents = newTimedEvents
+                    self.talentTableView?.reloadData()
                 }
             }
         }
@@ -91,14 +77,13 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _currentExperienceCellData.count
+        return _currentTimedEvents.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        if _currentExperienceCellData.count > indexPath.row {
-            let experienceCellData = _currentExperienceCellData[indexPath.row]
-            cell.talent = experienceCellData.timedEvent.talent
+        if _currentTimedEvents.count > indexPath.row {
+            cell.talent = _currentTimedEvents[indexPath.row].talent
         }
         
         return cell

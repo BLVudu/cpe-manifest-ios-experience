@@ -37,8 +37,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     private var _didTapShareObserver: NSObjectProtocol!
     
     private var _currentTime: Double = -1
-    private var _currentExperienceCellData = [ExperienceCellData]()
-    private var _isProcessingNewExperiences = false
+    private var _currentTimedEvents = [NGDMTimedEvent]()
+    private var _isProcessingTimedEvents = false
     
     private var _currentClipTimedEvent: NGDMTimedEvent? {
         didSet {
@@ -66,9 +66,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         
         _didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double {
-                if time != strongSelf._currentTime && !strongSelf._isProcessingNewExperiences {
-                    strongSelf._isProcessingNewExperiences = true
-                    strongSelf.processExperiencesForTime(time)
+                if time != strongSelf._currentTime && !strongSelf._isProcessingTimedEvents {
+                    strongSelf._isProcessingTimedEvents = true
+                    strongSelf.processTimedEvents(time)
                 }
             }
         }
@@ -91,104 +91,59 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionViewLayout.invalidateLayout()
     }
     
-    func currentIndexPathForExperience(experience: NGDMExperience) -> NSIndexPath? {
-        for i in 0 ..< _currentExperienceCellData.count {
-            if _currentExperienceCellData[i].experience == experience {
-                return NSIndexPath(forItem: i, inSection: 0)
-            }
-        }
-        
-        return nil
-    }
-    
-    func currentCellDataForExperience(experience: NGDMExperience) -> ExperienceCellData? {
-        for cellData in _currentExperienceCellData {
-            if cellData.experience == experience {
-                return cellData
-            }
-        }
-        
-        return nil
-    }
-    
-    func processExperiencesForTime(time: Double) {
+    func processTimedEvents(time: Double) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             self._currentTime = time
             
             var deleteIndexPaths = [NSIndexPath]()
             var insertIndexPaths = [NSIndexPath]()
             var reloadIndexPaths = [NSIndexPath]()
-            var moveIndexPaths = [(NSIndexPath, NSIndexPath)]()
             
-            if let allExperiences = CurrentManifest.inMovieExperience.childExperiences {
-                var newExperienceCellData = [ExperienceCellData]()
-                for i in 0 ..< allExperiences.count {
-                    let experience = allExperiences[i]
-                    let timedEvent = experience.timedEventSequence?.timedEvent(self._currentTime)
+            var newTimedEvents = [NGDMTimedEvent]()
+            for timedEvent in NGDMTimedEvent.findByTimecode(time, type: .Any) {
+                if timedEvent.experience == nil || !timedEvent.experience!.isType(.TalentData) {
+                    let indexPath = NSIndexPath(forItem: newTimedEvents.count, inSection: 0)
                     
-                    if experience.isType(.ClipAndShare) {
-                        self._currentClipTimedEvent = timedEvent
-                    } else if !experience.isType(.TalentData) {
-                        let oldCellData = self.currentCellDataForExperience(experience)
-                        let oldIndexPath = self.currentIndexPathForExperience(experience)
-                        
-                        if let newTimedEvent = timedEvent {
-                            newExperienceCellData.append(ExperienceCellData(experience: experience, timedEvent: newTimedEvent))
-                            let newIndexPath = NSIndexPath(forItem: newExperienceCellData.count - 1, inSection: 0)
-                            //print("Found \(experience.timedEventSequence!.id)")
-                            
-                            if oldCellData != nil {
-                                if oldIndexPath!.row != newIndexPath.row {
-                                    moveIndexPaths.append((oldIndexPath!, newIndexPath))
-                                    //print("Moving \(experience.timedEventSequence!.id)")
-                                } else if newTimedEvent.isType(.Product) || oldCellData!.timedEvent != newTimedEvent {
-                                    reloadIndexPaths.append(oldIndexPath!)
-                                    //print("Reloading \(experience.timedEventSequence!.id)")
-                                }
-                            } else {
-                                insertIndexPaths.append(newIndexPath)
-                                //print("Inserting \(experience.timedEventSequence!.id)")
+                    if newTimedEvents.count < self._currentTimedEvents.count {
+                        if self._currentTimedEvents[newTimedEvents.count] != timedEvent {
+                            reloadIndexPaths.append(indexPath)
+                        } else if timedEvent.isType(.Product) {
+                            if let cell = self.collectionView?.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
+                                cell.currentTime = self._currentTime
                             }
-                        } else if oldIndexPath != nil {
-                            deleteIndexPaths.append(oldIndexPath!)
-                            //print("Deleting \(experience.timedEventSequence!.id)")
                         }
+                    } else {
+                        insertIndexPaths.append(indexPath)
                     }
-                }
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    self._currentExperienceCellData = newExperienceCellData
                     
-                    self.collectionView?.performBatchUpdates({
-                        if deleteIndexPaths.count > 0 {
-                            self.collectionView?.deleteItemsAtIndexPaths(deleteIndexPaths)
-                        }
-                        
-                        if insertIndexPaths.count > 0 {
-                            self.collectionView?.insertItemsAtIndexPaths(insertIndexPaths)
-                        }
-                        
-                        for indexPaths in moveIndexPaths {
-                            self.collectionView?.moveItemAtIndexPath(indexPaths.0, toIndexPath: indexPaths.1)
-                        }
-                        
-                        var indexPaths = reloadIndexPaths
-                        for i in 0 ..< indexPaths.count {
-                            if let cell = self.collectionView?.cellForItemAtIndexPath(indexPaths[i]) as? ShoppingSceneDetailCollectionViewCell, timedEvent = cell.timedEvent {
-                                if timedEvent.isType(.Product) {
-                                    cell.currentTime = self._currentTime
-                                    reloadIndexPaths.removeAtIndex(i)
-                                }
-                            }
-                        }
-                        
-                        if reloadIndexPaths.count > 0 {
-                            self.collectionView?.reloadItemsAtIndexPaths(reloadIndexPaths)
-                        }
-                    }, completion: { (completed) in
-                        self._isProcessingNewExperiences = false
-                    })
+                    newTimedEvents.append(timedEvent)
                 }
+            }
+            
+            if self._currentTimedEvents.count > newTimedEvents.count {
+                for i in newTimedEvents.count ..< self._currentTimedEvents.count {
+                    deleteIndexPaths.append(NSIndexPath(forItem: i, inSection: 0))
+                }
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self._currentTimedEvents = newTimedEvents
+                
+                self.collectionView?.performBatchUpdates({
+                    if deleteIndexPaths.count > 0 {
+                        self.collectionView?.deleteItemsAtIndexPaths(deleteIndexPaths)
+                    }
+                    
+                    if insertIndexPaths.count > 0 {
+                        self.collectionView?.insertItemsAtIndexPaths(insertIndexPaths)
+                    }
+                    
+                    if reloadIndexPaths.count > 0 {
+                        self.collectionView?.reloadItemsAtIndexPaths(reloadIndexPaths)
+                    }
+                }, completion: { (completed) in
+                    self._isProcessingTimedEvents = false
+                })
             }
         }
     }
@@ -196,24 +151,23 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: UICollectionViewDataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _currentExperienceCellData.count
+        return _currentTimedEvents.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cellData = _currentExperienceCellData[indexPath.row]
+        let timedEvent = _currentTimedEvents[indexPath.row]
         
         var reuseIdentifier: String
-        if cellData.timedEvent.isType(.Location) {
+        if timedEvent.isType(.Location) {
             reuseIdentifier = MapSceneDetailCollectionViewCell.ReuseIdentifier
-        } else if cellData.timedEvent.isType(.Product) {
+        } else if timedEvent.isType(.Product) {
             reuseIdentifier = ShoppingSceneDetailCollectionViewCell.ReuseIdentifier
         } else {
             reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
         }
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell
-        cell.experience = cellData.experience
-        cell.timedEvent = cellData.timedEvent
+        cell.timedEvent = timedEvent
         cell.currentTime = _currentTime
         return cell
     }
@@ -260,7 +214,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             let shareDetailViewController = segue.destinationViewController as! SharingViewController
             shareDetailViewController.experience = CurrentManifest.inMovieExperience.childClipAndShareExperience
             shareDetailViewController.timedEvent = _currentClipTimedEvent!
-        } else if let cell = sender as? SceneDetailCollectionViewCell, experience = cell.experience, timedEvent = cell.timedEvent {
+        } else if let cell = sender as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent, experience = timedEvent.experience {
             if segue.identifier == SegueIdentifier.ShowGallery {
                 let galleryDetailViewController = segue.destinationViewController as! GallerySceneDetailViewController
                 galleryDetailViewController.experience = experience
@@ -281,20 +235,6 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 largeTextDetailViewController.timedEvent = timedEvent
             }
         }
-    }
-    
-    func cellForExperience(experience: NGDMExperience) -> SceneDetailCollectionViewCell? {
-        if let visibleCells = collectionView?.visibleCells() {
-            for cell in visibleCells {
-                if let cell = cell as? SceneDetailCollectionViewCell, cellExperience = cell.experience {
-                    if cellExperience == experience {
-                        return cell
-                    }
-                }
-            }
-        }
-        
-        return nil
     }
     
 }

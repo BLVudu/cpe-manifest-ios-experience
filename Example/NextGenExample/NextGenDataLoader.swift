@@ -11,8 +11,13 @@ class NextGenDataLoader {
     static let ManifestData = [[
         "title": "Man of Steel",
         "image": "MOS-Onesheet",
-        "manifest": "Data/Manifests/mos_hls_manifest_r60-v0.4",
-        "appdata": "Data/Manifests/mos_appdata_locations_r60-v0.4"
+        "manifest": "Data/Manifests/mos_hls_manifest_r60-v0.5",
+        "appdata": "Data/Manifests/mos_appdata_locations_r60-v0.5"
+    ], [
+        "title": "Batman v Superman",
+        "image": "BvS-Onesheet",
+        "manifest": "Data/Manifests/bvs_manifest_r60-v1.0",
+        "appdata": "Data/Manifests/bvs_appdata_locations_r60-v1.0"
     ], [
         "title": "Sisters",
         "image": "Sisters-Onesheet",
@@ -76,6 +81,8 @@ class NextGenDataLoader {
                 
                 if TheTakeAPIUtil.sharedInstance.apiKey != nil, let mediaId = CurrentManifest.mainExperience.customIdentifier(Namespaces.TheTake) {
                     TheTakeAPIUtil.sharedInstance.mediaId = mediaId
+                    TheTakeAPIUtil.sharedInstance.prefetchProductFrames(start: 0)
+                    TheTakeAPIUtil.sharedInstance.prefetchProductCategories()
                 }
                 
                 if var talentAPIUtil = NGDMConfiguration.talentAPIUtil, let id = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline) {
@@ -83,8 +90,6 @@ class NextGenDataLoader {
                 }
                 
                 CurrentManifest.mainExperience.loadTalent()
-                TheTakeAPIUtil.sharedInstance.prefetchProductFrames(start: 0)
-                TheTakeAPIUtil.sharedInstance.prefetchProductCategories()
             } catch NGDMError.MainExperienceMissing {
                 print("Error loading Manifest file: no main Experience found")
                 abort()
