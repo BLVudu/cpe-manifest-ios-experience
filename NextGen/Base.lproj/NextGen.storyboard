@@ -50,6 +50,7 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -181,20 +182,56 @@
                                     <segue destination="VTD-yi-sj7" kind="embed" id="mF3-qq-iFu"/>
                                 </connections>
                             </containerView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luB-dS-t2e" userLabel="Show Less Container">
+                                <rect key="frame" x="0.0" y="535" width="177" height="65"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="695-B4-A0R">
+                                        <rect key="frame" x="0.0" y="0.0" width="177" height="25"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="UKJ-x1-xkF"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seH-wt-xLY">
+                                        <rect key="frame" x="0.0" y="25" width="177" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="19"/>
+                                        <state key="normal" title="Show Less">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTapShowLess" destination="2KS-OB-0Ev" eventType="touchUpInside" id="ynJ-tE-pjV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="695-B4-A0R" firstAttribute="leading" secondItem="luB-dS-t2e" secondAttribute="leading" id="9xa-Om-eQN"/>
+                                    <constraint firstItem="seH-wt-xLY" firstAttribute="leading" secondItem="luB-dS-t2e" secondAttribute="leading" id="A5L-yR-fdL"/>
+                                    <constraint firstItem="seH-wt-xLY" firstAttribute="top" secondItem="695-B4-A0R" secondAttribute="bottom" id="DQ0-JN-Ws3"/>
+                                    <constraint firstAttribute="trailing" secondItem="seH-wt-xLY" secondAttribute="trailing" id="aN8-UA-vYB"/>
+                                    <constraint firstItem="695-B4-A0R" firstAttribute="top" secondItem="luB-dS-t2e" secondAttribute="top" id="bQC-CF-W6G"/>
+                                    <constraint firstAttribute="height" constant="65" id="rAf-mh-16Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="seH-wt-xLY" secondAttribute="bottom" id="w8R-1C-Hvy"/>
+                                    <constraint firstAttribute="trailing" secondItem="695-B4-A0R" secondAttribute="trailing" id="yy2-yP-MT0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="rYn-yB-xQG" secondAttribute="trailing" id="05g-Kf-WRF"/>
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="width" secondItem="76N-G4-UE0" secondAttribute="width" multiplier="0.23" id="5L3-yA-RXQ"/>
                             <constraint firstItem="rYn-yB-xQG" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leadingMargin" priority="750" id="Agp-1X-RgN"/>
+                            <constraint firstItem="luB-dS-t2e" firstAttribute="leading" secondItem="tfi-Pl-Rxu" secondAttribute="leading" id="JAj-YP-T3D"/>
                             <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="rYn-yB-xQG" secondAttribute="bottom" id="KkM-8D-pEb"/>
                             <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="tfi-Pl-Rxu" secondAttribute="bottom" id="PGI-fN-ZfU"/>
+                            <constraint firstItem="luB-dS-t2e" firstAttribute="bottom" secondItem="tfi-Pl-Rxu" secondAttribute="bottom" id="Pvr-KH-UMP"/>
                             <constraint firstAttribute="trailing" secondItem="iwP-Bl-F5c" secondAttribute="trailing" id="YYR-ck-6HE"/>
                             <constraint firstItem="6Aw-WG-9Xa" firstAttribute="top" secondItem="iwP-Bl-F5c" secondAttribute="bottom" id="hNo-AA-yHZ"/>
                             <constraint firstItem="iwP-Bl-F5c" firstAttribute="top" secondItem="FRX-EG-0Va" secondAttribute="bottom" id="lnx-G7-qBt"/>
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="top" secondItem="76N-G4-UE0" secondAttribute="top" constant="5" id="mCp-yC-1Bj"/>
                             <constraint firstItem="rYn-yB-xQG" firstAttribute="leading" secondItem="tfi-Pl-Rxu" secondAttribute="trailing" constant="10" id="oTc-02-jR9"/>
                             <constraint firstItem="tfi-Pl-Rxu" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leading" id="px0-3Q-0Ha"/>
+                            <constraint firstItem="luB-dS-t2e" firstAttribute="trailing" secondItem="tfi-Pl-Rxu" secondAttribute="trailing" id="sjV-Sa-Va0"/>
                             <constraint firstItem="rYn-yB-xQG" firstAttribute="top" secondItem="FRX-EG-0Va" secondAttribute="bottom" constant="5" id="wgd-vR-Muj"/>
                             <constraint firstItem="iwP-Bl-F5c" firstAttribute="leading" secondItem="76N-G4-UE0" secondAttribute="leading" id="wj1-mV-buS"/>
                         </constraints>
@@ -207,6 +244,9 @@
                     <size key="freeformSize" width="768" height="600"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="iwP-Bl-F5c" id="KJk-Or-y0a"/>
+                        <outlet property="showLessButton" destination="seH-wt-xLY" id="zZ0-Hu-QdC"/>
+                        <outlet property="showLessContainer" destination="luB-dS-t2e" id="Ds2-za-13x"/>
+                        <outlet property="showLessGradientView" destination="695-B4-A0R" id="5Pa-Ua-BQu"/>
                         <outlet property="talentTableView" destination="tfi-Pl-Rxu" id="c6b-Hu-Nhd"/>
                         <segue destination="enc-ld-Xnm" kind="presentation" identifier="ShowTalentSegueIdentifier" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="RQA-kJ-pjg"/>
                     </connections>

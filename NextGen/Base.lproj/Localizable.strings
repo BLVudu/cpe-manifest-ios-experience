@@ -23,6 +23,10 @@
 "info.leaving_app.title" = "Leaving App";
 "info.leaving_app.message" = "Following this link will exit the app and launch your browser. Would you like to continue?";
 
+// Talent
+"talent.show_more" = "Show More";
+"talent.show_less" = "Show Less";
+
 // Talent Detail
 "talentdetail.title" = "Actor";
 "talentdetail.biography" = "Biography";
