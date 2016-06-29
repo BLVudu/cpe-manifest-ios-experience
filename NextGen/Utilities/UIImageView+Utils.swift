@@ -29,25 +29,9 @@ extension UIImageView {
         
         self.image = placeholderImage
         
-        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        sessionConfiguration.requestCachePolicy = NSURLRequestCachePolicy.ReturnCacheDataElseLoad
-        sessionConfiguration.URLCache = NSURLCache(memoryCapacity: 0, diskCapacity: 1024 * 1024 * 256, diskPath: "com.wb.nextgen_image_cache") // 256Mb
-        sessionConfiguration.timeoutIntervalForRequest = 20
-        let task = NSURLSession(configuration: sessionConfiguration).dataTaskWithRequest(NSURLRequest(URL: url)) { (data, response, error) -> Void in
-            if let data = data {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.image = UIImage(data: data)
-                    if let completion = completion {
-                        completion(image: self.image)
-                    }
-                })
-            } else if let completion = completion {
-                completion(image: nil)
-            }
-        }
-            
-        task.resume()
-        return task
+        return UIImageRemoteLoader.loadImage(url, completion: { (image) in
+            self.image = image
+        })
     }
     
 }

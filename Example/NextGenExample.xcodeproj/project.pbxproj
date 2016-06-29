@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495CF3691CC042BA006AE290 /* CoreText.framework */; };
 		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
+		701695091D244772009D7E85 /* UIImageRemoteLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701695081D244772009D7E85 /* UIImageRemoteLoader.swift */; };
 		7021D3691D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */; };
 		708488DC1D0F7EC900670B45 /* NextGenDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */; };
 		70C093161D0F60DF00BFC1E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70C092A91D0F60DF00BFC1E4 /* Localizable.strings */; };
@@ -118,6 +119,7 @@
 		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49F502541C890E6500DFAD88 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		701695081D244772009D7E85 /* UIImageRemoteLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageRemoteLoader.swift; sourceTree = "<group>"; };
 		7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClipShareSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataLoader.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				70C093061D0F60DF00BFC1E4 /* UIImage+Utils.swift */,
 				70C093071D0F60DF00BFC1E4 /* UIImageView+Utils.swift */,
 				70C093081D0F60DF00BFC1E4 /* UIStoryboard+Utils.swift */,
+				701695081D244772009D7E85 /* UIImageRemoteLoader.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				70C093541D0F60DF00BFC1E4 /* SimpleImageCollectionViewCell.swift in Sources */,
 				70C093501D0F60DF00BFC1E4 /* MenuSectionCell.swift in Sources */,
 				70C093351D0F60DF00BFC1E4 /* ExtrasExperienceViewController.swift in Sources */,
+				701695091D244772009D7E85 /* UIImageRemoteLoader.swift in Sources */,
 				70C093371D0F60DF00BFC1E4 /* ExtrasPresentationController.swift in Sources */,
 				70C093241D0F60DF00BFC1E4 /* SceneDetailCollectionViewCell.swift in Sources */,
 				70C093591D0F60DF00BFC1E4 /* UIColor+Theme.swift in Sources */,

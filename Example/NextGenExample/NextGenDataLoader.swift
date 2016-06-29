@@ -87,6 +87,8 @@ class NextGenDataLoader {
                 
                 if var talentAPIUtil = NGDMConfiguration.talentAPIUtil, let id = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline) {
                     talentAPIUtil.apiId = id
+                } else {
+                    NGDMConfiguration.talentAPIUtil = nil
                 }
                 
                 CurrentManifest.mainExperience.loadTalent()

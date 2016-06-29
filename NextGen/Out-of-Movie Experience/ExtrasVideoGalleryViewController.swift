@@ -6,33 +6,39 @@ import UIKit
 
 class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
-    @IBOutlet weak var galleryTableView: UITableView!
+    @IBOutlet weak private var galleryTableView: UITableView!
     
-    @IBOutlet weak var videoContainerView: UIView!
-    @IBOutlet weak var previewImageView: UIImageView?
-    @IBOutlet weak var previewPlayButton: UIButton?
-    @IBOutlet weak var mediaTitleLabel: UILabel!
-    @IBOutlet weak var mediaDescriptionLabel: UILabel!
-    @IBOutlet weak var mediaRuntimeLabel: UILabel!
-    private var _videoPlayerViewController: VideoPlayerViewController?
+    @IBOutlet weak private var videoContainerView: UIView!
+    @IBOutlet weak private var previewImageView: UIImageView?
+    @IBOutlet weak private var previewPlayButton: UIButton?
+    @IBOutlet weak private var mediaTitleLabel: UILabel!
+    @IBOutlet weak private var mediaDescriptionLabel: UILabel!
+    @IBOutlet weak private var mediaRuntimeLabel: UILabel!
+    private var videoPlayerViewController: VideoPlayerViewController?
     
-    @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
-    @IBOutlet weak var galleryPageControl: UIPageControl!
-    private var _galleryDidScrollToPageObserver: NSObjectProtocol?
+    @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
+    @IBOutlet weak private var galleryPageControl: UIPageControl!
+    @IBOutlet weak private var turntableSlider: UISlider!
+    private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
-    private var _didPlayFirstItem = false
-    private var _previewPlayURL: NSURL?
-    private var _userDidSelectNextItem = true
+    private var didPlayFirstItem = false
+    private var previewPlayURL: NSURL?
+    private var userDidSelectNextItem = true
     
-    private var _willPlayNextItemObserver: NSObjectProtocol!
+    private var willPlayNextItemObserver: NSObjectProtocol?
     
     // MARK: Initialization
     deinit {
         let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(_willPlayNextItemObserver)
         
-        if let observer = _galleryDidScrollToPageObserver {
+        if let observer = willPlayNextItemObserver {
             center.removeObserver(observer)
+            willPlayNextItemObserver = nil
+        }
+        
+        if let observer = galleryDidScrollToPageObserver {
+            center.removeObserver(observer)
+            galleryDidScrollToPageObserver = nil
         }
     }
     
@@ -53,16 +59,16 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
 
-        _willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+        willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int where index < (strongSelf.experience.childExperiences?.count ?? 0) {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                strongSelf._userDidSelectNextItem = false
+                strongSelf.userDidSelectNextItem = false
                 strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
             }
         }
         
-        _galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
                 strongSelf.galleryPageControl.currentPage = page
             }
@@ -106,29 +112,42 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             
             // Reset media detail views
             galleryPageControl.hidden = true
+            turntableSlider.hidden = true
             galleryScrollView.hidden = true
             videoContainerView.hidden = false
-            previewImageView?.hidden = _didPlayFirstItem
-            previewPlayButton?.hidden = _didPlayFirstItem
+            previewImageView?.hidden = didPlayFirstItem
+            previewPlayButton?.hidden = didPlayFirstItem
             mediaRuntimeLabel.text = nil
             
             // Set new media detail views
             if let gallery = thisExperience.gallery {
-                galleryPageControl.hidden = false
                 galleryScrollView.hidden = false
                 videoContainerView.hidden = true
                 previewImageView?.hidden = true
                 previewPlayButton?.hidden = true
                 
-                galleryPageControl.numberOfPages = gallery.pictures?.count ?? 0
+                let numberOfPages = gallery.pictures?.count ?? 0
+                if gallery.isSubType(.Turntable) {
+                    turntableSlider.hidden = false
+                    turntableSlider.minimumValue = 0
+                    turntableSlider.maximumValue = Float(numberOfPages - 1)
+                    turntableSlider.value = 0
+                } else {
+                    galleryPageControl.hidden = false
+                    galleryPageControl.numberOfPages = numberOfPages
+                }
+                
                 galleryScrollView.gallery = gallery
+                if gallery.isSubType(.Turntable) {
+                    galleryScrollView.preloadImages()
+                }
             } else if thisExperience.isType(.AudioVisual) {
                 let runtime = thisExperience.videoRuntime
                 if runtime > 0 {
                     mediaRuntimeLabel.text = String.localize("label.runtime", variables: ["runtime": runtime.timeString()])
                 }
             
-                if let videoURL = thisExperience.videoURL, videoPlayerViewController = _videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                if let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                     if let player = videoPlayerViewController.player {
                         player.removeAllItems()
                     }
@@ -141,10 +160,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     videoContainerView.addSubview(videoPlayerViewController.view)
                     self.addChildViewController(videoPlayerViewController)
                     videoPlayerViewController.didMoveToParentViewController(self)
-                    _videoPlayerViewController = videoPlayerViewController
+                    self.videoPlayerViewController = videoPlayerViewController
                     
-                    if !_didPlayFirstItem {
-                        _previewPlayURL = videoURL
+                    if !didPlayFirstItem {
+                        previewPlayURL = videoURL
                     
                         if indexPath.row == 0 {
                             if let imageURL = thisExperience.imageURL {
@@ -154,13 +173,12 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                             playFirstItem(nil)
                         }
                     } else {
-                        if _userDidSelectNextItem {
+                        if userDidSelectNextItem {
                             videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
                         }
                             
                         videoPlayerViewController.playVideoWithURL(videoURL)
-                        _userDidSelectNextItem = true
-                    
+                        userDidSelectNextItem = true
                     }
                 }
             }
@@ -170,16 +188,24 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     // MARK: Actions
     @IBAction func playFirstItem(sender: UIButton?) {
-        _didPlayFirstItem = true
+        didPlayFirstItem = true
         
         previewImageView?.removeFromSuperview()
         previewPlayButton?.removeFromSuperview()
         previewImageView = nil
         previewPlayButton = nil
         
-        if let videoURL = _previewPlayURL {
-            _videoPlayerViewController?.playVideoWithURL(videoURL)
+        if let videoURL = previewPlayURL {
+            videoPlayerViewController?.playVideoWithURL(videoURL)
         }
+    }
+    
+    @IBAction func turntableSliderValueChanged(slider: UISlider!) {
+        galleryScrollView.gotoPage(Int(floor(slider.value)), animated: false)
+    }
+    
+    @IBAction func turntableSliderDidEnd() {
+        galleryScrollView.cleanInvisibleImages()
     }
     
 }
