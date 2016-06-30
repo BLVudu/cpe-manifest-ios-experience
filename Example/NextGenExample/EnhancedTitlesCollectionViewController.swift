@@ -30,8 +30,17 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         static let CollectionViewItemAspectRatio: CGFloat = 135 / 240
     }
     
+    // MARK: View Lifecycle
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         collectionView?.registerNib(UINib(nibName: String(EnhancedTitlesCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: EnhancedTitlesCollectionViewCell.ReuseIdentifier)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        MBProgressHUD.hideAllHUDsForView(self.view, animated: false)
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -57,10 +66,15 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
     // MARK: UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        NextGenDataLoader.loadTitle(indexPath.row)
         
-        let homeViewController = UIStoryboard.getNextGenViewController(HomeViewController)
-        self.presentViewController(homeViewController, animated: true, completion: nil)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            NextGenDataLoader.loadTitle(indexPath.row)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                let homeViewController = UIStoryboard.getNextGenViewController(HomeViewController)
+                self.presentViewController(homeViewController, animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: UICollectionViewFlowLayoutDelegate

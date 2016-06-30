@@ -14,8 +14,9 @@ class HomeViewController: UIViewController {
         static let ShowOutOfMovieExperience = "ShowOutOfMovieExperienceSegueIdentifier"
     }
     
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var backgroundVideoView: UIView!
+    @IBOutlet weak private var backButton: UIButton!
+    @IBOutlet weak private var backgroundImageView: UIImageView!
+    @IBOutlet weak private var backgroundVideoView: UIView!
     
     private var didFinishPlayingObserver: NSObjectProtocol?
     
@@ -34,6 +35,9 @@ class HomeViewController: UIViewController {
         
         let frameWidth = CGRectGetWidth(self.view.frame)
         let frameHeight = CGRectGetHeight(self.view.frame)
+        
+        backButton.setTitle(String.localize("label.back"), forState: .Normal)
+        homeScreenViews.append(backButton)
         
         if let appearance = CurrentManifest.mainExperience.appearance {
             willFadeInViews = appearance.backgroundVideoFadeTime > 0
@@ -197,6 +201,10 @@ class HomeViewController: UIViewController {
     
     func onExtras() {
         self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: CurrentManifest.outOfMovieExperience)
+    }
+    
+    @IBAction func onBack() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: Storyboard
