@@ -24,6 +24,10 @@ extension UIImageView {
                 self.image = UIImage(named: path)
             }
             
+            if let completion = completion {
+                completion(image: self.image)
+            }
+            
             return nil
         }
         
@@ -31,6 +35,10 @@ extension UIImageView {
         
         return UIImageRemoteLoader.loadImage(url, completion: { (image) in
             self.image = image
+            
+            if let completion = completion {
+                completion(image: self.image)
+            }
         })
     }
     

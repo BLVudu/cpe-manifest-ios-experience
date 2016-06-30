@@ -47,6 +47,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        _lastSavedTime = -1.0
         timedEvent = nil
     }
     

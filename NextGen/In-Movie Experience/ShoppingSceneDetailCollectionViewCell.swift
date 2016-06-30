@@ -60,6 +60,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
                 _imageURL = nil
                 _descriptionText = nil
                 _extraDescriptionText = nil
+                _currentProductFrameTime = -1.0
             }
         }
     }

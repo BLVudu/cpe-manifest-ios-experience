@@ -92,10 +92,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     if newTimedEvents.count < self._currentTimedEvents.count {
                         if self._currentTimedEvents[newTimedEvents.count] != timedEvent {
                             reloadIndexPaths.append(indexPath)
-                        } else if timedEvent.isType(.Product) {
-                            if let cell = self.collectionView?.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
-                                cell.currentTime = self._currentTime
-                            }
+                        } else if timedEvent.isType(.Product), let cell = self.collectionView?.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
+                            cell.currentTime = self._currentTime
                         }
                     } else {
                         insertIndexPaths.append(indexPath)
