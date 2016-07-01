@@ -85,10 +85,8 @@ class NextGenDataLoader {
                     TheTakeAPIUtil.sharedInstance.prefetchProductCategories()
                 }
                 
-                if var talentAPIUtil = NGDMConfiguration.talentAPIUtil, let id = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline) {
-                    talentAPIUtil.apiId = id
-                } else {
-                    NGDMConfiguration.talentAPIUtil = nil
+                if var talentAPIUtil = NGDMConfiguration.talentAPIUtil {
+                    talentAPIUtil.apiId = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline)
                 }
                 
                 CurrentManifest.mainExperience.loadTalent()
