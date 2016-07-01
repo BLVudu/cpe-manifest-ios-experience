@@ -6,6 +6,12 @@ import UIKit
 
 class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
+    private struct Constants {
+        static let GalleryTableViewImageAspectRatio: CGFloat = 16 / 9
+        static let GalleryTableViewLabelHeight: CGFloat = 40
+        static let GalleryTableViewPadding: CGFloat = 15
+    }
+    
     @IBOutlet weak private var galleryTableView: UITableView!
     
     @IBOutlet weak private var videoContainerView: UIView!
@@ -90,7 +96,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200
+        return (CGRectGetWidth(tableView.frame) / Constants.GalleryTableViewImageAspectRatio) + Constants.GalleryTableViewLabelHeight + Constants.GalleryTableViewPadding
     }
     
     
