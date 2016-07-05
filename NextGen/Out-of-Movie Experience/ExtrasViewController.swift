@@ -1,9 +1,5 @@
 //
 //  ExtrasViewController.swift
-//  NextGenPOC-Native
-//
-//  Created by Sedinam Gadzekpo on 1/8/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc.. All rights reserved.
 //
 
 
@@ -39,7 +35,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let actors = CurrentManifest.mainExperience.orderedActors where actors.count > 0 {
+        if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors where actors.count > 0 {
             talentTableView?.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
             talentTableView?.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         } else {
@@ -74,7 +70,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                 if _talentDetailViewController != nil {
                     _talentDetailViewController!.loadTalent(talent)
                 } else {
-                    if let talentDetailViewController = UIStoryboard.getMainStoryboardViewController(TalentDetailViewController) as? TalentDetailViewController {
+                    if let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController) as? TalentDetailViewController {
                         talentDetailViewController.talent = talent
                         
                         talentDetailViewController.view.frame = talentDetailView.bounds
@@ -118,18 +114,12 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let actors = CurrentManifest.mainExperience.orderedActors {
-            return actors.count
-        }
-        
-        return 0
+        return NGDMManifest.sharedInstance.mainExperience?.orderedActors?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        if let actors = CurrentManifest.mainExperience.orderedActors {
-            cell.talent = actors[indexPath.row]
-        }
+        cell.talent = NGDMManifest.sharedInstance.mainExperience?.orderedActors?[indexPath.row]
         
         return cell
     }
@@ -157,19 +147,19 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CurrentManifest.outOfMovieExperience.childExperiences?.count ?? 0
+        return NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(TitledImageCell.ReuseIdentifier, forIndexPath: indexPath) as! TitledImageCell
-        cell.experience = CurrentManifest.outOfMovieExperience.childExperiences?[indexPath.row]
+        cell.experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[indexPath.row]
         
         return cell
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let experience = CurrentManifest.outOfMovieExperience.childExperiences?[indexPath.row] {
+        if let experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[indexPath.row] {
             if experience.isType(.Shopping) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
             } else if experience.isType(.Location) {

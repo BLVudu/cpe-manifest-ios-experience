@@ -1,9 +1,5 @@
 //
 //  SceneDetailCollectionViewCell.swift
-//  NextGen
-//
-//  Created by Alec Ananian on 2/8/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit
@@ -30,14 +26,6 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    var experience: NGDMExperience? {
-        didSet {
-            if experience != oldValue {
-                experienceDidChange()
-            }
-        }
-    }
-    
     var timedEvent: NGDMTimedEvent? {
         didSet {
             if timedEvent != oldValue {
@@ -59,16 +47,17 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        experience = nil
+        _lastSavedTime = -1.0
         timedEvent = nil
     }
     
-    func experienceDidChange() {
-        _title = experience?.title
-    }
-    
     func timedEventDidChange() {
-        _descriptionText = timedEvent?.descriptionText
+        _title = timedEvent?.experience?.title
+        if timedEvent != nil && timedEvent!.isType(.ClipShare) {
+            _descriptionText = String.localize("clipshare.description")
+        } else {
+            _descriptionText = timedEvent?.descriptionText
+        }
     }
     
     func currentTimeDidChange() {

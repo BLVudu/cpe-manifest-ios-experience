@@ -1,9 +1,5 @@
 //
 //  SceneDetailViewController.swift
-//  NextGen
-//
-//  Created by Alec Ananian on 4/5/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit
@@ -16,6 +12,7 @@ class SceneDetailViewController: UIViewController {
     let kCloseButtonWidth: CGFloat = 110
     
     var experience: NGDMExperience?
+    var timedEvent: NGDMTimedEvent?
     
     var titleLabel: UILabel!
     var closeButton: UIButton!

@@ -1,9 +1,5 @@
 //
 //  ImageGalleryScrollView.swift
-//  NextGen
-//
-//  Created by Alec Ananian on 5/16/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit
@@ -28,9 +24,14 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     private var originalContainerFrame: CGRect?
     private var closeButton: UIButton!
     
+    private var sessionDataTasks = [NSURLSessionDataTask]()
+    
     private var scrollViewPageWidth: CGFloat = 0
     var currentPage = 0 {
         didSet {
+            sessionDataTasks.forEach({ $0.cancel() })
+            sessionDataTasks.removeAll()
+            
             loadGalleryImageForPage(currentPage)
             loadGalleryImageForPage(currentPage + 1)
             NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidScrollToPage, object: nil, userInfo: ["page": currentPage])
@@ -222,7 +223,9 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     private func loadGalleryImageForPage(page: Int) {
         if let imageURL = imageURLForPage(page), pageView = self.viewWithTag(page + 1) as? UIScrollView, imageView = pageView.subviews.first as? UIImageView where imageView.image == nil {
-            imageView.setImageWithURL(imageURL)
+            if let sessionDataTask = imageView.setImageWithURL(imageURL) {
+                sessionDataTasks.append(sessionDataTask)
+            }
         }
     }
     
@@ -248,6 +251,16 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         self.setContentOffset(CGPointMake(CGFloat(currentPage) * scrollViewPageWidth, 0), animated: animated)
     }
     
+    func preloadImages() {
+        if let pictures = gallery?.pictures {
+            for picture in pictures {
+                if let url = picture.imageURL {
+                    UIImageRemoteLoader.loadImage(url, completion: nil)
+                }
+            }
+        }
+    }
+    
     // MARK: UIScrollViewDelegate
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if scrollView == self {
@@ -255,8 +268,8 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    /*func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageViewForPage(currentPage)
-    }
+    }*/
 
 }

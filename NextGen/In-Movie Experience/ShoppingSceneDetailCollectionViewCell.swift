@@ -1,10 +1,9 @@
 //
 //  ShoppingSceneDetailCollectionViewCell.swift
-//  NextGen
 //
-//  Created by Alec Ananian on 2/5/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
-//
+
+import Foundation
+import UIKit
 
 class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
@@ -61,6 +60,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
                 _imageURL = nil
                 _descriptionText = nil
                 _extraDescriptionText = nil
+                _currentProductFrameTime = -1.0
             }
         }
     }

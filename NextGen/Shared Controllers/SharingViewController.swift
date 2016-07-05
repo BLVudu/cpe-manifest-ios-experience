@@ -1,9 +1,5 @@
 //
 //  SharingViewController.swift
-//  NextGen
-//
-//  Created by Sedinam Gadzekpo on 3/1/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit
@@ -21,8 +17,6 @@ class SharingViewController: SceneDetailViewController {
     @IBOutlet weak var videoBackgroundView: UIView!
     private var _videoPlayerViewController: VideoPlayerViewController?
     
-    var timedEvent: NGDMTimedEvent!
-    
     private var _clips = [NSURL]?()
     //private var _clips = [NGDMTimedEvent]?()
     private var _index = 0
@@ -37,27 +31,27 @@ class SharingViewController: SceneDetailViewController {
         // Localizations
         shareButton.setTitle(String.localize("clipshare.send_button").uppercaseString, forState: UIControlState.Normal)
         
-        clipNameLabel.text = timedEvent.descriptionText
+        clipNameLabel.text = timedEvent?.descriptionText
         
-        if let imageURL = timedEvent.imageURL {
+        if let imageURL = timedEvent?.imageURL {
             clipThumbnailImageView.setImageWithURL(imageURL)
         } else {
             clipThumbnailImageView.image = UIImage.themeDefaultImage16By9()
         }
         
-        if let videoURL = timedEvent.audioVisual?.videoURL {
+        if let videoURL = timedEvent?.audioVisual?.videoURL {
             _shareableURL = videoURL
             for i in 0...3{
                 _clips!.append( _shareableURL!)
             }
         }
         
-        self.clipDurationLabel.text = (timedEvent.endTime - timedEvent.startTime).timeString()
+        self.clipDurationLabel.text = ((timedEvent?.endTime ?? 0) - (timedEvent?.startTime ?? 0)).timeString()
     }
 
     func replaceClip(){
         
-        if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
+        if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
             }

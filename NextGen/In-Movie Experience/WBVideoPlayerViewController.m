@@ -1,7 +1,5 @@
 //
 //  WBVideoPlayerViewController.h
-//  Flixster
-//
 //  Fork of Apple's AVPlayerDemoPlaybackViewController.h
 //
 
@@ -151,10 +149,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 - (IBAction)pause:(id)sender {
     // Pause media
     [self pauseVideo];
-}
-
-- (IBAction)share:(id)sender {
-    // Override
 }
 
 - (IBAction)toggleFullScreen:(id)sender {

@@ -1,9 +1,5 @@
 //
 //  GallerySceneDetailViewController.swift
-//  NextGen
-//
-//  Created by Sedinam Gadzekpo on 2/29/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit
@@ -16,33 +12,34 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var timedEvent: NGDMTimedEvent!
     var gallery: NGDMGallery?
     private var _scrollViewPageWidth: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if timedEvent.isType(.AudioVisual) {
-            galleryScrollView.removeFromSuperview()
-            if let audioVisual = timedEvent.audioVisual, videoURL = audioVisual.videoURL {
-                descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
-                
-                if let videoPlayerViewController = UIStoryboard.getMainStoryboardViewController(VideoPlayerViewController) as? VideoPlayerViewController {
-                    videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
+        if let timedEvent = timedEvent {
+            if timedEvent.isType(.AudioVisual) {
+                galleryScrollView.removeFromSuperview()
+                if let audioVisual = timedEvent.audioVisual, videoURL = audioVisual.videoURL {
+                    descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
                     
-                    videoPlayerViewController.view.frame = videoContainerView.bounds
-                    videoContainerView.addSubview(videoPlayerViewController.view)
-                    self.addChildViewController(videoPlayerViewController)
-                    videoPlayerViewController.didMoveToParentViewController(self)
-                    
-                    videoPlayerViewController.playVideoWithURL(videoURL)
+                    if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                        videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
+                        
+                        videoPlayerViewController.view.frame = videoContainerView.bounds
+                        videoContainerView.addSubview(videoPlayerViewController.view)
+                        self.addChildViewController(videoPlayerViewController)
+                        videoPlayerViewController.didMoveToParentViewController(self)
+                        
+                        videoPlayerViewController.playVideoWithURL(videoURL)
+                    }
                 }
+            } else {
+                videoContainerView.removeFromSuperview()
+                gallery = timedEvent.gallery
+                descriptionLabel.text = gallery?.description
             }
-        } else {
-            videoContainerView.removeFromSuperview()
-            gallery = timedEvent.gallery
-            descriptionLabel.text = gallery?.description
         }
     }
     

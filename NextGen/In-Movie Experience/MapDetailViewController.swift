@@ -1,9 +1,5 @@
 //
 //  MapDetailViewController.swift
-//  NextGen
-//
-//  Created by Sedinam Gadzekpo on 2/29/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +11,6 @@ class MapDetailViewController: SceneDetailViewController {
     @IBOutlet weak var mapView: MultiMapView!
     @IBOutlet weak var mapDescriptionLabel: UILabel?
     
-    var timedEvent: NGDMTimedEvent!
     var appData: NGDMAppData!
     var location: NGDMLocation!
     
@@ -23,7 +18,7 @@ class MapDetailViewController: SceneDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appData = timedEvent.appData!
+        appData = timedEvent!.appData!
         location = appData.location!
     }
     

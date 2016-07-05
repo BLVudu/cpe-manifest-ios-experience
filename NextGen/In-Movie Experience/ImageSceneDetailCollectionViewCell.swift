@@ -1,14 +1,14 @@
 //
 //  ImageSceneDetailCollectionViewCell.swift
-//  NextGen
 //
-//  Created by Alec Ananian on 2/5/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
-//
+
+import Foundation
+import UIKit
 
 class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
+    static let ClipShareReuseIdentifier = "ClipShareSceneDetailCollectionViewCellReuseIdentifier"
     
     @IBOutlet weak private var _imageView: UIImageView!
     @IBOutlet weak private var _playButton: UIButton!
@@ -33,7 +33,7 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.timedEventDidChange()
         
         _imageURL = timedEvent?.imageURL
-        _playButton.hidden = timedEvent == nil || !timedEvent!.isType(.AudioVisual)
+        _playButton.hidden = timedEvent == nil || (!timedEvent!.isType(.AudioVisual) && !timedEvent!.isType(.ClipShare))
     }
     
     override func prepareForReuse() {

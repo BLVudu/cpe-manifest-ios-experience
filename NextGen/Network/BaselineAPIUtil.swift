@@ -1,9 +1,5 @@
 //
 //  BaselineAPIUtil.swift
-//  NextGen
-//
-//  Created by Alec Ananian on 3/18/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +7,9 @@ import NextGenDataManager
 
 public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     
-    struct Endpoints {
+    public static var APIDomain = "http://baselineapi.com/api"
+    
+    private struct Endpoints {
         static let GetCredits = "/ProjectAllCredits"
         static let GetBio = "/ParticipantBioShort"
         static let GetImages = "/ParticipantProfileImages"
@@ -20,7 +18,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         static let GetFilmPoster = "/ProjectFilmPoster"
     }
     
-    struct Keys {
+    private struct Keys {
         static let ParticipantID = "PARTICIPANT_ID"
         static let FullName = "FULL_NAME"
         static let Credit = "CREDIT"
@@ -36,49 +34,59 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         static let URL = "URL"
     }
     
-    struct Constants {
+    private struct Constants {
         static let MaxCredits = 15
         static let MaxFilmography = 10
     }
     
-    public static let sharedInstance = BaselineAPIUtil(apiDomain: "http://baselineapi.com/api")
+    public var apiNamespace = Namespaces.Baseline
+    public var apiKey: String!
+    public var apiId: String?
     
-    var projectId: String!
-    var apiKey: String!
-    
-    public func prefetchCredits(successBlock: (talents: [String: Talent]) -> Void) {
-        getJSONWithPath(Endpoints.GetCredits, parameters: ["id": projectId, "apikey": apiKey], successBlock: { (result) -> Void in
-            if let results = result["result"] as? NSArray {
-                var talents = [String: Talent]()
-                for talentInfo in results.subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxCredits, results.count))) {
-                    if let talentInfo = talentInfo as? NSDictionary, talentID = talentInfo[Keys.ParticipantID] as? NSNumber {
-                        let baselineId = (talentInfo[BaselineAPIUtil.Keys.ParticipantID] as! NSNumber).stringValue
-                        let name = talentInfo[BaselineAPIUtil.Keys.FullName] as? String
-                        let role = talentInfo[BaselineAPIUtil.Keys.Credit] as? String
-                        var type: TalentType?
-                        if let creditGroup = talentInfo[BaselineAPIUtil.Keys.CreditGroup] as? String {
-                            type = TalentType(rawValue: creditGroup)
-                        }
-                        
-                        talents[talentID.stringValue] = Talent(apiID: baselineId, name: name, role: role, type: type ?? .Unknown)
-                    }
-                }
-                
-                successBlock(talents: talents)
-            }
-        }, errorBlock: nil)
+    public convenience init(apiKey: String) {
+        self.init(apiDomain: BaselineAPIUtil.APIDomain)
+        self.apiKey = apiKey
     }
     
-    public func getTalentBio(talentID: String, successBlock: (biography: String) -> Void) {
-        getJSONWithPath(Endpoints.GetBio, parameters: ["id": talentID, "apikey": apiKey], successBlock: { (result) -> Void in
+    public func prefetchCredits(successBlock: (talents: [String: Talent]?) -> Void) {
+        if let apiId = apiId {
+            getJSONWithPath(Endpoints.GetCredits, parameters: ["id": apiId, "apikey": apiKey], successBlock: { (result) -> Void in
+                if let results = result["result"] as? NSArray {
+                    var talents = [String: Talent]()
+                    for talentInfo in results.subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxCredits, results.count))) {
+                        if let talentInfo = talentInfo as? NSDictionary, talentId = talentInfo[Keys.ParticipantID] as? NSNumber {
+                            let baselineId = (talentInfo[BaselineAPIUtil.Keys.ParticipantID] as! NSNumber).stringValue
+                            let name = talentInfo[BaselineAPIUtil.Keys.FullName] as? String
+                            let role = talentInfo[BaselineAPIUtil.Keys.Credit] as? String
+                            var type: TalentType?
+                            if let creditGroup = talentInfo[BaselineAPIUtil.Keys.CreditGroup] as? String {
+                                type = TalentType(rawValue: creditGroup)
+                            }
+                            
+                            talents[talentId.stringValue] = Talent(apiId: baselineId, name: name, role: role, type: type ?? .Unknown)
+                        }
+                    }
+                    
+                    successBlock(talents: talents)
+                }
+            }, errorBlock: nil)
+        } else {
+            successBlock(talents: nil)
+        }
+    }
+    
+    public func getTalentBio(talentId: String, successBlock: (biography: String?) -> Void) {
+        getJSONWithPath(Endpoints.GetBio, parameters: ["id": talentId, "apikey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary, biography = response[Keys.ShortBio] as? String {
                 successBlock(biography: biography)
+            } else {
+                successBlock(biography: nil)
             }
         }, errorBlock: nil)
     }
     
-    public func getTalentImages(talentID: String, successBlock: (talentImages: [TalentImage]?) -> Void) {
-        getJSONWithPath(Endpoints.GetImages, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
+    public func getTalentImages(talentId: String, successBlock: (talentImages: [TalentImage]?) -> Void) {
+        getJSONWithPath(Endpoints.GetImages, parameters: ["id": talentId, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 if results.count > 0 {
                     var talentImages = [TalentImage]()
@@ -106,8 +114,8 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         }, errorBlock: nil)
     }
     
-    public func getTalentSocialAccounts(talentID: String, successBlock: (socialAccounts: [TalentSocialAccount]?) -> Void) {
-        getJSONWithPath(Endpoints.GetSocialMedia, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
+    public func getTalentSocialAccounts(talentId: String, successBlock: (socialAccounts: [TalentSocialAccount]?) -> Void) {
+        getJSONWithPath(Endpoints.GetSocialMedia, parameters: ["id": talentId, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 if results.count > 0 {
                     var socialAccounts = [TalentSocialAccount]()
@@ -127,8 +135,8 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         }, errorBlock: nil)
     }
     
-    public func getTalentFilmography(talentID: String, successBlock: (films: [TalentFilm]) -> Void) {
-        getJSONWithPath(Endpoints.GetFilmography, parameters: ["id": talentID, "apiKey": apiKey], successBlock: { (result) -> Void in
+    public func getTalentFilmography(talentId: String, successBlock: (films: [TalentFilm]) -> Void) {
+        getJSONWithPath(Endpoints.GetFilmography, parameters: ["id": talentId, "apiKey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 var films = [TalentFilm]()
                 

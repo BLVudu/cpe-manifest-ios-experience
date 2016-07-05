@@ -1,9 +1,5 @@
 //
 //  String+Utils.swift
-//  NextGen
-//
-//  Created by Alec Ananian on 3/10/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import Foundation
@@ -25,6 +21,10 @@ extension String {
         }
         
         return localizedString
+    }
+    
+    static func localizePlural(singularKey: String, pluralKey: String, count: Int) -> String {
+        return localize(count == 1 ? singularKey : pluralKey, variables: ["count": String(count)])
     }
     
     subscript (i: Int) -> Character {

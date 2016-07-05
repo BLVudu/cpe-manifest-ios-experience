@@ -1,9 +1,5 @@
 //
 //  TheTakeAPIUtil.swift
-//  NextGen
-//
-//  Created by Alec Ananian on 3/10/16.
-//  Copyright © 2016 Warner Bros. Entertainment, Inc. All rights reserved.
 //
 
 import Foundation
@@ -13,7 +9,7 @@ public class TheTakeAPIUtil: APIUtil {
     
     public static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")
     
-    var mediaId: String!
+    public var mediaId: String!
     var apiKey: String!
     
     private var _frameTimes = [Double: NSDictionary]()
