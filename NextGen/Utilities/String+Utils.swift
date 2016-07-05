@@ -23,6 +23,10 @@ extension String {
         return localizedString
     }
     
+    static func localizePlural(singularKey: String, pluralKey: String, count: Int) -> String {
+        return localize(count == 1 ? singularKey : pluralKey, variables: ["count": String(count)])
+    }
+    
     subscript (i: Int) -> Character {
         return self[self.startIndex.advancedBy(i)]
     }

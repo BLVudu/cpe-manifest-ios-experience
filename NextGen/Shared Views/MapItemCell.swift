@@ -13,55 +13,63 @@ class MapItemCell: UICollectionViewCell {
     @IBOutlet weak private var subtitleLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var playButton: UIButton!
-    private var imageDataTask: NSURLSessionDataTask?
+    private var setImageSessionDataTask: NSURLSessionDataTask?
     
-    var experience: NGDMExperience? {
-        didSet {
-            if let appData = experience?.appData {
-                titleLabel.text = appData.title
-                
-                if let imageURL = appData.imageURL {
-                    imageDataTask = imageView.setImageWithURL(imageURL)
-                } else {
-                    imageView.image = nil
-                }
-                
-                subtitleLabel.text = nil
-                playButton.hidden = appData.audioVisual == nil
+    var title: String? {
+        set {
+            titleLabel.text = newValue
+        }
+        
+        get {
+            return titleLabel.text
+        }
+    }
+    
+    var subtitle: String? {
+        set {
+            subtitleLabel.text = newValue
+        }
+        
+        get {
+            return subtitleLabel.text
+        }
+    }
+    
+    var imageURL: NSURL? {
+        set {
+            if let imageURL = newValue {
+                setImageSessionDataTask = imageView.setImageWithURL(imageURL)
             } else {
-                titleLabel.text = experience?.title
-                
-                if let imageURL = experience?.imageURL {
-                    imageDataTask = imageView.setImageWithURL(imageURL)
-                } else {
-                    imageView.image = nil
-                }
-                
-                if let childExperiences = experience?.childExperiences {
-                    if childExperiences.count > 0 && childExperiences.first?.appData == nil {
-                        subtitleLabel.text = String.localize((childExperiences.count == 1 ? "locations.count.one" : "locations.count.other"), variables: ["count": String(childExperiences.count)])
-                    } else {
-                        subtitleLabel.text = nil
-                    }
-                } else {
-                    subtitleLabel.text = nil
-                }
-                
-                playButton.hidden = true
+                imageView.image = nil
             }
+        }
+        
+        get {
+            return nil
+        }
+    }
+    
+    var playButtonVisible: Bool {
+        set {
+            playButton.hidden = !newValue
+        }
+        
+        get {
+            return !playButton.hidden
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        titleLabel.text = nil
-        imageView.image = nil
-        subtitleLabel.text = nil
+        title = nil
+        subtitle = nil
+        imageURL = nil
         playButton.hidden = true
-        if let task = imageDataTask {
+        
+        if let task = setImageSessionDataTask {
             task.cancel()
-            imageDataTask = nil
+            setImageSessionDataTask = nil
         }
     }
     

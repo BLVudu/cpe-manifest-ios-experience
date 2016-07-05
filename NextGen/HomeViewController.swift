@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
         backButton.setTitle(String.localize("label.back"), forState: .Normal)
         homeScreenViews.append(backButton)
         
-        if let appearance = CurrentManifest.mainExperience.appearance {
+        if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {
             willFadeInViews = appearance.backgroundVideoFadeTime > 0
             
             if let centerOffset = appearance.titleImageCenterOffset, sizeOffset = appearance.titleImageSizeOffset, titleImageURL = appearance.titleImageURL {
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
         }
         
         // Play button
-        if let appearance = CurrentManifest.inMovieExperience.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
+        if let appearance = NGDMManifest.sharedInstance.inMovieExperience?.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
             let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
             button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
             
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
         }
         
         // Extras button
-        if let appearance = CurrentManifest.outOfMovieExperience.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
+        if let appearance = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
             let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
             button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
             
@@ -118,7 +118,7 @@ class HomeViewController: UIViewController {
     
     // MARK: Video Player
     func loadVideoPlayer() {
-        if let appearance = CurrentManifest.mainExperience.appearance {
+        if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {
             if let backgroundVideoURL = appearance.backgroundVideoURL {
                 let videoPlayer = AVPlayer(playerItem: AVPlayerItem(URL: backgroundVideoURL))
                 backgroundVideoLayer = AVPlayerLayer(player: videoPlayer)
@@ -200,7 +200,7 @@ class HomeViewController: UIViewController {
     }
     
     func onExtras() {
-        self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: CurrentManifest.outOfMovieExperience)
+        self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: NGDMManifest.sharedInstance.outOfMovieExperience)
     }
     
     @IBAction func onBack() {

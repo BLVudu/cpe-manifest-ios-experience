@@ -26,7 +26,7 @@ class ExtrasExperienceViewController: UIViewController {
         super.viewDidLoad()
         
         var titleFrame = CGRectMake(CGRectGetWidth(self.view.frame) - Constants.TitleImageWidth, 0, Constants.TitleImageWidth, Constants.TitleImageHeight)
-        if experience == CurrentManifest.outOfMovieExperience, let titleImageURL = experience.appearance?.titleImageURL {
+        if experience == NGDMManifest.sharedInstance.outOfMovieExperience, let titleImageURL = experience.appearance?.titleImageURL {
             let titleImageView = UIImageView(frame: titleFrame)
             titleImageView.setImageWithURL(titleImageURL)
             self.view.addSubview(titleImageView)
@@ -51,7 +51,7 @@ class ExtrasExperienceViewController: UIViewController {
         self.view.addSubview(_backButton)
         self.view.sendSubviewToBack(_backButton)
         
-        if let backgroundImageURL = CurrentManifest.outOfMovieExperience.appearance?.backgroundImageURL {
+        if let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance?.backgroundImageURL {
             let backgroundImageView = UIImageView()
             backgroundImageView.setImageWithURL(backgroundImageURL)
             backgroundImageView.frame = self.view.bounds

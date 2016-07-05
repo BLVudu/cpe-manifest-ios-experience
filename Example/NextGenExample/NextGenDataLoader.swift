@@ -72,24 +72,22 @@ class NextGenDataLoader {
         if let manifestXMLPath = NSBundle.mainBundle().pathForResource(titleData["manifest"], ofType: "xml") {
             do {
                 try NGDMManifest.sharedInstance.loadManifestXMLFile(manifestXMLPath)
-                CurrentManifest.mainExperience = NGDMManifest.sharedInstance.mainExperience
-                CurrentManifest.mainExperience.appearance = NGDMAppearance(type: .Main)
-                CurrentManifest.inMovieExperience = try CurrentManifest.mainExperience.getInMovieExperience()
-                CurrentManifest.inMovieExperience.appearance = NGDMAppearance(type: .InMovie)
-                CurrentManifest.outOfMovieExperience = try CurrentManifest.mainExperience.getOutOfMovieExperience()
-                CurrentManifest.outOfMovieExperience.appearance = NGDMAppearance(type: .OutOfMovie)
+                NGDMManifest.sharedInstance.mainExperience?.appearance = NGDMAppearance(type: .Main)
                 
-                if TheTakeAPIUtil.sharedInstance.apiKey != nil, let mediaId = CurrentManifest.mainExperience.customIdentifier(Namespaces.TheTake) {
+                NGDMManifest.sharedInstance.inMovieExperience?.appearance = NGDMAppearance(type: .InMovie)
+                NGDMManifest.sharedInstance.outOfMovieExperience?.appearance = NGDMAppearance(type: .OutOfMovie)
+                
+                if TheTakeAPIUtil.sharedInstance.apiKey != nil, let mediaId = NGDMManifest.sharedInstance.mainExperience?.customIdentifier(Namespaces.TheTake) {
                     TheTakeAPIUtil.sharedInstance.mediaId = mediaId
                     TheTakeAPIUtil.sharedInstance.prefetchProductFrames(start: 0)
                     TheTakeAPIUtil.sharedInstance.prefetchProductCategories()
                 }
                 
                 if var talentAPIUtil = NGDMConfiguration.talentAPIUtil {
-                    talentAPIUtil.apiId = CurrentManifest.mainExperience.customIdentifier(Namespaces.Baseline)
+                    talentAPIUtil.apiId = NGDMManifest.sharedInstance.mainExperience?.customIdentifier(Namespaces.Baseline)
                 }
                 
-                CurrentManifest.mainExperience.loadTalent()
+                NGDMManifest.sharedInstance.mainExperience?.loadTalent()
             } catch NGDMError.MainExperienceMissing {
                 print("Error loading Manifest file: no main Experience found")
                 abort()
@@ -111,7 +109,7 @@ class NextGenDataLoader {
         // Load current AppData file
         if let appDataXMLPath = NSBundle.mainBundle().pathForResource(titleData["appdata"], ofType: "xml") {
             do {
-                CurrentManifest.allAppData = try NGDMManifest.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
+                NGDMManifest.sharedInstance.appData = try NGDMManifest.sharedInstance.loadAppDataXMLFile(appDataXMLPath)
             } catch {
                 print("Error loading AppData file")
             }

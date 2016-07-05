@@ -41,11 +41,11 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let backgroundImageURL = CurrentManifest.inMovieExperience.appearance?.backgroundImageURL {
+        if let backgroundImageURL = NGDMManifest.sharedInstance.inMovieExperience?.appearance?.backgroundImageURL {
             backgroundImageView.setImageWithURL(backgroundImageURL)
         }
         
-        if let actors = CurrentManifest.mainExperience.orderedActors where actors.count > 0 {
+        if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors where actors.count > 0 {
             talentTableView?.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         } else {
             talentTableView?.removeFromSuperview()
@@ -170,7 +170,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         showLessContainer.hidden = !isShowingMore
         
         if isShowingMore {
-            currentTalents = CurrentManifest.mainExperience.orderedActors ?? [Talent]()
+            currentTalents = NGDMManifest.sharedInstance.mainExperience?.orderedActors ?? [Talent]()
         } else if let talents = hiddenTalents {
             currentTalents = talents
         }

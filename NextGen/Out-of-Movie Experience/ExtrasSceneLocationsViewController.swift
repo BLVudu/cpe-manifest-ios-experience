@@ -8,6 +8,29 @@ import NextGenDataManager
 
 class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    private struct SceneLocation {
+        var title: String!
+        var childSceneLocations = [ChildSceneLocation]()
+        
+        init(title: String) {
+            self.title = title
+        }
+    }
+    
+    private struct ChildSceneLocation {
+        var subtitle: String!
+        var childAppData = [NGDMAppData]()
+        var mapMarker: MultiMapMarker?
+        
+        init(subtitle: String) {
+            self.subtitle = subtitle
+        }
+        
+        mutating func addAppData(appData: NGDMAppData) {
+            childAppData.append(appData)
+        }
+    }
+    
     @IBOutlet weak var mapView: MultiMapView!
     @IBOutlet weak var collectionViewTitleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -22,45 +45,41 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     private var _galleryDidToggleFullScreenObserver: NSObjectProtocol?
     
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
-    private var locationExperienceMapping = [String: NGDMExperience]() // ExperienceID: Parent Experience
-    private var selectedExperience: NGDMExperience? {
+    private var sceneLocations = [SceneLocation]()
+    private var selectedSceneLocation: SceneLocation? {
         didSet {
-            if let experience = selectedExperience {
-                if let appDataExperience = experience.childExperiences?.first, appData = appDataExperience.appData, location = appData.location {
-                    mapView.selectedMarker = markers[appDataExperience.id]
-                    mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
-                } else {
-                    var selectedMarkers = [MultiMapMarker]()
-                    if experience == self.experience {
-                        selectedMarkers = Array(markers.values)
-                    } else if let childExperiences = experience.childExperiences {
-                        for childExperience in childExperiences {
-                            if let childChildExperiences = childExperience.childExperiences {
-                                for childChildExperience in childChildExperiences {
-                                    if let marker = markers[childChildExperience.id] {
-                                        selectedMarkers.append(marker)
-                                    }
-                                }
-                            }
-                        }
+            if let selectedSceneLocation = selectedSceneLocation {
+                var markers = [MultiMapMarker]()
+                var zoomLevel: Float = 21
+                for childSceneLocation in selectedSceneLocation.childSceneLocations {
+                    if let marker = childSceneLocation.mapMarker {
+                        markers.append(marker)
                     }
                     
-                    if let childExperiences = experience.childExperiences where childExperiences.count > 1 && selectedMarkers.count > 1 {
-                        mapView.selectedMarker = nil
-                        mapView.zoomToFitMarkers(selectedMarkers)
-                    } else if let appDataExperience = experience.childExperiences?.first?.childExperiences?.first, appData = appDataExperience.appData, location = appData.location {
-                        mapView.selectedMarker = markers[appDataExperience.id]
-                        mapView.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel, animated: true)
+                    if let appData = childSceneLocation.childAppData.first where appData.zoomLevel < zoomLevel {
+                        zoomLevel = appData.zoomLevel
                     }
-                    
-                    menuSections.first?.title = experience == self.experience ? String.localize("locations.full_map") : experience.title
-                    self.menuTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                 }
                 
-                collectionViewTitleLabel.text = experience.title.uppercaseString
+                if markers.count > 1 {
+                    mapView.zoomToFitMarkers(markers)
+                } else if let marker = markers.first {
+                    mapView.setLocation(marker.location, zoomLevel: zoomLevel, animated: true)
+                    mapView.selectedMarker = marker
+                }
             }
-            
-            collectionView.reloadData()
+        }
+    }
+    
+    private var selectedChildSceneLocation: ChildSceneLocation? {
+        didSet {
+            if let marker = selectedChildSceneLocation?.mapMarker {
+                mapView.selectedMarker = marker
+                
+                if let appData = selectedChildSceneLocation?.childAppData.first {
+                    mapView.setLocation(marker.location, zoomLevel: appData.zoomLevel, animated: true)
+                }
+            }
         }
     }
     
@@ -95,28 +114,34 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
             }
         })
         
+        if let experiences = experience.childExperiences {
+            for experience in experiences {
+                if let appData = experience.appData, title = appData.title, subtitle = appData.subtitle {
+                    // Set up data structures to power the full view
+                    addAppDataToChildSceneLocation(appData, title: title, subtitle: subtitle)
+                }
+            }
+        }
+        
+        // Set up menu
         let info = NSMutableDictionary()
         info[MenuSection.Keys.Title] = String.localize("locations.full_map")
         
         var rows = [[String: String]]()
-        rows.append([MenuItem.Keys.Title: String.localize("locations.full_map"), MenuItem.Keys.Value: experience.id])
-        
-        if let categoryExperiences = experience.childExperiences {
-            for categoryExperience in categoryExperiences {
-                rows.append([MenuItem.Keys.Title: categoryExperience.title, MenuItem.Keys.Value: categoryExperience.id])
-                
-                if let subcategoryExperiences = categoryExperience.childExperiences {
-                    for subcategoryExperience in subcategoryExperiences {
-                        if let locationExperiences = subcategoryExperience.childExperiences {
-                            for locationExperience in locationExperiences {
-                                if let location = locationExperience.appData?.location {
-                                    let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-                                    markers[locationExperience.id] = mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: false)
-                                    locationExperienceMapping[locationExperience.id] = subcategoryExperience
-                                }
-                            }
-                        }
-                    }
+        for i in 0 ..< sceneLocations.count {
+            rows.append([MenuItem.Keys.Title: sceneLocations[i].title, MenuItem.Keys.Value: String(i)])
+            
+            // Set up map markers
+            for j in 0 ..< sceneLocations[i].childSceneLocations.count {
+                if let location = sceneLocations[i].childSceneLocations[j].childAppData.first?.location {
+                    let marker = mapView.addMarker(CLLocationCoordinate2DMake(location.latitude, location.longitude),
+                                                   title: location.name,
+                                                   subtitle: location.address,
+                                                   icon: UIImage(named: "MOSMapPin"),
+                                                   autoSelect: false)
+                    
+                    marker.dataObject = ["sceneLocationIndex": i, "childSceneLocationIndex": j]
+                    sceneLocations[i].childSceneLocations[j].mapMarker = marker
                 }
             }
         }
@@ -124,9 +149,30 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         info[MenuSection.Keys.Rows] = rows
         menuSections.append(MenuSection(info: info))
         
-        selectedExperience = experience
         mapView.zoomToFitAllMarkers()
         mapView.delegate = self
+    }
+    
+    private func addAppDataToChildSceneLocation(appData: NGDMAppData, title: String, subtitle: String) {
+        for i in 0 ..< sceneLocations.count {
+            if sceneLocations[i].title == title {
+                for j in 0 ..< sceneLocations[i].childSceneLocations.count {
+                    if sceneLocations[i].childSceneLocations[j].subtitle == subtitle {
+                        sceneLocations[i].childSceneLocations[j].addAppData(appData)
+                        return
+                    }
+                }
+                
+                var childSceneLocation = ChildSceneLocation(subtitle: subtitle)
+                childSceneLocation.addAppData(appData)
+                sceneLocations[i].childSceneLocations.append(childSceneLocation)
+                return
+            }
+        }
+        
+        let sceneLocation = SceneLocation(title: title)
+        sceneLocations.append(sceneLocation)
+        addAppDataToChildSceneLocation(appData, title: title, subtitle: subtitle)
     }
     
     func playVideo(videoURL: NSURL) {
@@ -178,8 +224,11 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     
     // MARK: MultiMapViewDelegate
     func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
-        if let experienceId = markers.filter({ $0.1 == marker }).map({ $0.0 }).first, experience = locationExperienceMapping[experienceId] where experience != selectedExperience {
-            selectedExperience = experience
+        if let dataDictionary = marker.dataObject as? [String: Int], sceneLocationIndex = dataDictionary["sceneLocationIndex"], childSceneLocationIndex = dataDictionary["childSceneLocationIndex"] {
+            if sceneLocations.count > sceneLocationIndex && sceneLocations[sceneLocationIndex].childSceneLocations.count > childSceneLocationIndex {
+                selectedChildSceneLocation = sceneLocations[sceneLocationIndex].childSceneLocations[childSceneLocationIndex]
+                collectionView.reloadData()
+            }
         }
     }
    
@@ -200,41 +249,70 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(menuTableView, didSelectRowAtIndexPath: indexPath)
         
-        if let experienceId = (tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell)?.menuItem?.value, experience = NGDMExperience.getById(experienceId) {
-            selectedExperience = experience
+        if indexPath.row > 0 && sceneLocations.count > indexPath.row - 1 {
+            selectedChildSceneLocation = nil
+            selectedSceneLocation = sceneLocations[indexPath.row - 1]
+            collectionView.reloadData()
         }
     }
     
     //MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedExperience?.childExperiences?.count ?? 0
+        if let selectedChildSceneLocation = selectedChildSceneLocation {
+            return selectedChildSceneLocation.childAppData.count
+        }
+        
+        if let selectedSceneLocation = selectedSceneLocation {
+            return selectedSceneLocation.childSceneLocations.count
+        }
+        
+        return sceneLocations.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MapItemCell.ReuseIdentifier, forIndexPath: indexPath) as! MapItemCell
         cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
-        cell.experience = selectedExperience?.childExperiences?[indexPath.row]
+        
+        if let appData = selectedChildSceneLocation?.childAppData[indexPath.row] {
+            cell.playButtonVisible = appData.audioVisual != nil
+            cell.imageURL = appData.videoThumbnailImageURL
+            cell.title = appData.displayText
+            cell.subtitle = nil
+        } else if let appData = selectedSceneLocation?.childSceneLocations[indexPath.row].childAppData.first {
+            cell.playButtonVisible = false
+            cell.imageURL = appData.locationImageURL
+            cell.title = appData.location?.name
+            cell.subtitle = nil
+        } else if let appData = sceneLocations[indexPath.row].childSceneLocations.first?.childAppData.first {
+            cell.playButtonVisible = false
+            cell.imageURL = appData.locationImageURL
+            cell.title = appData.title
+            cell.subtitle = String.localizePlural("locations.count.one", pluralKey: "locations.count.other", count: sceneLocations[indexPath.row].childSceneLocations.count)
+        }
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let experience = (collectionView.cellForItemAtIndexPath(indexPath) as? MapItemCell)?.experience {
-            if let appData = experience.appData {
-                if let videoURL = appData.presentation?.videoURL {
-                    playVideo(videoURL)
-                } else if let gallery = appData.gallery {
-                    showGallery(gallery)
-                }
-            } else {
-                selectedExperience = experience
+        if let appData = selectedChildSceneLocation?.childAppData[indexPath.row] {
+            if let videoURL = appData.presentation?.videoURL {
+                playVideo(videoURL)
+            } else if let gallery = appData.gallery {
+                showGallery(gallery)
             }
+        } else if let selectedChildSceneLocation = selectedSceneLocation?.childSceneLocations[indexPath.row] {
+            self.selectedChildSceneLocation = selectedChildSceneLocation
+            collectionView.reloadData()
+        } else {
+            selectedSceneLocation = sceneLocations[indexPath.row]
+            collectionView.reloadData()
         }
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
     }
+    
 }
 
     

@@ -12,6 +12,7 @@ protocol MultiMapViewDelegate {
 }
 
 class MultiMapMarker: NSObject {
+    var dataObject: AnyObject?
     var appleMapAnnotation: MKAnnotation?
     var googleMapMarker: GMSMarker?
     var location: CLLocationCoordinate2D!
@@ -221,9 +222,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     }
     
     // MARK: GMSMapViewDelegate
-    /*
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
-     
         if let delegate = delegate {
             var selectedMarker: MultiMapMarker?
             for mapMarker in mapMarkers {
@@ -240,48 +239,5 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         
         return true
     }
-    */
-    func mapView(mapView: GMSMapView, didTapInfoWindowOfMarker marker: GMSMarker) {
-        
-        if let delegate = delegate {
-            var selectedMarker: MultiMapMarker?
-            for mapMarker in mapMarkers {
-                if mapMarker.googleMapMarker == marker {
-                    selectedMarker = mapMarker
-                    break
-                }
-            }
-            
-            if let marker = selectedMarker {
-                delegate.mapView(self, didTapMarker: marker)
-            }
-        }
-
-    }
-    
-    /*func mapView(mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        let customView = UIView(frame: CGRectMake(0, 0, 230, 80))
-        customView.backgroundColor = UIColor.whiteColor()
-        
-        let titleLabel = UILabel(frame: CGRectMake(10, 5, 200, 30))
-        titleLabel.text = marker.title
-        titleLabel.font = UIFont.themeFont(17)
-        
-        let addressLabel = UILabel(frame: CGRectMake(10, 30, 200, 50))
-        addressLabel.text = marker.snippet
-        addressLabel.font = UIFont.themeCondensedFont(15)
-        addressLabel.numberOfLines = 3
-        
-        customView.addSubview(addressLabel)
-        customView.addSubview(titleLabel)
-        customView.layer.cornerRadius = 5
-        customView.layer.masksToBounds = true
-        customView.layer.shadowColor = UIColor.blackColor().CGColor
-        customView.layer.shadowRadius = 10
-        customView.layer.shadowOpacity = 1
-        customView.layer.shadowOffset = CGSizeMake(0, 0)
- 
-        return customView
-    }*/
     
 }
