@@ -52,7 +52,6 @@
 		70C0933F1D0F60DF00BFC1E4 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70C092DC1D0F60DF00BFC1E4 /* RobotoCondensed-Bold.ttf */; };
 		70C093401D0F60DF00BFC1E4 /* RobotoCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70C092DD1D0F60DF00BFC1E4 /* RobotoCondensed-Italic.ttf */; };
 		70C093411D0F60DF00BFC1E4 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70C092DE1D0F60DF00BFC1E4 /* RobotoCondensed-Regular.ttf */; };
-		70C093421D0F60DF00BFC1E4 /* mos-nextgen-background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70C092E01D0F60DF00BFC1E4 /* mos-nextgen-background.mp4 */; };
 		70C093431D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70C092E11D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov */; };
 		70C093441D0F60DF00BFC1E4 /* LandscapeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */; };
 		70C093451D0F60DF00BFC1E4 /* MenuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */; };
@@ -167,7 +166,6 @@
 		70C092DC1D0F60DF00BFC1E4 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
 		70C092DD1D0F60DF00BFC1E4 /* RobotoCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Italic.ttf"; sourceTree = "<group>"; };
 		70C092DE1D0F60DF00BFC1E4 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
-		70C092E01D0F60DF00BFC1E4 /* mos-nextgen-background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mos-nextgen-background.mp4"; sourceTree = "<group>"; };
 		70C092E11D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
 		70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeNavigationController.swift; sourceTree = "<group>"; };
 		70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuedViewController.swift; sourceTree = "<group>"; };
@@ -400,7 +398,6 @@
 		70C092DF1D0F60DF00BFC1E4 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				70C092E01D0F60DF00BFC1E4 /* mos-nextgen-background.mp4 */,
 				70C092E11D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov */,
 			);
 			path = Videos;
@@ -602,7 +599,6 @@
 				70C093681D0F60DF00BFC1E4 /* EnhancedTitlesCollectionViewCell.xib in Resources */,
 				70C0933D1D0F60DF00BFC1E4 /* Assets.xcassets in Resources */,
 				70C9EA601D08A18C002299B3 /* Assets.xcassets in Resources */,
-				70C093421D0F60DF00BFC1E4 /* mos-nextgen-background.mp4 in Resources */,
 				70C093721D0F60DF00BFC1E4 /* VideoCell.xib in Resources */,
 				70C093671D0F60DF00BFC1E4 /* CommentaryView.xib in Resources */,
 				70C093411D0F60DF00BFC1E4 /* RobotoCondensed-Regular.ttf in Resources */,
