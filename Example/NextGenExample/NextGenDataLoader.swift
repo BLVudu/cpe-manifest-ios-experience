@@ -16,8 +16,8 @@ class NextGenDataLoader {
     ], [
         "title": "Batman v Superman",
         "image": "BvS-Onesheet",
-        "manifest": "Data/Manifests/bvs_manifest_r60-v1.0",
-        "appdata": "Data/Manifests/bvs_appdata_locations_r60-v1.0"
+        "manifest": "Data/Manifests/bvs_manifest_r60-v1.1",
+        "appdata": "Data/Manifests/bvs_appdata_locations_r60-v1.1"
     ], [
         "title": "Sisters",
         "image": "Sisters-Onesheet",
