@@ -7,10 +7,10 @@ import QuartzCore
 
 class MenuItemCell: UITableViewCell {
     
-    static let NibName = "MenuItemCell"
     static let ReuseIdentifier = "MenuItemCellReuseIdentifier"
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var titleLabelLargePaddingConstraint: NSLayoutConstraint!
     
     var menuItem: MenuItem? {
         didSet {
@@ -22,6 +22,7 @@ class MenuItemCell: UITableViewCell {
         super.prepareForReuse()
         
         menuItem = nil
+        titleLabelLargePaddingConstraint.active = true
     }
     
     override func layoutSubviews() {

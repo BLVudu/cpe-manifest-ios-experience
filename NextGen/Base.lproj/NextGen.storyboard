@@ -819,12 +819,12 @@
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="33" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gpg-6z-RVF">
-                                <rect key="frame" x="40" y="108" width="300" height="40"/>
+                                <rect key="frame" x="736" y="108" width="250" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="6fi-iC-Fjd"/>
                                     <constraint firstAttribute="height" constant="40" id="D0n-Z8-t9e"/>
-                                    <constraint firstAttribute="width" constant="300" id="rOd-Mb-PeV"/>
+                                    <constraint firstAttribute="width" constant="250" id="rOd-Mb-PeV"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -911,12 +911,12 @@
                             <constraint firstAttribute="trailing" secondItem="X5M-AR-HWB" secondAttribute="trailing" constant="22" id="T4d-Ly-BQA"/>
                             <constraint firstItem="a4b-Ll-eRF" firstAttribute="leading" secondItem="Mbu-ng-H5p" secondAttribute="leading" id="X9E-oB-Qeh"/>
                             <constraint firstAttribute="trailing" secondItem="Mbu-ng-H5p" secondAttribute="trailing" constant="22" id="b8h-RB-D6y"/>
-                            <constraint firstItem="Gpg-6z-RVF" firstAttribute="leading" secondItem="Mbu-ng-H5p" secondAttribute="leading" constant="18" id="c2m-b0-aN4"/>
                             <constraint firstAttribute="trailing" secondItem="e1H-fl-pll" secondAttribute="trailing" constant="22" id="eLn-7R-epN"/>
                             <constraint firstItem="X5M-AR-HWB" firstAttribute="leading" secondItem="6WQ-Jr-AOQ" secondAttribute="leading" constant="22" id="fdf-ky-X2c"/>
                             <constraint firstItem="e1H-fl-pll" firstAttribute="leading" secondItem="6WQ-Jr-AOQ" secondAttribute="leading" constant="22" id="kjm-fn-5T8"/>
                             <constraint firstItem="Mbu-ng-H5p" firstAttribute="top" secondItem="OUa-wa-S5m" secondAttribute="bottom" constant="90" id="lHt-hx-Sjn"/>
                             <constraint firstItem="e1H-fl-pll" firstAttribute="top" secondItem="X5M-AR-HWB" secondAttribute="bottom" id="nPD-4Q-SJn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gpg-6z-RVF" secondAttribute="trailing" constant="18" id="o72-5r-5TV"/>
                             <constraint firstItem="Gpg-6z-RVF" firstAttribute="top" secondItem="Mbu-ng-H5p" secondAttribute="top" constant="18" id="oHK-4t-etc"/>
                             <constraint firstItem="Jyt-nG-irv" firstAttribute="top" secondItem="e1H-fl-pll" secondAttribute="bottom" constant="10" id="ojj-7k-GYT"/>
                         </constraints>

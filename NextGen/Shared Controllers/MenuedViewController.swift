@@ -10,14 +10,13 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
     var menuSections = [MenuSection]()
     var selectedSection: MenuSection?
     var selectedItem: MenuItem?
-    var showsSelectedMenuItem = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         menuTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        menuTableView.registerNib(UINib(nibName: MenuSectionCell.NibName, bundle: nil), forCellReuseIdentifier: MenuSectionCell.ReuseIdentifier)
-        menuTableView.registerNib(UINib(nibName: MenuItemCell.NibName, bundle: nil), forCellReuseIdentifier: MenuItemCell.ReuseIdentifier)
+        menuTableView.registerNib(UINib(nibName: String(MenuSectionCell), bundle: nil), forCellReuseIdentifier: MenuSectionCell.ReuseIdentifier)
+        menuTableView.registerNib(UINib(nibName: String(MenuItemCell), bundle: nil), forCellReuseIdentifier: MenuItemCell.ReuseIdentifier)
     }
     
     // MARK: UITableViewDataSource
@@ -35,12 +34,6 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(MenuSectionCell.ReuseIdentifier) as! MenuSectionCell
             cell.menuSection = menuSection
-            if showsSelectedMenuItem {
-                cell.selectedItem = selectedItem
-            } else {
-                cell.secondaryLabel?.removeFromSuperview()
-            }
-            
             cell.selected = selectedSection != nil && selectedSection == cell.menuSection
             
             return cell

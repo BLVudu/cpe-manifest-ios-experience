@@ -42,7 +42,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak var closeButton: UIButton!
-    private var _galleryDidToggleFullScreenObserver: NSObjectProtocol?
+    private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
     
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
     private var sceneLocations = [SceneLocation]()
@@ -84,7 +84,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     }
     
     deinit {
-        if let observer = _galleryDidToggleFullScreenObserver {
+        if let observer = galleryDidToggleFullScreenObserver {
             NSNotificationCenter.defaultCenter().removeObserver(observer)
         }
     }
@@ -108,7 +108,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
         closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
         
-        _galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, isFullScreen = notification.userInfo?["isFullScreen"] as? Bool {
                 strongSelf.closeButton.hidden = isFullScreen
             }
@@ -315,7 +315,19 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
     }
     
-}
-
+    // MARK: UITableViewDataSource
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        if let menuItemCell = cell as? MenuItemCell {
+            menuItemCell.titleLabelLargePaddingConstraint.active = true
+        }
+        
+        return cell
+    }
     
-     
+    // MARK: UITableViewDelegate
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 40.0
+    }
+    
+}

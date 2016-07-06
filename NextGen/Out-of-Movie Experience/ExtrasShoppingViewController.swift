@@ -14,8 +14,6 @@ class ExtrasShoppingViewController: MenuedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showsSelectedMenuItem = false
-        
         for category in TheTakeAPIUtil.sharedInstance.productCategories {
             let info = NSMutableDictionary()
             info[MenuSection.Keys.Title] = category.name

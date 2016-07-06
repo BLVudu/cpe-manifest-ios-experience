@@ -92,10 +92,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             mapTypeSegmentedControl.selectedSegmentIndex = 0
             mapTypeSegmentedControl.layer.cornerRadius = 5
             mapTypeSegmentedControl.addTarget(self, action: #selector(self.onMapTypeChanged), forControlEvents: UIControlEvents.ValueChanged)
-            var segmentedControlFrame = mapTypeSegmentedControl.frame
-            segmentedControlFrame.origin.y = Constants.SegmentedControlPadding
-            segmentedControlFrame.size.width = Constants.SegmentedControlWidth
-            mapTypeSegmentedControl.frame = segmentedControlFrame
+            mapTypeSegmentedControl.frame = CGRectMake(Constants.SegmentedControlPadding, Constants.SegmentedControlPadding, Constants.SegmentedControlWidth, CGRectGetHeight(mapTypeSegmentedControl.frame))
             self.addSubview(mapTypeSegmentedControl)
         }
     }
@@ -104,9 +101,6 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         super.layoutSubviews()
         
         if let mapTypeSegmentedControl = mapTypeSegmentedControl {
-            var segmentedControlFrame = mapTypeSegmentedControl.frame
-            segmentedControlFrame.origin.x = CGRectGetWidth(self.bounds) - Constants.SegmentedControlWidth - Constants.SegmentedControlPadding
-            mapTypeSegmentedControl.frame = segmentedControlFrame
             self.bringSubviewToFront(mapTypeSegmentedControl)
         }
     }
@@ -180,7 +174,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
                 }
             }
             
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withEdgeInsets: UIEdgeInsetsMake(50, 50, 50, 250)))
         }
     }
     
