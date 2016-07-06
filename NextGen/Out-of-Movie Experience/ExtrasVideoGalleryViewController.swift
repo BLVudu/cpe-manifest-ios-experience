@@ -19,13 +19,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak private var previewPlayButton: UIButton?
     @IBOutlet weak private var mediaTitleLabel: UILabel!
     @IBOutlet weak private var mediaDescriptionLabel: UILabel!
-    @IBOutlet weak private var mediaRuntimeLabel: UILabel!
     private var videoPlayerViewController: VideoPlayerViewController?
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryPageControl: UIPageControl!
     @IBOutlet weak private var turntableSlider: UISlider!
     private var galleryDidScrollToPageObserver: NSObjectProtocol?
+    
+    @IBOutlet weak private var shareButton: UIButton!
     
     private var didPlayFirstItem = false
     private var previewPlayURL: NSURL?
@@ -117,13 +118,13 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             mediaDescriptionLabel.text = thisExperience.metadata?.description
             
             // Reset media detail views
+            shareButton.hidden = true
             galleryPageControl.hidden = true
             turntableSlider.hidden = true
             galleryScrollView.hidden = true
             videoContainerView.hidden = false
             previewImageView?.hidden = didPlayFirstItem
             previewPlayButton?.hidden = didPlayFirstItem
-            mediaRuntimeLabel.text = nil
             
             // Set new media detail views
             if let gallery = thisExperience.gallery {
@@ -139,6 +140,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     turntableSlider.maximumValue = Float(numberOfPages - 1)
                     turntableSlider.value = 0
                 } else {
+                    shareButton.hidden = false
+                    shareButton.setTitle(String.localize("gallery.share_button").uppercaseString, forState: .Normal)
                     galleryPageControl.hidden = false
                     galleryPageControl.numberOfPages = numberOfPages
                 }
@@ -147,53 +150,44 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 if gallery.isSubType(.Turntable) {
                     galleryScrollView.preloadImages()
                 }
-            } else if thisExperience.isType(.AudioVisual) {
-                let runtime = thisExperience.videoRuntime
-                if runtime > 0 {
-                    mediaRuntimeLabel.text = String.localize("label.runtime", variables: ["runtime": runtime.timeString()])
+            } else if thisExperience.isType(.AudioVisual), let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                if let player = videoPlayerViewController.player {
+                    player.removeAllItems()
                 }
-            
-                if let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
-                    if let player = videoPlayerViewController.player {
-                        player.removeAllItems()
-                    }
-                    
-                    videoPlayerViewController.mode = VideoPlayerMode.Supplemental
-                    videoPlayerViewController.curIndex = indexPath.row
-                    videoPlayerViewController.indexMax = experience.childExperiences?.count ?? 0
-                    
-                    videoPlayerViewController.view.frame = videoContainerView.bounds
-                    videoContainerView.addSubview(videoPlayerViewController.view)
-                    self.addChildViewController(videoPlayerViewController)
-                    videoPlayerViewController.didMoveToParentViewController(self)
-                    self.videoPlayerViewController = videoPlayerViewController
-                    
-                    if !didPlayFirstItem {
-                        previewPlayURL = videoURL
-                    
-                        if indexPath.row == 0 {
-                            if let imageURL = thisExperience.imageURL {
-                                previewImageView?.setImageWithURL(imageURL)
-                            }
-                        } else {
-                            playFirstItem(nil)
+                
+                videoPlayerViewController.mode = VideoPlayerMode.Supplemental
+                videoPlayerViewController.curIndex = indexPath.row
+                videoPlayerViewController.indexMax = experience.childExperiences?.count ?? 0
+                
+                videoPlayerViewController.view.frame = videoContainerView.bounds
+                videoContainerView.addSubview(videoPlayerViewController.view)
+                self.addChildViewController(videoPlayerViewController)
+                videoPlayerViewController.didMoveToParentViewController(self)
+                self.videoPlayerViewController = videoPlayerViewController
+                
+                if !didPlayFirstItem {
+                    previewPlayURL = videoURL
+                
+                    if indexPath.row == 0 {
+                        if let imageURL = thisExperience.imageURL {
+                            previewImageView?.setImageWithURL(imageURL)
                         }
                     } else {
-                        if userDidSelectNextItem {
-                            videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
-                        }
-                            
-                        videoPlayerViewController.playVideoWithURL(videoURL)
-                        userDidSelectNextItem = true
+                        playFirstItem()
                     }
+                } else {
+                    if userDidSelectNextItem {
+                        videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
+                    }
+                        
+                    videoPlayerViewController.playVideoWithURL(videoURL)
+                    userDidSelectNextItem = true
                 }
             }
         }
     }
     
-    
-    // MARK: Actions
-    @IBAction func playFirstItem(sender: UIButton?) {
+    func playFirstItem() {
         didPlayFirstItem = true
         
         previewImageView?.removeFromSuperview()
@@ -203,6 +197,24 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         
         if let videoURL = previewPlayURL {
             videoPlayerViewController?.playVideoWithURL(videoURL)
+        }
+    }
+    
+    
+    // MARK: Actions
+    @IBAction func onPlay() {
+        playFirstItem()
+    }
+    
+    @IBAction func onShare(sender: UIButton?) {
+        if !galleryScrollView.hidden {
+            if let url = galleryScrollView.currentImageURL {
+                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": "Man of Steel", "url": url.absoluteString])], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = sender
+                self.presentViewController(activityViewController, animated: true, completion: nil)
+            }
+        } else {
+            
         }
     }
     

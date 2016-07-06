@@ -35,14 +35,18 @@
 
 // Clip & Share
 "clipshare.description" = "Share this clip with friends!";
-"clipshare.message" = "Check out this clip from %{movie_name}: %{clip_link}";
-"clipshare.send_button" = "Share this Clip";
+"clipshare.share_message" = "Check out this clip from %{movie_name}: %{url}";
+"clipshare.share_button" = "Share this Clip";
 
 // Locations
 "locations.map" = "Map";
 "locations.full_map" = "Location: Full Map";
 "locations.count.one" = "%{count} location";
 "locations.count.other" = "%{count} locations";
+
+// Galleries
+"gallery.share_message" = "Check out this image from %{movie_name}: %{url}";
+"gallery.share_button" = "Share this Image";
 
 // Shopping
 "shopping.exact_match" = "Exact match";

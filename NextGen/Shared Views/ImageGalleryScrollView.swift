@@ -50,6 +50,22 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    var currentImageURL: NSURL? {
+        set {
+            
+        }
+        
+        get {
+            if let pictures = gallery?.pictures {
+                return pictures[currentPage].imageURL
+            } else if let imageURLs = imageURLs {
+                return imageURLs[currentPage]
+            }
+            
+            return nil
+        }
+    }
+    
     
     // MARK: Initialization
     override init(frame: CGRect) {

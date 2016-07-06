@@ -29,7 +29,7 @@ class SharingViewController: SceneDetailViewController {
         _clips = []
         self.view.translatesAutoresizingMaskIntoConstraints = true
         // Localizations
-        shareButton.setTitle(String.localize("clipshare.send_button").uppercaseString, forState: UIControlState.Normal)
+        shareButton.setTitle(String.localize("clipshare.share_button").uppercaseString, forState: UIControlState.Normal)
         
         clipNameLabel.text = timedEvent?.descriptionText
         
@@ -83,7 +83,7 @@ class SharingViewController: SceneDetailViewController {
     
     @IBAction func shareClip(sender: AnyObject) {
         if let url = _shareableURL {
-            let activityViewController = UIActivityViewController(activityItems: [String.localize("clipshare.message", variables: ["movie_name": "Man of Steel", "clip_link": url.absoluteString])], applicationActivities: nil)
+            let activityViewController = UIActivityViewController(activityItems: [String.localize("clipshare.share_message", variables: ["movie_name": "Man of Steel", "url": url.absoluteString])], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender as? UIView
             self.presentViewController(activityViewController, animated: true, completion: nil)
         }
