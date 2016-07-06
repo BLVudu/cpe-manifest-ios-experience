@@ -7,24 +7,45 @@ import NextGenDataManager
 
 class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewDelegate {
     
-    @IBOutlet weak var galleryScrollView: UIScrollView!
-    @IBOutlet weak var videoContainerView: UIView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak private var videoContainerView: UIView?
+    @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView?
+    @IBOutlet weak private var descriptionLabel: UILabel!
+    @IBOutlet weak private var pageControl: UIPageControl?
+    @IBOutlet weak private var shareButton: UIButton?
     
-    var gallery: NGDMGallery?
-    private var _scrollViewPageWidth: CGFloat = 0
+    private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK: Initialization
+    deinit {
+        if let observer = galleryDidScrollToPageObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            galleryDidScrollToPageObserver = nil
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        galleryScrollView?.cleanInvisibleImages()
+    }
+    
+    // MARK: View Lifecycle
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         if let timedEvent = timedEvent {
             if timedEvent.isType(.AudioVisual) {
-                galleryScrollView.removeFromSuperview()
+                galleryScrollView?.removeFromSuperview()
+                pageControl?.removeFromSuperview()
+                shareButton?.removeFromSuperview()
+                galleryScrollView = nil
+                pageControl = nil
+                shareButton = nil
+                
                 if let audioVisual = timedEvent.audioVisual, videoURL = audioVisual.videoURL {
                     descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
                     
-                    if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                    if let videoContainerView = videoContainerView, videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                         videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
                         
                         videoPlayerViewController.view.frame = videoContainerView.bounds
@@ -35,55 +56,39 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
                         videoPlayerViewController.playVideoWithURL(videoURL)
                     }
                 }
-            } else {
-                videoContainerView.removeFromSuperview()
-                gallery = timedEvent.gallery
-                descriptionLabel.text = gallery?.description
-            }
-        }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if let gallery = gallery, pictures = gallery.pictures {
-            let numPictures = pictures.count
-            pageControl.numberOfPages = numPictures
-            
-            var imageViewX: CGFloat = 0
-            _scrollViewPageWidth = CGRectGetWidth(galleryScrollView.bounds)
-            for i in 0 ..< numPictures {
-                let imageView = UIImageView()
-                imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                imageView.frame = CGRectMake(imageViewX, 0, _scrollViewPageWidth, CGRectGetHeight(galleryScrollView.bounds))
-                imageView.clipsToBounds = true
-                imageView.tag = i + 1
-                galleryScrollView.addSubview(imageView)
-                imageViewX += _scrollViewPageWidth
-            }
-            
-            galleryScrollView.contentSize = CGSizeMake(CGRectGetWidth(galleryScrollView.bounds) * CGFloat(numPictures), CGRectGetHeight(galleryScrollView.bounds))
-        }
-        
-        loadImageForPage(0)
-    }
-    
-    func loadImageForPage(page: Int) {
-        if let gallery = gallery, imageView = galleryScrollView.viewWithTag(page + 1) as? UIImageView, pictures = gallery.pictures {
-            if imageView.image == nil {
-                if let imageURL = pictures[page].imageURL {
-                    imageView.setImageWithURL(imageURL)
+            } else if let gallery = timedEvent.gallery {
+                videoContainerView?.removeFromSuperview()
+                videoContainerView = nil
+                
+                galleryScrollView?.gallery = gallery
+                descriptionLabel.text = gallery.description
+                
+                if gallery.isSubType(.Turntable) {
+                    shareButton?.removeFromSuperview()
+                    shareButton = nil
+                } else {
+                    shareButton?.setTitle(String.localize("gallery.share_button").uppercaseString, forState: .Normal)
+                    galleryScrollView?.removeToolbar()
+                    pageControl?.numberOfPages = gallery.pictures?.count ?? 0
+                    if pageControl != nil && pageControl!.numberOfPages > 0 {
+                        galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+                            if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
+                                strongSelf.pageControl?.currentPage = page
+                            }
+                        })
+                    }
                 }
             }
-            
-            pageControl.currentPage = page
         }
     }
     
-    // MARK: UIScrollViewDelegate
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let page = Int(targetContentOffset.memory.x / _scrollViewPageWidth)
-        loadImageForPage(page)
+    // MARK: Actions
+    @IBAction func onShare(sender: UIButton?) {
+        if let galleryScrollView = galleryScrollView, url = galleryScrollView.currentImageURL {
+            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": "Man of Steel", "url": url.absoluteString])], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = sender
+            self.presentViewController(activityViewController, animated: true, completion: nil)
+        }
     }
  
 }

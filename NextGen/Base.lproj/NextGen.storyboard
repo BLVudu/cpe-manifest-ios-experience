@@ -52,6 +52,7 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1868,33 +1869,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wLr-WP-rI5">
-                                <rect key="frame" x="40" y="70" width="944" height="532"/>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLr-WP-rI5">
+                                <rect key="frame" x="40" y="70" width="944" height="531"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wLr-WP-rI5" secondAttribute="height" multiplier="16:9" id="Blt-uc-Z8n"/>
                                 </constraints>
                             </containerView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaG-qF-uaZ">
-                                <rect key="frame" x="40" y="70" width="944" height="532"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaG-qF-uaZ" customClass="ImageGalleryScrollView" customModule="NextGenExample" customModuleProvider="target">
+                                <rect key="frame" x="40" y="70" width="944" height="531"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="AaG-qF-uaZ" secondAttribute="height" multiplier="16:9" id="XgV-6d-YRp"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="v1c-4O-jsc" id="cUw-ku-KYX"/>
-                                </connections>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis libero ut augue ornare aliquet. Donec eu enim nulla. " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ju6-0D-gz2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis libero ut augue ornare aliquet. Donec eu enim nulla. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ju6-0D-gz2">
                                 <rect key="frame" x="40" y="611" width="944" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="547-yv-fWM"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="547-yv-fWM"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="xOr-pe-CTy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="NSs-ZD-yML">
-                                <rect key="frame" x="509" y="711" width="7" height="37"/>
+                                <rect key="frame" x="509" y="651" width="7" height="37"/>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ag1-z8-REb">
+                                <rect key="frame" x="824" y="647" width="160" height="45"/>
+                                <color key="backgroundColor" red="0.72941176470000002" green="0.058823529409999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="5Cr-4B-CVS"/>
+                                    <constraint firstAttribute="height" constant="45" id="ALH-2e-the"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="15"/>
+                                <state key="normal" title="SHARE THIS CLIP">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onShare:" destination="v1c-4O-jsc" eventType="touchUpInside" id="aUd-AZ-M3l"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1903,19 +1922,22 @@
                             <constraint firstAttribute="trailing" secondItem="Ju6-0D-gz2" secondAttribute="trailing" constant="40" id="DfS-RN-G6h"/>
                             <constraint firstItem="NSs-ZD-yML" firstAttribute="centerX" secondItem="04i-SV-O6G" secondAttribute="centerX" id="HRk-mR-64k"/>
                             <constraint firstItem="Ju6-0D-gz2" firstAttribute="top" secondItem="wLr-WP-rI5" secondAttribute="bottom" constant="10" id="Lkb-Ae-21i"/>
+                            <constraint firstItem="NSs-ZD-yML" firstAttribute="top" secondItem="Ju6-0D-gz2" secondAttribute="bottom" constant="20" id="M2v-jZ-GQs"/>
                             <constraint firstItem="Ju6-0D-gz2" firstAttribute="top" secondItem="AaG-qF-uaZ" secondAttribute="bottom" priority="750" constant="10" id="VFx-7K-5kh"/>
-                            <constraint firstItem="NNg-Ub-yIx" firstAttribute="top" secondItem="NSs-ZD-yML" secondAttribute="bottom" constant="20" id="gVk-8g-MEx"/>
+                            <constraint firstItem="ag1-z8-REb" firstAttribute="trailing" secondItem="AaG-qF-uaZ" secondAttribute="trailing" id="VKp-sj-5hr"/>
                             <constraint firstItem="AaG-qF-uaZ" firstAttribute="leading" secondItem="04i-SV-O6G" secondAttribute="leading" constant="40" id="hQz-JV-UwH"/>
                             <constraint firstItem="wLr-WP-rI5" firstAttribute="top" secondItem="5eA-cJ-1XS" secondAttribute="bottom" constant="70" id="hpa-wp-eOR"/>
                             <constraint firstAttribute="trailing" secondItem="wLr-WP-rI5" secondAttribute="trailing" constant="40" id="mVl-1f-Wst"/>
                             <constraint firstItem="wLr-WP-rI5" firstAttribute="leading" secondItem="04i-SV-O6G" secondAttribute="leading" constant="40" id="ndP-jT-K7X"/>
                             <constraint firstAttribute="trailing" secondItem="AaG-qF-uaZ" secondAttribute="trailing" constant="40" id="psg-K1-Sdq"/>
+                            <constraint firstItem="ag1-z8-REb" firstAttribute="centerY" secondItem="NSs-ZD-yML" secondAttribute="centerY" id="zsg-2P-pIf"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="Ju6-0D-gz2" id="Qeo-mg-tKC"/>
                         <outlet property="galleryScrollView" destination="AaG-qF-uaZ" id="A3v-cC-T7J"/>
                         <outlet property="pageControl" destination="NSs-ZD-yML" id="8vv-jL-sim"/>
+                        <outlet property="shareButton" destination="ag1-z8-REb" id="RLt-L5-gXB"/>
                         <outlet property="videoContainerView" destination="wLr-WP-rI5" id="nsa-oI-zh8"/>
                     </connections>
                 </viewController>
