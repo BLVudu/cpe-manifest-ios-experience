@@ -34,6 +34,8 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
                 strongSelf.galleryCollectionView.selectItemAtIndexPath(NSIndexPath(forItem: page, inSection: 0), animated: false, scrollPosition: .None)
             }
         })
+        
+        galleryCollectionView.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
     }
     
     override func viewDidAppear(animated: Bool) {

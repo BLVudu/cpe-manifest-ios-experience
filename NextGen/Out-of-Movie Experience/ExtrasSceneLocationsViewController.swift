@@ -149,6 +149,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         info[MenuSection.Keys.Rows] = rows
         menuSections.append(MenuSection(info: info))
         
+        mapView.addControls()
         mapView.zoomToFitAllMarkers()
         mapView.delegate = self
     }
@@ -274,18 +275,18 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
         if let appData = selectedChildSceneLocation?.childAppData[indexPath.row] {
-            cell.playButtonVisible = appData.audioVisual != nil
-            cell.imageURL = appData.videoThumbnailImageURL
+            cell.playButtonVisible = appData.hasVideo
+            cell.imageURL = appData.getImageURL(.MediaThumbnail)
             cell.title = appData.displayText
             cell.subtitle = nil
         } else if let appData = selectedSceneLocation?.childSceneLocations[indexPath.row].childAppData.first {
             cell.playButtonVisible = false
-            cell.imageURL = appData.locationImageURL
+            cell.imageURL = appData.getImageURL(.Location)
             cell.title = appData.location?.name
             cell.subtitle = nil
         } else if let appData = sceneLocations[indexPath.row].childSceneLocations.first?.childAppData.first {
             cell.playButtonVisible = false
-            cell.imageURL = appData.locationImageURL
+            cell.imageURL = appData.getImageURL(.Location)
             cell.title = appData.title
             cell.subtitle = String.localizePlural("locations.count.one", pluralKey: "locations.count.other", count: sceneLocations[indexPath.row].childSceneLocations.count)
         }
@@ -295,7 +296,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let appData = selectedChildSceneLocation?.childAppData[indexPath.row] {
-            if let videoURL = appData.presentation?.videoURL {
+            if let videoURL = appData.videoURL {
                 playVideo(videoURL)
             } else if let gallery = appData.gallery {
                 showGallery(gallery)
@@ -309,6 +310,7 @@ class ExtrasSceneLocationsViewController: MenuedViewController, MultiMapViewDele
         }
     }
     
+    // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
     }

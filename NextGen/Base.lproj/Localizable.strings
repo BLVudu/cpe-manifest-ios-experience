@@ -39,6 +39,7 @@
 "clipshare.send_button" = "Share this Clip";
 
 // Locations
+"locations.map" = "Map";
 "locations.full_map" = "Location: Full Map";
 "locations.count.one" = "%{count} location";
 "locations.count.other" = "%{count} locations";

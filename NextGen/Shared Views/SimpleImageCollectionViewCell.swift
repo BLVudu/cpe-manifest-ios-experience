@@ -9,27 +9,43 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     static let BaseReuseIdentifier = "SimpleImageCollectionViewCellReuseIdentifier"
     
     @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var playButton: UIButton!
+    
     private var setImageSessionDataTask: NSURLSessionDataTask?
     
     var showsSelectedBorder = false
     
     var imageURL: NSURL? {
-        didSet {
-            if let url = imageURL {
+        set {
+            if let url = newValue {
                 setImageSessionDataTask = imageView.setImageWithURL(url)
             } else {
-                image = UIImage(named: "Blank Poster")
+                image = nil
             }
+        }
+        
+        get {
+            return nil
         }
     }
     
     var image: UIImage? {
+        set {
+            imageView.image = image
+        }
+        
         get {
             return imageView.image
         }
-        
+    }
+    
+    var playButtonVisible: Bool {
         set {
-            imageView.image = image
+            playButton.hidden = !newValue
+        }
+        
+        get {
+            return !playButton.hidden
         }
     }
     
@@ -51,6 +67,7 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
         self.selected = false
         
         image = nil
+        playButtonVisible = false
         
         if let task = setImageSessionDataTask {
             task.cancel()

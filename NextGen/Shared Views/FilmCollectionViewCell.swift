@@ -20,7 +20,7 @@ class FilmCollectionViewCell: SimpleImageCollectionViewCell {
                     })
                 })
             } else {
-                image = nil
+                image = UIImage(named: "Blank Poster")
             }
         }
     }

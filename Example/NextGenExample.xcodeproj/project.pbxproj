@@ -12,6 +12,9 @@
 		701695091D244772009D7E85 /* UIImageRemoteLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701695081D244772009D7E85 /* UIImageRemoteLoader.swift */; };
 		7021D3691D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */; };
 		708488DC1D0F7EC900670B45 /* NextGenDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */; };
+		70B101A01D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70B1019F1D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib */; };
+		70B101A21D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70B101A11D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib */; };
+		70B101A41D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B101A31D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift */; };
 		70C093161D0F60DF00BFC1E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70C092A91D0F60DF00BFC1E4 /* Localizable.strings */; };
 		70C093171D0F60DF00BFC1E4 /* NextGen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70C092AB1D0F60DF00BFC1E4 /* NextGen.storyboard */; };
 		70C093181D0F60DF00BFC1E4 /* Commentary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70C092AD1D0F60DF00BFC1E4 /* Commentary.plist */; };
@@ -87,7 +90,6 @@
 		70C093641D0F60DF00BFC1E4 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C093061D0F60DF00BFC1E4 /* UIImage+Utils.swift */; };
 		70C093651D0F60DF00BFC1E4 /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C093071D0F60DF00BFC1E4 /* UIImageView+Utils.swift */; };
 		70C093661D0F60DF00BFC1E4 /* UIStoryboard+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C093081D0F60DF00BFC1E4 /* UIStoryboard+Utils.swift */; };
-		70C093671D0F60DF00BFC1E4 /* CommentaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C0930A1D0F60DF00BFC1E4 /* CommentaryView.xib */; };
 		70C093681D0F60DF00BFC1E4 /* EnhancedTitlesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C0930B1D0F60DF00BFC1E4 /* EnhancedTitlesCollectionViewCell.xib */; };
 		70C093691D0F60DF00BFC1E4 /* ImageSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C0930C1D0F60DF00BFC1E4 /* ImageSceneDetailCollectionViewCell.xib */; };
 		70C0936A1D0F60DF00BFC1E4 /* MapItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C0930D1D0F60DF00BFC1E4 /* MapItemCell.xib */; };
@@ -123,6 +125,9 @@
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataLoader.swift; sourceTree = "<group>"; };
 		7084E1E41D0F18EE00B1B5B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		70B1019F1D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		70B101A11D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleMapCollectionViewCell.xib; sourceTree = "<group>"; };
+		70B101A31D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMapCollectionViewCell.swift; sourceTree = "<group>"; };
 		70C0929E1D0F2DC400BFC1E4 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		70C092A41D0F52E100BFC1E4 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Dependencies/GoogleMaps.framework; sourceTree = "<group>"; };
 		70C092AA1D0F60DF00BFC1E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -201,7 +206,6 @@
 		70C093061D0F60DF00BFC1E4 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		70C093071D0F60DF00BFC1E4 /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		70C093081D0F60DF00BFC1E4 /* UIStoryboard+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Utils.swift"; sourceTree = "<group>"; };
-		70C0930A1D0F60DF00BFC1E4 /* CommentaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryView.xib; sourceTree = "<group>"; };
 		70C0930B1D0F60DF00BFC1E4 /* EnhancedTitlesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnhancedTitlesCollectionViewCell.xib; sourceTree = "<group>"; };
 		70C0930C1D0F60DF00BFC1E4 /* ImageSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		70C0930D1D0F60DF00BFC1E4 /* MapItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapItemCell.xib; sourceTree = "<group>"; };
@@ -429,6 +433,7 @@
 				70C092F21D0F60DF00BFC1E4 /* RadioButton.swift */,
 				70C092F31D0F60DF00BFC1E4 /* RoundImageView.swift */,
 				70C092F41D0F60DF00BFC1E4 /* SimpleImageCollectionViewCell.swift */,
+				70B101A31D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift */,
 				70C092F51D0F60DF00BFC1E4 /* SocialButton.swift */,
 				70C092F61D0F60DF00BFC1E4 /* TalentTableViewCell.swift */,
 				70C092F71D0F60DF00BFC1E4 /* TitledImageCell.swift */,
@@ -470,7 +475,6 @@
 			isa = PBXGroup;
 			children = (
 				7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */,
-				70C0930A1D0F60DF00BFC1E4 /* CommentaryView.xib */,
 				70C0930B1D0F60DF00BFC1E4 /* EnhancedTitlesCollectionViewCell.xib */,
 				70C0930C1D0F60DF00BFC1E4 /* ImageSceneDetailCollectionViewCell.xib */,
 				70C0930D1D0F60DF00BFC1E4 /* MapItemCell.xib */,
@@ -478,6 +482,8 @@
 				70C0930F1D0F60DF00BFC1E4 /* MenuItemCell.xib */,
 				70C093101D0F60DF00BFC1E4 /* MenuSectionCell.xib */,
 				70C093111D0F60DF00BFC1E4 /* ShoppingSceneDetailCollectionViewCell.xib */,
+				70B1019F1D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib */,
+				70B101A11D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib */,
 				70C093121D0F60DF00BFC1E4 /* TalentTableViewCell-Narrow.xib */,
 				70C093131D0F60DF00BFC1E4 /* TalentTableViewCell-Wide.xib */,
 				70C093141D0F60DF00BFC1E4 /* TitledImageCell.xib */,
@@ -588,9 +594,11 @@
 				70C0933E1D0F60DF00BFC1E4 /* Roboto-Regular.ttf in Resources */,
 				70C093711D0F60DF00BFC1E4 /* TitledImageCell.xib in Resources */,
 				70C093171D0F60DF00BFC1E4 /* NextGen.storyboard in Resources */,
+				70B101A21D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib in Resources */,
 				70C093161D0F60DF00BFC1E4 /* Localizable.strings in Resources */,
 				70C0936F1D0F60DF00BFC1E4 /* TalentTableViewCell-Narrow.xib in Resources */,
 				7021D3691D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib in Resources */,
+				70B101A01D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib in Resources */,
 				70C093401D0F60DF00BFC1E4 /* RobotoCondensed-Italic.ttf in Resources */,
 				70C093431D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov in Resources */,
 				70C0936A1D0F60DF00BFC1E4 /* MapItemCell.xib in Resources */,
@@ -600,7 +608,6 @@
 				70C0933D1D0F60DF00BFC1E4 /* Assets.xcassets in Resources */,
 				70C9EA601D08A18C002299B3 /* Assets.xcassets in Resources */,
 				70C093721D0F60DF00BFC1E4 /* VideoCell.xib in Resources */,
-				70C093671D0F60DF00BFC1E4 /* CommentaryView.xib in Resources */,
 				70C093411D0F60DF00BFC1E4 /* RobotoCondensed-Regular.ttf in Resources */,
 				70C0936C1D0F60DF00BFC1E4 /* MenuItemCell.xib in Resources */,
 				70C0936D1D0F60DF00BFC1E4 /* MenuSectionCell.xib in Resources */,
@@ -664,6 +671,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70C093301D0F60DF00BFC1E4 /* MenuSection.swift in Sources */,
+				70B101A41D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift in Sources */,
 				70C093201D0F60DF00BFC1E4 /* InMovieExperienceViewController.swift in Sources */,
 				70C093271D0F60DF00BFC1E4 /* ShoppingDetailViewController.swift in Sources */,
 				70C0933B1D0F60DF00BFC1E4 /* ExtrasVideoGalleryViewController.swift in Sources */,

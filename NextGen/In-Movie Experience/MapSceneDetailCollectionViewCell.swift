@@ -10,18 +10,12 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     @IBOutlet weak var mapView: MultiMapView!
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        mapView.removeControls()
-    }
-    
     override func timedEventDidChange() {
         super.timedEventDidChange()
         
         if let appData = timedEvent?.appData, location = appData.location {
             let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-            mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: false)
+            mapView.setLocation(center, zoomLevel: appData.zoomLevel - 4, animated: false)
             mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: false)
         }
         

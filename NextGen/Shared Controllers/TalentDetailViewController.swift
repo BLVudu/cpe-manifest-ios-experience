@@ -73,6 +73,8 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             _talentNoGalleryConstraint.priority = UILayoutPriorityRequired
         }
         
+        _galleryCollectionView?.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
+        
         loadTalent(talent)
     }
     

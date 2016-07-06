@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SimpleMapCollectionViewCellReuseIdentifier" id="6ve-97-mtp" customClass="SimpleMapCollectionViewCell" customModule="NextGenExample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="175"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="175"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOH-U9-Aw6" customClass="MultiMapView" customModule="NextGenExample" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="175"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4B-ll-AdR">
+                        <rect key="frame" x="10" y="147" width="240" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="7Sv-4p-ab3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="pOH-U9-Aw6" secondAttribute="trailing" id="0en-9J-I51"/>
+                <constraint firstAttribute="bottom" secondItem="V4B-ll-AdR" secondAttribute="bottom" constant="8" id="14p-0s-B6g"/>
+                <constraint firstItem="V4B-ll-AdR" firstAttribute="leading" secondItem="6ve-97-mtp" secondAttribute="leading" constant="10" id="FOk-g8-EsT"/>
+                <constraint firstItem="pOH-U9-Aw6" firstAttribute="top" secondItem="6ve-97-mtp" secondAttribute="top" id="Ggs-md-kFr"/>
+                <constraint firstAttribute="trailing" secondItem="V4B-ll-AdR" secondAttribute="trailing" id="WJT-5z-0FR"/>
+                <constraint firstAttribute="bottom" secondItem="pOH-U9-Aw6" secondAttribute="bottom" id="a87-5f-uM4"/>
+                <constraint firstItem="pOH-U9-Aw6" firstAttribute="leading" secondItem="6ve-97-mtp" secondAttribute="leading" id="hdF-SS-pHP"/>
+            </constraints>
+            <size key="customSize" width="249" height="248"/>
+            <connections>
+                <outlet property="mapTextLabel" destination="V4B-ll-AdR" id="Rau-DR-ynb"/>
+                <outlet property="mapView" destination="pOH-U9-Aw6" id="3h1-8d-sdE"/>
+            </connections>
+            <point key="canvasLocation" x="796" y="527.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

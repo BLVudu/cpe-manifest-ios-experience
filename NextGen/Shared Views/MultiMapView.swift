@@ -17,6 +17,11 @@ class MultiMapMarker: NSObject {
     var googleMapMarker: GMSMarker?
     var location: CLLocationCoordinate2D!
 }
+    
+enum MultiMapType: Int {
+    case Map = 0
+    case Satellite = 1
+}
 
 class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
@@ -24,11 +29,6 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         static let MarkerAnnotationViewReuseIdentifier = "kMarkerAnnotationViewReuseIdentifier"
         static let SegmentedControlPadding: CGFloat = 18
         static let SegmentedControlWidth: CGFloat = 185
-    }
-    
-    enum MultiMapType: Int {
-        case Map = 0
-        case Satellite = 1
     }
     
     private var appleMapView: MKMapView?
@@ -48,7 +48,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         }
     }
     
-    var mapType: MultiMapType = .Satellite {
+    var mapType: MultiMapType = .Map {
         didSet {
             if let mapView = googleMapView {
                 mapView.mapType = (mapType == .Satellite ? kGMSTypeSatellite : kGMSTypeNormal)
@@ -80,14 +80,16 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             self.addSubview(appleMapView!)
         }
         
-        mapType = .Satellite
-        
+        mapType = .Map
+    }
+    
+    func addControls() {
         mapTypeSegmentedControl = UISegmentedControl(items: ["Map", "Satellite"])
         if let mapTypeSegmentedControl = mapTypeSegmentedControl {
             let textAttributes = NSDictionary(object: UIFont.themeCondensedFont(16), forKey: NSFontAttributeName)
             mapTypeSegmentedControl.setTitleTextAttributes(textAttributes as [NSObject : AnyObject], forState: UIControlState.Normal)
             mapTypeSegmentedControl.backgroundColor = UIColor.whiteColor()
-            mapTypeSegmentedControl.selectedSegmentIndex = MultiMapType.Satellite.rawValue
+            mapTypeSegmentedControl.selectedSegmentIndex = 0
             mapTypeSegmentedControl.layer.cornerRadius = 5
             mapTypeSegmentedControl.addTarget(self, action: #selector(self.onMapTypeChanged), forControlEvents: UIControlEvents.ValueChanged)
             var segmentedControlFrame = mapTypeSegmentedControl.frame
@@ -180,10 +182,6 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             
             mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
         }
-    }
-    
-    func removeControls() {
-        mapTypeSegmentedControl?.removeFromSuperview()
     }
     
     // MARK: Actions
