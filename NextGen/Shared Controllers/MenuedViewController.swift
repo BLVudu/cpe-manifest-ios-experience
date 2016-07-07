@@ -6,10 +6,10 @@ import UIKit
 
 class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var menuTableView: UITableView!
-    var menuSections = [MenuSection]()
-    var selectedSection: MenuSection?
-    var selectedItem: MenuItem?
+    @IBOutlet weak internal var menuTableView: UITableView!
+    internal var menuSections = [MenuSection]()
+    private var selectedSectionValue: String?
+    private var selectedItemValue: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +34,14 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(MenuSectionCell.ReuseIdentifier) as! MenuSectionCell
             cell.menuSection = menuSection
-            cell.selected = selectedSection != nil && selectedSection == cell.menuSection
+            cell.active = selectedSectionValue == cell.menuSection?.value
             
             return cell
         }
         
         let cell = tableView.dequeueReusableCellWithIdentifier(MenuItemCell.ReuseIdentifier) as! MenuItemCell
         cell.menuItem = menuSection.items[indexPath.row - 1]
-        cell.selected = selectedItem != nil && selectedItem == cell.menuItem
+        cell.active = selectedItemValue == cell.menuItem?.value
         
         return cell
     }
@@ -60,6 +60,18 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let updateActiveCells = { [weak self] in
+            if let strongSelf = self {
+                for cell in tableView.visibleCells {
+                    if let menuSectionCell = cell as? MenuSectionCell {
+                        menuSectionCell.active = strongSelf.selectedSectionValue == menuSectionCell.menuSection?.value
+                    } else if let menuItemCell = cell as? MenuItemCell {
+                        menuItemCell.active = strongSelf.selectedItemValue == menuItemCell.menuItem?.value
+                    }
+                }
+            }
+        }
+        
         let menuSection = menuSections[indexPath.section]
         if indexPath.row == 0 {
             menuSection.toggle()
@@ -69,16 +81,18 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
             }
             
             if !menuSection.expandable {
-                selectedSection = menuSection
-                selectedItem = nil
+                selectedSectionValue = menuSection.value
+                selectedItemValue = nil
             }
             
-            tableView.beginUpdates()
+            CATransaction.begin()
+            CATransaction.setCompletionBlock(updateActiveCells)
             tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.None)
-            tableView.endUpdates()
+            CATransaction.commit()
         } else {
-            selectedSection = nil
-            selectedItem = menuSection.items[indexPath.row - 1]
+            selectedItemValue = menuSection.items[indexPath.row - 1].value
+            selectedSectionValue = nil
+            updateActiveCells()
         }
     }
     

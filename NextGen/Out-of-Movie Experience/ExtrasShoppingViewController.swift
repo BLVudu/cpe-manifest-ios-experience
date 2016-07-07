@@ -14,6 +14,8 @@ class ExtrasShoppingViewController: MenuedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        menuSections.append(MenuSection(info: [MenuSection.Keys.Title: String.localize("label.all"), MenuSection.Keys.Value: "-1"]))
+        
         for category in TheTakeAPIUtil.sharedInstance.productCategories {
             let info = NSMutableDictionary()
             info[MenuSection.Keys.Title] = category.name
