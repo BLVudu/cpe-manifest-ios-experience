@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
         static let ShowOutOfMovieExperience = "ShowOutOfMovieExperienceSegueIdentifier"
     }
     
-    @IBOutlet weak private var backButton: UIButton!
+    @IBOutlet weak private var exitButton: UIButton!
     @IBOutlet weak private var backgroundImageView: UIImageView!
     @IBOutlet weak private var backgroundVideoView: UIView!
     
@@ -36,8 +36,8 @@ class HomeViewController: UIViewController {
         let frameWidth = CGRectGetWidth(self.view.frame)
         let frameHeight = CGRectGetHeight(self.view.frame)
         
-        backButton.setTitle(String.localize("label.back"), forState: .Normal)
-        homeScreenViews.append(backButton)
+        exitButton.setTitle(String.localize("label.exit"), forState: .Normal)
+        homeScreenViews.append(exitButton)
         
         if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {
             willFadeInViews = appearance.backgroundVideoFadeTime > 0
@@ -203,7 +203,7 @@ class HomeViewController: UIViewController {
         self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: NGDMManifest.sharedInstance.outOfMovieExperience)
     }
     
-    @IBAction func onBack() {
+    @IBAction func onExit() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

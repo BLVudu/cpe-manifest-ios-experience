@@ -103,7 +103,6 @@ static NSString * const kWBVideoPlayerWillPlayNextItem                      = @"
 
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;
-- (IBAction)share:(id)sender;
 - (IBAction)toggleFullScreen:(id)sender;
 - (IBAction)done:(id)sender;
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer;
