@@ -174,7 +174,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
                 }
             }
             
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withEdgeInsets: UIEdgeInsetsMake(50, 50, 50, 250)))
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50))
         }
     }
     
