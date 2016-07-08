@@ -38,24 +38,38 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
     @IBOutlet weak private var _homeButton: UIButton!
     
     @IBOutlet weak var toolbar: UIView!
-
-
+    
     @IBOutlet weak var countdown: CircularProgressView!
     var countdownTimer: NSTimer!
     var nextItemTask: Task?
     var commentaryIndex = 0
     var alertController: UIAlertController!
     
-    private var _shouldPauseAllOtherObserver: NSObjectProtocol!
-    private var _updateCommentaryButton: NSObjectProtocol!
+    private var shouldPauseAllOtherObserver: NSObjectProtocol?
+    private var updateCommentaryButtonObserver: NSObjectProtocol?
+    private var sceneDetailWillCloseObserver: NSObjectProtocol?
     
     private var countdownSeconds = 0
     var curIndex = 0
     var indexMax = 0
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(_shouldPauseAllOtherObserver)
-        NSNotificationCenter.defaultCenter().removeObserver(_updateCommentaryButton)
+        let center = NSNotificationCenter.defaultCenter()
+        
+        if let observer = shouldPauseAllOtherObserver {
+            center.removeObserver(observer)
+            shouldPauseAllOtherObserver = nil
+        }
+        
+        if let observer = updateCommentaryButtonObserver {
+            center.removeObserver(observer)
+            updateCommentaryButtonObserver = nil
+        }
+        
+        if let observer = sceneDetailWillCloseObserver {
+            center.removeObserver(observer)
+            sceneDetailWillCloseObserver = nil
+        }
     }
     
     override func viewDidLoad() {
@@ -68,7 +82,9 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         _commentaryButton.setTitle(String.localize("label.commentary"), forState: UIControlState.Normal)
         _commentaryView.hidden = true
         alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        _shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        
+        // Notifications
+        shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
                 if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
                     strongSelf.pauseVideo()
@@ -76,13 +92,19 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             }
         })
         
-        _updateCommentaryButton = NSNotificationCenter.defaultCenter().addObserverForName(kDidSelectCommetaryOption, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self]
+        updateCommentaryButtonObserver = NSNotificationCenter.defaultCenter().addObserverForName(kDidSelectCommetaryOption, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self]
             (notification) in
-            if let strongSelf = self{
+            if let strongSelf = self {
                 if let userInfo = notification.userInfo, index = userInfo["option"] as? Int{
                     strongSelf.commentaryIndex = index
                     strongSelf._commentaryButton.setTitle(index > 0 ? String.localize("label.commentary.on") : String.localize("label.commentary"), forState: .Normal)
                 }
+            }
+        })
+        
+        sceneDetailWillCloseObserver = NSNotificationCenter.defaultCenter().addObserverForName(SceneDetailNotification.WillClose, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self where strongSelf.mode == .MainFeature {
+                strongSelf.playVideo()
             }
         })
 
