@@ -122,6 +122,15 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
         }
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        if _didPlayInterstitial {
+            self.playerControlsVisible = true;
+            self.initAutoHideTimer()
+        }
+    }
+    
     // MARK: Video Playback
     override func playVideoWithURL(url: NSURL!) {
         super.playVideoWithURL(url)
