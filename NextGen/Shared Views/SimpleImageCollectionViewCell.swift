@@ -9,7 +9,7 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     static let BaseReuseIdentifier = "SimpleImageCollectionViewCellReuseIdentifier"
     
     @IBOutlet weak private var imageView: UIImageView!
-    @IBOutlet weak private var playButton: UIButton!
+    @IBOutlet weak private var playButton: UIButton?
     
     private var setImageSessionDataTask: NSURLSessionDataTask?
     
@@ -41,11 +41,11 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     
     var playButtonVisible: Bool {
         set {
-            playButton.hidden = !newValue
+            playButton?.hidden = !newValue
         }
         
         get {
-            return !playButton.hidden
+            return playButton != nil && !playButton!.hidden
         }
     }
     
