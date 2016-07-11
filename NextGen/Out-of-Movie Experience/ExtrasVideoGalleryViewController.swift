@@ -161,7 +161,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 
                     if indexPath.row == 0 {
                         if let imageURL = thisExperience.imageURL {
-                            previewImageView?.setImageWithURL(imageURL)
+                            previewImageView?.setImageWithURL(imageURL, completion: nil)
                         }
                     } else {
                         playFirstItem()
