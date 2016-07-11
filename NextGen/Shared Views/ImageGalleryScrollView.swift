@@ -85,13 +85,6 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         toolbar!.barStyle = .Black
         toolbar!.translucent = true
         
-        let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
-        fullScreenButton.tintColor = UIColor.whiteColor()
-        fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
-        fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
-        fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
-        toolbar!.items = [UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(customView: fullScreenButton)]
-        
         closeButton = UIButton()
         closeButton.tintColor = UIColor.whiteColor()
         closeButton.alpha = 0.75
@@ -103,23 +96,36 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if let toolbar = toolbar {
+        if let toolbar = toolbar where !toolbar.hidden {
             var toolbarFrame = toolbar.frame
             toolbarFrame.origin.x = self.contentOffset.x
             toolbarFrame.origin.y = self.contentOffset.y + (CGRectGetHeight(self.frame) - Constants.ToolbarHeight) + 1
             toolbar.frame = toolbarFrame
             self.bringSubviewToFront(toolbar)
+            
+            if let toolbarItems = toolbar.items, turntableSlider = toolbarItems.first?.customView as? UISlider {
+                turntableSlider.frame.size.width = CGRectGetWidth(toolbarFrame) - 35 - (isFullScreen || toolbarItems.count == 1 ? 0 : Constants.ToolbarHeight)
+            }
         }
         
-        var closeButtonFrame = closeButton.frame
-        closeButtonFrame.origin.x = self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding
-        closeButton.frame = closeButtonFrame
-        self.bringSubviewToFront(closeButton)
+        if !closeButton.hidden {
+            var closeButtonFrame = closeButton.frame
+            closeButtonFrame.origin.x = self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding
+            closeButton.frame = closeButtonFrame
+            self.bringSubviewToFront(closeButton)
+        }
     }
     
     func removeToolbar() {
         toolbar?.removeFromSuperview()
         toolbar = nil
+    }
+    
+    func removeFullScreenButton() {
+        if let toolbar = toolbar, var items = toolbar.items where items.count > 0 {
+            items.removeLast()
+            toolbar.items = items
+        }
     }
     
     private func resetScrollView() {
@@ -137,6 +143,33 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             self.frame = frame
         }
         
+        if let toolbar = toolbar {
+            toolbar.items = nil
+            
+            var toolbarItems = [UIBarButtonItem]()
+            if let gallery = gallery where gallery.isSubType(.Turntable) {
+                let turntableSlider = UISlider(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame) - Constants.ToolbarHeight - 35, Constants.ToolbarHeight))
+                turntableSlider.minimumValue = 0
+                turntableSlider.maximumValue = gallery.pictures != nil ? Float(gallery.pictures!.count - 1) : 0
+                turntableSlider.value = 0
+                turntableSlider.addTarget(self, action: #selector(self.turntableSliderValueChanged), forControlEvents: .ValueChanged)
+                turntableSlider.addTarget(self, action: #selector(self.turntableSliderDidEnd), forControlEvents: [.TouchUpInside, .TouchUpOutside])
+                toolbarItems.append(UIBarButtonItem(customView: turntableSlider))
+            } else {
+                toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil))
+            }
+            
+            let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
+            fullScreenButton.tintColor = UIColor.whiteColor()
+            fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
+            fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
+            fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
+            toolbarItems.append(UIBarButtonItem(customView: fullScreenButton))
+            
+            toolbar.items = toolbarItems
+        }
+        
+        self.scrollEnabled = gallery == nil || !gallery!.isSubType(.Turntable)
         isFullScreen = false
         toolbar?.hidden = false
         closeButton.hidden = true
@@ -191,7 +224,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Actions
     func toggleFullScreen() {
         isFullScreen = !isFullScreen
-        toolbar?.hidden = isFullScreen
+        toolbar?.hidden = isFullScreen && (gallery == nil || !gallery!.isSubType(.Turntable))
         closeButton.hidden = !isFullScreen
         
         if isFullScreen {
@@ -222,6 +255,14 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidToggleFullScreen, object: nil, userInfo: ["isFullScreen": isFullScreen])
+    }
+    
+    func turntableSliderValueChanged(slider: UISlider!) {
+        gotoPage(Int(floor(slider.value)), animated: false)
+    }
+    
+    func turntableSliderDidEnd() {
+        cleanInvisibleImages()
     }
     
     // MARK: Image Gallery

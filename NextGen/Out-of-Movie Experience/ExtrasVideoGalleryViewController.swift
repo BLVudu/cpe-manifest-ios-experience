@@ -23,7 +23,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryPageControl: UIPageControl!
-    @IBOutlet weak private var turntableSlider: UISlider!
     private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
     @IBOutlet weak private var shareButton: UIButton!
@@ -120,7 +119,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             // Reset media detail views
             shareButton.hidden = true
             galleryPageControl.hidden = true
-            turntableSlider.hidden = true
             galleryScrollView.hidden = true
             videoContainerView.hidden = false
             previewImageView?.hidden = didPlayFirstItem
@@ -133,22 +131,15 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 previewImageView?.hidden = true
                 previewPlayButton?.hidden = true
                 
-                let numberOfPages = gallery.pictures?.count ?? 0
+                galleryScrollView.gallery = gallery
+                
                 if gallery.isSubType(.Turntable) {
-                    turntableSlider.hidden = false
-                    turntableSlider.minimumValue = 0
-                    turntableSlider.maximumValue = Float(numberOfPages - 1)
-                    turntableSlider.value = 0
+                    galleryScrollView.preloadImages()
                 } else {
                     shareButton.hidden = false
                     shareButton.setTitle(String.localize("gallery.share_button").uppercaseString, forState: .Normal)
                     galleryPageControl.hidden = false
-                    galleryPageControl.numberOfPages = numberOfPages
-                }
-                
-                galleryScrollView.gallery = gallery
-                if gallery.isSubType(.Turntable) {
-                    galleryScrollView.preloadImages()
+                    galleryPageControl.numberOfPages = gallery.pictures?.count ?? 0
                 }
             } else if thisExperience.isType(.AudioVisual), let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                 if let player = videoPlayerViewController.player {
@@ -216,14 +207,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         } else {
             
         }
-    }
-    
-    @IBAction func turntableSliderValueChanged(slider: UISlider!) {
-        galleryScrollView.gotoPage(Int(floor(slider.value)), animated: false)
-    }
-    
-    @IBAction func turntableSliderDidEnd() {
-        galleryScrollView.cleanInvisibleImages()
     }
     
 }

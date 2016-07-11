@@ -1029,14 +1029,6 @@
                             <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ul9-sZ-eg9">
                                 <rect key="frame" x="327" y="523" width="672" height="37"/>
                             </pageControl>
-                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DL4-gR-EgH">
-                                <rect key="frame" x="325" y="523" width="676" height="31"/>
-                                <connections>
-                                    <action selector="turntableSliderDidEnd" destination="wpZ-Jt-DDC" eventType="touchUpOutside" id="GoO-WB-aTq"/>
-                                    <action selector="turntableSliderDidEnd" destination="wpZ-Jt-DDC" eventType="touchUpInside" id="o3h-xF-cte"/>
-                                    <action selector="turntableSliderValueChanged:" destination="wpZ-Jt-DDC" eventType="valueChanged" id="Kcd-jr-CY8"/>
-                                </connections>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="deY-ex-mWN">
                                 <rect key="frame" x="327" y="623" width="160" height="45"/>
                                 <color key="backgroundColor" red="0.72941176470000002" green="0.058823529409999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1066,10 +1058,8 @@
                         <constraints>
                             <constraint firstItem="eG2-1b-EHg" firstAttribute="leading" secondItem="iVh-Ev-WDN" secondAttribute="leading" id="53e-AI-eKc"/>
                             <constraint firstItem="gVb-rK-Z1W" firstAttribute="leading" secondItem="iVh-Ev-WDN" secondAttribute="leading" id="AR4-fy-DiB"/>
-                            <constraint firstItem="DL4-gR-EgH" firstAttribute="leading" secondItem="Lqt-gp-7il" secondAttribute="leading" id="CXt-A5-ej9"/>
                             <constraint firstItem="Lqt-gp-7il" firstAttribute="top" secondItem="gVb-rK-Z1W" secondAttribute="bottom" constant="5" id="DIj-q2-2H5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gVb-rK-Z1W" secondAttribute="trailing" constant="5" id="FoS-ZN-qRf"/>
-                            <constraint firstItem="DL4-gR-EgH" firstAttribute="trailing" secondItem="gVb-rK-Z1W" secondAttribute="trailing" id="GAn-TC-tSm"/>
                             <constraint firstItem="rKR-Hd-dDs" firstAttribute="trailing" secondItem="iVh-Ev-WDN" secondAttribute="trailing" id="GHP-Re-fbM"/>
                             <constraint firstItem="iVh-Ev-WDN" firstAttribute="top" secondItem="fGJ-AQ-eTt" secondAttribute="top" id="JxH-sW-nNI"/>
                             <constraint firstItem="gVb-rK-Z1W" firstAttribute="top" secondItem="iVh-Ev-WDN" secondAttribute="bottom" constant="15" id="K2c-AA-CUp"/>
@@ -1084,7 +1074,6 @@
                             <constraint firstItem="Lqt-gp-7il" firstAttribute="leading" secondItem="gVb-rK-Z1W" secondAttribute="leading" id="WGs-3Z-uBt"/>
                             <constraint firstItem="Ul9-sZ-eg9" firstAttribute="top" secondItem="gVb-rK-Z1W" secondAttribute="bottom" constant="5" id="Wwj-89-LLO"/>
                             <constraint firstItem="gVb-rK-Z1W" firstAttribute="top" secondItem="sRb-OQ-3Uc" secondAttribute="bottom" constant="422" id="XO2-Vi-CAL"/>
-                            <constraint firstItem="DL4-gR-EgH" firstAttribute="top" secondItem="gVb-rK-Z1W" secondAttribute="bottom" constant="5" id="YAg-Gz-WCi"/>
                             <constraint firstItem="deY-ex-mWN" firstAttribute="top" secondItem="Lqt-gp-7il" secondAttribute="bottom" constant="20" id="YW2-5d-L5U"/>
                             <constraint firstItem="Lqt-gp-7il" firstAttribute="trailing" secondItem="gVb-rK-Z1W" secondAttribute="trailing" id="bVB-zy-jOw"/>
                             <constraint firstItem="fGJ-AQ-eTt" firstAttribute="width" secondItem="OB4-DC-Qqz" secondAttribute="width" multiplier="0.28" id="bw9-6Q-ayI"/>
@@ -1117,7 +1106,6 @@
                         <outlet property="previewImageView" destination="rKR-Hd-dDs" id="WGK-GU-PCV"/>
                         <outlet property="previewPlayButton" destination="TCb-DV-Jv5" id="FYm-Io-jWn"/>
                         <outlet property="shareButton" destination="deY-ex-mWN" id="FlQ-4N-Hci"/>
-                        <outlet property="turntableSlider" destination="DL4-gR-EgH" id="M8s-Rz-bwi"/>
                         <outlet property="videoContainerView" destination="iVh-Ev-WDN" id="Wzk-TM-iLr"/>
                     </connections>
                 </viewController>
