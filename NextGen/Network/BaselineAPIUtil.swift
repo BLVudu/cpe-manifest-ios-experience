@@ -159,15 +159,14 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     
     public func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) -> NSURLSessionDataTask {
         return getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
-            if let results = result["result"] as? NSArray {
-                if results.count > 0 {
-                    if let response = results[0] as? NSDictionary, imageURL = response[Keys.LargeURL] as? String {
-                        successBlock(imageURL: NSURL(string: imageURL))
-                    }
-                } else {
-                    successBlock(imageURL: nil)
+            var imageURL: NSURL?
+            if let results = result["result"] as? NSArray where results.count > 0 {
+                if let response = results[0] as? NSDictionary, posterImageURL = response[Keys.LargeURL] as? String {
+                    imageURL = NSURL(string: posterImageURL)
                 }
             }
+            
+            successBlock(imageURL: imageURL)
         }, errorBlock: nil)
     }
     

@@ -8,6 +8,9 @@
 "label.commentary" = "Commentary";
 "label.commentary.on" = "Commentary is on";
 
+// Out-Of-Movie Experience
+"out_of_movie.extras_title" = "Extras";
+
 // Video labels
 "label.runtime" = "Runtime: %{runtime}";
 "label.watched" = "WATCHED";

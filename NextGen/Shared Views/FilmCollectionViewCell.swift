@@ -16,7 +16,11 @@ class FilmCollectionViewCell: SimpleImageCollectionViewCell {
             if film != nil {
                 getFilmImageSessionDataTask = film!.getImageURL({ (imageURL) in
                     dispatch_async(dispatch_get_main_queue(), {
-                        self.imageURL = imageURL
+                        if let imageURL = imageURL {
+                            self.imageURL = imageURL
+                        } else {
+                            self.image = UIImage(named: "Blank Poster")
+                        }
                     })
                 })
             } else {
