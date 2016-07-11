@@ -34,7 +34,7 @@ class SharingViewController: SceneDetailViewController {
         clipNameLabel.text = timedEvent?.descriptionText
         
         if let imageURL = timedEvent?.imageURL {
-            clipThumbnailImageView.setImageWithURL(imageURL)
+            clipThumbnailImageView.setImageWithURL(imageURL, completion: nil)
         } else {
             clipThumbnailImageView.image = UIImage.themeDefaultImage16By9()
         }

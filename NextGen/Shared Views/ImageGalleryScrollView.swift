@@ -280,7 +280,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     private func loadGalleryImageForPage(page: Int) {
         if let imageURL = imageURLForPage(page), pageView = self.viewWithTag(page + 1) as? UIScrollView, imageView = pageView.subviews.first as? UIImageView where imageView.image == nil {
-            if let sessionDataTask = imageView.setImageWithURL(imageURL) {
+            if let sessionDataTask = imageView.setImageWithURL(imageURL, completion: nil) {
                 sessionDataTasks.append(sessionDataTask)
             }
         }

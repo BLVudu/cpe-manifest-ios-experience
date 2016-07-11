@@ -47,7 +47,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet private var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint!
     
     var images = [String]()
-    var talent: Talent!
+    var talent: NGDMTalent!
     var mode = TalentDetailMode.Extras
     
     // MARK: View Lifecycle
@@ -78,14 +78,14 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         loadTalent(talent)
     }
     
-    func loadTalent(talent: Talent) {
+    func loadTalent(talent: NGDMTalent) {
         self.talent = talent
         
         _talentGalleryButton.hidden = mode != .Synced || talent.images == nil || talent.images!.count == 1
         
         _talentNameLabel.text = talent.name?.uppercaseString
         if let imageURL = talent.fullImageURL {
-            _talentImageView.setImageWithURL(imageURL)
+            _talentImageView.setImageWithURL(imageURL, completion: nil)
         } else {
             _talentImageView.image = nil
         }

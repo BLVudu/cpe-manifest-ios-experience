@@ -26,8 +26,8 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     private var didChangeTimeObserver: NSObjectProtocol?
     
     private var currentTime: Double = -1
-    private var currentTalents = [Talent]()
-    private var hiddenTalents: [Talent]?
+    private var currentTalents = [NGDMTalent]()
+    private var hiddenTalents: [NGDMTalent]?
     private var isShowingMore = false
     
     deinit {
@@ -42,7 +42,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         super.viewDidLoad()
         
         if let backgroundImageURL = NGDMManifest.sharedInstance.inMovieExperience?.appearance?.backgroundImageURL {
-            backgroundImageView.setImageWithURL(backgroundImageURL)
+            backgroundImageView.setImageWithURL(backgroundImageURL, completion: nil)
         }
         
         if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors where actors.count > 0 {
@@ -170,7 +170,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         showLessContainer.hidden = !isShowingMore
         
         if isShowingMore {
-            currentTalents = NGDMManifest.sharedInstance.mainExperience?.orderedActors ?? [Talent]()
+            currentTalents = NGDMManifest.sharedInstance.mainExperience?.orderedActors ?? [NGDMTalent]()
         } else if let talents = hiddenTalents {
             currentTalents = talents
         }
@@ -184,7 +184,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         if segue.identifier == SegueIdentifier.ShowTalent {
             let talentDetailViewController = segue.destinationViewController as! TalentDetailViewController
             talentDetailViewController.title = String.localize("talentdetail.title")
-            talentDetailViewController.talent = sender as! Talent
+            talentDetailViewController.talent = sender as! NGDMTalent
             talentDetailViewController.mode = TalentDetailMode.Synced
         }
     }

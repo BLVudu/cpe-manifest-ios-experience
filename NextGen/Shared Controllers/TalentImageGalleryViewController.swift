@@ -10,7 +10,7 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryCollectionView: UICollectionView!
     
-    var talent: Talent!
+    var talent: NGDMTalent!
     var initialPage = 0
     
     private var galleryDidScrollToPageObserver: NSObjectProtocol?

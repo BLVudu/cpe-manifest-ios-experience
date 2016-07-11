@@ -1,9 +1,9 @@
 //
-//  WBVideoPlayerPlaybackView.m
+//  NextGenVideoPlayerPlaybackView.m
 //  Fork of Apple's AVPlayerDemoPlaybackView.m
 //
 
-#import "WBVideoPlayerPlaybackView.h"
+#import "NextGenVideoPlayerPlaybackView.h"
 
 /* ---------------------------------------------------------
 **  To play the visual component of an asset, you need a view 
@@ -15,18 +15,18 @@
 **  that is used for this purpose.
 ** ------------------------------------------------------- */
 
-@implementation WBVideoPlayerPlaybackView
+@implementation NextGenVideoPlayerPlaybackView
 
 + (Class)layerClass {
 	return [AVPlayerLayer class];
 }
 
-- (AVPlayer*)player {
+- (AVPlayer *)player {
 	return [(AVPlayerLayer*)[self layer] player];
 }
 
-- (void)setPlayer:(AVPlayer*)player {
-	[(AVPlayerLayer*)[self layer] setPlayer:player];
+- (void)setPlayer:(AVPlayer *)player {
+	[(AVPlayerLayer *)[self layer] setPlayer:player];
 }
 
 /* Specifies how the video is displayed within a player layer’s bounds. 

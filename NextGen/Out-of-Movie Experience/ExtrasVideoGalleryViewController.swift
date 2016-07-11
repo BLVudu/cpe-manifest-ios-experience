@@ -65,7 +65,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
 
-        willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kWBVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+        willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kNextGenVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int where index < (strongSelf.experience.childExperiences?.count ?? 0) {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)

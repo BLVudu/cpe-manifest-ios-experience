@@ -22,7 +22,7 @@ enum VideoPlayerMode {
 
 typealias Task = (cancel : Bool) -> ()
 
-class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControllerDelegate {
+class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverControllerDelegate {
     
     let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
     
@@ -193,7 +193,7 @@ class VideoPlayerViewController: WBVideoPlayerViewController, UIPopoverControlle
             self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.subtractTime), userInfo: nil, repeats: true)
             self.countdown.animateTimer()
             nextItemTask = delay(5) {
-                NSNotificationCenter.defaultCenter().postNotificationName(kWBVideoPlayerWillPlayNextItem, object:self, userInfo:["index": self.curIndex])
+                NSNotificationCenter.defaultCenter().postNotificationName(kNextGenVideoPlayerWillPlayNextItem, object:self, userInfo:["index": self.curIndex])
                 self.countdown.hidden = true;
                 self.countdownTimer.invalidate()
                 self.countdownTimer = nil

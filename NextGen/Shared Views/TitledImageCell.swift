@@ -19,7 +19,7 @@ class TitledImageCell: UICollectionViewCell {
             titleLabel.text = experience?.metadata?.title?.uppercaseString
             
             if let imageURL = experience?.imageURL {
-                _setImageSessionDataTask = imageView.setImageWithURL(imageURL)
+                _setImageSessionDataTask = imageView.setImageWithURL(imageURL, completion: nil)
             } else {
                 imageView.image = nil
             }

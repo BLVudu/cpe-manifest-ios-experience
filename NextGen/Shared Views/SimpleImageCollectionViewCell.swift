@@ -18,7 +18,7 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     var imageURL: NSURL? {
         set {
             if let url = newValue {
-                setImageSessionDataTask = imageView.setImageWithURL(url)
+                setImageSessionDataTask = imageView.setImageWithURL(url, completion: nil)
             } else {
                 image = nil
             }

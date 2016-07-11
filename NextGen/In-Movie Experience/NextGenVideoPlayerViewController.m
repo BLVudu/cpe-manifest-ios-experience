@@ -1,18 +1,15 @@
 //
-//  WBVideoPlayerViewController.h
+//  NextGenVideoPlayerViewController.h
 //  Fork of Apple's AVPlayerDemoPlaybackViewController.h
 //
 
 
-#import "WBVideoPlayerViewController.h"
-#import "WBVideoPlayerPlaybackView.h"
+#import "NextGenVideoPlayerViewController.h"
+#import "NextGenVideoPlayerPlaybackView.h"
 
 //=========================================================
 # pragma mark - Constants
 //=========================================================
-// XIB
-static NSString *kWBVideoPlayerNibName                           = @"WBVideoPlayerView";
-
 // AVFoundation KVOs
 static NSString * const kAVPlayerItemStatusKVO                   = @"status";
 static NSString * const kAVPlayerItemDurationKVO                 = @"duration";
@@ -34,7 +31,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 //=========================================================
 # pragma mark - Private variables & methods
 //=========================================================
-@interface WBVideoPlayerViewController ()
+@interface NextGenVideoPlayerViewController ()
 
 @property (weak, nonatomic)   IBOutlet  UIView                          *playbackToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *playButton;
@@ -82,9 +79,9 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 @end
 
 //=========================================================
-# pragma mark - WBVideoPlayerViewController
+# pragma mark - NextGenVideoPlayerViewController
 //=========================================================
-@implementation WBVideoPlayerViewController
+@implementation NextGenVideoPlayerViewController
 
 //=========================================================
 # pragma mark - Playback
@@ -169,7 +166,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 //=========================================================
 /* Show the pause button in the movie player controller. */
 -(void)showPauseButton {
-    if (self.state != WBVideoPlayerStateVideoLoading) {
+    if (self.state != NextGenVideoPlayerStateVideoLoading) {
         // Disable + Hide Play Button
         self.playButton.enabled     = NO;
         self.playButton.hidden      = YES;
@@ -182,7 +179,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 
 /* Show the play button in the movie player controller. */
 -(void)showPlayButton {
-    if (self.state == WBVideoPlayerStateVideoPaused || self.state == WBVideoPlayerStateReadyToPlay) {
+    if (self.state == NextGenVideoPlayerStateVideoPaused || self.state == NextGenVideoPlayerStateReadyToPlay) {
         // Disable + Hide Pause Button
         self.pauseButton.enabled    = NO;
         self.pauseButton.hidden     = YES;
@@ -292,7 +289,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
                 
                 // Show play/pause button if player controls are visible
                 // Calling setPlayerControlsVisible will now toggle the play/pause
-                // button once the player's state is NOT WBVideoPlayerStateVideoLoading
+                // button once the player's state is NOT NextGenVideoPlayerStateVideoLoading
                 self.playerControlsVisible      = self.playerControlsVisible;
             }
         }];
@@ -323,7 +320,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     if (!self.playerControlsVisible) return;
     
     // Auto-hide controls if player is playing
-    if (self.state == WBVideoPlayerStateVideoPlaying) {
+    if (self.state == NextGenVideoPlayerStateVideoPlaying) {
         self.playerControlsVisible = NO;
     }
 }
@@ -344,7 +341,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     }
     
     /* Update the scrubber during normal playback. */
-    __weak WBVideoPlayerViewController *weakSelf = self;
+    __weak NextGenVideoPlayerViewController *weakSelf = self;
     mTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1, 1)
                                                               queue:NULL /* If you pass NULL, the main queue is used. */
                                                          usingBlock:^(CMTime time) {
@@ -407,7 +404,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     isSeeking           = YES;
     
     // Set State
-    self.state          = WBVideoPlayerStateVideoSeeking;
+    self.state          = NextGenVideoPlayerStateVideoSeeking;
     
     // Seek
     [self.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
@@ -484,10 +481,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 # pragma mark - View Controller
 //=========================================================
 
-- (id)init {
-    return [self initWithNibName:kWBVideoPlayerNibName bundle:nil];
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         [self setup];
@@ -506,7 +499,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 
 - (void)setup {
     // Set player state
-    [self setState:WBVideoPlayerStateUnknown];
+    [self setState:NextGenVideoPlayerStateUnknown];
     
     [self setPlayer:nil];
     
@@ -607,19 +600,20 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 //=========================================================
 # pragma mark - Player
 //=========================================================
-- (void)setState:(WBVideoPlayerState)newState {
+- (void)setState:(NextGenVideoPlayerState)newState {
     // Set _state
     _state  = newState;
     
     //DDLogInfo(@"%@", [NSString stringFromVideoPlayerState:newState]);
     
     switch (_state) {
-        case WBVideoPlayerStateUnknown:
+        case NextGenVideoPlayerStateUnknown:
             [self removePlayerTimeObserver];
             [self syncScrubber];
             //self.playerControlsEnabled = NO;
             break;
-        case WBVideoPlayerStateReadyToPlay:
+            
+        case NextGenVideoPlayerStateReadyToPlay:
             // Play from playbackSyncStartTime
             if (playbackSyncStartTime > 1 && !hasSeekedToPlaybackSyncStartTime) {
                 // hasSeekedToStartTime
@@ -646,7 +640,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
             
             break;
             
-        case WBVideoPlayerStateVideoPlaying:
+        case NextGenVideoPlayerStateVideoPlaying:
             // Hide activity indicator
             self.activityIndicatorVisible       = NO;
             
@@ -658,7 +652,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
             
             break;
             
-        case WBVideoPlayerStateVideoPaused:
+        case NextGenVideoPlayerStateVideoPaused:
             // Hide activity indicator
             self.activityIndicatorVisible       = NO;
             
@@ -667,8 +661,8 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
             
             break;
         
-        case WBVideoPlayerStateVideoSeeking:
-        case WBVideoPlayerStateVideoLoading:
+        case NextGenVideoPlayerStateVideoSeeking:
+        case NextGenVideoPlayerStateVideoLoading:
             // Show activity indicator
             self.activityIndicatorVisible       = YES;
             
@@ -682,7 +676,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     }
     
     // Post notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerPlaybackStateDidChangeNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerPlaybackStateDidChangeNotification object:self];
 }
 
 - (void)playVideo {
@@ -825,7 +819,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 
 -(void)assetFailedToPrepareForPlayback:(NSError *)error {
     // Set player state
-    [self setState:WBVideoPlayerStateError];
+    [self setState:NextGenVideoPlayerStateError];
 
     [self removePlayerTimeObserver];
     [self syncScrubber];
@@ -850,7 +844,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
  */
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
     // Set player state
-    [self setState:WBVideoPlayerStateVideoLoading];
+    [self setState:NextGenVideoPlayerStateVideoLoading];
     
     /* Make sure that the value of each key has loaded successfully. */
 	for (NSString *thisKey in requestedKeys) {
@@ -872,7 +866,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 								   localizedDescription, NSLocalizedDescriptionKey, 
 								   localizedFailureReason, NSLocalizedFailureReasonErrorKey, 
 								   nil];
-		NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"WBVideoPlayer" code:0 userInfo:errorDict];
+		NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"NextGenVideoPlayer" code:0 userInfo:errorDict];
         
         /* Display the error to the user. */
         [self assetFailedToPrepareForPlayback:assetCannotBePlayedError];
@@ -967,9 +961,6 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
     }
     
     /* Make our new AVPlayerItem the AVPlayer's current item. */
-
-
-    
     if (self.player.currentItem != self.playerItem){
         /* Replace the player item with a new player item. The item replacement occurs 
          asynchronously; observe the currentItem property to find out when the 
@@ -982,16 +973,9 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
         //[self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         [self syncPlayPauseButtons];
     }
-
-	
+    
     [self.scrubber setValue:0.0];
-    
-
-    
 }
-
-
-
 
 
 //=========================================================
@@ -1023,7 +1007,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
              it has not tried to load new media resources for playback */
             case AVPlayerStatusUnknown:{
                 // Set player state
-                [self setState:WBVideoPlayerStateUnknown];
+                [self setState:NextGenVideoPlayerStateUnknown];
             }
             break;
                 
@@ -1033,11 +1017,11 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
                  its duration can be fetched from the item. */
                 
                 // Set player state
-                [self setState:WBVideoPlayerStateReadyToPlay];
+                [self setState:NextGenVideoPlayerStateReadyToPlay];
                 [self playVideo];
                 
                 // Notification
-                [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerItemReadyToPlayNotification object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerItemReadyToPlayNotification object:nil];
                 
             }
             break;
@@ -1064,16 +1048,16 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
                                           duration, kAVPlayerItemDurationKVO,
                                           nil];
             // Post notification
-            [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerItemDurationDidLoadNotification object:self userInfo:durationInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerItemDurationDidLoadNotification object:self userInfo:durationInfo];
         }
     }
 	/* AVPlayer "rate" property value observer. */
 	else if (context == VideoPlayerRateObservationContext) {
         // Set player state
         if ([self isPlaying]) {
-            [self setState:WBVideoPlayerStateVideoPlaying];
+            [self setState:NextGenVideoPlayerStateVideoPlaying];
         } else {
-            [self setState:WBVideoPlayerStateVideoPaused];
+            [self setState:NextGenVideoPlayerStateVideoPaused];
         }
 	}
 	/* AVPlayer "currentItem" property observer. 
@@ -1103,41 +1087,38 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
         //DDLogInfo(@"playbackBufferEmpty: %@", self.playerItem.isPlaybackBufferEmpty ? @"yes" : @"no");
         
         // Set player state
-        [self setState:WBVideoPlayerStateVideoLoading];
+        [self setState:NextGenVideoPlayerStateVideoLoading];
         
         if (self.playerItem.isPlaybackBufferEmpty && CMTimeGetSeconds([self.playerItem currentTime]) > 0 && CMTimeGetSeconds([self.playerItem currentTime]) < CMTimeGetSeconds([self playerItemDuration]) - 1 && [self isPlaying]) {
             
-            // WBVideoPlayerDelegate - bufferring started
+            // NextGenVideoPlayerDelegate - bufferring started
             if (self.playerItem.isPlaybackBufferEmpty && self.delegate && [self.delegate respondsToSelector:@selector(videoPlayer:isBuffering:)]) {
                 [self.delegate videoPlayer:self isBuffering:YES];
             }
             
             // Dispatch notification
-            [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerPlaybackBufferEmptyNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerPlaybackBufferEmptyNotification object:nil];
         }
         
     }
     else if (context == VideoPlayerPlaybackLikelyToKeepUpObservationContext) {
         //DDLogInfo(@"playbackLikelyToKeepUp: %@", self.playerItem.playbackLikelyToKeepUp ? @"yes" : @"no");
         
-        if (self.state != WBVideoPlayerStateVideoPaused) {
+        if (self.state != NextGenVideoPlayerStateVideoPaused) {
             // Set player state
-            //[self setState:WBVideoPlayerStateReadyToPlay];
+            //[self setState:NextGenVideoPlayerStateReadyToPlay];
             
             if (self.playerItem.playbackLikelyToKeepUp && ![self isPlaying]) {
-                // WBVideoPlayerDelegate - bufferring ended
+                // NextGenVideoPlayerDelegate - bufferring ended
                 if (self.playerItem.playbackLikelyToKeepUp && self.delegate && [self.delegate respondsToSelector:@selector(videoPlayer:isBuffering:)]) {
                     [self.delegate videoPlayer:self isBuffering:NO];
                 }
                 
                 // Dispatch notification
-                [[NSNotificationCenter defaultCenter] postNotificationName:kWBVideoPlayerPlaybackLikelyToKeepUpNotification object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification object:nil];
                 
                 // Play
-                
                 [self playVideo];
-
-
             }
         }
     }

@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
             if let centerOffset = appearance.titleImageCenterOffset, sizeOffset = appearance.titleImageSizeOffset, titleImageURL = appearance.titleImageURL {
                 let imageView = UIImageView(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
                 imageView.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
-                imageView.setImageWithURL(titleImageURL)
+                imageView.setImageWithURL(titleImageURL, completion: nil)
                 imageView.hidden = true
                 self.view.addSubview(imageView)
                 
@@ -170,7 +170,7 @@ class HomeViewController: UIViewController {
                     backgroundImageView.removeFromSuperview()
                 }
             } else if let backgroundImageURL = appearance.backgroundImageURL {
-                backgroundImageView.setImageWithURL(backgroundImageURL)
+                backgroundImageView.setImageWithURL(backgroundImageURL, completion: nil)
                 if backgroundVideoView != nil {
                     backgroundVideoView.removeFromSuperview()
                 }

@@ -294,16 +294,16 @@
 				70C092AD1D0F60DF00BFC1E4 /* Commentary.plist */,
 				70C092AF1D0F60DF00BFC1E4 /* HomeViewController.swift */,
 				70C092B01D0F60DF00BFC1E4 /* In-Movie Experience */,
+				70C092CF1D0F60DF00BFC1E4 /* Out-of-Movie Experience */,
 				70C092C51D0F60DF00BFC1E4 /* Managers */,
 				70C092C71D0F60DF00BFC1E4 /* Models */,
 				70C092CA1D0F60DF00BFC1E4 /* Network */,
-				70C092CF1D0F60DF00BFC1E4 /* Out-of-Movie Experience */,
-				70C092D81D0F60DF00BFC1E4 /* Resources */,
 				70C092E21D0F60DF00BFC1E4 /* Shared Controllers */,
 				70C092EA1D0F60DF00BFC1E4 /* Shared Views */,
 				70C092F91D0F60DF00BFC1E4 /* Theme */,
 				70C092FD1D0F60DF00BFC1E4 /* Utilities */,
 				70C093091D0F60DF00BFC1E4 /* XIBs */,
+				70C092D81D0F60DF00BFC1E4 /* Resources */,
 			);
 			name = NextGen;
 			path = ../NextGen;

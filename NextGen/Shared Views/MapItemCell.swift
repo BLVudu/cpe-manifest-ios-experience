@@ -38,7 +38,7 @@ class MapItemCell: UICollectionViewCell {
     var imageURL: NSURL? {
         set {
             if let imageURL = newValue {
-                setImageSessionDataTask = imageView.setImageWithURL(imageURL)
+                setImageSessionDataTask = imageView.setImageWithURL(imageURL, completion: nil)
             } else {
                 imageView.image = nil
             }

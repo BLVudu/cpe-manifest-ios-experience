@@ -20,7 +20,7 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         didSet {
             if let url = _imageURL {
                 if url != oldValue {
-                    _setImageSessionDataTask = _imageView.setImageWithURL(url)
+                    _setImageSessionDataTask = _imageView.setImageWithURL(url, completion: nil)
                 }
             } else {
                 _imageView.image = UIImage.themeDefaultImage16By9()

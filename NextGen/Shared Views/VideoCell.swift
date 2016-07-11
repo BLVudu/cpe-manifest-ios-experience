@@ -32,7 +32,7 @@ class VideoCell: UITableViewCell {
             }
             
             if let imageURL = experience?.imageURL {
-                _setImageSessionDataTask = thumbnailImageView.setImageWithURL(imageURL)
+                _setImageSessionDataTask = thumbnailImageView.setImageWithURL(imageURL, completion: nil)
             } else {
                 thumbnailImageView.image = nil
             }
