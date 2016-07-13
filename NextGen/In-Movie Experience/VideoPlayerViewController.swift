@@ -33,31 +33,29 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
     
     var mode = VideoPlayerMode.Supplemental
+    var showCountdownTimer = false
+    var curIndex = 0
+    var indexMax = 0
     
     private var _didPlayInterstitial = false
     private var _lastNotifiedTime = -1.0
     private var _controlsAreLocked = false
     
-    var showCountdownTimer = false
     @IBOutlet weak private var _commentaryView: UIView!
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
     
-    @IBOutlet weak var toolbar: UIView!
-    
     @IBOutlet weak var countdown: CircularProgressView!
     var countdownTimer: NSTimer!
+    private var countdownSeconds = 0
     var nextItemTask: Task?
     var commentaryIndex = 0
-    var alertController: UIAlertController!
+    
+    private var manuallyPaused = false
     
     private var shouldPauseAllOtherObserver: NSObjectProtocol?
     private var updateCommentaryButtonObserver: NSObjectProtocol?
     private var sceneDetailWillCloseObserver: NSObjectProtocol?
-    
-    private var countdownSeconds = 0
-    var curIndex = 0
-    var indexMax = 0
     
     deinit {
         let center = NSNotificationCenter.defaultCenter()
@@ -87,7 +85,6 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
         _commentaryButton.setTitle(String.localize("label.commentary"), forState: UIControlState.Normal)
         _commentaryView.hidden = true
-        alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         // Notifications
         shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
@@ -109,7 +106,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         })
         
         sceneDetailWillCloseObserver = NSNotificationCenter.defaultCenter().addObserverForName(SceneDetailNotification.WillClose, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self where strongSelf.mode == .MainFeature {
+            if let strongSelf = self where strongSelf.mode == .MainFeature && !strongSelf.manuallyPaused {
                 strongSelf.playVideo()
             }
         })
@@ -135,6 +132,13 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
             self.playerControlsVisible = true;
             self.initAutoHideTimer()
         }
+    }
+    
+    // MARK: Actions
+    override func pause(sender: AnyObject!) {
+        super.pause(sender)
+        
+        manuallyPaused = true
     }
     
     // MARK: Video Playback
@@ -177,6 +181,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     override func playVideo() {
         super.playVideo()
         
+        manuallyPaused = false
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, userInfo: [kMasterVideoPlayerViewControllerKey: self])
     }
     

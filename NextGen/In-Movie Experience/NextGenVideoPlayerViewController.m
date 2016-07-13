@@ -625,8 +625,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
             // Start from either beginning or from wherever left off
             else {
                [self playVideo];
-
-                
             }
             
             // Scrubber timer
