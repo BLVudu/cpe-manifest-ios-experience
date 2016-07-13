@@ -69,6 +69,10 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         _galleryCollectionView.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
         
+        let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
+        launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
+        _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
+        
         loadTalent(talent)
     }
     
@@ -129,6 +133,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         let talentHasGallery = talent.images != nil && talent.images!.count > 1
         _galleryContainerView.hidden = mode == .Synced || !talentHasGallery
         _talentGalleryButton.hidden = mode != .Synced || !talentHasGallery
+        _talentImageView.userInteractionEnabled = talentHasGallery
         _talentNoGalleryConstraint.active = _galleryContainerView.hidden
         
         _filmographyCollectionView.backgroundColor = UIColor.clearColor()

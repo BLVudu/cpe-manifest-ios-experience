@@ -21,7 +21,7 @@ public enum VideoPlayerMode {
 }
 
 public protocol NextGenVideoPlayerDelegate {
-    func getProcessedVideoURL(url: NSURL, mode: VideoPlayerMode, completion: (url: NSURL) -> Void)
+    func getProcessedVideoURL(url: NSURL, mode: VideoPlayerMode, completion: (url: NSURL?) -> Void)
 }
 
 typealias Task = (cancel : Bool) -> ()
@@ -143,8 +143,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 SettingsManager.setVideoAsWatched(url)
                 VideoPlayerViewController.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url) in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        super.playVideoWithURL(url)
+                    if let url = url {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            super.playVideoWithURL(url)
+                        }
                     }
                 })
             }
