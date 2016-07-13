@@ -27,11 +27,11 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet weak private var _talentNameLabel: UILabel!
     @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak private var _talentBiographyLabel: UITextView!
-    @IBOutlet private var _talentNoGalleryConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak private var _galleryContainerView: UIView?
-    @IBOutlet weak private var _galleryHeaderLabel: UILabel?
-    @IBOutlet weak private var _galleryCollectionView: UICollectionView?
+    @IBOutlet weak private var _galleryContainerView: UIView!
+    @IBOutlet weak private var _galleryHeaderLabel: UILabel!
+    @IBOutlet weak private var _galleryCollectionView: UICollectionView!
+    @IBOutlet private var _talentNoGalleryConstraint: NSLayoutConstraint!
     
     @IBOutlet weak private var _filmographyContainerView: UIView!
     @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
@@ -56,7 +56,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         // Localizations
         _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
-        _galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercaseString
+        _galleryHeaderLabel.text = String.localize("talentdetail.gallery").uppercaseString
         _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
         
         if mode == .Extras {
@@ -64,24 +64,16 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             closeButton.removeFromSuperview()
             _containerViewTopConstraint.constant = 20
         } else {
-            _galleryHeaderLabel?.removeFromSuperview()
-            _galleryCollectionView?.removeFromSuperview()
-            _galleryContainerView?.removeFromSuperview()
-            _galleryHeaderLabel = nil
-            _galleryCollectionView = nil
-            _galleryContainerView = nil
-            _talentNoGalleryConstraint.priority = UILayoutPriorityRequired
+            _talentNoGalleryConstraint.active = true
         }
         
-        _galleryCollectionView?.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
+        _galleryCollectionView.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
         
         loadTalent(talent)
     }
     
     func loadTalent(talent: NGDMTalent) {
         self.talent = talent
-        
-        _talentGalleryButton.hidden = mode != .Synced || talent.images == nil || talent.images!.count == 1
         
         _talentNameLabel.text = talent.name?.uppercaseString
         if let imageURL = talent.fullImageURL {
@@ -133,6 +125,11 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             })
         })
         
+        let talentHasGallery = talent.images != nil && talent.images!.count > 1
+        _galleryContainerView.hidden = mode == .Synced || !talentHasGallery
+        _talentGalleryButton.hidden = mode != .Synced || !talentHasGallery
+        _talentNoGalleryConstraint.active = _galleryContainerView.hidden
+        
         _filmographyCollectionView.backgroundColor = UIColor.clearColor()
         _filmographyCollectionView.showsHorizontalScrollIndicator = true
         _filmographyContainerView.hidden = true
@@ -149,7 +146,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             }
         })
         
-        _galleryCollectionView?.reloadData()
+        _galleryCollectionView.reloadData()
     }
     
     // MARK: Actions
