@@ -31,7 +31,7 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     
     var image: UIImage? {
         set {
-            imageView.image = image
+            imageView.image = newValue
         }
         
         get {

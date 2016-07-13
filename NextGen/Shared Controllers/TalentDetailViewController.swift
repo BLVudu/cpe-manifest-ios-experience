@@ -85,6 +85,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         talent.getBiography({ (biography) in
             dispatch_async(dispatch_get_main_queue(), {
                 self._talentBiographyLabel.text = biography
+                self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
             })
         })
         
@@ -131,7 +132,6 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         _talentNoGalleryConstraint.active = _galleryContainerView.hidden
         
         _filmographyCollectionView.backgroundColor = UIColor.clearColor()
-        _filmographyCollectionView.showsHorizontalScrollIndicator = true
         _filmographyContainerView.hidden = true
         talent.getFilmography({ (films) in
             if let films = films {
@@ -139,6 +139,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                     if films.count > 0 {
                         self._filmographyContainerView.hidden = false
                         self._filmographyCollectionView.reloadData()
+                        self._filmographyCollectionView.setContentOffset(CGPointMake(0, 0), animated: false)
                     } else {
                         self._filmographyContainerView.hidden = true
                     }
