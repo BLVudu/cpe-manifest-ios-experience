@@ -14,15 +14,21 @@ struct VideoPlayerNotification {
     static let ShouldPauseAllOtherVideos = "VideoPlayerNotificationShouldPauseAllOtherVideos"
 }
 
-enum VideoPlayerMode {
+public enum VideoPlayerMode {
     case MainFeature
     case Supplemental
     case SupplementalInMovie
 }
 
+public protocol NextGenVideoPlayerDelegate {
+    func getProcessedVideoURL(url: NSURL, mode: VideoPlayerMode, completion: (url: NSURL) -> Void)
+}
+
 typealias Task = (cancel : Bool) -> ()
 
 class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverControllerDelegate {
+    
+    static var delegate: NextGenVideoPlayerDelegate?
     
     let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
     
@@ -133,9 +139,18 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     
     // MARK: Video Playback
     override func playVideoWithURL(url: NSURL!) {
-        super.playVideoWithURL(url)
-        
-        SettingsManager.setVideoAsWatched(url)
+        if _didPlayInterstitial {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                SettingsManager.setVideoAsWatched(url)
+                VideoPlayerViewController.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url) in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        super.playVideoWithURL(url)
+                    }
+                })
+            }
+        } else {
+            super.playVideoWithURL(url)
+        }
     }
     
     func playMainExperience() {
