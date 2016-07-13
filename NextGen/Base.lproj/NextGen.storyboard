@@ -821,6 +821,12 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHILD LOCATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDl-aD-aYn">
+                                <rect key="frame" x="455" y="535" width="151" height="25"/>
+                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="22"/>
+                                <color key="textColor" red="1" green="0.80392156862745101" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back Nav" translatesAutoresizingMaskIntoConstraints="NO" id="itV-dR-adh">
                                 <rect key="frame" x="420" y="535" width="25" height="25"/>
                                 <constraints>
@@ -911,12 +917,6 @@
                                     <constraint firstAttribute="trailing" secondItem="aFf-AH-Frh" secondAttribute="trailing" constant="150" id="oBj-kr-rlM"/>
                                 </constraints>
                             </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHILD LOCATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDl-aD-aYn">
-                                <rect key="frame" x="455" y="535" width="151" height="25"/>
-                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="22"/>
-                                <color key="textColor" red="1" green="0.80392156862745101" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

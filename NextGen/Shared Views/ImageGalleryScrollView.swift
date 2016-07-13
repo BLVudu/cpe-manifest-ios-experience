@@ -41,6 +41,10 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     var gallery: NGDMGallery? {
         didSet {
             resetScrollView()
+            
+            if let gallery = gallery where gallery.isSubType(.Turntable) {
+                preloadImages()
+            }
         }
     }
     

@@ -62,11 +62,11 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     private var selectedChildSceneLocation: ChildSceneLocation? {
         didSet {
             if let marker = selectedChildSceneLocation?.mapMarker {
-                mapView.selectedMarker = marker
-                
                 if let appData = selectedChildSceneLocation?.childAppData.first {
                     mapView.setLocation(marker.location, zoomLevel: appData.zoomLevel, animated: true)
                 }
+                
+                mapView.selectedMarker = marker
             }
             
             reloadBreadcrumbs()
@@ -198,8 +198,10 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     func reloadBreadcrumbs() {
+        breadcrumbsPrimaryButton.userInteractionEnabled = false
         breadcrumbsSecondaryArrowImageView.hidden = true
         breadcrumbsSecondaryButton.hidden = true
+        breadcrumbsSecondaryButton.userInteractionEnabled = true
         breadcrumbsTertiaryArrowImageView.hidden = true
         breadcrumbsTertiaryLabel.hidden = true
         
@@ -212,12 +214,19 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             breadcrumbsSecondaryButton.hidden = false
             
             if let childSceneLocation = selectedChildSceneLocation {
-                breadcrumbsTertiaryLabel.text = childSceneLocation.subtitle.uppercaseString
-                breadcrumbsTertiaryLabel.sizeToFit()
-                breadcrumbsTertiaryLabel.frame.size.height = CGRectGetHeight(breadcrumbsPrimaryButton.frame)
-                breadcrumbsTertiaryArrowImageView.hidden = false
-                breadcrumbsTertiaryLabel.hidden = false
+                if sceneLocation.title != childSceneLocation.subtitle {
+                    breadcrumbsTertiaryLabel.text = childSceneLocation.subtitle.uppercaseString
+                    breadcrumbsTertiaryLabel.sizeToFit()
+                    breadcrumbsTertiaryLabel.frame.size.height = CGRectGetHeight(breadcrumbsPrimaryButton.frame)
+                    breadcrumbsTertiaryArrowImageView.hidden = false
+                    breadcrumbsTertiaryLabel.hidden = false
+                } else {
+                    breadcrumbsSecondaryButton.setTitleColor(UIColor.themePrimaryColor(), forState: .Normal)
+                    breadcrumbsSecondaryButton.userInteractionEnabled = false
+                }
             }
+            
+            breadcrumbsPrimaryButton.userInteractionEnabled = true
         }
     }
     
@@ -269,7 +278,8 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
         if let dataDictionary = marker.dataObject as? [String: Int], sceneLocationIndex = dataDictionary["sceneLocationIndex"], childSceneLocationIndex = dataDictionary["childSceneLocationIndex"] {
             if sceneLocations.count > sceneLocationIndex && sceneLocations[sceneLocationIndex].childSceneLocations.count > childSceneLocationIndex {
-                selectedChildSceneLocation = sceneLocations[sceneLocationIndex].childSceneLocations[childSceneLocationIndex]
+                selectedSceneLocation = sceneLocations[sceneLocationIndex]
+                selectedChildSceneLocation = selectedSceneLocation!.childSceneLocations[childSceneLocationIndex]
                 collectionView.reloadData()
             }
         }
@@ -324,6 +334,10 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             collectionView.reloadData()
         } else {
             selectedSceneLocation = sceneLocations[indexPath.row]
+            if let childSceneLocations = selectedSceneLocation?.childSceneLocations where childSceneLocations.count == 1 {
+                selectedChildSceneLocation = childSceneLocations.first
+            }
+            
             collectionView.reloadData()
         }
     }
