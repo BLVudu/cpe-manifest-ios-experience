@@ -38,6 +38,7 @@
 "talentdetail.filmography" = "Filmography";
 
 // Clip & Share
+"clipshare.select_clip_title" = "Choose a clip to share";
 "clipshare.description" = "Share this clip with friends!";
 "clipshare.share_message" = "Check out this clip from %{movie_name}: %{url}";
 "clipshare.share_button" = "Share this Clip";

@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import NextGenDataManager
 
 class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
@@ -196,8 +197,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     @IBAction func onShare(sender: UIButton?) {
         if !galleryScrollView.hidden {
-            if let url = galleryScrollView.currentImageURL {
-                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": "Man of Steel", "url": url.absoluteString])], applicationActivities: nil)
+            if let url = galleryScrollView.currentImageURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
+                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
                 activityViewController.popoverPresentationController?.sourceView = sender
                 self.presentViewController(activityViewController, animated: true, completion: nil)
             }

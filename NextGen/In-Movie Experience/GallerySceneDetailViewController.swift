@@ -84,8 +84,8 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     
     // MARK: Actions
     @IBAction func onShare(sender: UIButton?) {
-        if let galleryScrollView = galleryScrollView, url = galleryScrollView.currentImageURL {
-            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": "Man of Steel", "url": url.absoluteString])], applicationActivities: nil)
+        if let galleryScrollView = galleryScrollView, url = galleryScrollView.currentImageURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
+            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender
             self.presentViewController(activityViewController, animated: true, completion: nil)
         }
