@@ -20,15 +20,9 @@ public enum VideoPlayerMode {
     case SupplementalInMovie
 }
 
-public protocol NextGenVideoPlayerDelegate {
-    func getProcessedVideoURL(url: NSURL, mode: VideoPlayerMode, completion: (url: NSURL?) -> Void)
-}
-
 typealias Task = (cancel : Bool) -> ()
 
 class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverControllerDelegate {
-    
-    static var delegate: NextGenVideoPlayerDelegate?
     
     let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
     
@@ -146,7 +140,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         if _didPlayInterstitial {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 SettingsManager.setVideoAsWatched(url)
-                VideoPlayerViewController.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url) in
+                NextGenHook.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url) in
                     if let url = url {
                         dispatch_async(dispatch_get_main_queue()) {
                             super.playVideoWithURL(url)
@@ -294,6 +288,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     override func done(sender: AnyObject?) {
         super.done(sender)
         
+        NextGenHook.delegate?.videoPlayerWillClose(mode)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -343,5 +338,3 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     }
     
 }
-
-

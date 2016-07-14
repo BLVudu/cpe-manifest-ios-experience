@@ -204,6 +204,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func onExit() {
+        NextGenHook.delegate?.nextGenExperienceWillClose()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
