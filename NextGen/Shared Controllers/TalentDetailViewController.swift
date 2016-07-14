@@ -86,49 +86,53 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             _talentImageView.image = nil
         }
         
-        talent.getBiography({ (biography) in
-            dispatch_async(dispatch_get_main_queue(), {
-                self._talentBiographyLabel.text = biography
-                self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            talent.getBiography({ (biography) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self._talentBiographyLabel.text = biography
+                    self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
+                })
             })
-        })
+        }
         
         _twitterButton.hidden = true
         _facebookButton.hidden = true
         _instagramButton.hidden = true
-        talent.getSocialAccounts({ (socialAccounts) in
-            dispatch_async(dispatch_get_main_queue(), {
-                if let socialAccounts = socialAccounts {
-                    for socialAccount in socialAccounts {
-                        switch (socialAccount.type) {
-                        case .Facebook:
-                            self._facebookButton.hidden = false
-                            self._facebookButton.socialAccount = socialAccount
-                            break
-                            
-                        case .Twitter:
-                            self._twitterButton.hidden = false
-                            self._twitterButton.socialAccount = socialAccount
-                            break
-                            
-                        case .Instagram:
-                            self._instagramButton.hidden = false
-                            self._instagramButton.socialAccount = socialAccount
-                            break
-                            
-                        default:
-                            break
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            talent.getSocialAccounts({ (socialAccounts) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let socialAccounts = socialAccounts {
+                        for socialAccount in socialAccounts {
+                            switch (socialAccount.type) {
+                            case .Facebook:
+                                self._facebookButton.hidden = false
+                                self._facebookButton.socialAccount = socialAccount
+                                break
+                                
+                            case .Twitter:
+                                self._twitterButton.hidden = false
+                                self._twitterButton.socialAccount = socialAccount
+                                break
+                                
+                            case .Instagram:
+                                self._instagramButton.hidden = false
+                                self._instagramButton.socialAccount = socialAccount
+                                break
+                                
+                            default:
+                                break
+                            }
                         }
                     }
-                }
-                
-                self._twitterNoFacebookNoInstagramConstraint.active = self._facebookButton.hidden && self._instagramButton.hidden
-                self._twitterNoFacebookConstraint.active = self._facebookButton.hidden && !self._instagramButton.hidden
-                self._twitterMainConstraint.active = !self._twitterNoFacebookNoInstagramConstraint.active && !self._twitterNoFacebookConstraint.active
-                self._facebookNoInstagramConstraint.active = self._instagramButton.hidden
-                self._facebookMainConstraint.active = !self._facebookNoInstagramConstraint.active
+                    
+                    self._twitterNoFacebookNoInstagramConstraint.active = self._facebookButton.hidden && self._instagramButton.hidden
+                    self._twitterNoFacebookConstraint.active = self._facebookButton.hidden && !self._instagramButton.hidden
+                    self._twitterMainConstraint.active = !self._twitterNoFacebookNoInstagramConstraint.active && !self._twitterNoFacebookConstraint.active
+                    self._facebookNoInstagramConstraint.active = self._instagramButton.hidden
+                    self._facebookMainConstraint.active = !self._facebookNoInstagramConstraint.active
+                })
             })
-        })
+        }
         
         let talentHasGallery = talent.images != nil && talent.images!.count > 1
         _galleryContainerView.hidden = mode == .Synced || !talentHasGallery
@@ -138,19 +142,21 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         _filmographyCollectionView.backgroundColor = UIColor.clearColor()
         _filmographyContainerView.hidden = true
-        talent.getFilmography({ (films) in
-            if let films = films {
-                dispatch_async(dispatch_get_main_queue(), {
-                    if films.count > 0 {
-                        self._filmographyContainerView.hidden = false
-                        self._filmographyCollectionView.reloadData()
-                        self._filmographyCollectionView.setContentOffset(CGPointMake(0, 0), animated: false)
-                    } else {
-                        self._filmographyContainerView.hidden = true
-                    }
-                })
-            }
-        })
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            talent.getFilmography({ (films) in
+                if let films = films {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if films.count > 0 {
+                            self._filmographyContainerView.hidden = false
+                            self._filmographyCollectionView.reloadData()
+                            self._filmographyCollectionView.setContentOffset(CGPointMake(0, 0), animated: false)
+                        } else {
+                            self._filmographyContainerView.hidden = true
+                        }
+                    })
+                }
+            })
+        }
         
         _galleryCollectionView.reloadData()
     }

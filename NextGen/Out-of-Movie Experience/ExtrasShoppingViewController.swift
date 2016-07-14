@@ -4,8 +4,10 @@
 
 import UIKit
 
-let kShoppingNotificationDidSelectCategory = "kShoppingNotificationDidSelectCategory"
-let kShoppingNotificationCloseDetailsView = "kShoppingNotificationCloseDetailsView"
+struct ShoppingMenuNotification {
+    static let DidSelectCategory = "kShoppingMenuNotificationDidSelectCategory"
+    static let ShouldCloseDetails = "kShoppingMenuNotificationShouldCloseDetails"
+}
 
 class ExtrasShoppingViewController: MenuedViewController {
     
@@ -67,8 +69,8 @@ class ExtrasShoppingViewController: MenuedViewController {
         }
         
         if categoryId != nil {
-            NSNotificationCenter.defaultCenter().postNotificationName(kShoppingNotificationCloseDetailsView, object: nil, userInfo: nil)
-            NSNotificationCenter.defaultCenter().postNotificationName(kShoppingNotificationDidSelectCategory, object: nil, userInfo: ["categoryId": categoryId!])
+            NSNotificationCenter.defaultCenter().postNotificationName(ShoppingMenuNotification.ShouldCloseDetails, object: nil, userInfo: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(ShoppingMenuNotification.DidSelectCategory, object: nil, userInfo: ["categoryId": categoryId!])
         }
     }
 

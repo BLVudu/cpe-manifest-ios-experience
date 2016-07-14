@@ -7,47 +7,52 @@ import MBProgressHUD
 
 class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    struct Constants {
+    private struct Constants {
         static let ItemSpacing: CGFloat = 12
         static let LineSpacing: CGFloat = 12
         static let Padding: CGFloat = 15
         static let ItemAspectRatio: CGFloat = 338 / 230
     }
     
-    @IBOutlet weak var productsCollectionView: UICollectionView!
+    @IBOutlet weak private var productsCollectionView: UICollectionView!
     
-    private var _products: [TheTakeProduct]?
-    private var _productListSessionDataTask: NSURLSessionDataTask?
-    private var _didSelectCategoryObserver: NSObjectProtocol!
+    private var products: [TheTakeProduct]?
+    private var productListSessionDataTask: NSURLSessionDataTask?
+    private var didSelectCategoryObserver: NSObjectProtocol?
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(_didSelectCategoryObserver)
+        if let observer = didSelectCategoryObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+        }
     }
  
     override func viewDidLoad() {
         productsCollectionView.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        _didSelectCategoryObserver = NSNotificationCenter.defaultCenter().addObserverForName(kShoppingNotificationDidSelectCategory, object: nil, queue: nil, usingBlock: { [weak self] (notification) in
+        didSelectCategoryObserver = NSNotificationCenter.defaultCenter().addObserverForName(ShoppingMenuNotification.DidSelectCategory, object: nil, queue: nil, usingBlock: { [weak self] (notification) in
             if let strongSelf = self, userInfo = notification.userInfo, categoryId = userInfo["categoryId"] as? String {
-                strongSelf.productsCollectionView.userInteractionEnabled = false
-                MBProgressHUD.showHUDAddedTo(strongSelf.productsCollectionView, animated: true)
+                dispatch_async(dispatch_get_main_queue(), {
+                    strongSelf.productsCollectionView.userInteractionEnabled = false
+                    MBProgressHUD.showHUDAddedTo(strongSelf.productsCollectionView, animated: true)
+                })
                 
-                if let currentTask = strongSelf._productListSessionDataTask {
+                if let currentTask = strongSelf.productListSessionDataTask {
                     currentTask.cancel()
                 }
                 
-                strongSelf._productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf._products = products
-                        strongSelf.productsCollectionView.reloadData()
-                        let newIndex = NSIndexPath(forItem: 0, inSection: 0)
-                        strongSelf.productsCollectionView.scrollToItemAtIndexPath(newIndex, atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
-                        strongSelf.productsCollectionView.userInteractionEnabled = true
-                        MBProgressHUD.hideAllHUDsForView(strongSelf.productsCollectionView, animated: true)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                    strongSelf.productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
+                        strongSelf.productListSessionDataTask = nil
+                        dispatch_async(dispatch_get_main_queue()) {
+                            strongSelf.products = products
+                            strongSelf.productsCollectionView.reloadData()
+                            let newIndex = NSIndexPath(forItem: 0, inSection: 0)
+                            strongSelf.productsCollectionView.scrollToItemAtIndexPath(newIndex, atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
+                            strongSelf.productsCollectionView.userInteractionEnabled = true
+                            MBProgressHUD.hideAllHUDsForView(strongSelf.productsCollectionView, animated: true)
+                        }
                     })
-                    
-                    strongSelf._productListSessionDataTask = nil
-                })
+                }
             }
         })
     }
@@ -64,11 +69,7 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
     }
     
      func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let products = _products {
-            return products.count
-        }
-        
-        return 0
+        return products?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -76,7 +77,7 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
         cell.titleLabel?.removeFromSuperview()
         cell.productImageType = ShoppingSceneDetailCollectionViewCell.ProductImageType.Scene
         
-        if let product = _products?[indexPath.row] {
+        if let product = products?[indexPath.row] {
             cell.theTakeProducts = [product]
         }
         

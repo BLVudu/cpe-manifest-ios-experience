@@ -89,7 +89,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         
         productMatchIcon.layer.cornerRadius = CGRectGetWidth(productMatchIcon.frame) / 2
         
-        _closeDetailsViewObserver = NSNotificationCenter.defaultCenter().addObserverForName(kShoppingNotificationCloseDetailsView, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        _closeDetailsViewObserver = NSNotificationCenter.defaultCenter().addObserverForName(ShoppingMenuNotification.ShouldCloseDetails, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self {
                 strongSelf.close(nil)
             }
