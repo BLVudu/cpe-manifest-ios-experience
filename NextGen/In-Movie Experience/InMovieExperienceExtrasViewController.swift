@@ -26,9 +26,12 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     private var didChangeTimeObserver: NSObjectProtocol?
     
     private var currentTime: Double = -1
-    private var currentTalents = [NGDMTalent]()
+    private var currentTalents: [NGDMTalent]?
     private var hiddenTalents: [NGDMTalent]?
     private var isShowingMore = false
+    private var numCurrentTalents: Int {
+        return currentTalents?.count ?? 0
+    }
     
     deinit {
         if let observer = didChangeTimeObserver {
@@ -77,10 +80,10 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
             if self.isShowingMore {
                 self.hiddenTalents = newTalents
             } else {
-                var hasNewData = newTalents.count != self.currentTalents.count
+                var hasNewData = newTalents.count != self.numCurrentTalents
                 if !hasNewData {
                     for talent in newTalents {
-                        if !self.currentTalents.contains(talent) {
+                        if self.currentTalents == nil || !self.currentTalents!.contains(talent) {
                             hasNewData = true
                             break
                         }
@@ -99,13 +102,13 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentTalents.count
+        return numCurrentTalents
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        if currentTalents.count > indexPath.row {
-            cell.talent = currentTalents[indexPath.row]
+        if numCurrentTalents > indexPath.row, let talent = currentTalents?[indexPath.row] {
+            cell.talent = talent
         }
         
         return cell
@@ -171,8 +174,8 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         
         if isShowingMore {
             currentTalents = NGDMManifest.sharedInstance.mainExperience?.orderedActors ?? [NGDMTalent]()
-        } else if let talents = hiddenTalents {
-            currentTalents = talents
+        } else {
+            currentTalents = hiddenTalents
         }
         
         talentTableView?.contentOffset = CGPointZero
