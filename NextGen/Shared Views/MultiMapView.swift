@@ -114,6 +114,9 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        googleMapView?.frame = self.bounds
+        appleMapView?.frame = self.bounds
+        
         if let mapTypeSegmentedControl = mapTypeSegmentedControl {
             self.bringSubviewToFront(mapTypeSegmentedControl)
         }

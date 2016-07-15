@@ -38,7 +38,11 @@ class MapItemCell: UICollectionViewCell {
     var imageURL: NSURL? {
         set {
             if let imageURL = newValue {
-                setImageSessionDataTask = imageView.setImageWithURL(imageURL, completion: nil)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
+                    if let strongSelf = self {
+                        strongSelf.setImageSessionDataTask = strongSelf.imageView.setImageWithURL(imageURL, completion: nil)
+                    }
+                }
             } else {
                 imageView.image = nil
             }

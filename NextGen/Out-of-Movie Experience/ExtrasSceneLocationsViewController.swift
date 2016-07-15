@@ -44,8 +44,10 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     private var videoPlayerViewController: VideoPlayerViewController?
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
+    @IBOutlet weak private var galleryPageControl: UIPageControl!
     @IBOutlet weak private var closeButton: UIButton!
     private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
+    private var galleryDidScrollToPage: NSObjectProtocol?
     
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
     private var sceneLocations = [SceneLocation]()
@@ -74,8 +76,14 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     deinit {
+        let center = NSNotificationCenter.defaultCenter()
+        
         if let observer = galleryDidToggleFullScreenObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            center.removeObserver(observer)
+        }
+        
+        if let observer = galleryDidScrollToPage {
+            center.removeObserver(observer)
         }
     }
     
@@ -103,6 +111,13 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, isFullScreen = notification.userInfo?["isFullScreen"] as? Bool {
                 strongSelf.closeButton.hidden = isFullScreen
+                strongSelf.galleryPageControl.hidden = isFullScreen
+            }
+        })
+        
+        galleryDidScrollToPage = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
+                strongSelf.galleryPageControl.currentPage = page
             }
         })
         
@@ -182,6 +197,14 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         galleryScrollView.loadGallery(gallery)
         galleryScrollView.hidden = false
         
+        if gallery.isSubType(.Turntable) {
+            galleryPageControl.hidden = true
+        } else {
+            galleryPageControl.hidden = false
+            galleryPageControl.numberOfPages = galleryScrollView.imageURLs.count
+            galleryPageControl.currentPage = 0
+        }
+        
         locationDetailView.hidden = false
     }
     
@@ -190,6 +213,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         
         galleryScrollView.destroyGallery()
         galleryScrollView.hidden = true
+        galleryPageControl.hidden = true
         
         videoPlayerViewController?.willMoveToParentViewController(nil)
         videoPlayerViewController?.view.removeFromSuperview()
