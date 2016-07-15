@@ -12,10 +12,10 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak private var thumbnailContainerView: UIView!
     @IBOutlet weak private var thumbnailImageView: UIImageView!
     @IBOutlet weak private var playIconImageView: UIImageView!
-    @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak private var runtimeLabel: UILabel!
     @IBOutlet weak private var captionLabel: UILabel!
     
-    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    private var setImageSessionDataTask: NSURLSessionDataTask?
     
     var experience: NGDMExperience? {
         didSet {
@@ -32,7 +32,11 @@ class VideoCell: UITableViewCell {
             }
             
             if let imageURL = experience?.imageURL {
-                _setImageSessionDataTask = thumbnailImageView.setImageWithURL(imageURL, completion: nil)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
+                    if let strongSelf = self {
+                        strongSelf.setImageSessionDataTask = strongSelf.thumbnailImageView.setImageWithURL(imageURL, completion: nil)
+                    }
+                }
             } else {
                 thumbnailImageView.image = nil
             }
@@ -44,9 +48,9 @@ class VideoCell: UITableViewCell {
         
         experience = nil
         
-        if let task = _setImageSessionDataTask {
+        if let task = setImageSessionDataTask {
             task.cancel()
-            _setImageSessionDataTask = nil
+            setImageSessionDataTask = nil
         }
         
         runtimeLabel.text = nil

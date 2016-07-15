@@ -8,22 +8,26 @@ extension UIImageView {
     
     func setImageWithURL(url: NSURL, completion: ((image: UIImage?) -> Void)?) -> NSURLSessionDataTask? {
         if url.fileURL {
-            if let path = url.path {
-                self.image = UIImage(named: path)
+            dispatch_async(dispatch_get_main_queue()) {
+                if let path = url.path {
+                    self.image = UIImage(named: path)
+                }
+                
+                if let completion = completion {
+                    completion(image: self.image)
+                }
             }
-            
-            if let completion = completion {
-                completion(image: self.image)
-            }
-            
+        
             return nil
         }
         
         return UIImageRemoteLoader.loadImage(url, completion: { (image) in
-            self.image = image
-            
-            if let completion = completion {
-                completion(image: self.image)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.image = image
+                
+                if let completion = completion {
+                    completion(image: self.image)
+                }
             }
         })
     }

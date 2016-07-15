@@ -179,7 +179,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     func showGallery(gallery: NGDMGallery) {
         closeDetailView()
         
-        galleryScrollView.gallery = gallery
+        galleryScrollView.loadGallery(gallery)
         galleryScrollView.hidden = false
         
         locationDetailView.hidden = false
@@ -188,7 +188,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     @IBAction func closeDetailView() {
         locationDetailView.hidden = true
         
-        galleryScrollView.gallery = nil
+        galleryScrollView.destroyGallery()
         galleryScrollView.hidden = true
         
         videoPlayerViewController?.willMoveToParentViewController(nil)

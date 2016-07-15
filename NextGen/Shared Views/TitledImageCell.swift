@@ -9,17 +9,21 @@ class TitledImageCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "TitledImageCellReuseIdentifier"
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
     
-    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    private var setImageSessionDataTask: NSURLSessionDataTask?
     
     var experience: NGDMExperience? {
         didSet {
             titleLabel.text = experience?.metadata?.title?.uppercaseString
             
             if let imageURL = experience?.imageURL {
-                _setImageSessionDataTask = imageView.setImageWithURL(imageURL, completion: nil)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
+                    if let strongSelf = self {
+                        strongSelf.setImageSessionDataTask = strongSelf.imageView.setImageWithURL(imageURL, completion: nil)
+                    }
+                }
             } else {
                 imageView.image = nil
             }
@@ -30,9 +34,9 @@ class TitledImageCell: UICollectionViewCell {
         super.prepareForReuse()
         
         experience = nil
-        if let task = _setImageSessionDataTask {
+        if let task = setImageSessionDataTask {
             task.cancel()
-            _setImageSessionDataTask = nil
+            setImageSessionDataTask = nil
         }
     }
     

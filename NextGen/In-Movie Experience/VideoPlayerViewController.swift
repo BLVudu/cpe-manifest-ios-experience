@@ -11,7 +11,7 @@ import NextGenDataManager
 struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
-    static let ShouldPauseAllOtherVideos = "VideoPlayerNotificationShouldPauseAllOtherVideos"
+    static let DidPlayVideo = "VideoPlayerNotificationDidPlayVideo"
 }
 
 public enum VideoPlayerMode {
@@ -81,7 +81,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         _commentaryView.hidden = true
         
         // Notifications
-        shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
                 if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
                     strongSelf.pauseVideo()
@@ -176,7 +176,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         super.playVideo()
         
         manuallyPaused = false
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.ShouldPauseAllOtherVideos, object: nil, userInfo: [kMasterVideoPlayerViewControllerKey: self])
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayVideo, object: nil, userInfo: [kMasterVideoPlayerViewControllerKey: self])
     }
     
     override func syncScrubber() {

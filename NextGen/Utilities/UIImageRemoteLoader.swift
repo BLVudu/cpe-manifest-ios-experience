@@ -11,9 +11,7 @@ struct UIImageRemoteLoader {
         let urlCache = NSURLCache(memoryCapacity: 0, diskCapacity: 1024 * 1024 * 512, diskPath: "com.wb.nextgen_image_cache") // 512Mb
         if let cachedResponse = urlCache.cachedResponseForRequest(request) where cachedResponse.data.length > 0 {
             if let completion = completion {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    completion(image: UIImage(data: cachedResponse.data))
-                })
+                completion(image: UIImage(data: cachedResponse.data))
             }
             
             return nil
@@ -25,13 +23,7 @@ struct UIImageRemoteLoader {
         sessionConfiguration.timeoutIntervalForRequest = 10
         let task = NSURLSession(configuration: sessionConfiguration).dataTaskWithRequest(NSURLRequest(URL: url)) { (data, response, error) -> Void in
             if let completion = completion {
-                if let data = data {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        completion(image: UIImage(data: data))
-                    })
-                } else {
-                    completion(image: nil)
-                }
+                completion(image: (data != nil ? UIImage(data: data!) : nil))
             }
         }
         

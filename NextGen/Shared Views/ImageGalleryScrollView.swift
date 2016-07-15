@@ -38,21 +38,8 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    var gallery: NGDMGallery? {
-        didSet {
-            resetScrollView()
-            
-            if let gallery = gallery where gallery.isSubType(.Turntable) {
-                preloadImages()
-            }
-        }
-    }
-    
-    var imageURLs: [NSURL]? {
-        didSet {
-            resetScrollView()
-        }
-    }
+    var imageURLs = [NSURL]()
+    private var gallerySubType = GallerySubType.Gallery
     
     var currentImageURL: NSURL? {
         set {
@@ -60,13 +47,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
         
         get {
-            if let pictures = gallery?.pictures {
-                return pictures[currentPage].imageURL
-            } else if let imageURLs = imageURLs {
-                return imageURLs[currentPage]
-            }
-            
-            return nil
+            return imageURLForPage(currentPage)
         }
     }
     
@@ -120,6 +101,32 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    func loadGallery(gallery: NGDMGallery) {
+        gallerySubType = gallery.isSubType(.Turntable) ? .Turntable : .Gallery
+        imageURLs = [NSURL]()
+        
+        if let pictures = gallery.pictures {
+            for i in 0.stride(to: pictures.count - 1, by: max((self.gallerySubType == .Turntable ? Int(ceil(Double(pictures.count) / 50)) : 1), 1)) {
+                if let url = pictures[i].imageURL {
+                    self.imageURLs.append(url)
+                }
+            }
+        }
+        
+        resetScrollView()
+        
+        if gallerySubType == .Turntable {
+            for i in 0 ..< imageURLs.count {
+                loadGalleryImageForPage(i)
+            }
+        }
+    }
+    
+    func destroyGallery() {
+        imageURLs = [NSURL]()
+        resetScrollView()
+    }
+    
     func removeToolbar() {
         toolbar?.removeFromSuperview()
         toolbar = nil
@@ -151,13 +158,12 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             toolbar.items = nil
             
             var toolbarItems = [UIBarButtonItem]()
-            if let gallery = gallery where gallery.isSubType(.Turntable) {
+            if gallerySubType == .Turntable {
                 let turntableSlider = UISlider(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame) - Constants.ToolbarHeight - 35, Constants.ToolbarHeight))
                 turntableSlider.minimumValue = 0
-                turntableSlider.maximumValue = gallery.pictures != nil ? Float(gallery.pictures!.count - 1) : 0
+                turntableSlider.maximumValue = max(Float(imageURLs.count - 1), 0)
                 turntableSlider.value = 0
                 turntableSlider.addTarget(self, action: #selector(self.turntableSliderValueChanged), forControlEvents: .ValueChanged)
-                turntableSlider.addTarget(self, action: #selector(self.turntableSliderDidEnd), forControlEvents: [.TouchUpInside, .TouchUpOutside])
                 toolbarItems.append(UIBarButtonItem(customView: turntableSlider))
             } else {
                 toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil))
@@ -173,7 +179,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             toolbar.items = toolbarItems
         }
         
-        self.scrollEnabled = gallery == nil || !gallery!.isSubType(.Turntable)
+        self.scrollEnabled = gallerySubType != .Turntable
         isFullScreen = false
         toolbar?.hidden = false
         closeButton.hidden = true
@@ -182,9 +188,8 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     func layoutPages() {
-        let numPictures = gallery?.pictures?.count ?? imageURLs?.count ?? 0
         scrollViewPageWidth = CGRectGetWidth(self.bounds)
-        for i in 0 ..< numPictures {
+        for i in 0 ..< imageURLs.count {
             var pageView = self.viewWithTag(i + 1) as? UIScrollView
             var imageView = pageView?.subviews.first as? UIImageView
             if pageView == nil {
@@ -211,7 +216,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             imageView!.frame = pageView!.bounds
         }
         
-        self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * CGFloat(numPictures), CGRectGetHeight(self.frame))
+        self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * CGFloat(imageURLs.count), CGRectGetHeight(self.frame))
         self.contentOffset.x = scrollViewPageWidth * CGFloat(currentPage)
         
         if let toolbar = toolbar {
@@ -228,7 +233,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Actions
     func toggleFullScreen() {
         isFullScreen = !isFullScreen
-        toolbar?.hidden = isFullScreen && (gallery == nil || !gallery!.isSubType(.Turntable))
+        toolbar?.hidden = isFullScreen && gallerySubType != .Turntable
         closeButton.hidden = !isFullScreen
         
         if isFullScreen {
@@ -265,17 +270,9 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         gotoPage(Int(floor(slider.value)), animated: false)
     }
     
-    func turntableSliderDidEnd() {
-        cleanInvisibleImages()
-    }
-    
     // MARK: Image Gallery
     private func imageURLForPage(page: Int) -> NSURL? {
-        if let pictures = gallery?.pictures where pictures.count > page {
-            return pictures[page].imageURL
-        }
-        
-        if let imageURLs = imageURLs where imageURLs.count > page {
+        if imageURLs.count > page {
             return imageURLs[page]
         }
         
@@ -283,9 +280,11 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     private func loadGalleryImageForPage(page: Int) {
-        if let imageURL = imageURLForPage(page), pageView = self.viewWithTag(page + 1) as? UIScrollView, imageView = pageView.subviews.first as? UIImageView where imageView.image == nil {
-            if let sessionDataTask = imageView.setImageWithURL(imageURL, completion: nil) {
-                sessionDataTasks.append(sessionDataTask)
+        if let url = imageURLForPage(page), imageView = (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView where imageView.image == nil {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) { [weak self] in
+                if let strongSelf = self, sessionDataTask = imageView.setImageWithURL(url, completion: nil) {
+                    strongSelf.sessionDataTasks.append(sessionDataTask)
+                }
             }
         }
     }
@@ -308,17 +307,9 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     func gotoPage(page: Int, animated: Bool) {
-        currentPage = page
-        self.setContentOffset(CGPointMake(CGFloat(currentPage) * scrollViewPageWidth, 0), animated: animated)
-    }
-    
-    func preloadImages() {
-        if let pictures = gallery?.pictures {
-            for picture in pictures {
-                if let url = picture.imageURL {
-                    UIImageRemoteLoader.loadImage(url, completion: nil)
-                }
-            }
+        self.setContentOffset(CGPointMake(CGFloat(page) * scrollViewPageWidth, 0), animated: animated)
+        if gallerySubType != .Turntable {
+            currentPage = page
         }
     }
     
