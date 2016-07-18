@@ -7,23 +7,21 @@ import QuartzCore
 
 class MenuSectionCell: UITableViewCell {
     
-    static let NibName = "MenuSectionCell"
     static let ReuseIdentifier = "MenuSectionCellReuseIdentifier"
     
-    @IBOutlet weak var primaryLabel: UILabel!
-    @IBOutlet weak var secondaryLabel: UILabel?
-    @IBOutlet weak var dropDownImageView: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var dropDownImageView: UIImageView!
     
     var menuSection: MenuSection? {
         didSet {
-            primaryLabel.text = menuSection?.title
+            titleLabel.text = menuSection?.title
             dropDownImageView.hidden = (menuSection == nil || !menuSection!.expandable)
         }
     }
     
-    var selectedItem: MenuItem? {
+    var active = false {
         didSet {
-            secondaryLabel?.text = selectedItem?.title
+            updateCellStyle()
         }
     }
     
@@ -31,7 +29,7 @@ class MenuSectionCell: UITableViewCell {
         super.prepareForReuse()
         
         menuSection = nil
-        selectedItem = nil
+        active = false
     }
     
     override func layoutSubviews() {
@@ -40,18 +38,10 @@ class MenuSectionCell: UITableViewCell {
         if let section = menuSection {
             dropDownImageView.transform = CGAffineTransformMakeRotation(section.expanded ? CGFloat(-M_PI) : 0.0)
         }
-        
-        updateCellStyle()
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        updateCellStyle()
     }
     
     func updateCellStyle() {
-        primaryLabel.textColor = self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor()
+        titleLabel.textColor = self.active ? UIColor.themePrimaryColor() : UIColor.whiteColor()
     }
     
     func toggleDropDownIcon() {

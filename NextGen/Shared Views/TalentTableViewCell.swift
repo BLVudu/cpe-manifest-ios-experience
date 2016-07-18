@@ -19,7 +19,7 @@ class TalentTableViewCell: UITableViewCell {
         didSet {
             if let url = _imageURL {
                 if url != oldValue {
-                    _setImageSessionDataTask = talentImageView.setImageWithURL(url)
+                    _setImageSessionDataTask = talentImageView.setImageWithURL(url, completion: nil)
                 }
             } else {
                 talentImageView.image = nil
@@ -39,7 +39,7 @@ class TalentTableViewCell: UITableViewCell {
         }
     }
     
-    var talent: Talent? {
+    var talent: NGDMTalent? {
         didSet {
             if let talent = talent {
                 if talent != oldValue {

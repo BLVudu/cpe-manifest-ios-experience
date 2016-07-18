@@ -28,7 +28,7 @@ class ExtrasExperienceViewController: UIViewController {
         var titleFrame = CGRectMake(CGRectGetWidth(self.view.frame) - Constants.TitleImageWidth, 0, Constants.TitleImageWidth, Constants.TitleImageHeight)
         if experience == NGDMManifest.sharedInstance.outOfMovieExperience, let titleImageURL = experience.appearance?.titleImageURL {
             let titleImageView = UIImageView(frame: titleFrame)
-            titleImageView.setImageWithURL(titleImageURL)
+            titleImageView.setImageWithURL(titleImageURL, completion: nil)
             self.view.addSubview(titleImageView)
             self.view.sendSubviewToBack(titleImageView)
         } else {
@@ -38,7 +38,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleLabel.textAlignment = NSTextAlignment.Right
             titleLabel.textColor = UIColor(netHex: 0xdddddd)
             titleLabel.font = UIFont.themeCondensedBoldFont(30)
-            titleLabel.text = experience.title.uppercaseString
+            titleLabel.text = (experience.title == "out-of-movie" ? String.localize("out_of_movie.extras_title") : experience.title).uppercaseString
             self.view.addSubview(titleLabel)
             self.view.sendSubviewToBack(titleLabel)
         }
@@ -53,7 +53,7 @@ class ExtrasExperienceViewController: UIViewController {
         
         if let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance?.backgroundImageURL {
             let backgroundImageView = UIImageView()
-            backgroundImageView.setImageWithURL(backgroundImageURL)
+            backgroundImageView.setImageWithURL(backgroundImageURL, completion: nil)
             backgroundImageView.frame = self.view.bounds
             self.view.addSubview(backgroundImageView)
             self.view.sendSubviewToBack(backgroundImageView)

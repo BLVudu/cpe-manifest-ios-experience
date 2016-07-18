@@ -17,26 +17,36 @@ class MultiMapMarker: NSObject {
     var googleMapMarker: GMSMarker?
     var location: CLLocationCoordinate2D!
 }
+    
+enum MultiMapType: Int {
+    case Map = 0
+    case Satellite = 1
+}
 
 class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
     struct Constants {
         static let MarkerAnnotationViewReuseIdentifier = "kMarkerAnnotationViewReuseIdentifier"
-        static let SegmentedControlPadding: CGFloat = 18
+        static let ControlsPadding: CGFloat = 18
         static let SegmentedControlWidth: CGFloat = 185
-    }
-    
-    enum MultiMapType: Int {
-        case Map = 0
-        case Satellite = 1
+        static let ZoomButtonWidth: CGFloat = 30
     }
     
     private var appleMapView: MKMapView?
     private var googleMapView: GMSMapView?
     private var mapTypeSegmentedControl: UISegmentedControl?
+    private var zoomInButton: UIButton?
+    private var zoomOutButton: UIButton?
     private var mapIconImage: UIImage?
     private var mapMarkers = [MultiMapMarker]()
     var delegate: MultiMapViewDelegate?
+    var maxZoomLevel: Float = -1 {
+        didSet {
+            if let mapView = googleMapView {
+                mapView.setMinZoom(kGMSMinZoomLevel, maxZoom: (maxZoomLevel > 0 ? maxZoomLevel : kGMSMaxZoomLevel))
+            }
+        }
+    }
     
     var selectedMarker: MultiMapMarker? {
         didSet {
@@ -48,7 +58,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         }
     }
     
-    var mapType: MultiMapType = .Satellite {
+    var mapType: MultiMapType = .Map {
         didSet {
             if let mapView = googleMapView {
                 mapView.mapType = (mapType == .Satellite ? kGMSTypeSatellite : kGMSTypeNormal)
@@ -80,32 +90,50 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             self.addSubview(appleMapView!)
         }
         
-        mapType = .Satellite
+        mapType = .Map
+    }
+    
+    func addControls() {
+        let segmentedControl = UISegmentedControl(items: [String.localize("locations.map.type_standard"), String.localize("locations.map.type_satellite")])
+        let textAttributes = NSDictionary(object: UIFont.themeCondensedFont(16), forKey: NSFontAttributeName)
+        segmentedControl.setTitleTextAttributes(textAttributes as [NSObject : AnyObject], forState: UIControlState.Normal)
+        segmentedControl.backgroundColor = UIColor.whiteColor()
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.layer.cornerRadius = 5
+        segmentedControl.addTarget(self, action: #selector(self.onMapTypeChanged), forControlEvents: UIControlEvents.ValueChanged)
+        segmentedControl.frame = CGRectMake(Constants.ControlsPadding, Constants.ControlsPadding, Constants.SegmentedControlWidth, CGRectGetHeight(segmentedControl.frame))
+        self.addSubview(segmentedControl)
+        mapTypeSegmentedControl = segmentedControl
         
-        mapTypeSegmentedControl = UISegmentedControl(items: ["Map", "Satellite"])
-        if let mapTypeSegmentedControl = mapTypeSegmentedControl {
-            let textAttributes = NSDictionary(object: UIFont.themeCondensedFont(16), forKey: NSFontAttributeName)
-            mapTypeSegmentedControl.setTitleTextAttributes(textAttributes as [NSObject : AnyObject], forState: UIControlState.Normal)
-            mapTypeSegmentedControl.backgroundColor = UIColor.whiteColor()
-            mapTypeSegmentedControl.selectedSegmentIndex = MultiMapType.Satellite.rawValue
-            mapTypeSegmentedControl.layer.cornerRadius = 5
-            mapTypeSegmentedControl.addTarget(self, action: #selector(self.onMapTypeChanged), forControlEvents: UIControlEvents.ValueChanged)
-            var segmentedControlFrame = mapTypeSegmentedControl.frame
-            segmentedControlFrame.origin.y = Constants.SegmentedControlPadding
-            segmentedControlFrame.size.width = Constants.SegmentedControlWidth
-            mapTypeSegmentedControl.frame = segmentedControlFrame
-            self.addSubview(mapTypeSegmentedControl)
-        }
+        let zoomInButton = UIButton(frame: CGRectMake(Constants.ControlsPadding, CGRectGetMaxY(segmentedControl.frame) + Constants.ControlsPadding, Constants.ZoomButtonWidth, Constants.ZoomButtonWidth))
+        zoomInButton.setImage(UIImage(named: "MapZoomIn"), forState: .Normal)
+        zoomInButton.addTarget(self, action: #selector(self.zoomIn), forControlEvents: .TouchUpInside)
+        self.addSubview(zoomInButton)
+        self.zoomInButton = zoomInButton
+        
+        let zoomOutButton = UIButton(frame: CGRectMake(Constants.ControlsPadding, CGRectGetMaxY(zoomInButton.frame), Constants.ZoomButtonWidth, Constants.ZoomButtonWidth))
+        zoomOutButton.setImage(UIImage(named: "MapZoomOut"), forState: .Normal)
+        zoomOutButton.addTarget(self, action: #selector(self.zoomOut), forControlEvents: .TouchUpInside)
+        self.addSubview(zoomOutButton)
+        self.zoomOutButton = zoomOutButton
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        googleMapView?.frame = self.bounds
+        appleMapView?.frame = self.bounds
+        
         if let mapTypeSegmentedControl = mapTypeSegmentedControl {
-            var segmentedControlFrame = mapTypeSegmentedControl.frame
-            segmentedControlFrame.origin.x = CGRectGetWidth(self.bounds) - Constants.SegmentedControlWidth - Constants.SegmentedControlPadding
-            mapTypeSegmentedControl.frame = segmentedControlFrame
             self.bringSubviewToFront(mapTypeSegmentedControl)
+        }
+        
+        if let button = zoomInButton {
+            self.bringSubviewToFront(button)
+        }
+        
+        if let button = zoomOutButton {
+            self.bringSubviewToFront(button)
         }
     }
     
@@ -178,12 +206,20 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
                 }
             }
             
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 40))
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50))
         }
     }
     
-    func removeControls() {
-        mapTypeSegmentedControl?.removeFromSuperview()
+    func zoomIn() {
+        if let mapView = googleMapView {
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.zoomIn())
+        }
+    }
+    
+    func zoomOut() {
+        if let mapView = googleMapView {
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.zoomOut())
+        }
     }
     
     // MARK: Actions

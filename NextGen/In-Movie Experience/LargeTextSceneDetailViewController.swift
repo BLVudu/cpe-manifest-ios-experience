@@ -16,7 +16,7 @@ class LargeTextSceneDetailViewController: SceneDetailViewController {
         textLabel.text = timedEvent?.descriptionText
         
         if let imageURL = timedEvent?.imageURL {
-            imageView.setImageWithURL(imageURL)
+            imageView.setImageWithURL(imageURL, completion: nil)
         } else {
             imageView.image = UIImage.themeDefaultImage16By9()
         }

@@ -66,24 +66,25 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     }
     
     override func currentTimeDidChange() {
-        if timedEvent != nil && timedEvent!.isType(.Product) {
-            let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(currentTime)
-            if newFrameTime != _currentProductFrameTime {
-                _currentProductFrameTime = newFrameTime
-                
-                if let currentTask = _currentProductSessionDataTask {
-                    currentTask.cancel()
-                }
-                
-                _currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(_currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
-                    if let strongSelf = self {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            strongSelf.theTakeProducts = products
-                        })
-                        
-                        strongSelf._currentProductSessionDataTask = nil
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            if self.timedEvent != nil && self.timedEvent!.isType(.Product) {
+                let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(self.currentTime)
+                if newFrameTime != self._currentProductFrameTime {
+                    self._currentProductFrameTime = newFrameTime
+                    
+                    if let currentTask = self._currentProductSessionDataTask {
+                        currentTask.cancel()
                     }
-                })
+                    
+                    self._currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(self._currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
+                        if let strongSelf = self {
+                            strongSelf._currentProductSessionDataTask = nil
+                            dispatch_async(dispatch_get_main_queue(), {
+                                strongSelf.theTakeProducts = products
+                            })
+                        }
+                    })
+                }
             }
         }
     }

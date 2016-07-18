@@ -4,8 +4,10 @@
 
 import UIKit
 
-let kShoppingNotificationDidSelectCategory = "kShoppingNotificationDidSelectCategory"
-let kShoppingNotificationCloseDetailsView = "kShoppingNotificationCloseDetailsView"
+struct ShoppingMenuNotification {
+    static let DidSelectCategory = "kShoppingMenuNotificationDidSelectCategory"
+    static let ShouldCloseDetails = "kShoppingMenuNotificationShouldCloseDetails"
+}
 
 class ExtrasShoppingViewController: MenuedViewController {
     
@@ -14,7 +16,7 @@ class ExtrasShoppingViewController: MenuedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showsSelectedMenuItem = false
+        menuSections.append(MenuSection(info: [MenuSection.Keys.Title: String.localize("label.all"), MenuSection.Keys.Value: "-1"]))
         
         for category in TheTakeAPIUtil.sharedInstance.productCategories {
             let info = NSMutableDictionary()
@@ -67,8 +69,8 @@ class ExtrasShoppingViewController: MenuedViewController {
         }
         
         if categoryId != nil {
-            NSNotificationCenter.defaultCenter().postNotificationName(kShoppingNotificationCloseDetailsView, object: nil, userInfo: nil)
-            NSNotificationCenter.defaultCenter().postNotificationName(kShoppingNotificationDidSelectCategory, object: nil, userInfo: ["categoryId": categoryId!])
+            NSNotificationCenter.defaultCenter().postNotificationName(ShoppingMenuNotification.ShouldCloseDetails, object: nil, userInfo: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(ShoppingMenuNotification.DidSelectCategory, object: nil, userInfo: ["categoryId": categoryId!])
         }
     }
 

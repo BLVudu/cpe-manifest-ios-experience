@@ -95,7 +95,12 @@ public class TheTakeAPIUtil: APIUtil {
     }
     
     func getCategoryProducts(categoryId: String, successBlock: (products: [TheTakeProduct]) -> Void) -> NSURLSessionDataTask? {
-        return getJSONWithPath("/products/listProducts", parameters: ["category": categoryId, "media": mediaId], successBlock: { (result) -> Void in
+        var parameters: [String: String] = ["media": mediaId, "limit": "100"]
+        if Int(categoryId) > 0 {
+            parameters["category"] = categoryId
+        }
+        
+        return getJSONWithPath("/products/listProducts", parameters: parameters, successBlock: { (result) -> Void in
             if let productList = result["result"] as? NSArray {
                 var products = [TheTakeProduct]()
                 for productInfo in productList {

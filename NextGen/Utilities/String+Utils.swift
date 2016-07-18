@@ -11,7 +11,7 @@ extension String {
     }
     
     static func localize(key: String) -> String {
-        return NSLocalizedString(key, comment: "")
+        return NSLocalizedString(key, tableName: "NextGen", bundle: NSBundle.mainBundle(), value: "", comment: "")
     }
     
     static func localize(key: String, variables: [String: String]) -> String {

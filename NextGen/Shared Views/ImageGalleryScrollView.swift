@@ -38,15 +38,16 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    var gallery: NGDMGallery? {
-        didSet {
-            resetScrollView()
-        }
-    }
+    var imageURLs = [NSURL]()
+    private var gallerySubType = GallerySubType.Gallery
     
-    var imageURLs: [NSURL]? {
-        didSet {
-            resetScrollView()
+    var currentImageURL: NSURL? {
+        set {
+            
+        }
+        
+        get {
+            return imageURLForPage(currentPage)
         }
     }
     
@@ -69,13 +70,6 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         toolbar!.barStyle = .Black
         toolbar!.translucent = true
         
-        let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
-        fullScreenButton.tintColor = UIColor.whiteColor()
-        fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
-        fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
-        fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
-        toolbar!.items = [UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(customView: fullScreenButton)]
-        
         closeButton = UIButton()
         closeButton.tintColor = UIColor.whiteColor()
         closeButton.alpha = 0.75
@@ -87,23 +81,68 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if let toolbar = toolbar {
+        if let toolbar = toolbar where !toolbar.hidden {
             var toolbarFrame = toolbar.frame
             toolbarFrame.origin.x = self.contentOffset.x
             toolbarFrame.origin.y = self.contentOffset.y + (CGRectGetHeight(self.frame) - Constants.ToolbarHeight) + 1
             toolbar.frame = toolbarFrame
             self.bringSubviewToFront(toolbar)
+            
+            if let toolbarItems = toolbar.items, turntableSlider = toolbarItems.first?.customView as? UISlider {
+                turntableSlider.frame.size.width = CGRectGetWidth(toolbarFrame) - 35 - (isFullScreen || toolbarItems.count == 1 ? 0 : Constants.ToolbarHeight)
+            }
         }
         
-        var closeButtonFrame = closeButton.frame
-        closeButtonFrame.origin.x = self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding
-        closeButton.frame = closeButtonFrame
-        self.bringSubviewToFront(closeButton)
+        if !closeButton.hidden {
+            var closeButtonFrame = closeButton.frame
+            closeButtonFrame.origin.x = self.contentOffset.x + CGRectGetWidth(self.frame) - Constants.CloseButtonSize - Constants.CloseButtonPadding
+            closeButton.frame = closeButtonFrame
+            self.bringSubviewToFront(closeButton)
+        }
+    }
+    
+    func loadGallery(gallery: NGDMGallery) {
+        gallerySubType = gallery.isSubType(.Turntable) ? .Turntable : .Gallery
+        imageURLs = [NSURL]()
+        
+        if let pictures = gallery.pictures {
+            for i in 0.stride(to: pictures.count, by: max((self.gallerySubType == .Turntable ? Int(ceil(Double(pictures.count) / 50)) : 1), 1)) {
+                if let url = pictures[i].imageURL {
+                    self.imageURLs.append(url)
+                }
+            }
+        }
+        
+        resetScrollView()
+        
+        if gallerySubType == .Turntable {
+            for i in 0 ..< imageURLs.count {
+                loadGalleryImageForPage(i)
+            }
+        }
+    }
+    
+    func loadImageURLs(imageURLs: [NSURL]) {
+        gallerySubType = .Gallery
+        self.imageURLs = imageURLs
+        resetScrollView()
+    }
+    
+    func destroyGallery() {
+        imageURLs = [NSURL]()
+        resetScrollView()
     }
     
     func removeToolbar() {
         toolbar?.removeFromSuperview()
         toolbar = nil
+    }
+    
+    func removeFullScreenButton() {
+        if let toolbar = toolbar, var items = toolbar.items where items.count > 0 {
+            items.removeLast()
+            toolbar.items = items
+        }
     }
     
     private func resetScrollView() {
@@ -121,6 +160,32 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             self.frame = frame
         }
         
+        if let toolbar = toolbar {
+            toolbar.items = nil
+            
+            var toolbarItems = [UIBarButtonItem]()
+            if gallerySubType == .Turntable {
+                let turntableSlider = UISlider(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame) - Constants.ToolbarHeight - 35, Constants.ToolbarHeight))
+                turntableSlider.minimumValue = 0
+                turntableSlider.maximumValue = max(Float(imageURLs.count - 1), 0)
+                turntableSlider.value = 0
+                turntableSlider.addTarget(self, action: #selector(self.turntableSliderValueChanged), forControlEvents: .ValueChanged)
+                toolbarItems.append(UIBarButtonItem(customView: turntableSlider))
+            } else {
+                toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil))
+            }
+            
+            let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
+            fullScreenButton.tintColor = UIColor.whiteColor()
+            fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
+            fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
+            fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
+            toolbarItems.append(UIBarButtonItem(customView: fullScreenButton))
+            
+            toolbar.items = toolbarItems
+        }
+        
+        self.scrollEnabled = gallerySubType != .Turntable
         isFullScreen = false
         toolbar?.hidden = false
         closeButton.hidden = true
@@ -129,9 +194,8 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     func layoutPages() {
-        let numPictures = gallery?.pictures?.count ?? imageURLs?.count ?? 0
         scrollViewPageWidth = CGRectGetWidth(self.bounds)
-        for i in 0 ..< numPictures {
+        for i in 0 ..< imageURLs.count {
             var pageView = self.viewWithTag(i + 1) as? UIScrollView
             var imageView = pageView?.subviews.first as? UIImageView
             if pageView == nil {
@@ -158,7 +222,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             imageView!.frame = pageView!.bounds
         }
         
-        self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * CGFloat(numPictures), CGRectGetHeight(self.frame))
+        self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * CGFloat(imageURLs.count), CGRectGetHeight(self.frame))
         self.contentOffset.x = scrollViewPageWidth * CGFloat(currentPage)
         
         if let toolbar = toolbar {
@@ -175,7 +239,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Actions
     func toggleFullScreen() {
         isFullScreen = !isFullScreen
-        toolbar?.hidden = isFullScreen
+        toolbar?.hidden = isFullScreen && gallerySubType != .Turntable
         closeButton.hidden = !isFullScreen
         
         if isFullScreen {
@@ -208,13 +272,13 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidToggleFullScreen, object: nil, userInfo: ["isFullScreen": isFullScreen])
     }
     
+    func turntableSliderValueChanged(slider: UISlider!) {
+        gotoPage(Int(floor(slider.value)), animated: false)
+    }
+    
     // MARK: Image Gallery
     private func imageURLForPage(page: Int) -> NSURL? {
-        if let pictures = gallery?.pictures where pictures.count > page {
-            return pictures[page].imageURL
-        }
-        
-        if let imageURLs = imageURLs where imageURLs.count > page {
+        if imageURLs.count > page {
             return imageURLs[page]
         }
         
@@ -222,9 +286,11 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     private func loadGalleryImageForPage(page: Int) {
-        if let imageURL = imageURLForPage(page), pageView = self.viewWithTag(page + 1) as? UIScrollView, imageView = pageView.subviews.first as? UIImageView where imageView.image == nil {
-            if let sessionDataTask = imageView.setImageWithURL(imageURL) {
-                sessionDataTasks.append(sessionDataTask)
+        if let url = imageURLForPage(page), imageView = (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView where imageView.image == nil {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) { [weak self] in
+                if let strongSelf = self, sessionDataTask = imageView.setImageWithURL(url, completion: nil) {
+                    strongSelf.sessionDataTasks.append(sessionDataTask)
+                }
             }
         }
     }
@@ -247,17 +313,9 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     func gotoPage(page: Int, animated: Bool) {
-        currentPage = page
-        self.setContentOffset(CGPointMake(CGFloat(currentPage) * scrollViewPageWidth, 0), animated: animated)
-    }
-    
-    func preloadImages() {
-        if let pictures = gallery?.pictures {
-            for picture in pictures {
-                if let url = picture.imageURL {
-                    UIImageRemoteLoader.loadImage(url, completion: nil)
-                }
-            }
+        self.setContentOffset(CGPointMake(CGFloat(page) * scrollViewPageWidth, 0), animated: animated)
+        if gallerySubType != .Turntable {
+            currentPage = page
         }
     }
     
@@ -268,8 +326,8 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    /*func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageViewForPage(currentPage)
-    }*/
-
+    }
+ 
 }

@@ -27,11 +27,11 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet weak private var _talentNameLabel: UILabel!
     @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak private var _talentBiographyLabel: UITextView!
-    @IBOutlet private var _talentNoGalleryConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak private var _galleryContainerView: UIView?
-    @IBOutlet weak private var _galleryHeaderLabel: UILabel?
-    @IBOutlet weak private var _galleryCollectionView: UICollectionView?
+    @IBOutlet weak private var _galleryContainerView: UIView!
+    @IBOutlet weak private var _galleryHeaderLabel: UILabel!
+    @IBOutlet weak private var _galleryCollectionView: UICollectionView!
+    @IBOutlet private var _talentNoGalleryConstraint: NSLayoutConstraint!
     
     @IBOutlet weak private var _filmographyContainerView: UIView!
     @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
@@ -47,7 +47,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet private var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint!
     
     var images = [String]()
-    var talent: Talent!
+    var talent: NGDMTalent!
     var mode = TalentDetailMode.Extras
     
     // MARK: View Lifecycle
@@ -56,7 +56,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         // Localizations
         _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
-        _galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercaseString
+        _galleryHeaderLabel.text = String.localize("talentdetail.gallery").uppercaseString
         _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
         
         if mode == .Extras {
@@ -64,90 +64,101 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             closeButton.removeFromSuperview()
             _containerViewTopConstraint.constant = 20
         } else {
-            _galleryHeaderLabel?.removeFromSuperview()
-            _galleryCollectionView?.removeFromSuperview()
-            _galleryContainerView?.removeFromSuperview()
-            _galleryHeaderLabel = nil
-            _galleryCollectionView = nil
-            _galleryContainerView = nil
-            _talentNoGalleryConstraint.priority = UILayoutPriorityRequired
+            _talentNoGalleryConstraint.active = true
         }
+        
+        _galleryCollectionView.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
+        
+        let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
+        launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
+        _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
         
         loadTalent(talent)
     }
     
-    func loadTalent(talent: Talent) {
+    func loadTalent(talent: NGDMTalent) {
         self.talent = talent
-        
-        _talentGalleryButton.hidden = mode != .Synced || talent.images == nil || talent.images!.count == 1
         
         _talentNameLabel.text = talent.name?.uppercaseString
         if let imageURL = talent.fullImageURL {
-            _talentImageView.setImageWithURL(imageURL)
+            _talentImageView.setImageWithURL(imageURL, completion: nil)
         } else {
             _talentImageView.image = nil
         }
         
-        talent.getBiography({ (biography) in
-            dispatch_async(dispatch_get_main_queue(), {
-                self._talentBiographyLabel.text = biography
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            talent.getBiography({ (biography) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self._talentBiographyLabel.text = biography
+                    self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
+                })
             })
-        })
+        }
         
         _twitterButton.hidden = true
         _facebookButton.hidden = true
         _instagramButton.hidden = true
-        talent.getSocialAccounts({ (socialAccounts) in
-            dispatch_async(dispatch_get_main_queue(), {
-                if let socialAccounts = socialAccounts {
-                    for socialAccount in socialAccounts {
-                        switch (socialAccount.type) {
-                        case .Facebook:
-                            self._facebookButton.hidden = false
-                            self._facebookButton.socialAccount = socialAccount
-                            break
-                            
-                        case .Twitter:
-                            self._twitterButton.hidden = false
-                            self._twitterButton.socialAccount = socialAccount
-                            break
-                            
-                        case .Instagram:
-                            self._instagramButton.hidden = false
-                            self._instagramButton.socialAccount = socialAccount
-                            break
-                            
-                        default:
-                            break
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            talent.getSocialAccounts({ (socialAccounts) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let socialAccounts = socialAccounts {
+                        for socialAccount in socialAccounts {
+                            switch (socialAccount.type) {
+                            case .Facebook:
+                                self._facebookButton.hidden = false
+                                self._facebookButton.socialAccount = socialAccount
+                                break
+                                
+                            case .Twitter:
+                                self._twitterButton.hidden = false
+                                self._twitterButton.socialAccount = socialAccount
+                                break
+                                
+                            case .Instagram:
+                                self._instagramButton.hidden = false
+                                self._instagramButton.socialAccount = socialAccount
+                                break
+                                
+                            default:
+                                break
+                            }
                         }
                     }
-                }
-                
-                self._twitterNoFacebookNoInstagramConstraint.active = self._facebookButton.hidden && self._instagramButton.hidden
-                self._twitterNoFacebookConstraint.active = self._facebookButton.hidden && !self._instagramButton.hidden
-                self._twitterMainConstraint.active = !self._twitterNoFacebookNoInstagramConstraint.active && !self._twitterNoFacebookConstraint.active
-                self._facebookNoInstagramConstraint.active = self._instagramButton.hidden
-                self._facebookMainConstraint.active = !self._facebookNoInstagramConstraint.active
+                    
+                    self._twitterNoFacebookNoInstagramConstraint.active = self._facebookButton.hidden && self._instagramButton.hidden
+                    self._twitterNoFacebookConstraint.active = self._facebookButton.hidden && !self._instagramButton.hidden
+                    self._twitterMainConstraint.active = !self._twitterNoFacebookNoInstagramConstraint.active && !self._twitterNoFacebookConstraint.active
+                    self._facebookNoInstagramConstraint.active = self._instagramButton.hidden
+                    self._facebookMainConstraint.active = !self._facebookNoInstagramConstraint.active
+                })
             })
-        })
+        }
+        
+        let talentHasGallery = talent.images != nil && talent.images!.count > 1
+        _galleryContainerView.hidden = mode == .Synced || !talentHasGallery
+        _talentGalleryButton.hidden = mode != .Synced || !talentHasGallery
+        _talentImageView.userInteractionEnabled = talentHasGallery
+        _talentNoGalleryConstraint.active = _galleryContainerView.hidden
         
         _filmographyCollectionView.backgroundColor = UIColor.clearColor()
-        _filmographyCollectionView.showsHorizontalScrollIndicator = true
         _filmographyContainerView.hidden = true
-        talent.getFilmography({ (films) in
-            if let films = films {
-                dispatch_async(dispatch_get_main_queue(), {
-                    if films.count > 0 {
-                        self._filmographyContainerView.hidden = false
-                        self._filmographyCollectionView.reloadData()
-                    } else {
-                        self._filmographyContainerView.hidden = true
-                    }
-                })
-            }
-        })
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            talent.getFilmography({ (films) in
+                if let films = films {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if films.count > 0 {
+                            self._filmographyContainerView.hidden = false
+                            self._filmographyCollectionView.reloadData()
+                            self._filmographyCollectionView.setContentOffset(CGPointMake(0, 0), animated: false)
+                        } else {
+                            self._filmographyContainerView.hidden = true
+                        }
+                    })
+                }
+            })
+        }
         
-        _galleryCollectionView?.reloadData()
+        _galleryCollectionView.reloadData()
     }
     
     // MARK: Actions

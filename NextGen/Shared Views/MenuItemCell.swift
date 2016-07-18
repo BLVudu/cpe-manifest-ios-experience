@@ -7,10 +7,10 @@ import QuartzCore
 
 class MenuItemCell: UITableViewCell {
     
-    static let NibName = "MenuItemCell"
     static let ReuseIdentifier = "MenuItemCellReuseIdentifier"
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var titleLabelLargePaddingConstraint: NSLayoutConstraint!
     
     var menuItem: MenuItem? {
         didSet {
@@ -18,26 +18,22 @@ class MenuItemCell: UITableViewCell {
         }
     }
     
+    var active = false {
+        didSet {
+            updateCellStyle()
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
         menuItem = nil
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        updateCellStyle()
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        updateCellStyle()
+        active = false
+        titleLabelLargePaddingConstraint.active = true
     }
     
     func updateCellStyle() {
-        titleLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
+        titleLabel.textColor = (self.active ? UIColor.themePrimaryColor() : UIColor.whiteColor())
     }
 
 }

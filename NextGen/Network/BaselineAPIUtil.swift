@@ -48,11 +48,11 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         self.apiKey = apiKey
     }
     
-    public func prefetchCredits(successBlock: (talents: [String: Talent]?) -> Void) {
+    public func prefetchCredits(successBlock: (talents: [String: NGDMTalent]?) -> Void) {
         if let apiId = apiId {
             getJSONWithPath(Endpoints.GetCredits, parameters: ["id": apiId, "apikey": apiKey], successBlock: { (result) -> Void in
                 if let results = result["result"] as? NSArray {
-                    var talents = [String: Talent]()
+                    var talents = [String: NGDMTalent]()
                     for talentInfo in results.subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxCredits, results.count))) {
                         if let talentInfo = talentInfo as? NSDictionary, talentId = talentInfo[Keys.ParticipantID] as? NSNumber {
                             let baselineId = (talentInfo[BaselineAPIUtil.Keys.ParticipantID] as! NSNumber).stringValue
@@ -63,7 +63,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
                                 type = TalentType(rawValue: creditGroup)
                             }
                             
-                            talents[talentId.stringValue] = Talent(apiId: baselineId, name: name, role: role, type: type ?? .Unknown)
+                            talents[talentId.stringValue] = NGDMTalent(apiId: baselineId, name: name, role: role, type: type ?? .Unknown)
                         }
                     }
                     
@@ -159,15 +159,14 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     
     public func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) -> NSURLSessionDataTask {
         return getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
-            if let results = result["result"] as? NSArray {
-                if results.count > 0 {
-                    if let response = results[0] as? NSDictionary, imageURL = response[Keys.LargeURL] as? String {
-                        successBlock(imageURL: NSURL(string: imageURL))
-                    }
-                } else {
-                    successBlock(imageURL: nil)
+            var imageURL: NSURL?
+            if let results = result["result"] as? NSArray where results.count > 0 {
+                if let response = results[0] as? NSDictionary, posterImageURL = response[Keys.LargeURL] as? String {
+                    imageURL = NSURL(string: posterImageURL)
                 }
             }
+            
+            successBlock(imageURL: imageURL)
         }, errorBlock: nil)
     }
     

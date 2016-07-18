@@ -5,11 +5,17 @@
 import UIKit
 import NextGenDataManager
 
+struct SceneDetailNotification {
+    static let WillClose = "kSceneDetailNotificationWillClose"
+}
+
 class SceneDetailViewController: UIViewController {
     
-    let kViewMargin: CGFloat = 30
-    let kTitleLabelHeight: CGFloat = 70
-    let kCloseButtonWidth: CGFloat = 110
+    private struct Constants {
+        static let ViewMargin: CGFloat = 10
+        static let TitleLabelHeight: CGFloat = 70
+        static let CloseButtonWidth: CGFloat = 110
+    }
     
     var experience: NGDMExperience?
     var timedEvent: NGDMTimedEvent?
@@ -48,13 +54,14 @@ class SceneDetailViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         let viewWidth = CGRectGetWidth(self.view.frame)
-        titleLabel.frame = CGRectMake(kViewMargin, 0, viewWidth - (2 * kViewMargin), kTitleLabelHeight)
-        closeButton.frame = CGRectMake(viewWidth - kCloseButtonWidth - kViewMargin, 0, kCloseButtonWidth, kTitleLabelHeight)
+        titleLabel.frame = CGRectMake(Constants.ViewMargin, 0, viewWidth - (2 * Constants.ViewMargin), Constants.TitleLabelHeight)
+        closeButton.frame = CGRectMake(viewWidth - Constants.CloseButtonWidth - Constants.ViewMargin, 0, Constants.CloseButtonWidth, Constants.TitleLabelHeight)
     }
     
     // MARK: Actions
     func close() {
         self.dismissViewControllerAnimated(true, completion: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(SceneDetailNotification.WillClose, object: nil)
     }
 
 }
