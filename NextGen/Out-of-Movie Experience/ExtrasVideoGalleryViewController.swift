@@ -137,7 +137,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     shareButton.hidden = false
                     shareButton.setTitle(String.localize("gallery.share_button").uppercaseString, forState: .Normal)
                     galleryPageControl.hidden = false
-                    galleryPageControl.numberOfPages = gallery.pictures?.count ?? 0
+                    galleryPageControl.numberOfPages = galleryScrollView.imageURLs.count
                 }
             } else if thisExperience.isType(.AudioVisual), let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                 if let player = videoPlayerViewController.player {

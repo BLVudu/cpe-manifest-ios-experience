@@ -106,7 +106,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         imageURLs = [NSURL]()
         
         if let pictures = gallery.pictures {
-            for i in 0.stride(to: pictures.count - 1, by: max((self.gallerySubType == .Turntable ? Int(ceil(Double(pictures.count) / 50)) : 1), 1)) {
+            for i in 0.stride(to: pictures.count, by: max((self.gallerySubType == .Turntable ? Int(ceil(Double(pictures.count) / 50)) : 1), 1)) {
                 if let url = pictures[i].imageURL {
                     self.imageURLs.append(url)
                 }
