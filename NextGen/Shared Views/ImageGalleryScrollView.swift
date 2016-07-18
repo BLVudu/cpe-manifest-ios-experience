@@ -122,6 +122,12 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    func loadImageURLs(imageURLs: [NSURL]) {
+        gallerySubType = .Gallery
+        self.imageURLs = imageURLs
+        resetScrollView()
+    }
+    
     func destroyGallery() {
         imageURLs = [NSURL]()
         resetScrollView()

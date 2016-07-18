@@ -31,7 +31,20 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
         
         galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
-                strongSelf.galleryCollectionView.selectItemAtIndexPath(NSIndexPath(forItem: page, inSection: 0), animated: false, scrollPosition: .None)
+                let pageIndexPath = NSIndexPath(forItem: page, inSection: 0)
+                strongSelf.galleryCollectionView.selectItemAtIndexPath(pageIndexPath, animated: false, scrollPosition: .None)
+                
+                var cellIsShowing = false
+                for cell in strongSelf.galleryCollectionView.visibleCells() {
+                    if let indexPath = strongSelf.galleryCollectionView.indexPathForCell(cell) where indexPath.row == page {
+                        cellIsShowing = true
+                        break
+                    }
+                }
+                
+                if !cellIsShowing {
+                    strongSelf.galleryCollectionView.scrollToItemAtIndexPath(pageIndexPath, atScrollPosition: .CenteredHorizontally, animated: true)
+                }
             }
         })
         
@@ -50,7 +63,7 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
             }
         }
         
-        galleryScrollView.imageURLs = imageURLs
+        galleryScrollView.loadImageURLs(imageURLs)
         galleryScrollView.gotoPage(initialPage, animated: false)
     }
     
