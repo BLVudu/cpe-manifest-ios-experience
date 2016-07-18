@@ -8,6 +8,10 @@
 "label.commentary" = "Commentary";
 "label.commentary.on" = "Commentary is on";
 
+// Home
+"label.play_movie" = "Play Movie";
+"label.extras" = "Extras";
+
 // Out-Of-Movie Experience
 "out_of_movie.extras_title" = "Extras";
 

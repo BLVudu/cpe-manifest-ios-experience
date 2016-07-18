@@ -15,8 +15,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBOutlet weak private var exitButton: UIButton!
-    @IBOutlet weak private var backgroundImageView: UIImageView!
-    @IBOutlet weak private var backgroundVideoView: UIView!
+    @IBOutlet weak private var backgroundImageView: UIImageView?
+    @IBOutlet weak private var backgroundVideoView: UIView?
     
     private var didFinishPlayingObserver: NSObjectProtocol?
     
@@ -24,100 +24,112 @@ class HomeViewController: UIViewController {
     private var backgroundVideoTimeObserver: AnyObject?
     private var backgroundVideoPlayer: AVPlayer?
     private var backgroundVideoLayer: AVPlayerLayer?
-    
+    private var interfaceCreated = false
     
     // MARK: View Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        var homeScreenViews = [UIView]()
-        var willFadeInViews = false
-        
-        let frameWidth = CGRectGetWidth(self.view.frame)
-        let frameHeight = CGRectGetHeight(self.view.frame)
-        
-        exitButton.setTitle(String.localize("label.exit"), forState: .Normal)
-        homeScreenViews.append(exitButton)
-        
-        if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {
-            willFadeInViews = appearance.backgroundVideoFadeTime > 0
+        if !interfaceCreated {
+            var homeScreenViews = [UIView]()
+            var willFadeInViews = false
             
-            if let centerOffset = appearance.titleImageCenterOffset, sizeOffset = appearance.titleImageSizeOffset, titleImageURL = appearance.titleImageURL {
-                let imageView = UIImageView(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
-                imageView.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
-                imageView.setImageWithURL(titleImageURL, completion: nil)
-                imageView.hidden = true
-                self.view.addSubview(imageView)
+            let frameWidth = CGRectGetWidth(self.view.frame)
+            let frameHeight = CGRectGetHeight(self.view.frame)
+            
+            exitButton.setTitle(String.localize("label.exit"), forState: .Normal)
+            homeScreenViews.append(exitButton)
+            
+            if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {
+                willFadeInViews = appearance.backgroundVideoFadeTime > 0
                 
-                homeScreenViews.append(imageView)
+                if let centerOffset = appearance.titleImageCenterOffset, sizeOffset = appearance.titleImageSizeOffset, titleImageURL = appearance.titleImageURL {
+                    let imageView = UIImageView(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
+                    imageView.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
+                    imageView.setImageWithURL(titleImageURL, completion: nil)
+                    imageView.hidden = true
+                    self.view.addSubview(imageView)
+                    
+                    homeScreenViews.append(imageView)
+                }
             }
-        }
-        
-        // Play button
-        if let appearance = NGDMManifest.sharedInstance.inMovieExperience?.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
-            let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
-            button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
             
-            if let imageURL = appearance.buttonImageURL {
-                button.setImageWithURL(imageURL)
+            // Play button
+            if let appearance = NGDMManifest.sharedInstance.inMovieExperience?.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
+                let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
+                button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
+                
+                if let imageURL = appearance.buttonImageURL {
+                    button.setImageWithURL(imageURL)
+                } else {
+                    button.setTitle(String.localize("label.play_movie"), forState: .Normal)
+                    button.backgroundColor = UIColor.redColor()
+                }
+                
+                button.addTarget(self, action: #selector(self.onPlay), forControlEvents: UIControlEvents.TouchUpInside)
+                button.hidden = true
+                self.view.addSubview(button)
+                
+                homeScreenViews.append(button)
+            }
+            
+            // Extras button
+            if let appearance = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
+                let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
+                button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
+                
+                if let imageURL = appearance.buttonImageURL {
+                    button.setImageWithURL(imageURL)
+                } else {
+                    button.setTitle(String.localize("label.extras"), forState: .Normal)
+                    button.backgroundColor = UIColor.grayColor()
+                }
+                
+                button.addTarget(self, action: #selector(self.onExtras), forControlEvents: UIControlEvents.TouchUpInside)
+                button.hidden = true
+                self.view.addSubview(button)
+                
+                homeScreenViews.append(button)
+            }
+            
+            if !willFadeInViews {
+                for view in homeScreenViews {
+                    view.hidden = false
+                }
             } else {
-                button.setTitle("Play Movie", forState: .Normal)
-                button.backgroundColor = UIColor.redColor()
+                backgroundVideoFadeInViews = homeScreenViews
             }
             
-            button.addTarget(self, action: #selector(self.onPlay), forControlEvents: UIControlEvents.TouchUpInside)
-            button.hidden = true
-            self.view.addSubview(button)
-            
-            homeScreenViews.append(button)
-        }
-        
-        // Extras button
-        if let appearance = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance, centerOffset = appearance.buttonCenterOffset, sizeOffset = appearance.buttonSizeOffset {
-            let button = UIButton(frame: CGRectMake(0, 0, frameWidth * sizeOffset.width, frameHeight * sizeOffset.height))
-            button.center = CGPointMake(frameWidth * centerOffset.x, frameHeight * centerOffset.y)
-            
-            if let imageURL = appearance.buttonImageURL {
-                button.setImageWithURL(imageURL)
-            } else {
-                button.setTitle("Extras", forState: .Normal)
-                button.backgroundColor = UIColor.grayColor()
-            }
-            
-            button.addTarget(self, action: #selector(self.onExtras), forControlEvents: UIControlEvents.TouchUpInside)
-            button.hidden = true
-            self.view.addSubview(button)
-            
-            homeScreenViews.append(button)
-        }
-        
-        if !willFadeInViews {
-            for view in homeScreenViews {
-                view.hidden = false
-            }
-        } else {
-            backgroundVideoFadeInViews = homeScreenViews
+            loadBackground()
+            interfaceCreated = true
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadVideoPlayer()
+        if interfaceCreated {
+            loadBackground()
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        unloadVideoPlayer()
+        unloadBackground()
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Landscape
+        return .Landscape
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        let interfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
+        return UIInterfaceOrientationIsLandscape(interfaceOrientation) ? interfaceOrientation : .LandscapeLeft
     }
     
     // MARK: Video Player
-    func loadVideoPlayer() {
+    func loadBackground() {
         if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {
             if let backgroundVideoURL = appearance.backgroundVideoURL {
                 let videoPlayer = AVPlayer(playerItem: AVPlayerItem(URL: backgroundVideoURL))
@@ -166,19 +178,15 @@ class HomeViewController: UIViewController {
                 }
                 
                 backgroundVideoPlayer = videoPlayer
-                if backgroundImageView != nil {
-                    backgroundImageView.removeFromSuperview()
-                }
+                backgroundImageView?.removeFromSuperview()
             } else if let backgroundImageURL = appearance.backgroundImageURL {
-                backgroundImageView.setImageWithURL(backgroundImageURL, completion: nil)
-                if backgroundVideoView != nil {
-                    backgroundVideoView.removeFromSuperview()
-                }
+                backgroundImageView?.setImageWithURL(backgroundImageURL, completion: nil)
+                backgroundVideoView?.removeFromSuperview()
             }
         }
     }
     
-    func unloadVideoPlayer() {
+    func unloadBackground() {
         if let observer = didFinishPlayingObserver {
             NSNotificationCenter.defaultCenter().removeObserver(observer)
             didFinishPlayingObserver = nil
@@ -192,6 +200,7 @@ class HomeViewController: UIViewController {
         backgroundVideoLayer?.removeFromSuperlayer()
         backgroundVideoLayer = nil
         backgroundVideoPlayer = nil
+        backgroundImageView?.image = nil
     }
     
     // MARK: Actions
