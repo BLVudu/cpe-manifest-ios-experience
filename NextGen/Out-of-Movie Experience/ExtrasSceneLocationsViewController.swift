@@ -55,6 +55,26 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         didSet {
             if let selectedSceneLocation = selectedSceneLocation {
                 zoomToFitSceneLocationMarkers(selectedSceneLocation)
+                
+                var lowestZoomLevel = MAXFLOAT
+                for childSceneLocation in selectedSceneLocation.childSceneLocations {
+                    if let appData = childSceneLocation.childAppData.first where appData.zoomLevel < lowestZoomLevel {
+                        lowestZoomLevel = appData.zoomLevel
+                    }
+                }
+                
+                mapView.maxZoomLevel = lowestZoomLevel
+            } else {
+                var lowestZoomLevel = MAXFLOAT
+                for sceneLocation in sceneLocations {
+                    for childSceneLocation in sceneLocation.childSceneLocations {
+                        if let appData = childSceneLocation.childAppData.first where appData.zoomLevel < lowestZoomLevel {
+                            lowestZoomLevel = appData.zoomLevel
+                        }
+                    }
+                }
+                
+                mapView.maxZoomLevel = lowestZoomLevel
             }
             
             reloadBreadcrumbs()
@@ -66,6 +86,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             if let marker = selectedChildSceneLocation?.mapMarker {
                 if let appData = selectedChildSceneLocation?.childAppData.first {
                     mapView.setLocation(marker.location, zoomLevel: appData.zoomLevel, animated: true)
+                    mapView.maxZoomLevel = appData.zoomLevel
                 }
                 
                 mapView.selectedMarker = marker
@@ -149,6 +170,9 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         mapView.addControls()
         mapView.zoomToFitAllMarkers()
         mapView.delegate = self
+        
+        selectedSceneLocation = nil
+        selectedChildSceneLocation = nil
     }
     
     private func addAppDataToChildSceneLocation(appData: NGDMAppData, title: String, subtitle: String) {

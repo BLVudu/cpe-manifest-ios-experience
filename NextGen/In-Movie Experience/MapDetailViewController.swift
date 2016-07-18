@@ -67,6 +67,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: false)
         mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: true)
         mapView.addControls()
+        mapView.maxZoomLevel = appData.zoomLevel
     }
     
     // MARK: Actions

@@ -40,6 +40,13 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     private var mapIconImage: UIImage?
     private var mapMarkers = [MultiMapMarker]()
     var delegate: MultiMapViewDelegate?
+    var maxZoomLevel: Float = -1 {
+        didSet {
+            if let mapView = googleMapView {
+                mapView.setMinZoom(kGMSMinZoomLevel, maxZoom: (maxZoomLevel > 0 ? maxZoomLevel : kGMSMaxZoomLevel))
+            }
+        }
+    }
     
     var selectedMarker: MultiMapMarker? {
         didSet {
