@@ -54,8 +54,6 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     private var selectedSceneLocation: SceneLocation? {
         didSet {
             if let selectedSceneLocation = selectedSceneLocation {
-                zoomToFitSceneLocationMarkers(selectedSceneLocation)
-                
                 var lowestZoomLevel = MAXFLOAT
                 for childSceneLocation in selectedSceneLocation.childSceneLocations {
                     if let appData = childSceneLocation.childAppData.first where appData.zoomLevel < lowestZoomLevel {
@@ -64,6 +62,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
                 }
                 
                 mapView.maxZoomLevel = lowestZoomLevel
+                zoomToFitSceneLocationMarkers(selectedSceneLocation)
             } else {
                 var lowestZoomLevel = MAXFLOAT
                 for sceneLocation in sceneLocations {
