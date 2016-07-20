@@ -51,7 +51,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     
-    var products: [TheTakeProduct]!
+    var products: [TheTakeProduct]?
     private var _closeDetailsViewObserver: NSObjectProtocol!
     
     deinit {
@@ -127,12 +127,12 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return products.count
+        return products?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ShoppingDetailCell.ReuseIdentifier, forIndexPath: indexPath) as! ShoppingDetailCell
-        cell.product = products[indexPath.row]
+        cell.product = products?[indexPath.row]
         
         return cell
     }
@@ -140,8 +140,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let product = products[indexPath.row]
-        if product != currentProduct {
+        if let product = products?[indexPath.row] where product != currentProduct {
             currentProduct = product
         }
     }

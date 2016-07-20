@@ -285,9 +285,8 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     func cleanInvisibleImages() {
-        let page = Int(self.contentOffset.x / scrollViewPageWidth)
         for subview in self.subviews {
-            if subview.tag != page + 1, let imageView = subview.subviews.first as? UIImageView {
+            if subview.tag != currentPage + 1, let imageView = subview.subviews.first as? UIImageView {
                 imageView.image = nil
             }
         }
@@ -300,7 +299,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     // MARK: UIScrollViewDelegate
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView == self {
+        if scrollView == self && scrollViewPageWidth > 0 {
             currentPage = Int(targetContentOffset.memory.x / scrollViewPageWidth)
         }
     }
