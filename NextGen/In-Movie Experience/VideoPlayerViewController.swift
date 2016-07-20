@@ -12,6 +12,7 @@ struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
     static let DidPlayVideo = "VideoPlayerNotificationDidPlayVideo"
+    static let UserInfoVideoURL = "kVideoPlayerNotificationVideoURL"
 }
 
 public enum VideoPlayerMode {
@@ -23,8 +24,6 @@ public enum VideoPlayerMode {
 typealias Task = (cancel : Bool) -> ()
 
 class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverControllerDelegate {
-    
-    let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
     
     var mode = VideoPlayerMode.Supplemental
     var showCountdownTimer = false
@@ -82,8 +81,8 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         
         // Notifications
         shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
-                if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
+            if let strongSelf = self where strongSelf._didPlayInterstitial {
+                if let videoURL = notification.userInfo?[VideoPlayerNotification.UserInfoVideoURL] as? NSURL where videoURL != strongSelf.URL {
                     strongSelf.pauseVideo()
                 }
             }
@@ -176,7 +175,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         super.playVideo()
         
         manuallyPaused = false
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayVideo, object: nil, userInfo: [kMasterVideoPlayerViewControllerKey: self])
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayVideo, object: nil, userInfo: [VideoPlayerNotification.UserInfoVideoURL: self.URL])
     }
     
     override func syncScrubber() {

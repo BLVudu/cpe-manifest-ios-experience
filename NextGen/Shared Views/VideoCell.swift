@@ -16,17 +16,25 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak private var captionLabel: UILabel!
     
     private var setImageSessionDataTask: NSURLSessionDataTask?
+    private var didPlayVideoObserver: NSObjectProtocol?
     
     var experience: NGDMExperience? {
         didSet {
-            captionLabel.text = experience?.metadata?.title
-            if let runtime = experience?.videoRuntime, videoURL = experience?.videoURL {
-                if runtime > 0 {
+            captionLabel.text = experience?.title
+            
+            if let videoURL = experience?.videoURL {
+                if let runtime = experience?.videoRuntime where runtime > 0 {
                     runtimeLabel.hidden = false
                     runtimeLabel.text = SettingsManager.didWatchVideo(videoURL) ? String.localize("label.watched") : runtime.formattedTime()
                 } else {
                     runtimeLabel.hidden = true
                 }
+                
+                didPlayVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+                    if let strongSelf = self, playingVideoURL = notification.userInfo?[VideoPlayerNotification.UserInfoVideoURL] as? NSURL where playingVideoURL == videoURL {
+                        strongSelf.runtimeLabel.text = String.localize("label.playing")
+                    }
+                })
             } else {
                 runtimeLabel.hidden = true
             }
@@ -53,6 +61,11 @@ class VideoCell: UITableViewCell {
             setImageSessionDataTask = nil
         }
         
+        if let observer = didPlayVideoObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            didPlayVideoObserver = nil
+        }
+        
         runtimeLabel.text = nil
     }
     
@@ -71,7 +84,6 @@ class VideoCell: UITableViewCell {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
-                self.runtimeLabel.text = String.localize("label.playing")
             }, completion: nil)
         } else {
             UIView.animateWithDuration(0.25, animations: {
