@@ -220,11 +220,11 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         galleryScrollView.loadGallery(gallery)
         galleryScrollView.hidden = false
         
-        if gallery.isSubType(.Turntable) {
+        if gallery.isTurntable {
             galleryPageControl.hidden = true
         } else {
             galleryPageControl.hidden = false
-            galleryPageControl.numberOfPages = galleryScrollView.imageURLs.count
+            galleryPageControl.numberOfPages = gallery.totalCount
             galleryPageControl.currentPage = 0
         }
         

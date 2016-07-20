@@ -63,13 +63,13 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
                 galleryScrollView?.loadGallery(gallery)
                 descriptionLabel.text = gallery.description
                 
-                if gallery.isSubType(.Turntable) {
+                if gallery.isTurntable {
                     shareButton?.removeFromSuperview()
                     shareButton = nil
                 } else {
                     shareButton?.setTitle(String.localize("gallery.share_button").uppercaseString, forState: .Normal)
                     galleryScrollView?.removeToolbar()
-                    pageControl?.numberOfPages = gallery.pictures?.count ?? 0
+                    pageControl?.numberOfPages = gallery.totalCount
                     if pageControl != nil && pageControl!.numberOfPages > 0 {
                         galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
                             if let strongSelf = self, page = notification.userInfo?["page"] as? Int {

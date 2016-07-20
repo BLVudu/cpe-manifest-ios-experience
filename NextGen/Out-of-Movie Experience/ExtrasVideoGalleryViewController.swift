@@ -103,10 +103,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if !cell.selected {
-                return indexPath
-            }
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) where !cell.selected {
+            return indexPath
         }
         
         return nil
@@ -114,8 +112,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let thisExperience = experience.childExperiences?[indexPath.row] {
-            mediaTitleLabel.text = thisExperience.metadata?.title
-            mediaDescriptionLabel.text = thisExperience.metadata?.description
+            mediaTitleLabel.hidden = true
+            mediaDescriptionLabel.hidden = true
             
             // Reset media detail views
             shareButton.hidden = true
@@ -127,19 +125,25 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             
             // Set new media detail views
             if let gallery = thisExperience.gallery {
+                mediaTitleLabel.text = nil
                 galleryScrollView.hidden = false
                 videoContainerView.hidden = true
                 previewImageView?.hidden = true
                 previewPlayButton?.hidden = true
                 
                 galleryScrollView.loadGallery(gallery)
-                if !gallery.isSubType(.Turntable) {
+                if !gallery.isTurntable {
                     shareButton.hidden = false
                     shareButton.setTitle(String.localize("gallery.share_button").uppercaseString, forState: .Normal)
                     galleryPageControl.hidden = false
-                    galleryPageControl.numberOfPages = galleryScrollView.imageURLs.count
+                    galleryPageControl.numberOfPages = gallery.totalCount
                 }
             } else if thisExperience.isType(.AudioVisual), let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                mediaTitleLabel.text = thisExperience.metadata?.title
+                mediaDescriptionLabel.text = thisExperience.metadata?.description
+                mediaTitleLabel.hidden = false
+                mediaDescriptionLabel.hidden = false
+                
                 if let player = videoPlayerViewController.player {
                     player.removeAllItems()
                 }
