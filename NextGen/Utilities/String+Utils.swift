@@ -10,6 +10,24 @@ extension String {
         return String(self.characters.filter({ !characters.contains($0) }))
     }
     
+    func htmlDecodedString() -> String {
+        if let encodedData = self.dataUsingEncoding(NSUTF8StringEncoding) {
+            let attributedOptions : [String: AnyObject] = [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding]
+            do {
+                if let attributedString:NSAttributedString = try NSAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil){
+                    return attributedString.string
+                }
+                
+                return self
+            } catch {
+                print("Error decoding HTML string: \(error)")
+                return self
+            }
+        }
+        
+        return self
+    }
+    
     static func localize(key: String) -> String {
         return NSLocalizedString(key, tableName: "NextGen", bundle: NSBundle.mainBundle(), value: "", comment: "")
     }

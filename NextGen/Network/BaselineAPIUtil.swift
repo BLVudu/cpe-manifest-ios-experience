@@ -78,7 +78,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     public func getTalentBio(talentId: String, successBlock: (biography: String?) -> Void) {
         getJSONWithPath(Endpoints.GetBio, parameters: ["id": talentId, "apikey": apiKey], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary, biography = response[Keys.ShortBio] as? String {
-                successBlock(biography: biography)
+                successBlock(biography: biography.htmlDecodedString())
             } else {
                 successBlock(biography: nil)
             }
