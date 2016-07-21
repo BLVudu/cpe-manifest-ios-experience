@@ -132,7 +132,7 @@ class HomeViewController: UIViewController {
     func loadBackground() {
         if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {
             if let backgroundVideoURL = appearance.backgroundVideoURL {
-                let videoPlayer = AVPlayer(playerItem: AVPlayerItem(URL: backgroundVideoURL))
+                let videoPlayer = AVPlayer(playerItem: AVPlayerItem(cacheableURL: backgroundVideoURL))
                 backgroundVideoLayer = AVPlayerLayer(player: videoPlayer)
                 backgroundVideoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
                 backgroundVideoLayer?.frame = self.view.bounds
@@ -213,7 +213,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func onExit() {
-        NextGenHook.delegate?.nextGenExperienceWillClose()
+        NextGenHook.experienceWillClose()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

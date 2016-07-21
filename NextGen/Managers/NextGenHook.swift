@@ -14,4 +14,9 @@ class NextGenHook {
     
     static var delegate: NextGenHookDelegate?
     
+    static func experienceWillClose() {
+        delegate?.nextGenExperienceWillClose()
+        NextGenCacheManager.clearTempDirectory()
+    }
+    
 }
