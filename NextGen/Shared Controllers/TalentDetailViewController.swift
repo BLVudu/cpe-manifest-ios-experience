@@ -23,15 +23,16 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak private var _talentImageView: UIImageView!
-    @IBOutlet weak private var _talentGalleryButton: UIButton!
+    @IBOutlet weak private var _talentGalleryButton: UIButton?
     @IBOutlet weak private var _talentNameLabel: UILabel!
     @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
     @IBOutlet weak private var _talentBiographyLabel: UITextView!
     
-    @IBOutlet weak private var _galleryContainerView: UIView!
-    @IBOutlet weak private var _galleryHeaderLabel: UILabel!
-    @IBOutlet weak private var _galleryCollectionView: UICollectionView!
-    @IBOutlet private var _talentNoGalleryConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var _galleryContainerView: UIView?
+    @IBOutlet weak private var _galleryHeaderLabel: UILabel?
+    @IBOutlet weak private var _galleryCollectionView: UICollectionView?
+    @IBOutlet private var _biographyToFilmographyConstraint: NSLayoutConstraint?
+    @IBOutlet private var _biographyToGalleryConstraint: NSLayoutConstraint?
     
     @IBOutlet weak private var _filmographyContainerView: UIView!
     @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
@@ -56,22 +57,28 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         // Localizations
         _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
-        _galleryHeaderLabel.text = String.localize("talentdetail.gallery").uppercaseString
+        _galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercaseString
         _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
         
         if mode == .Extras {
             titleLabel.removeFromSuperview()
             closeButton.removeFromSuperview()
             _containerViewTopConstraint.constant = 20
+            
+            _talentGalleryButton?.removeFromSuperview()
+            _galleryCollectionView?.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
         } else {
-            _talentNoGalleryConstraint.active = true
+            _biographyToFilmographyConstraint?.active = true
+            _biographyToGalleryConstraint?.active = false
+            _biographyToGalleryConstraint = nil
+            _galleryHeaderLabel?.removeFromSuperview()
+            _galleryCollectionView?.removeFromSuperview()
+            _galleryContainerView?.removeFromSuperview()
+            
+            let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
+            launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
+            _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
         }
-        
-        _galleryCollectionView.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
-        
-        let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
-        launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
-        _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
         
         loadTalent(talent)
     }
@@ -135,10 +142,14 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         }
         
         let talentHasGallery = talent.images != nil && talent.images!.count > 1
-        _galleryContainerView.hidden = mode == .Synced || !talentHasGallery
-        _talentGalleryButton.hidden = mode != .Synced || !talentHasGallery
         _talentImageView.userInteractionEnabled = talentHasGallery
-        _talentNoGalleryConstraint.active = _galleryContainerView.hidden
+        if mode == .Extras {
+            _galleryContainerView?.hidden = !talentHasGallery
+            _biographyToFilmographyConstraint?.active = !talentHasGallery
+            _biographyToGalleryConstraint?.active = talentHasGallery
+        } else {
+            _talentGalleryButton?.hidden = !talentHasGallery
+        }
         
         _filmographyCollectionView.backgroundColor = UIColor.clearColor()
         _filmographyContainerView.hidden = true
@@ -158,7 +169,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             })
         }
         
-        _galleryCollectionView.reloadData()
+        _galleryCollectionView?.reloadData()
     }
     
     // MARK: Actions
