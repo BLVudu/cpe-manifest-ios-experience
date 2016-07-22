@@ -16,8 +16,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak private var galleryTableView: UITableView!
     
     @IBOutlet weak private var videoContainerView: UIView!
-    @IBOutlet weak private var previewImageView: UIImageView?
-    @IBOutlet weak private var previewPlayButton: UIButton?
+    @IBOutlet weak private var previewImageView: UIImageView!
+    @IBOutlet weak private var previewPlayButton: UIButton!
     @IBOutlet weak private var mediaTitleLabel: UILabel!
     @IBOutlet weak private var mediaDescriptionLabel: UILabel!
     private var videoPlayerViewController: VideoPlayerViewController?
@@ -29,10 +29,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak private var shareButton: UIButton!
     
     private var didPlayFirstItem = false
-    private var previewPlayURL: NSURL?
     private var userDidSelectNextItem = true
     
     private var willPlayNextItemObserver: NSObjectProtocol?
+    private var didEndLastVideoObserver: NSObjectProtocol?
     
     // MARK: Initialization
     deinit {
@@ -41,6 +41,11 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         if let observer = willPlayNextItemObserver {
             center.removeObserver(observer)
             willPlayNextItemObserver = nil
+        }
+        
+        if let observer = didEndLastVideoObserver {
+            center.removeObserver(observer)
+            didEndLastVideoObserver = nil
         }
         
         if let observer = galleryDidScrollToPageObserver {
@@ -74,6 +79,18 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
             }
         }
+        
+        didEndLastVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidEndLastVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
+            if let strongSelf = self {
+                strongSelf.previewImageView.hidden = false
+                strongSelf.previewPlayButton.hidden = false
+                strongSelf.destroyVideoPlayer()
+                
+                if let selectedIndexPath = strongSelf.galleryTableView.indexPathForSelectedRow, cell = strongSelf.galleryTableView.cellForRowAtIndexPath(selectedIndexPath) as? VideoCell {
+                    cell.setWatched()
+                }
+            }
+        })
         
         galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
@@ -111,6 +128,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row > 0 {
+            didPlayFirstItem = true
+        }
+        
         if let thisExperience = experience.childExperiences?[indexPath.row] {
             mediaTitleLabel.hidden = true
             mediaDescriptionLabel.hidden = true
@@ -120,16 +141,16 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             galleryPageControl.hidden = true
             galleryScrollView.hidden = true
             videoContainerView.hidden = false
-            previewImageView?.hidden = didPlayFirstItem
-            previewPlayButton?.hidden = didPlayFirstItem
+            previewImageView.hidden = didPlayFirstItem
+            previewPlayButton.hidden = didPlayFirstItem
             
             // Set new media detail views
             if let gallery = thisExperience.gallery {
                 mediaTitleLabel.text = nil
                 galleryScrollView.hidden = false
                 videoContainerView.hidden = true
-                previewImageView?.hidden = true
-                previewPlayButton?.hidden = true
+                previewImageView.hidden = true
+                previewPlayButton.hidden = true
                 
                 galleryScrollView.loadGallery(gallery)
                 if !gallery.isTurntable {
@@ -138,76 +159,64 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                     galleryPageControl.hidden = false
                     galleryPageControl.numberOfPages = gallery.totalCount
                 }
-            } else if thisExperience.isType(.AudioVisual), let videoURL = thisExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+            } else if thisExperience.isType(.AudioVisual) {
                 mediaTitleLabel.text = thisExperience.metadata?.title
                 mediaDescriptionLabel.text = thisExperience.metadata?.description
                 mediaTitleLabel.hidden = false
                 mediaDescriptionLabel.hidden = false
+                playSelectedExperience()
+                userDidSelectNextItem = true
+            }
+        }
+    }
+    
+    private func playSelectedExperience() {
+        if let selectedIndexPath = galleryTableView.indexPathForSelectedRow, selectedExperience = experience.childExperiences?[selectedIndexPath.row] {
+            if let imageURL = selectedExperience.imageURL {
+                previewImageView.setImageWithURL(imageURL, completion: nil)
+            }
+            
+            if didPlayFirstItem, let videoURL = selectedExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
+                previewImageView.hidden = true
+                previewPlayButton.hidden = true
                 
-                if let player = videoPlayerViewController.player {
-                    player.removeAllItems()
-                }
-                
+                videoPlayerViewController.player?.removeAllItems()
                 videoPlayerViewController.mode = VideoPlayerMode.Supplemental
-                videoPlayerViewController.curIndex = indexPath.row
+                videoPlayerViewController.curIndex = selectedIndexPath.row
                 videoPlayerViewController.indexMax = experience.childExperiences?.count ?? 0
-                
                 videoPlayerViewController.view.frame = videoContainerView.bounds
                 videoContainerView.addSubview(videoPlayerViewController.view)
                 self.addChildViewController(videoPlayerViewController)
                 videoPlayerViewController.didMoveToParentViewController(self)
-                self.videoPlayerViewController = videoPlayerViewController
                 
-                if !didPlayFirstItem {
-                    previewPlayURL = videoURL
-                
-                    if indexPath.row == 0 {
-                        if let imageURL = thisExperience.imageURL {
-                            previewImageView?.setImageWithURL(imageURL, completion: nil)
-                        }
-                    } else {
-                        playFirstItem()
-                    }
-                } else {
-                    if userDidSelectNextItem {
-                        videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
-                    }
-                        
-                    videoPlayerViewController.playVideoWithURL(videoURL)
-                    userDidSelectNextItem = true
+                if userDidSelectNextItem {
+                    videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
                 }
+                
+                videoPlayerViewController.playVideoWithURL(videoURL)
+                self.videoPlayerViewController = videoPlayerViewController
             }
         }
     }
     
-    func playFirstItem() {
-        didPlayFirstItem = true
-        
-        previewImageView?.removeFromSuperview()
-        previewPlayButton?.removeFromSuperview()
-        previewImageView = nil
-        previewPlayButton = nil
-        
-        if let videoURL = previewPlayURL {
-            videoPlayerViewController?.playVideoWithURL(videoURL)
-        }
+    private func destroyVideoPlayer() {
+        videoPlayerViewController?.willMoveToParentViewController(nil)
+        videoPlayerViewController?.view.removeFromSuperview()
+        videoPlayerViewController?.removeFromParentViewController()
+        videoPlayerViewController = nil
     }
-    
     
     // MARK: Actions
     @IBAction func onPlay() {
-        playFirstItem()
+        didPlayFirstItem = true
+        playSelectedExperience()
     }
     
     @IBAction func onShare(sender: UIButton?) {
-        if !galleryScrollView.hidden {
-            if let url = galleryScrollView.currentImageURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
-                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = sender
-                self.presentViewController(activityViewController, animated: true, completion: nil)
-            }
-        } else {
-            
+        if !galleryScrollView.hidden, let url = galleryScrollView.currentImageURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
+            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = sender
+            self.presentViewController(activityViewController, animated: true, completion: nil)
         }
     }
     

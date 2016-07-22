@@ -105,4 +105,8 @@ class VideoCell: UITableViewCell {
         playIconImageView.hidden = (experience == nil || experience!.isType(.Gallery)) || self.selected
     }
     
+    func setWatched() {
+        self.runtimeLabel.text = String.localize("label.watched")
+    }
+    
 }

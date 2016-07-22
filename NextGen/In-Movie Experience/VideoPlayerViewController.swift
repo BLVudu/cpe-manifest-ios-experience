@@ -12,6 +12,7 @@ struct VideoPlayerNotification {
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
     static let DidPlayVideo = "VideoPlayerNotificationDidPlayVideo"
+    static let DidEndLastVideo = "kVideoPlayerNotificationDidEndLastVideo"
     static let UserInfoVideoURL = "kVideoPlayerNotificationVideoURL"
 }
 
@@ -215,6 +216,8 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
                 self.countdownSeconds = 5;
                 self.countdown.countdownString = "  \(self.countdownSeconds) sec"
             }
+        } else {
+            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndLastVideo, object: nil)
         }
 
         if mode == .Supplemental {
