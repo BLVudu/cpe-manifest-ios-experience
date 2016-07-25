@@ -50,6 +50,7 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1139,7 +1140,7 @@
                                         <rect key="frame" x="0.0" y="28" width="408" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">
@@ -1248,14 +1249,6 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cbz-fT-NUV" userLabel="Activity Indicator">
                                 <rect key="frame" x="494" y="369" width="37" height="29"/>
                             </activityIndicatorView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxP-Uc-jyH" customClass="CircularProgressView" customModule="NextGen" customModuleProvider="target">
-                                <rect key="frame" x="45" y="20" width="40" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="kxP-Uc-jyH" secondAttribute="height" multiplier="1:1" id="PvW-CG-ZU6"/>
-                                    <constraint firstAttribute="width" constant="40" id="vES-nR-pYc"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-Vu-ikZ" userLabel="Top Toolbar">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="75"/>
                                 <subviews>
@@ -1390,6 +1383,16 @@
                                     <constraint firstItem="yBz-nT-qfC" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="y4a-g7-H3D"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IcY-NN-IUH">
+                                <rect key="frame" x="45" y="20" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="7kR-wK-bmN"/>
+                                    <constraint firstAttribute="width" secondItem="IcY-NN-IUH" secondAttribute="height" multiplier="1:1" id="xjk-l0-ef2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZM-tJ-9zk">
                                 <rect key="frame" x="615" y="55" width="400" height="260"/>
                                 <constraints>
@@ -1411,14 +1414,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="3ZM-tJ-9zk" secondAttribute="trailing" constant="-11" id="CU9-sI-a06"/>
                             <constraint firstAttribute="bottom" secondItem="HZD-oz-ZXg" secondAttribute="bottom" id="DzX-Ic-rcn"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="leading" secondItem="cbz-fT-NUV" secondAttribute="trailing" constant="84" id="FDg-kV-KIm"/>
+                            <constraint firstItem="IcY-NN-IUH" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="20" id="FPo-NG-1xk"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="74" id="Hgi-El-ngk"/>
                             <constraint firstAttribute="centerY" secondItem="HZD-oz-ZXg" secondAttribute="centerY" id="NGJ-V2-Xef"/>
+                            <constraint firstItem="IcY-NN-IUH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" constant="45" id="Oow-Dj-Poe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3ZM-tJ-9zk" secondAttribute="trailing" constant="-16" id="PQ3-eq-VT7"/>
                             <constraint firstAttribute="trailing" secondItem="VY7-Vu-ikZ" secondAttribute="trailing" id="TVX-rr-5DP"/>
                             <constraint firstItem="HZD-oz-ZXg" firstAttribute="top" secondItem="r83-OM-ywG" secondAttribute="top" id="WFQ-gw-au5"/>
-                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="20" id="WPu-b7-QAY"/>
                             <constraint firstAttribute="centerX" secondItem="cbz-fT-NUV" secondAttribute="centerX" constant="-0.5" id="ZgH-nX-eyv"/>
-                            <constraint firstItem="kxP-Uc-jyH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" constant="45" id="bDX-LN-yYv"/>
                             <constraint firstItem="VY7-Vu-ikZ" firstAttribute="top" secondItem="r83-OM-ywG" secondAttribute="top" id="cGT-q1-ZXP"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leadingMargin" priority="750" constant="600" id="cbf-Yo-Ojk"/>
                             <constraint firstAttribute="bottom" secondItem="tdq-om-9xU" secondAttribute="bottom" id="edM-Ea-fe1"/>
@@ -1447,7 +1450,7 @@
                         <outlet property="_commentaryView" destination="3ZM-tJ-9zk" id="e9d-SM-nuc"/>
                         <outlet property="_homeButton" destination="aLt-Qu-Yg8" id="neb-30-wLZ"/>
                         <outlet property="activityIndicator" destination="cbz-fT-NUV" id="2GD-nb-I0M"/>
-                        <outlet property="countdown" destination="kxP-Uc-jyH" id="QMm-gr-Td3"/>
+                        <outlet property="countdownLabel" destination="IcY-NN-IUH" id="bdY-t4-wu6"/>
                         <outlet property="durationLabel" destination="c6W-KZ-1CO" id="agC-Tl-gJZ"/>
                         <outlet property="fullScreenButton" destination="hQ6-y2-KsL" id="QEK-g6-Bkd"/>
                         <outlet property="pauseButton" destination="Fre-sx-P7e" id="xPZ-ZP-9To"/>

@@ -8,6 +8,17 @@ class SettingsManager {
     
     private struct UserDefaults {
         static let DidWatchVideo = "kUserDefaultsDidWatchVideo"
+        static let DidWatchInterstitial = "kUserDefaultsDidWatchInterstitial"
+    }
+    
+    static var didWatchInterstitial: Bool {
+        get {
+            return NSUserDefaults.standardUserDefaults().boolForKey(UserDefaults.DidWatchInterstitial)
+        }
+        
+        set {
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: UserDefaults.DidWatchInterstitial)
+        }
     }
     
     static func didWatchVideo(videoURL: NSURL) -> Bool {

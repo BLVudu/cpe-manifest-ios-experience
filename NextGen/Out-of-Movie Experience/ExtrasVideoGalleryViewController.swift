@@ -29,7 +29,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak private var shareButton: UIButton!
     
     private var didPlayFirstItem = false
-    private var userDidSelectNextItem = true
     
     private var willPlayNextItemObserver: NSObjectProtocol?
     private var didEndLastVideoObserver: NSObjectProtocol?
@@ -71,11 +70,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
 
-        willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(kNextGenVideoPlayerWillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
+        willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.WillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int where index < (strongSelf.experience.childExperiences?.count ?? 0) {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                strongSelf.userDidSelectNextItem = false
                 strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
             }
         }
@@ -132,6 +130,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             didPlayFirstItem = true
         }
         
+        print("selected: \(indexPath.row)")
+        
         if let thisExperience = experience.childExperiences?[indexPath.row] {
             mediaTitleLabel.hidden = true
             mediaDescriptionLabel.hidden = true
@@ -165,7 +165,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 mediaTitleLabel.hidden = false
                 mediaDescriptionLabel.hidden = false
                 playSelectedExperience()
-                userDidSelectNextItem = true
             }
         }
     }
@@ -182,18 +181,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 
                 videoPlayerViewController.player?.removeAllItems()
                 videoPlayerViewController.mode = VideoPlayerMode.Supplemental
-                videoPlayerViewController.curIndex = selectedIndexPath.row
-                videoPlayerViewController.indexMax = experience.childExperiences?.count ?? 0
+                videoPlayerViewController.queueTotalCount = experience.childExperiences?.count ?? 0
+                videoPlayerViewController.queueCurrentIndex = selectedIndexPath.row
                 videoPlayerViewController.view.frame = videoContainerView.bounds
                 videoContainerView.addSubview(videoPlayerViewController.view)
                 self.addChildViewController(videoPlayerViewController)
                 videoPlayerViewController.didMoveToParentViewController(self)
-                
-                if userDidSelectNextItem {
-                    videoPlayerViewController.cancel(videoPlayerViewController.nextItemTask)
-                }
-                
                 videoPlayerViewController.playVideoWithURL(videoURL)
+                
                 self.videoPlayerViewController = videoPlayerViewController
             }
         }

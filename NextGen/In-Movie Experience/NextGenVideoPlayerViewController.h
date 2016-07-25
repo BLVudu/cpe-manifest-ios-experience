@@ -32,7 +32,6 @@ static NSString * const kNextGenVideoPlayerItemReadyToPlayNotification          
 static NSString * const kNextGenVideoPlayerPlaybackStateDidChangeNotification    = @"kNextGenVideoPlayerPlaybackStateDidChangeNotification";
 static NSString * const kNextGenVideoPlayerPlaybackBufferEmptyNotification       = @"kNextGenVideoPlayerPlaybackBufferEmptyNotification";
 static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification    = @"kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification";
-static NSString * const kNextGenVideoPlayerWillPlayNextItem                      = @"kNextGenVideoPlayerWillPlayNextItem";
 
 //=========================================================
 # pragma mark -

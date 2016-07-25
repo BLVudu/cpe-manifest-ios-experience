@@ -72,8 +72,8 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
                 player.removeAllItems()
             }
             
-            videoPlayerViewController.curIndex = 0
-            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.queueTotalCount = 1
+            videoPlayerViewController.queueCurrentIndex = 0
             videoPlayerViewController.mode = .SupplementalInMovie
             videoPlayerViewController.view.frame = videoContainerView.bounds
             
