@@ -22,4 +22,10 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         mapView.userInteractionEnabled = false
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        mapView.clear()
+    }
+    
 }

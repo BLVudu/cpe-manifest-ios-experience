@@ -142,6 +142,14 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         googleMapView = nil
         appleMapView = nil
     }
+    
+    func clear() {
+        if let mapView = googleMapView {
+            mapView.clear()
+        } else if let mapView = appleMapView {
+            mapView.removeAnnotations(mapView.annotations)
+        }
+    }
 
     func setLocation(location: CLLocationCoordinate2D, zoomLevel: Float, animated: Bool) {
         if let mapView = googleMapView {
@@ -207,6 +215,15 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             }
             
             mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50))
+        } else if let mapView = appleMapView {
+            var annotations = [MKAnnotation]()
+            for marker in markers {
+                if let mapMarker = marker.appleMapAnnotation {
+                    annotations.append(mapMarker)
+                }
+            }
+            
+            mapView.showAnnotations(annotations, animated: true)
         }
     }
     
@@ -241,20 +258,6 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         annotationView?.annotation = annotation
         
         return annotationView
-    }
-    
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        /*if let delegate = delegate {
-            var selectedMarker: MultiMapMarker
-            for mapMarker in mapMarkers {
-                if mapMarker.appleMapAnnotation == view.annotation {
-                    selectedMarker = mapMarker
-                    break
-                }
-            }
-            
-            delegate.didTapMarker(selectedMarker)
-        }*/
     }
     
     // MARK: GMSMapViewDelegate
