@@ -1146,7 +1146,7 @@
                                         <rect key="frame" x="0.0" y="28" width="408" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">
@@ -1511,10 +1511,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="tpv-9d-upg" secondAttribute="trailing" constant="40" id="2Kv-Zm-x7l"/>
                             <constraint firstItem="AwK-XO-vi8" firstAttribute="top" secondItem="tpv-9d-upg" secondAttribute="bottom" constant="10" id="36a-Zb-d4l"/>
-                            <constraint firstItem="AwK-XO-vi8" firstAttribute="leading" secondItem="tpv-9d-upg" secondAttribute="leading" id="FRd-fo-Jck"/>
                             <constraint firstItem="pBp-JA-3ZL" firstAttribute="top" relation="lessThanOrEqual" secondItem="AwK-XO-vi8" secondAttribute="bottom" constant="80" id="Udc-Xt-wKO"/>
                             <constraint firstItem="tpv-9d-upg" firstAttribute="top" secondItem="aDV-nV-E6a" secondAttribute="bottom" constant="70" id="jwc-XR-fTS"/>
-                            <constraint firstItem="AwK-XO-vi8" firstAttribute="trailing" secondItem="tpv-9d-upg" secondAttribute="trailing" id="xPy-Rv-7Uk"/>
+                            <constraint firstAttribute="trailing" secondItem="AwK-XO-vi8" secondAttribute="trailing" constant="40" id="lev-2p-xFp"/>
+                            <constraint firstItem="AwK-XO-vi8" firstAttribute="top" secondItem="aDV-nV-E6a" secondAttribute="bottom" priority="750" constant="70" id="psR-P1-31w"/>
+                            <constraint firstItem="AwK-XO-vi8" firstAttribute="leading" secondItem="fWX-1J-8Cs" secondAttribute="leading" constant="40" id="y8h-Xl-BAM"/>
                             <constraint firstItem="tpv-9d-upg" firstAttribute="leading" secondItem="fWX-1J-8Cs" secondAttribute="leading" constant="40" id="zaG-on-vYX"/>
                         </constraints>
                     </view>

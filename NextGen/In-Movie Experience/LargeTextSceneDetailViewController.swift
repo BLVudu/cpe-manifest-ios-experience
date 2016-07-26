@@ -7,7 +7,7 @@ import NextGenDataManager
 
 class LargeTextSceneDetailViewController: SceneDetailViewController {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var textLabel: UILabel!
 
     override func viewDidLoad() {
@@ -16,9 +16,9 @@ class LargeTextSceneDetailViewController: SceneDetailViewController {
         textLabel.text = timedEvent?.descriptionText
         
         if let imageURL = timedEvent?.imageURL {
-            imageView.setImageWithURL(imageURL, completion: nil)
+            imageView?.setImageWithURL(imageURL, completion: nil)
         } else {
-            imageView.image = UIImage.themeDefaultImage16By9()
+            imageView?.removeFromSuperview()
         }
     }
 

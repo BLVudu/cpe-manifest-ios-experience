@@ -23,7 +23,7 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
                     _setImageSessionDataTask = _imageView.setImageWithURL(url, completion: nil)
                 }
             } else {
-                _imageView.image = UIImage.themeDefaultImage16By9()
+                _imageView.image = nil
                 _imageView.backgroundColor = UIColor.clearColor()
             }
         }

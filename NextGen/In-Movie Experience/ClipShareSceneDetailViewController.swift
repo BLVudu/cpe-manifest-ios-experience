@@ -45,7 +45,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         if let imageURL = timedEvent?.imageURL {
             previewImageView.setImageWithURL(imageURL, completion: nil)
         } else {
-            previewImageView.image = UIImage.themeDefaultImage16By9()
+            previewImageView.image = nil
         }
         
         videoContainerView.hidden = true
