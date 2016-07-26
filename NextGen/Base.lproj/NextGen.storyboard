@@ -901,6 +901,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="gMB-l8-A8q"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="onPageControlValueChanged" destination="JyP-nX-0rW" eventType="valueChanged" id="cle-hH-asc"/>
+                                        </connections>
                                     </pageControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNG-gG-rsO">
                                         <rect key="frame" x="855" y="0.0" width="125" height="50"/>
@@ -1054,6 +1057,9 @@
                             </button>
                             <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ul9-sZ-eg9">
                                 <rect key="frame" x="327" y="468" width="672" height="37"/>
+                                <connections>
+                                    <action selector="onPageControlValueChanged" destination="wpZ-Jt-DDC" eventType="valueChanged" id="ZM1-44-wRR"/>
+                                </connections>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG2-1b-EHg" customClass="ImageGalleryScrollView" customModule="NextGen" customModuleProvider="target">
                                 <rect key="frame" x="327" y="90" width="672" height="378"/>
@@ -1882,6 +1888,9 @@
                             </label>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="NSs-ZD-yML">
                                 <rect key="frame" x="509" y="651" width="7" height="37"/>
+                                <connections>
+                                    <action selector="onPageControlValueChanged" destination="v1c-4O-jsc" eventType="valueChanged" id="TH6-9J-gqu"/>
+                                </connections>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ag1-z8-REb">
                                 <rect key="frame" x="824" y="647" width="160" height="45"/>

@@ -130,8 +130,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             didPlayFirstItem = true
         }
         
-        print("selected: \(indexPath.row)")
-        
         if let thisExperience = experience.childExperiences?[indexPath.row] {
             mediaTitleLabel.hidden = true
             mediaDescriptionLabel.hidden = true
@@ -213,6 +211,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             activityViewController.popoverPresentationController?.sourceView = sender
             self.presentViewController(activityViewController, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func onPageControlValueChanged() {
+        galleryScrollView.gotoPage(galleryPageControl.currentPage, animated: true)
     }
     
 }

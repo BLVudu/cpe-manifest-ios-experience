@@ -321,6 +321,10 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         collectionView.reloadData()
     }
     
+    @IBAction func onPageControlValueChanged() {
+        galleryScrollView.gotoPage(galleryPageControl.currentPage, animated: true)
+    }
+    
     // MARK: MultiMapViewDelegate
     func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
         if let dataDictionary = marker.dataObject as? [String: Int], sceneLocationIndex = dataDictionary["sceneLocationIndex"], childSceneLocationIndex = dataDictionary["childSceneLocationIndex"] {

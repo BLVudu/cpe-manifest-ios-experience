@@ -90,5 +90,11 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
             self.presentViewController(activityViewController, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func onPageControlValueChanged() {
+        if let pageControl = pageControl {
+            galleryScrollView?.gotoPage(pageControl.currentPage, animated: true)
+        }
+    }
  
 }
