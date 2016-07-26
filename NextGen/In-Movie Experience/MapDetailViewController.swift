@@ -75,7 +75,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         closeDetailView()
         
         if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
-            videoPlayerViewController.mode = VideoPlayerMode.Supplemental
+            videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
             
             videoPlayerViewController.view.frame = videoContainerView.bounds
             videoContainerView.addSubview(videoPlayerViewController.view)
