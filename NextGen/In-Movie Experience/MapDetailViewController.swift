@@ -22,6 +22,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     
     private var appData: NGDMAppData!
     private var location: NGDMLocation!
+    private var marker: MultiMapMarker!
     
     deinit {
         if let observer = galleryDidToggleFullScreenObserver {
@@ -65,13 +66,19 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         
         let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: false)
-        mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: true)
+        marker = mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: true)
         mapView.addControls()
         mapView.maxZoomLevel = appData.zoomLevel
     }
     
+    private func animateToCenter() {
+        let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+        mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: true)
+        mapView.selectedMarker = marker
+    }
+    
     // MARK: Actions
-    func playVideo(videoURL: NSURL) {
+    private func playVideo(videoURL: NSURL) {
         closeDetailView()
         
         if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
@@ -89,7 +96,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         }
     }
     
-    func showGallery(gallery: NGDMGallery) {
+    private func showGallery(gallery: NGDMGallery) {
         closeDetailView()
         
         galleryScrollView.loadGallery(gallery)
@@ -98,7 +105,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         locationDetailView.hidden = false
     }
     
-    func closeDetailView() {
+    private func closeDetailView() {
         locationDetailView.hidden = true
         
         galleryScrollView.destroyGallery()
@@ -133,6 +140,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 {
             closeDetailView()
+            animateToCenter()
         } else if let videoURL = appData.videoURL {
             playVideo(videoURL)
         } else if let gallery = appData.gallery {
