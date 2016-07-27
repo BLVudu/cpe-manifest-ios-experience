@@ -18,7 +18,7 @@ struct ExperienceCellData {
 
 class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let ShowGallery = "showGallery"
         static let ShowShop = "showShop"
         static let ShowMap = "showMap"
@@ -26,7 +26,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ShowLargeText = "ShowLargeTextSegueIdentifier"
     }
     
-    struct Constants {
+    private struct Constants {
         static let ItemsPerRow: CGFloat = 2
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10

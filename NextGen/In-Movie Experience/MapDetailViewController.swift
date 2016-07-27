@@ -44,14 +44,14 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         appData = timedEvent!.appData!
         location = appData.location!
         
-        if appData.hasVideo || appData.hasGallery {
+        if appData.mediaCount > 0 {
             descriptionLabel?.removeFromSuperview()
             mediaCollectionView?.registerNib(UINib(nibName: String(SimpleMapCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleMapCollectionViewCell.ReuseIdentifier)
             mediaCollectionView?.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
         } else {
             mediaCollectionView?.removeFromSuperview()
             
-            if let text = appData.displayText {
+            if let text = appData.description {
                 descriptionLabel?.text = text
                 descriptionLabel?.hidden = false
             } else {
@@ -119,7 +119,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return appData.hasVideo || appData.hasGallery ? 2 : 0
+        return appData.mediaCount > 0 ? appData.mediaCount + 1 : 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -130,8 +130,14 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         }
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleImageCollectionViewCell.BaseReuseIdentifier, forIndexPath: indexPath) as! SimpleImageCollectionViewCell
-        cell.playButtonVisible = appData.hasVideo
-        cell.imageURL = appData.getImageURL(.MediaThumbnail)
+        
+        if let experience = appData.mediaAtIndex(indexPath.row - 1) {
+            cell.playButtonVisible = experience.isType(.AudioVisual)
+            cell.imageURL = experience.imageURL
+        } else {
+            cell.playButtonVisible = false
+            cell.imageURL = nil
+        }
         
         return cell
     }
@@ -141,10 +147,12 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         if indexPath.row == 0 {
             closeDetailView()
             animateToCenter()
-        } else if let videoURL = appData.videoURL {
-            playVideo(videoURL)
-        } else if let gallery = appData.gallery {
-            showGallery(gallery)
+        } else if let experience = appData.mediaAtIndex(indexPath.row - 1) {
+            if let videoURL = experience.videoURL {
+                playVideo(videoURL)
+            } else if let gallery = experience.gallery {
+                showGallery(gallery)
+            }
         }
     }
     

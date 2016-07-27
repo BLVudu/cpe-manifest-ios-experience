@@ -10,7 +10,6 @@ class MapItemCell: UICollectionViewCell {
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
     
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var subtitleLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var playButton: UIButton!
     private var setImageSessionDataTask: NSURLSessionDataTask?
@@ -22,16 +21,6 @@ class MapItemCell: UICollectionViewCell {
         
         get {
             return titleLabel.text
-        }
-    }
-    
-    var subtitle: String? {
-        set {
-            subtitleLabel.text = newValue
-        }
-        
-        get {
-            return subtitleLabel.text
         }
     }
     
@@ -67,7 +56,6 @@ class MapItemCell: UICollectionViewCell {
         super.prepareForReuse()
         
         title = nil
-        subtitle = nil
         imageURL = nil
         playButton.hidden = true
         
