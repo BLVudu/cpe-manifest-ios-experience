@@ -157,7 +157,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
                     let marker = mapView.addMarker(CLLocationCoordinate2DMake(location.latitude, location.longitude),
                                                    title: location.name,
                                                    subtitle: location.address,
-                                                   icon: UIImage(named: "MOSMapPin"),
+                                                   icon: location.iconImage,
                                                    autoSelect: false)
                     
                     marker.dataObject = ["sceneLocationIndex": i, "childSceneLocationIndex": j]

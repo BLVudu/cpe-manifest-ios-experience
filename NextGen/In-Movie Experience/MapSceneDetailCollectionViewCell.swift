@@ -16,7 +16,7 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         if let appData = timedEvent?.appData, location = appData.location {
             let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
             mapView.setLocation(center, zoomLevel: appData.zoomLevel - 4, animated: false)
-            mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: false)
+            mapView.addMarker(center, title: location.name, subtitle: location.address, icon: location.iconImage, autoSelect: false)
         }
         
         mapView.userInteractionEnabled = false

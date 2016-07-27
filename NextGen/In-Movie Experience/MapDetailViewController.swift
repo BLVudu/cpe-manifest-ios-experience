@@ -66,7 +66,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         
         let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: false)
-        marker = mapView.addMarker(center, title: location.name, subtitle: location.address, icon: UIImage(named: "MOSMapPin"), autoSelect: true)
+        marker = mapView.addMarker(center, title: location.name, subtitle: location.address, icon: location.iconImage, autoSelect: true)
         mapView.addControls()
         mapView.maxZoomLevel = appData.zoomLevel
     }
