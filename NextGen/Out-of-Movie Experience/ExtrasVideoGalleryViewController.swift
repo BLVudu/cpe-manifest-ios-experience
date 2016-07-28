@@ -11,6 +11,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         static let GalleryTableViewImageAspectRatio: CGFloat = 16 / 9
         static let GalleryTableViewLabelHeight: CGFloat = 40
         static let GalleryTableViewPadding: CGFloat = 15
+        static let GalleryTableViewMobileAspectRatio: CGFloat = 600 / 195
     }
     
     @IBOutlet weak private var galleryTableView: UITableView!
@@ -64,7 +65,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        galleryTableView.registerNib(UINib(nibName: String(VideoCell), bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
+        galleryTableView.registerNib(UINib(nibName: VideoCell.NibName, bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
 
         let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
         self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
@@ -112,7 +113,11 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return (CGRectGetWidth(tableView.frame) / Constants.GalleryTableViewImageAspectRatio) + Constants.GalleryTableViewLabelHeight + Constants.GalleryTableViewPadding
+        if DeviceType.IS_IPAD {
+            return (CGRectGetWidth(tableView.frame) / Constants.GalleryTableViewImageAspectRatio) + Constants.GalleryTableViewLabelHeight + Constants.GalleryTableViewPadding
+        }
+        
+        return CGRectGetWidth(tableView.frame) / Constants.GalleryTableViewMobileAspectRatio
     }
     
     

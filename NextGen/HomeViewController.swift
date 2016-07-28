@@ -140,12 +140,16 @@ class HomeViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Landscape
+        return (DeviceType.IS_IPAD ? .Landscape : .All)
     }
     
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        let interfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
-        return UIInterfaceOrientationIsLandscape(interfaceOrientation) ? interfaceOrientation : .LandscapeLeft
+        if DeviceType.IS_IPAD {
+            let interfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
+            return UIInterfaceOrientationIsLandscape(interfaceOrientation) ? interfaceOrientation : .LandscapeLeft
+        }
+        
+        return super.preferredInterfaceOrientationForPresentation()
     }
     
     // MARK: Video Player

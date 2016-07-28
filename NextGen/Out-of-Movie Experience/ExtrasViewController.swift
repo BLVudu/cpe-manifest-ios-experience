@@ -24,23 +24,28 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     }
     
     @IBOutlet weak var talentTableView: UITableView?
-    @IBOutlet weak var talentDetailView: UIView!
-    private var _talentDetailViewController: TalentDetailViewController?
+    @IBOutlet weak var talentDetailView: UIView?
     @IBOutlet var extrasCollectionView: UICollectionView!
     
-    var selectedIndexPath: NSIndexPath?
+    private var talentDetailViewController: TalentDetailViewController?
+    private var selectedIndexPath: NSIndexPath?
     
+    private var showActorsInGrid: Bool {
+        return !DeviceType.IS_IPAD && NGDMManifest.sharedInstance.hasActors
+    }
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors where actors.count > 0 {
-            talentTableView?.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
-            talentTableView?.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
-        } else {
-            talentTableView?.removeFromSuperview()
-            talentTableView = nil
+        if let talentTableView = talentTableView {
+            if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors where actors.count > 0 {
+                talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Wide", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+                talentTableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
+            } else {
+                talentTableView.removeFromSuperview()
+                self.talentTableView = nil
+            }
         }
         
         extrasCollectionView.registerNib(UINib(nibName: String(TitledImageCell), bundle: nil), forCellWithReuseIdentifier: TitledImageCell.ReuseIdentifier)
@@ -48,14 +53,10 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         showHomeButton()
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Landscape
-    }
-    
     
     // MARK: Actions
     override func close() {
-        if !talentDetailView.hidden {
+        if talentDetailView != nil && !talentDetailView!.hidden {
             hideTalentDetailView()
         } else {
             super.close()
@@ -67,10 +68,10 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     func showTalentDetailView() {
         if selectedIndexPath != nil {
             if let cell = talentTableView?.cellForRowAtIndexPath(selectedIndexPath!) as? TalentTableViewCell, talent = cell.talent {
-                if _talentDetailViewController != nil {
-                    _talentDetailViewController!.loadTalent(talent)
+                if talentDetailViewController != nil {
+                    talentDetailViewController!.loadTalent(talent)
                 } else {
-                    if let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController) as? TalentDetailViewController {
+                    if let talentDetailView = talentDetailView, talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController) as? TalentDetailViewController {
                         talentDetailViewController.talent = talent
                         
                         talentDetailViewController.view.frame = talentDetailView.bounds
@@ -83,10 +84,10 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                         showBackButton()
                         
                         UIView.animateWithDuration(0.25, animations: {
-                            self.talentDetailView.alpha = 1
+                            talentDetailView.alpha = 1
                         })
                         
-                        _talentDetailViewController = talentDetailViewController
+                        self.talentDetailViewController = talentDetailViewController
                     }
                 }
             }
@@ -102,13 +103,13 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         showHomeButton()
         
         UIView.animateWithDuration(0.25, animations: {
-            self.talentDetailView.alpha = 0
+            self.talentDetailView?.alpha = 0
         }, completion: { (Bool) -> Void in
-            self.talentDetailView.hidden = true
-            self._talentDetailViewController?.willMoveToParentViewController(nil)
-            self._talentDetailViewController?.view.removeFromSuperview()
-            self._talentDetailViewController?.removeFromParentViewController()
-            self._talentDetailViewController = nil
+            self.talentDetailView?.hidden = true
+            self.talentDetailViewController?.willMoveToParentViewController(nil)
+            self.talentDetailViewController?.view.removeFromSuperview()
+            self.talentDetailViewController?.removeFromParentViewController()
+            self.talentDetailViewController = nil
         })
     }
     
@@ -147,19 +148,46 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?.count ?? 0
+        var experiencesCount = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?.count ?? 0
+        if showActorsInGrid {
+            experiencesCount += 1
+        }
+        
+        return experiencesCount
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(TitledImageCell.ReuseIdentifier, forIndexPath: indexPath) as! TitledImageCell
-        cell.experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[indexPath.row]
+        
+        var childExperienceIndex = indexPath.row
+        if showActorsInGrid {
+            if indexPath.row == 0 {
+                cell.experience = nil
+                cell.setTitle(String.localize("label.actors"))
+                cell.setImageURL(NGDMManifest.sharedInstance.mainExperience?.orderedActors?.first?.images?.first?.thumbnailImageURL)
+                return cell
+            }
+            
+            childExperienceIndex -= 1
+        }
+        
+        cell.experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[childExperienceIndex]
         
         return cell
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[indexPath.row] {
+        var childExperienceIndex = indexPath.row
+        if showActorsInGrid {
+            if indexPath.row == 0 {
+                return
+            }
+            
+            childExperienceIndex -= 1
+        }
+        
+        if let experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[childExperienceIndex] {
             if experience.isType(.Shopping) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
             } else if experience.isType(.Location) {

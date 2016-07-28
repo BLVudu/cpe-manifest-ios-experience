@@ -8,6 +8,14 @@ import NextGenDataManager
 class VideoCell: UITableViewCell {
     
     static let ReuseIdentifier = "VideoCellReuseIdentifier"
+    static var NibName: String {
+        var nibName = String(VideoCell)
+        if !DeviceType.IS_IPAD {
+            nibName += "_iPhone"
+        }
+        
+        return nibName
+    }
     
     @IBOutlet weak private var thumbnailContainerView: UIView!
     @IBOutlet weak private var thumbnailImageView: UIImageView!
@@ -21,6 +29,9 @@ class VideoCell: UITableViewCell {
     var experience: NGDMExperience? {
         didSet {
             captionLabel.text = experience?.title
+            if !DeviceType.IS_IPAD {
+                captionLabel.sizeToFit()
+            }
             
             if let videoURL = experience?.videoURL {
                 if let runtime = experience?.videoRuntime where runtime > 0 {

@@ -91,7 +91,7 @@ class ExtrasExperienceViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Landscape
+        return (DeviceType.IS_IPAD ? .Landscape : .All)
     }
 
 }

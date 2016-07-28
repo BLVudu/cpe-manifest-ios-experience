@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RobotoCondensed-Regular.ttf">
@@ -14,34 +15,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoCellReuseIdentifier" rowHeight="236" id="5TR-li-LKC" customClass="VideoCell" customModule="NextGen" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="348" height="251"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoCellReuseIdentifier" rowHeight="195" id="5TR-li-LKC" customClass="VideoCell" customModule="NextGen" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="196"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5TR-li-LKC" id="IzL-Yw-hoz">
-                <rect key="frame" x="0.0" y="0.0" width="348" height="250"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="195"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zH-1v-tiT">
-                        <rect key="frame" x="0.0" y="196" width="348" height="39"/>
-                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="16"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FW5-gv-qba">
-                        <rect key="frame" x="0.0" y="0.0" width="348" height="196"/>
+                        <rect key="frame" x="0.0" y="0.0" width="328" height="185"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kcr-fA-Eba">
-                                <rect key="frame" x="0.0" y="0.0" width="348" height="196"/>
+                                <rect key="frame" x="0.0" y="0.0" width="328" height="185"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlackPlayButton" translatesAutoresizingMaskIntoConstraints="NO" id="drI-l5-Cju">
-                                <rect key="frame" x="152" y="76" width="45" height="45"/>
+                                <rect key="frame" x="131" y="60" width="65" height="65"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="TWT-cm-drs"/>
-                                    <constraint firstAttribute="height" constant="45" id="qdx-BD-nOe"/>
+                                    <constraint firstAttribute="width" secondItem="drI-l5-Cju" secondAttribute="height" multiplier="1:1" id="uaM-Gh-XWW"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWa-e0-61Q">
-                                <rect key="frame" x="268" y="166" width="80" height="30"/>
+                                <rect key="frame" x="248" y="155" width="80" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.74700969827586206" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6Gy-qM-vSk"/>
@@ -61,19 +55,25 @@
                             <constraint firstAttribute="trailing" secondItem="kcr-fA-Eba" secondAttribute="trailing" id="U3H-6f-lUI"/>
                             <constraint firstItem="drI-l5-Cju" firstAttribute="centerX" secondItem="kcr-fA-Eba" secondAttribute="centerX" id="jcC-Hr-vgN"/>
                             <constraint firstAttribute="bottom" secondItem="DWa-e0-61Q" secondAttribute="bottom" id="qhP-rR-WrA"/>
+                            <constraint firstItem="drI-l5-Cju" firstAttribute="width" secondItem="kcr-fA-Eba" secondAttribute="width" multiplier="0.2" id="s21-ha-rJl"/>
                             <constraint firstAttribute="bottom" secondItem="kcr-fA-Eba" secondAttribute="bottom" id="xHW-G6-49q"/>
                             <constraint firstAttribute="width" secondItem="FW5-gv-qba" secondAttribute="height" multiplier="16:9" id="zBq-2T-cPQ"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zH-1v-tiT">
+                        <rect key="frame" x="338" y="0.0" width="262" height="21"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="9zH-1v-tiT" secondAttribute="bottom" constant="15" id="233-dt-btd"/>
-                    <constraint firstItem="9zH-1v-tiT" firstAttribute="leading" secondItem="FW5-gv-qba" secondAttribute="leading" id="K8b-67-ehf"/>
                     <constraint firstItem="FW5-gv-qba" firstAttribute="leading" secondItem="IzL-Yw-hoz" secondAttribute="leading" id="b6q-vs-VDS"/>
-                    <constraint firstItem="9zH-1v-tiT" firstAttribute="trailing" secondItem="FW5-gv-qba" secondAttribute="trailing" id="fR0-X4-1gh"/>
+                    <constraint firstAttribute="trailing" secondItem="9zH-1v-tiT" secondAttribute="trailing" id="eNv-e2-T2d"/>
                     <constraint firstItem="FW5-gv-qba" firstAttribute="top" secondItem="IzL-Yw-hoz" secondAttribute="top" id="goW-A5-CMb"/>
-                    <constraint firstAttribute="trailing" secondItem="FW5-gv-qba" secondAttribute="trailing" id="hsh-BN-LV5"/>
-                    <constraint firstItem="9zH-1v-tiT" firstAttribute="top" secondItem="FW5-gv-qba" secondAttribute="bottom" id="t17-7e-8B8"/>
+                    <constraint firstAttribute="bottom" secondItem="FW5-gv-qba" secondAttribute="bottom" constant="10" id="imT-e6-zB2"/>
+                    <constraint firstItem="9zH-1v-tiT" firstAttribute="leading" secondItem="FW5-gv-qba" secondAttribute="trailing" constant="10" id="k7c-dR-oGF"/>
+                    <constraint firstItem="9zH-1v-tiT" firstAttribute="top" secondItem="IzL-Yw-hoz" secondAttribute="top" id="kfy-Ot-1y9"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -83,7 +83,7 @@
                 <outlet property="thumbnailContainerView" destination="FW5-gv-qba" id="bIR-zT-8KN"/>
                 <outlet property="thumbnailImageView" destination="kcr-fA-Eba" id="GUc-IA-x8d"/>
             </connections>
-            <point key="canvasLocation" x="798" y="429"/>
+            <point key="canvasLocation" x="823" y="421"/>
         </tableViewCell>
     </objects>
     <resources>
