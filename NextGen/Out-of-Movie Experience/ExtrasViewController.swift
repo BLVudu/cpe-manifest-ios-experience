@@ -21,6 +21,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         static let ShowGallery = "ExtrasGallerySegue"
         static let ShowMap = "ExtrasMapSegue"
         static let ShowShopping = "ExtrasShoppingSegue"
+        static let ShowTalentSelector = "TalentSelectorSegueIdentifier"
     }
     
     @IBOutlet weak var talentTableView: UITableView?
@@ -181,6 +182,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         var childExperienceIndex = indexPath.row
         if showActorsInGrid {
             if indexPath.row == 0 {
+                self.performSegueWithIdentifier(SegueIdentifier.ShowTalentSelector, sender: nil)
                 return
             }
             

@@ -38,7 +38,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleLabel.textAlignment = NSTextAlignment.Right
             titleLabel.textColor = UIColor(netHex: 0xdddddd)
             titleLabel.font = UIFont.themeCondensedBoldFont(30)
-            titleLabel.text = (experience.title == "out-of-movie" ? String.localize("out_of_movie.extras_title") : experience.title).uppercaseString
+            titleLabel.text = (experience?.title == "out-of-movie" ? String.localize("out_of_movie.extras_title") : experience?.title)?.uppercaseString
             self.view.addSubview(titleLabel)
             self.view.sendSubviewToBack(titleLabel)
         }

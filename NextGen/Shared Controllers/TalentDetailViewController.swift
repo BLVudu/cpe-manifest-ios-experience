@@ -41,11 +41,11 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     @IBOutlet weak private var _twitterButton: SocialButton!
     @IBOutlet weak private var _facebookButton: SocialButton!
     @IBOutlet weak private var _instagramButton: SocialButton!
-    @IBOutlet private var _facebookMainConstraint: NSLayoutConstraint!
-    @IBOutlet private var _twitterMainConstraint: NSLayoutConstraint!
-    @IBOutlet private var _facebookNoInstagramConstraint: NSLayoutConstraint!
-    @IBOutlet private var _twitterNoFacebookConstraint: NSLayoutConstraint!
-    @IBOutlet private var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint!
+    @IBOutlet private var _facebookMainConstraint: NSLayoutConstraint?
+    @IBOutlet private var _twitterMainConstraint: NSLayoutConstraint?
+    @IBOutlet private var _facebookNoInstagramConstraint: NSLayoutConstraint?
+    @IBOutlet private var _twitterNoFacebookConstraint: NSLayoutConstraint?
+    @IBOutlet private var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint?
     
     var images = [String]()
     var talent: NGDMTalent!
@@ -132,11 +132,13 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                         }
                     }
                     
-                    self._twitterNoFacebookNoInstagramConstraint.active = self._facebookButton.hidden && self._instagramButton.hidden
-                    self._twitterNoFacebookConstraint.active = self._facebookButton.hidden && !self._instagramButton.hidden
-                    self._twitterMainConstraint.active = !self._twitterNoFacebookNoInstagramConstraint.active && !self._twitterNoFacebookConstraint.active
-                    self._facebookNoInstagramConstraint.active = self._instagramButton.hidden
-                    self._facebookMainConstraint.active = !self._facebookNoInstagramConstraint.active
+                    if self._twitterNoFacebookNoInstagramConstraint != nil {
+                        self._twitterNoFacebookNoInstagramConstraint!.active = self._facebookButton.hidden && self._instagramButton.hidden
+                        self._twitterNoFacebookConstraint!.active = self._facebookButton.hidden && !self._instagramButton.hidden
+                        self._twitterMainConstraint!.active = !self._twitterNoFacebookNoInstagramConstraint!.active && !self._twitterNoFacebookConstraint!.active
+                        self._facebookNoInstagramConstraint!.active = self._instagramButton.hidden
+                        self._facebookMainConstraint!.active = !self._facebookNoInstagramConstraint!.active
+                    }
                 })
             })
         }
