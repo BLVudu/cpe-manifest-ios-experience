@@ -4,6 +4,7 @@
 
 import UIKit
 import NextGenDataManager
+import QuartzCore
 
 struct ImageGalleryNotification {
     static let DidScrollToPage = "kImageGalleryNotificationDidScrollToPage"
@@ -70,8 +71,8 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         self.delegate = self
         
         toolbar = UIToolbar()
-        toolbar!.barStyle = .Black
-        toolbar!.translucent = true
+        toolbar!.barStyle = .Default
+        toolbar!.setBackgroundImage(UIImage(named: "ToolbarBackground"), forToolbarPosition: .Any, barMetrics: .Default)
         
         closeButton = UIButton()
         closeButton.tintColor = UIColor.whiteColor()
@@ -158,8 +159,14 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
                 toolbarItems.append(UIBarButtonItem(customView: turntableSlider))
             } else {
                 let captionLabel = UILabel(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame) - Constants.ToolbarHeight - 35, Constants.ToolbarHeight))
-                captionLabel.textColor = UIColor.lightGrayColor()
+                captionLabel.textColor = UIColor.whiteColor()
                 captionLabel.font = UIFont.themeCondensedFont(16)
+                captionLabel.layer.shadowColor = UIColor.blackColor().CGColor
+                captionLabel.layer.shadowOpacity = 1
+                captionLabel.layer.shadowRadius = 2
+                captionLabel.layer.shadowOffset = CGSizeMake(0, 1)
+                captionLabel.layer.masksToBounds = false
+                captionLabel.layer.shouldRasterize = true
                 toolbarItems.append(UIBarButtonItem(customView: captionLabel))
             }
             
