@@ -74,11 +74,11 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             _galleryHeaderLabel?.removeFromSuperview()
             _galleryCollectionView?.removeFromSuperview()
             _galleryContainerView?.removeFromSuperview()
-            
-            let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
-            launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
-            _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
         }
+        
+        let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
+        launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
+        _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
         
         loadTalent(talent)
     }

@@ -32,15 +32,6 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
         self.tableView(self.talentTableView, didSelectRowAtIndexPath: path)
     }
     
-    // MARK: Actions
-    override func close() {
-        if talentDetailView != nil && !talentDetailView!.hidden {
-            hideTalentDetailView()
-        } else {
-            super.close()
-        }
-    }
-    
     // MARK: Talent Details
     func showTalentDetailView() {
         if selectedIndexPath != nil {
@@ -104,12 +95,7 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if indexPath == selectedIndexPath {
-            hideTalentDetailView()
-            return nil
-        }
-        
-        return indexPath
+        return (indexPath != selectedIndexPath ? indexPath : nil)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

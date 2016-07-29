@@ -10,9 +10,9 @@ import NextGenDataManager
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
     private struct Constants {
-        static let CollectionViewItemSpacing: CGFloat = 12
-        static let CollectionViewLineSpacing: CGFloat = 12
-        static let CollectionViewPadding: CGFloat = 15
+        static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 10)
+        static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 20)
+        static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
         static let CollectionViewItemAspectRatio: CGFloat = 338 / 230
     }
     
