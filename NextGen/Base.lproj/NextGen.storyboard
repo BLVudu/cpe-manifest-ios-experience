@@ -50,6 +50,7 @@
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
+            <string>RobotoCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1383,12 +1384,55 @@
                                     <segue destination="bIg-l5-X8P" kind="embed" id="gXI-tv-zB4"/>
                                 </connections>
                             </containerView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSQ-Q3-XWz">
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="70"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wC-mP-4XA">
+                                        <rect key="frame" x="34" y="24" width="22" height="22"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="AiO-pJ-jWJ"/>
+                                            <constraint firstAttribute="width" secondItem="2wC-mP-4XA" secondAttribute="height" multiplier="1:1" id="Db8-an-Vcg"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Skip" translatesAutoresizingMaskIntoConstraints="NO" id="5T5-Bs-y7x">
+                                        <rect key="frame" x="142" y="0.0" width="18" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="85f-3G-JdY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip this" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8x-iS-Iwy">
+                                        <rect key="frame" x="64" y="0.0" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="db4-uh-igr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
+                                        <color key="textColor" red="1" green="0.80392156859999997" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="1YG-ZB-IDY"/>
+                                    <constraint firstItem="B8x-iS-Iwy" firstAttribute="top" secondItem="fSQ-Q3-XWz" secondAttribute="top" id="4Ft-El-6Lu"/>
+                                    <constraint firstAttribute="trailing" secondItem="5T5-Bs-y7x" secondAttribute="trailing" id="NI8-Tb-eeY"/>
+                                    <constraint firstAttribute="bottom" secondItem="5T5-Bs-y7x" secondAttribute="bottom" id="R7U-DK-GMU"/>
+                                    <constraint firstAttribute="bottom" secondItem="B8x-iS-Iwy" secondAttribute="bottom" id="Uv0-o8-3t8"/>
+                                    <constraint firstItem="5T5-Bs-y7x" firstAttribute="leading" secondItem="B8x-iS-Iwy" secondAttribute="trailing" constant="8" id="bMz-iO-Hxm"/>
+                                    <constraint firstAttribute="height" priority="750" constant="40" id="fO1-il-ESL"/>
+                                    <constraint firstAttribute="height" constant="70" id="ii7-sZ-mev"/>
+                                    <constraint firstItem="B8x-iS-Iwy" firstAttribute="leading" secondItem="2wC-mP-4XA" secondAttribute="trailing" constant="8" id="ntL-kc-in0"/>
+                                    <constraint firstItem="2wC-mP-4XA" firstAttribute="centerY" secondItem="fSQ-Q3-XWz" secondAttribute="centerY" id="qbw-kp-TvD"/>
+                                    <constraint firstItem="5T5-Bs-y7x" firstAttribute="top" secondItem="fSQ-Q3-XWz" secondAttribute="top" id="r5M-yq-uoQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="top" secondItem="VY7-Vu-ikZ" secondAttribute="bottom" constant="-20" id="1v4-Ig-8Ur"/>
                             <constraint firstAttribute="trailing" secondItem="HZD-oz-ZXg" secondAttribute="trailing" id="2hc-H9-0t5"/>
                             <constraint firstItem="VY7-Vu-ikZ" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="5Vg-PF-J03"/>
+                            <constraint firstItem="fSQ-Q3-XWz" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" id="79j-Ul-d5e"/>
                             <constraint firstAttribute="centerX" secondItem="HZD-oz-ZXg" secondAttribute="centerX" id="7pd-yd-O8a"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="bottom" secondItem="cbz-fT-NUV" secondAttribute="bottom" constant="-83" id="9b2-u1-X36"/>
                             <constraint firstItem="hPT-Z4-V6I" firstAttribute="top" secondItem="3ZM-tJ-9zk" secondAttribute="bottom" constant="374" id="Al2-7J-c2E"/>
@@ -1396,6 +1440,7 @@
                             <constraint firstAttribute="bottom" secondItem="HZD-oz-ZXg" secondAttribute="bottom" id="DzX-Ic-rcn"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="leading" secondItem="cbz-fT-NUV" secondAttribute="trailing" constant="84" id="FDg-kV-KIm"/>
                             <constraint firstItem="IcY-NN-IUH" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="20" id="FPo-NG-1xk"/>
+                            <constraint firstItem="fSQ-Q3-XWz" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" id="GsY-ZL-vhV"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="74" id="Hgi-El-ngk"/>
                             <constraint firstAttribute="centerY" secondItem="HZD-oz-ZXg" secondAttribute="centerY" id="NGJ-V2-Xef"/>
                             <constraint firstItem="IcY-NN-IUH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" constant="45" id="Oow-Dj-Poe"/>
@@ -1439,6 +1484,10 @@
                         <outlet property="playbackToolbar" destination="tdq-om-9xU" id="JM8-RH-KYY"/>
                         <outlet property="playbackView" destination="HZD-oz-ZXg" id="0ny-ge-cu8"/>
                         <outlet property="scrubber" destination="yBz-nT-qfC" id="KSN-e6-tul"/>
+                        <outlet property="skipContainerLandscapeHeightConstraint" destination="ii7-sZ-mev" id="WIy-XE-qOP"/>
+                        <outlet property="skipContainerPortraitHeightConstraint" destination="fO1-il-ESL" id="KAt-GR-Pz1"/>
+                        <outlet property="skipContainerView" destination="fSQ-Q3-XWz" id="5G6-dm-zgM"/>
+                        <outlet property="skipCountdownContainerView" destination="2wC-mP-4XA" id="5dE-7e-Ii8"/>
                         <outlet property="tapGestureRecognizer" destination="r3s-SR-OYc" id="32O-Fs-uuC"/>
                         <outlet property="timeElapsedLabel" destination="uap-nw-qBj" id="Vp9-Te-KOf"/>
                         <outlet property="topToolbar" destination="VY7-Vu-ikZ" id="oK3-nh-CIz"/>
@@ -2279,6 +2328,7 @@
         <image name="Maximize Highlighted" width="25" height="25"/>
         <image name="NextGenPauseButton" width="25" height="25"/>
         <image name="NextGenPlayButton" width="25" height="25"/>
+        <image name="Skip" width="20" height="20"/>
         <image name="TheTakeLogo" width="100" height="25"/>
         <image name="Twitter Icon" width="75" height="75"/>
     </resources>
