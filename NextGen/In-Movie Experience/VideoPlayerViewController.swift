@@ -10,11 +10,12 @@ import NextGenDataManager
 import UAProgressView
 
 struct VideoPlayerNotification {
+    static let WillPlayNextItem = "kNextGenVideoPlayerWillPlayNextItem"
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
     static let DidPlayVideo = "VideoPlayerNotificationDidPlayVideo"
+    static let DidEndVideo = "kNextGenVideoPlayerDidEndVideo"
     static let DidEndLastVideo = "kVideoPlayerNotificationDidEndLastVideo"
-    static let WillPlayNextItem = "kNextGenVideoPlayerWillPlayNextItem"
     static let UserInfoVideoURL = "kVideoPlayerNotificationVideoURL"
 }
 
@@ -262,6 +263,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         if !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
+            return
         }
         
         queueCurrentIndex += 1
@@ -285,10 +287,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         } else {
             NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndLastVideo, object: nil)
         }
-
-        if mode == .Supplemental {
-            super.playerItemDidReachEnd(notification)
-        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndVideo, object: nil)
+        
+        super.playerItemDidReachEnd(notification)
     }
     
     func onCountdownTimerFired() {

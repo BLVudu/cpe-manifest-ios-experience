@@ -21,12 +21,13 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     @IBOutlet weak private var locationDetailView: UIView!
     @IBOutlet weak private var videoContainerView: UIView!
     private var videoPlayerViewController: VideoPlayerViewController?
+    private var videoPlayerDidEndVideoObserver: NSObjectProtocol?
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryPageControl: UIPageControl!
     @IBOutlet weak private var closeButton: UIButton!
     private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
-    private var galleryDidScrollToPage: NSObjectProtocol?
+    private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
     private var locationExperiences = [NGDMExperience]()
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
@@ -65,12 +66,19 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         
-        if let observer = galleryDidToggleFullScreenObserver {
+        if let observer = videoPlayerDidEndVideoObserver {
             center.removeObserver(observer)
+            videoPlayerDidEndVideoObserver = nil
         }
         
-        if let observer = galleryDidScrollToPage {
+        if let observer = galleryDidToggleFullScreenObserver {
             center.removeObserver(observer)
+            galleryDidToggleFullScreenObserver = nil
+        }
+        
+        if let observer = galleryDidScrollToPageObserver {
+            center.removeObserver(observer)
+            galleryDidScrollToPageObserver = nil
         }
     }
     
@@ -98,6 +106,12 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         
         breadcrumbsSecondaryArrowImageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
         
+        videoPlayerDidEndVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidEndVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self {
+                strongSelf.closeDetailView(animated: true)
+            }
+        })
+        
         galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, isFullScreen = notification.userInfo?["isFullScreen"] as? Bool {
                 strongSelf.closeButton.hidden = isFullScreen
@@ -105,7 +119,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             }
         })
         
-        galleryDidScrollToPage = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
                 strongSelf.galleryPageControl.currentPage = page
             }
@@ -125,7 +139,8 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     func playVideo(videoURL: NSURL) {
-        closeDetailView()
+        let shouldAnimateOpen = locationDetailView.hidden
+        closeDetailView(animated: false)
         
         if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
             videoPlayerViewController.mode = VideoPlayerMode.Supplemental
@@ -135,15 +150,27 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             self.addChildViewController(videoPlayerViewController)
             videoPlayerViewController.didMoveToParentViewController(self)
             
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            
-            locationDetailView.hidden = false
             self.videoPlayerViewController = videoPlayerViewController
+            
+            locationDetailView.alpha = 0
+            locationDetailView.hidden = false
+            
+            if shouldAnimateOpen {
+                UIView.animateWithDuration(0.25, animations: {
+                    self.locationDetailView.alpha = 1
+                }, completion: { (_) in
+                    self.videoPlayerViewController?.playVideoWithURL(videoURL)
+                })
+            } else {
+                locationDetailView.alpha = 1
+                self.videoPlayerViewController?.playVideoWithURL(videoURL)
+            }
         }
     }
     
     func showGallery(gallery: NGDMGallery) {
-        closeDetailView()
+        let shouldAnimateOpen = locationDetailView.hidden
+        closeDetailView(animated: false)
         
         galleryScrollView.loadGallery(gallery)
         galleryScrollView.hidden = false
@@ -156,20 +183,45 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             galleryPageControl.currentPage = 0
         }
         
+        locationDetailView.alpha = 0
         locationDetailView.hidden = false
+        
+        if shouldAnimateOpen {
+            UIView.animateWithDuration(0.25, animations: {
+                self.locationDetailView.alpha = 1
+            })
+        } else {
+            locationDetailView.alpha = 1
+        }
     }
     
     @IBAction func closeDetailView() {
-        locationDetailView.hidden = true
+        closeDetailView(animated: true)
+    }
+    
+    private func closeDetailView(animated animated: Bool) {
+        let hideViews = {
+            self.locationDetailView.hidden = true
+            
+            self.galleryScrollView.destroyGallery()
+            self.galleryScrollView.hidden = true
+            self.galleryPageControl.hidden = true
+            
+            self.videoPlayerViewController?.willMoveToParentViewController(nil)
+            self.videoPlayerViewController?.view.removeFromSuperview()
+            self.videoPlayerViewController?.removeFromParentViewController()
+            self.videoPlayerViewController = nil
+        }
         
-        galleryScrollView.destroyGallery()
-        galleryScrollView.hidden = true
-        galleryPageControl.hidden = true
-        
-        videoPlayerViewController?.willMoveToParentViewController(nil)
-        videoPlayerViewController?.view.removeFromSuperview()
-        videoPlayerViewController?.removeFromParentViewController()
-        videoPlayerViewController = nil
+        if animated {
+            UIView.animateWithDuration(0.2, animations: { 
+                self.locationDetailView.alpha = 0
+            }, completion: { (_) in
+                hideViews()
+            })
+        } else {
+            hideViews()
+        }
     }
     
     func reloadBreadcrumbs() {
@@ -196,7 +248,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     @IBAction func onTapBreadcrumb(sender: UIButton) {
-        closeDetailView()
+        closeDetailView(animated: false)
         selectedExperience = nil
     }
     
