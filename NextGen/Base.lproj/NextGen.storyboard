@@ -72,8 +72,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-aI-A4f">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqY-9s-sBg" userLabel="Done Button">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqY-9s-sBg" userLabel="Done Button">
                                 <rect key="frame" x="0.0" y="0.0" width="140" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="6Rc-ez-mad"/>
+                                    <constraint firstAttribute="width" constant="140" id="cYR-Hr-Y2K"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
                                 <inset key="titleEdgeInsets" minX="38" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -94,6 +98,8 @@
                             <constraint firstItem="HaL-aI-A4f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jah-9g-l5r"/>
                             <constraint firstAttribute="trailing" secondItem="gA2-16-mAf" secondAttribute="trailing" id="PlC-ZR-BvV"/>
                             <constraint firstItem="gA2-16-mAf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="WET-V8-KkC"/>
+                            <constraint firstItem="dqY-9s-sBg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Yha-1w-UIR"/>
+                            <constraint firstItem="dqY-9s-sBg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iAg-dC-Gun"/>
                             <constraint firstAttribute="trailing" secondItem="HaL-aI-A4f" secondAttribute="trailing" id="lof-kZ-pt6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gA2-16-mAf" secondAttribute="bottom" id="x4B-CQ-6hg"/>
                         </constraints>

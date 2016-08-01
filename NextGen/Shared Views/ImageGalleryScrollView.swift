@@ -14,7 +14,7 @@ struct ImageGalleryNotification {
 class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     private struct Constants {
-        static let ToolbarHeight: CGFloat = 44
+        static let ToolbarHeight: CGFloat = (DeviceType.IS_IPAD ? 40 : 20)
         static let CloseButtonSize: CGFloat = 44
         static let CloseButtonPadding: CGFloat = 15
     }

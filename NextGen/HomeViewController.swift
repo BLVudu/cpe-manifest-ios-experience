@@ -58,6 +58,12 @@ class HomeViewController: UIViewController {
             let frameHeight = CGRectGetHeight(self.view.frame)
             
             exitButton.setTitle(String.localize("label.exit"), forState: .Normal)
+            exitButton.titleLabel?.layer.shadowColor = UIColor.blackColor().CGColor
+            exitButton.titleLabel?.layer.shadowOpacity = 0.75
+            exitButton.titleLabel?.layer.shadowRadius = 2
+            exitButton.titleLabel?.layer.shadowOffset = CGSizeMake(0, 1)
+            exitButton.titleLabel?.layer.masksToBounds = false
+            exitButton.titleLabel?.layer.shouldRasterize = true
             homeScreenViews.append(exitButton)
             
             if let appearance = NGDMManifest.sharedInstance.mainExperience?.appearance {

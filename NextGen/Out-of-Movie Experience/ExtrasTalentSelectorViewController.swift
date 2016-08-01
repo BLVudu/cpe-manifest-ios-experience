@@ -24,8 +24,8 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
         showBackButton()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         let path = NSIndexPath(forRow: 0, inSection: 0)
         self.talentTableView.selectRowAtIndexPath(path, animated: false, scrollPosition: .Top)

@@ -29,6 +29,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     @IBOutlet weak private var shareButton: UIButton!
     
+    private var didInitialSetup = false
     private var didPlayFirstItem = false
     
     private var willPlayNextItemObserver: NSObjectProtocol?
@@ -67,10 +68,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         
         galleryTableView.registerNib(UINib(nibName: VideoCell.NibName, bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
 
-        let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        self.tableView(self.galleryTableView, didSelectRowAtIndexPath: selectedPath)
-
         willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.WillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
             if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int where index < (strongSelf.experience.childExperiences?.count ?? 0) {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
@@ -96,6 +93,17 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 strongSelf.galleryPageControl.currentPage = page
             }
         })
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if !didInitialSetup {
+            let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
+            galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+            self.tableView(galleryTableView, didSelectRowAtIndexPath: selectedPath)
+            didInitialSetup = true
+        }
     }
     
     
