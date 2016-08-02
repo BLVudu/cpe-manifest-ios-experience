@@ -10,8 +10,8 @@ import NextGenDataManager
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
     private struct Constants {
-        static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 10)
-        static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 20)
+        static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 5)
+        static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 15)
         static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
         static let CollectionViewItemAspectRatio: CGFloat = 338 / 230
     }
@@ -202,7 +202,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / 2) - (Constants.CollectionViewItemSpacing * 2)
+        let containerWidth = CGRectGetWidth(collectionView.frame) - (Constants.CollectionViewPadding * 2)
+        let itemWidth: CGFloat = (containerWidth / 2) - Constants.CollectionViewItemSpacing
         return CGSizeMake(itemWidth, itemWidth / Constants.CollectionViewItemAspectRatio)
     }
     
