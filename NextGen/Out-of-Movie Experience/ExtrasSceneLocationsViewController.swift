@@ -9,7 +9,10 @@ import NextGenDataManager
 class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private struct Constants {
-        static let ItemAspectRatio: CGFloat = 249 / 170
+        static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 5)
+        static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 15)
+        static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
+        static let CollectionViewItemAspectRatio: CGFloat = 250 / 175
     }
     
     @IBOutlet weak private var mapView: MultiMapView!
@@ -311,8 +314,25 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let itemHeight = CGRectGetHeight(collectionView.frame)
-        return CGSizeMake(itemHeight * Constants.ItemAspectRatio, itemHeight)
+        if DeviceType.IS_IPAD {
+            let itemHeight = CGRectGetHeight(collectionView.frame)
+            return CGSizeMake(itemHeight * Constants.CollectionViewItemAspectRatio, itemHeight)
+        }
+        
+        let itemWidth = (CGRectGetWidth(collectionView.frame) - (Constants.CollectionViewPadding * 2) - Constants.CollectionViewItemSpacing) / 2
+        return CGSizeMake(itemWidth, itemWidth / Constants.CollectionViewItemAspectRatio)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewLineSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewItemSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding)
     }
     
 }

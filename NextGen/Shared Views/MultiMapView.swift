@@ -27,9 +27,10 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
     struct Constants {
         static let MarkerAnnotationViewReuseIdentifier = "kMarkerAnnotationViewReuseIdentifier"
-        static let ControlsPadding: CGFloat = 18
-        static let SegmentedControlWidth: CGFloat = 185
-        static let ZoomButtonWidth: CGFloat = 30
+        static let ControlsPadding: CGFloat = (DeviceType.IS_IPAD ? 18 : 8)
+        static let SegmentedControlWidth: CGFloat = (DeviceType.IS_IPAD ? 185 : 135)
+        static let ZoomButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 30 : 25)
+        static let ZoomFitAllPadding: CGFloat = (DeviceType.IS_IPAD ? 50 : 20)
     }
     
     private var appleMapView: MKMapView?
@@ -214,7 +215,14 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
                 }
             }
             
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 50))
+            var edgeInsets: UIEdgeInsets
+            if let segmentedControl = mapTypeSegmentedControl {
+                edgeInsets = UIEdgeInsetsMake(Constants.ControlsPadding + CGRectGetHeight(segmentedControl.frame), Constants.ControlsPadding + Constants.SegmentedControlWidth, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
+            } else {
+                edgeInsets = UIEdgeInsetsMake(Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
+            }
+            
+            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withEdgeInsets: edgeInsets))
         } else if let mapView = appleMapView {
             var annotations = [MKAnnotation]()
             for marker in markers {

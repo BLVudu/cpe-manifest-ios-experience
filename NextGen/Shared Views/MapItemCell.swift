@@ -65,4 +65,12 @@ class MapItemCell: UICollectionViewCell {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if !DeviceType.IS_IPAD {
+            titleLabel.font = UIFont(name: titleLabel.font.fontName, size: 12)
+        }
+    }
+    
 }

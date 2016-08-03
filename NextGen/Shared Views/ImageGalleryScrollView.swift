@@ -160,7 +160,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             } else {
                 let captionLabel = UILabel(frame: CGRectMake(0, 0, CGRectGetWidth(self.frame) - Constants.ToolbarHeight - 35, Constants.ToolbarHeight))
                 captionLabel.textColor = UIColor.whiteColor()
-                captionLabel.font = UIFont.themeCondensedFont(16)
+                captionLabel.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 16 : 14)
                 captionLabel.layer.shadowColor = UIColor.blackColor().CGColor
                 captionLabel.layer.shadowOpacity = 1
                 captionLabel.layer.shadowRadius = 2

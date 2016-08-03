@@ -42,9 +42,10 @@ class ExtrasExperienceViewController: UIViewController {
         } else {
             let titleLabel = UILabel()
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.font = UIFont.themeCondensedBoldFont(DeviceType.IS_IPAD ? 30 : 20)
+            titleLabel.font = UIFont.themeCondensedBoldFont(DeviceType.IS_IPAD ? 30 : 18)
             titleLabel.adjustsFontSizeToFitWidth = true
             titleLabel.minimumScaleFactor = 0.5
+            titleLabel.numberOfLines = 2
             titleLabel.text = (experience?.title == "out-of-movie" ? String.localize("out_of_movie.extras_title") : experience?.title)?.uppercaseString
             titleLabel.textAlignment = .Right
             titleLabel.textColor = UIColor(netHex: 0xdddddd)
