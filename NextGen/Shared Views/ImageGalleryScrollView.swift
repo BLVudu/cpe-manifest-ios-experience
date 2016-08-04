@@ -20,6 +20,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     var gallery: NGDMGallery?
+    var allowsFullScreen = true
     private var toolbar: UIToolbar?
     private var originalFrame: CGRect?
     private var originalContainerFrame: CGRect?
@@ -208,12 +209,14 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
                 toolbarItems.append(UIBarButtonItem(customView: captionLabel))
             }
             
-            let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
-            fullScreenButton.tintColor = UIColor.whiteColor()
-            fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
-            fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
-            fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
-            toolbarItems.append(UIBarButtonItem(customView: fullScreenButton))
+            if allowsFullScreen {
+                let fullScreenButton = UIButton(frame: CGRectMake(0, 0, Constants.ToolbarHeight, Constants.ToolbarHeight))
+                fullScreenButton.tintColor = UIColor.whiteColor()
+                fullScreenButton.setImage(UIImage(named: "Maximize"), forState: .Normal)
+                fullScreenButton.setImage(UIImage(named: "Maximize Highlighted"), forState: .Highlighted)
+                fullScreenButton.addTarget(self, action: #selector(self.toggleFullScreen), forControlEvents: .TouchUpInside)
+                toolbarItems.append(UIBarButtonItem(customView: fullScreenButton))
+            }
             
             toolbar.items = toolbarItems
         }

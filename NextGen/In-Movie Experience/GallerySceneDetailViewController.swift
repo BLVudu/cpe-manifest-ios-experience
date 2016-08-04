@@ -30,6 +30,12 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     }
     
     // MARK: View Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        galleryScrollView?.allowsFullScreen = false
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         

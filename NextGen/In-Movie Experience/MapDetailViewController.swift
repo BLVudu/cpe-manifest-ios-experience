@@ -59,6 +59,8 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
                 mapAspectRatioConstraint.active = false
             }
         }
+        
+        galleryScrollView.allowsFullScreen = false
     }
     
     override func viewWillAppear(animated: Bool) {
