@@ -40,17 +40,17 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     }
     
     public var apiNamespace = Namespaces.Baseline
-    public var apiKey: String!
     public var apiId: String?
     
     public convenience init(apiKey: String) {
         self.init(apiDomain: BaselineAPIUtil.APIDomain)
-        self.apiKey = apiKey
+        
+        self.customHeaders["x-api-key"] = apiKey
     }
     
     public func prefetchCredits(successBlock: (talents: [String: NGDMTalent]?) -> Void) {
         if let apiId = apiId {
-            getJSONWithPath(Endpoints.GetCredits, parameters: ["id": apiId, "apikey": apiKey], successBlock: { (result) -> Void in
+            getJSONWithPath(Endpoints.GetCredits, parameters: ["id": apiId], successBlock: { (result) -> Void in
                 if let results = result["result"] as? NSArray {
                     var talents = [String: NGDMTalent]()
                     for talentInfo in results.subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxCredits, results.count))) {
@@ -76,7 +76,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     }
     
     public func getTalentBio(talentId: String, successBlock: (biography: String?) -> Void) {
-        getJSONWithPath(Endpoints.GetBio, parameters: ["id": talentId, "apikey": apiKey], successBlock: { (result) -> Void in
+        getJSONWithPath(Endpoints.GetBio, parameters: ["id": talentId], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray, response = results[0] as? NSDictionary, biography = response[Keys.ShortBio] as? String {
                 successBlock(biography: biography)
             } else {
@@ -86,7 +86,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     }
     
     public func getTalentImages(talentId: String, successBlock: (talentImages: [TalentImage]?) -> Void) {
-        getJSONWithPath(Endpoints.GetImages, parameters: ["id": talentId, "apiKey": apiKey], successBlock: { (result) -> Void in
+        getJSONWithPath(Endpoints.GetImages, parameters: ["id": talentId], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 if results.count > 0 {
                     var talentImages = [TalentImage]()
@@ -115,7 +115,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     }
     
     public func getTalentSocialAccounts(talentId: String, successBlock: (socialAccounts: [TalentSocialAccount]?) -> Void) {
-        getJSONWithPath(Endpoints.GetSocialMedia, parameters: ["id": talentId, "apiKey": apiKey], successBlock: { (result) -> Void in
+        getJSONWithPath(Endpoints.GetSocialMedia, parameters: ["id": talentId], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 if results.count > 0 {
                     var socialAccounts = [TalentSocialAccount]()
@@ -136,7 +136,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     }
     
     public func getTalentFilmography(talentId: String, successBlock: (films: [TalentFilm]) -> Void) {
-        getJSONWithPath(Endpoints.GetFilmography, parameters: ["id": talentId, "apiKey": apiKey], successBlock: { (result) -> Void in
+        getJSONWithPath(Endpoints.GetFilmography, parameters: ["id": talentId], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray {
                 var films = [TalentFilm]()
                 
@@ -158,7 +158,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     }
     
     public func getFilmImageURL(filmID: String, successBlock: (imageURL: NSURL?) -> Void) -> NSURLSessionDataTask {
-        return getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID, "apiKey": apiKey], successBlock: { (result) -> Void in
+        return getJSONWithPath(Endpoints.GetFilmPoster, parameters: ["id": filmID], successBlock: { (result) -> Void in
             var imageURL: NSURL?
             if let results = result["result"] as? NSArray where results.count > 0 {
                 if let response = results[0] as? NSDictionary, posterImageURL = response[Keys.LargeURL] as? String {
