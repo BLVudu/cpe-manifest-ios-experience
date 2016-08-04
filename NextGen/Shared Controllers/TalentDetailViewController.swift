@@ -4,6 +4,7 @@
 
 import UIKit
 import NextGenDataManager
+import MBProgressHUD
 
 protocol TalentDetailViewPresenter {
     func talentDetailViewShouldClose()
@@ -216,6 +217,17 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == _galleryCollectionView {
             self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: indexPath.row + 1)
+        } else if collectionView == _filmographyCollectionView {
+            if let film = (collectionView.cellForItemAtIndexPath(indexPath) as? FilmCollectionViewCell)?.film, delegate = NextGenHook.delegate {
+                MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                delegate.getUrlForContent(film.title, completion: { [weak self] (url) in
+                    if let strongSelf = self {
+                        MBProgressHUD.hideAllHUDsForView(strongSelf.view, animated: true)
+                    }
+                    
+                    url?.promptLaunchBrowser()
+                })
+            }
         }
     }
     

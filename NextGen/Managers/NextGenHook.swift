@@ -8,6 +8,7 @@ public protocol NextGenHookDelegate {
     func nextGenExperienceWillClose()
     func videoPlayerWillClose(mode: VideoPlayerMode)
     func getProcessedVideoURL(url: NSURL, mode: VideoPlayerMode, completion: (url: NSURL?) -> Void)
+    func getUrlForContent(title: String, completion: (url: NSURL?) -> Void)
 }
 
 class NextGenHook {
