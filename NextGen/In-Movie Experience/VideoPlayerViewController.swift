@@ -226,7 +226,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         } else {
             skipContainerView.hidden = !SettingsManager.didWatchInterstitial
             SettingsManager.didWatchInterstitial = true
-            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("MOS_INTERSTITIAL_v2", ofType: "mp4")!))
+            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("MOS_INTERSTITIAL_v3", ofType: "mp4")!))
         }
     }
     
@@ -242,6 +242,12 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         
         manuallyPaused = false
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayVideo, object: nil, userInfo: [VideoPlayerNotification.UserInfoVideoURL: self.URL])
+    }
+    
+    override func observeValueForKeyPath(path: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+        super.observeValueForKeyPath(path, ofObject: object, change: change, context: context)
+        
+        self.playbackView.setVideoFillMode(_didPlayInterstitial ? AVLayerVideoGravityResizeAspect : AVLayerVideoGravityResizeAspectFill)
     }
     
     override func syncScrubber() {

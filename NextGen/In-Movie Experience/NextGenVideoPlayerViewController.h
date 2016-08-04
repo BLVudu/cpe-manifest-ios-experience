@@ -95,4 +95,6 @@ static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification   
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
 - (void)initAutoHideTimer;
 
+- (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
+
 @end

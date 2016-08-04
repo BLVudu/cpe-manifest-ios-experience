@@ -72,7 +72,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 // Player
 - (void)removePlayerTimeObserver;
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
-- (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
 
 @end
