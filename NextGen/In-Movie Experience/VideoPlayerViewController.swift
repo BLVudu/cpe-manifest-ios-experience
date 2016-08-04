@@ -63,8 +63,8 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     // Skip interstitial
     @IBOutlet weak private var skipContainerView: UIView!
     @IBOutlet weak private var skipCountdownContainerView: UIView!
-    @IBOutlet private var skipContainerLandscapeHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private var skipContainerPortraitHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var skipContainerLandscapeHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var skipContainerPortraitHeightConstraint: NSLayoutConstraint?
     
     // Notifications
     private var playerItemDurationDidLoadObserver: NSObjectProtocol?
@@ -177,8 +177,9 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         super.viewWillLayoutSubviews()
         
         if !_didPlayInterstitial {
-            skipContainerLandscapeHeightConstraint.active = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
-            skipContainerPortraitHeightConstraint.active = !skipContainerLandscapeHeightConstraint.active
+            let currentOrientation = UIApplication.sharedApplication().statusBarOrientation
+            skipContainerLandscapeHeightConstraint?.active = UIInterfaceOrientationIsLandscape(currentOrientation)
+            skipContainerPortraitHeightConstraint?.active = UIInterfaceOrientationIsPortrait(currentOrientation)
             countdownProgressView?.frame = skipCountdownContainerView.frame
         }
     }

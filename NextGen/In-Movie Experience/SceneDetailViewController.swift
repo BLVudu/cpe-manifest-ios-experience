@@ -14,7 +14,7 @@ class SceneDetailViewController: UIViewController {
     private struct Constants {
         static let ViewMargin: CGFloat = 10
         static let TitleLabelHeight: CGFloat = (DeviceType.IS_IPAD ? 70 : 50)
-        static let CloseButtonWidth: CGFloat = 110
+        static let CloseButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 110 : 100)
     }
     
     var experience: NGDMExperience?
@@ -39,7 +39,7 @@ class SceneDetailViewController: UIViewController {
         closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
         closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
         closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
-        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
+        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.CloseButtonWidth, 0, 0)
         closeButton.addTarget(self, action: #selector(SceneDetailViewController.close), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(closeButton)
         

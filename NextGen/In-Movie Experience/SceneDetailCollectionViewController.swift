@@ -27,7 +27,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     private struct Constants {
-        static let ItemsPerRow: CGFloat = 2
+        static let ItemsPerRow: CGFloat = (DeviceType.IS_IPAD ? 2 : 1)
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10
         static let ItemAspectRatio: CGFloat = 286 / 220
