@@ -106,6 +106,14 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         }
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        let isFullScreen = size.width > size.height
+        galleryScrollView.isFullScreen = isFullScreen
+        videoPlayerViewController?.isFullScreen = isFullScreen
+    }
+    
     
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

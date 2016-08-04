@@ -48,8 +48,10 @@ class InMovieExperienceViewController: UIViewController {
         return UIInterfaceOrientationMask.All
     }
     
-    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        extrasContainerView.hidden = size.width > size.height
         updatePlayerConstraints()
     }
     

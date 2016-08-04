@@ -28,7 +28,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryPageControl: UIPageControl!
-    @IBOutlet weak private var closeButton: UIButton!
+    @IBOutlet weak private var closeButton: UIButton?
     private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
     private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
@@ -100,12 +100,12 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         
         breadcrumbsPrimaryButton.setTitle(experience.title.uppercaseString, forState: .Normal)
         collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
-        closeButton.titleLabel?.font = UIFont.themeCondensedFont(17)
-        closeButton.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
-        closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
-        closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
-        closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
-        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
+        closeButton?.titleLabel?.font = UIFont.themeCondensedFont(17)
+        closeButton?.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
+        closeButton?.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
+        closeButton?.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
+        closeButton?.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
+        closeButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
         
         breadcrumbsSecondaryArrowImageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
         
@@ -117,7 +117,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         
         galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, isFullScreen = notification.userInfo?["isFullScreen"] as? Bool {
-                strongSelf.closeButton.hidden = isFullScreen
+                strongSelf.closeButton?.hidden = isFullScreen
                 strongSelf.galleryPageControl.hidden = isFullScreen
             }
         })
@@ -244,10 +244,14 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     
     // MARK: Actions
     override func close() {
-        mapView.destroy()
-        mapView = nil
-        
-        super.close()
+        if !locationDetailView.hidden {
+            closeDetailView()
+        } else {
+            mapView.destroy()
+            mapView = nil
+            
+            super.close()
+        }
     }
     
     @IBAction func onTapBreadcrumb(sender: UIButton) {

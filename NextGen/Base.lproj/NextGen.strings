@@ -51,9 +51,6 @@
 "locations.map" = "Map";
 "locations.map.type_standard" = "Map";
 "locations.map.type_satellite" = "Satellite";
-"locations.full_map" = "Location: Full Map";
-"locations.count.one" = "%{count} location";
-"locations.count.other" = "%{count} locations";
 
 // Galleries
 "gallery.share_message" = "Check out this image from %{movie_name}: %{url}";

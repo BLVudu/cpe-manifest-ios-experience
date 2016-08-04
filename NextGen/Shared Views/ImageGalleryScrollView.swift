@@ -14,18 +14,56 @@ struct ImageGalleryNotification {
 class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     private struct Constants {
-        static let ToolbarHeight: CGFloat = (DeviceType.IS_IPAD ? 40 : 20)
+        static let ToolbarHeight: CGFloat = (DeviceType.IS_IPAD ? 40 : 35)
         static let CloseButtonSize: CGFloat = 44
         static let CloseButtonPadding: CGFloat = 15
     }
     
     var gallery: NGDMGallery?
     private var toolbar: UIToolbar?
-    private var isFullScreen = false
     private var originalFrame: CGRect?
     private var originalContainerFrame: CGRect?
     private var closeButton: UIButton!
     private var sessionDataTasks = [NSURLSessionDataTask]()
+    
+    var isFullScreen = false {
+        didSet {
+            if isFullScreen != oldValue {
+                closeButton.hidden = !isFullScreen
+                
+                if isFullScreen {
+                    if let superview = self.superview {
+                        originalContainerFrame = superview.frame
+                        superview.frame = UIScreen.mainScreen().bounds
+                    }
+                    
+                    originalFrame = self.frame
+                    
+                    // FIXME: I have no idea why this hack works
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.01 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                        self.frame = UIScreen.mainScreen().bounds
+                        self.layoutPages()
+                    }
+                } else {
+                    if let frame = originalContainerFrame {
+                        self.superview?.frame = frame
+                        originalContainerFrame = nil
+                    }
+                    
+                    if let frame = originalFrame {
+                        self.frame = frame
+                        originalFrame = nil
+                    }
+                    
+                    layoutPages()
+                }
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidToggleFullScreen, object: nil, userInfo: ["isFullScreen": isFullScreen])
+            } else {
+                layoutPages()
+            }
+        }
+    }
     
     private var scrollViewPageWidth: CGFloat = 0
     var currentPage = 0 {
@@ -236,36 +274,6 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Actions
     func toggleFullScreen() {
         isFullScreen = !isFullScreen
-        closeButton.hidden = !isFullScreen
-        
-        if isFullScreen {
-            if let superview = self.superview {
-                originalContainerFrame = superview.frame
-                superview.frame = UIScreen.mainScreen().bounds
-            }
-            
-            originalFrame = self.frame
-            
-            // FIXME: I have no idea why this hack works
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.01 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                self.frame = UIScreen.mainScreen().bounds
-                self.layoutPages()
-            }
-        } else {
-            if let frame = originalContainerFrame {
-                self.superview?.frame = frame
-                originalContainerFrame = nil
-            }
-            
-            if let frame = originalFrame {
-                self.frame = frame
-                originalFrame = nil
-            }
-            
-            layoutPages()
-        }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(ImageGalleryNotification.DidToggleFullScreen, object: nil, userInfo: ["isFullScreen": isFullScreen])
     }
     
     func turntableSliderValueChanged(slider: UISlider!) {

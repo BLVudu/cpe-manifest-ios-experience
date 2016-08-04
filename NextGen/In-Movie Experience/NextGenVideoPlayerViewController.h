@@ -68,6 +68,7 @@ static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification   
 @property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *fullScreenButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
+@property (nonatomic, assign)           BOOL                            isFullScreen;
 
 /**
  * Toggles all player controls visibility.
@@ -80,7 +81,6 @@ static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification   
 
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;
-- (IBAction)toggleFullScreen:(id)sender;
 - (IBAction)done:(id)sender;
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer;
 - (BOOL)isPlaying;
