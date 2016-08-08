@@ -14,6 +14,7 @@
 		701695091D244772009D7E85 /* UIImageRemoteLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701695081D244772009D7E85 /* UIImageRemoteLoader.swift */; };
 		7021D3691D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */; };
 		708488DC1D0F7EC900670B45 /* NextGenDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */; };
+		708D535F1D525944009CED95 /* NextGenHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D535E1D525944009CED95 /* NextGenHook.swift */; };
 		70B101A01D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70B1019F1D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib */; };
 		70B101A21D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70B101A11D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib */; };
 		70B101A41D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B101A31D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift */; };
@@ -45,7 +46,6 @@
 		70C093331D0F60DF00BFC1E4 /* TheTakeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092CD1D0F60DF00BFC1E4 /* TheTakeCategory.swift */; };
 		70C093341D0F60DF00BFC1E4 /* TheTakeProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092CE1D0F60DF00BFC1E4 /* TheTakeProduct.swift */; };
 		70C093351D0F60DF00BFC1E4 /* ExtrasExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092D01D0F60DF00BFC1E4 /* ExtrasExperienceViewController.swift */; };
-		70C093371D0F60DF00BFC1E4 /* ExtrasPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092D21D0F60DF00BFC1E4 /* ExtrasPresentationController.swift */; };
 		70C093381D0F60DF00BFC1E4 /* ExtrasSceneLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092D31D0F60DF00BFC1E4 /* ExtrasSceneLocationsViewController.swift */; };
 		70C093391D0F60DF00BFC1E4 /* ExtrasShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092D41D0F60DF00BFC1E4 /* ExtrasShoppingItemsViewController.swift */; };
 		70C0933A1D0F60DF00BFC1E4 /* ExtrasShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092D51D0F60DF00BFC1E4 /* ExtrasShoppingViewController.swift */; };
@@ -59,7 +59,6 @@
 		70C093431D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 70C092E11D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov */; };
 		70C093441D0F60DF00BFC1E4 /* LandscapeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */; };
 		70C093451D0F60DF00BFC1E4 /* MenuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */; };
-		70C093461D0F60DF00BFC1E4 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E51D0F60DF00BFC1E4 /* SharingViewController.swift */; };
 		70C093481D0F60DF00BFC1E4 /* TalentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E71D0F60DF00BFC1E4 /* TalentDetailViewController.swift */; };
 		70C093491D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E81D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift */; };
 		70C0934A1D0F60DF00BFC1E4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092E91D0F60DF00BFC1E4 /* WebViewController.swift */; };
@@ -129,6 +128,7 @@
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataLoader.swift; sourceTree = "<group>"; };
 		7084E1E41D0F18EE00B1B5B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		708D535E1D525944009CED95 /* NextGenHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenHook.swift; sourceTree = "<group>"; };
 		70B1019F1D2C6BCF003D0424 /* SimpleImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		70B101A11D2D7B84003D0424 /* SimpleMapCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleMapCollectionViewCell.xib; sourceTree = "<group>"; };
 		70B101A31D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMapCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -162,7 +162,6 @@
 		70C092CD1D0F60DF00BFC1E4 /* TheTakeCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeCategory.swift; sourceTree = "<group>"; };
 		70C092CE1D0F60DF00BFC1E4 /* TheTakeProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheTakeProduct.swift; sourceTree = "<group>"; };
 		70C092D01D0F60DF00BFC1E4 /* ExtrasExperienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasExperienceViewController.swift; sourceTree = "<group>"; };
-		70C092D21D0F60DF00BFC1E4 /* ExtrasPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasPresentationController.swift; sourceTree = "<group>"; };
 		70C092D31D0F60DF00BFC1E4 /* ExtrasSceneLocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasSceneLocationsViewController.swift; sourceTree = "<group>"; };
 		70C092D41D0F60DF00BFC1E4 /* ExtrasShoppingItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingItemsViewController.swift; sourceTree = "<group>"; };
 		70C092D51D0F60DF00BFC1E4 /* ExtrasShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtrasShoppingViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +175,6 @@
 		70C092E11D0F60DF00BFC1E4 /* mos-nextgen-interstitial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "mos-nextgen-interstitial.mov"; sourceTree = "<group>"; };
 		70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeNavigationController.swift; sourceTree = "<group>"; };
 		70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuedViewController.swift; sourceTree = "<group>"; };
-		70C092E51D0F60DF00BFC1E4 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
 		70C092E71D0F60DF00BFC1E4 /* TalentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentDetailViewController.swift; sourceTree = "<group>"; };
 		70C092E81D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentImageGalleryViewController.swift; sourceTree = "<group>"; };
 		70C092E91D0F60DF00BFC1E4 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -339,6 +337,7 @@
 		70C092C51D0F60DF00BFC1E4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				708D535E1D525944009CED95 /* NextGenHook.swift */,
 				70C092C61D0F60DF00BFC1E4 /* SettingsManager.swift */,
 			);
 			path = Managers;
@@ -368,7 +367,6 @@
 			isa = PBXGroup;
 			children = (
 				70C092D01D0F60DF00BFC1E4 /* ExtrasExperienceViewController.swift */,
-				70C092D21D0F60DF00BFC1E4 /* ExtrasPresentationController.swift */,
 				70C092D31D0F60DF00BFC1E4 /* ExtrasSceneLocationsViewController.swift */,
 				70C092D41D0F60DF00BFC1E4 /* ExtrasShoppingItemsViewController.swift */,
 				70C092D51D0F60DF00BFC1E4 /* ExtrasShoppingViewController.swift */,
@@ -412,7 +410,6 @@
 			children = (
 				70C092E31D0F60DF00BFC1E4 /* LandscapeNavigationController.swift */,
 				70C092E41D0F60DF00BFC1E4 /* MenuedViewController.swift */,
-				70C092E51D0F60DF00BFC1E4 /* SharingViewController.swift */,
 				70C092E71D0F60DF00BFC1E4 /* TalentDetailViewController.swift */,
 				70C092E81D0F60DF00BFC1E4 /* TalentImageGalleryViewController.swift */,
 				70C092E91D0F60DF00BFC1E4 /* WebViewController.swift */,
@@ -679,7 +676,7 @@
 				70C093341D0F60DF00BFC1E4 /* TheTakeProduct.swift in Sources */,
 				70C093521D0F60DF00BFC1E4 /* RadioButton.swift in Sources */,
 				70C093391D0F60DF00BFC1E4 /* ExtrasShoppingItemsViewController.swift in Sources */,
-				70C093461D0F60DF00BFC1E4 /* SharingViewController.swift in Sources */,
+				708D535F1D525944009CED95 /* NextGenHook.swift in Sources */,
 				70C9EA6B1D08A2D7002299B3 /* AppDelegate.swift in Sources */,
 				70C0934E1D0F60DF00BFC1E4 /* MapItemCell.swift in Sources */,
 				70C093571D0F60DF00BFC1E4 /* TitledImageCell.swift in Sources */,
@@ -723,7 +720,6 @@
 				70C093501D0F60DF00BFC1E4 /* MenuSectionCell.swift in Sources */,
 				70C093351D0F60DF00BFC1E4 /* ExtrasExperienceViewController.swift in Sources */,
 				701695091D244772009D7E85 /* UIImageRemoteLoader.swift in Sources */,
-				70C093371D0F60DF00BFC1E4 /* ExtrasPresentationController.swift in Sources */,
 				70C093241D0F60DF00BFC1E4 /* SceneDetailCollectionViewCell.swift in Sources */,
 				70C093591D0F60DF00BFC1E4 /* UIColor+Theme.swift in Sources */,
 				70C0935E1D0F60DF00BFC1E4 /* NSTimeInterval+Utils.swift in Sources */,

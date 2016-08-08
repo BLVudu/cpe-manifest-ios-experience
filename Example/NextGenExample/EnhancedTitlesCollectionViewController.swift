@@ -55,9 +55,12 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(EnhancedTitlesCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! EnhancedTitlesCollectionViewCell
         
-        cell.titleLabel.text = NextGenDataLoader.ManifestData[indexPath.row]["title"]
-        if let imageName = NextGenDataLoader.ManifestData[indexPath.row]["image"] {
-            cell.imageView.image = UIImage(named: imageName)
+        let cid = Array(NextGenDataLoader.ManifestData.keys)[indexPath.row]
+        if let data = NextGenDataLoader.ManifestData[cid] {
+            cell.titleLabel.text = data["title"]
+            if let imageName = data["image"] {
+                cell.imageView.image = UIImage(named: imageName)
+            }
         }
         
         return cell
@@ -68,7 +71,7 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            NextGenDataLoader.loadTitle(indexPath.row)
+            NextGenDataLoader.sharedInstance.loadTitle(Array(NextGenDataLoader.ManifestData.keys)[indexPath.row])
             
             dispatch_async(dispatch_get_main_queue()) {
                 let homeViewController = UIStoryboard.getNextGenViewController(HomeViewController)
