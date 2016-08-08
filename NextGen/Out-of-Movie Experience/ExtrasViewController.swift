@@ -194,6 +194,11 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                 self.performSegueWithIdentifier(SegueIdentifier.ShowShopping, sender: experience)
             } else if experience.isType(.Location) {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowMap, sender: experience)
+            } else if experience.isType(.App) {
+                if let app = experience.app, url = app.url {
+                    let webViewController = WebViewController(title: app.title, url: url)
+                    self.presentViewController(webViewController, animated: true, completion: nil)
+                }
             } else {
                 self.performSegueWithIdentifier(SegueIdentifier.ShowGallery, sender: experience)
             }

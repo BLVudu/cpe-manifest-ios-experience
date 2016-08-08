@@ -286,7 +286,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Image Gallery
     private func loadGalleryImageForPage(page: Int) {
         if let url = gallery?.getImageURLForPage(page), imageView = (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView where imageView.image == nil {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) { [weak self] in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
                 if let strongSelf = self, sessionDataTask = imageView.setImageWithURL(url, completion: nil) {
                     strongSelf.sessionDataTasks.append(sessionDataTask)
                 }
