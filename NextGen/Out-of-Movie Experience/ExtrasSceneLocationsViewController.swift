@@ -335,8 +335,4 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         return Constants.CollectionViewItemSpacing
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding)
-    }
-    
 }

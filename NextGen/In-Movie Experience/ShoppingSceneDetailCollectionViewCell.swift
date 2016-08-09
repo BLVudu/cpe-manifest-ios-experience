@@ -14,53 +14,64 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         static let Scene = "ProductImageTypeScene"
     }
     
-    @IBOutlet weak private var _imageView: UIImageView!
-    @IBOutlet weak private var _bullseyeImageView: UIImageView!
-    @IBOutlet weak private var _extraDescriptionLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var bullseyeImageView: UIImageView!
+    @IBOutlet weak private var extraDescriptionLabel: UILabel!
     
     var productImageType = ProductImageType.Product
-    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    private var setImageSessionDataTask: NSURLSessionDataTask?
     
-    private var _extraDescriptionText: String? {
-        didSet {
-            _extraDescriptionLabel?.text = _extraDescriptionText
-        }
-    }
-    
-    private var _imageURL: NSURL? {
-        didSet {
-            if let url = _imageURL {
-                if url != oldValue {
-                    _imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                    _setImageSessionDataTask = _imageView.setImageWithURL(url, completion: { (image) -> Void in
-                        self._imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
-                    })
-                }
+    private var imageURL: NSURL? {
+        set {
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
+            }
+            
+            if let url = newValue {
+                imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                setImageSessionDataTask = imageView.setImageWithURL(url, completion: { (image) -> Void in
+                    self.imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
+                })
             } else {
-                _imageView.image = nil
-                _imageView.backgroundColor = UIColor.clearColor()
+                imageView.image = nil
+                imageView.backgroundColor = UIColor.clearColor()
             }
         }
+        
+        get {
+            return nil
+        }
     }
     
-    private var _currentProduct: TheTakeProduct?
-    private var _currentProductFrameTime = -1.0
-    private var _currentProductSessionDataTask: NSURLSessionDataTask?
+    private var extraDescription: String? {
+        set {
+            extraDescriptionLabel?.text = newValue
+        }
+        
+        get {
+            return extraDescriptionLabel?.text
+        }
+    }
+    
+    private var currentProduct: TheTakeProduct?
+    private var currentProductFrameTime = -1.0
+    private var currentProductSessionDataTask: NSURLSessionDataTask?
     var theTakeProducts: [TheTakeProduct]? {
         didSet {
             if let products = theTakeProducts, product = products.first {
-                if _currentProduct != product {
-                    _currentProduct = product
-                    _descriptionText = product.brand
-                    _extraDescriptionText = product.name
-                    _imageURL = (productImageType == ProductImageType.Scene ? product.sceneImageURL : product.productImageURL)
+                if currentProduct != product {
+                    currentProduct = product
+                    descriptionText = product.brand
+                    extraDescription = product.name
+                    imageURL = (productImageType == ProductImageType.Scene ? product.sceneImageURL : product.productImageURL)
                 }
             } else {
-                _currentProduct = nil
-                _imageURL = nil
-                _descriptionText = nil
-                _extraDescriptionText = nil
-                _currentProductFrameTime = -1.0
+                currentProduct = nil
+                imageURL = nil
+                descriptionText = nil
+                extraDescription = nil
+                currentProductFrameTime = -1.0
             }
         }
     }
@@ -69,16 +80,16 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             if self.timedEvent != nil && self.timedEvent!.isType(.Product) {
                 let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(self.currentTime)
-                if newFrameTime != self._currentProductFrameTime {
-                    self._currentProductFrameTime = newFrameTime
+                if newFrameTime != self.currentProductFrameTime {
+                    self.currentProductFrameTime = newFrameTime
                     
-                    if let currentTask = self._currentProductSessionDataTask {
+                    if let currentTask = self.currentProductSessionDataTask {
                         currentTask.cancel()
                     }
                     
-                    self._currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(self._currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
+                    self.currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(self.currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
                         if let strongSelf = self {
-                            strongSelf._currentProductSessionDataTask = nil
+                            strongSelf.currentProductSessionDataTask = nil
                             dispatch_async(dispatch_get_main_queue(), {
                                 strongSelf.theTakeProducts = products
                             })
@@ -93,16 +104,11 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.prepareForReuse()
         
         theTakeProducts = nil
-        _bullseyeImageView.hidden = true
+        bullseyeImageView.hidden = true
         
-        if let task = _currentProductSessionDataTask {
+        if let task = currentProductSessionDataTask {
             task.cancel()
-            _currentProductSessionDataTask = nil
-        }
-        
-        if let task = _setImageSessionDataTask {
-            task.cancel()
-            _setImageSessionDataTask = nil
+            currentProductSessionDataTask = nil
         }
     }
     
@@ -110,21 +116,21 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.layoutSubviews()
         
         if productImageType == ProductImageType.Scene {
-            _bullseyeImageView.hidden = false
-            if let product = _currentProduct {
-                var bullseyeFrame = _bullseyeImageView.frame
-                let bullseyePoint = product.getSceneBullseyePoint(_imageView.frame)
-                bullseyeFrame.origin = CGPointMake(bullseyePoint.x + CGRectGetMinX(_imageView.frame) - (CGRectGetWidth(bullseyeFrame) / 2), bullseyePoint.y + CGRectGetMinY(_imageView.frame) - (CGRectGetHeight(bullseyeFrame) / 2))
-                _bullseyeImageView.frame = bullseyeFrame
+            bullseyeImageView.hidden = false
+            if let product = currentProduct {
+                var bullseyeFrame = bullseyeImageView.frame
+                let bullseyePoint = product.getSceneBullseyePoint(imageView.frame)
+                bullseyeFrame.origin = CGPointMake(bullseyePoint.x + CGRectGetMinX(imageView.frame) - (CGRectGetWidth(bullseyeFrame) / 2), bullseyePoint.y + CGRectGetMinY(imageView.frame) - (CGRectGetHeight(bullseyeFrame) / 2))
+                bullseyeImageView.frame = bullseyeFrame
                 
-                _bullseyeImageView.layer.shadowColor = UIColor.blackColor().CGColor;
-                _bullseyeImageView.layer.shadowOffset = CGSizeMake(1, 1);
-                _bullseyeImageView.layer.shadowOpacity = 0.75;
-                _bullseyeImageView.layer.shadowRadius = 2.0;
-                _bullseyeImageView.clipsToBounds = false;
+                bullseyeImageView.layer.shadowColor = UIColor.blackColor().CGColor;
+                bullseyeImageView.layer.shadowOffset = CGSizeMake(1, 1);
+                bullseyeImageView.layer.shadowOpacity = 0.75;
+                bullseyeImageView.layer.shadowRadius = 2.0;
+                bullseyeImageView.clipsToBounds = false;
             }
         } else {
-            _bullseyeImageView.hidden = true
+            bullseyeImageView.hidden = true
         }
     }
     

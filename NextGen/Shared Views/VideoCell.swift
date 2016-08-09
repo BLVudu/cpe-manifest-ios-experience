@@ -50,6 +50,11 @@ class VideoCell: UITableViewCell {
                 runtimeLabel.hidden = true
             }
             
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
+            }
+            
             if let imageURL = experience?.imageURL {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
                     if let strongSelf = self {
@@ -66,11 +71,6 @@ class VideoCell: UITableViewCell {
         super.prepareForReuse()
         
         experience = nil
-        
-        if let task = setImageSessionDataTask {
-            task.cancel()
-            setImageSessionDataTask = nil
-        }
         
         if let observer = didPlayVideoObserver {
             NSNotificationCenter.defaultCenter().removeObserver(observer)

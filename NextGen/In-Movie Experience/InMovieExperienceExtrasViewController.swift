@@ -22,17 +22,15 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     @IBOutlet weak private var showLessButton: UIButton!
     @IBOutlet weak private var showLessGradientView: UIView!
     private var showLessGradient = CAGradientLayer()
-    var appApperance: NGDMAppearance!
-    
-    private var didChangeTimeObserver: NSObjectProtocol?
-    
-    private var currentTime: Double = -1
     private var currentTalents: [NGDMTalent]?
     private var hiddenTalents: [NGDMTalent]?
     private var isShowingMore = false
     private var numCurrentTalents: Int {
         return currentTalents?.count ?? 0
     }
+    
+    private var currentTime: Double = -1
+    private var didChangeTimeObserver: NSObjectProtocol?
     
     deinit {
         if let observer = didChangeTimeObserver {

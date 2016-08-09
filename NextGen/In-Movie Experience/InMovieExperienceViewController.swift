@@ -15,23 +15,6 @@ class InMovieExperienceViewController: UIViewController {
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
-    private var _didPlayMainExperienceObserver: NSObjectProtocol!
-    private var _isShowingInterstitial = true
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(_didPlayMainExperienceObserver)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        _didPlayMainExperienceObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayMainExperience, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) in
-            if let strongSelf = self {
-                strongSelf._isShowingInterstitial = false
-            }
-        }
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

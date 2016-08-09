@@ -17,6 +17,11 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     
     var imageURL: NSURL? {
         set {
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
+            }
+            
             if let url = newValue {
                 setImageSessionDataTask = imageView.setImageWithURL(url, completion: nil)
             } else {
@@ -66,13 +71,8 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
         
         self.selected = false
         
-        image = nil
+        imageURL = nil
         playButtonVisible = false
-        
-        if let task = setImageSessionDataTask {
-            task.cancel()
-            setImageSessionDataTask = nil
-        }
     }
 
 }

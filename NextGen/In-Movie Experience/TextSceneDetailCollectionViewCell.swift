@@ -9,10 +9,14 @@ class TextSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "TextSceneDetailCollectionViewCellReuseIdentifier"
     
-    override internal var _descriptionText: String? {
-        didSet {
-            descriptionLabel.text = _descriptionText
+    override internal var descriptionText: String? {
+        set {
+            super.descriptionText = newValue
             descriptionLabel.sizeToFit()
+        }
+        
+        get {
+            return super.descriptionText
         }
     }
     

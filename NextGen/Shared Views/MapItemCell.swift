@@ -26,6 +26,11 @@ class MapItemCell: UICollectionViewCell {
     
     var imageURL: NSURL? {
         set {
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
+            }
+            
             if let imageURL = newValue {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
                     if let strongSelf = self {
@@ -58,11 +63,6 @@ class MapItemCell: UICollectionViewCell {
         title = nil
         imageURL = nil
         playButton.hidden = true
-        
-        if let task = setImageSessionDataTask {
-            task.cancel()
-            setImageSessionDataTask = nil
-        }
     }
     
     override func layoutSubviews() {

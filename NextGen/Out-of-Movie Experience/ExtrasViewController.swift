@@ -164,8 +164,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if showActorsInGrid {
             if indexPath.row == 0 {
                 cell.experience = nil
-                cell.setTitle(String.localize("label.actors"))
-                cell.setImageURL(NGDMManifest.sharedInstance.mainExperience?.orderedActors?.first?.images?.first?.thumbnailImageURL)
+                cell.title = String.localize("label.actors")
+                cell.imageURL = NGDMManifest.sharedInstance.mainExperience?.orderedActors?.first?.images?.first?.thumbnailImageURL
                 return cell
             }
             
