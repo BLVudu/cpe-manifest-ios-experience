@@ -53,6 +53,8 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
             getJSONWithPath(Endpoints.GetCredits, parameters: ["id": apiId], successBlock: { (result) -> Void in
                 if let results = result["result"] as? NSArray {
                     var talents = [String: NGDMTalent]()
+                    
+                    var i = 0
                     for talentInfo in results.subarrayWithRange(NSRange(location: 0, length: min(Constants.MaxCredits, results.count))) {
                         if let talentInfo = talentInfo as? NSDictionary, talentId = talentInfo[Keys.ParticipantID] as? NSNumber {
                             let baselineId = (talentInfo[BaselineAPIUtil.Keys.ParticipantID] as! NSNumber).stringValue
@@ -63,8 +65,10 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
                                 type = TalentType(rawValue: creditGroup)
                             }
                             
-                            talents[talentId.stringValue] = NGDMTalent(apiId: baselineId, name: name, role: role, type: type ?? .Unknown)
+                            talents[talentId.stringValue] = NGDMTalent(apiId: baselineId, name: name, role: role, billingBlockOrder: i, type: type ?? .Unknown)
                         }
+                        
+                        i += 1
                     }
                     
                     successBlock(talents: talents)
