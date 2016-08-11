@@ -244,7 +244,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     
     // MARK: Actions
     override func close() {
-        if !locationDetailView.hidden {
+        if !locationDetailView.hidden && !DeviceType.IS_IPAD {
             closeDetailView()
         } else {
             mapView.destroy()
