@@ -73,7 +73,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleTreatmentImageView.translatesAutoresizingMaskIntoConstraints = false
             titleTreatmentImageView.contentMode = .ScaleAspectFit
             titleTreatmentImageView.clipsToBounds = true
-            titleTreatmentImageView.setImageWithURL(titleTreatmentImageURL)
+            titleTreatmentImageView.setImageWithURL(titleTreatmentImageURL, completion: nil)
             self.view.addSubview(titleTreatmentImageView)
             self.view.sendSubviewToBack(titleTreatmentImageView)
             
