@@ -66,8 +66,12 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let talentTableView = talentTableView {
+            showLessGradientView.frame.size.width = CGRectGetWidth(talentTableView.frame)
+        }
         
         showLessGradient.frame = showLessGradientView.bounds
     }

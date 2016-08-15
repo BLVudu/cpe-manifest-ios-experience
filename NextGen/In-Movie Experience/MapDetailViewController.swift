@@ -18,18 +18,10 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     private var videoPlayerViewController: VideoPlayerViewController?
     
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
-    private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
     
     private var appData: NGDMAppData!
     private var location: NGDMLocation!
     private var marker: MultiMapMarker!
-    
-    deinit {
-        if let observer = galleryDidToggleFullScreenObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
-            galleryDidToggleFullScreenObserver = nil
-        }
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -61,6 +53,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         }
         
         galleryScrollView.allowsFullScreen = false
+        galleryScrollView.removeToolbar()
     }
     
     override func viewWillAppear(animated: Bool) {
