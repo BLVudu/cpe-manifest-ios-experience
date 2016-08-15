@@ -116,6 +116,10 @@ class HomeViewController: UIViewController {
                 self.view.addSubview(button)
                 
                 homeScreenViews.append(button)
+                
+                let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didLongPressExtrasButton(_:)))
+                longPressGestureRecognizer.minimumPressDuration = 5
+                button.addGestureRecognizer(longPressGestureRecognizer)
             }
             
             if !willFadeInViews {
@@ -156,6 +160,12 @@ class HomeViewController: UIViewController {
         }
         
         return super.preferredInterfaceOrientationForPresentation()
+    }
+    
+    func didLongPressExtrasButton(sender: UILongPressGestureRecognizer) {
+        if sender.state == .Began {
+            NextGenHook.delegate?.nextGenExperienceWillEnterDebugMode()
+        }
     }
     
     // MARK: Video Player
