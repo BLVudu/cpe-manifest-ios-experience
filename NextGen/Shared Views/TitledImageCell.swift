@@ -16,17 +16,41 @@ class TitledImageCell: UICollectionViewCell {
     
     var experience: NGDMExperience? {
         didSet {
-            titleLabel.text = experience?.metadata?.title?.uppercaseString
+            title = experience?.metadata?.title
+            imageURL = experience?.imageURL
+        }
+    }
+    
+    var title: String? {
+        set {
+            titleLabel.text = newValue?.uppercaseString
+        }
+        
+        get {
+            return titleLabel.text
+        }
+    }
+    
+    var imageURL: NSURL? {
+        set {
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
+            }
             
-            if let imageURL = experience?.imageURL {
+            if let url = newValue {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
                     if let strongSelf = self {
-                        strongSelf.setImageSessionDataTask = strongSelf.imageView.setImageWithURL(imageURL, completion: nil)
+                        strongSelf.setImageSessionDataTask = strongSelf.imageView.setImageWithURL(url, completion: nil)
                     }
                 }
             } else {
                 imageView.image = nil
             }
+        }
+        
+        get {
+            return nil
         }
     }
     
@@ -34,10 +58,6 @@ class TitledImageCell: UICollectionViewCell {
         super.prepareForReuse()
         
         experience = nil
-        if let task = setImageSessionDataTask {
-            task.cancel()
-            setImageSessionDataTask = nil
-        }
     }
     
 }

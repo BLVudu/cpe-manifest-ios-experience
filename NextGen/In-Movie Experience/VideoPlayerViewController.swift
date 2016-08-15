@@ -7,11 +7,16 @@ import UIKit
 import MessageUI
 import CoreMedia
 import NextGenDataManager
+import UAProgressView
 
 struct VideoPlayerNotification {
+    static let WillPlayNextItem = "kNextGenVideoPlayerWillPlayNextItem"
     static let DidChangeTime = "VideoPlayerNotificationDidChangeTime"
     static let DidPlayMainExperience = "VideoPlayerNotificationDidPlayMainExperience"
     static let DidPlayVideo = "VideoPlayerNotificationDidPlayVideo"
+    static let DidEndVideo = "kNextGenVideoPlayerDidEndVideo"
+    static let DidEndLastVideo = "kVideoPlayerNotificationDidEndLastVideo"
+    static let UserInfoVideoURL = "kVideoPlayerNotificationVideoURL"
 }
 
 public enum VideoPlayerMode {
@@ -24,35 +29,56 @@ typealias Task = (cancel : Bool) -> ()
 
 class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverControllerDelegate {
     
-    let kMasterVideoPlayerViewControllerKey = "kMasterVideoPlayerViewControllerKey"
+    private struct Constants {
+        static let CountdownTimeInterval: CGFloat = 1
+        static let CountdownTotalTime: CGFloat = 5
+    }
     
     var mode = VideoPlayerMode.Supplemental
-    var showCountdownTimer = false
-    var curIndex = 0
-    var indexMax = 0
     
     private var _didPlayInterstitial = false
     private var _lastNotifiedTime = -1.0
     private var _controlsAreLocked = false
+    private var manuallyPaused = false
     
     @IBOutlet weak private var _commentaryView: UIView!
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
-    
-    @IBOutlet weak var countdown: CircularProgressView!
-    var countdownTimer: NSTimer!
-    private var countdownSeconds = 0
-    var nextItemTask: Task?
     var commentaryIndex = 0
     
-    private var manuallyPaused = false
+    // Countdown/Queue
+    var queueTotalCount = 0
+    var queueCurrentIndex = 0
+    private var countdownSeconds: CGFloat = 0 {
+        didSet {
+            countdownLabel.text = String.localize("label.time.seconds", variables: ["count": String(Int(Constants.CountdownTotalTime - countdownSeconds))])
+            countdownProgressView?.setProgress(((countdownSeconds + 1) / Constants.CountdownTotalTime), animated: true)
+        }
+    }
     
+    private var countdownTimer: NSTimer?
+    private var countdownProgressView: UAProgressView?
+    @IBOutlet weak private var countdownLabel: UILabel!
+    
+    // Skip interstitial
+    @IBOutlet weak private var skipContainerView: UIView!
+    @IBOutlet weak private var skipCountdownContainerView: UIView!
+    @IBOutlet private var skipContainerLandscapeHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var skipContainerPortraitHeightConstraint: NSLayoutConstraint?
+    
+    // Notifications
+    private var playerItemDurationDidLoadObserver: NSObjectProtocol?
     private var shouldPauseAllOtherObserver: NSObjectProtocol?
     private var updateCommentaryButtonObserver: NSObjectProtocol?
     private var sceneDetailWillCloseObserver: NSObjectProtocol?
     
     deinit {
         let center = NSNotificationCenter.defaultCenter()
+        
+        if let observer = playerItemDurationDidLoadObserver {
+            center.removeObserver(observer)
+            playerItemDurationDidLoadObserver = nil
+        }
         
         if let observer = shouldPauseAllOtherObserver {
             center.removeObserver(observer)
@@ -68,12 +94,15 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
             center.removeObserver(observer)
             sceneDetailWillCloseObserver = nil
         }
+        
+        cancelCountdown()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.countdown.hidden = true
         
+        skipContainerView.hidden = true
+        skipContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTapSkip)))
         
         // Localizations
         _homeButton.setTitle(String.localize("label.home"), forState: UIControlState.Normal)
@@ -81,9 +110,23 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         _commentaryView.hidden = true
         
         // Notifications
+        playerItemDurationDidLoadObserver = NSNotificationCenter.defaultCenter().addObserverForName(kNextGenVideoPlayerItemDurationDidLoadNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self, duration = notification.userInfo?["duration"] as? Double where strongSelf.countdownProgressView == nil {
+                let progressView = UAProgressView(frame: strongSelf.skipCountdownContainerView.frame)
+                progressView.borderWidth = 0
+                progressView.lineWidth = 2
+                progressView.fillOnTouch = false
+                progressView.tintColor = UIColor.whiteColor()
+                progressView.animationDuration = duration
+                strongSelf.skipContainerView.addSubview(progressView)
+                strongSelf.countdownProgressView = progressView
+                strongSelf.countdownProgressView?.setProgress(1, animated: true)
+            }
+        })
+        
         shouldPauseAllOtherObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self, userInfo = notification.userInfo, masterVideoPlayerViewController = userInfo[strongSelf.kMasterVideoPlayerViewControllerKey] as? VideoPlayerViewController {
-                if masterVideoPlayerViewController != strongSelf && strongSelf._didPlayInterstitial {
+            if let strongSelf = self where strongSelf._didPlayInterstitial {
+                if let videoURL = notification.userInfo?[VideoPlayerNotification.UserInfoVideoURL] as? NSURL where videoURL != strongSelf.URL {
                     strongSelf.pauseVideo()
                 }
             }
@@ -92,7 +135,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         updateCommentaryButtonObserver = NSNotificationCenter.defaultCenter().addObserverForName(kDidSelectCommetaryOption, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self]
             (notification) in
             if let strongSelf = self {
-                if let userInfo = notification.userInfo, index = userInfo["option"] as? Int{
+                if let userInfo = notification.userInfo, index = userInfo["option"] as? Int {
                     strongSelf.commentaryIndex = index
                     strongSelf._commentaryButton.setTitle(index > 0 ? String.localize("label.commentary.on") : String.localize("label.commentary"), forState: .Normal)
                 }
@@ -123,8 +166,21 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
         if _didPlayInterstitial {
-            self.playerControlsVisible = true;
+            self.playerControlsVisible = true
             self.initAutoHideTimer()
+        } else {
+            countdownProgressView?.frame = skipCountdownContainerView.frame
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if !_didPlayInterstitial {
+            let currentOrientation = UIApplication.sharedApplication().statusBarOrientation
+            skipContainerLandscapeHeightConstraint?.active = UIInterfaceOrientationIsLandscape(currentOrientation)
+            skipContainerPortraitHeightConstraint?.active = UIInterfaceOrientationIsPortrait(currentOrientation)
+            countdownProgressView?.frame = skipCountdownContainerView.frame
         }
     }
     
@@ -137,6 +193,8 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     
     // MARK: Video Playback
     override func playVideoWithURL(url: NSURL!) {
+        cancelCountdown()
+        
         if _didPlayInterstitial {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 SettingsManager.setVideoAsWatched(url)
@@ -155,13 +213,20 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     
     func playMainExperience() {
         self.playerControlsVisible = false
+        countdownProgressView?.removeFromSuperview()
+        countdownProgressView = nil
+        
         if _didPlayInterstitial {
+            skipContainerView.hidden = true
+            
             if let audioVisual = NGDMManifest.sharedInstance.mainExperience?.audioVisual {
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayMainExperience, object: nil)
                 self.playVideoWithURL(audioVisual.videoURL)
             }
         } else {
-            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("mos-nextgen-interstitial", ofType: "mov")!))
+            skipContainerView.hidden = !SettingsManager.didWatchInterstitial
+            SettingsManager.didWatchInterstitial = true
+            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("MOS_INTERSTITIAL_v3", ofType: "mp4")!))
         }
     }
     
@@ -176,7 +241,13 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         super.playVideo()
         
         manuallyPaused = false
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayVideo, object: nil, userInfo: [kMasterVideoPlayerViewControllerKey: self])
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayVideo, object: nil, userInfo: [VideoPlayerNotification.UserInfoVideoURL: self.URL])
+    }
+    
+    override func observeValueForKeyPath(path: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+        super.observeValueForKeyPath(path, ofObject: object, change: change, context: context)
+        
+        self.playbackView.setVideoFillMode(_didPlayInterstitial ? AVLayerVideoGravityResizeAspect : AVLayerVideoGravityResizeAspectFill)
     }
     
     override func syncScrubber() {
@@ -199,90 +270,62 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         if !_didPlayInterstitial {
             _didPlayInterstitial = true
             playMainExperience()
+            return
         }
         
-        self.curIndex += 1
-        if (self.curIndex < self.indexMax) {
+        queueCurrentIndex += 1
+        if queueCurrentIndex < queueTotalCount {
             self.pauseVideo()
-            self.countdownSeconds = 5;
-            self.countdown.hidden = false
-            self.countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.subtractTime), userInfo: nil, repeats: true)
-            self.countdown.animateTimer()
-            nextItemTask = delay(5) {
-                NSNotificationCenter.defaultCenter().postNotificationName(kNextGenVideoPlayerWillPlayNextItem, object:self, userInfo:["index": self.curIndex])
-                self.countdown.hidden = true;
-                self.countdownTimer.invalidate()
-                self.countdownTimer = nil
-                self.countdownSeconds = 5;
-                self.countdown.countdownString = "  \(self.countdownSeconds) sec"
-            }
-        }
-
-        if mode == .Supplemental {
-            super.playerItemDidReachEnd(notification)
-        }
-    }
-    
-    func delay(delay:Double, block:()->()) -> Task {
-       
-        func dispatch_later(block:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), block)
-    }
-        var closureBlock: dispatch_block_t? = block
-        var result: Task?
-        
-        let delayedClosure: Task = {
-            cancel in
-            if let internalClosure = closureBlock {
-                if (cancel == false) {
-                    dispatch_async(dispatch_get_main_queue(), internalClosure);
-                }
-            }
-            closureBlock = nil
-            result = nil
-        }
-        
-        result = delayedClosure
-        
-        dispatch_later {
-            if let delayedClosure = result {
-                delayedClosure(cancel: false)
-            }
-        }
-        
-        return result!
-    }
-    
-    func cancel(task:Task?) {
-        if(self.countdownTimer !== nil){
-            self.countdownTimer.invalidate()
-        }
-        self.countdownSeconds = 5
-        self.countdown.countdownString = "  \(self.countdownSeconds) sec"
-        self.countdown.hidden = true
-        task?(cancel: true)
-            }
-        
             
-    func subtractTime(){
-        
-        if (self.countdownSeconds == 0) {
-            self.countdownTimer.invalidate()
-            self.countdownTimer = nil
-            self.countdownSeconds = 5
-            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
+            countdownLabel.hidden = false
+            
+            let progressView = UAProgressView(frame: countdownLabel.frame)
+            progressView.centralView = countdownLabel
+            progressView.borderWidth = 0
+            progressView.lineWidth = 2
+            progressView.fillOnTouch = false
+            progressView.tintColor = UIColor.themePrimaryColor()
+            progressView.animationDuration = Double(Constants.CountdownTimeInterval)
+            self.view.addSubview(progressView)
+            countdownProgressView = progressView
+            
+            countdownSeconds = 0
+            countdownTimer = NSTimer.scheduledTimerWithTimeInterval(Double(Constants.CountdownTimeInterval), target: self, selector: #selector(self.onCountdownTimerFired), userInfo: nil, repeats: true)
         } else {
-            self.countdownSeconds -= 1
-            self.countdown.countdownString = "  \(self.countdownSeconds) sec"
-            }
+            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndLastVideo, object: nil)
         }
         
-
+        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndVideo, object: nil)
+        
+        super.playerItemDidReachEnd(notification)
+    }
+    
+    func onCountdownTimerFired() {
+        countdownSeconds += Constants.CountdownTimeInterval
+        
+        if countdownSeconds >= Constants.CountdownTotalTime {
+            if let timer = countdownTimer {
+                timer.invalidate()
+                countdownTimer = nil
+            }
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(Constants.CountdownTimeInterval) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.cancelCountdown()
+                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.WillPlayNextItem, object: nil, userInfo: ["index": self.queueCurrentIndex])
+            }
+        }
+    }
+    
+    func cancelCountdown() {
+        if let timer = countdownTimer {
+            timer.invalidate()
+            countdownTimer = nil
+        }
+        
+        countdownLabel.hidden = true
+        countdownProgressView?.removeFromSuperview()
+        countdownProgressView = nil
+    }
     
     // MARK: Actions
     override func done(sender: AnyObject?) {
@@ -314,16 +357,18 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     }
     
     override func handleTap(gestureRecognizer: UITapGestureRecognizer!) {
-        if !_controlsAreLocked {
-            if !_didPlayInterstitial {
-                skipInterstitial()
-            }
-            
-            if _commentaryView.hidden{
+        if !_controlsAreLocked && _didPlayInterstitial {
+            if _commentaryView.hidden {
                 super.handleTap(gestureRecognizer)
             } else {
                 commentary(_commentaryButton)
             }
+        }
+    }
+    
+    func onTapSkip() {
+        if !_controlsAreLocked && !_didPlayInterstitial {
+            skipInterstitial()
         }
     }
     

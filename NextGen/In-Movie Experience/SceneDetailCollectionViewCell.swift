@@ -14,15 +14,23 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    private var _title: String? {
-        didSet {
-            titleLabel?.text = _title?.uppercaseString
+    private var title: String? {
+        set {
+            titleLabel?.text = newValue?.uppercaseString
+        }
+        
+        get {
+            return titleLabel?.text
         }
     }
     
-    internal var _descriptionText: String? {
-        didSet {
-            descriptionLabel.text = _descriptionText
+    internal var descriptionText: String? {
+        set {
+            descriptionLabel.text = newValue
+        }
+        
+        get {
+            return descriptionLabel.text
         }
     }
     
@@ -34,11 +42,11 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private var _lastSavedTime: Double = -1.0
+    private var lastSavedTime: Double = -1.0
     var currentTime: Double = -1.0 {
         didSet {
-            if _lastSavedTime == -1 || abs(currentTime - _lastSavedTime) >= Constants.UpdateInterval {
-                _lastSavedTime = currentTime
+            if lastSavedTime == -1 || abs(currentTime - lastSavedTime) >= Constants.UpdateInterval {
+                lastSavedTime = currentTime
                 currentTimeDidChange()
             }
         }
@@ -47,20 +55,21 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        _lastSavedTime = -1.0
+        lastSavedTime = -1.0
         timedEvent = nil
     }
     
-    func timedEventDidChange() {
-        _title = timedEvent?.experience?.title
+    internal func timedEventDidChange() {
+        title = timedEvent?.experience?.title
+        
         if timedEvent != nil && timedEvent!.isType(.ClipShare) {
-            _descriptionText = String.localize("clipshare.description")
+            descriptionText = String.localize("clipshare.description")
         } else {
-            _descriptionText = timedEvent?.descriptionText
+            descriptionText = timedEvent?.descriptionText
         }
     }
     
-    func currentTimeDidChange() {
+    internal func currentTimeDidChange() {
         // Override
     }
 }

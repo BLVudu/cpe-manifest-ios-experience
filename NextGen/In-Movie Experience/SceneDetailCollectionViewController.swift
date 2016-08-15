@@ -18,7 +18,7 @@ struct ExperienceCellData {
 
 class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let ShowGallery = "showGallery"
         static let ShowShop = "showShop"
         static let ShowMap = "showMap"
@@ -26,8 +26,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ShowLargeText = "ShowLargeTextSegueIdentifier"
     }
     
-    struct Constants {
-        static let ItemsPerRow: CGFloat = 2
+    private struct Constants {
+        static let ItemsPerRow: CGFloat = (DeviceType.IS_IPAD ? 2 : 1)
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10
         static let ItemAspectRatio: CGFloat = 286 / 220
@@ -50,6 +50,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         
         self.collectionView?.backgroundColor = UIColor.clearColor()
         self.collectionView?.alpha = 0
+        self.collectionView?.registerNib(UINib(nibName: String(TextSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: TextSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(ImageSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: "ClipShareSceneDetailCollectionViewCell", bundle:nil), forCellWithReuseIdentifier: ImageSceneDetailCollectionViewCell.ClipShareReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: String(MapSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
@@ -147,8 +148,10 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
             reuseIdentifier = ShoppingSceneDetailCollectionViewCell.ReuseIdentifier
         } else if timedEvent.isType(.ClipShare) {
             reuseIdentifier = ImageSceneDetailCollectionViewCell.ClipShareReuseIdentifier
-        } else {
+        } else if timedEvent.imageURL != nil {
             reuseIdentifier = ImageSceneDetailCollectionViewCell.ReuseIdentifier
+        } else {
+            reuseIdentifier = TextSceneDetailCollectionViewCell.ReuseIdentifier
         }
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SceneDetailCollectionViewCell

@@ -8,6 +8,14 @@ import NextGenDataManager
 class VideoCell: UITableViewCell {
     
     static let ReuseIdentifier = "VideoCellReuseIdentifier"
+    static var NibName: String {
+        var nibName = String(VideoCell)
+        if !DeviceType.IS_IPAD {
+            nibName += "_iPhone"
+        }
+        
+        return nibName
+    }
     
     @IBOutlet weak private var thumbnailContainerView: UIView!
     @IBOutlet weak private var thumbnailImageView: UIImageView!
@@ -16,19 +24,35 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak private var captionLabel: UILabel!
     
     private var setImageSessionDataTask: NSURLSessionDataTask?
+    private var didPlayVideoObserver: NSObjectProtocol?
     
     var experience: NGDMExperience? {
         didSet {
-            captionLabel.text = experience?.metadata?.title
-            if let runtime = experience?.videoRuntime, videoURL = experience?.videoURL {
-                if runtime > 0 {
+            captionLabel.text = experience?.title
+            if !DeviceType.IS_IPAD {
+                captionLabel.sizeToFit()
+            }
+            
+            if let videoURL = experience?.videoURL {
+                if let runtime = experience?.videoRuntime where runtime > 0 {
                     runtimeLabel.hidden = false
                     runtimeLabel.text = SettingsManager.didWatchVideo(videoURL) ? String.localize("label.watched") : runtime.formattedTime()
                 } else {
                     runtimeLabel.hidden = true
                 }
+                
+                didPlayVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+                    if let strongSelf = self, playingVideoURL = notification.userInfo?[VideoPlayerNotification.UserInfoVideoURL] as? NSURL where playingVideoURL == videoURL {
+                        strongSelf.runtimeLabel.text = String.localize("label.playing")
+                    }
+                })
             } else {
                 runtimeLabel.hidden = true
+            }
+            
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
             }
             
             if let imageURL = experience?.imageURL {
@@ -48,9 +72,9 @@ class VideoCell: UITableViewCell {
         
         experience = nil
         
-        if let task = setImageSessionDataTask {
-            task.cancel()
-            setImageSessionDataTask = nil
+        if let observer = didPlayVideoObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            didPlayVideoObserver = nil
         }
         
         runtimeLabel.text = nil
@@ -71,7 +95,6 @@ class VideoCell: UITableViewCell {
             UIView.animateWithDuration(0.25, animations: {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
-                self.runtimeLabel.text = String.localize("label.playing")
             }, completion: nil)
         } else {
             UIView.animateWithDuration(0.25, animations: {
@@ -91,6 +114,10 @@ class VideoCell: UITableViewCell {
         thumbnailContainerView.layer.borderWidth = (self.selected ? 2 : 0)
         captionLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
         playIconImageView.hidden = (experience == nil || experience!.isType(.Gallery)) || self.selected
+    }
+    
+    func setWatched() {
+        self.runtimeLabel.text = String.localize("label.watched")
     }
     
 }

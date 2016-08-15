@@ -32,7 +32,6 @@ static NSString * const kNextGenVideoPlayerItemReadyToPlayNotification          
 static NSString * const kNextGenVideoPlayerPlaybackStateDidChangeNotification    = @"kNextGenVideoPlayerPlaybackStateDidChangeNotification";
 static NSString * const kNextGenVideoPlayerPlaybackBufferEmptyNotification       = @"kNextGenVideoPlayerPlaybackBufferEmptyNotification";
 static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification    = @"kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification";
-static NSString * const kNextGenVideoPlayerWillPlayNextItem                      = @"kNextGenVideoPlayerWillPlayNextItem";
 
 //=========================================================
 # pragma mark -
@@ -69,6 +68,7 @@ static NSString * const kNextGenVideoPlayerWillPlayNextItem                     
 @property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *fullScreenButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
+@property (nonatomic, assign)           BOOL                            isFullScreen;
 
 /**
  * Toggles all player controls visibility.
@@ -81,7 +81,6 @@ static NSString * const kNextGenVideoPlayerWillPlayNextItem                     
 
 - (IBAction)play:(id)sender;
 - (IBAction)pause:(id)sender;
-- (IBAction)toggleFullScreen:(id)sender;
 - (IBAction)done:(id)sender;
 - (IBAction)handleTap:(UITapGestureRecognizer *)gestureRecognizer;
 - (BOOL)isPlaying;
@@ -95,5 +94,7 @@ static NSString * const kNextGenVideoPlayerWillPlayNextItem                     
 - (void)syncScrubber;
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
 - (void)initAutoHideTimer;
+
+- (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
 
 @end

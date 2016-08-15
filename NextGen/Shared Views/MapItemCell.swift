@@ -10,7 +10,6 @@ class MapItemCell: UICollectionViewCell {
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
     
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var subtitleLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var playButton: UIButton!
     private var setImageSessionDataTask: NSURLSessionDataTask?
@@ -25,18 +24,13 @@ class MapItemCell: UICollectionViewCell {
         }
     }
     
-    var subtitle: String? {
-        set {
-            subtitleLabel.text = newValue
-        }
-        
-        get {
-            return subtitleLabel.text
-        }
-    }
-    
     var imageURL: NSURL? {
         set {
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
+            }
+            
             if let imageURL = newValue {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
                     if let strongSelf = self {
@@ -67,13 +61,15 @@ class MapItemCell: UICollectionViewCell {
         super.prepareForReuse()
         
         title = nil
-        subtitle = nil
         imageURL = nil
         playButton.hidden = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        if let task = setImageSessionDataTask {
-            task.cancel()
-            setImageSessionDataTask = nil
+        if !DeviceType.IS_IPAD {
+            titleLabel.font = UIFont(name: titleLabel.font.fontName, size: 12)
         }
     }
     

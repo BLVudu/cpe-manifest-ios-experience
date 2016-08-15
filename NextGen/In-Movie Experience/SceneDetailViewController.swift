@@ -13,8 +13,8 @@ class SceneDetailViewController: UIViewController {
     
     private struct Constants {
         static let ViewMargin: CGFloat = 10
-        static let TitleLabelHeight: CGFloat = 70
-        static let CloseButtonWidth: CGFloat = 110
+        static let TitleLabelHeight: CGFloat = (DeviceType.IS_IPAD ? 70 : 50)
+        static let CloseButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 110 : 100)
     }
     
     var experience: NGDMExperience?
@@ -29,17 +29,17 @@ class SceneDetailViewController: UIViewController {
         self.view.backgroundColor = UIColor.blackColor()
         
         titleLabel = UILabel()
-        titleLabel.font = UIFont.themeCondensedFont(25)
+        titleLabel.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 25 : 18)
         titleLabel.textColor = UIColor.whiteColor()
         self.view.addSubview(titleLabel)
         
         closeButton = UIButton(type: UIButtonType.Custom)
-        closeButton.titleLabel?.font = UIFont.themeCondensedFont(17)
+        closeButton.titleLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 17 : 15)
         closeButton.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
         closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
         closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
         closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
-        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
+        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.CloseButtonWidth, 0, 0)
         closeButton.addTarget(self, action: #selector(SceneDetailViewController.close), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(closeButton)
         

@@ -45,7 +45,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         if let imageURL = timedEvent?.imageURL {
             previewImageView.setImageWithURL(imageURL, completion: nil)
         } else {
-            previewImageView.image = UIImage.themeDefaultImage16By9()
+            previewImageView.image = nil
         }
         
         videoContainerView.hidden = true
@@ -72,8 +72,8 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
                 player.removeAllItems()
             }
             
-            videoPlayerViewController.curIndex = 0
-            videoPlayerViewController.indexMax = 1
+            videoPlayerViewController.queueTotalCount = 1
+            videoPlayerViewController.queueCurrentIndex = 0
             videoPlayerViewController.mode = .SupplementalInMovie
             videoPlayerViewController.view.frame = videoContainerView.bounds
             

@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import NextGenDataManager
 
 extension UIImageView {
     

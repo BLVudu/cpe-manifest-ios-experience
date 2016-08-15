@@ -10,48 +10,50 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
     static let ClipShareReuseIdentifier = "ClipShareSceneDetailCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak private var _imageView: UIImageView!
-    @IBOutlet weak private var _playButton: UIButton!
-    @IBOutlet weak private var _extraDescriptionLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var playButton: UIButton!
+    @IBOutlet weak private var extraDescriptionLabel: UILabel!
     
-    private var _setImageSessionDataTask: NSURLSessionDataTask?
+    private var setImageSessionDataTask: NSURLSessionDataTask?
     
-    private var _imageURL: NSURL? {
-        didSet {
-            if let url = _imageURL {
-                if url != oldValue {
-                    _setImageSessionDataTask = _imageView.setImageWithURL(url, completion: nil)
-                }
-            } else {
-                _imageView.image = UIImage.themeDefaultImage16By9()
-                _imageView.backgroundColor = UIColor.clearColor()
+    private var imageURL: NSURL? {
+        set {
+            if let task = setImageSessionDataTask {
+                task.cancel()
+                setImageSessionDataTask = nil
             }
+            
+            if let url = newValue {
+                setImageSessionDataTask = imageView.setImageWithURL(url, completion: nil)
+            } else {
+                imageView.image = nil
+                imageView.backgroundColor = UIColor.clearColor()
+            }
+        }
+        
+        get {
+            return nil
         }
     }
     
     override func timedEventDidChange() {
         super.timedEventDidChange()
         
-        _imageURL = timedEvent?.imageURL
-        _playButton.hidden = timedEvent == nil || (!timedEvent!.isType(.AudioVisual) && !timedEvent!.isType(.ClipShare))
+        imageURL = timedEvent?.imageURL
+        playButton.hidden = timedEvent == nil || (!timedEvent!.isType(.AudioVisual) && !timedEvent!.isType(.ClipShare))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        if let task = _setImageSessionDataTask {
-            task.cancel()
-            _setImageSessionDataTask = nil
-        }
-        
-        _imageURL = nil
-        _playButton.hidden = true
+        imageURL = nil
+        playButton.hidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        _imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
 }

@@ -8,102 +8,80 @@ import NextGenDataManager
 
 class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    private struct SceneLocation {
-        var title: String!
-        var childSceneLocations = [ChildSceneLocation]()
-        
-        init(title: String) {
-            self.title = title
-        }
-    }
-    
-    private struct ChildSceneLocation {
-        var subtitle: String!
-        var childAppData = [NGDMAppData]()
-        var mapMarker: MultiMapMarker?
-        
-        init(subtitle: String) {
-            self.subtitle = subtitle
-        }
-        
-        mutating func addAppData(appData: NGDMAppData) {
-            childAppData.append(appData)
-        }
+    private struct Constants {
+        static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 5)
+        static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 15)
+        static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
+        static let CollectionViewItemAspectRatio: CGFloat = 250 / 175
     }
     
     @IBOutlet weak private var mapView: MultiMapView!
     @IBOutlet weak private var breadcrumbsPrimaryButton: UIButton!
     @IBOutlet weak private var breadcrumbsSecondaryArrowImageView: UIImageView!
-    @IBOutlet weak private var breadcrumbsSecondaryButton: UIButton!
-    @IBOutlet weak private var breadcrumbsTertiaryArrowImageView: UIImageView!
-    @IBOutlet weak private var breadcrumbsTertiaryLabel: UILabel!
+    @IBOutlet weak private var breadcrumbsSecondaryLabel: UILabel!
     @IBOutlet weak private var collectionView: UICollectionView!
     
     @IBOutlet weak private var locationDetailView: UIView!
     @IBOutlet weak private var videoContainerView: UIView!
     private var videoPlayerViewController: VideoPlayerViewController?
+    private var videoPlayerDidEndVideoObserver: NSObjectProtocol?
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryPageControl: UIPageControl!
-    @IBOutlet weak private var closeButton: UIButton!
+    @IBOutlet weak private var closeButton: UIButton?
     private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
-    private var galleryDidScrollToPage: NSObjectProtocol?
+    private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
+    private var locationExperiences = [NGDMExperience]()
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
-    private var sceneLocations = [SceneLocation]()
-    private var selectedSceneLocation: SceneLocation? {
+    private var selectedExperience: NGDMExperience? {
         didSet {
-            if let selectedSceneLocation = selectedSceneLocation {
+            if let selectedExperience = selectedExperience {
+                if let marker = markers[selectedExperience.id] {
+                    if let appData = selectedExperience.appData {
+                        mapView.maxZoomLevel = appData.zoomLevel
+                        mapView.setLocation(marker.location, zoomLevel: appData.zoomLevel, animated: true)
+                    }
+                    
+                    mapView.selectedMarker = marker
+                }
+            } else {
+                mapView.selectedMarker = nil
+                
                 var lowestZoomLevel = MAXFLOAT
-                for childSceneLocation in selectedSceneLocation.childSceneLocations {
-                    if let appData = childSceneLocation.childAppData.first where appData.zoomLevel < lowestZoomLevel {
+                for locationExperience in locationExperiences {
+                    if let appData = locationExperience.appData where appData.zoomLevel < lowestZoomLevel {
                         lowestZoomLevel = appData.zoomLevel
                     }
                 }
                 
                 mapView.maxZoomLevel = lowestZoomLevel
-                zoomToFitSceneLocationMarkers(selectedSceneLocation)
-            } else {
-                var lowestZoomLevel = MAXFLOAT
-                for sceneLocation in sceneLocations {
-                    for childSceneLocation in sceneLocation.childSceneLocations {
-                        if let appData = childSceneLocation.childAppData.first where appData.zoomLevel < lowestZoomLevel {
-                            lowestZoomLevel = appData.zoomLevel
-                        }
-                    }
-                }
+                mapView.zoomToFitAllMarkers()
                 
-                mapView.maxZoomLevel = lowestZoomLevel
             }
             
             reloadBreadcrumbs()
-        }
-    }
-    
-    private var selectedChildSceneLocation: ChildSceneLocation? {
-        didSet {
-            if let marker = selectedChildSceneLocation?.mapMarker {
-                if let appData = selectedChildSceneLocation?.childAppData.first {
-                    mapView.setLocation(marker.location, zoomLevel: appData.zoomLevel, animated: true)
-                    mapView.maxZoomLevel = appData.zoomLevel
-                }
-                
-                mapView.selectedMarker = marker
-            }
-            
-            reloadBreadcrumbs()
+            collectionView.reloadData()
+            collectionView.contentOffset = CGPointZero
         }
     }
     
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         
-        if let observer = galleryDidToggleFullScreenObserver {
+        if let observer = videoPlayerDidEndVideoObserver {
             center.removeObserver(observer)
+            videoPlayerDidEndVideoObserver = nil
         }
         
-        if let observer = galleryDidScrollToPage {
+        if let observer = galleryDidToggleFullScreenObserver {
             center.removeObserver(observer)
+            galleryDidToggleFullScreenObserver = nil
+        }
+        
+        if let observer = galleryDidScrollToPageObserver {
+            center.removeObserver(observer)
+            galleryDidScrollToPageObserver = nil
         }
     }
     
@@ -116,88 +94,56 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let childExperiences = experience.childExperiences {
+            locationExperiences = childExperiences
+        }
+        
         breadcrumbsPrimaryButton.setTitle(experience.title.uppercaseString, forState: .Normal)
         collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
-        closeButton.titleLabel?.font = UIFont.themeCondensedFont(17)
-        closeButton.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
-        closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
-        closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
-        closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
-        closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
+        closeButton?.titleLabel?.font = UIFont.themeCondensedFont(17)
+        closeButton?.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
+        closeButton?.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
+        closeButton?.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
+        closeButton?.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
+        closeButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
         
         breadcrumbsSecondaryArrowImageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-        breadcrumbsTertiaryArrowImageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+        
+        videoPlayerDidEndVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidEndVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            if let strongSelf = self {
+                strongSelf.closeDetailView(animated: true)
+            }
+        })
         
         galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, isFullScreen = notification.userInfo?["isFullScreen"] as? Bool {
-                strongSelf.closeButton.hidden = isFullScreen
+                strongSelf.closeButton?.hidden = isFullScreen
                 strongSelf.galleryPageControl.hidden = isFullScreen
             }
         })
         
-        galleryDidScrollToPage = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
             if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
                 strongSelf.galleryPageControl.currentPage = page
             }
         })
         
-        if let experiences = experience.childExperiences {
-            for experience in experiences {
-                if let appData = experience.appData, title = appData.title, subtitle = appData.subtitle {
-                    // Set up data structures to power the full view
-                    addAppDataToChildSceneLocation(appData, title: title, subtitle: subtitle)
-                }
-            }
-        }
-        
         // Set up map markers
-        for i in 0 ..< sceneLocations.count {
-            for j in 0 ..< sceneLocations[i].childSceneLocations.count {
-                if let location = sceneLocations[i].childSceneLocations[j].childAppData.first?.location {
-                    let marker = mapView.addMarker(CLLocationCoordinate2DMake(location.latitude, location.longitude),
-                                                   title: location.name,
-                                                   subtitle: location.address,
-                                                   icon: UIImage(named: "MOSMapPin"),
-                                                   autoSelect: false)
-                    
-                    marker.dataObject = ["sceneLocationIndex": i, "childSceneLocationIndex": j]
-                    sceneLocations[i].childSceneLocations[j].mapMarker = marker
-                }
+        for locationExperience in locationExperiences {
+            if let location = locationExperience.appData?.location {
+                markers[locationExperience.id] = mapView.addMarker(CLLocationCoordinate2DMake(location.latitude, location.longitude), title: location.name, subtitle: location.address, icon: location.iconImage, autoSelect: false)
             }
         }
         
         mapView.addControls()
-        mapView.zoomToFitAllMarkers()
         mapView.delegate = self
         
-        selectedSceneLocation = nil
-        selectedChildSceneLocation = nil
-    }
-    
-    private func addAppDataToChildSceneLocation(appData: NGDMAppData, title: String, subtitle: String) {
-        for i in 0 ..< sceneLocations.count {
-            if sceneLocations[i].title == title {
-                for j in 0 ..< sceneLocations[i].childSceneLocations.count {
-                    if sceneLocations[i].childSceneLocations[j].subtitle == subtitle {
-                        sceneLocations[i].childSceneLocations[j].addAppData(appData)
-                        return
-                    }
-                }
-                
-                var childSceneLocation = ChildSceneLocation(subtitle: subtitle)
-                childSceneLocation.addAppData(appData)
-                sceneLocations[i].childSceneLocations.append(childSceneLocation)
-                return
-            }
-        }
-        
-        let sceneLocation = SceneLocation(title: title)
-        sceneLocations.append(sceneLocation)
-        addAppDataToChildSceneLocation(appData, title: title, subtitle: subtitle)
+        selectedExperience = nil
     }
     
     func playVideo(videoURL: NSURL) {
-        closeDetailView()
+        let shouldAnimateOpen = locationDetailView.hidden
+        closeDetailView(animated: false)
         
         if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
             videoPlayerViewController.mode = VideoPlayerMode.Supplemental
@@ -207,191 +153,186 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             self.addChildViewController(videoPlayerViewController)
             videoPlayerViewController.didMoveToParentViewController(self)
             
-            videoPlayerViewController.playVideoWithURL(videoURL)
-            
-            locationDetailView.hidden = false
             self.videoPlayerViewController = videoPlayerViewController
+            
+            locationDetailView.alpha = 0
+            locationDetailView.hidden = false
+            
+            if shouldAnimateOpen {
+                UIView.animateWithDuration(0.25, animations: {
+                    self.locationDetailView.alpha = 1
+                }, completion: { (_) in
+                    self.videoPlayerViewController?.playVideoWithURL(videoURL)
+                })
+            } else {
+                locationDetailView.alpha = 1
+                self.videoPlayerViewController?.playVideoWithURL(videoURL)
+            }
         }
     }
     
     func showGallery(gallery: NGDMGallery) {
-        closeDetailView()
+        let shouldAnimateOpen = locationDetailView.hidden
+        closeDetailView(animated: false)
         
         galleryScrollView.loadGallery(gallery)
         galleryScrollView.hidden = false
         
-        if gallery.isSubType(.Turntable) {
+        if gallery.isTurntable {
             galleryPageControl.hidden = true
         } else {
             galleryPageControl.hidden = false
-            galleryPageControl.numberOfPages = galleryScrollView.imageURLs.count
+            galleryPageControl.numberOfPages = gallery.totalCount
             galleryPageControl.currentPage = 0
         }
         
+        locationDetailView.alpha = 0
         locationDetailView.hidden = false
+        
+        if shouldAnimateOpen {
+            UIView.animateWithDuration(0.25, animations: {
+                self.locationDetailView.alpha = 1
+            })
+        } else {
+            locationDetailView.alpha = 1
+        }
     }
     
     @IBAction func closeDetailView() {
-        locationDetailView.hidden = true
+        closeDetailView(animated: true)
+    }
+    
+    private func closeDetailView(animated animated: Bool) {
+        let hideViews = {
+            self.locationDetailView.hidden = true
+            
+            self.galleryScrollView.destroyGallery()
+            self.galleryScrollView.hidden = true
+            self.galleryPageControl.hidden = true
+            
+            self.videoPlayerViewController?.willMoveToParentViewController(nil)
+            self.videoPlayerViewController?.view.removeFromSuperview()
+            self.videoPlayerViewController?.removeFromParentViewController()
+            self.videoPlayerViewController = nil
+        }
         
-        galleryScrollView.destroyGallery()
-        galleryScrollView.hidden = true
-        galleryPageControl.hidden = true
-        
-        videoPlayerViewController?.willMoveToParentViewController(nil)
-        videoPlayerViewController?.view.removeFromSuperview()
-        videoPlayerViewController?.removeFromParentViewController()
-        videoPlayerViewController = nil
+        if animated {
+            UIView.animateWithDuration(0.2, animations: { 
+                self.locationDetailView.alpha = 0
+            }, completion: { (_) in
+                hideViews()
+            })
+        } else {
+            hideViews()
+        }
     }
     
     func reloadBreadcrumbs() {
         breadcrumbsPrimaryButton.userInteractionEnabled = false
         breadcrumbsSecondaryArrowImageView.hidden = true
-        breadcrumbsSecondaryButton.hidden = true
-        breadcrumbsSecondaryButton.userInteractionEnabled = true
-        breadcrumbsTertiaryArrowImageView.hidden = true
-        breadcrumbsTertiaryLabel.hidden = true
+        breadcrumbsSecondaryLabel.hidden = true
         
-        if let sceneLocation = selectedSceneLocation {
-            breadcrumbsSecondaryButton.setTitle(sceneLocation.title.uppercaseString, forState: .Normal)
-            breadcrumbsSecondaryButton.setTitleColor(selectedChildSceneLocation != nil ? UIColor.whiteColor() : UIColor.themePrimaryColor(), forState: .Normal)
-            breadcrumbsSecondaryButton.sizeToFit()
-            breadcrumbsSecondaryButton.frame.size.height = CGRectGetHeight(breadcrumbsPrimaryButton.frame)
+        if let selectedExperience = selectedExperience {
+            breadcrumbsSecondaryLabel.text = selectedExperience.title.uppercaseString
+            breadcrumbsSecondaryLabel.sizeToFit()
+            breadcrumbsSecondaryLabel.frame.size.height = CGRectGetHeight(breadcrumbsPrimaryButton.frame)
             breadcrumbsSecondaryArrowImageView.hidden = false
-            breadcrumbsSecondaryButton.hidden = false
-            
-            if let childSceneLocation = selectedChildSceneLocation {
-                if sceneLocation.title != childSceneLocation.subtitle {
-                    breadcrumbsTertiaryLabel.text = childSceneLocation.subtitle.uppercaseString
-                    breadcrumbsTertiaryLabel.sizeToFit()
-                    breadcrumbsTertiaryLabel.frame.size.height = CGRectGetHeight(breadcrumbsPrimaryButton.frame)
-                    breadcrumbsTertiaryArrowImageView.hidden = false
-                    breadcrumbsTertiaryLabel.hidden = false
-                } else {
-                    breadcrumbsSecondaryButton.setTitleColor(UIColor.themePrimaryColor(), forState: .Normal)
-                    breadcrumbsSecondaryButton.userInteractionEnabled = false
-                }
-            }
-            
+            breadcrumbsSecondaryLabel.hidden = false
             breadcrumbsPrimaryButton.userInteractionEnabled = true
-        }
-    }
-    
-    private func zoomToFitSceneLocationMarkers(sceneLocation: SceneLocation) {
-        var markers = [MultiMapMarker]()
-        var zoomLevel: Float = 21
-        for childSceneLocation in sceneLocation.childSceneLocations {
-            if let marker = childSceneLocation.mapMarker {
-                markers.append(marker)
-            }
-            
-            if let appData = childSceneLocation.childAppData.first where appData.zoomLevel < zoomLevel {
-                zoomLevel = appData.zoomLevel
-            }
-        }
-        
-        if markers.count > 1 {
-            mapView.zoomToFitMarkers(markers)
-        } else if let marker = markers.first {
-            mapView.setLocation(marker.location, zoomLevel: zoomLevel, animated: true)
-            mapView.selectedMarker = marker
         }
     }
     
     // MARK: Actions
     override func close() {
-        mapView.destroy()
-        mapView = nil
-        
-        super.close()
+        if !locationDetailView.hidden && !DeviceType.IS_IPAD {
+            closeDetailView()
+        } else {
+            mapView.destroy()
+            mapView = nil
+            
+            super.close()
+        }
     }
     
     @IBAction func onTapBreadcrumb(sender: UIButton) {
-        closeDetailView()
-        selectedChildSceneLocation = nil
-        mapView.selectedMarker = nil
-        
-        if sender == breadcrumbsPrimaryButton {
-            selectedSceneLocation = nil
-            mapView.zoomToFitAllMarkers()
-        } else if let sceneLocation = selectedSceneLocation {
-            zoomToFitSceneLocationMarkers(sceneLocation)
-        }
-        
-        collectionView.reloadData()
+        closeDetailView(animated: false)
+        selectedExperience = nil
+    }
+    
+    @IBAction func onPageControlValueChanged() {
+        galleryScrollView.gotoPage(galleryPageControl.currentPage, animated: true)
     }
     
     // MARK: MultiMapViewDelegate
     func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
-        if let dataDictionary = marker.dataObject as? [String: Int], sceneLocationIndex = dataDictionary["sceneLocationIndex"], childSceneLocationIndex = dataDictionary["childSceneLocationIndex"] {
-            if sceneLocations.count > sceneLocationIndex && sceneLocations[sceneLocationIndex].childSceneLocations.count > childSceneLocationIndex {
-                selectedSceneLocation = sceneLocations[sceneLocationIndex]
-                selectedChildSceneLocation = selectedSceneLocation!.childSceneLocations[childSceneLocationIndex]
-                collectionView.reloadData()
+        for (experienceId, locationMarker) in markers {
+            if marker == locationMarker {
+                selectedExperience = NGDMExperience.getById(experienceId)
+                return
             }
         }
     }
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let selectedChildSceneLocation = selectedChildSceneLocation {
-            return selectedChildSceneLocation.childAppData.count
+        if let selectedExperience = selectedExperience {
+            return selectedExperience.appDataMediaCount ?? 0
         }
         
-        if let selectedSceneLocation = selectedSceneLocation {
-            return selectedSceneLocation.childSceneLocations.count
-        }
-        
-        return sceneLocations.count
+        return locationExperiences.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MapItemCell.ReuseIdentifier, forIndexPath: indexPath) as! MapItemCell
         cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
-        if let appData = selectedChildSceneLocation?.childAppData[indexPath.row] {
-            cell.playButtonVisible = appData.hasVideo
-            cell.imageURL = appData.getImageURL(.MediaThumbnail)
-            cell.title = appData.displayText
-            cell.subtitle = nil
-        } else if let appData = selectedSceneLocation?.childSceneLocations[indexPath.row].childAppData.first {
+        if let selectedExperience = selectedExperience {
+            if let experience = selectedExperience.appDataMediaAtIndex(indexPath.row) {
+                cell.playButtonVisible = experience.isType(.AudioVisual)
+                cell.imageURL = experience.imageURL
+                cell.title = experience.title
+            }
+        } else {
+            let experience = locationExperiences[indexPath.row]
             cell.playButtonVisible = false
-            cell.imageURL = appData.getImageURL(.Location)
-            cell.title = appData.location?.name
-            cell.subtitle = nil
-        } else if let appData = sceneLocations[indexPath.row].childSceneLocations.first?.childAppData.first {
-            cell.playButtonVisible = false
-            cell.imageURL = appData.getImageURL(.Location)
-            cell.title = appData.title
-            cell.subtitle = String.localizePlural("locations.count.one", pluralKey: "locations.count.other", count: sceneLocations[indexPath.row].childSceneLocations.count)
+            cell.imageURL = experience.imageURL
+            cell.title = experience.title
         }
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let appData = selectedChildSceneLocation?.childAppData[indexPath.row] {
-            if let videoURL = appData.videoURL {
-                playVideo(videoURL)
-            } else if let gallery = appData.gallery {
-                showGallery(gallery)
+        if let selectedExperience = selectedExperience {
+            if let experience = selectedExperience.appDataMediaAtIndex(indexPath.row) {
+                if let videoURL = experience.videoURL {
+                    playVideo(videoURL)
+                } else if let gallery = experience.gallery {
+                    showGallery(gallery)
+                }
             }
-        } else if let selectedChildSceneLocation = selectedSceneLocation?.childSceneLocations[indexPath.row] {
-            self.selectedChildSceneLocation = selectedChildSceneLocation
-            collectionView.reloadData()
         } else {
-            selectedSceneLocation = sceneLocations[indexPath.row]
-            if let childSceneLocations = selectedSceneLocation?.childSceneLocations where childSceneLocations.count == 1 {
-                selectedChildSceneLocation = childSceneLocations.first
-            }
-            
-            collectionView.reloadData()
+            selectedExperience = locationExperiences[indexPath.row]
         }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
+        if DeviceType.IS_IPAD {
+            let itemHeight = CGRectGetHeight(collectionView.frame)
+            return CGSizeMake(itemHeight * Constants.CollectionViewItemAspectRatio, itemHeight)
+        }
+        
+        let itemWidth = (CGRectGetWidth(collectionView.frame) - (Constants.CollectionViewPadding * 2) - Constants.CollectionViewItemSpacing) / 2
+        return CGSizeMake(itemWidth, itemWidth / Constants.CollectionViewItemAspectRatio)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewLineSpacing
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return Constants.CollectionViewItemSpacing
     }
     
 }

@@ -6,9 +6,9 @@ import UIKit
 
 class VideoPlayerScrubber: UISlider {
     
-    private struct Constants {
-        static let ThumbRectAdjustment: CGFloat = 15
-    }
+    /*private struct Constants {
+        static let ThumbRectAdjustment: CGFloat = 0
+    }*/
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)!
@@ -29,12 +29,12 @@ class VideoPlayerScrubber: UISlider {
         self.minimumTrackTintColor = UIColor.themePrimaryColor()
     }
     
-    override func thumbRectForBounds(bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
+    /*override func thumbRectForBounds(bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
         var thumbRect = super.thumbRectForBounds(bounds, trackRect: rect, value: value)
         thumbRect.origin.x -= Constants.ThumbRectAdjustment
         thumbRect.size.width += Constants.ThumbRectAdjustment * 2
         
         return thumbRect
-    }
+    }*/
     
 }

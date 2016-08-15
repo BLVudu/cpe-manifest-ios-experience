@@ -54,16 +54,17 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        var imageURLs = [NSURL]()
+        var pictures = [NGDMPicture]()
         if let talentImages = talent.images {
             for talentImage in talentImages {
                 if let imageURL = talentImage.imageURL {
-                    imageURLs.append(imageURL)
+                    pictures.append(NGDMPicture(imageURL: imageURL))
                 }
             }
         }
         
-        galleryScrollView.loadImageURLs(imageURLs)
+        let gallery = NGDMGallery(pictures: pictures)
+        galleryScrollView.loadGallery(gallery)
         galleryScrollView.gotoPage(initialPage, animated: false)
     }
     

@@ -19,19 +19,18 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     @IBOutlet weak private var talentTableView: UITableView?
     @IBOutlet weak private var backgroundImageView: UIImageView!
     @IBOutlet weak private var showLessContainer: UIView!
-    @IBOutlet weak private var showLessGradientView: UIView!
     @IBOutlet weak private var showLessButton: UIButton!
-    var appApperance: NGDMAppearance!
-    
-    private var didChangeTimeObserver: NSObjectProtocol?
-    
-    private var currentTime: Double = -1
+    @IBOutlet weak private var showLessGradientView: UIView!
+    private var showLessGradient = CAGradientLayer()
     private var currentTalents: [NGDMTalent]?
     private var hiddenTalents: [NGDMTalent]?
     private var isShowingMore = false
     private var numCurrentTalents: Int {
         return currentTalents?.count ?? 0
     }
+    
+    private var currentTime: Double = -1
+    private var didChangeTimeObserver: NSObjectProtocol?
     
     deinit {
         if let observer = didChangeTimeObserver {
@@ -55,10 +54,8 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
             talentTableView = nil
         }
         
-        let gradient = CAGradientLayer()
-        gradient.frame = showLessGradientView.bounds
-        gradient.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor]
-        showLessGradientView.layer.insertSublayer(gradient, atIndex: 0)
+        showLessGradient.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor]
+        showLessGradientView.layer.insertSublayer(showLessGradient, atIndex: 0)
         
         showLessButton.setTitle(String.localize("talent.show_less"), forState: .Normal)
         
@@ -67,6 +64,16 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
                 strongSelf.processTimedEvents(time)
             }
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let talentTableView = talentTableView {
+            showLessGradientView.frame.size.width = CGRectGetWidth(talentTableView.frame)
+        }
+        
+        showLessGradient.frame = showLessGradientView.bounds
     }
     
     func processTimedEvents(time: Double) {
@@ -134,7 +141,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textAlignment = .Center
-            header.textLabel?.font = UIFont.themeCondensedFont(19)
+            header.textLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 19 : 17)
             header.textLabel?.textColor = UIColor(netHex: 0xe5e5e5)
         }
     }
@@ -142,7 +149,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if let footer = view as? UITableViewHeaderFooterView {
             footer.textLabel?.textAlignment = .Center
-            footer.textLabel?.font = UIFont.themeCondensedFont(19)
+            footer.textLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 19 : 17)
             footer.textLabel?.textColor = UIColor(netHex: 0xe5e5e5)
             
             if footer.gestureRecognizers == nil || footer.gestureRecognizers!.count == 0 {

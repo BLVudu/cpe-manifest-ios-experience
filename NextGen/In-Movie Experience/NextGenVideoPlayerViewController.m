@@ -57,7 +57,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 /**
  * Track the status of full screen video
  */
-@property (assign, nonatomic)           BOOL                             isFullScreen;
 @property (strong, nonatomic)           UIView                          *originalContainerView;
 
 /**
@@ -73,7 +72,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 // Player
 - (void)removePlayerTimeObserver;
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
-- (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
 
 @end
@@ -150,7 +148,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 
 - (IBAction)toggleFullScreen:(id)sender {
     // Toggle full screen
-    [self toggleFullScreen];
+    self.isFullScreen = !self.isFullScreen;
 }
 
 /**
@@ -707,8 +705,9 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     [self showPlayButton];
 }
 
-- (void)toggleFullScreen {
-    self.isFullScreen = !self.isFullScreen;
+- (void)setIsFullScreen:(BOOL)isFullScreen {
+    _isFullScreen = isFullScreen;
+    
     [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize" : @"Maximize")] forState:UIControlStateNormal];
     [self.fullScreenButton setImage:[UIImage imageNamed:(self.isFullScreen ? @"Minimize Highlighted" : @"Maximize Highlighted")] forState:UIControlStateHighlighted];
     
@@ -721,27 +720,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
     }
     
     self.view.frame = self.view.superview.bounds;
-    
-    /*UIView *sourceView = self.view.superview;
-    UIView *destinationView;
-    if (self.isFullScreen) {
-        self.originalContainerView = sourceView;
-        destinationView = [UIApplication sharedApplication].keyWindow;
-        [destinationView addSubview:self.view];
-        self.view.center = destinationView.center;
-        [UIView animateWithDuration:0.25 animations:^{
-            self.view.frame = destinationView.bounds;
-        }];
-    } else {
-        destinationView = self.originalContainerView;
-        [UIView animateWithDuration:0.25 animations:^{
-            self.view.center = [self.originalContainerView convertPoint:self.originalContainerView.center toView:destinationView];
-            self.view.frame = self.originalContainerView.bounds;
-        } completion:^(BOOL finished) {
-            [self.originalContainerView addSubview:self.view];
-            self.originalContainerView = nil;
-        }];
-    }*/
 }
 
 
