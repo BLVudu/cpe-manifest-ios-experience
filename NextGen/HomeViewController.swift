@@ -131,6 +131,10 @@ class HomeViewController: UIViewController {
             extrasButton = UIButton()
             extrasButton.addTarget(self, action: #selector(self.onExtras), forControlEvents: UIControlEvents.TouchUpInside)
             
+            let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didLongPressExtrasButton(_:)))
+            longPressGestureRecognizer.minimumPressDuration = 5
+            extrasButton.addGestureRecognizer(longPressGestureRecognizer)
+            
             if let extrasButtonImageURL = extrasButtonImageURL {
                 extrasButton.setImageWithURL(extrasButtonImageURL)
             } else {
@@ -239,6 +243,12 @@ class HomeViewController: UIViewController {
         }
         
         return super.preferredInterfaceOrientationForPresentation()
+    }
+    
+    func didLongPressExtrasButton(sender: UILongPressGestureRecognizer) {
+        if sender.state == .Began {
+            NextGenHook.delegate?.nextGenExperienceWillEnterDebugMode()
+        }
     }
     
     // MARK: Video Player

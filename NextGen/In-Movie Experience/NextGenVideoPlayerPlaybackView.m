@@ -33,7 +33,11 @@
 	(AVLayerVideoGravityResizeAspect is default) */
 - (void)setVideoFillMode:(NSString *)fillMode {
 	AVPlayerLayer *playerLayer = (AVPlayerLayer*)[self layer];
-	playerLayer.videoGravity = fillMode;
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0];
+    [CATransaction setDisableActions:YES];
+    playerLayer.videoGravity = fillMode;
+    [CATransaction commit];
 }
 
 @end
