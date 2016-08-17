@@ -456,28 +456,14 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilmCollectionViewCellReuseIdentifier" id="5H1-5x-Bj6" customClass="FilmCollectionViewCell" customModule="NextGen" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SimpleImageCollectionViewCellReuseIdentifier" id="5H1-5x-Bj6" customClass="SimpleImageCollectionViewCell" customModule="NextGen" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="145" height="215"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="215"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Shb-sC-D0O">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="145" height="215"/>
-                                                                </imageView>
-                                                            </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
-                                                        <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="Shb-sC-D0O" secondAttribute="bottom" id="Nwb-Uq-LpX"/>
-                                                            <constraint firstItem="Shb-sC-D0O" firstAttribute="top" secondItem="5H1-5x-Bj6" secondAttribute="top" id="bWl-Db-m33"/>
-                                                            <constraint firstItem="Shb-sC-D0O" firstAttribute="leading" secondItem="5H1-5x-Bj6" secondAttribute="leading" id="nfK-bb-s8a"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Shb-sC-D0O" secondAttribute="trailing" id="wbJ-eg-yOf"/>
-                                                        </constraints>
-                                                        <connections>
-                                                            <outlet property="imageView" destination="Shb-sC-D0O" id="mB0-Tu-Xm9"/>
-                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                                 <connections>

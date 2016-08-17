@@ -81,6 +81,8 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
         _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
         
+        _filmographyCollectionView.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
+        
         loadTalent(talent)
     }
     
@@ -94,21 +96,36 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             _talentImageView.image = nil
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            talent.getBiography({ (biography) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self._talentBiographyLabel.text = biography
-                    self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
-                })
-            })
-        }
-        
         _twitterButton.hidden = true
         _facebookButton.hidden = true
         _instagramButton.hidden = true
+        
+        
+        let talentHasGallery = talent.images != nil && talent.images!.count > 1
+        _talentImageView.userInteractionEnabled = talentHasGallery
+        if mode == .Extras {
+            _galleryContainerView?.hidden = !talentHasGallery
+            _biographyToFilmographyConstraint?.active = !talentHasGallery
+            _biographyToGalleryConstraint?.active = talentHasGallery
+        } else {
+            _talentGalleryButton?.hidden = !talentHasGallery
+        }
+        
+        _talentBiographyLabel.text = nil
+        
+        _filmographyCollectionView.backgroundColor = UIColor.clearColor()
+        _filmographyContainerView.hidden = true
+        
+        if !talent.detailsLoaded {
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        }
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            talent.getSocialAccounts({ (socialAccounts) in
+            talent.getTalentDetails({ (biography, socialAccounts, films) in
                 dispatch_async(dispatch_get_main_queue(), {
+                    self._talentBiographyLabel.text = biography
+                    self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
+                    
                     if let socialAccounts = socialAccounts {
                         for socialAccount in socialAccounts {
                             switch (socialAccount.type) {
@@ -140,35 +157,16 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                         self._facebookNoInstagramConstraint!.active = self._instagramButton.hidden
                         self._facebookMainConstraint!.active = !self._facebookNoInstagramConstraint!.active
                     }
+                    
+                    let hasFilms = films != nil && films!.count > 0
+                    self._filmographyContainerView.hidden = !hasFilms
+                    if hasFilms {
+                        self._filmographyCollectionView.reloadData()
+                        self._filmographyCollectionView.setContentOffset(CGPointMake(0, 0), animated: false)
+                    }
+                    
+                    MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 })
-            })
-        }
-        
-        let talentHasGallery = talent.images != nil && talent.images!.count > 1
-        _talentImageView.userInteractionEnabled = talentHasGallery
-        if mode == .Extras {
-            _galleryContainerView?.hidden = !talentHasGallery
-            _biographyToFilmographyConstraint?.active = !talentHasGallery
-            _biographyToGalleryConstraint?.active = talentHasGallery
-        } else {
-            _talentGalleryButton?.hidden = !talentHasGallery
-        }
-        
-        _filmographyCollectionView.backgroundColor = UIColor.clearColor()
-        _filmographyContainerView.hidden = true
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            talent.getFilmography({ (films) in
-                if let films = films {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if films.count > 0 {
-                            self._filmographyContainerView.hidden = false
-                            self._filmographyCollectionView.reloadData()
-                            self._filmographyCollectionView.setContentOffset(CGPointMake(0, 0), animated: false)
-                        } else {
-                            self._filmographyContainerView.hidden = true
-                        }
-                    })
-                }
             })
         }
         
@@ -202,14 +200,13 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleImageCollectionViewCell.BaseReuseIdentifier, forIndexPath: indexPath) as! SimpleImageCollectionViewCell
         if collectionView == _filmographyCollectionView {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(FilmCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! FilmCollectionViewCell
-            cell.film = talent?.films?[indexPath.row]
-            return cell
+            cell.imageURL = talent?.films?[indexPath.row].imageURL
+        } else {
+            cell.imageURL = talent?.additionalImages?[indexPath.row].thumbnailImageURL
         }
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleImageCollectionViewCell.BaseReuseIdentifier, forIndexPath: indexPath) as! SimpleImageCollectionViewCell
-        cell.imageURL = talent?.additionalImages?[indexPath.row].thumbnailImageURL
         return cell
     }
     
@@ -218,7 +215,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         if collectionView == _galleryCollectionView {
             self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: indexPath.row + 1)
         } else if collectionView == _filmographyCollectionView {
-            if let film = (collectionView.cellForItemAtIndexPath(indexPath) as? FilmCollectionViewCell)?.film, delegate = NextGenHook.delegate {
+            if let film = talent?.films?[indexPath.row], delegate = NextGenHook.delegate {
                 MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 delegate.getUrlForContent(film.title, completion: { [weak self] (url) in
                     if let strongSelf = self {
