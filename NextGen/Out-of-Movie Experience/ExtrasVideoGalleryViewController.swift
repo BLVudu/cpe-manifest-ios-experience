@@ -103,15 +103,9 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
             self.tableView(galleryTableView, didSelectRowAtIndexPath: selectedPath)
             didInitialSetup = true
+        } else {
+            galleryScrollView.layoutPages()
         }
-    }
-    
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        
-        let isFullScreen = size.width > size.height
-        galleryScrollView.isFullScreen = isFullScreen
-        videoPlayerViewController?.isFullScreen = isFullScreen
     }
     
     
