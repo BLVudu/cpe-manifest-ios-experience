@@ -1,6 +1,5 @@
 //
 //  HomeViewController.swift
-//  Created by Sedinam Gadzekpo on 1/7/16.
 //
 
 import UIKit
@@ -235,7 +234,7 @@ class HomeViewController: UIViewController {
             let backgroundNewScale = (backgroundNewSize.height / backgroundBaseSize.height)
             let buttonOverlayWidth = min(buttonOverlaySize.width * backgroundNewScale, CGRectGetWidth(self.view.frame) - 20)
             let buttonOverlayHeight = buttonOverlayWidth / (buttonOverlaySize.width / buttonOverlaySize.height)
-            let buttonOverlayX = buttonOverlayBottomLeft.x * backgroundNewScale
+            let buttonOverlayX = (buttonOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - CGRectGetWidth(self.view.frame)) / 2)
             
             buttonOverlayView.frame = CGRectMake(
                 (buttonOverlayX + buttonOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : buttonOverlayX,
@@ -346,7 +345,7 @@ class HomeViewController: UIViewController {
                 backgroundVideoPlayer = videoPlayer
                 backgroundImageView?.removeFromSuperview()
                 
-                if let backgroundVideoSize = playerItem.asset.tracks.first?.naturalSize {
+                if let backgroundVideoSize = playerItem.asset.tracksWithMediaType(AVMediaTypeVideo).first?.naturalSize where backgroundVideoSize != CGSizeZero {
                     backgroundBaseSize = backgroundVideoSize
                 } else {
                     backgroundBaseSize = self.view.frame.size

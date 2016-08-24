@@ -12,5 +12,5 @@ struct ScreenSize {
 }
 
 struct DeviceType {
-    static let IS_IPAD = UIDevice.currentDevice().userInterfaceIdiom == .Pad && ScreenSize.SCREEN_MAX_LENGTH == 1024
+    static let IS_IPAD = UIDevice.currentDevice().userInterfaceIdiom == .Pad && ScreenSize.SCREEN_MAX_LENGTH >= 1024
 }
