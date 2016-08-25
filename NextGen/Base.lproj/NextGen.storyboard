@@ -1512,7 +1512,7 @@
                                     <constraint firstAttribute="width" secondItem="tpv-9d-upg" secondAttribute="height" multiplier="16:9" id="cJg-RU-WZr"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="AwK-XO-vi8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="AwK-XO-vi8">
                                 <rect key="frame" x="40" y="611" width="944" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="vui-kf-UWM"/>
@@ -1528,6 +1528,7 @@
                             <constraint firstAttribute="trailing" secondItem="tpv-9d-upg" secondAttribute="trailing" constant="40" id="2Kv-Zm-x7l"/>
                             <constraint firstItem="AwK-XO-vi8" firstAttribute="top" secondItem="tpv-9d-upg" secondAttribute="bottom" constant="10" id="36a-Zb-d4l"/>
                             <constraint firstItem="pBp-JA-3ZL" firstAttribute="top" relation="lessThanOrEqual" secondItem="AwK-XO-vi8" secondAttribute="bottom" constant="80" id="Udc-Xt-wKO"/>
+                            <constraint firstItem="pBp-JA-3ZL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AwK-XO-vi8" secondAttribute="bottom" constant="15" id="eJz-og-tPb"/>
                             <constraint firstItem="tpv-9d-upg" firstAttribute="top" secondItem="aDV-nV-E6a" secondAttribute="bottom" constant="70" id="jwc-XR-fTS"/>
                             <constraint firstAttribute="trailing" secondItem="AwK-XO-vi8" secondAttribute="trailing" constant="40" id="lev-2p-xFp"/>
                             <constraint firstItem="AwK-XO-vi8" firstAttribute="top" secondItem="aDV-nV-E6a" secondAttribute="bottom" priority="750" constant="70" id="psR-P1-31w"/>
