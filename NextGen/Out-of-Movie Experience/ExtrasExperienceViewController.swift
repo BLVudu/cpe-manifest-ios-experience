@@ -128,13 +128,17 @@ class ExtrasExperienceViewController: UIViewController {
         _backButton.hidden = false
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if let presentedViewController = self.presentedViewController {
+            return presentedViewController.supportedInterfaceOrientations()
+        }
+        
+        return (DeviceType.IS_IPAD ? .Landscape : .Portrait)
+    }
+    
     // MARK: Actions
     func close() {
         self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (DeviceType.IS_IPAD ? .Landscape : .All)
     }
 
 }

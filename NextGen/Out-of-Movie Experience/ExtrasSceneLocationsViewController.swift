@@ -141,6 +141,14 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         selectedExperience = nil
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if DeviceType.IS_IPAD || (galleryScrollView.hidden && videoPlayerViewController == nil) {
+            return super.supportedInterfaceOrientations()
+        }
+        
+        return .All
+    }
+    
     func playVideo(videoURL: NSURL) {
         let shouldAnimateOpen = locationDetailView.hidden
         closeDetailView(animated: false)

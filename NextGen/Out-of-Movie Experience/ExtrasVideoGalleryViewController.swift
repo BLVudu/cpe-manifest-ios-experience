@@ -95,6 +95,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         })
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return (DeviceType.IS_IPAD ? .Landscape : .All)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

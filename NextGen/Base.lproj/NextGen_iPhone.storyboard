@@ -1368,43 +1368,43 @@
                                 </connections>
                             </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KfV-0Q-Dsg">
-                                <rect key="frame" x="0.0" y="0.0" width="140" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQV-FV-fl5">
-                                        <rect key="frame" x="14" y="9" width="22" height="22"/>
+                                        <rect key="frame" x="14" y="11" width="18" height="18"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="22" id="Xzk-kp-ZwV"/>
                                             <constraint firstAttribute="width" secondItem="fQV-FV-fl5" secondAttribute="height" multiplier="1:1" id="qhU-bn-AcT"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Skip" translatesAutoresizingMaskIntoConstraints="NO" id="Uzi-wp-ExT">
-                                        <rect key="frame" x="122" y="0.0" width="18" height="40"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip this" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5g-jM-U4S">
+                                        <rect key="frame" x="40" y="2" width="55" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="DDo-CJ-5ma"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="r9H-yF-QGG"/>
                                         </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip this" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5g-jM-U4S">
-                                        <rect key="frame" x="44" y="0.0" width="70" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="diY-Ta-rVF"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.80392156859999997" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Skip" translatesAutoresizingMaskIntoConstraints="NO" id="Uzi-wp-ExT">
+                                        <rect key="frame" x="103" y="11" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Uzi-wp-ExT" secondAttribute="height" multiplier="1:1" id="CAQ-zI-qn5"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="o5g-jM-U4S" firstAttribute="top" secondItem="KfV-0Q-Dsg" secondAttribute="top" id="0Un-GV-Qtu"/>
-                                    <constraint firstAttribute="trailing" secondItem="Uzi-wp-ExT" secondAttribute="trailing" id="4xL-ny-CLx"/>
-                                    <constraint firstAttribute="bottom" secondItem="Uzi-wp-ExT" secondAttribute="bottom" id="9W2-xK-pmy"/>
+                                    <constraint firstItem="o5g-jM-U4S" firstAttribute="top" secondItem="KfV-0Q-Dsg" secondAttribute="top" constant="2" id="0Un-GV-Qtu"/>
+                                    <constraint firstItem="Uzi-wp-ExT" firstAttribute="height" secondItem="o5g-jM-U4S" secondAttribute="height" multiplier="0.5" id="Bdn-Rs-aHS"/>
                                     <constraint firstItem="fQV-FV-fl5" firstAttribute="centerY" secondItem="KfV-0Q-Dsg" secondAttribute="centerY" id="NOG-e1-9Pr"/>
-                                    <constraint firstAttribute="width" constant="140" id="W7h-jI-aQm"/>
                                     <constraint firstAttribute="height" constant="40" id="aDj-xm-pUp"/>
-                                    <constraint firstAttribute="bottom" secondItem="o5g-jM-U4S" secondAttribute="bottom" id="bus-rt-1se"/>
-                                    <constraint firstItem="Uzi-wp-ExT" firstAttribute="top" secondItem="KfV-0Q-Dsg" secondAttribute="top" id="cui-Oo-w40"/>
+                                    <constraint firstAttribute="bottom" secondItem="o5g-jM-U4S" secondAttribute="bottom" constant="2" id="bus-rt-1se"/>
+                                    <constraint firstItem="Uzi-wp-ExT" firstAttribute="centerY" secondItem="KfV-0Q-Dsg" secondAttribute="centerY" id="gFk-5b-sKp"/>
+                                    <constraint firstAttribute="height" priority="750" constant="20" id="h0F-Dj-azT"/>
+                                    <constraint firstItem="fQV-FV-fl5" firstAttribute="leading" secondItem="KfV-0Q-Dsg" secondAttribute="leading" constant="14" id="n4a-fZ-Xog"/>
                                     <constraint firstItem="o5g-jM-U4S" firstAttribute="leading" secondItem="fQV-FV-fl5" secondAttribute="trailing" constant="8" id="slt-Ap-cND"/>
+                                    <constraint firstItem="fQV-FV-fl5" firstAttribute="height" secondItem="o5g-jM-U4S" secondAttribute="height" multiplier="0.5" id="x1O-m1-637"/>
                                     <constraint firstItem="Uzi-wp-ExT" firstAttribute="leading" secondItem="o5g-jM-U4S" secondAttribute="trailing" constant="8" id="yAu-tU-Bmd"/>
                                 </constraints>
                             </view>
@@ -1417,6 +1417,7 @@
                             <constraint firstAttribute="trailing" secondItem="3ZM-tJ-9zk" secondAttribute="trailing" constant="9" id="7d3-IL-tj8"/>
                             <constraint firstAttribute="centerX" secondItem="HZD-oz-ZXg" secondAttribute="centerX" id="7pd-yd-O8a"/>
                             <constraint firstItem="hPT-Z4-V6I" firstAttribute="top" secondItem="3ZM-tJ-9zk" secondAttribute="bottom" constant="374" id="Al2-7J-c2E"/>
+                            <constraint firstAttribute="trailing" secondItem="KfV-0Q-Dsg" secondAttribute="trailing" id="Ce0-xZ-RrT"/>
                             <constraint firstAttribute="bottom" secondItem="HZD-oz-ZXg" secondAttribute="bottom" id="DzX-Ic-rcn"/>
                             <constraint firstItem="IcY-NN-IUH" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="20" id="FPo-NG-1xk"/>
                             <constraint firstItem="3ZM-tJ-9zk" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="74" id="Hgi-El-ngk"/>
@@ -1464,6 +1465,8 @@
                         <outlet property="playbackToolbar" destination="tdq-om-9xU" id="JM8-RH-KYY"/>
                         <outlet property="playbackView" destination="HZD-oz-ZXg" id="0ny-ge-cu8"/>
                         <outlet property="scrubber" destination="yBz-nT-qfC" id="KSN-e6-tul"/>
+                        <outlet property="skipContainerLandscapeHeightConstraint" destination="aDj-xm-pUp" id="nDF-R6-1JE"/>
+                        <outlet property="skipContainerPortraitHeightConstraint" destination="h0F-Dj-azT" id="YLj-E7-Tag"/>
                         <outlet property="skipContainerView" destination="KfV-0Q-Dsg" id="as1-RY-0yJ"/>
                         <outlet property="skipCountdownContainerView" destination="fQV-FV-fl5" id="mPR-vB-8Ro"/>
                         <outlet property="tapGestureRecognizer" destination="r3s-SR-OYc" id="32O-Fs-uuC"/>
