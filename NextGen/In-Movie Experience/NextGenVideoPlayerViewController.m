@@ -33,7 +33,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 //=========================================================
 @interface NextGenVideoPlayerViewController ()
 
-@property (weak, nonatomic)   IBOutlet  UIView                          *playbackToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *playButton;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *pauseButton;
 @property (weak, nonatomic)   IBOutlet  UISlider                        *scrubber;

@@ -23,6 +23,7 @@ public enum VideoPlayerMode {
     case MainFeature
     case Supplemental
     case SupplementalInMovie
+    case BasicPlayer
 }
 
 typealias Task = (cancel : Bool) -> ()
@@ -148,7 +149,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
             }
         })
 
-        if mode == VideoPlayerMode.MainFeature {
+        if mode == .MainFeature {
             self.fullScreenButton.removeFromSuperview()
             playMainExperience()
         } else {
@@ -156,8 +157,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
             self.playerControlsVisible = false
             self.topToolbar.removeFromSuperview()
             
-            if mode == VideoPlayerMode.SupplementalInMovie {
+            if mode == .SupplementalInMovie {
                 self.fullScreenButton.removeFromSuperview()
+            } else if mode == .BasicPlayer {
+                self.playbackToolbar.removeFromSuperview()
             }
         }
     }
@@ -247,13 +250,13 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     override func observeValueForKeyPath(path: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
         super.observeValueForKeyPath(path, ofObject: object, change: change, context: context)
         
-        self.playbackView.setVideoFillMode(_didPlayInterstitial ? AVLayerVideoGravityResizeAspect : AVLayerVideoGravityResizeAspectFill)
+        self.playbackView.setVideoFillMode(_didPlayInterstitial && mode != .BasicPlayer ? AVLayerVideoGravityResizeAspect : AVLayerVideoGravityResizeAspectFill)
     }
     
     override func syncScrubber() {
         super.syncScrubber()
         
-        if player != nil && mode == VideoPlayerMode.MainFeature {
+        if player != nil && (mode == .MainFeature || mode == .BasicPlayer) {
             var currentTime = _didPlayInterstitial ? CMTimeGetSeconds(self.player?.currentTime() ?? kCMTimeZero) : 0
             if currentTime.isNaN {
                 currentTime = 0.0
