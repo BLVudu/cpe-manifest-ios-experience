@@ -65,19 +65,19 @@ class HomeViewController: UIViewController {
     }
     
     private var buttonOverlaySize: CGSize {
-        return nodeStyle?.buttonOverlaySize ?? CGSizeMake(495, 175)
+        return nodeStyle?.buttonOverlaySize ?? CGSizeMake(300, 100)
     }
     
     private var buttonOverlayBottomLeft: CGPoint {
-        return nodeStyle?.buttonOverlayBottomLeft ?? CGPointMake(10, 25)
+        return nodeStyle?.buttonOverlayBottomLeft ?? CGPointMake(490, 25)
     }
     
     private var playButtonSize: CGSize {
-        return playButtonImage?.size ?? CGSizeMake(495, 100)
+        return playButtonImage?.size ?? CGSizeMake(300, 55)
     }
     
     private var extrasButtonSize: CGSize {
-        return extrasButtonImage?.size ?? CGSizeMake(265, 75)
+        return extrasButtonImage?.size ?? CGSizeMake(300, 60)
     }
     
     private var titleOverlaySize: CGSize {
@@ -355,20 +355,14 @@ class HomeViewController: UIViewController {
                 self.view.layoutIfNeeded()
             }
         } else {
-            var backgroundImageURL: NSURL? = nodeStyle?.backgroundImageURL
-            if backgroundImageURL == nil {
-                backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL // FIXME: This appears to be the way Comcast defines background images
-            }
-            
-            if let backgroundImageURL = backgroundImageURL {
-                backgroundImageView?.setImageWithURL(backgroundImageURL, completion: nil)
+            if let backgroundImageURL = nodeStyle?.backgroundImageURL ?? NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL { // FIXME: This appears to be the way Comcast defines background images
+                print(backgroundImageURL)
                 backgroundImageView?.setImageWithURL(backgroundImageURL, completion: { [weak self] (image) in
                     if let strongSelf = self, image = image {
                         strongSelf.backgroundBaseSize = CGSizeMake(image.size.width * image.scale, image.size.height * image.scale)
                     }
                 })
                 
-                backgroundBaseSize = self.view.frame.size
                 backgroundVideoView?.removeFromSuperview()
             }
         }
