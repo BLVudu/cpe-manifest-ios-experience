@@ -144,7 +144,7 @@ class HomeViewController: UIViewController {
             playButton.layer.masksToBounds = false
             
             if let playButtonImageURL = playButtonImageURL {
-                playButton.setImageWithURL(playButtonImageURL)
+                playButton.af_setImageForState(.Normal, URL: playButtonImageURL)
             } else {
                 playButton.setTitle(String.localize("label.play_movie"), forState: .Normal)
                 playButton.backgroundColor = UIColor.redColor()
@@ -164,7 +164,7 @@ class HomeViewController: UIViewController {
             extrasButton.addGestureRecognizer(longPressGestureRecognizer)
             
             if let extrasButtonImageURL = extrasButtonImageURL {
-                extrasButton.setImageWithURL(extrasButtonImageURL)
+                extrasButton.af_setBackgroundImageForState(.Normal, URL: extrasButtonImageURL)
             } else {
                 extrasButton.setTitle(String.localize("label.extras"), forState: .Normal)
                 extrasButton.backgroundColor = UIColor.grayColor()
@@ -182,8 +182,8 @@ class HomeViewController: UIViewController {
                 homeScreenViews.append(titleOverlayView!)
                 
                 titleImageView = UIImageView()
-                titleImageView?.contentMode = .ScaleAspectFit
-                titleImageView!.setImageWithURL(imageURL, completion: nil)
+                titleImageView!.contentMode = .ScaleAspectFit
+                titleImageView!.af_setImageWithURL(imageURL)
                 titleOverlayView!.addSubview(titleImageView!)
                 
                 self.view.addSubview(titleOverlayView!)
@@ -356,9 +356,8 @@ class HomeViewController: UIViewController {
             }
         } else {
             if let backgroundImageURL = nodeStyle?.backgroundImageURL ?? NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL { // FIXME: This appears to be the way Comcast defines background images
-                print(backgroundImageURL)
-                backgroundImageView?.setImageWithURL(backgroundImageURL, completion: { [weak self] (image) in
-                    if let strongSelf = self, image = image {
+                backgroundImageView?.af_setImageWithURL(backgroundImageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                    if let strongSelf = self, image = response.result.value {
                         strongSelf.backgroundBaseSize = CGSizeMake(image.size.width * image.scale, image.size.height * image.scale)
                     }
                 })

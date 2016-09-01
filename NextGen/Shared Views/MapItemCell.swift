@@ -12,7 +12,6 @@ class MapItemCell: UICollectionViewCell {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var playButton: UIButton!
-    private var setImageSessionDataTask: NSURLSessionDataTask?
     
     var title: String? {
         set {
@@ -26,18 +25,10 @@ class MapItemCell: UICollectionViewCell {
     
     var imageURL: NSURL? {
         set {
-            if let task = setImageSessionDataTask {
-                task.cancel()
-                setImageSessionDataTask = nil
-            }
-            
             if let imageURL = newValue {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-                    if let strongSelf = self {
-                        strongSelf.setImageSessionDataTask = strongSelf.imageView.setImageWithURL(imageURL, completion: nil)
-                    }
-                }
+                imageView.af_setImageWithURL(imageURL)
             } else {
+                imageView.af_cancelImageRequest()
                 imageView.image = nil
             }
         }

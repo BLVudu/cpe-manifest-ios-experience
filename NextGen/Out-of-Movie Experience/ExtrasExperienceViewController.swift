@@ -4,6 +4,7 @@
 
 import UIKit
 import NextGenDataManager
+import AlamofireImage
 
 class ExtrasExperienceViewController: UIViewController {
     
@@ -29,7 +30,7 @@ class ExtrasExperienceViewController: UIViewController {
             let titleImageView = UIImageView()
             titleImageView.translatesAutoresizingMaskIntoConstraints = false
             titleImageView.contentMode = .ScaleAspectFill
-            titleImageView.setImageWithURL(titleImageURL, completion: nil)
+            titleImageView.af_setImageWithURL(titleImageURL)
             self.view.addSubview(titleImageView)
             self.view.sendSubviewToBack(titleImageView)
             
@@ -73,7 +74,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleTreatmentImageView.translatesAutoresizingMaskIntoConstraints = false
             titleTreatmentImageView.contentMode = .ScaleAspectFit
             titleTreatmentImageView.clipsToBounds = true
-            titleTreatmentImageView.setImageWithURL(titleTreatmentImageURL)
+            titleTreatmentImageView.af_setImageWithURL(titleTreatmentImageURL)
             self.view.addSubview(titleTreatmentImageView)
             self.view.sendSubviewToBack(titleTreatmentImageView)
             
@@ -89,7 +90,7 @@ class ExtrasExperienceViewController: UIViewController {
         if let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance?.backgroundImageURL {
             let backgroundImageView = UIImageView()
             backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-            backgroundImageView.setImageWithURL(backgroundImageURL, completion: nil)
+            backgroundImageView.af_setImageWithURL(backgroundImageURL)
             backgroundImageView.contentMode = .ScaleAspectFill
             self.view.addSubview(backgroundImageView)
             self.view.sendSubviewToBack(backgroundImageView)
@@ -106,7 +107,7 @@ class ExtrasExperienceViewController: UIViewController {
     }
     
     func headerButton(title: String, imageName: String) -> UIButton {
-        let button = UIButton.buttonWithImage(UIImage(named: imageName))
+        let button = UIButton(type: .Custom)
         button.hidden = true
         button.frame = CGRectMake(0, 0, Constants.HeaderButtonWidth, Constants.TitleImageHeight)
         button.contentHorizontalAlignment = .Left
@@ -114,6 +115,7 @@ class ExtrasExperienceViewController: UIViewController {
         button.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding, 0, 0)
         button.titleLabel?.font = UIFont.themeFont(DeviceType.IS_IPAD ? 18 : 14)
         button.setTitle(title, forState: .Normal)
+        button.setImage(UIImage(named: imageName), forState: .Normal)
         button.addTarget(self, action: #selector(self.close), forControlEvents: UIControlEvents.TouchUpInside)
         return button
     }
@@ -129,7 +131,7 @@ class ExtrasExperienceViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if let presentedViewController = self.presentedViewController {
+        if let presentedViewController = self.presentedViewController where presentedViewController.classForCoder != UIAlertController.self {
             return presentedViewController.supportedInterfaceOrientations()
         }
         

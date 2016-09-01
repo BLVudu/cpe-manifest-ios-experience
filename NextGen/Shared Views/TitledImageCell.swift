@@ -39,12 +39,9 @@ class TitledImageCell: UICollectionViewCell {
             }
             
             if let url = newValue {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-                    if let strongSelf = self {
-                        strongSelf.setImageSessionDataTask = strongSelf.imageView.setImageWithURL(url, completion: nil)
-                    }
-                }
+                imageView.af_setImageWithURL(url)
             } else {
+                imageView.af_cancelImageRequest()
                 imageView.image = nil
             }
         }

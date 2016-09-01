@@ -23,24 +23,15 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
             }
             
             if let url = newValue {
-                setImageSessionDataTask = imageView.setImageWithURL(url, completion: nil)
+                imageView.af_setImageWithURL(url)
             } else {
-                image = nil
+                imageView.af_cancelImageRequest()
+                imageView.image = nil
             }
         }
         
         get {
             return nil
-        }
-    }
-    
-    var image: UIImage? {
-        set {
-            imageView.image = newValue
-        }
-        
-        get {
-            return imageView.image
         }
     }
     

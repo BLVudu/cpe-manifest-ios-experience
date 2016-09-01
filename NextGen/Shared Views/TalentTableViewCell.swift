@@ -24,9 +24,10 @@ class TalentTableViewCell: UITableViewCell {
             
             if let url = imageURL {
                 if url != oldValue {
-                    setImageSessionDataTask = talentImageView.setImageWithURL(url, completion: nil)
+                    talentImageView.af_setImageWithURL(url)
                 }
             } else {
+                talentImageView.af_cancelImageRequest()
                 talentImageView.image = nil
             }
         }

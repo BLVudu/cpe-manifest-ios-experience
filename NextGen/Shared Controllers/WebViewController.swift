@@ -62,13 +62,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let button = UIButton.buttonWithImage(UIImage(named: "Delete"))
+        let button = UIButton(type: .Custom)
         button.frame = CGRectMake(CGRectGetWidth(self.view.frame) - Constants.HeaderButtonWidth, 0, Constants.HeaderButtonWidth, Constants.HeaderButtonHeight)
         button.contentHorizontalAlignment = .Left
         button.titleEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding + 10, 0, 0)
         button.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding, 0, 0)
         button.titleLabel?.font = UIFont.themeFont(DeviceType.IS_IPAD ? 18 : 14)
         button.setTitle(String.localize("label.exit"), forState: .Normal)
+        button.setImage(UIImage(named: "Delete"), forState: .Normal)
         button.titleLabel?.layer.shadowColor = UIColor.blackColor().CGColor
         button.titleLabel?.layer.shadowOpacity = 0.75
         button.titleLabel?.layer.shadowRadius = 2

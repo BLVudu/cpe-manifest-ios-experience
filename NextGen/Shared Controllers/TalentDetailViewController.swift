@@ -91,8 +91,9 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         
         _talentNameLabel.text = talent.name?.uppercaseString
         if let imageURL = talent.fullImageURL {
-            _talentImageView.setImageWithURL(imageURL, completion: nil)
+            _talentImageView.af_setImageWithURL(imageURL)
         } else {
+            _talentImageView.af_cancelImageRequest()
             _talentImageView.image = nil
         }
         
