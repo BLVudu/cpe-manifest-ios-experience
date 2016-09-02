@@ -301,6 +301,15 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndVideo, object: nil)
         
         super.playerItemDidReachEnd(notification)
+        
+        if mode == .MainFeature {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                NextGenHook.delegate?.videoPlayerWillClose(self.mode)
+                self.dismissViewControllerAnimated(true, completion: {
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.ShouldLaunchExtras, object: nil)
+                })
+            }
+        }
     }
     
     func onCountdownTimerFired() {

@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     private var interfaceCreated = false
     
     private var didFinishPlayingObserver: NSObjectProtocol?
+    private var shouldLaunchExtrasObserver: NSObjectProtocol?
     
     private var backgroundVideoFadeInViews: [UIView]?
     private var backgroundVideoTimeObserver: AnyObject?
@@ -95,6 +96,11 @@ class HomeViewController: UIViewController {
             NSNotificationCenter.defaultCenter().removeObserver(observer)
             didFinishPlayingObserver = nil
         }
+        
+        if let observer = shouldLaunchExtrasObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            shouldLaunchExtrasObserver = nil
+        }
     }
     
     // MARK: View Lifecycle
@@ -104,7 +110,7 @@ class HomeViewController: UIViewController {
         mainExperience = NGDMManifest.sharedInstance.mainExperience!
         
         if let nodeStyle = nodeStyle where nodeStyle.backgroundVideoLoops {
-            didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+            didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
                 if let videoPlayer = self?.backgroundVideoPlayer {
                     videoPlayer.muted = true
                     videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
@@ -112,6 +118,10 @@ class HomeViewController: UIViewController {
                 }
             })
         }
+        
+        shouldLaunchExtrasObserver = NSNotificationCenter.defaultCenter().addObserverForName(Notifications.ShouldLaunchExtras, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
+            self?.onExtras()
+        })
     }
     
     override func viewDidAppear(animated: Bool) {
