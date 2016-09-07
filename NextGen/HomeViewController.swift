@@ -82,11 +82,11 @@ class HomeViewController: UIViewController {
     }
     
     private var titleOverlaySize: CGSize {
-        return CGSizeMake(backgroundBaseSize.width - 50, 100)
+        return CGSizeMake(300, 100)
     }
     
     private var titleOverlayBottomLeft: CGPoint {
-        return CGPointMake(25, backgroundBaseSize.height - 115)
+        return CGPointMake(490, backgroundBaseSize.height - (titleOverlaySize.height + 15))
     }
     
     deinit {
@@ -145,6 +145,9 @@ class HomeViewController: UIViewController {
             
             if let playButtonImageURL = playButtonImageURL {
                 playButton.af_setImageForState(.Normal, URL: playButtonImageURL)
+                playButton.contentHorizontalAlignment = .Fill
+                playButton.contentVerticalAlignment = .Fill
+                playButton.imageView?.contentMode = .ScaleAspectFit
             } else {
                 playButton.setTitle(String.localize("label.play_movie"), forState: .Normal)
                 playButton.backgroundColor = UIColor.redColor()
@@ -165,6 +168,9 @@ class HomeViewController: UIViewController {
             
             if let extrasButtonImageURL = extrasButtonImageURL {
                 extrasButton.af_setBackgroundImageForState(.Normal, URL: extrasButtonImageURL)
+                extrasButton.contentHorizontalAlignment = .Fill
+                extrasButton.contentVerticalAlignment = .Fill
+                extrasButton.imageView?.contentMode = .ScaleAspectFit
             } else {
                 extrasButton.setTitle(String.localize("label.extras"), forState: .Normal)
                 extrasButton.backgroundColor = UIColor.grayColor()
@@ -187,6 +193,7 @@ class HomeViewController: UIViewController {
                 titleOverlayView!.addSubview(titleImageView!)
                 
                 self.view.addSubview(titleOverlayView!)
+                homeScreenViews.append(titleOverlayView!)
             }
             
             loadBackground()
@@ -229,7 +236,7 @@ class HomeViewController: UIViewController {
             let buttonOverlayX = (buttonOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - CGRectGetWidth(self.view.frame)) / 2)
             
             buttonOverlayView.frame = CGRectMake(
-                (buttonOverlayX + buttonOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : buttonOverlayX,
+                buttonOverlayX < 0 || (buttonOverlayX + buttonOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : buttonOverlayX,
                 CGRectGetHeight(self.view.frame) - buttonOverlayBottomLeft.y * backgroundNewScale - buttonOverlayHeight,
                 buttonOverlayWidth,
                 buttonOverlayHeight
@@ -241,16 +248,20 @@ class HomeViewController: UIViewController {
             let extrasButtonHeight = extrasButtonWidth / (extrasButtonSize.width / extrasButtonSize.height)
             extrasButton.frame = CGRectMake((CGRectGetWidth(buttonOverlayView.frame) - extrasButtonWidth) / 2, buttonOverlayHeight - extrasButtonHeight, extrasButtonWidth, extrasButtonHeight)
             
-            /*if let titleOverlayView = titleOverlayView {
+            if let titleOverlayView = titleOverlayView {
+                let titleOverlayWidth = min(titleOverlaySize.width * backgroundNewScale, CGRectGetWidth(self.view.frame) - 20)
+                let titleOverlayHeight = titleOverlayWidth / (titleOverlaySize.width / titleOverlaySize.height)
+                let titleOverlayX = (titleOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - CGRectGetWidth(self.view.frame)) / 2)
+                
                 titleOverlayView.frame = CGRectMake(
-                    (titleOverlayBottomLeft.x / backgroundToScreenRatio) - leftOffset,
-                    CGRectGetHeight(self.view.frame) - (((titleOverlayBottomLeft.y + titleOverlaySize.height) / backgroundToScreenRatio) - topOffset),
-                    titleOverlaySize.width / backgroundToScreenRatio,
-                    titleOverlaySize.height / backgroundToScreenRatio
+                    titleOverlayX < 0 || (titleOverlayX + titleOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : titleOverlayX,
+                    CGRectGetHeight(self.view.frame) - titleOverlayBottomLeft.y * backgroundNewScale - titleOverlayHeight,
+                    titleOverlayWidth,
+                    titleOverlayHeight
                 )
                 
                 titleImageView?.frame = titleOverlayView.bounds
-            }*/
+            }
         }
         
         if let backgroundVideoView = backgroundVideoView {

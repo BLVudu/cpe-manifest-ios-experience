@@ -38,7 +38,7 @@ class ExtrasExperienceViewController: UIViewController {
                 titleImageView.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.25).active = true
                 titleImageView.heightAnchor.constraintEqualToConstant(Constants.TitleImageHeight).active = true
                 titleImageView.topAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.topAnchor).active = true
-                titleImageView.trailingAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.trailingAnchor, constant: -10).active = true
+                titleImageView.trailingAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.trailingAnchor, constant: (DeviceType.IS_IPAD ? -10 : -20)).active = true
             }
         } else {
             let titleLabel = UILabel()
