@@ -273,44 +273,46 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     }
     
     override func playerItemDidReachEnd(notification: NSNotification!) {
-        if !_didPlayInterstitial {
-            _didPlayInterstitial = true
-            playMainExperience()
-            return
-        }
-        
-        queueCurrentIndex += 1
-        if queueCurrentIndex < queueTotalCount {
-            self.pauseVideo()
+        if let playerItem = notification.object as? AVPlayerItem where playerItem == self.player.currentItem {
+            if !_didPlayInterstitial {
+                _didPlayInterstitial = true
+                playMainExperience()
+                return
+            }
             
-            countdownLabel.hidden = false
+            queueCurrentIndex += 1
+            if queueCurrentIndex < queueTotalCount {
+                self.pauseVideo()
+                
+                countdownLabel.hidden = false
+                
+                let progressView = UAProgressView(frame: countdownLabel.frame)
+                progressView.centralView = countdownLabel
+                progressView.borderWidth = 0
+                progressView.lineWidth = 2
+                progressView.fillOnTouch = false
+                progressView.tintColor = UIColor.themePrimaryColor()
+                progressView.animationDuration = Double(Constants.CountdownTimeInterval)
+                self.view.addSubview(progressView)
+                countdownProgressView = progressView
+                
+                countdownSeconds = 0
+                countdownTimer = NSTimer.scheduledTimerWithTimeInterval(Double(Constants.CountdownTimeInterval), target: self, selector: #selector(self.onCountdownTimerFired), userInfo: nil, repeats: true)
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndLastVideo, object: nil)
+            }
             
-            let progressView = UAProgressView(frame: countdownLabel.frame)
-            progressView.centralView = countdownLabel
-            progressView.borderWidth = 0
-            progressView.lineWidth = 2
-            progressView.fillOnTouch = false
-            progressView.tintColor = UIColor.themePrimaryColor()
-            progressView.animationDuration = Double(Constants.CountdownTimeInterval)
-            self.view.addSubview(progressView)
-            countdownProgressView = progressView
+            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndVideo, object: nil)
             
-            countdownSeconds = 0
-            countdownTimer = NSTimer.scheduledTimerWithTimeInterval(Double(Constants.CountdownTimeInterval), target: self, selector: #selector(self.onCountdownTimerFired), userInfo: nil, repeats: true)
-        } else {
-            NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndLastVideo, object: nil)
-        }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidEndVideo, object: nil)
-        
-        super.playerItemDidReachEnd(notification)
-        
-        if mode == .MainFeature {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                NextGenHook.delegate?.videoPlayerWillClose(self.mode)
-                self.dismissViewControllerAnimated(true, completion: {
-                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.ShouldLaunchExtras, object: nil)
-                })
+            super.playerItemDidReachEnd(notification)
+            
+            if mode == .MainFeature {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                    NextGenHook.delegate?.videoPlayerWillClose(self.mode)
+                    self.dismissViewControllerAnimated(true, completion: {
+                        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.ShouldLaunchExtras, object: nil)
+                    })
+                }
             }
         }
     }
