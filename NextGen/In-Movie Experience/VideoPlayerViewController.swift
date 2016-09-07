@@ -222,14 +222,17 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         if _didPlayInterstitial {
             skipContainerView.hidden = true
             
-            if let audioVisual = NGDMManifest.sharedInstance.mainExperience?.audioVisual {
+            if let videoURL = NGDMManifest.sharedInstance.mainExperience?.videoURL {
                 NSNotificationCenter.defaultCenter().postNotificationName(VideoPlayerNotification.DidPlayMainExperience, object: nil)
-                self.playVideoWithURL(audioVisual.videoURL)
+                self.playVideoWithURL(videoURL)
             }
         } else {
             skipContainerView.hidden = !SettingsManager.didWatchInterstitial
             SettingsManager.didWatchInterstitial = true
-            self.playVideoWithURL(NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("MOS_INTERSTITIAL_v3", ofType: "mp4")!))
+            
+            if let videoURL = NGDMManifest.sharedInstance.mainExperience?.interstitialVideoURL {
+                self.playVideoWithURL(videoURL)
+            }
         }
     }
     

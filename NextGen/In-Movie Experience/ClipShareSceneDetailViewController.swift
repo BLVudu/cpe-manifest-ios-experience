@@ -68,7 +68,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         previewImageView.hidden = true
         previewPlayButton.hidden = true
         
-        if let videoURL = timedEvent?.audioVisual?.videoURL, videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
+        if let videoURL = timedEvent?.videoURL, videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
             }
@@ -103,7 +103,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
     }
     
     @IBAction private func onShare(sender: UIButton) {
-        if let url = timedEvent?.audioVisual?.videoURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
+        if let url = timedEvent?.videoURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
             let activityViewController = UIActivityViewController(activityItems: [String.localize("clipshare.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender
             self.presentViewController(activityViewController, animated: true, completion: nil)

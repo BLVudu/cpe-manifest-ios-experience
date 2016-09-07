@@ -30,12 +30,12 @@ class HomeViewController: UIViewController {
     private var extrasButton: UIButton!
     private var titleOverlayView: UIView?
     private var titleImageView: UIImageView?
+    private var homeScreenViews = [UIView]()
     private var interfaceCreated = false
     
     private var didFinishPlayingObserver: NSObjectProtocol?
     private var shouldLaunchExtrasObserver: NSObjectProtocol?
     
-    private var backgroundVideoFadeInViews: [UIView]?
     private var backgroundVideoTimeObserver: AnyObject?
     private var backgroundVideoFadeTime: Double {
         if let loopTimecode = nodeStyle?.backgroundVideoLoopTimecode {
@@ -109,16 +109,6 @@ class HomeViewController: UIViewController {
         
         mainExperience = NGDMManifest.sharedInstance.mainExperience!
         
-        if let nodeStyle = nodeStyle where nodeStyle.backgroundVideoLoops {
-            didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
-                if let videoPlayer = self?.backgroundVideoPlayer {
-                    videoPlayer.muted = true
-                    videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                    videoPlayer.play()
-                }
-            })
-        }
-        
         shouldLaunchExtrasObserver = NSNotificationCenter.defaultCenter().addObserverForName(Notifications.ShouldLaunchExtras, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
             self?.onExtras()
         })
@@ -128,7 +118,7 @@ class HomeViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if !interfaceCreated {
-            var homeScreenViews = [UIView]()
+            homeScreenViews.removeAll()
             
             exitButton.setTitle(String.localize("label.exit"), forState: .Normal)
             exitButton.titleLabel?.layer.shadowColor = UIColor.blackColor().CGColor
@@ -197,14 +187,6 @@ class HomeViewController: UIViewController {
                 titleOverlayView!.addSubview(titleImageView!)
                 
                 self.view.addSubview(titleOverlayView!)
-            }
-            
-            if backgroundVideoFadeTime > 0 {
-                backgroundVideoFadeInViews = homeScreenViews
-            } else {
-                for view in homeScreenViews {
-                    view.hidden = false
-                }
             }
             
             loadBackground()
@@ -306,6 +288,16 @@ class HomeViewController: UIViewController {
     // MARK: Video Player
     func loadBackground() {
         if let nodeStyle = nodeStyle, backgroundVideoURL = nodeStyle.backgroundVideoURL {
+            if nodeStyle.backgroundVideoLoops {
+                didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
+                    if let videoPlayer = self?.backgroundVideoPlayer {
+                        videoPlayer.muted = true
+                        videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
+                        videoPlayer.play()
+                    }
+                })
+            }
+            
             let playerItem = AVPlayerItem(cacheableURL: backgroundVideoURL)
             if let videoPlayer = backgroundVideoPlayer {
                 videoPlayer.replaceCurrentItemWithPlayerItem(playerItem)
@@ -320,7 +312,7 @@ class HomeViewController: UIViewController {
                 backgroundVideoView?.frame = self.view.bounds
                 backgroundVideoView?.layer.addSublayer(backgroundVideoLayer!)
                 
-                if backgroundVideoFadeInViews?.count > 0 {
+                if backgroundVideoFadeTime > 0 {
                     backgroundVideoTimeObserver = videoPlayer.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(0.55, Int32(NSEC_PER_SEC)), queue: dispatch_get_main_queue(), usingBlock: { [weak self] (time) in
                         if let strongSelf = self where time.seconds > strongSelf.backgroundVideoFadeTime {
                             if let observer = strongSelf.backgroundVideoTimeObserver {
@@ -328,29 +320,34 @@ class HomeViewController: UIViewController {
                                 strongSelf.backgroundVideoTimeObserver = nil
                             }
                             
-                            if let views = strongSelf.backgroundVideoFadeInViews {
-                                for view in views {
-                                    view.alpha = 0
-                                    view.hidden = false
-                                }
-                                
-                                UIView.animateWithDuration(Constants.OverlayFadeInDuration, animations: {
-                                    for view in views {
-                                        view.alpha = 1
-                                    }
-                                })
+                            for view in strongSelf.homeScreenViews {
+                                view.alpha = 0
+                                view.hidden = false
                             }
                             
-                            strongSelf.backgroundVideoFadeInViews = nil
+                            UIView.animateWithDuration(Constants.OverlayFadeInDuration, animations: {
+                                for view in strongSelf.homeScreenViews {
+                                    view.alpha = 1
+                                }
+                            })
+                            
+                            strongSelf.homeScreenViews.removeAll()
                         }
                     })
-                    
-                    videoPlayer.play()
                 } else {
+                    for view in homeScreenViews {
+                        view.hidden = false
+                    }
+                    
+                    homeScreenViews.removeAll()
+                }
+                
+                if interfaceCreated {
                     videoPlayer.muted = true
                     videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                    videoPlayer.play()
                 }
+                
+                videoPlayer.play()
                 
                 backgroundVideoPlayer = videoPlayer
                 backgroundImageView?.removeFromSuperview()
@@ -374,12 +371,24 @@ class HomeViewController: UIViewController {
                 
                 backgroundVideoView?.removeFromSuperview()
             }
+            
+            for view in homeScreenViews {
+                view.hidden = false
+            }
+            
+            homeScreenViews.removeAll()
         }
     }
     
     func unloadBackground() {
         if let observer = backgroundVideoTimeObserver {
             backgroundVideoPlayer?.removeTimeObserver(observer)
+            backgroundVideoTimeObserver = nil
+        }
+        
+        if let observer = didFinishPlayingObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            didFinishPlayingObserver = nil
         }
         
         backgroundVideoPlayer?.pause()
