@@ -71,11 +71,17 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            NextGenDataLoader.sharedInstance.loadTitle(Array(NextGenDataLoader.ManifestData.keys)[indexPath.row])
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                let homeViewController = UIStoryboard.getNextGenViewController(HomeViewController)
-                self.presentViewController(homeViewController, animated: true, completion: nil)
+            do {
+                try NextGenDataLoader.sharedInstance.loadTitle(Array(NextGenDataLoader.ManifestData.keys)[indexPath.row], completionHandler: { [weak self] (success) in
+                    if success {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .None)
+                            self?.presentViewController(UIStoryboard.getNextGenViewController(HomeViewController), animated: true, completion: nil)
+                        }
+                    }
+                })
+            } catch let error {
+                print("Error loading title: \(error)")
             }
         }
     }

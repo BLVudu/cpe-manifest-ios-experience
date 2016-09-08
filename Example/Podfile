@@ -9,10 +9,13 @@ target 'NextGenExample' do
     
     use_frameworks!
     
-    pod 'NextGenDataManager', :path => '../../cpe-manifest-ios-data'
+    pod 'MBProgressHUD',            '~> 0.9.2'
     
-    pod 'MBProgressHUD', '~> 0.9.2'
+    # NextGen
     pod 'GoogleMaps'
     pod 'UAProgressView'
+    pod 'PromiseKit',               '~> 3.0'
+    pod 'AlamofireImage',           '~> 2.0'
+    pod 'NextGenDataManager',       :path => '../../cpe-manifest-ios-data'
 
 end
