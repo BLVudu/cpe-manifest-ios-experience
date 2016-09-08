@@ -14,18 +14,12 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     @IBOutlet weak private var playButton: UIButton!
     @IBOutlet weak private var extraDescriptionLabel: UILabel!
     
-    private var setImageSessionDataTask: NSURLSessionDataTask?
-    
     private var imageURL: NSURL? {
         set {
-            if let task = setImageSessionDataTask {
-                task.cancel()
-                setImageSessionDataTask = nil
-            }
-            
             if let url = newValue {
-                setImageSessionDataTask = imageView.setImageWithURL(url, completion: nil)
+                imageView.af_setImageWithURL(url)
             } else {
+                imageView.af_cancelImageRequest()
                 imageView.image = nil
                 imageView.backgroundColor = UIColor.clearColor()
             }

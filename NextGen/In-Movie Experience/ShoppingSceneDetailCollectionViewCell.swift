@@ -19,21 +19,18 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     @IBOutlet weak private var extraDescriptionLabel: UILabel!
     
     var productImageType = ProductImageType.Product
-    private var setImageSessionDataTask: NSURLSessionDataTask?
     
     private var imageURL: NSURL? {
         set {
-            if let task = setImageSessionDataTask {
-                task.cancel()
-                setImageSessionDataTask = nil
-            }
-            
             if let url = newValue {
                 imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                setImageSessionDataTask = imageView.setImageWithURL(url, completion: { (image) -> Void in
-                    self.imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
+                imageView.af_setImageWithURL(url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                    if let strongSelf = self {
+                        strongSelf.imageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
+                    }
                 })
             } else {
+                imageView.af_cancelImageRequest()
                 imageView.image = nil
                 imageView.backgroundColor = UIColor.clearColor()
             }

@@ -54,6 +54,12 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         showHomeButton()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        extrasCollectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     
     // MARK: Actions
     override func close() {

@@ -19,10 +19,10 @@ struct ExperienceCellData {
 class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private struct SegueIdentifier {
-        static let ShowGallery = "showGallery"
-        static let ShowShop = "showShop"
-        static let ShowMap = "showMap"
-        static let ShowShare = "showShare"
+        static let ShowGallery = "ShowGallerySegueIdentifier"
+        static let ShowShopping = "ShowShoppingSegueIdentifier"
+        static let ShowMap = "ShowMapSegueIdentifier"
+        static let ShowClipShare = "ShowClipShareSegueIdentifier"
         static let ShowLargeText = "ShowLargeTextSegueIdentifier"
     }
     
@@ -30,7 +30,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ItemsPerRow: CGFloat = (DeviceType.IS_IPAD ? 2 : 1)
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10
-        static let ItemAspectRatio: CGFloat = 286 / 220
+        static let ItemAspectRatio: CGFloat = 283 / 220
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
@@ -188,11 +188,11 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                 if timedEvent.isType(.AudioVisual) || timedEvent.isType(.Gallery) {
                     segueIdentifier = SegueIdentifier.ShowGallery
                 } else if timedEvent.isType(.ClipShare) {
-                    segueIdentifier = SegueIdentifier.ShowShare
+                    segueIdentifier = SegueIdentifier.ShowClipShare
                 } else if timedEvent.isType(.Location) {
                     segueIdentifier = SegueIdentifier.ShowMap
                 } else if timedEvent.isType(.Product) {
-                    segueIdentifier = SegueIdentifier.ShowShop
+                    segueIdentifier = SegueIdentifier.ShowShopping
                 } else if timedEvent.isType(.TextItem) {
                     segueIdentifier = SegueIdentifier.ShowLargeText
                 }
@@ -208,7 +208,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     // MARK: Storyboard Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? SceneDetailCollectionViewCell, timedEvent = cell.timedEvent, experience = timedEvent.experience {
-            if segue.identifier == SegueIdentifier.ShowShop {
+            if segue.identifier == SegueIdentifier.ShowShopping {
                 if let cell = cell as? ShoppingSceneDetailCollectionViewCell, products = cell.theTakeProducts {
                     let shopDetailViewController = segue.destinationViewController as! ShoppingDetailViewController
                     shopDetailViewController.experience = experience

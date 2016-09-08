@@ -48,8 +48,8 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
                 pageControl = nil
                 shareButton = nil
                 
-                if let audioVisual = timedEvent.audioVisual, videoURL = audioVisual.videoURL {
-                    descriptionLabel.text = audioVisual.metadata?.description != nil ? audioVisual.metadata?.description : audioVisual.metadata?.title
+                if let videoURL = timedEvent.videoURL {
+                    descriptionLabel.text = timedEvent.audioVisual?.descriptionText
                     
                     if let videoContainerView = videoContainerView, videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
                         videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie

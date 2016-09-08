@@ -9,7 +9,7 @@ import NextGenDataManager
 class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak private var mapView: MultiMapView!
-    @IBOutlet private var mapAspectRatioConstraint: NSLayoutConstraint!
+    @IBOutlet private var mapContainerAspectRatioConstraint: NSLayoutConstraint!
     @IBOutlet weak private var mediaCollectionView: UICollectionView?
     @IBOutlet weak private var descriptionLabel: UILabel?
     
@@ -37,19 +37,18 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         location = appData.location!
         
         if appData.mediaCount > 0 {
-            descriptionLabel?.removeFromSuperview()
             mediaCollectionView?.registerNib(UINib(nibName: String(SimpleMapCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleMapCollectionViewCell.ReuseIdentifier)
             mediaCollectionView?.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
         } else {
             mediaCollectionView?.removeFromSuperview()
-            
-            if let text = appData.description {
-                descriptionLabel?.text = text
-                descriptionLabel?.hidden = false
-            } else {
-                descriptionLabel?.removeFromSuperview()
-                mapAspectRatioConstraint.active = false
-            }
+            mapContainerAspectRatioConstraint.active = false
+        }
+        
+        if let text = appData.description {
+            descriptionLabel?.text = text
+            descriptionLabel?.hidden = false
+        } else {
+            descriptionLabel?.removeFromSuperview()
         }
         
         galleryScrollView.allowsFullScreen = false

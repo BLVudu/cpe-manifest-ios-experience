@@ -25,7 +25,6 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     private var originalFrame: CGRect?
     private var originalContainerFrame: CGRect?
     private var closeButton: UIButton!
-    private var sessionDataTasks = [NSURLSessionDataTask]()
     
     var isFullScreen = false {
         didSet {
@@ -69,9 +68,6 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     private var scrollViewPageWidth: CGFloat = 0
     var currentPage = 0 {
         didSet {
-            sessionDataTasks.forEach({ $0.cancel() })
-            sessionDataTasks.removeAll()
-            
             if gallery != nil && !gallery!.isTurntable {
                 loadGalleryImageForPage(currentPage)
                 loadGalleryImageForPage(currentPage + 1)
@@ -286,11 +282,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Image Gallery
     private func loadGalleryImageForPage(page: Int) {
         if let url = gallery?.getImageURLForPage(page), imageView = (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView where imageView.image == nil {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-                if let strongSelf = self, sessionDataTask = imageView.setImageWithURL(url, completion: nil) {
-                    strongSelf.sessionDataTasks.append(sessionDataTask)
-                }
-            }
+            imageView.af_setImageWithURL(url)
         }
     }
     

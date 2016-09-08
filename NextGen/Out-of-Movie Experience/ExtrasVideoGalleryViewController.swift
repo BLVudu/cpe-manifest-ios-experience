@@ -95,6 +95,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         })
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return (DeviceType.IS_IPAD ? .Landscape : .All)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -103,15 +107,9 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
             self.tableView(galleryTableView, didSelectRowAtIndexPath: selectedPath)
             didInitialSetup = true
+        } else {
+            galleryScrollView.layoutPages()
         }
-    }
-    
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        
-        let isFullScreen = size.width > size.height
-        galleryScrollView.isFullScreen = isFullScreen
-        videoPlayerViewController?.isFullScreen = isFullScreen
     }
     
     
@@ -191,7 +189,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     private func playSelectedExperience() {
         if let selectedIndexPath = galleryTableView.indexPathForSelectedRow, selectedExperience = experience.childExperiences?[selectedIndexPath.row] {
             if let imageURL = selectedExperience.imageURL {
-                previewImageView.setImageWithURL(imageURL, completion: nil)
+                previewImageView.af_setImageWithURL(imageURL)
             }
             
             if didPlayFirstItem, let videoURL = selectedExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {

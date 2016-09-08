@@ -17,10 +17,13 @@ class ShoppingDetailCell: UICollectionViewCell {
             productBrandLabel.text = product?.brand
             productNameLabel.text = product?.name
             if let imageURL = product?.productImageURL {
-                productImageView.setImageWithURL(imageURL, completion: { (image) -> Void in
-                    self.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
+                productImageView.af_setImageWithURL(imageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                    if let strongSelf = self {
+                        strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
+                    }
                 })
             } else {
+                productImageView.af_cancelImageRequest()
                 productImageView.image = nil
                 productImageView.backgroundColor = UIColor.clearColor()
             }
@@ -66,10 +69,13 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
             productNameLabel.text = currentProduct?.name
             productPriceLabel.text = currentProduct?.price
             if let imageURL = currentProduct?.productImageURL {
-                productImageView.setImageWithURL(imageURL, completion: { (image) -> Void in
-                    self.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
+                productImageView.af_setImageWithURL(imageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                    if let strongSelf = self {
+                        strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
+                    }
                 })
             } else {
+                productImageView.af_cancelImageRequest()
                 productImageView.image = nil
                 productImageView.backgroundColor = UIColor.clearColor()
             }

@@ -66,6 +66,7 @@ static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification   
 @property (readwrite, nonatomic)        NSInteger                       playerControlsAutoHideTime;
 @property (strong, nonatomic)           NSTimer                         *playerControlsAutoHideTimer;
 @property (weak, nonatomic)   IBOutlet  UIView                          *topToolbar;
+@property (weak, nonatomic)   IBOutlet  UIView                          *playbackToolbar;
 @property (weak, nonatomic)   IBOutlet  UIButton                        *fullScreenButton;
 @property (weak, nonatomic)   IBOutlet  UITapGestureRecognizer          *tapGestureRecognizer;
 @property (nonatomic, assign)           BOOL                            isFullScreen;

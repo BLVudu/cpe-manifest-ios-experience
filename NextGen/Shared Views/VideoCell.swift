@@ -4,6 +4,7 @@
 
 import UIKit
 import NextGenDataManager
+import AlamofireImage
 
 class VideoCell: UITableViewCell {
     
@@ -23,7 +24,6 @@ class VideoCell: UITableViewCell {
     @IBOutlet weak private var runtimeLabel: UILabel!
     @IBOutlet weak private var captionLabel: UILabel!
     
-    private var setImageSessionDataTask: NSURLSessionDataTask?
     private var didPlayVideoObserver: NSObjectProtocol?
     
     var experience: NGDMExperience? {
@@ -50,18 +50,10 @@ class VideoCell: UITableViewCell {
                 runtimeLabel.hidden = true
             }
             
-            if let task = setImageSessionDataTask {
-                task.cancel()
-                setImageSessionDataTask = nil
-            }
-            
             if let imageURL = experience?.imageURL {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [weak self] in
-                    if let strongSelf = self {
-                        strongSelf.setImageSessionDataTask = strongSelf.thumbnailImageView.setImageWithURL(imageURL, completion: nil)
-                    }
-                }
+                thumbnailImageView.af_setImageWithURL(imageURL)
             } else {
+                thumbnailImageView.af_cancelImageRequest()
                 thumbnailImageView.image = nil
             }
         }
