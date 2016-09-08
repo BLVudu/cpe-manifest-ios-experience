@@ -35,7 +35,7 @@ class ExtrasExperienceViewController: UIViewController {
             self.view.sendSubviewToBack(titleImageView)
             
             if #available(iOS 9.0, *) {
-                titleImageView.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.25).active = true
+                titleImageView.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.28).active = true
                 titleImageView.heightAnchor.constraintEqualToConstant(Constants.TitleImageHeight).active = true
                 titleImageView.topAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.topAnchor).active = true
                 titleImageView.trailingAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.trailingAnchor, constant: (DeviceType.IS_IPAD ? -10 : -20)).active = true
@@ -54,7 +54,7 @@ class ExtrasExperienceViewController: UIViewController {
             self.view.sendSubviewToBack(titleLabel)
             
             if #available(iOS 9.0, *) {
-                titleLabel.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.25).active = true
+                titleLabel.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.28).active = true
                 titleLabel.heightAnchor.constraintEqualToConstant(Constants.TitleImageHeight).active = true
                 titleLabel.topAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.topAnchor).active = true
                 titleLabel.trailingAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.trailingAnchor, constant: 10).active = true
@@ -80,7 +80,7 @@ class ExtrasExperienceViewController: UIViewController {
             
             if #available(iOS 9.0, *) {
                 let imageHeight = Constants.TitleImageHeight * (DeviceType.IS_IPAD ? 0.6 : 1)
-                titleTreatmentImageView.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.45).active = true
+                titleTreatmentImageView.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.4).active = true
                 titleTreatmentImageView.heightAnchor.constraintEqualToConstant(imageHeight).active = true
                 titleTreatmentImageView.topAnchor.constraintEqualToAnchor(self.view.layoutMarginsGuide.topAnchor, constant: (Constants.TitleImageHeight - imageHeight) / 2).active = true
                 titleTreatmentImageView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true

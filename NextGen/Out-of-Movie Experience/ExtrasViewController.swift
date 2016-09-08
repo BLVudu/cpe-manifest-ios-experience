@@ -11,9 +11,9 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     private struct Constants {
         static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 5)
-        static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 15)
+        static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 25)
         static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
-        static let CollectionViewItemAspectRatio: CGFloat = 338 / 230
+        static let CollectionViewItemAspectRatio: CGFloat = 318 / 224
     }
     
     private struct SegueIdentifier {

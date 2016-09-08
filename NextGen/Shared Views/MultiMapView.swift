@@ -217,7 +217,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             
             var edgeInsets: UIEdgeInsets
             if let segmentedControl = mapTypeSegmentedControl {
-                edgeInsets = UIEdgeInsetsMake(Constants.ControlsPadding + CGRectGetHeight(segmentedControl.frame), Constants.ControlsPadding + Constants.SegmentedControlWidth, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
+                edgeInsets = UIEdgeInsetsMake((Constants.ControlsPadding * 2) + CGRectGetHeight(segmentedControl.frame) + Constants.ZoomFitAllPadding, (Constants.ControlsPadding * 2) + Constants.ZoomButtonWidth, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
             } else {
                 edgeInsets = UIEdgeInsetsMake(Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
             }
