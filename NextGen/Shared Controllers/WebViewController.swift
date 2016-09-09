@@ -16,6 +16,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     private var _webView: WKWebView!
     private var _title: String?
     private var _url: NSURL!
+    var shouldDisplayFullScreen = false
     
     // MARK: Initialization
     convenience init(title: String?, url: NSURL) {
@@ -31,6 +32,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         
         self.title = _title
         self.view.backgroundColor = UIColor.blackColor()
+        
+        self.navigationController?.navigationBarHidden = shouldDisplayFullScreen
         
         let configuration = WKWebViewConfiguration()
         configuration.mediaPlaybackRequiresUserAction = false

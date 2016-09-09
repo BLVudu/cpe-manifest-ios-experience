@@ -374,7 +374,7 @@ class HomeViewController: UIViewController {
             }
         } else {
             if let backgroundImageURL = nodeStyle?.backgroundImageURL ?? NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL { // FIXME: This appears to be the way Comcast defines background images
-                backgroundImageView?.af_setImageWithURL(backgroundImageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                backgroundImageView?.af_setImageWithURL(backgroundImageURL, completion: { [weak self] (response) in
                     if let strongSelf = self, image = response.result.value {
                         strongSelf.backgroundBaseSize = CGSizeMake(image.size.width * image.scale, image.size.height * image.scale)
                     }

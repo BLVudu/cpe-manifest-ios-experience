@@ -24,7 +24,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         set {
             if let url = newValue {
                 imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                imageView.af_setImageWithURL(url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                imageView.af_setImageWithURL(url, completion: { [weak self] (response) in
                     if let strongSelf = self {
                         strongSelf.imageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
                     }

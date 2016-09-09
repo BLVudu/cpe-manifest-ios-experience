@@ -17,7 +17,7 @@ class ShoppingDetailCell: UICollectionViewCell {
             productBrandLabel.text = product?.brand
             productNameLabel.text = product?.name
             if let imageURL = product?.productImageURL {
-                productImageView.af_setImageWithURL(imageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                productImageView.af_setImageWithURL(imageURL, completion: { [weak self] (response) in
                     if let strongSelf = self {
                         strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
                     }
@@ -69,7 +69,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
             productNameLabel.text = currentProduct?.name
             productPriceLabel.text = currentProduct?.price
             if let imageURL = currentProduct?.productImageURL {
-                productImageView.af_setImageWithURL(imageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
+                productImageView.af_setImageWithURL(imageURL, completion: { [weak self] (response) in
                     if let strongSelf = self {
                         strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
                     }
