@@ -201,10 +201,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
         if _didPlayInterstitial {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
                 SettingsManager.setVideoAsWatched(url)
-                NextGenHook.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url) in
+                NextGenHook.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url, startTime) in
                     if let url = url {
                         dispatch_async(dispatch_get_main_queue()) {
-                            super.playVideoWithURL(url)
+                            super.playVideoWithURL(url, startTime: startTime ?? 0)
                         }
                     }
                 })
@@ -308,7 +308,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
             
             if mode == .MainFeature {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                    NextGenHook.delegate?.videoPlayerWillClose(self.mode)
+                    NextGenHook.delegate?.videoPlayerWillClose(self.mode, playbackPosition: 0)
                     self.dismissViewControllerAnimated(true, completion: {
                         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.ShouldLaunchExtras, object: nil)
                     })
@@ -348,7 +348,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     override func done(sender: AnyObject?) {
         super.done(sender)
         
-        NextGenHook.delegate?.videoPlayerWillClose(mode)
+        NextGenHook.delegate?.videoPlayerWillClose(mode, playbackPosition: CMTimeGetSeconds(self.playerItem.currentTime()))
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
