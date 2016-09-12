@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1270,7 +1270,7 @@
                                 <rect key="frame" x="0.0" y="693" width="1024" height="75"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yBz-nT-qfC" customClass="VideoPlayerScrubber" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="153" y="23" width="718" height="31"/>
+                                        <rect key="frame" x="153" y="23" width="713" height="31"/>
                                         <connections>
                                             <action selector="beginScrubbing:" destination="FsK-dw-pgC" eventType="touchDown" id="RN9-Kl-8aZ"/>
                                             <action selector="endScrubbing:" destination="FsK-dw-pgC" eventType="touchUpInside" id="9mC-FJ-7wc"/>
@@ -1279,9 +1279,9 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6W-KZ-1CO" userLabel="Duration Time">
-                                        <rect key="frame" x="869" y="0.0" width="75" height="75"/>
+                                        <rect key="frame" x="864" y="0.0" width="60" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="qXq-vE-bus"/>
+                                            <constraint firstAttribute="width" constant="60" id="qXq-vE-bus"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1321,9 +1321,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQ6-y2-KsL">
-                                        <rect key="frame" x="944" y="13" width="80" height="50"/>
+                                        <rect key="frame" x="924" y="13" width="60" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="EwQ-wB-lrH"/>
+                                            <constraint firstAttribute="width" constant="60" id="EwQ-wB-lrH"/>
                                             <constraint firstAttribute="height" constant="50" id="hCi-17-X1z"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
@@ -1333,22 +1333,37 @@
                                             <action selector="toggleFullScreen:" destination="FsK-dw-pgC" eventType="touchUpInside" id="BFB-aF-Brb"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Si-46-ANZ">
+                                        <rect key="frame" x="954" y="25" width="79" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="NCo-X5-42O"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <state key="normal" image="Maximize">
+                                            <color key="titleColor" red="1" green="0.085336501780000004" blue="0.1303381599" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cropImageAction:" destination="FsK-dw-pgC" eventType="touchUpInside" id="IlZ-46-B2T"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="uap-nw-qBj" secondAttribute="bottom" id="3l3-qA-aPy"/>
                                     <constraint firstItem="Fre-sx-P7e" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="702-LB-pdn"/>
-                                    <constraint firstAttribute="trailing" secondItem="hQ6-y2-KsL" secondAttribute="trailing" id="Cuk-Qy-gR3"/>
+                                    <constraint firstAttribute="trailing" secondItem="hQ6-y2-KsL" secondAttribute="trailing" constant="40" id="Cuk-Qy-gR3"/>
                                     <constraint firstItem="Fre-sx-P7e" firstAttribute="leading" secondItem="tdq-om-9xU" secondAttribute="leading" id="DjV-sH-Tcg"/>
                                     <constraint firstItem="uap-nw-qBj" firstAttribute="leading" secondItem="r3j-NO-iAX" secondAttribute="trailing" id="Krx-8J-5eP"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Si-46-ANZ" secondAttribute="bottom" constant="22" id="Kym-cd-kDK"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Si-46-ANZ" secondAttribute="trailing" constant="8" id="ZQq-mF-HUm"/>
                                     <constraint firstItem="hQ6-y2-KsL" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="cOV-sB-2ta"/>
                                     <constraint firstItem="c6W-KZ-1CO" firstAttribute="top" secondItem="tdq-om-9xU" secondAttribute="top" id="cV8-Et-hSQ"/>
                                     <constraint firstItem="r3j-NO-iAX" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="fcz-BG-Cbh"/>
                                     <constraint firstItem="uap-nw-qBj" firstAttribute="top" secondItem="tdq-om-9xU" secondAttribute="top" id="fjX-EC-SFE"/>
                                     <constraint firstItem="c6W-KZ-1CO" firstAttribute="leading" secondItem="yBz-nT-qfC" secondAttribute="trailing" id="jdR-oD-S8U"/>
                                     <constraint firstAttribute="height" constant="75" id="jiI-0v-lbW"/>
-                                    <constraint firstAttribute="trailing" secondItem="c6W-KZ-1CO" secondAttribute="trailing" priority="250" constant="25" id="lzZ-av-4Eu"/>
+                                    <constraint firstAttribute="trailing" secondItem="c6W-KZ-1CO" secondAttribute="trailing" priority="250" constant="40" id="lzZ-av-4Eu"/>
                                     <constraint firstAttribute="bottom" secondItem="c6W-KZ-1CO" secondAttribute="bottom" id="m8O-EA-h4D"/>
                                     <constraint firstItem="yBz-nT-qfC" firstAttribute="leading" secondItem="uap-nw-qBj" secondAttribute="trailing" id="plS-BJ-gtK"/>
                                     <constraint firstItem="r3j-NO-iAX" firstAttribute="leading" secondItem="tdq-om-9xU" secondAttribute="leading" id="qqr-zz-B97"/>
@@ -1469,6 +1484,7 @@
                         <outlet property="_homeButton" destination="aLt-Qu-Yg8" id="neb-30-wLZ"/>
                         <outlet property="activityIndicator" destination="cbz-fT-NUV" id="2GD-nb-I0M"/>
                         <outlet property="countdownLabel" destination="IcY-NN-IUH" id="bdY-t4-wu6"/>
+                        <outlet property="cropImageButton" destination="5Si-46-ANZ" id="wWq-YY-vqh"/>
                         <outlet property="durationLabel" destination="c6W-KZ-1CO" id="agC-Tl-gJZ"/>
                         <outlet property="fullScreenButton" destination="hQ6-y2-KsL" id="QEK-g6-Bkd"/>
                         <outlet property="pauseButton" destination="Fre-sx-P7e" id="xPZ-ZP-9To"/>

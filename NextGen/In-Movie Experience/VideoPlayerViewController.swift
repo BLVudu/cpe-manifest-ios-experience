@@ -41,11 +41,31 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController, UIPopoverCont
     private var _lastNotifiedTime = -1.0
     private var _controlsAreLocked = false
     private var manuallyPaused = false
-    
+    private var buttonTapped = true
     @IBOutlet weak private var _commentaryView: UIView!
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
     var commentaryIndex = 0
+    
+    @IBOutlet weak var cropImageButton: UIButton!
+    
+    
+    @IBAction func cropImageAction(sender: AnyObject) {
+        
+        if (buttonTapped == false) {
+            buttonTapped = true
+            self.playbackView.setVideoFillMode(AVLayerVideoGravityResizeAspectFill)
+            
+        } else if (buttonTapped == true) {
+            buttonTapped = false
+            self.playbackView.setVideoFillMode(AVLayerVideoGravityResizeAspect)
+        }
+        
+        
+        
+        
+    }
+    
     
     // Countdown/Queue
     var queueTotalCount = 0
