@@ -18,11 +18,12 @@ class HomeViewController: UIViewController {
     }
     
     @IBOutlet weak private var exitButton: UIButton!
-    @IBOutlet weak private var backgroundImageView: UIImageView?
-    @IBOutlet weak private var backgroundVideoView: UIView?
+    @IBOutlet weak private var backgroundImageView: UIImageView!
+    @IBOutlet weak private var backgroundVideoView: UIView!
     private var backgroundVideoLayer: AVPlayerLayer?
     private var backgroundVideoPlayer: AVPlayer?
-    private var backgroundBaseSize = CGSizeZero
+    private var backgroundVideoSize = CGSizeZero
+    private var backgroundImageSize = CGSizeZero
     
     private var mainExperience: NGDMMainExperience!
     private var buttonOverlayView: UIView!
@@ -32,6 +33,7 @@ class HomeViewController: UIViewController {
     private var titleImageView: UIImageView?
     private var homeScreenViews = [UIView]()
     private var interfaceCreated = false
+    private var currentlyDismissing = false
     
     private var didFinishPlayingObserver: NSObjectProtocol?
     private var shouldLaunchExtrasObserver: NSObjectProtocol?
@@ -86,7 +88,8 @@ class HomeViewController: UIViewController {
     }
     
     private var titleOverlayBottomLeft: CGPoint {
-        return CGPointMake(490, backgroundBaseSize.height - (titleOverlaySize.height + 15))
+        return CGPointZero
+        //return CGPointMake(490, backgroundBaseSize.height - (titleOverlaySize.height + 15))
     }
     
     deinit {
@@ -140,7 +143,6 @@ class HomeViewController: UIViewController {
             playButton.layer.shadowRadius = 5
             playButton.layer.shadowColor = UIColor.blackColor().CGColor
             playButton.layer.shadowOffset = CGSizeZero
-            //playButton.layer.shadowOpacity = 0.5
             playButton.layer.masksToBounds = false
             
             if let playButtonImageURL = playButtonImageURL {
@@ -159,7 +161,6 @@ class HomeViewController: UIViewController {
             extrasButton.layer.shadowRadius = 5
             extrasButton.layer.shadowColor = UIColor.blackColor().CGColor
             extrasButton.layer.shadowOffset = CGSizeZero
-            //extrasButton.layer.shadowOpacity = 0.5
             extrasButton.layer.masksToBounds = false
             
             let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didLongPressExtrasButton(_:)))
@@ -204,9 +205,17 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        currentlyDismissing = false
+        
         if interfaceCreated {
             loadBackground()
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        currentlyDismissing = true
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -215,65 +224,155 @@ class HomeViewController: UIViewController {
         unloadBackground()
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        coordinator.animateAlongsideTransition({ (_) in
+            if self.interfaceCreated {
+                self.unloadBackground()
+                self.loadBackground()
+            }
+        }, completion: nil)
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        if interfaceCreated && backgroundBaseSize != CGSizeZero {
-            let backgroundBaseAspectRatio = backgroundBaseSize.width / backgroundBaseSize.height
-            var backgroundNewSize = CGSizeZero
-
-            if (backgroundBaseAspectRatio > (CGRectGetWidth(self.view.frame) / CGRectGetHeight(self.view.frame))) {
-                backgroundNewSize.height = CGRectGetHeight(self.view.frame)
-                backgroundNewSize.width = backgroundNewSize.height * backgroundBaseAspectRatio
-            } else {
-                backgroundNewSize.width = CGRectGetWidth(self.view.frame)
-                backgroundNewSize.height = backgroundNewSize.width / backgroundBaseAspectRatio
+        if interfaceCreated && !currentlyDismissing {
+            let viewWidth = CGRectGetWidth(self.view.frame)
+            let viewHeight = CGRectGetHeight(self.view.frame)
+            let viewAspectRatio = viewWidth / viewHeight
+            
+            if backgroundVideoSize != CGSizeZero {
+                var backgroundPoint = CGPointZero
+                var backgroundSize = CGSizeZero
+                let backgroundVideoAspectRatio = backgroundVideoSize.width / backgroundVideoSize.height
+                
+                if nodeStyle?.backgroundScaleMethod == .Full {
+                    if (backgroundVideoAspectRatio > viewAspectRatio) {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundVideoAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.y = (viewHeight - backgroundSize.height) / 2
+                        }
+                    } else {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundVideoAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.x = (viewWidth - backgroundSize.width) / 2
+                        }
+                    }
+                } else {
+                    if (backgroundVideoAspectRatio > viewAspectRatio) {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundVideoAspectRatio
+                    } else {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundVideoAspectRatio
+                    }
+                    
+                    if nodeStyle?.backgroundPositionMethod == .Centered {
+                        backgroundPoint.x = (backgroundSize.width - viewWidth) / -2
+                        backgroundPoint.y = (backgroundSize.height - viewHeight) / -2
+                    }
+                }
+                
+                backgroundVideoView.frame = CGRectMake(backgroundPoint.x, backgroundPoint.y, backgroundSize.width, backgroundSize.height)
+                
+                if let backgroundVideoLayer = backgroundVideoLayer {
+                    backgroundVideoLayer.frame = backgroundVideoView.frame
+                }
             }
             
-            let backgroundNewScale = (backgroundNewSize.height / backgroundBaseSize.height)
-            let buttonOverlayWidth = min(buttonOverlaySize.width * backgroundNewScale, CGRectGetWidth(self.view.frame) - 20)
-            let buttonOverlayHeight = buttonOverlayWidth / (buttonOverlaySize.width / buttonOverlaySize.height)
-            let buttonOverlayX = (buttonOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - CGRectGetWidth(self.view.frame)) / 2)
-            
-            buttonOverlayView.frame = CGRectMake(
-                buttonOverlayX < 0 || (buttonOverlayX + buttonOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : buttonOverlayX,
-                CGRectGetHeight(self.view.frame) - buttonOverlayBottomLeft.y * backgroundNewScale - buttonOverlayHeight,
-                buttonOverlayWidth,
-                buttonOverlayHeight
-            )
-            
-            playButton.frame = CGRectMake(0, 0, CGRectGetWidth(buttonOverlayView.frame), CGRectGetWidth(buttonOverlayView.frame) / (playButtonSize.width / playButtonSize.height))
-            
-            let extrasButtonWidth = CGRectGetWidth(playButton.frame) * 0.6
-            let extrasButtonHeight = extrasButtonWidth / (extrasButtonSize.width / extrasButtonSize.height)
-            extrasButton.frame = CGRectMake((CGRectGetWidth(buttonOverlayView.frame) - extrasButtonWidth) / 2, buttonOverlayHeight - extrasButtonHeight, extrasButtonWidth, extrasButtonHeight)
-            
-            if let titleOverlayView = titleOverlayView {
-                let titleOverlayWidth = min(titleOverlaySize.width * backgroundNewScale, CGRectGetWidth(self.view.frame) - 20)
-                let titleOverlayHeight = titleOverlayWidth / (titleOverlaySize.width / titleOverlaySize.height)
-                let titleOverlayX = (titleOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - CGRectGetWidth(self.view.frame)) / 2)
+            if backgroundImageSize != CGSizeZero {
+                var backgroundPoint = CGPointZero
+                var backgroundSize = CGSizeZero
+                let backgroundImageAspectRatio = backgroundImageSize.width / backgroundImageSize.height
                 
-                titleOverlayView.frame = CGRectMake(
-                    titleOverlayX < 0 || (titleOverlayX + titleOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : titleOverlayX,
-                    CGRectGetHeight(self.view.frame) - titleOverlayBottomLeft.y * backgroundNewScale - titleOverlayHeight,
-                    titleOverlayWidth,
-                    titleOverlayHeight
+                if nodeStyle?.backgroundScaleMethod == .Full && backgroundVideoSize == CGSizeZero {
+                    if (backgroundImageAspectRatio > viewAspectRatio) {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundImageAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.y = (viewHeight - backgroundSize.height) / 2
+                        }
+                    } else {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundImageAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.x = (viewWidth - backgroundSize.width) / 2
+                        }
+                    }
+                } else {
+                    if (backgroundImageAspectRatio > viewAspectRatio) {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundImageAspectRatio
+                    } else {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundImageAspectRatio
+                    }
+                    
+                    if nodeStyle?.backgroundPositionMethod == .Centered || backgroundVideoSize != CGSizeZero {
+                        backgroundPoint.x = (backgroundSize.width - viewWidth) / -2
+                        backgroundPoint.y = (backgroundSize.height - viewHeight) / -2
+                    }
+                }
+                
+                backgroundImageView.frame = CGRectMake(backgroundPoint.x, backgroundPoint.y, backgroundSize.width, backgroundSize.height)
+            }
+            
+            var backgroundBaseSize = CGSizeZero
+            var backgroundNewSize = CGSizeZero
+            var backgroundPoint = CGPointZero
+            
+            if backgroundImageSize != CGSizeZero {
+                backgroundBaseSize = backgroundImageSize
+                backgroundNewSize = backgroundImageView.frame.size
+                backgroundPoint = backgroundImageView.frame.origin
+            } else if backgroundVideoSize != CGSizeZero {
+                backgroundBaseSize = backgroundVideoSize
+                backgroundNewSize = backgroundVideoView.frame.size
+                backgroundPoint = backgroundVideoView.frame.origin
+            }
+            
+            if backgroundBaseSize != CGSizeZero {
+                let backgroundNewScale = (backgroundNewSize.height / backgroundBaseSize.height)
+                let buttonOverlayWidth = min(buttonOverlaySize.width * backgroundNewScale, viewWidth - 20)
+                let buttonOverlayHeight = buttonOverlayWidth / (buttonOverlaySize.width / buttonOverlaySize.height)
+                let buttonOverlayX = (buttonOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - viewWidth) / 2)
+                
+                buttonOverlayView.frame = CGRectMake(
+                    buttonOverlayX < 0 || (buttonOverlayX + buttonOverlayWidth > viewWidth) ? 10 : buttonOverlayX,
+                    viewHeight - (buttonOverlayBottomLeft.y * backgroundNewScale) - buttonOverlayHeight - backgroundPoint.y,
+                    buttonOverlayWidth,
+                    buttonOverlayHeight
                 )
                 
-                titleImageView?.frame = titleOverlayView.bounds
+                playButton.frame = CGRectMake(0, 0, CGRectGetWidth(buttonOverlayView.frame), CGRectGetWidth(buttonOverlayView.frame) / (playButtonSize.width / playButtonSize.height))
+                
+                let extrasButtonWidth = CGRectGetWidth(playButton.frame) * 0.6
+                let extrasButtonHeight = extrasButtonWidth / (extrasButtonSize.width / extrasButtonSize.height)
+                extrasButton.frame = CGRectMake((CGRectGetWidth(buttonOverlayView.frame) - extrasButtonWidth) / 2, buttonOverlayHeight - extrasButtonHeight, extrasButtonWidth, extrasButtonHeight)
+                
+                if let titleOverlayView = titleOverlayView {
+                    let titleOverlayWidth = min(titleOverlaySize.width * backgroundNewScale, viewWidth - 20)
+                    let titleOverlayHeight = titleOverlayWidth / (titleOverlaySize.width / titleOverlaySize.height)
+                    let titleOverlayX = (titleOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - viewWidth) / 2)
+                    
+                    titleOverlayView.frame = CGRectMake(
+                        titleOverlayX < 0 || (titleOverlayX + titleOverlayWidth > viewWidth) ? 10 : titleOverlayX,
+                        viewHeight - titleOverlayBottomLeft.y * backgroundNewScale - titleOverlayHeight,
+                        titleOverlayWidth,
+                        titleOverlayHeight
+                    )
+                    
+                    titleImageView?.frame = titleOverlayView.bounds
+                }
             }
-        }
-        
-        if let backgroundVideoView = backgroundVideoView {
-            backgroundVideoView.frame = self.view.bounds
-            
-            if let backgroundVideoLayer = backgroundVideoLayer {
-                backgroundVideoLayer.frame = backgroundVideoView.bounds
-            }
-        }
-        
-        if let backgroundImageView = backgroundImageView {
-            backgroundImageView.frame = self.view.bounds
         }
     }
     
@@ -315,13 +414,19 @@ class HomeViewController: UIViewController {
                 videoPlayer.muted = true
                 videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
                 videoPlayer.play()
+                
+                for view in homeScreenViews {
+                    view.hidden = false
+                }
+                
+                homeScreenViews.removeAll()
             } else {
                 let videoPlayer = AVPlayer(playerItem: playerItem)
                 backgroundVideoLayer = AVPlayerLayer(player: videoPlayer)
                 backgroundVideoLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
                 backgroundVideoLayer!.frame = self.view.bounds
-                backgroundVideoView?.frame = self.view.bounds
-                backgroundVideoView?.layer.addSublayer(backgroundVideoLayer!)
+                backgroundVideoView.frame = self.view.bounds
+                backgroundVideoView.layer.addSublayer(backgroundVideoLayer!)
                 
                 if backgroundVideoFadeTime > 0 {
                     backgroundVideoTimeObserver = videoPlayer.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(0.55, Int32(NSEC_PER_SEC)), queue: dispatch_get_main_queue(), usingBlock: { [weak self] (time) in
@@ -361,33 +466,27 @@ class HomeViewController: UIViewController {
                 videoPlayer.play()
                 
                 backgroundVideoPlayer = videoPlayer
-                backgroundImageView?.removeFromSuperview()
-                
-                if let backgroundVideoSize = playerItem.asset.tracksWithMediaType(AVMediaTypeVideo).first?.naturalSize where backgroundVideoSize != CGSizeZero {
-                    backgroundBaseSize = backgroundVideoSize
-                } else {
-                    backgroundBaseSize = self.view.frame.size
-                }
-                
-                self.view.setNeedsLayout()
-                self.view.layoutIfNeeded()
-            }
-        } else {
-            if let backgroundImageURL = nodeStyle?.backgroundImageURL ?? NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL { // FIXME: This appears to be the way Comcast defines background images
-                backgroundImageView?.af_setImageWithURL(backgroundImageURL, completion: { [weak self] (response) in
-                    if let strongSelf = self, image = response.result.value {
-                        strongSelf.backgroundBaseSize = CGSizeMake(image.size.width * image.scale, image.size.height * image.scale)
-                    }
-                })
-                
-                backgroundVideoView?.removeFromSuperview()
             }
             
+            if let backgroundVideoSize = playerItem.asset.tracksWithMediaType(AVMediaTypeVideo).first?.naturalSize where backgroundVideoSize != CGSizeZero {
+                self.backgroundVideoSize = backgroundVideoSize
+            } else {
+                backgroundVideoSize = self.view.frame.size
+            }
+        } else {
             for view in homeScreenViews {
                 view.hidden = false
             }
             
             homeScreenViews.removeAll()
+        }
+        
+        if let backgroundImageURL = nodeStyle?.backgroundImageURL {
+            backgroundImageView.af_setImageWithURL(backgroundImageURL, completion: { [weak self] (response) in
+                if let strongSelf = self, image = response.result.value {
+                    strongSelf.backgroundImageSize = CGSizeMake(image.size.width * image.scale, image.size.height * image.scale)
+                }
+            })
         }
     }
     
@@ -404,7 +503,9 @@ class HomeViewController: UIViewController {
         
         backgroundVideoPlayer?.pause()
         backgroundVideoPlayer?.replaceCurrentItemWithPlayerItem(nil)
-        backgroundImageView?.image = nil
+        backgroundImageView.image = nil
+        backgroundVideoSize = CGSizeZero
+        backgroundImageSize = CGSizeZero
     }
     
     // MARK: Actions
