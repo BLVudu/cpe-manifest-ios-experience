@@ -8,20 +8,20 @@ import NextGenDataManager
 
 class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak private var mapView: MultiMapView!
-    @IBOutlet private var mapContainerAspectRatioConstraint: NSLayoutConstraint!
-    @IBOutlet weak private var mediaCollectionView: UICollectionView?
-    @IBOutlet weak private var descriptionLabel: UILabel?
+    @IBOutlet weak fileprivate var mapView: MultiMapView!
+    @IBOutlet fileprivate var mapContainerAspectRatioConstraint: NSLayoutConstraint!
+    @IBOutlet weak fileprivate var mediaCollectionView: UICollectionView?
+    @IBOutlet weak fileprivate var descriptionLabel: UILabel?
     
     @IBOutlet weak var locationDetailView: UIView!
     @IBOutlet weak var videoContainerView: UIView!
-    private var videoPlayerViewController: VideoPlayerViewController?
+    fileprivate var videoPlayerViewController: VideoPlayerViewController?
     
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     
-    private var appData: NGDMAppData!
-    private var location: NGDMLocation!
-    private var marker: MultiMapMarker!
+    fileprivate var appData: NGDMAppData!
+    fileprivate var location: NGDMLocation!
+    fileprivate var marker: MultiMapMarker!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -37,16 +37,16 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         location = appData.location!
         
         if appData.mediaCount > 0 {
-            mediaCollectionView?.registerNib(UINib(nibName: String(SimpleMapCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleMapCollectionViewCell.ReuseIdentifier)
-            mediaCollectionView?.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
+            mediaCollectionView?.register(UINib(nibName: "SimpleMapCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SimpleMapCollectionViewCell.ReuseIdentifier)
+            mediaCollectionView?.register(UINib(nibName: "SimpleImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
         } else {
             mediaCollectionView?.removeFromSuperview()
-            mapContainerAspectRatioConstraint.active = false
+            mapContainerAspectRatioConstraint.isActive = false
         }
         
         if let text = appData.description {
             descriptionLabel?.text = text
-            descriptionLabel?.hidden = false
+            descriptionLabel?.isHidden = false
         } else {
             descriptionLabel?.removeFromSuperview()
         }
@@ -55,7 +55,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         galleryScrollView.removeToolbar()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
@@ -65,68 +65,68 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         mapView.maxZoomLevel = appData.zoomLevel
     }
     
-    private func animateToCenter() {
+    fileprivate func animateToCenter() {
         let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: true)
         mapView.selectedMarker = marker
     }
     
     // MARK: Actions
-    private func playVideo(videoURL: NSURL) {
+    fileprivate func playVideo(_ videoURL: URL) {
         closeDetailView()
         
-        if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
-            videoPlayerViewController.mode = VideoPlayerMode.SupplementalInMovie
+        if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
+            videoPlayerViewController.mode = VideoPlayerMode.supplementalInMovie
             
             videoPlayerViewController.view.frame = videoContainerView.bounds
             videoContainerView.addSubview(videoPlayerViewController.view)
             self.addChildViewController(videoPlayerViewController)
-            videoPlayerViewController.didMoveToParentViewController(self)
+            videoPlayerViewController.didMove(toParentViewController: self)
             
-            videoPlayerViewController.playVideoWithURL(videoURL)
+            videoPlayerViewController.playVideo(with: videoURL)
             
-            locationDetailView.hidden = false
+            locationDetailView.isHidden = false
             self.videoPlayerViewController = videoPlayerViewController
         }
     }
     
-    private func showGallery(gallery: NGDMGallery) {
+    fileprivate func showGallery(_ gallery: NGDMGallery) {
         closeDetailView()
         
         galleryScrollView.loadGallery(gallery)
-        galleryScrollView.hidden = false
+        galleryScrollView.isHidden = false
         
-        locationDetailView.hidden = false
+        locationDetailView.isHidden = false
     }
     
-    private func closeDetailView() {
-        locationDetailView.hidden = true
+    fileprivate func closeDetailView() {
+        locationDetailView.isHidden = true
         
         galleryScrollView.destroyGallery()
-        galleryScrollView.hidden = true
+        galleryScrollView.isHidden = true
         
-        videoPlayerViewController?.willMoveToParentViewController(nil)
+        videoPlayerViewController?.willMove(toParentViewController: nil)
         videoPlayerViewController?.view.removeFromSuperview()
         videoPlayerViewController?.removeFromParentViewController()
         videoPlayerViewController = nil
     }
     
     // MARK: UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return appData.mediaCount > 0 ? appData.mediaCount + 1 : 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == 0 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleMapCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! SimpleMapCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if (indexPath as NSIndexPath).row == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimpleMapCollectionViewCell.ReuseIdentifier, for: indexPath) as! SimpleMapCollectionViewCell
             cell.setLocation(CLLocationCoordinate2DMake(location.latitude, location.longitude), zoomLevel: appData.zoomLevel - 4)
             return cell
         }
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleImageCollectionViewCell.BaseReuseIdentifier, forIndexPath: indexPath) as! SimpleImageCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier, for: indexPath) as! SimpleImageCollectionViewCell
         
         if let experience = appData.mediaAtIndex(indexPath.row - 1) {
-            cell.playButtonVisible = experience.isType(.AudioVisual)
+            cell.playButtonVisible = experience.isType(.audioVisual)
             cell.imageURL = experience.imageURL
         } else {
             cell.playButtonVisible = false
@@ -137,8 +137,8 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     }
     
     // MARK: UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 0 {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).row == 0 {
             closeDetailView()
             animateToCenter()
         } else if let experience = appData.mediaAtIndex(indexPath.row - 1) {
@@ -151,8 +151,8 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake((CGRectGetWidth(collectionView.frame) / 4), CGRectGetHeight(collectionView.frame))
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (collectionView.frame.width / 4), height: collectionView.frame.height)
     }
     
 }

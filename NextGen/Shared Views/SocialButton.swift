@@ -23,7 +23,7 @@ class SocialButton: UIButton {
     
     
     func initialize() {
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.clipsToBounds = true
         self.layer.borderWidth = 0
         self.layer.cornerRadius = 0.5*40

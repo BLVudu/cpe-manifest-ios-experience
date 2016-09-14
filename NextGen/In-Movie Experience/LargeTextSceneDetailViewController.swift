@@ -16,7 +16,7 @@ class LargeTextSceneDetailViewController: SceneDetailViewController {
         textLabel.text = timedEvent?.descriptionText
         
         if let imageURL = timedEvent?.imageURL {
-            imageView?.af_setImageWithURL(imageURL)
+            imageView?.af_setImage(withURL: imageURL)
         } else {
             imageView?.af_cancelImageRequest()
             imageView?.removeFromSuperview()

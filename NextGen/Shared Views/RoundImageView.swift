@@ -18,7 +18,7 @@ import UIKit
         }
     }
     
-    private func makeRound() {
+    fileprivate func makeRound() {
         if round {
             self.clipsToBounds = true
             self.layer.cornerRadius = (self.frame.width + self.frame.height) / 4

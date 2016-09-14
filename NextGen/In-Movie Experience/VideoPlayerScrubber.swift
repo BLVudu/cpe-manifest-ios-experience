@@ -22,10 +22,10 @@ class VideoPlayerScrubber: UISlider {
         setup()
     }
     
-    private func setup() {
+    fileprivate func setup() {
         let scrubberImage = UIImage(named: "Scrubber Image")
-        self.setThumbImage(scrubberImage, forState: .Normal)
-        self.setThumbImage(scrubberImage, forState: .Highlighted)
+        self.setThumbImage(scrubberImage, for: UIControlState())
+        self.setThumbImage(scrubberImage, for: .highlighted)
         self.minimumTrackTintColor = UIColor.themePrimaryColor()
     }
     

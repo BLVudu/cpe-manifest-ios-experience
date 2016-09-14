@@ -8,14 +8,14 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     
     static let BaseReuseIdentifier = "SimpleImageCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak private var imageView: UIImageView!
-    @IBOutlet weak private var playButton: UIButton?
+    @IBOutlet weak fileprivate var imageView: UIImageView!
+    @IBOutlet weak fileprivate var playButton: UIButton?
     
-    private var setImageSessionDataTask: NSURLSessionDataTask?
+    fileprivate var setImageSessionDataTask: URLSessionDataTask?
     
     var showsSelectedBorder = false
     
-    var imageURL: NSURL? {
+    var imageURL: URL? {
         set {
             if let task = setImageSessionDataTask {
                 task.cancel()
@@ -23,7 +23,7 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
             }
             
             if let url = newValue {
-                imageView.af_setImageWithURL(url)
+                imageView.af_setImage(withURL: url)
             } else {
                 imageView.af_cancelImageRequest()
                 imageView.image = nil
@@ -37,19 +37,19 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     
     var playButtonVisible: Bool {
         set {
-            playButton?.hidden = !newValue
+            playButton?.isHidden = !newValue
         }
         
         get {
-            return playButton != nil && !playButton!.hidden
+            return playButton != nil && !playButton!.isHidden
         }
     }
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
-            if self.selected && showsSelectedBorder {
+            if self.isSelected && showsSelectedBorder {
                 self.layer.borderWidth = 2
-                self.layer.borderColor = UIColor.whiteColor().CGColor
+                self.layer.borderColor = UIColor.white.cgColor
             } else {
                 self.layer.borderWidth = 0
                 self.layer.borderColor = nil
@@ -60,7 +60,7 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.selected = false
+        self.isSelected = false
         
         imageURL = nil
         playButtonVisible = false

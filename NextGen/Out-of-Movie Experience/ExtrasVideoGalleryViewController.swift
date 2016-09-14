@@ -37,7 +37,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     // MARK: Initialization
     deinit {
-        let center = NSNotificationCenter.defaultCenter()
+        let center = NotificationCenter.default
         
         if let observer = willPlayNextItemObserver {
             center.removeObserver(observer)
@@ -66,46 +66,46 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        galleryTableView.registerNib(UINib(nibName: VideoCell.NibName, bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
+        galleryTableView.register(UINib(nibName: VideoCell.NibName, bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
 
-        willPlayNextItemObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.WillPlayNextItem, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] (notification) -> Void in
-            if let strongSelf = self, userInfo = notification.userInfo, index = userInfo["index"] as? Int where index < (strongSelf.experience.childExperiences?.count ?? 0) {
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                strongSelf.galleryTableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAtIndexPath: indexPath)
+        willPlayNextItemObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.WillPlayNextItem), object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
+            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let index = userInfo["index"] as? Int , index < (strongSelf.experience.childExperiences?.count ?? 0) {
+                let indexPath = IndexPath(row: index, section: 0)
+                strongSelf.galleryTableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+                strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAt: indexPath)
             }
         }
         
-        didEndLastVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidEndLastVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
+        didEndLastVideoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndLastVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
             if let strongSelf = self {
-                strongSelf.previewImageView.hidden = false
-                strongSelf.previewPlayButton.hidden = false
+                strongSelf.previewImageView.isHidden = false
+                strongSelf.previewPlayButton.isHidden = false
                 strongSelf.destroyVideoPlayer()
                 
-                if let selectedIndexPath = strongSelf.galleryTableView.indexPathForSelectedRow, cell = strongSelf.galleryTableView.cellForRowAtIndexPath(selectedIndexPath) as? VideoCell {
+                if let selectedIndexPath = strongSelf.galleryTableView.indexPathForSelectedRow, let cell = strongSelf.galleryTableView.cellForRow(at: selectedIndexPath) as? VideoCell {
                     cell.setWatched()
                 }
             }
         })
         
-        galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
+        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
                 strongSelf.galleryPageControl.currentPage = page
             }
         })
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (DeviceType.IS_IPAD ? .Landscape : .All)
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return (DeviceType.IS_IPAD ? .landscape : .all)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         if !didInitialSetup {
-            let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
-            galleryTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-            self.tableView(galleryTableView, didSelectRowAtIndexPath: selectedPath)
+            let selectedPath = IndexPath(row: 0, section: 0)
+            galleryTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+            self.tableView(galleryTableView, didSelectRowAt: selectedPath)
             didInitialSetup = true
         } else {
             galleryScrollView.layoutPages()
@@ -114,97 +114,97 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     
     // MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(VideoCell.ReuseIdentifier, forIndexPath: indexPath) as! VideoCell
-        cell.backgroundColor = UIColor.clearColor()
-        cell.selectionStyle = .None
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: VideoCell.ReuseIdentifier, for: indexPath) as! VideoCell
+        cell.backgroundColor = UIColor.clear
+        cell.selectionStyle = .none
         cell.experience = experience.childExperiences?[indexPath.row]
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return experience.childExperiences?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if DeviceType.IS_IPAD {
-            return (CGRectGetWidth(tableView.frame) / Constants.GalleryTableViewImageAspectRatio) + Constants.GalleryTableViewLabelHeight + Constants.GalleryTableViewPadding
+            return (tableView.frame.width / Constants.GalleryTableViewImageAspectRatio) + Constants.GalleryTableViewLabelHeight + Constants.GalleryTableViewPadding
         }
         
-        return CGRectGetWidth(tableView.frame) / Constants.GalleryTableViewMobileAspectRatio
+        return tableView.frame.width / Constants.GalleryTableViewMobileAspectRatio
     }
     
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) where !cell.selected {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let cell = tableView.cellForRow(at: indexPath), !cell.isSelected {
             return indexPath
         }
         
         return nil
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row > 0 {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).row > 0 {
             didPlayFirstItem = true
         }
         
         if let thisExperience = experience.childExperiences?[indexPath.row] {
-            mediaTitleLabel.hidden = true
-            mediaDescriptionLabel.hidden = true
+            mediaTitleLabel.isHidden = true
+            mediaDescriptionLabel.isHidden = true
             
             // Reset media detail views
-            shareButton.hidden = true
-            galleryPageControl.hidden = true
-            galleryScrollView.hidden = true
-            videoContainerView.hidden = false
-            previewImageView.hidden = didPlayFirstItem
-            previewPlayButton.hidden = didPlayFirstItem
+            shareButton.isHidden = true
+            galleryPageControl.isHidden = true
+            galleryScrollView.isHidden = true
+            videoContainerView.isHidden = false
+            previewImageView.isHidden = didPlayFirstItem
+            previewPlayButton.isHidden = didPlayFirstItem
             
             // Set new media detail views
             if let gallery = thisExperience.gallery {
                 mediaTitleLabel.text = nil
-                galleryScrollView.hidden = false
-                videoContainerView.hidden = true
-                previewImageView.hidden = true
-                previewPlayButton.hidden = true
+                galleryScrollView.isHidden = false
+                videoContainerView.isHidden = true
+                previewImageView.isHidden = true
+                previewPlayButton.isHidden = true
                 
                 galleryScrollView.loadGallery(gallery)
                 if !gallery.isTurntable {
-                    shareButton.hidden = false
-                    shareButton.setTitle(String.localize("gallery.share_button").uppercaseString, forState: .Normal)
-                    galleryPageControl.hidden = false
+                    shareButton.isHidden = false
+                    shareButton.setTitle(String.localize("gallery.share_button").uppercased(), for: UIControlState())
+                    galleryPageControl.isHidden = false
                     galleryPageControl.numberOfPages = gallery.totalCount
                 }
-            } else if thisExperience.isType(.AudioVisual) {
+            } else if thisExperience.isType(.audioVisual) {
                 mediaTitleLabel.text = thisExperience.metadata?.title
                 mediaDescriptionLabel.text = thisExperience.metadata?.description
-                mediaTitleLabel.hidden = false
-                mediaDescriptionLabel.hidden = false
+                mediaTitleLabel.isHidden = false
+                mediaDescriptionLabel.isHidden = false
                 playSelectedExperience()
             }
         }
     }
     
-    private func playSelectedExperience() {
-        if let selectedIndexPath = galleryTableView.indexPathForSelectedRow, selectedExperience = experience.childExperiences?[selectedIndexPath.row] {
+    fileprivate func playSelectedExperience() {
+        if let selectedIndexPath = galleryTableView.indexPathForSelectedRow, let selectedExperience = experience.childExperiences?[selectedIndexPath.row] {
             if let imageURL = selectedExperience.imageURL {
-                previewImageView.af_setImageWithURL(imageURL)
+                previewImageView.af_setImage(withURL: imageURL)
             }
             
-            if didPlayFirstItem, let videoURL = selectedExperience.videoURL, videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
-                previewImageView.hidden = true
-                previewPlayButton.hidden = true
+            if didPlayFirstItem, let videoURL = selectedExperience.videoURL, let videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
+                previewImageView.isHidden = true
+                previewPlayButton.isHidden = true
                 
                 videoPlayerViewController.player?.removeAllItems()
-                videoPlayerViewController.mode = VideoPlayerMode.Supplemental
+                videoPlayerViewController.mode = VideoPlayerMode.supplemental
                 videoPlayerViewController.queueTotalCount = experience.childExperiences?.count ?? 0
-                videoPlayerViewController.queueCurrentIndex = selectedIndexPath.row
+                videoPlayerViewController.queueCurrentIndex = (selectedIndexPath as NSIndexPath).row
                 videoPlayerViewController.view.frame = videoContainerView.bounds
                 videoContainerView.addSubview(videoPlayerViewController.view)
                 self.addChildViewController(videoPlayerViewController)
-                videoPlayerViewController.didMoveToParentViewController(self)
-                videoPlayerViewController.playVideoWithURL(videoURL)
+                videoPlayerViewController.didMove(toParentViewController: self)
+                videoPlayerViewController.playVideo(with: videoURL)
                 
                 self.videoPlayerViewController = videoPlayerViewController
             }
@@ -212,7 +212,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     }
     
     private func destroyVideoPlayer() {
-        videoPlayerViewController?.willMoveToParentViewController(nil)
+        videoPlayerViewController?.willMove(toParentViewController: nil)
         videoPlayerViewController?.view.removeFromSuperview()
         videoPlayerViewController?.removeFromParentViewController()
         videoPlayerViewController = nil
@@ -224,11 +224,11 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         playSelectedExperience()
     }
     
-    @IBAction func onShare(sender: UIButton?) {
-        if !galleryScrollView.hidden, let url = galleryScrollView.currentImageURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
+    @IBAction func onShare(_ sender: UIButton?) {
+        if !galleryScrollView.isHidden, let url = galleryScrollView.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
             let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender
-            self.presentViewController(activityViewController, animated: true, completion: nil)
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
     

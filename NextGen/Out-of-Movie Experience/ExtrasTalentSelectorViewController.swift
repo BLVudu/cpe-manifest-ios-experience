@@ -12,30 +12,30 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     @IBOutlet weak var talentTableView: UITableView!
     @IBOutlet weak var talentDetailView: UIView!
     
-    private var talentDetailViewController: TalentDetailViewController?
-    private var selectedIndexPath: NSIndexPath?
+    fileprivate var talentDetailViewController: TalentDetailViewController?
+    fileprivate var selectedIndexPath: IndexPath?
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+        talentTableView.register(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         
         showBackButton()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let path = NSIndexPath(forRow: 0, inSection: 0)
-        self.talentTableView.selectRowAtIndexPath(path, animated: false, scrollPosition: .Top)
-        self.tableView(self.talentTableView, didSelectRowAtIndexPath: path)
+        let path = IndexPath(row: 0, section: 0)
+        self.talentTableView.selectRow(at: path, animated: false, scrollPosition: .top)
+        self.tableView(self.talentTableView, didSelectRowAt: path)
     }
     
     // MARK: Talent Details
     func showTalentDetailView() {
         if selectedIndexPath != nil {
-            if let cell = talentTableView?.cellForRowAtIndexPath(selectedIndexPath!) as? TalentTableViewCell, talent = cell.talent {
+            if let cell = talentTableView?.cellForRow(at: selectedIndexPath!) as? TalentTableViewCell, let talent = cell.talent {
                 if talentDetailViewController != nil {
                     talentDetailViewController!.loadTalent(talent)
                 } else {
@@ -45,13 +45,13 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
                         talentDetailViewController.view.frame = talentDetailView.bounds
                         talentDetailView.addSubview(talentDetailViewController.view)
                         self.addChildViewController(talentDetailViewController)
-                        talentDetailViewController.didMoveToParentViewController(self)
+                        talentDetailViewController.didMove(toParentViewController: self)
                         
                         talentDetailView.alpha = 0
-                        talentDetailView.hidden = false
+                        talentDetailView.isHidden = false
                         showBackButton()
                         
-                        UIView.animateWithDuration(0.25, animations: {
+                        UIView.animate(withDuration: 0.25, animations: {
                             self.talentDetailView.alpha = 1
                         })
                         
@@ -64,17 +64,17 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     
     func hideTalentDetailView() {
         if selectedIndexPath != nil {
-            talentTableView?.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
+            talentTableView?.deselectRow(at: selectedIndexPath!, animated: true)
             selectedIndexPath = nil
         }
         
         showHomeButton()
         
-        UIView.animateWithDuration(0.25, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             self.talentDetailView.alpha = 0
         }, completion: { (Bool) -> Void in
-            self.talentDetailView.hidden = true
-            self.talentDetailViewController?.willMoveToParentViewController(nil)
+            self.talentDetailView.isHidden = true
+            self.talentDetailViewController?.willMove(toParentViewController: nil)
             self.talentDetailViewController?.view.removeFromSuperview()
             self.talentDetailViewController?.removeFromParentViewController()
             self.talentDetailViewController = nil
@@ -82,23 +82,23 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     }
     
     // MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return NGDMManifest.sharedInstance.mainExperience?.orderedActors?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
         cell.talent = NGDMManifest.sharedInstance.mainExperience?.orderedActors?[indexPath.row]
         
         return cell
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return (indexPath != selectedIndexPath ? indexPath : nil)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         showTalentDetailView()
     }

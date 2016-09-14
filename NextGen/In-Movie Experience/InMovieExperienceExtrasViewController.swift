@@ -7,34 +7,34 @@ import NextGenDataManager
 
 class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let HeaderHeight: CGFloat = 35
         static let FooterHeight: CGFloat = 50
     }
     
-    private struct SegueIdentifier {
+    fileprivate struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
     }
     
-    @IBOutlet weak private var talentTableView: UITableView?
-    @IBOutlet weak private var backgroundImageView: UIImageView!
-    @IBOutlet weak private var showLessContainer: UIView!
-    @IBOutlet weak private var showLessButton: UIButton!
-    @IBOutlet weak private var showLessGradientView: UIView!
-    private var showLessGradient = CAGradientLayer()
-    private var currentTalents: [NGDMTalent]?
-    private var hiddenTalents: [NGDMTalent]?
-    private var isShowingMore = false
-    private var numCurrentTalents: Int {
+    @IBOutlet weak fileprivate var talentTableView: UITableView?
+    @IBOutlet weak fileprivate var backgroundImageView: UIImageView!
+    @IBOutlet weak fileprivate var showLessContainer: UIView!
+    @IBOutlet weak fileprivate var showLessButton: UIButton!
+    @IBOutlet weak fileprivate var showLessGradientView: UIView!
+    fileprivate var showLessGradient = CAGradientLayer()
+    fileprivate var currentTalents: [NGDMTalent]?
+    fileprivate var hiddenTalents: [NGDMTalent]?
+    fileprivate var isShowingMore = false
+    fileprivate var numCurrentTalents: Int {
         return currentTalents?.count ?? 0
     }
     
-    private var currentTime: Double = -1
-    private var didChangeTimeObserver: NSObjectProtocol?
+    fileprivate var currentTime: Double = -1
+    fileprivate var didChangeTimeObserver: NSObjectProtocol?
     
     deinit {
         if let observer = didChangeTimeObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
             didChangeTimeObserver = nil
         }
     }
@@ -44,23 +44,23 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         super.viewDidLoad()
         
         if let backgroundImageURL = NGDMManifest.sharedInstance.inMovieExperience?.appearance?.backgroundImageURL {
-            backgroundImageView.af_setImageWithURL(backgroundImageURL)
+            backgroundImageView.af_setImage(withURL: backgroundImageURL)
         }
         
-        if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors where actors.count > 0 {
-            talentTableView?.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+        if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors , actors.count > 0 {
+            talentTableView?.register(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         } else {
             talentTableView?.removeFromSuperview()
             talentTableView = nil
         }
         
-        showLessGradient.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor]
-        showLessGradientView.layer.insertSublayer(showLessGradient, atIndex: 0)
+        showLessGradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        showLessGradientView.layer.insertSublayer(showLessGradient, at: 0)
         
-        showLessButton.setTitle(String.localize("talent.show_less"), forState: .Normal)
+        showLessButton.setTitle(String.localize("talent.show_less"), for: UIControlState())
         
-        didChangeTimeObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
-            if let strongSelf = self, userInfo = notification.userInfo, time = userInfo["time"] as? Double where time != strongSelf.currentTime {
+        didChangeTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: nil) { [weak self] (notification) -> Void in
+            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let time = userInfo["time"] as? Double , time != strongSelf.currentTime {
                 strongSelf.processTimedEvents(time)
             }
         }
@@ -70,17 +70,17 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         super.viewDidLayoutSubviews()
         
         if let talentTableView = talentTableView {
-            showLessGradientView.frame.size.width = CGRectGetWidth(talentTableView.frame)
+            showLessGradientView.frame.size.width = talentTableView.frame.width
         }
         
         showLessGradient.frame = showLessGradientView.bounds
     }
     
-    func processTimedEvents(time: Double) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+    func processTimedEvents(_ time: Double) {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.currentTime = time
             
-            let newTalents = NGDMTimedEvent.findByTimecode(time, type: .Talent).sort({ (timedEvent1, timedEvent2) -> Bool in
+            let newTalents = NGDMTimedEvent.findByTimecode(time, type: .talent).sorted(by: { (timedEvent1, timedEvent2) -> Bool in
                 return timedEvent1.talent!.billingBlockOrder < timedEvent2.talent!.billingBlockOrder
             }).map({ $0.talent! })
             
@@ -98,7 +98,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
                 }
                     
                 if hasNewData {
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         self.currentTalents = newTalents
                         self.talentTableView?.reloadData()
                     }
@@ -108,47 +108,47 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     }
     
     // MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numCurrentTalents
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
-        if numCurrentTalents > indexPath.row, let talent = currentTalents?[indexPath.row] {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
+        if numCurrentTalents > (indexPath as NSIndexPath).row, let talent = currentTalents?[indexPath.row] {
             cell.talent = talent
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String.localize("label.actors").uppercaseString
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return String.localize("label.actors").uppercased()
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Constants.HeaderHeight
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return Constants.FooterHeight
     }
     
-    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return (isShowingMore ? nil : String.localize("talent.show_more"))
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textAlignment = .Center
+            header.textLabel?.textAlignment = .center
             header.textLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 19 : 17)
             header.textLabel?.textColor = UIColor(netHex: 0xe5e5e5)
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if let footer = view as? UITableViewHeaderFooterView {
-            footer.textLabel?.textAlignment = .Center
+            footer.textLabel?.textAlignment = .center
             footer.textLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 19 : 17)
             footer.textLabel?.textColor = UIColor(netHex: 0xe5e5e5)
             
@@ -158,12 +158,12 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TalentTableViewCell, talent = cell.talent {
-            self.performSegueWithIdentifier(SegueIdentifier.ShowTalent, sender: talent)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? TalentTableViewCell, let talent = cell.talent {
+            self.performSegue(withIdentifier: SegueIdentifier.ShowTalent, sender: talent)
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: Actions
@@ -177,7 +177,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     
     func toggleShowMore() {
         isShowingMore = !isShowingMore
-        showLessContainer.hidden = !isShowingMore
+        showLessContainer.isHidden = !isShowingMore
         
         if isShowingMore {
             currentTalents = NGDMManifest.sharedInstance.mainExperience?.orderedActors ?? [NGDMTalent]()
@@ -185,14 +185,14 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
             currentTalents = hiddenTalents
         }
         
-        talentTableView?.contentOffset = CGPointZero
+        talentTableView?.contentOffset = CGPoint.zero
         talentTableView?.reloadData()
     }
     
     // MARK: Storyboard Methods
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.ShowTalent {
-            let talentDetailViewController = segue.destinationViewController as! TalentDetailViewController
+            let talentDetailViewController = segue.destination as! TalentDetailViewController
             talentDetailViewController.title = String.localize("talentdetail.title")
             talentDetailViewController.talent = sender as! NGDMTalent
             talentDetailViewController.mode = TalentDetailMode.Synced
