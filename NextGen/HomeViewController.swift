@@ -88,8 +88,7 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate var titleOverlayBottomLeft: CGPoint {
-        return CGPoint.zero
-        //return CGPointMake(490, backgroundBaseSize.height - (titleOverlaySize.height + 15))
+        return CGPoint(x: 490, y: backgroundImageSize.height - (titleOverlaySize.height + 15))
     }
     
     deinit {
@@ -182,7 +181,7 @@ class HomeViewController: UIViewController {
             self.view.addSubview(buttonOverlayView)
             
             // Title treatment
-            if let imageURL = NGDMManifest.sharedInstance.inMovieExperience?.imageURL {
+            if nodeStyle == nil, let imageURL = NGDMManifest.sharedInstance.inMovieExperience?.imageURL {
                 titleOverlayView = UIView()
                 titleOverlayView!.isHidden = true
                 titleOverlayView!.isUserInteractionEnabled = false
@@ -204,6 +203,8 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        currentlyDismissing = false
         
         if interfaceCreated {
             loadBackground()
@@ -345,7 +346,7 @@ class HomeViewController: UIViewController {
                 
                 buttonOverlayView.frame = CGRect(
                     x: buttonOverlayX < 0 || (buttonOverlayX + buttonOverlayWidth > viewWidth) ? 10 : buttonOverlayX,
-                    y: viewHeight - (buttonOverlayBottomLeft.y * backgroundNewScale) - buttonOverlayHeight - backgroundPoint.y,
+                    y: backgroundNewSize.height - (buttonOverlayBottomLeft.y * backgroundNewScale) - buttonOverlayHeight + backgroundPoint.y,
                     width: buttonOverlayWidth,
                     height: buttonOverlayHeight
                 )
@@ -371,18 +372,6 @@ class HomeViewController: UIViewController {
                     titleImageView?.frame = titleOverlayView.bounds
                 }
             }
-        }
-        
-        if let backgroundVideoView = backgroundVideoView {
-            backgroundVideoView.frame = self.view.bounds
-            
-            if let backgroundVideoLayer = backgroundVideoLayer {
-                backgroundVideoLayer.frame = backgroundVideoView.bounds
-            }
-        }
-        
-        if let backgroundImageView = backgroundImageView {
-            backgroundImageView.frame = self.view.bounds
         }
     }
     
@@ -426,7 +415,6 @@ class HomeViewController: UIViewController {
                 videoPlayer.isMuted = true
                 videoPlayer.seek(to: CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
                 videoPlayer.play()
-
                 for view in homeScreenViews {
                     view.isHidden = false
                 }
@@ -437,8 +425,8 @@ class HomeViewController: UIViewController {
                 backgroundVideoLayer = AVPlayerLayer(player: videoPlayer)
                 backgroundVideoLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
                 backgroundVideoLayer!.frame = self.view.bounds
-                backgroundVideoView?.frame = self.view.bounds
-                backgroundVideoView?.layer.addSublayer(backgroundVideoLayer!)
+                backgroundVideoView.frame = self.view.bounds
+                backgroundVideoView.layer.addSublayer(backgroundVideoLayer!)
                 
                 if backgroundVideoFadeTime > 0 {
                     backgroundVideoTimeObserver = videoPlayer.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.55, Int32(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { [weak self] (time) in
@@ -495,7 +483,7 @@ class HomeViewController: UIViewController {
             homeScreenViews.removeAll()
         }
 
-        if let backgroundImageURL = nodeStyle?.backgroundImageURL {
+        if let backgroundImageURL = nodeStyle?.backgroundImageURL { // NGDMManifest.sharedInstance.outOfMovieExperience?.metadata?.imageURL (COMCAST)
             backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
                 if let image = image {
                     self?.backgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)

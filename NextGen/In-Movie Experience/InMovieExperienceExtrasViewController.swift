@@ -43,8 +43,13 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let backgroundImageURL = NGDMManifest.sharedInstance.inMovieExperience?.appearance?.backgroundImageURL {
-            backgroundImageView.sd_setImage(with: backgroundImageURL)
+        if let nodeStyle = NGDMManifest.sharedInstance.inMovieExperience?.getNodeStyle(UIApplication.shared.statusBarOrientation) {
+            self.view.backgroundColor = nodeStyle.backgroundColor
+            
+            if let backgroundImageURL = nodeStyle.backgroundImageURL {
+                backgroundImageView.sd_setImage(with: backgroundImageURL)
+                backgroundImageView.contentMode = nodeStyle.backgroundScaleMethod == .BestFit ? .scaleAspectFill : .scaleAspectFit
+            }
         }
         
         if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors , actors.count > 0 {

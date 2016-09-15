@@ -26,7 +26,7 @@ class ExtrasExperienceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if experience == NGDMManifest.sharedInstance.outOfMovieExperience, let titleImageURL = experience.appearance?.titleImageURL {
+        if experience == NGDMManifest.sharedInstance.outOfMovieExperience, let titleImageURL = experience.getNodeStyle(UIApplication.shared.statusBarOrientation)?.getButtonImage("Title")?.url {
             let titleImageView = UIImageView()
             titleImageView.translatesAutoresizingMaskIntoConstraints = false
             titleImageView.contentMode = .scaleAspectFill
@@ -69,7 +69,7 @@ class ExtrasExperienceViewController: UIViewController {
         self.view.addSubview(_backButton)
         self.view.sendSubview(toBack: _backButton)
         
-        if let titleTreatmentImageURL = NGDMManifest.sharedInstance.mainExperience?.appearance?.titleImageURL {
+        if let titleTreatmentImageURL = NGDMManifest.sharedInstance.inMovieExperience?.imageURL {
             let titleTreatmentImageView = UIImageView()
             titleTreatmentImageView.translatesAutoresizingMaskIntoConstraints = false
             titleTreatmentImageView.contentMode = .scaleAspectFit
@@ -87,19 +87,23 @@ class ExtrasExperienceViewController: UIViewController {
             }
         }
         
-        if let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance?.backgroundImageURL {
-            let backgroundImageView = UIImageView()
-            backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-            backgroundImageView.sd_setImage(with: backgroundImageURL)
-            backgroundImageView.contentMode = .scaleAspectFill
-            self.view.addSubview(backgroundImageView)
-            self.view.sendSubview(toBack: backgroundImageView)
+        if let nodeStyle = NGDMManifest.sharedInstance.outOfMovieExperience?.getNodeStyle(UIApplication.shared.statusBarOrientation) {
+            self.view.backgroundColor = nodeStyle.backgroundColor
             
-            if #available(iOS 9.0, *) {
-                backgroundImageView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-                backgroundImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-                backgroundImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-                backgroundImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            if let backgroundImageURL = nodeStyle.backgroundImageURL {
+                let backgroundImageView = UIImageView()
+                backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+                backgroundImageView.sd_setImage(with: backgroundImageURL)
+                backgroundImageView.contentMode = nodeStyle.backgroundScaleMethod == .BestFit ? .scaleAspectFill : .scaleAspectFit
+                self.view.addSubview(backgroundImageView)
+                self.view.sendSubview(toBack: backgroundImageView)
+                
+                if #available(iOS 9.0, *) {
+                    backgroundImageView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+                    backgroundImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+                    backgroundImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+                    backgroundImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+                }
             }
         }
         
