@@ -146,7 +146,7 @@ class HomeViewController: UIViewController {
             playButton.layer.masksToBounds = false
             
             if let playButtonImageURL = playButtonImageURL {
-                playButton.af_setImage(for: .normal, url: playButtonImageURL)
+                playButton.sd_setImage(with: playButtonImageURL, for: .normal)
                 playButton.contentHorizontalAlignment = .fill
                 playButton.contentVerticalAlignment = .fill
                 playButton.imageView?.contentMode = .scaleAspectFit
@@ -168,7 +168,7 @@ class HomeViewController: UIViewController {
             extrasButton.addGestureRecognizer(longPressGestureRecognizer)
             
             if let extrasButtonImageURL = extrasButtonImageURL {
-                extrasButton.af_setBackgroundImage(for: .normal, url: extrasButtonImageURL)
+                extrasButton.sd_setImage(with: extrasButtonImageURL, for: .normal)
                 extrasButton.contentHorizontalAlignment = .fill
                 extrasButton.contentVerticalAlignment = .fill
                 extrasButton.imageView?.contentMode = .scaleAspectFit
@@ -190,7 +190,7 @@ class HomeViewController: UIViewController {
                 
                 titleImageView = UIImageView()
                 titleImageView!.contentMode = .scaleAspectFit
-                titleImageView!.af_setImage(withURL: imageURL)
+                titleImageView!.sd_setImage(with: imageURL)
                 titleOverlayView!.addSubview(titleImageView!)
                 
                 self.view.addSubview(titleOverlayView!)
@@ -407,6 +407,8 @@ class HomeViewController: UIViewController {
     
     // MARK: Video Player
     func loadBackground() {
+        var hasVideoOrImage = false
+        
         if let nodeStyle = nodeStyle, let backgroundVideoURL = nodeStyle.backgroundVideoURL {
             if nodeStyle.backgroundVideoLoops {
                 didFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
@@ -483,6 +485,8 @@ class HomeViewController: UIViewController {
             } else {
                 backgroundVideoSize = self.view.frame.size
             }
+            
+            hasVideoOrImage = true
         } else {
             for view in homeScreenViews {
                 view.isHidden = false
@@ -492,11 +496,17 @@ class HomeViewController: UIViewController {
         }
 
         if let backgroundImageURL = nodeStyle?.backgroundImageURL {
-            backgroundImageView.af_setImage(withURL: backgroundImageURL, completion: { [weak self] (response) in
-                if let strongSelf = self, let image = response.result.value {
-                    strongSelf.backgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
+            backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
+                if let image = image {
+                    self?.backgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
                 }
             })
+            
+            hasVideoOrImage = true
+        }
+        
+        if !hasVideoOrImage {
+            backgroundImageSize = CGSize(width: 1920, height: 1080)
         }
     }
     

@@ -26,9 +26,9 @@ class MapItemCell: UICollectionViewCell {
     var imageURL: URL? {
         set {
             if let imageURL = newValue {
-                imageView.af_setImage(withURL: imageURL)
+                imageView.sd_setImage(with: imageURL)
             } else {
-                imageView.af_cancelImageRequest()
+                imageView.sd_cancelCurrentImageLoad()
                 imageView.image = nil
             }
         }

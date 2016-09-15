@@ -4,7 +4,7 @@
 
 import UIKit
 import NextGenDataManager
-import AlamofireImage
+import SDWebImage
 
 class VideoCell: UITableViewCell {
     
@@ -44,9 +44,9 @@ class VideoCell: UITableViewCell {
             }
             
             if let imageURL = experience?.imageURL {
-                thumbnailImageView.af_setImage(withURL: imageURL)
+                thumbnailImageView.sd_setImage(with: imageURL)
             } else {
-                thumbnailImageView.af_cancelImageRequest()
+                thumbnailImageView.sd_cancelCurrentImageLoad()
                 thumbnailImageView.image = nil
             }
         }

@@ -282,7 +282,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Image Gallery
     fileprivate func loadGalleryImageForPage(_ page: Int) {
         if let url = gallery?.getImageURLForPage(page), let imageView = (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView , imageView.image == nil {
-            imageView.af_setImage(withURL: url)
+            imageView.sd_setImage(with: url)
         }
     }
     

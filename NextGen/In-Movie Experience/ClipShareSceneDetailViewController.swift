@@ -43,9 +43,9 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         previewPlayButton.isHidden = false
         
         if let imageURL = timedEvent?.imageURL {
-            previewImageView.af_setImage(withURL: imageURL)
+            previewImageView.sd_setImage(with: imageURL)
         } else {
-            previewImageView.af_cancelImageRequest()
+            previewImageView.sd_cancelCurrentImageLoad()
             previewImageView.image = nil
         }
         

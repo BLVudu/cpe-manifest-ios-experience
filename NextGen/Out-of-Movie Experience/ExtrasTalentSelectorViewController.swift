@@ -39,7 +39,7 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
                 if talentDetailViewController != nil {
                     talentDetailViewController!.loadTalent(talent)
                 } else {
-                    if let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController) as? TalentDetailViewController {
+                    if let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController.self) as? TalentDetailViewController {
                         talentDetailViewController.talent = talent
                         
                         talentDetailViewController.view.frame = talentDetailView.bounds

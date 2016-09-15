@@ -44,7 +44,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         super.viewDidLoad()
         
         if let backgroundImageURL = NGDMManifest.sharedInstance.inMovieExperience?.appearance?.backgroundImageURL {
-            backgroundImageView.af_setImage(withURL: backgroundImageURL)
+            backgroundImageView.sd_setImage(with: backgroundImageURL)
         }
         
         if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors , actors.count > 0 {

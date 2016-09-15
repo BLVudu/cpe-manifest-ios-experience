@@ -96,8 +96,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
     func addControls() {
         let segmentedControl = UISegmentedControl(items: [String.localize("locations.map.type_standard"), String.localize("locations.map.type_satellite")])
-        let textAttributes = NSDictionary(object: UIFont.themeCondensedFont(16), forKey: NSFontAttributeName as NSCopying)
-        segmentedControl.setTitleTextAttributes(textAttributes as! [AnyHashable: Any], for: UIControlState())
+        segmentedControl.setTitleTextAttributes([NSFontAttributeName: UIFont.themeCondensedFont(16)], for: UIControlState())
         segmentedControl.backgroundColor = UIColor.white
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.layer.cornerRadius = 5

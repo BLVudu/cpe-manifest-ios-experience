@@ -189,7 +189,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     fileprivate func playSelectedExperience() {
         if let selectedIndexPath = galleryTableView.indexPathForSelectedRow, let selectedExperience = experience.childExperiences?[selectedIndexPath.row] {
             if let imageURL = selectedExperience.imageURL {
-                previewImageView.af_setImage(withURL: imageURL)
+                previewImageView.sd_setImage(with: imageURL)
             }
             
             if didPlayFirstItem, let videoURL = selectedExperience.videoURL, let videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {

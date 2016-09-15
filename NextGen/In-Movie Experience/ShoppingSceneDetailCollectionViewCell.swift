@@ -24,13 +24,11 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         set {
             if let url = newValue {
                 imageView.contentMode = UIViewContentMode.scaleAspectFit
-                imageView.af_setImage(withURL: url, completion: { [weak self] (response) in
-                    if let strongSelf = self {
-                        strongSelf.imageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
-                    }
+                imageView.sd_setImage(with: url, completed: { [weak self] (image, _, _, _) in
+                    self?.imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
-                imageView.af_cancelImageRequest()
+                imageView.sd_cancelCurrentImageLoad()
                 imageView.image = nil
                 imageView.backgroundColor = UIColor.clear
             }

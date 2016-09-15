@@ -4,7 +4,7 @@
 
 import UIKit
 import NextGenDataManager
-import AlamofireImage
+import SDWebImage
 
 class ExtrasExperienceViewController: UIViewController {
     
@@ -30,7 +30,7 @@ class ExtrasExperienceViewController: UIViewController {
             let titleImageView = UIImageView()
             titleImageView.translatesAutoresizingMaskIntoConstraints = false
             titleImageView.contentMode = .scaleAspectFill
-            titleImageView.af_setImage(withURL: titleImageURL)
+            titleImageView.sd_setImage(with: titleImageURL)
             self.view.addSubview(titleImageView)
             self.view.sendSubview(toBack: titleImageView)
             
@@ -74,7 +74,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleTreatmentImageView.translatesAutoresizingMaskIntoConstraints = false
             titleTreatmentImageView.contentMode = .scaleAspectFit
             titleTreatmentImageView.clipsToBounds = true
-            titleTreatmentImageView.af_setImage(withURL: titleTreatmentImageURL)
+            titleTreatmentImageView.sd_setImage(with: titleTreatmentImageURL)
             self.view.addSubview(titleTreatmentImageView)
             self.view.sendSubview(toBack: titleTreatmentImageView)
             
@@ -90,7 +90,7 @@ class ExtrasExperienceViewController: UIViewController {
         if let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.appearance?.backgroundImageURL {
             let backgroundImageView = UIImageView()
             backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-            backgroundImageView.af_setImage(withURL: backgroundImageURL)
+            backgroundImageView.sd_setImage(with: backgroundImageURL)
             backgroundImageView.contentMode = .scaleAspectFill
             self.view.addSubview(backgroundImageView)
             self.view.sendSubview(toBack: backgroundImageView)

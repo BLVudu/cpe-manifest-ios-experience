@@ -17,13 +17,11 @@ class ShoppingDetailCell: UICollectionViewCell {
             productBrandLabel.text = product?.brand
             productNameLabel.text = product?.name
             if let imageURL = product?.productImageURL {
-                productImageView.af_setImage(withURL: imageURL, completion: { [weak self] (response) in
-                    if let strongSelf = self {
-                        strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
-                    }
+                productImageView.sd_setImage(with: imageURL, completed: { [weak self] (image, _, _, _) in
+                    self?.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
-                productImageView.af_cancelImageRequest()
+                productImageView.sd_cancelCurrentImageLoad()
                 productImageView.image = nil
                 productImageView.backgroundColor = UIColor.clear
             }
@@ -69,13 +67,11 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
             productNameLabel.text = currentProduct?.name
             productPriceLabel.text = currentProduct?.price
             if let imageURL = currentProduct?.productImageURL {
-                productImageView.af_setImage(withURL: imageURL, completion: { [weak self] (response) in
-                    if let strongSelf = self {
-                        strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
-                    }
+                productImageView.sd_setImage(with: imageURL, completed: { [weak self] (image, _, _, _) in
+                    self?.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
-                productImageView.af_cancelImageRequest()
+                productImageView.sd_cancelCurrentImageLoad()
                 productImageView.image = nil
                 productImageView.backgroundColor = UIColor.clear
             }

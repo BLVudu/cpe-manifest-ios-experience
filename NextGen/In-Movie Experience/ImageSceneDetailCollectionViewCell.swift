@@ -17,9 +17,9 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     fileprivate var imageURL: URL? {
         set {
             if let url = newValue {
-                imageView.af_setImage(withURL: url)
+                imageView.sd_setImage(with: url)
             } else {
-                imageView.af_cancelImageRequest()
+                imageView.sd_cancelCurrentImageLoad()
                 imageView.image = nil
                 imageView.backgroundColor = UIColor.clear
             }

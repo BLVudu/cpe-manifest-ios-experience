@@ -36,7 +36,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         self.navigationController?.isNavigationBarHidden = shouldDisplayFullScreen
         
         let configuration = WKWebViewConfiguration()
-        configuration.requiresUserActionForMediaPlayback = false
+        if #available(iOS 9.0, *) {
+            configuration.requiresUserActionForMediaPlayback = false
+        } else {
+            configuration.mediaPlaybackRequiresUserAction = false
+        }
         _webView = WKWebView(frame: self.view.bounds, configuration: configuration)
         self.view.addSubview(_webView)
         
