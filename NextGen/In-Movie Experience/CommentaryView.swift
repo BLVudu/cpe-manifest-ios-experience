@@ -40,7 +40,7 @@ class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         
-        if let path = NSBundle.mainBundle().pathForResource("Commentary", ofType: "plist"), let sections = NSArray(contentsOfFile: path) {
+        if let path = Bundle.main.path(forResource: "Commentary", ofType: "plist"), let sections = NSArray(contentsOfFile: path) {
             for section in sections {
                 if let sectionInfo = section as? NSDictionary {
                     sectionData.append(CommentaryObject(info: sectionInfo))
@@ -52,40 +52,40 @@ class CommentaryView: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
-        let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        let selectedIndexPath = IndexPath(row: 0, section: 0)
+        self.tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
 
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("commentary")as! CommentaryViewCell
-        cell.option.text = sectionData[indexPath.row].title
-        cell.subtitle.text = sectionData[indexPath.row].subtitle
-        cell.radioBtn.index = indexPath.row
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentary")as! CommentaryViewCell
+        cell.option.text = sectionData[(indexPath as NSIndexPath).row].title
+        cell.subtitle.text = sectionData[(indexPath as NSIndexPath).row].subtitle
+        cell.radioBtn.index = (indexPath as NSIndexPath).row
         cell.backgroundColor = UIColor.init(red: 17/255, green: 17/255, blue: 19/255, alpha: 1)
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
          return 80
     }
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionData.count
     }
     
     
-    @IBAction func selectedRB(sender: RadioButton) {
+    @IBAction func selectedRB(_ sender: RadioButton) {
         
-        let indexPath = NSIndexPath(forRow: sender.index!, inSection: 0)
+        let indexPath = IndexPath(row: sender.index!, section: 0)
         
-        self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        NSNotificationCenter.defaultCenter().postNotificationName(kDidSelectCommetaryOption, object: nil, userInfo: ["option":sender.index!])
+        self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kDidSelectCommetaryOption), object: nil, userInfo: ["option":sender.index!])
 
     }
     

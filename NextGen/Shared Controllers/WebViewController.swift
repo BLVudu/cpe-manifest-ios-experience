@@ -7,19 +7,19 @@ import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let HeaderButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 125 : 100)
         static let HeaderButtonHeight: CGFloat = (DeviceType.IS_IPAD ? 90 : 50)
         static let HeaderIconPadding: CGFloat = (DeviceType.IS_IPAD ? 30 : 15)
     }
     
-    private var _webView: WKWebView!
-    private var _title: String?
-    private var _url: NSURL!
+    fileprivate var _webView: WKWebView!
+    fileprivate var _title: String?
+    fileprivate var _url: URL!
     var shouldDisplayFullScreen = false
     
     // MARK: Initialization
-    convenience init(title: String?, url: NSURL) {
+    convenience init(title: String?, url: URL) {
         self.init()
         
         _title = title
@@ -31,66 +31,70 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         
         self.title = _title
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         
-        self.navigationController?.navigationBarHidden = shouldDisplayFullScreen
+        self.navigationController?.isNavigationBarHidden = shouldDisplayFullScreen
         
         let configuration = WKWebViewConfiguration()
-        configuration.mediaPlaybackRequiresUserAction = false
+        if #available(iOS 9.0, *) {
+            configuration.requiresUserActionForMediaPlayback = false
+        } else {
+            configuration.mediaPlaybackRequiresUserAction = false
+        }
         _webView = WKWebView(frame: self.view.bounds, configuration: configuration)
         self.view.addSubview(_webView)
         
         // Disable caching for now
         if #available(iOS 9.0, *) {
             let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
-            let date = NSDate(timeIntervalSince1970: 0)
-            WKWebsiteDataStore.defaultDataStore().removeDataOfTypes(websiteDataTypes as! Set<String>, modifiedSince: date, completionHandler:{ })
+            let date = Date(timeIntervalSince1970: 0)
+            WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes as! Set<String>, modifiedSince: date, completionHandler:{ })
         } else {
-            var libraryPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.LibraryDirectory, NSSearchPathDomainMask.UserDomainMask, false).first!
+            var libraryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, false).first!
             libraryPath += "/Cookies"
             
             do {
-                try NSFileManager.defaultManager().removeItemAtPath(libraryPath)
+                try FileManager.default.removeItem(atPath: libraryPath)
             } catch {
                 print("error")
             }
             
-            NSURLCache.sharedURLCache().removeAllCachedResponses()
+            URLCache.shared.removeAllCachedResponses()
         }
         
         _webView.navigationDelegate = self
-        _webView.loadRequest(NSURLRequest(URL: _url))
+        _webView.load(URLRequest(url: _url))
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let button = UIButton(type: .Custom)
-        button.frame = CGRectMake(CGRectGetWidth(self.view.frame) - Constants.HeaderButtonWidth, 0, Constants.HeaderButtonWidth, Constants.HeaderButtonHeight)
-        button.contentHorizontalAlignment = .Left
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(x: self.view.frame.width - Constants.HeaderButtonWidth, y: 0, width: Constants.HeaderButtonWidth, height: Constants.HeaderButtonHeight)
+        button.contentHorizontalAlignment = .left
         button.titleEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding + 10, 0, 0)
         button.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding, 0, 0)
         button.titleLabel?.font = UIFont.themeFont(DeviceType.IS_IPAD ? 18 : 14)
-        button.setTitle(String.localize("label.exit"), forState: .Normal)
-        button.setImage(UIImage(named: "Delete"), forState: .Normal)
-        button.titleLabel?.layer.shadowColor = UIColor.blackColor().CGColor
+        button.setTitle(String.localize("label.exit"), for: UIControlState())
+        button.setImage(UIImage(named: "Delete"), for: UIControlState())
+        button.titleLabel?.layer.shadowColor = UIColor.black.cgColor
         button.titleLabel?.layer.shadowOpacity = 0.75
         button.titleLabel?.layer.shadowRadius = 2
-        button.titleLabel?.layer.shadowOffset = CGSizeMake(0, 1)
+        button.titleLabel?.layer.shadowOffset = CGSize(width: 0, height: 1)
         button.titleLabel?.layer.masksToBounds = false
         button.titleLabel?.layer.shouldRasterize = true
-        button.addTarget(self, action: #selector(self.onDone), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(self.onDone), for: UIControlEvents.touchUpInside)
         self.view.addSubview(button)
     }
 
     // MARK: Actions
     func onDone() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: WKNavigationDelegate
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        decisionHandler(WKNavigationActionPolicy.Allow)
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        decisionHandler(WKNavigationActionPolicy.allow)
     }
 
 }

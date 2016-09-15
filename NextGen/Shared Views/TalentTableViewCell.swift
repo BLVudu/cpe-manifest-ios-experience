@@ -9,13 +9,13 @@ class TalentTableViewCell: UITableViewCell {
     
     static let ReuseIdentifier = "TalentTableViewCell"
     
-    @IBOutlet weak private var talentImageView: RoundImageView!
-    @IBOutlet weak private var nameLabel: UILabel?
-    @IBOutlet weak private var roleLabel: UILabel?
+    @IBOutlet weak fileprivate var talentImageView: RoundImageView!
+    @IBOutlet weak fileprivate var nameLabel: UILabel?
+    @IBOutlet weak fileprivate var roleLabel: UILabel?
     
-    private var setImageSessionDataTask: NSURLSessionDataTask?
+    fileprivate var setImageSessionDataTask: URLSessionDataTask?
     
-    private var imageURL: NSURL? {
+    fileprivate var imageURL: URL? {
         didSet {
             if let task = setImageSessionDataTask {
                 task.cancel()
@@ -24,18 +24,18 @@ class TalentTableViewCell: UITableViewCell {
             
             if let url = imageURL {
                 if url != oldValue {
-                    talentImageView.af_setImageWithURL(url)
+                    talentImageView.sd_setImage(with: url)
                 }
             } else {
-                talentImageView.af_cancelImageRequest()
+                talentImageView.sd_cancelCurrentImageLoad()
                 talentImageView.image = nil
             }
         }
     }
     
-    private var name: String? {
+    fileprivate var name: String? {
         set {
-            nameLabel?.text = newValue?.uppercaseString
+            nameLabel?.text = newValue?.uppercased()
         }
         
         get {
@@ -43,7 +43,7 @@ class TalentTableViewCell: UITableViewCell {
         }
     }
     
-    private var role: String? {
+    fileprivate var role: String? {
         set {
             roleLabel?.text = newValue
         }
@@ -78,20 +78,20 @@ class TalentTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         if selected {
             talentImageView.layer.borderWidth = 2
-            talentImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            talentImageView.layer.borderColor = UIColor.white.cgColor
             nameLabel?.textColor = UIColor.themePrimaryColor()
             roleLabel?.textColor = UIColor.themePrimaryColor()
         } else {
             talentImageView.layer.borderWidth = 0
-            nameLabel?.textColor = UIColor.whiteColor()
+            nameLabel?.textColor = UIColor.white
             roleLabel?.textColor = UIColor.themeLightGreyColor()
         }
     }

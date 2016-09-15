@@ -7,15 +7,13 @@ import NextGenDataManager
 
 extension UIImageView {
     
-    func setImageWithURL(url: NSURL, completion: ((image: UIImage?) -> Void)?) -> NSURLSessionDataTask? {
-        if url.fileURL {
-            dispatch_async(dispatch_get_main_queue()) {
-                if let path = url.path {
-                    self.image = UIImage(named: path)
-                }
+    func setImageWithURL(_ url: URL, completion: ((_ image: UIImage?) -> Void)?) -> URLSessionDataTask? {
+        if url.isFileURL {
+            DispatchQueue.main.async {
+                self.image = UIImage(named: url.path)
                 
                 if let completion = completion {
-                    completion(image: self.image)
+                    completion(self.image)
                 }
             }
         
@@ -23,11 +21,11 @@ extension UIImageView {
         }
         
         return UIImageRemoteLoader.loadImage(url, completion: { (image) in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.image = image
                 
                 if let completion = completion {
-                    completion(image: self.image)
+                    completion(self.image)
                 }
             }
         })

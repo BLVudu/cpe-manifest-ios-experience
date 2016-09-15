@@ -15,33 +15,33 @@ class InMovieExperienceViewController: UIViewController {
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        extrasContainerView.hidden = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
+        extrasContainerView.isHidden = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
         updatePlayerConstraints()
     }
     
     func updatePlayerConstraints() {
-        playerToExtrasConstarint.active = !extrasContainerView.hidden
-        playerToSuperviewConstraint.active = !playerToExtrasConstarint.active
+        playerToExtrasConstarint.isActive = !extrasContainerView.isHidden
+        playerToSuperviewConstraint.isActive = !playerToExtrasConstarint.isActive
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.All
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.all
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
-        extrasContainerView.hidden = size.width > size.height
+        extrasContainerView.isHidden = size.width > size.height
         updatePlayerConstraints()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.PlayerViewController {
-            let playerViewController = segue.destinationViewController as! VideoPlayerViewController
-            playerViewController.mode = VideoPlayerMode.MainFeature
+            let playerViewController = segue.destination as! VideoPlayerViewController
+            playerViewController.mode = VideoPlayerMode.mainFeature
         }
     }
 

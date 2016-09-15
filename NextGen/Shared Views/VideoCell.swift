@@ -4,27 +4,20 @@
 
 import UIKit
 import NextGenDataManager
-import AlamofireImage
+import SDWebImage
 
 class VideoCell: UITableViewCell {
     
     static let ReuseIdentifier = "VideoCellReuseIdentifier"
-    static var NibName: String {
-        var nibName = String(VideoCell)
-        if !DeviceType.IS_IPAD {
-            nibName += "_iPhone"
-        }
-        
-        return nibName
-    }
+    static let NibName = "VideoCell" + (DeviceType.IS_IPAD ? "" : "_iPhone")
     
-    @IBOutlet weak private var thumbnailContainerView: UIView!
-    @IBOutlet weak private var thumbnailImageView: UIImageView!
-    @IBOutlet weak private var playIconImageView: UIImageView!
-    @IBOutlet weak private var runtimeLabel: UILabel!
-    @IBOutlet weak private var captionLabel: UILabel!
+    @IBOutlet weak fileprivate var thumbnailContainerView: UIView!
+    @IBOutlet weak fileprivate var thumbnailImageView: UIImageView!
+    @IBOutlet weak fileprivate var playIconImageView: UIImageView!
+    @IBOutlet weak fileprivate var runtimeLabel: UILabel!
+    @IBOutlet weak fileprivate var captionLabel: UILabel!
     
-    private var didPlayVideoObserver: NSObjectProtocol?
+    fileprivate var didPlayVideoObserver: NSObjectProtocol?
     
     var experience: NGDMExperience? {
         didSet {
@@ -34,26 +27,26 @@ class VideoCell: UITableViewCell {
             }
             
             if let videoURL = experience?.videoURL {
-                if let runtime = experience?.videoRuntime where runtime > 0 {
-                    runtimeLabel.hidden = false
+                if let runtime = experience?.videoRuntime , runtime > 0 {
+                    runtimeLabel.isHidden = false
                     runtimeLabel.text = SettingsManager.didWatchVideo(videoURL) ? String.localize("label.watched") : runtime.formattedTime()
                 } else {
-                    runtimeLabel.hidden = true
+                    runtimeLabel.isHidden = true
                 }
                 
-                didPlayVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidPlayVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-                    if let strongSelf = self, playingVideoURL = notification.userInfo?[VideoPlayerNotification.UserInfoVideoURL] as? NSURL where playingVideoURL == videoURL {
+                didPlayVideoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidPlayVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                    if let strongSelf = self, let playingVideoURL = (notification as NSNotification).userInfo?[VideoPlayerNotification.UserInfoVideoURL] as? URL , playingVideoURL == videoURL {
                         strongSelf.runtimeLabel.text = String.localize("label.playing")
                     }
                 })
             } else {
-                runtimeLabel.hidden = true
+                runtimeLabel.isHidden = true
             }
             
             if let imageURL = experience?.imageURL {
-                thumbnailImageView.af_setImageWithURL(imageURL)
+                thumbnailImageView.sd_setImage(with: imageURL)
             } else {
-                thumbnailImageView.af_cancelImageRequest()
+                thumbnailImageView.sd_cancelCurrentImageLoad()
                 thumbnailImageView.image = nil
             }
         }
@@ -65,7 +58,7 @@ class VideoCell: UITableViewCell {
         experience = nil
         
         if let observer = didPlayVideoObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
             didPlayVideoObserver = nil
         }
         
@@ -78,18 +71,18 @@ class VideoCell: UITableViewCell {
         updateCellStyle()
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         updateCellStyle()
         
         if selected {
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.thumbnailImageView.alpha = 1
                 self.captionLabel.alpha = 1
             }, completion: nil)
         } else {
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.thumbnailImageView.alpha = 0.5
                 self.captionLabel.alpha = 0.5
                 if let videoURL = self.experience?.videoURL {
@@ -102,10 +95,10 @@ class VideoCell: UITableViewCell {
     }
     
     func updateCellStyle() {
-        thumbnailContainerView.layer.borderColor = UIColor.whiteColor().CGColor
-        thumbnailContainerView.layer.borderWidth = (self.selected ? 2 : 0)
-        captionLabel.textColor = (self.selected ? UIColor.themePrimaryColor() : UIColor.whiteColor())
-        playIconImageView.hidden = (experience == nil || experience!.isType(.Gallery)) || self.selected
+        thumbnailContainerView.layer.borderColor = UIColor.white.cgColor
+        thumbnailContainerView.layer.borderWidth = (self.isSelected ? 2 : 0)
+        captionLabel.textColor = (self.isSelected ? UIColor.themePrimaryColor() : UIColor.white)
+        playIconImageView.isHidden = (experience == nil || experience!.isType(.gallery)) || self.isSelected
     }
     
     func setWatched() {

@@ -14,9 +14,9 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    private var title: String? {
+    fileprivate var title: String? {
         set {
-            titleLabel?.text = newValue?.uppercaseString
+            titleLabel?.text = newValue?.uppercased()
         }
         
         get {
@@ -42,7 +42,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private var lastSavedTime: Double = -1.0
+    fileprivate var lastSavedTime: Double = -1.0
     var currentTime: Double = -1.0 {
         didSet {
             if lastSavedTime == -1 || abs(currentTime - lastSavedTime) >= Constants.UpdateInterval {
@@ -62,7 +62,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     internal func timedEventDidChange() {
         title = timedEvent?.experience?.title
         
-        if timedEvent != nil && timedEvent!.isType(.ClipShare) {
+        if timedEvent != nil && timedEvent!.isType(.clipShare) {
             descriptionText = String.localize("clipshare.description")
         } else {
             descriptionText = timedEvent?.descriptionText

@@ -7,7 +7,7 @@ import CoreGraphics
 
 class TheTakeProduct: NSObject {
     
-    private var _data: NSDictionary!
+    fileprivate var _data: NSDictionary!
     
     var id: String {
         get {
@@ -33,34 +33,30 @@ class TheTakeProduct: NSObject {
         }
     }
     
-    var productImageURL: NSURL? {
+    var productImageURL: URL? {
         get {
             var images = _data["productImages"]
             if images == nil {
                 images = _data["productImage"]
             }
             
-            if images != nil {
-                if let image = images?["500pxLink"] as? String {
-                    return NSURL(string: image)
-                }
+            if let image = (images as? NSDictionary)?["500pxLink"] as? String {
+                return URL(string: image)
             }
             
             return nil
         }
     }
     
-    var sceneImageURL: NSURL? {
+    var sceneImageURL: URL? {
         get {
             var images = _data["cropImages"]
             if images == nil {
                 images = _data["cropImage"]
             }
             
-            if images != nil {
-                if let image = images?["500pxCropLink"] as? String {
-                    return NSURL(string: image)
-                }
+            if let image = (images as? NSDictionary)?["500pxCropLink"] as? String {
+                return URL(string: image)
             }
             
             return nil
@@ -70,7 +66,7 @@ class TheTakeProduct: NSObject {
     var exactMatch: Bool {
         get {
             if let verified = _data["verified"] {
-                return verified.boolValue
+                return (verified as AnyObject).boolValue
             }
             
             return false
@@ -79,7 +75,7 @@ class TheTakeProduct: NSObject {
     
     var theTakeURLString: String {
         get {
-            if let link = _data["purchaseLink"] as? String where link.characters.count > 0 {
+            if let link = _data["purchaseLink"] as? String , link.characters.count > 0 {
                 return link
             }
             
@@ -87,9 +83,9 @@ class TheTakeProduct: NSObject {
         }
     }
     
-    var theTakeURL: NSURL {
+    var theTakeURL: URL {
         get {
-            return NSURL(string: theTakeURLString)!
+            return URL(string: theTakeURLString)!
         }
     }
     
@@ -103,7 +99,7 @@ class TheTakeProduct: NSObject {
         _data = data
     }
     
-    override func isEqual(object: AnyObject?) -> Bool {
+    override func isEqual(_ object: Any?) -> Bool {
         if let otherProduct = object as? TheTakeProduct {
             return otherProduct.id == id
         }
@@ -111,16 +107,12 @@ class TheTakeProduct: NSObject {
         return false
     }
     
-    func dataValue(key: String) -> String {
-        if let value = _data[key] {
-            return String(value)
-        }
-        
-        return ""
+    func dataValue(_ key: String) -> String {
+        return (_data[key] as? String) ?? ""
     }
     
-    func getSceneBullseyePoint(parentRect: CGRect) -> CGPoint {
-        return CGPointMake(CGRectGetWidth(parentRect) * CGFloat((dataValue("keyCropProductX") as NSString).doubleValue), CGRectGetHeight(parentRect) * CGFloat((dataValue("keyCropProductY") as NSString).doubleValue))
+    func getSceneBullseyePoint(_ parentRect: CGRect) -> CGPoint {
+        return CGPoint(x: parentRect.width * CGFloat((dataValue("keyCropProductX") as NSString).doubleValue), y: parentRect.height * CGFloat((dataValue("keyCropProductY") as NSString).doubleValue))
     }
     
 }

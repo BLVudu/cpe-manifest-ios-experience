@@ -4,16 +4,16 @@
 
 extension AVPlayerItem {
     
-    convenience init(cacheableURL: NSURL) {
+    convenience init(cacheableURL: URL) {
         if let tempFileURL = NextGenCacheManager.tempFileURL(cacheableURL) {
             if NextGenCacheManager.fileExists(tempFileURL) {
-                self.init(URL: tempFileURL)
+                self.init(url: tempFileURL)
             } else {
                 NextGenCacheManager.storeTempFile(cacheableURL)
-                self.init(URL: cacheableURL)
+                self.init(url: cacheableURL)
             }
         } else {
-            self.init(URL: cacheableURL)
+            self.init(url: cacheableURL)
         }
     }
     
