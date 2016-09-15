@@ -84,11 +84,11 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate var titleOverlaySize: CGSize {
-        return CGSize(width: 300, height: 100)
+        return CGSize(width: 400, height: 133)
     }
     
     fileprivate var titleOverlayBottomLeft: CGPoint {
-        return CGPoint(x: 490, y: backgroundImageSize.height - (titleOverlaySize.height + 15))
+        return CGPoint(x: 440, y: backgroundImageSize.height - (titleOverlaySize.height + 15))
     }
     
     deinit {
@@ -151,6 +151,7 @@ class HomeViewController: UIViewController {
                 playButton.imageView?.contentMode = .scaleAspectFit
             } else {
                 playButton.setTitle(String.localize("label.play_movie"), for: UIControlState())
+                playButton.titleLabel?.font = UIFont.themeCondensedBoldFont(15)
                 playButton.backgroundColor = UIColor.red
             }
             
@@ -173,6 +174,7 @@ class HomeViewController: UIViewController {
                 extrasButton.imageView?.contentMode = .scaleAspectFit
             } else {
                 extrasButton.setTitle(String.localize("label.extras"), for: UIControlState())
+                extrasButton.titleLabel?.font = UIFont.themeCondensedBoldFont(15)
                 extrasButton.backgroundColor = UIColor.gray
             }
             
@@ -358,12 +360,12 @@ class HomeViewController: UIViewController {
                 extrasButton.frame = CGRect(x: (buttonOverlayView.frame.width - extrasButtonWidth) / 2, y: buttonOverlayHeight - extrasButtonHeight, width: extrasButtonWidth, height: extrasButtonHeight)
                 
                 if let titleOverlayView = titleOverlayView {
-                    let titleOverlayWidth = min(titleOverlaySize.width * backgroundNewScale, viewWidth - 20)
+                    let titleOverlayWidth = min(titleOverlaySize.width * backgroundNewScale, viewWidth * 0.9)
                     let titleOverlayHeight = titleOverlayWidth / (titleOverlaySize.width / titleOverlaySize.height)
                     let titleOverlayX = (titleOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - viewWidth) / 2)
                     
                     titleOverlayView.frame = CGRect(
-                        x: titleOverlayX < 0 || (titleOverlayX + titleOverlayWidth > viewWidth) ? 10 : titleOverlayX,
+                        x: titleOverlayX < 0 || (titleOverlayX + titleOverlaySize.width > viewWidth) ? (viewWidth - titleOverlayWidth) / 2 : titleOverlayX,
                         y: viewHeight - titleOverlayBottomLeft.y * backgroundNewScale - titleOverlayHeight,
                         width: titleOverlayWidth,
                         height: titleOverlayHeight
@@ -483,7 +485,12 @@ class HomeViewController: UIViewController {
             homeScreenViews.removeAll()
         }
 
-        if let backgroundImageURL = nodeStyle?.backgroundImageURL { // NGDMManifest.sharedInstance.outOfMovieExperience?.metadata?.imageURL (COMCAST)
+        var backgroundImageURL = nodeStyle?.backgroundImageURL
+        if backgroundImageURL == nil && !hasVideoOrImage {
+            backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL // This is how Comcast defines background images
+        }
+        
+        if let backgroundImageURL = backgroundImageURL {
             backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
                 if let image = image {
                     self?.backgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
