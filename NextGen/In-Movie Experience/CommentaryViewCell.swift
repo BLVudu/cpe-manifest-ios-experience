@@ -11,13 +11,13 @@ class CommentaryViewCell: UITableViewCell {
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var radioBtn: RadioButton!
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         if (selected){
             
-            NSNotificationCenter.defaultCenter().postNotificationName(kDidSelectCommetaryOption, object: nil, userInfo: ["option":self.radioBtn.index!])
-            self.radioBtn.selected = true
+            NotificationCenter.default.post(name: Notification.Name(rawValue: kDidSelectCommetaryOption), object: nil, userInfo: ["option":self.radioBtn.index!])
+            self.radioBtn.isSelected = true
             self.option.textColor = UIColor.init(red: 255/255, green: 205/255, blue: 77/255, alpha: 1)
             //self.subtitle.textColor = UIColor.init(red: 255/255, green: 205/255, blue: 77/255, alpha: 1)
             
@@ -25,8 +25,8 @@ class CommentaryViewCell: UITableViewCell {
             
         } else {
             
-            self.radioBtn.selected = false
-            self.option.textColor = UIColor.whiteColor()
+            self.radioBtn.isSelected = false
+            self.option.textColor = UIColor.white
             //self.subtitle.textColor = UIColor.whiteColor()
             
             

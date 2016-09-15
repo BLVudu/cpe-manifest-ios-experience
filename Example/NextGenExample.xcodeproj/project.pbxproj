@@ -81,7 +81,7 @@
 		70C093581D0F60DF00BFC1E4 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F81D0F60DF00BFC1E4 /* VideoCell.swift */; };
 		70C093591D0F60DF00BFC1E4 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092FA1D0F60DF00BFC1E4 /* UIColor+Theme.swift */; };
 		70C0935A1D0F60DF00BFC1E4 /* UIFont+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092FB1D0F60DF00BFC1E4 /* UIFont+Theme.swift */; };
-		70C0935C1D0F60DF00BFC1E4 /* Indexable+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092FE1D0F60DF00BFC1E4 /* Indexable+Utils.swift */; };
+		70C0935C1D0F60DF00BFC1E4 /* Collection+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092FE1D0F60DF00BFC1E4 /* Collection+Utils.swift */; };
 		70C0935E1D0F60DF00BFC1E4 /* NSTimeInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C093001D0F60DF00BFC1E4 /* NSTimeInterval+Utils.swift */; };
 		70C0935F1D0F60DF00BFC1E4 /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C093011D0F60DF00BFC1E4 /* NSURL+Utils.swift */; };
 		70C093601D0F60DF00BFC1E4 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C093021D0F60DF00BFC1E4 /* String+Utils.swift */; };
@@ -198,7 +198,7 @@
 		70C092F81D0F60DF00BFC1E4 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		70C092FA1D0F60DF00BFC1E4 /* UIColor+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		70C092FB1D0F60DF00BFC1E4 /* UIFont+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Theme.swift"; sourceTree = "<group>"; };
-		70C092FE1D0F60DF00BFC1E4 /* Indexable+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Indexable+Utils.swift"; sourceTree = "<group>"; };
+		70C092FE1D0F60DF00BFC1E4 /* Collection+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Utils.swift"; sourceTree = "<group>"; };
 		70C093001D0F60DF00BFC1E4 /* NSTimeInterval+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+Utils.swift"; sourceTree = "<group>"; };
 		70C093011D0F60DF00BFC1E4 /* NSURL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Utils.swift"; sourceTree = "<group>"; };
 		70C093021D0F60DF00BFC1E4 /* String+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
@@ -449,7 +449,7 @@
 			children = (
 				70A5FBAE1D6289B800EE7847 /* AVPlayerItem+Cache.swift */,
 				70A5FBAF1D6289B800EE7847 /* DeviceType.swift */,
-				70C092FE1D0F60DF00BFC1E4 /* Indexable+Utils.swift */,
+				70C092FE1D0F60DF00BFC1E4 /* Collection+Utils.swift */,
 				70C093001D0F60DF00BFC1E4 /* NSTimeInterval+Utils.swift */,
 				70C093011D0F60DF00BFC1E4 /* NSURL+Utils.swift */,
 				70C093021D0F60DF00BFC1E4 /* String+Utils.swift */,
@@ -551,6 +551,7 @@
 					4921D9721C3EFD0B00ED2AA6 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = CE7D7D92E2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -721,7 +722,7 @@
 				70A5FBB11D6289B800EE7847 /* DeviceType.swift in Sources */,
 				70CE5F571D81CE6F0052DA20 /* Notifications.swift in Sources */,
 				70C093631D0F60DF00BFC1E4 /* UIColor+Utils.swift in Sources */,
-				70C0935C1D0F60DF00BFC1E4 /* Indexable+Utils.swift in Sources */,
+				70C0935C1D0F60DF00BFC1E4 /* Collection+Utils.swift in Sources */,
 				70C093641D0F60DF00BFC1E4 /* UIImage+Utils.swift in Sources */,
 				70A5FBB71D628A3A00EE7847 /* NextGenCacheManager.swift in Sources */,
 				70A5FBB01D6289B800EE7847 /* AVPlayerItem+Cache.swift in Sources */,
@@ -870,13 +871,14 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGenExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(inherited)";
 				SWIFT_OBJC_BRIDGING_HEADER = "../NextGen/NextGen-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};
@@ -898,13 +900,14 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wb.nextgen;
 				PRODUCT_NAME = NextGenExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(inherited)";
 				SWIFT_OBJC_BRIDGING_HEADER = "../NextGen/NextGen-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 			};

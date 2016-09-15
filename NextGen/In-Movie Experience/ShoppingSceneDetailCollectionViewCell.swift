@@ -14,25 +14,23 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         static let Scene = "ProductImageTypeScene"
     }
     
-    @IBOutlet weak private var imageView: UIImageView!
-    @IBOutlet weak private var bullseyeImageView: UIImageView!
-    @IBOutlet weak private var extraDescriptionLabel: UILabel!
+    @IBOutlet weak fileprivate var imageView: UIImageView!
+    @IBOutlet weak fileprivate var bullseyeImageView: UIImageView!
+    @IBOutlet weak fileprivate var extraDescriptionLabel: UILabel!
     
     var productImageType = ProductImageType.Product
     
-    private var imageURL: NSURL? {
+    fileprivate var imageURL: URL? {
         set {
             if let url = newValue {
-                imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                imageView.af_setImageWithURL(url, completion: { [weak self] (response) in
-                    if let strongSelf = self {
-                        strongSelf.imageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
-                    }
+                imageView.contentMode = UIViewContentMode.scaleAspectFit
+                imageView.sd_setImage(with: url, completed: { [weak self] (image, _, _, _) in
+                    self?.imageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
-                imageView.af_cancelImageRequest()
+                imageView.sd_cancelCurrentImageLoad()
                 imageView.image = nil
-                imageView.backgroundColor = UIColor.clearColor()
+                imageView.backgroundColor = UIColor.clear
             }
         }
         
@@ -41,7 +39,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         }
     }
     
-    private var extraDescription: String? {
+    fileprivate var extraDescription: String? {
         set {
             extraDescriptionLabel?.text = newValue
         }
@@ -51,17 +49,17 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         }
     }
     
-    private var currentProduct: TheTakeProduct?
-    private var currentProductFrameTime = -1.0
-    private var currentProductSessionDataTask: NSURLSessionDataTask?
+    fileprivate var currentProduct: TheTakeProduct?
+    fileprivate var currentProductFrameTime = -1.0
+    fileprivate var currentProductSessionDataTask: URLSessionDataTask?
     var theTakeProducts: [TheTakeProduct]? {
         didSet {
-            if let products = theTakeProducts, product = products.first {
+            if let products = theTakeProducts, let product = products.first {
                 if currentProduct != product {
                     currentProduct = product
                     descriptionText = product.brand
                     extraDescription = product.name
-                    imageURL = (productImageType == ProductImageType.Scene ? product.sceneImageURL : product.productImageURL)
+                    imageURL = (productImageType == ProductImageType.Scene ? product.sceneImageURL : product.productImageURL as URL?)
                 }
             } else {
                 currentProduct = nil
@@ -74,8 +72,8 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     }
     
     override func currentTimeDidChange() {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            if self.timedEvent != nil && self.timedEvent!.isType(.Product) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            if self.timedEvent != nil && self.timedEvent!.isType(.product) {
                 let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(self.currentTime)
                 if newFrameTime != self.currentProductFrameTime {
                     self.currentProductFrameTime = newFrameTime
@@ -87,9 +85,9 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
                     self.currentProductSessionDataTask = TheTakeAPIUtil.sharedInstance.getFrameProducts(self.currentProductFrameTime, successBlock: { [weak self] (products) -> Void in
                         if let strongSelf = self {
                             strongSelf.currentProductSessionDataTask = nil
-                            dispatch_async(dispatch_get_main_queue(), {
+                            DispatchQueue.main.async {
                                 strongSelf.theTakeProducts = products
-                            })
+                            }
                         }
                     })
                 }
@@ -101,7 +99,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.prepareForReuse()
         
         theTakeProducts = nil
-        bullseyeImageView.hidden = true
+        bullseyeImageView.isHidden = true
         
         if let task = currentProductSessionDataTask {
             task.cancel()
@@ -113,21 +111,21 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.layoutSubviews()
         
         if productImageType == ProductImageType.Scene {
-            bullseyeImageView.hidden = false
+            bullseyeImageView.isHidden = false
             if let product = currentProduct {
                 var bullseyeFrame = bullseyeImageView.frame
                 let bullseyePoint = product.getSceneBullseyePoint(imageView.frame)
-                bullseyeFrame.origin = CGPointMake(bullseyePoint.x + CGRectGetMinX(imageView.frame) - (CGRectGetWidth(bullseyeFrame) / 2), bullseyePoint.y + CGRectGetMinY(imageView.frame) - (CGRectGetHeight(bullseyeFrame) / 2))
+                bullseyeFrame.origin = CGPoint(x: bullseyePoint.x + imageView.frame.minX - (bullseyeFrame.width / 2), y: bullseyePoint.y + imageView.frame.minY - (bullseyeFrame.height / 2))
                 bullseyeImageView.frame = bullseyeFrame
                 
-                bullseyeImageView.layer.shadowColor = UIColor.blackColor().CGColor;
-                bullseyeImageView.layer.shadowOffset = CGSizeMake(1, 1);
+                bullseyeImageView.layer.shadowColor = UIColor.black.cgColor;
+                bullseyeImageView.layer.shadowOffset = CGSize(width: 1, height: 1);
                 bullseyeImageView.layer.shadowOpacity = 0.75;
                 bullseyeImageView.layer.shadowRadius = 2.0;
                 bullseyeImageView.clipsToBounds = false;
             }
         } else {
-            bullseyeImageView.hidden = true
+            bullseyeImageView.isHidden = true
         }
     }
     

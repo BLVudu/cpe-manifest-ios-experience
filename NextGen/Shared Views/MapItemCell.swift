@@ -9,9 +9,9 @@ class MapItemCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
     
-    @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var imageView: UIImageView!
-    @IBOutlet weak private var playButton: UIButton!
+    @IBOutlet weak fileprivate var titleLabel: UILabel!
+    @IBOutlet weak fileprivate var imageView: UIImageView!
+    @IBOutlet weak fileprivate var playButton: UIButton!
     
     var title: String? {
         set {
@@ -23,12 +23,12 @@ class MapItemCell: UICollectionViewCell {
         }
     }
     
-    var imageURL: NSURL? {
+    var imageURL: URL? {
         set {
             if let imageURL = newValue {
-                imageView.af_setImageWithURL(imageURL)
+                imageView.sd_setImage(with: imageURL)
             } else {
-                imageView.af_cancelImageRequest()
+                imageView.sd_cancelCurrentImageLoad()
                 imageView.image = nil
             }
         }
@@ -40,11 +40,11 @@ class MapItemCell: UICollectionViewCell {
     
     var playButtonVisible: Bool {
         set {
-            playButton.hidden = !newValue
+            playButton.isHidden = !newValue
         }
         
         get {
-            return !playButton.hidden
+            return !playButton.isHidden
         }
     }
     
@@ -53,7 +53,7 @@ class MapItemCell: UICollectionViewCell {
         
         title = nil
         imageURL = nil
-        playButton.hidden = true
+        playButton.isHidden = true
     }
     
     override func layoutSubviews() {

@@ -12,7 +12,7 @@ class SimpleMapCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak private var mapView: MultiMapView!
     @IBOutlet weak private var mapTextLabel: UILabel?
     
-    func setLocation(location: CLLocationCoordinate2D, zoomLevel: Float) {
+    func setLocation(_ location: CLLocationCoordinate2D, zoomLevel: Float) {
         mapView.setLocation(location, zoomLevel: zoomLevel, animated: false)
     }
     

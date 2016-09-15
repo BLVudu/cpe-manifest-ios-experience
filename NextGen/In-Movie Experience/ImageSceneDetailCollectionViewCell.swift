@@ -10,18 +10,18 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
     static let ClipShareReuseIdentifier = "ClipShareSceneDetailCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak private var imageView: UIImageView!
-    @IBOutlet weak private var playButton: UIButton!
-    @IBOutlet weak private var extraDescriptionLabel: UILabel!
+    @IBOutlet weak fileprivate var imageView: UIImageView!
+    @IBOutlet weak fileprivate var playButton: UIButton!
+    @IBOutlet weak fileprivate var extraDescriptionLabel: UILabel!
     
-    private var imageURL: NSURL? {
+    fileprivate var imageURL: URL? {
         set {
             if let url = newValue {
-                imageView.af_setImageWithURL(url)
+                imageView.sd_setImage(with: url)
             } else {
-                imageView.af_cancelImageRequest()
+                imageView.sd_cancelCurrentImageLoad()
                 imageView.image = nil
-                imageView.backgroundColor = UIColor.clearColor()
+                imageView.backgroundColor = UIColor.clear
             }
         }
         
@@ -34,20 +34,20 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.timedEventDidChange()
         
         imageURL = timedEvent?.imageURL
-        playButton.hidden = timedEvent == nil || (!timedEvent!.isType(.AudioVisual) && !timedEvent!.isType(.ClipShare))
+        playButton.isHidden = timedEvent == nil || (!timedEvent!.isType(.audioVisual) && !timedEvent!.isType(.clipShare))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         imageURL = nil
-        playButton.hidden = true
+        playButton.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
     }
     
 }
