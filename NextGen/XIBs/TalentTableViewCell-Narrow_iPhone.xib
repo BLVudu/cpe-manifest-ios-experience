@@ -18,58 +18,55 @@
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="ZFg-U0-fjg" customClass="TalentTableViewCell" customModule="NextGen" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="140"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TalentTableViewCell" id="ZFg-U0-fjg" customClass="TalentTableViewCell" customModule="NextGen" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZFg-U0-fjg" id="Rb8-s1-zKI">
-                <frame key="frameInset" width="250" height="139"/>
+                <frame key="frameInset" width="250" height="149"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Role" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="veR-JQ-nkI">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Role" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veR-JQ-nkI">
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="0Ne-1b-SMu"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="0Ne-1b-SMu"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="RobotoCondensed-Italic" family="Roboto Condensed" pointSize="16"/>
                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="hrx-Y5-lp0">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hrx-Y5-lp0">
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="TMV-XB-qoa"/>
+                            <constraint firstAttribute="height" constant="20" id="TMV-XB-qoa"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="19"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-D7-49Z">
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-D7-49Z">
                         <constraints>
                             <constraint firstAttribute="width" secondItem="4FG-D7-49Z" secondAttribute="height" multiplier="1:1" id="seQ-yn-e8p"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="round" value="YES"/>
-                        </userDefinedRuntimeAttributes>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="4FG-D7-49Z" firstAttribute="height" secondItem="Rb8-s1-zKI" secondAttribute="height" multiplier="0.56" id="00n-gq-jTs"/>
                     <constraint firstItem="4FG-D7-49Z" firstAttribute="centerX" secondItem="Rb8-s1-zKI" secondAttribute="centerX" id="5Q4-zo-7u6"/>
                     <constraint firstItem="hrx-Y5-lp0" firstAttribute="leading" secondItem="Rb8-s1-zKI" secondAttribute="leadingMargin" id="5Zi-rQ-xmI"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="leading" secondItem="Rb8-s1-zKI" secondAttribute="leadingMargin" id="F7d-bF-nQp"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="trailing" secondItem="Rb8-s1-zKI" secondAttribute="trailingMargin" id="J3I-mL-UHb"/>
                     <constraint firstItem="hrx-Y5-lp0" firstAttribute="top" secondItem="4FG-D7-49Z" secondAttribute="bottom" constant="3" id="Jlg-em-w98"/>
+                    <constraint firstItem="4FG-D7-49Z" firstAttribute="height" secondItem="Rb8-s1-zKI" secondAttribute="height" multiplier="0.55" id="PnU-q2-mE7"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="top" secondItem="hrx-Y5-lp0" secondAttribute="bottom" id="V7V-oI-mbe"/>
-                    <constraint firstItem="4FG-D7-49Z" firstAttribute="top" secondItem="Rb8-s1-zKI" secondAttribute="top" constant="8" id="k7h-j0-zNK"/>
+                    <constraint firstItem="4FG-D7-49Z" firstAttribute="top" secondItem="Rb8-s1-zKI" secondAttribute="top" constant="5" id="k7h-j0-zNK"/>
                     <constraint firstItem="hrx-Y5-lp0" firstAttribute="trailing" secondItem="Rb8-s1-zKI" secondAttribute="trailingMargin" id="qUu-24-PqN"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="veR-JQ-nkI" secondAttribute="bottom" constant="5" id="tBD-xa-CSD"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameLabel" destination="hrx-Y5-lp0" id="TFx-gO-R4U"/>
                 <outlet property="roleLabel" destination="veR-JQ-nkI" id="qDb-BO-jxM"/>
-                <outlet property="talentImageView" destination="4FG-D7-49Z" id="DXf-VX-Mb1"/>
+                <outlet property="talentImageView" destination="4FG-D7-49Z" id="Afk-En-y2S"/>
             </connections>
-            <point key="canvasLocation" x="769" y="529"/>
+            <point key="canvasLocation" x="53" y="427"/>
         </tableViewCell>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>

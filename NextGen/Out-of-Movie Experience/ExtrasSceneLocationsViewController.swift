@@ -33,6 +33,11 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     fileprivate var galleryDidToggleFullScreenObserver: NSObjectProtocol?
     fileprivate var galleryDidScrollToPageObserver: NSObjectProtocol?
     
+    @IBOutlet private var containerTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerAspectRatioConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerBottomInnerConstraint: NSLayoutConstraint?
+    
     fileprivate var locationExperiences = [NGDMExperience]()
     fileprivate var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
     fileprivate var selectedExperience: NGDMExperience? {
@@ -129,6 +134,8 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             }
         })
         
+        galleryScrollView.allowsFullScreen = false
+        
         // Set up map markers
         for locationExperience in locationExperiences {
             if let location = locationExperience.appData?.location {
@@ -140,6 +147,20 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         mapView.delegate = self
         
         selectedExperience = nil
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        let toLandscape = (size.width > size.height)
+        containerAspectRatioConstraint?.isActive = !toLandscape
+        containerTopConstraint?.constant = (toLandscape ? 0 : ExtrasExperienceViewController.Constants.TitleImageHeight)
+        containerBottomConstraint?.isActive = !toLandscape
+        containerBottomInnerConstraint?.isActive = !toLandscape
+        
+        coordinator.animate(alongsideTransition: nil, completion: { (_) in
+            self.galleryScrollView.layoutPages()
+        })
     }
     
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
@@ -161,6 +182,10 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             videoContainerView.addSubview(videoPlayerViewController.view)
             self.addChildViewController(videoPlayerViewController)
             videoPlayerViewController.didMove(toParentViewController: self)
+            
+            if !DeviceType.IS_IPAD && videoPlayerViewController.fullScreenButton != nil {
+                videoPlayerViewController.fullScreenButton.removeFromSuperview()
+            }
             
             self.videoPlayerViewController = videoPlayerViewController
             

@@ -8,7 +8,7 @@ import SDWebImage
 
 class ExtrasExperienceViewController: UIViewController {
     
-    fileprivate struct Constants {
+    struct Constants {
         static let HeaderButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 250 : 100)
         static let HeaderIconPadding: CGFloat = (DeviceType.IS_IPAD ? 30 : 15)
         static let TitleImageAspectRatio: CGFloat = 300 / 90

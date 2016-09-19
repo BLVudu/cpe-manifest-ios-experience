@@ -9,19 +9,12 @@ class TalentTableViewCell: UITableViewCell {
     
     static let ReuseIdentifier = "TalentTableViewCell"
     
-    @IBOutlet weak fileprivate var talentImageView: RoundImageView!
+    @IBOutlet weak fileprivate var talentImageView: UIImageView!
     @IBOutlet weak fileprivate var nameLabel: UILabel?
     @IBOutlet weak fileprivate var roleLabel: UILabel?
     
-    fileprivate var setImageSessionDataTask: URLSessionDataTask?
-    
     fileprivate var imageURL: URL? {
         didSet {
-            if let task = setImageSessionDataTask {
-                task.cancel()
-                setImageSessionDataTask = nil
-            }
-            
             if let url = imageURL {
                 if url != oldValue {
                     talentImageView.sd_setImage(with: url)
@@ -79,6 +72,7 @@ class TalentTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         self.backgroundColor = UIColor.clear
+        talentImageView.layer.cornerRadius = (talentImageView.frame.width + talentImageView.frame.height) / 4
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

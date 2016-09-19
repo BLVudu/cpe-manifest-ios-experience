@@ -19,7 +19,7 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        talentTableView.register(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+        talentTableView.register(UINib(nibName: "TalentTableViewCell-Narrow" + (DeviceType.IS_IPAD ? "" : "_iPhone"), bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         
         showBackButton()
     }

@@ -27,6 +27,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak private var galleryPageControl: UIPageControl!
     private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
+    @IBOutlet private var containerTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerAspectRatioConstraint: NSLayoutConstraint?
+    
     @IBOutlet weak private var shareButton: UIButton!
     
     private var didInitialSetup = false
@@ -65,8 +69,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        galleryTableView.register(UINib(nibName: VideoCell.NibName, bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
 
         willPlayNextItemObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.WillPlayNextItem), object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
             if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let index = userInfo["index"] as? Int , index < (strongSelf.experience.childExperiences?.count ?? 0) {
@@ -77,22 +79,23 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         }
         
         didEndLastVideoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndLastVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
-            if let strongSelf = self {
-                strongSelf.previewImageView.isHidden = false
-                strongSelf.previewPlayButton.isHidden = false
-                strongSelf.destroyVideoPlayer()
-                
-                if let selectedIndexPath = strongSelf.galleryTableView.indexPathForSelectedRow, let cell = strongSelf.galleryTableView.cellForRow(at: selectedIndexPath) as? VideoCell {
-                    cell.setWatched()
-                }
+            self?.previewImageView.isHidden = false
+            self?.previewPlayButton.isHidden = false
+            self?.destroyVideoPlayer()
+            
+            if let selectedIndexPath = self?.galleryTableView.indexPathForSelectedRow, let cell = self?.galleryTableView.cellForRow(at: selectedIndexPath) as? VideoCell {
+                cell.setWatched()
             }
         })
         
         galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
-                strongSelf.galleryPageControl.currentPage = page
+            if let page = (notification as NSNotification).userInfo?["page"] as? Int {
+                self?.galleryPageControl.currentPage = page
             }
         })
+        
+        galleryTableView.register(UINib(nibName: VideoCell.NibName, bundle: nil), forCellReuseIdentifier: VideoCell.ReuseIdentifier)
+        galleryScrollView.allowsFullScreen = DeviceType.IS_IPAD
     }
     
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
@@ -110,6 +113,15 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         } else {
             galleryScrollView.layoutPages()
         }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        let toLandscape = (size.width > size.height)
+        containerAspectRatioConstraint?.isActive = !toLandscape
+        containerTopConstraint?.constant = (toLandscape ? 0 : ExtrasExperienceViewController.Constants.TitleImageHeight)
+        containerBottomConstraint?.isActive = !toLandscape
     }
     
     
@@ -205,6 +217,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 self.addChildViewController(videoPlayerViewController)
                 videoPlayerViewController.didMove(toParentViewController: self)
                 videoPlayerViewController.playVideo(with: videoURL)
+                
+                if !DeviceType.IS_IPAD && videoPlayerViewController.fullScreenButton != nil {
+                    videoPlayerViewController.fullScreenButton.removeFromSuperview()
+                }
                 
                 self.videoPlayerViewController = videoPlayerViewController
             }

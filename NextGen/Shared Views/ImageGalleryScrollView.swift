@@ -74,7 +74,16 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, userInfo: ["page": currentPage])
                 
                 if let toolbarItems = toolbar?.items, let captionLabel = toolbarItems.first?.customView as? UILabel {
-                    captionLabel.text = gallery?.getPictureForPage(currentPage)?.caption
+                    if let caption = gallery?.getPictureForPage(currentPage)?.caption {
+                        toolbar?.isHidden = false
+                        captionLabel.text = caption
+                    } else {
+                        captionLabel.text = nil
+                        
+                        if !allowsFullScreen {
+                            toolbar?.isHidden = true
+                        }
+                    }
                 }
             }
         }
