@@ -26,39 +26,42 @@ class ExtrasExperienceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var titleView: UIView
         if experience == NGDMManifest.sharedInstance.outOfMovieExperience, let titleImageURL = experience.getNodeStyle(UIApplication.shared.statusBarOrientation)?.getButtonImage("Title")?.url {
             let titleImageView = UIImageView()
-            titleImageView.translatesAutoresizingMaskIntoConstraints = false
-            titleImageView.contentMode = .scaleAspectFill
+            titleImageView.contentMode = .scaleAspectFit
             titleImageView.sd_setImage(with: titleImageURL)
             self.view.addSubview(titleImageView)
             self.view.sendSubview(toBack: titleImageView)
-            
-            if #available(iOS 9.0, *) {
-                titleImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.28).isActive = true
-                titleImageView.heightAnchor.constraint(equalToConstant: Constants.TitleImageHeight).isActive = true
-                titleImageView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor).isActive = true
-                titleImageView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: (DeviceType.IS_IPAD ? -10 : -20)).isActive = true
-            }
+            titleView = titleImageView
         } else {
             let titleLabel = UILabel()
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.font = UIFont.themeCondensedBoldFont(DeviceType.IS_IPAD ? 30 : 18)
             titleLabel.adjustsFontSizeToFitWidth = true
-            titleLabel.minimumScaleFactor = 0.5
             titleLabel.numberOfLines = 2
+            titleLabel.minimumScaleFactor = 0.5
             titleLabel.text = (experience?.title == "out-of-movie" ? String.localize("out_of_movie.extras_title") : experience?.title)?.uppercased()
             titleLabel.textAlignment = .right
             titleLabel.textColor = UIColor(netHex: 0xdddddd)
             self.view.addSubview(titleLabel)
             self.view.sendSubview(toBack: titleLabel)
-            
-            if #available(iOS 9.0, *) {
-                titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.28).isActive = true
-                titleLabel.heightAnchor.constraint(equalToConstant: Constants.TitleImageHeight).isActive = true
-                titleLabel.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor).isActive = true
-                titleLabel.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: 10).isActive = true
-            }
+            titleView = titleLabel
+        }
+        
+        titleView.clipsToBounds = true
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 9.0, *) {
+            titleView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.28).isActive = true
+            titleView.heightAnchor.constraint(equalToConstant: Constants.TitleImageHeight).isActive = true
+            titleView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor).isActive = true
+            titleView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: 10).isActive = true
+        } else {
+            self.view.addConstraints([
+                NSLayoutConstraint(item: titleView, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 0.28, constant: 0),
+                NSLayoutConstraint(item: titleView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Constants.TitleImageHeight),
+                NSLayoutConstraint(item: titleView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: titleView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: -8)
+            ])
         }
         
         _homeButton = headerButton(String.localize("label.home"), imageName: "Home")
@@ -78,12 +81,19 @@ class ExtrasExperienceViewController: UIViewController {
             self.view.addSubview(titleTreatmentImageView)
             self.view.sendSubview(toBack: titleTreatmentImageView)
             
+            let imageHeight = Constants.TitleImageHeight * (DeviceType.IS_IPAD ? 0.6 : 1)
             if #available(iOS 9.0, *) {
-                let imageHeight = Constants.TitleImageHeight * (DeviceType.IS_IPAD ? 0.6 : 1)
                 titleTreatmentImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4).isActive = true
                 titleTreatmentImageView.heightAnchor.constraint(equalToConstant: imageHeight).isActive = true
                 titleTreatmentImageView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: (Constants.TitleImageHeight - imageHeight) / 2).isActive = true
                 titleTreatmentImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            } else {
+                self.view.addConstraints([
+                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 0.4, constant: 0),
+                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: imageHeight),
+                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: (Constants.TitleImageHeight - imageHeight) / 2),
+                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
+                ])
             }
         }
         
@@ -103,6 +113,13 @@ class ExtrasExperienceViewController: UIViewController {
                     backgroundImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
                     backgroundImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
                     backgroundImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+                } else {
+                    self.view.addConstraints([
+                        NSLayoutConstraint(item: backgroundImageView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0),
+                        NSLayoutConstraint(item: backgroundImageView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0),
+                        NSLayoutConstraint(item: backgroundImageView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0),
+                        NSLayoutConstraint(item: backgroundImageView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0)
+                    ])
                 }
             }
         }
