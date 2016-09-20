@@ -53,10 +53,10 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath as NSIndexPath).row == 0 {
-            return 60.0
+            return (DeviceType.IS_IPAD ? 60 : 40)
         }
         
-        return 40.0
+        return (DeviceType.IS_IPAD ? 40 : 30)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

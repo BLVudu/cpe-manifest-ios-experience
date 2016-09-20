@@ -53,7 +53,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         }
         
         if let actors = NGDMManifest.sharedInstance.mainExperience?.orderedActors , actors.count > 0 {
-            talentTableView?.register(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+            talentTableView?.register(UINib(nibName: "TalentTableViewCell-Narrow" + (DeviceType.IS_IPAD ? "" : "_iPhone"), bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         } else {
             talentTableView?.removeFromSuperview()
             talentTableView = nil

@@ -75,7 +75,7 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier, for: indexPath) as! ShoppingSceneDetailCollectionViewCell
         cell.titleLabel?.removeFromSuperview()
-        cell.productImageType = ShoppingSceneDetailCollectionViewCell.ProductImageType.Scene
+        cell.productImageType = .scene
         
         if let product = products?[(indexPath as NSIndexPath).row] {
             cell.theTakeProducts = [product]
@@ -89,15 +89,21 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
         if let shoppingDetailViewController = UIStoryboard.getNextGenViewController(ShoppingDetailViewController.self) as? ShoppingDetailViewController, let cell = collectionView.cellForItem(at: indexPath) as? ShoppingSceneDetailCollectionViewCell {
             shoppingDetailViewController.experience = experience
             shoppingDetailViewController.products = cell.theTakeProducts
-            shoppingDetailViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            shoppingDetailViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            shoppingDetailViewController.modalPresentationStyle = (DeviceType.IS_IPAD ? .overCurrentContext : .overFullScreen)
+            shoppingDetailViewController.modalTransitionStyle = .crossDissolve
             self.present(shoppingDetailViewController, animated: true, completion: nil)
         }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth: CGFloat = (collectionView.frame.width / 2) - (Constants.ItemSpacing * 2)
+        var itemWidth: CGFloat
+        if DeviceType.IS_IPAD {
+            itemWidth = (collectionView.frame.width / 2) - (Constants.ItemSpacing * 2)
+        } else {
+            itemWidth = collectionView.frame.width
+        }
+        
         return CGSize(width: itemWidth, height: itemWidth / Constants.ItemAspectRatio)
     }
     

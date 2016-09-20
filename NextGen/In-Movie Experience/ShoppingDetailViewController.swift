@@ -39,24 +39,25 @@ class ShoppingDetailCell: UICollectionViewCell {
 
 class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var productMatchIcon: UIView!
-    @IBOutlet weak var productMatchLabel: UILabel!
-    @IBOutlet weak var productImageView: UIImageView!
-    @IBOutlet weak var productBrandLabel: UILabel!
-    @IBOutlet weak var productNameLabel: UILabel!
-    @IBOutlet weak var productPriceLabel: UILabel!
-    @IBOutlet weak var shopButton: UIButton!
-    @IBOutlet weak var emailButton: UIButton!
-    @IBOutlet weak var poweredByLabel: UILabel!
-    @IBOutlet weak var disclaimerLabel: UILabel!
-    
-    @IBOutlet weak var productsCollectionView: UICollectionView!
+    @IBOutlet weak private var productMatchIcon: UIView!
+    @IBOutlet weak private var productMatchLabel: UILabel!
+    @IBOutlet weak private var productImageView: UIImageView!
+    @IBOutlet weak private var productBrandLabel: UILabel!
+    @IBOutlet weak private var productNameLabel: UILabel!
+    @IBOutlet weak private var productPriceLabel: UILabel!
+    @IBOutlet weak private var shopButton: UIButton!
+    @IBOutlet weak private var emailButton: UIButton!
+    @IBOutlet weak private var poweredByLabel: UILabel!
+    @IBOutlet weak private var disclaimerLabel: UILabel!
+    @IBOutlet weak private var productsCollectionView: UICollectionView?
     
     var products: [TheTakeProduct]?
-    private var _closeDetailsViewObserver: NSObjectProtocol!
+    private var closeDetailsViewObserver: NSObjectProtocol?
     
     deinit {
-        NotificationCenter.default.removeObserver(_closeDetailsViewObserver)
+        if let observer = closeDetailsViewObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     var currentProduct: TheTakeProduct? {
@@ -91,7 +92,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         
         productMatchIcon.layer.cornerRadius = productMatchIcon.frame.width / 2
         
-        _closeDetailsViewObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ShoppingMenuNotification.ShouldCloseDetails), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+        closeDetailsViewObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ShoppingMenuNotification.ShouldCloseDetails), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self {
                 strongSelf.close(nil)
             }
@@ -101,9 +102,14 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let indexPath = IndexPath(row: 0, section: 0)
-        productsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.top)
-        collectionView(productsCollectionView, didSelectItemAt: indexPath)
+        if products != nil && products!.count > 1, let productsCollectionView = productsCollectionView {
+            let indexPath = IndexPath(row: 0, section: 0)
+            productsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.top)
+            collectionView(productsCollectionView, didSelectItemAt: indexPath)
+        } else {
+            productsCollectionView?.removeFromSuperview()
+            currentProduct = products?.first
+        }
     }
     
     
@@ -113,9 +119,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     }
     
     @IBAction func onShop(_ sender: AnyObject) {
-        if let product = currentProduct {
-            product.theTakeURL.promptLaunchBrowser()
-        }
+        currentProduct?.theTakeURL?.promptLaunchBrowser()
     }
     
     @IBAction func onSendLink(_ sender: AnyObject) {

@@ -7,96 +7,50 @@ import CoreGraphics
 
 class TheTakeProduct: NSObject {
     
-    fileprivate var _data: NSDictionary!
-    
-    var id: String {
-        get {
-            return dataValue("productId")
-        }
-    }
-    
-    var name: String {
-        get {
-            return dataValue("productName")
-        }
-    }
-    
-    var brand: String {
-        get {
-            return dataValue("productBrand")
-        }
-    }
-    
-    var price: String {
-        get {
-            return dataValue("productPrice")
-        }
-    }
-    
-    var productImageURL: URL? {
-        get {
-            var images = _data["productImages"]
-            if images == nil {
-                images = _data["productImage"]
-            }
-            
-            if let image = (images as? NSDictionary)?["500pxLink"] as? String {
-                return URL(string: image)
-            }
-            
-            return nil
-        }
-    }
-    
-    var sceneImageURL: URL? {
-        get {
-            var images = _data["cropImages"]
-            if images == nil {
-                images = _data["cropImage"]
-            }
-            
-            if let image = (images as? NSDictionary)?["500pxCropLink"] as? String {
-                return URL(string: image)
-            }
-            
-            return nil
-        }
-    }
-    
-    var exactMatch: Bool {
-        get {
-            if let verified = _data["verified"] {
-                return (verified as AnyObject).boolValue
-            }
-            
-            return false
-        }
-    }
-    
-    var theTakeURLString: String {
-        get {
-            if let link = _data["purchaseLink"] as? String , link.characters.count > 0 {
-                return link
-            }
-            
-            return "http://www.thetake.com/product/" + id
-        }
-    }
-    
-    var theTakeURL: URL {
-        get {
-            return URL(string: theTakeURLString)!
-        }
-    }
+    var id: String
+    var name: String
+    var brand: String?
+    var price: String?
+    var productImageURL: URL?
+    var sceneImageURL: URL?
+    var exactMatch = false
+    var theTakeURLString: String?
+    var theTakeURL: URL?
+    var bullseyePoint = CGPoint.zero
     
     var shareText: String {
         get {
-            return name + " - " + theTakeURLString
+            return name + " - " + (theTakeURL?.absoluteString ?? "")
         }
     }
     
     init(data: NSDictionary) {
-        _data = data
+        id = data["productId"] as? String ?? NSUUID().uuidString
+        name = data["productName"] as? String ?? "Unknown"
+        brand = data["productBrand"] as? String
+        price = data["productPrice"] as? String
+        
+        if let imagesData = (data["productImages"] ?? data["productImage"]) as? [String: String], let imageString = imagesData["500pxLink"] {
+            productImageURL = URL(string: imageString)
+        }
+        
+        if let imagesData = (data["cropImages"] ?? data["cropImage"]) as? [String: String], let imageString = imagesData["500pxCropLink"] {
+            sceneImageURL = URL(string: imageString)
+        }
+        
+        if let verified = data["verified"] as? Bool {
+            exactMatch = verified
+        }
+        
+        if let purchaseLink = data["purchaseLink"] as? String , purchaseLink.characters.count > 0 {
+            theTakeURL = URL(string: purchaseLink)
+        } else {
+            theTakeURL = URL(string: "http://www.thetake.com/product/" + id)
+        }
+        
+        if let x = data["keyCropProductX"] as? Double, let y = data["keyCropProductY"] as? Double {
+            bullseyePoint = CGPoint(x: x, y: y)
+        }
     }
     
     override func isEqual(_ object: Any?) -> Bool {
@@ -105,14 +59,6 @@ class TheTakeProduct: NSObject {
         }
         
         return false
-    }
-    
-    func dataValue(_ key: String) -> String {
-        return (_data[key] as? String) ?? ""
-    }
-    
-    func getSceneBullseyePoint(_ parentRect: CGRect) -> CGPoint {
-        return CGPoint(x: parentRect.width * CGFloat((dataValue("keyCropProductX") as NSString).doubleValue), y: parentRect.height * CGFloat((dataValue("keyCropProductY") as NSString).doubleValue))
     }
     
 }

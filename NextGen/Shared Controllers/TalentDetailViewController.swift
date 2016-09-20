@@ -15,10 +15,17 @@ enum TalentDetailMode: String {
     case Extras = "TalentDetailModeExtras"
 }
 
-class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     fileprivate struct SegueIdentifier {
         static let TalentImageGallery = "TalentImageGallerySegueIdentifier"
+    }
+    
+    fileprivate struct Constants {
+        static let GalleryCollectionViewItemSpacing: CGFloat = 10
+        static let GalleryCollectionViewItemAspectRatio: CGFloat = 8 / 10
+        static let FilmographyCollectionViewItemSpacing: CGFloat = 10
+        static let FilmographyCollectionViewItemAspectRatio: CGFloat = 27 / 41
     }
     
     @IBOutlet fileprivate var _containerViewTopConstraint: NSLayoutConstraint!
@@ -64,7 +71,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         if mode == .Extras {
             titleLabel.removeFromSuperview()
             closeButton.removeFromSuperview()
-            _containerViewTopConstraint.constant = 20
+            _containerViewTopConstraint.constant = (DeviceType.IS_IPAD ? 20 : 10)
             
             _talentGalleryButton?.removeFromSuperview()
             _galleryCollectionView?.register(UINib(nibName: "SimpleImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
@@ -125,6 +132,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             talent.getTalentDetails({ (biography, socialAccounts, films) in
                 DispatchQueue.main.async(execute: {
                     self._talentBiographyLabel.text = biography
+                    self._talentBiographyLabel.scrollRectToVisible(CGRect.zero, animated: false)
                     self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
                     
                     if let socialAccounts = socialAccounts {
@@ -227,6 +235,27 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                 })
             }
         }
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.height
+        var width: CGFloat
+        if collectionView == _filmographyCollectionView {
+            width = height * Constants.FilmographyCollectionViewItemAspectRatio
+        } else {
+            width = height * Constants.GalleryCollectionViewItemAspectRatio
+        }
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == _filmographyCollectionView {
+            return Constants.FilmographyCollectionViewItemSpacing
+        }
+        
+        return Constants.GalleryCollectionViewItemSpacing
     }
     
     // MARK: Storyboard Methods

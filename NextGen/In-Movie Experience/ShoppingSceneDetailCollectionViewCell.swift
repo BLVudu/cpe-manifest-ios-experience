@@ -5,20 +5,20 @@
 import Foundation
 import UIKit
 
+enum ShoppingProductImageType {
+    case product
+    case scene
+}
+
 class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "ShoppingSceneDetailCollectionViewCellReuseIdentifier"
-    
-    struct ProductImageType {
-        static let Product = "ProductImageTypeProduct"
-        static let Scene = "ProductImageTypeScene"
-    }
     
     @IBOutlet weak fileprivate var imageView: UIImageView!
     @IBOutlet weak fileprivate var bullseyeImageView: UIImageView!
     @IBOutlet weak fileprivate var extraDescriptionLabel: UILabel!
     
-    var productImageType = ProductImageType.Product
+    var productImageType = ShoppingProductImageType.product
     
     fileprivate var imageURL: URL? {
         set {
@@ -59,7 +59,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
                     currentProduct = product
                     descriptionText = product.brand
                     extraDescription = product.name
-                    imageURL = (productImageType == ProductImageType.Scene ? product.sceneImageURL : product.productImageURL as URL?)
+                    imageURL = (productImageType == .scene ? product.sceneImageURL : product.productImageURL as URL?)
                 }
             } else {
                 currentProduct = nil
@@ -110,18 +110,18 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if productImageType == ProductImageType.Scene {
+        if productImageType == .scene {
             bullseyeImageView.isHidden = false
             if let product = currentProduct {
                 var bullseyeFrame = bullseyeImageView.frame
-                let bullseyePoint = product.getSceneBullseyePoint(imageView.frame)
+                let bullseyePoint = CGPoint(x: imageView.frame.width * product.bullseyePoint.x, y: imageView.frame.height * product.bullseyePoint.y)
                 bullseyeFrame.origin = CGPoint(x: bullseyePoint.x + imageView.frame.minX - (bullseyeFrame.width / 2), y: bullseyePoint.y + imageView.frame.minY - (bullseyeFrame.height / 2))
                 bullseyeImageView.frame = bullseyeFrame
                 
                 bullseyeImageView.layer.shadowColor = UIColor.black.cgColor;
                 bullseyeImageView.layer.shadowOffset = CGSize(width: 1, height: 1);
                 bullseyeImageView.layer.shadowOpacity = 0.75;
-                bullseyeImageView.layer.shadowRadius = 2.0;
+                bullseyeImageView.layer.shadowRadius = 2;
                 bullseyeImageView.clipsToBounds = false;
             }
         } else {
