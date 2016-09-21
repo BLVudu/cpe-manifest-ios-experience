@@ -1759,10 +1759,11 @@
                                                     <constraint firstItem="Pkk-ZG-8MM" firstAttribute="top" secondItem="23j-15-3LR" secondAttribute="bottom" constant="3" id="bmb-Fz-0Kr"/>
                                                     <constraint firstItem="23j-15-3LR" firstAttribute="top" secondItem="zXy-2o-SuG" secondAttribute="bottom" constant="3" id="dZB-U2-nhG"/>
                                                     <constraint firstItem="23j-15-3LR" firstAttribute="leading" secondItem="mjC-Ox-eEd" secondAttribute="leading" id="gwB-Vh-VJp"/>
-                                                    <constraint firstItem="8C8-nk-uPQ" firstAttribute="leading" secondItem="bcK-5n-TFL" secondAttribute="trailing" constant="8" id="jLW-PE-uct"/>
+                                                    <constraint firstItem="8C8-nk-uPQ" firstAttribute="leading" secondItem="bcK-5n-TFL" secondAttribute="trailing" constant="5" id="jLW-PE-uct"/>
                                                     <constraint firstItem="bcK-5n-TFL" firstAttribute="top" secondItem="mjC-Ox-eEd" secondAttribute="top" constant="2" id="l1z-e2-hdR"/>
                                                     <constraint firstItem="90b-8Y-5s8" firstAttribute="leading" secondItem="mjC-Ox-eEd" secondAttribute="leading" id="lbl-tr-QfD"/>
                                                     <constraint firstAttribute="trailing" secondItem="Pkk-ZG-8MM" secondAttribute="trailing" id="nY9-DX-pSU"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8C8-nk-uPQ" secondAttribute="trailing" id="uAl-BW-Gji"/>
                                                     <constraint firstItem="90b-8Y-5s8" firstAttribute="top" secondItem="hw5-F1-pr6" secondAttribute="bottom" constant="8" id="wUX-90-ZUe"/>
                                                 </constraints>
                                             </view>

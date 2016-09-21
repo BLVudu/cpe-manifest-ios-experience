@@ -62,8 +62,14 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
     
     var currentProduct: TheTakeProduct? {
         didSet {
-            productMatchIcon.backgroundColor = currentProduct != nil ? (currentProduct!.exactMatch ? UIColor(netHex: 0x2c97de) : UIColor(netHex: 0xf1c115)) : UIColor.clear
-            productMatchLabel.text = currentProduct != nil ? (currentProduct!.exactMatch ? String.localize("shopping.exact_match") : String.localize("shopping.close_match")) : nil
+            if let product = currentProduct {
+                productMatchIcon.backgroundColor = (product.exactMatch ? UIColor(netHex: 0x2c97de) : UIColor(netHex: 0xf1c115))
+                productMatchLabel.text = (product.exactMatch ? String.localize("shopping.exact_match") : String.localize("shopping.close_match"))
+            } else {
+                productMatchIcon.backgroundColor = UIColor.clear
+                productMatchLabel.text = nil
+            }
+            
             productBrandLabel.text = currentProduct?.brand
             productNameLabel.text = currentProduct?.name
             productPriceLabel.text = currentProduct?.price
@@ -90,11 +96,9 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         poweredByLabel.text = String.localize("shopping.powered_by")
         disclaimerLabel.text = String.localize("shopping.disclaimer").uppercased()
         
-        productMatchIcon.layer.cornerRadius = productMatchIcon.frame.width / 2
-        
         closeDetailsViewObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ShoppingMenuNotification.ShouldCloseDetails), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self {
-                strongSelf.close(nil)
+                strongSelf.close()
             }
         })
     }
@@ -112,12 +116,14 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         }
     }
     
-    
-    // MARK: Actions
-    @IBAction func close(_ sender: AnyObject?) {
-        self.dismiss(animated: true, completion: nil)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        productMatchIcon.layer.cornerRadius = productMatchIcon.frame.width / 2
     }
     
+    
+    // MARK: Actions
     @IBAction func onShop(_ sender: AnyObject) {
         currentProduct?.theTakeURL?.promptLaunchBrowser()
     }

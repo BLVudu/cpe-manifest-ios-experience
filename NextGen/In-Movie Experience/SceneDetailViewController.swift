@@ -59,7 +59,7 @@ class SceneDetailViewController: UIViewController {
     }
     
     // MARK: Actions
-    func close() {
+    internal func close() {
         self.dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: Notification.Name(rawValue: SceneDetailNotification.WillClose), object: nil)
     }
