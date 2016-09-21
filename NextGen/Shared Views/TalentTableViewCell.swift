@@ -9,11 +9,11 @@ class TalentTableViewCell: UITableViewCell {
     
     static let ReuseIdentifier = "TalentTableViewCell"
     
-    @IBOutlet weak fileprivate var talentImageView: UIImageView!
-    @IBOutlet weak fileprivate var nameLabel: UILabel?
-    @IBOutlet weak fileprivate var roleLabel: UILabel?
+    @IBOutlet weak private var talentImageView: UIImageView!
+    @IBOutlet weak private var nameLabel: UILabel?
+    @IBOutlet weak private var roleLabel: UILabel?
     
-    fileprivate var imageURL: URL? {
+    private var imageURL: URL? {
         didSet {
             if let url = imageURL {
                 if url != oldValue {
@@ -26,7 +26,7 @@ class TalentTableViewCell: UITableViewCell {
         }
     }
     
-    fileprivate var name: String? {
+    private var name: String? {
         set {
             nameLabel?.text = newValue?.uppercased()
         }
@@ -36,7 +36,7 @@ class TalentTableViewCell: UITableViewCell {
         }
     }
     
-    fileprivate var role: String? {
+    private var role: String? {
         set {
             roleLabel?.text = newValue
         }

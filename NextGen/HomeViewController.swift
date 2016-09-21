@@ -8,38 +8,38 @@ import NextGenDataManager
 
 class HomeViewController: UIViewController {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let OverlayFadeInDuration = 0.5
     }
     
-    fileprivate struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let ShowInMovieExperience = "ShowInMovieExperienceSegueIdentifier"
         static let ShowOutOfMovieExperience = "ShowOutOfMovieExperienceSegueIdentifier"
     }
     
-    @IBOutlet weak fileprivate var exitButton: UIButton!
-    @IBOutlet weak fileprivate var backgroundImageView: UIImageView!
-    @IBOutlet weak fileprivate var backgroundVideoView: UIView!
-    fileprivate var backgroundVideoLayer: AVPlayerLayer?
-    fileprivate var backgroundVideoPlayer: AVPlayer?
-    fileprivate var backgroundVideoSize = CGSize.zero
-    fileprivate var backgroundImageSize = CGSize.zero
+    @IBOutlet weak private var exitButton: UIButton!
+    @IBOutlet weak private var backgroundImageView: UIImageView!
+    @IBOutlet weak private var backgroundVideoView: UIView!
+    private var backgroundVideoLayer: AVPlayerLayer?
+    private var backgroundVideoPlayer: AVPlayer?
+    private var backgroundVideoSize = CGSize.zero
+    private var backgroundImageSize = CGSize.zero
     
-    fileprivate var mainExperience: NGDMMainExperience!
-    fileprivate var buttonOverlayView: UIView!
-    fileprivate var playButton: UIButton!
-    fileprivate var extrasButton: UIButton!
-    fileprivate var titleOverlayView: UIView?
-    fileprivate var titleImageView: UIImageView?
-    fileprivate var homeScreenViews = [UIView]()
-    fileprivate var interfaceCreated = false
-    fileprivate var currentlyDismissing = false
+    private var mainExperience: NGDMMainExperience!
+    private var buttonOverlayView: UIView!
+    private var playButton: UIButton!
+    private var extrasButton: UIButton!
+    private var titleOverlayView: UIView?
+    private var titleImageView: UIImageView?
+    private var homeScreenViews = [UIView]()
+    private var interfaceCreated = false
+    private var currentlyDismissing = false
     
-    fileprivate var didFinishPlayingObserver: NSObjectProtocol?
-    fileprivate var shouldLaunchExtrasObserver: NSObjectProtocol?
+    private var didFinishPlayingObserver: NSObjectProtocol?
+    private var shouldLaunchExtrasObserver: NSObjectProtocol?
     
-    fileprivate var backgroundVideoTimeObserver: Any?
-    fileprivate var backgroundVideoFadeTime: Double {
+    private var backgroundVideoTimeObserver: Any?
+    private var backgroundVideoFadeTime: Double {
         if let loopTimecode = nodeStyle?.backgroundVideoLoopTimecode {
             return max(loopTimecode - Constants.OverlayFadeInDuration, 0)
         }
@@ -47,47 +47,47 @@ class HomeViewController: UIViewController {
         return 0
     }
     
-    fileprivate var nodeStyle: NGDMNodeStyle? {
+    private var nodeStyle: NGDMNodeStyle? {
         return mainExperience.getNodeStyle(UIApplication.shared.statusBarOrientation)
     }
     
-    fileprivate var playButtonImage: NGDMImage? {
+    private var playButtonImage: NGDMImage? {
         return nodeStyle?.getButtonImage("Play")
     }
     
-    fileprivate var extrasButtonImage: NGDMImage? {
+    private var extrasButtonImage: NGDMImage? {
         return nodeStyle?.getButtonImage("Extras")
     }
     
-    fileprivate var playButtonImageURL: URL? {
+    private var playButtonImageURL: URL? {
         return playButtonImage?.url
     }
     
-    fileprivate var extrasButtonImageURL: URL? {
+    private var extrasButtonImageURL: URL? {
         return extrasButtonImage?.url
     }
     
-    fileprivate var buttonOverlaySize: CGSize {
+    private var buttonOverlaySize: CGSize {
         return nodeStyle?.buttonOverlaySize ?? CGSize(width: 300, height: 100)
     }
     
-    fileprivate var buttonOverlayBottomLeft: CGPoint {
+    private var buttonOverlayBottomLeft: CGPoint {
         return nodeStyle?.buttonOverlayBottomLeft ?? CGPoint(x: 490, y: 25)
     }
     
-    fileprivate var playButtonSize: CGSize {
+    private var playButtonSize: CGSize {
         return playButtonImage?.size ?? CGSize(width: 300, height: 55)
     }
     
-    fileprivate var extrasButtonSize: CGSize {
+    private var extrasButtonSize: CGSize {
         return extrasButtonImage?.size ?? CGSize(width: 300, height: 60)
     }
     
-    fileprivate var titleOverlaySize: CGSize {
+    private var titleOverlaySize: CGSize {
         return CGSize(width: 400, height: 133)
     }
     
-    fileprivate var titleOverlayBottomLeft: CGPoint {
+    private var titleOverlayBottomLeft: CGPoint {
         return CGPoint(x: 440, y: backgroundImageSize.height - (titleOverlaySize.height + 15))
     }
     

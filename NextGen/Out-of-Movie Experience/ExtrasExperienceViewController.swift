@@ -19,8 +19,8 @@ class ExtrasExperienceViewController: UIViewController {
     
     var experience: NGDMExperience!
     
-    fileprivate var _homeButton: UIButton!
-    fileprivate var _backButton: UIButton!
+    private var _homeButton: UIButton!
+    private var _backButton: UIButton!
     
     // MARK: View Lifecycle
     override func viewDidLoad() {

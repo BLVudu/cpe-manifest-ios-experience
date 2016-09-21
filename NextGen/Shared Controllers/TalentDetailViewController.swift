@@ -17,43 +17,43 @@ enum TalentDetailMode: String {
 
 class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    fileprivate struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let TalentImageGallery = "TalentImageGallerySegueIdentifier"
     }
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let GalleryCollectionViewItemSpacing: CGFloat = 10
         static let GalleryCollectionViewItemAspectRatio: CGFloat = 8 / 10
         static let FilmographyCollectionViewItemSpacing: CGFloat = 10
         static let FilmographyCollectionViewItemAspectRatio: CGFloat = 27 / 41
     }
     
-    @IBOutlet fileprivate var _containerViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak fileprivate var _talentImageView: UIImageView!
-    @IBOutlet weak fileprivate var _talentGalleryButton: UIButton?
-    @IBOutlet weak fileprivate var _talentNameLabel: UILabel!
-    @IBOutlet weak fileprivate var _talentBiographyHeaderLabel: UILabel!
-    @IBOutlet weak fileprivate var _talentBiographyLabel: UITextView!
+    @IBOutlet weak private var _talentImageView: UIImageView!
+    @IBOutlet weak private var _talentGalleryButton: UIButton?
+    @IBOutlet weak private var _talentNameLabel: UILabel!
+    @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
+    @IBOutlet weak private var _talentBiographyLabel: UITextView!
     
-    @IBOutlet weak fileprivate var _galleryContainerView: UIView?
-    @IBOutlet weak fileprivate var _galleryHeaderLabel: UILabel?
-    @IBOutlet weak fileprivate var _galleryCollectionView: UICollectionView?
-    @IBOutlet fileprivate var _biographyToFilmographyConstraint: NSLayoutConstraint?
-    @IBOutlet fileprivate var _biographyToGalleryConstraint: NSLayoutConstraint?
+    @IBOutlet weak private var _galleryContainerView: UIView?
+    @IBOutlet weak private var _galleryHeaderLabel: UILabel?
+    @IBOutlet weak private var _galleryCollectionView: UICollectionView?
+    @IBOutlet private var _biographyToFilmographyConstraint: NSLayoutConstraint?
+    @IBOutlet private var _biographyToGalleryConstraint: NSLayoutConstraint?
     
-    @IBOutlet weak fileprivate var _filmographyContainerView: UIView!
-    @IBOutlet weak fileprivate var _filmographyHeaderLabel: UILabel!
-    @IBOutlet weak fileprivate var _filmographyCollectionView: UICollectionView!
+    @IBOutlet weak private var _filmographyContainerView: UIView!
+    @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
+    @IBOutlet weak private var _filmographyCollectionView: UICollectionView!
     
-    @IBOutlet weak fileprivate var _twitterButton: SocialButton!
-    @IBOutlet weak fileprivate var _facebookButton: SocialButton!
-    @IBOutlet weak fileprivate var _instagramButton: SocialButton!
-    @IBOutlet fileprivate var _facebookMainConstraint: NSLayoutConstraint?
-    @IBOutlet fileprivate var _twitterMainConstraint: NSLayoutConstraint?
-    @IBOutlet fileprivate var _facebookNoInstagramConstraint: NSLayoutConstraint?
-    @IBOutlet fileprivate var _twitterNoFacebookConstraint: NSLayoutConstraint?
-    @IBOutlet fileprivate var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint?
+    @IBOutlet weak private var _twitterButton: SocialButton!
+    @IBOutlet weak private var _facebookButton: SocialButton!
+    @IBOutlet weak private var _instagramButton: SocialButton!
+    @IBOutlet private var _facebookMainConstraint: NSLayoutConstraint?
+    @IBOutlet private var _twitterMainConstraint: NSLayoutConstraint?
+    @IBOutlet private var _facebookNoInstagramConstraint: NSLayoutConstraint?
+    @IBOutlet private var _twitterNoFacebookConstraint: NSLayoutConstraint?
+    @IBOutlet private var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint?
     
     var images = [String]()
     var talent: NGDMTalent!

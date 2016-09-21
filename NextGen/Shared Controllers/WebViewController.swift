@@ -7,15 +7,15 @@ import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let HeaderButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 125 : 100)
         static let HeaderButtonHeight: CGFloat = (DeviceType.IS_IPAD ? 90 : 50)
         static let HeaderIconPadding: CGFloat = (DeviceType.IS_IPAD ? 30 : 15)
     }
     
-    fileprivate var _webView: WKWebView!
-    fileprivate var _title: String?
-    fileprivate var _url: URL!
+    private var _webView: WKWebView!
+    private var _title: String?
+    private var _url: URL!
     var shouldDisplayFullScreen = false
     
     // MARK: Initialization

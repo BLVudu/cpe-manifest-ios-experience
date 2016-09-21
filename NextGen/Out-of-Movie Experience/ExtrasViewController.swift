@@ -9,14 +9,14 @@ import NextGenDataManager
 
 class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, TalentDetailViewPresenter {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 5)
         static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 25)
         static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
         static let CollectionViewItemAspectRatio: CGFloat = 318 / 224
     }
     
-    fileprivate struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
         static let ShowGallery = "ExtrasGallerySegue"
         static let ShowMap = "ExtrasMapSegue"
@@ -28,10 +28,10 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     @IBOutlet weak var talentDetailView: UIView?
     @IBOutlet var extrasCollectionView: UICollectionView!
     
-    fileprivate var talentDetailViewController: TalentDetailViewController?
-    fileprivate var selectedIndexPath: IndexPath?
+    private var talentDetailViewController: TalentDetailViewController?
+    private var selectedIndexPath: IndexPath?
     
-    fileprivate var showActorsInGrid: Bool {
+    private var showActorsInGrid: Bool {
         return !DeviceType.IS_IPAD && NGDMManifest.sharedInstance.hasActors
     }
     

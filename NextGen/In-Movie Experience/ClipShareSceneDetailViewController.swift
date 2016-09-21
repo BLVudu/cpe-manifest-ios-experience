@@ -7,18 +7,18 @@ import NextGenDataManager
 
 class ClipShareSceneDetailViewController: SceneDetailViewController {
     
-    @IBOutlet weak fileprivate var clipShareTitleLabel: UILabel!
-    @IBOutlet weak fileprivate var previousButton: UIButton!
-    @IBOutlet weak fileprivate var nextButton: UIButton!
-    @IBOutlet weak fileprivate var videoContainerView: UIView!
-    @IBOutlet weak fileprivate var previewImageView: UIImageView!
-    @IBOutlet weak fileprivate var previewPlayButton: UIButton!
-    @IBOutlet weak fileprivate var clipNameLabel: UILabel!
-    @IBOutlet weak fileprivate var shareButton: UIButton!
+    @IBOutlet weak private var clipShareTitleLabel: UILabel!
+    @IBOutlet weak private var previousButton: UIButton!
+    @IBOutlet weak private var nextButton: UIButton!
+    @IBOutlet weak private var videoContainerView: UIView!
+    @IBOutlet weak private var previewImageView: UIImageView!
+    @IBOutlet weak private var previewPlayButton: UIButton!
+    @IBOutlet weak private var clipNameLabel: UILabel!
+    @IBOutlet weak private var shareButton: UIButton!
     
-    fileprivate var videoPlayerViewController: VideoPlayerViewController?
-    fileprivate var previousTimedEvent: NGDMTimedEvent?
-    fileprivate var nextTimedEvent: NGDMTimedEvent?
+    private var videoPlayerViewController: VideoPlayerViewController?
+    private var previousTimedEvent: NGDMTimedEvent?
+    private var nextTimedEvent: NGDMTimedEvent?
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         shareButton.setTitle(String.localize("clipshare.share_button").uppercased(), for: UIControlState())
     }
     
-    fileprivate func reloadClipViews() {
+    private func reloadClipViews() {
         videoPlayerViewController?.willMove(toParentViewController: nil)
         videoPlayerViewController?.view.removeFromSuperview()
         videoPlayerViewController?.removeFromParentViewController()
@@ -64,7 +64,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
     }
     
     // MARK: Actions
-    @IBAction fileprivate func onPlay() {
+    @IBAction private func onPlay() {
         previewImageView.isHidden = true
         previewPlayButton.isHidden = true
         
@@ -88,21 +88,21 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         }
     }
     
-    @IBAction fileprivate func onTapPrevious() {
+    @IBAction private func onTapPrevious() {
         if let timedEvent = previousTimedEvent {
             self.timedEvent = timedEvent
             reloadClipViews()
         }
     }
     
-    @IBAction fileprivate func onTapNext() {
+    @IBAction private func onTapNext() {
         if let timedEvent = nextTimedEvent {
             self.timedEvent = timedEvent
             reloadClipViews()
         }
     }
     
-    @IBAction fileprivate func onShare(_ sender: UIButton) {
+    @IBAction private func onShare(_ sender: UIButton) {
         if let url = timedEvent?.videoURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
             let activityViewController = UIActivityViewController(activityItems: [String.localize("clipshare.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender

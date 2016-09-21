@@ -13,7 +13,7 @@ struct ImageGalleryNotification {
 
 class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let ToolbarHeight: CGFloat = (DeviceType.IS_IPAD ? 40 : 35)
         static let CloseButtonSize: CGFloat = 44
         static let CloseButtonPadding: CGFloat = 15
@@ -21,10 +21,10 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     var gallery: NGDMGallery?
     var allowsFullScreen = true
-    fileprivate var toolbar: UIToolbar?
-    fileprivate var originalFrame: CGRect?
-    fileprivate var originalContainerFrame: CGRect?
-    fileprivate var closeButton: UIButton!
+    private var toolbar: UIToolbar?
+    private var originalFrame: CGRect?
+    private var originalContainerFrame: CGRect?
+    private var closeButton: UIButton!
     
     var isFullScreen = false {
         didSet {
@@ -65,7 +65,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    fileprivate var scrollViewPageWidth: CGFloat = 0
+    private var scrollViewPageWidth: CGFloat = 0
     var currentPage = 0 {
         didSet {
             if gallery != nil && !gallery!.isTurntable {
@@ -111,7 +111,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         setup()
     }
     
-    fileprivate func setup() {
+    private func setup() {
         self.delegate = self
         
         toolbar = UIToolbar()
@@ -175,7 +175,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         toolbar = nil
     }
     
-    fileprivate func resetScrollView() {
+    private func resetScrollView() {
         for subview in self.subviews {
             if let subview = subview as? UIScrollView {
                 subview.removeFromSuperview()
@@ -289,13 +289,13 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     // MARK: Image Gallery
-    fileprivate func loadGalleryImageForPage(_ page: Int) {
+    private func loadGalleryImageForPage(_ page: Int) {
         if let url = gallery?.getImageURLForPage(page), let imageView = (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView , imageView.image == nil {
             imageView.sd_setImage(with: url)
         }
     }
     
-    fileprivate func imageViewForPage(_ page: Int) -> UIImageView? {
+    private func imageViewForPage(_ page: Int) -> UIImageView? {
         if let pageView = self.viewWithTag(page + 1) as? UIScrollView {
             return pageView.subviews.first as? UIImageView
         }

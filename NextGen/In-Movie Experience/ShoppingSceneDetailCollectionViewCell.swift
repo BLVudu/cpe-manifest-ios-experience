@@ -14,13 +14,13 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     
     static let ReuseIdentifier = "ShoppingSceneDetailCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak fileprivate var imageView: UIImageView!
-    @IBOutlet weak fileprivate var bullseyeImageView: UIImageView!
-    @IBOutlet weak fileprivate var extraDescriptionLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var bullseyeImageView: UIImageView!
+    @IBOutlet weak private var extraDescriptionLabel: UILabel!
     
     var productImageType = ShoppingProductImageType.product
     
-    fileprivate var imageURL: URL? {
+    private var imageURL: URL? {
         set {
             if let url = newValue {
                 imageView.contentMode = UIViewContentMode.scaleAspectFit
@@ -39,7 +39,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         }
     }
     
-    fileprivate var extraDescription: String? {
+    private var extraDescription: String? {
         set {
             extraDescriptionLabel?.text = newValue
         }
@@ -49,9 +49,9 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         }
     }
     
-    fileprivate var currentProduct: TheTakeProduct?
-    fileprivate var currentProductFrameTime = -1.0
-    fileprivate var currentProductSessionDataTask: URLSessionDataTask?
+    private var currentProduct: TheTakeProduct?
+    private var currentProductFrameTime = -1.0
+    private var currentProductSessionDataTask: URLSessionDataTask?
     var theTakeProducts: [TheTakeProduct]? {
         didSet {
             if let products = theTakeProducts, let product = products.first {

@@ -8,20 +8,20 @@ import NextGenDataManager
 
 class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak fileprivate var mapView: MultiMapView!
-    @IBOutlet fileprivate var mapContainerAspectRatioConstraint: NSLayoutConstraint!
-    @IBOutlet weak fileprivate var mediaCollectionView: UICollectionView?
-    @IBOutlet weak fileprivate var descriptionLabel: UILabel?
+    @IBOutlet weak private var mapView: MultiMapView!
+    @IBOutlet private var mapContainerAspectRatioConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var mediaCollectionView: UICollectionView?
+    @IBOutlet weak private var descriptionLabel: UILabel?
     
     @IBOutlet weak var locationDetailView: UIView!
     @IBOutlet weak var videoContainerView: UIView!
-    fileprivate var videoPlayerViewController: VideoPlayerViewController?
+    private var videoPlayerViewController: VideoPlayerViewController?
     
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     
-    fileprivate var appData: NGDMAppData!
-    fileprivate var location: NGDMLocation!
-    fileprivate var marker: MultiMapMarker!
+    private var appData: NGDMAppData!
+    private var location: NGDMLocation!
+    private var marker: MultiMapMarker!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -65,14 +65,14 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         mapView.maxZoomLevel = appData.zoomLevel
     }
     
-    fileprivate func animateToCenter() {
+    private func animateToCenter() {
         let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: true)
         mapView.selectedMarker = marker
     }
     
     // MARK: Actions
-    fileprivate func playVideo(_ videoURL: URL) {
+    private func playVideo(_ videoURL: URL) {
         closeDetailView()
         
         if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
@@ -90,7 +90,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         }
     }
     
-    fileprivate func showGallery(_ gallery: NGDMGallery) {
+    private func showGallery(_ gallery: NGDMGallery) {
         closeDetailView()
         
         galleryScrollView.loadGallery(gallery)
@@ -99,7 +99,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         locationDetailView.isHidden = false
     }
     
-    fileprivate func closeDetailView() {
+    private func closeDetailView() {
         locationDetailView.isHidden = true
         
         galleryScrollView.destroyGallery()

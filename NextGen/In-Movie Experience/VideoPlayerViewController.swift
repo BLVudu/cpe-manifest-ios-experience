@@ -30,48 +30,48 @@ typealias Task = (_ cancel : Bool) -> ()
 
 class VideoPlayerViewController: NextGenVideoPlayerViewController {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let CountdownTimeInterval: CGFloat = 1
         static let CountdownTotalTime: CGFloat = 5
     }
     
     var mode = VideoPlayerMode.supplemental
     
-    fileprivate var _didPlayInterstitial = false
-    fileprivate var _lastNotifiedTime = -1.0
-    fileprivate var _controlsAreLocked = false
-    fileprivate var manuallyPaused = false
+    private var _didPlayInterstitial = false
+    private var _lastNotifiedTime = -1.0
+    private var _controlsAreLocked = false
+    private var manuallyPaused = false
     
-    @IBOutlet weak fileprivate var _commentaryView: UIView!
-    @IBOutlet weak fileprivate var _commentaryButton: UIButton!
-    @IBOutlet weak fileprivate var _homeButton: UIButton!
+    @IBOutlet weak private var _commentaryView: UIView!
+    @IBOutlet weak private var _commentaryButton: UIButton!
+    @IBOutlet weak private var _homeButton: UIButton!
     var commentaryIndex = 0
     
     // Countdown/Queue
     var queueTotalCount = 0
     var queueCurrentIndex = 0
-    fileprivate var countdownSeconds: CGFloat = 0 {
+    private var countdownSeconds: CGFloat = 0 {
         didSet {
             countdownLabel.text = String.localize("label.time.seconds", variables: ["count": String(Int(Constants.CountdownTotalTime - countdownSeconds))])
             countdownProgressView?.setProgress(((countdownSeconds + 1) / Constants.CountdownTotalTime), animated: true)
         }
     }
     
-    fileprivate var countdownTimer: Timer?
-    fileprivate var countdownProgressView: UAProgressView?
-    @IBOutlet weak fileprivate var countdownLabel: UILabel!
+    private var countdownTimer: Timer?
+    private var countdownProgressView: UAProgressView?
+    @IBOutlet weak private var countdownLabel: UILabel!
     
     // Skip interstitial
-    @IBOutlet weak fileprivate var skipContainerView: UIView!
-    @IBOutlet weak fileprivate var skipCountdownContainerView: UIView!
-    @IBOutlet fileprivate var skipContainerLandscapeHeightConstraint: NSLayoutConstraint?
-    @IBOutlet fileprivate var skipContainerPortraitHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak private var skipContainerView: UIView!
+    @IBOutlet weak private var skipCountdownContainerView: UIView!
+    @IBOutlet private var skipContainerLandscapeHeightConstraint: NSLayoutConstraint?
+    @IBOutlet private var skipContainerPortraitHeightConstraint: NSLayoutConstraint?
     
     // Notifications
-    fileprivate var playerItemDurationDidLoadObserver: NSObjectProtocol?
-    fileprivate var shouldPauseAllOtherObserver: NSObjectProtocol?
-    fileprivate var updateCommentaryButtonObserver: NSObjectProtocol?
-    fileprivate var sceneDetailWillCloseObserver: NSObjectProtocol?
+    private var playerItemDurationDidLoadObserver: NSObjectProtocol?
+    private var shouldPauseAllOtherObserver: NSObjectProtocol?
+    private var updateCommentaryButtonObserver: NSObjectProtocol?
+    private var sceneDetailWillCloseObserver: NSObjectProtocol?
     
     deinit {
         let center = NotificationCenter.default

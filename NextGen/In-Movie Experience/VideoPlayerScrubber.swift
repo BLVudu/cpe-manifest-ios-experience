@@ -22,7 +22,7 @@ class VideoPlayerScrubber: UISlider {
         setup()
     }
     
-    fileprivate func setup() {
+    private func setup() {
         let scrubberImage = UIImage(named: "Scrubber Image")
         self.setThumbImage(scrubberImage, for: UIControlState())
         self.setThumbImage(scrubberImage, for: .highlighted)

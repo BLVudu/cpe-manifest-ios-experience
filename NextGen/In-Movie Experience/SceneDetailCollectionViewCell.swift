@@ -14,7 +14,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    fileprivate var title: String? {
+    private var title: String? {
         set {
             titleLabel?.text = newValue?.uppercased()
         }
@@ -42,7 +42,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    fileprivate var lastSavedTime: Double = -1.0
+    private var lastSavedTime: Double = -1.0
     var currentTime: Double = -1.0 {
         didSet {
             if lastSavedTime == -1 || abs(currentTime - lastSavedTime) >= Constants.UpdateInterval {

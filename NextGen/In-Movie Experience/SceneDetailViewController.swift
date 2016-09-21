@@ -11,7 +11,7 @@ struct SceneDetailNotification {
 
 class SceneDetailViewController: UIViewController {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let ViewMargin: CGFloat = 10
         static let TitleLabelHeight: CGFloat = (DeviceType.IS_IPAD ? 70 : 50)
         static let CloseButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 110 : 100)

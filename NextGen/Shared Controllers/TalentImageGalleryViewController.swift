@@ -7,13 +7,13 @@ import NextGenDataManager
 
 class TalentImageGalleryViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak fileprivate var galleryScrollView: ImageGalleryScrollView!
-    @IBOutlet weak fileprivate var galleryCollectionView: UICollectionView!
+    @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
+    @IBOutlet weak private var galleryCollectionView: UICollectionView!
     
     var talent: NGDMTalent!
     var initialPage = 0
     
-    fileprivate var galleryDidScrollToPageObserver: NSObjectProtocol?
+    private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

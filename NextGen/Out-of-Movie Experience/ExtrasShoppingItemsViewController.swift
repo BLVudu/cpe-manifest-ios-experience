@@ -7,18 +7,18 @@ import MBProgressHUD
 
 class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let ItemSpacing: CGFloat = 12
         static let LineSpacing: CGFloat = 12
         static let Padding: CGFloat = 15
         static let ItemAspectRatio: CGFloat = 338 / 230
     }
     
-    @IBOutlet weak fileprivate var productsCollectionView: UICollectionView!
+    @IBOutlet weak private var productsCollectionView: UICollectionView!
     
-    fileprivate var products: [TheTakeProduct]?
-    fileprivate var productListSessionDataTask: URLSessionDataTask?
-    fileprivate var didSelectCategoryObserver: NSObjectProtocol?
+    private var products: [TheTakeProduct]?
+    private var productListSessionDataTask: URLSessionDataTask?
+    private var didSelectCategoryObserver: NSObjectProtocol?
     
     deinit {
         if let observer = didSelectCategoryObserver {

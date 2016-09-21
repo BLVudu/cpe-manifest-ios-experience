@@ -11,7 +11,7 @@ struct ShoppingMenuNotification {
 
 class ExtrasShoppingViewController: MenuedViewController {
     
-    fileprivate var _didAutoSelectCategory = false
+    private var _didAutoSelectCategory = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

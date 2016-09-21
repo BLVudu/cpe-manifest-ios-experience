@@ -11,13 +11,13 @@ class VideoCell: UITableViewCell {
     static let ReuseIdentifier = "VideoCellReuseIdentifier"
     static let NibName = "VideoCell" + (DeviceType.IS_IPAD ? "" : "_iPhone")
     
-    @IBOutlet weak fileprivate var thumbnailContainerView: UIView!
-    @IBOutlet weak fileprivate var thumbnailImageView: UIImageView!
-    @IBOutlet weak fileprivate var playIconImageView: UIImageView!
-    @IBOutlet weak fileprivate var runtimeLabel: UILabel!
-    @IBOutlet weak fileprivate var captionLabel: UILabel!
+    @IBOutlet weak private var thumbnailContainerView: UIView!
+    @IBOutlet weak private var thumbnailImageView: UIImageView!
+    @IBOutlet weak private var playIconImageView: UIImageView!
+    @IBOutlet weak private var runtimeLabel: UILabel!
+    @IBOutlet weak private var captionLabel: UILabel!
     
-    fileprivate var didPlayVideoObserver: NSObjectProtocol?
+    private var didPlayVideoObserver: NSObjectProtocol?
     
     var experience: NGDMExperience? {
         didSet {

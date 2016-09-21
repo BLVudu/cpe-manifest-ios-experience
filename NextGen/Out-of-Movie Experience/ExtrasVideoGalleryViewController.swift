@@ -198,7 +198,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         }
     }
     
-    fileprivate func playSelectedExperience() {
+    private func playSelectedExperience() {
         if let selectedIndexPath = galleryTableView.indexPathForSelectedRow, let selectedExperience = experience.childExperiences?[selectedIndexPath.row] {
             if let imageURL = selectedExperience.imageURL {
                 previewImageView.sd_setImage(with: imageURL)

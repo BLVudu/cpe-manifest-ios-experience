@@ -6,7 +6,7 @@ import Foundation
 
 class SettingsManager {
     
-    fileprivate struct UserDefaults {
+    private struct UserDefaults {
         static let DidWatchVideo = "kUserDefaultsDidWatchVideo"
         static let DidWatchInterstitial = "kUserDefaultsDidWatchInterstitial"
     }

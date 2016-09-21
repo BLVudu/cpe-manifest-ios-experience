@@ -5,17 +5,17 @@
 import Foundation
 import NextGenDataManager
 
-open class BaselineAPIUtil: APIUtil, TalentAPIUtil {
+public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
     
-    open static var APIDomain = "https://vic57ayytg.execute-api.us-west-2.amazonaws.com/prod"
+    public static var APIDomain = "https://vic57ayytg.execute-api.us-west-2.amazonaws.com/prod"
     
-    fileprivate struct Endpoints {
+    private struct Endpoints {
         static let GetCredits = "/film/credits"
         static let GetTalentImages = "/talent/images"
         static let GetTalentDetails = "/talent"
     }
     
-    fileprivate struct Keys {
+    private struct Keys {
         static let ParticipantID = "PARTICIPANT_ID"
         static let FullName = "FULL_NAME"
         static let Credit = "CREDIT"
@@ -34,13 +34,13 @@ open class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         static let URL = "URL"
     }
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let MaxCredits = 15
         static let MaxFilmography = 10
     }
     
-    open var apiNamespace = Namespaces.Baseline
-    open var apiId: String?
+    public var apiNamespace = Namespaces.Baseline
+    public var apiId: String?
     
     public convenience init(apiKey: String) {
         self.init(apiDomain: BaselineAPIUtil.APIDomain)
@@ -48,7 +48,7 @@ open class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         self.customHeaders["x-api-key"] = apiKey
     }
     
-    open func prefetchCredits(_ successBlock: @escaping (_ talents: [String: NGDMTalent]?) -> Void) {
+    public func prefetchCredits(_ successBlock: @escaping (_ talents: [String: NGDMTalent]?) -> Void) {
         if let apiId = apiId {
             _ = getJSONWithPath(Endpoints.GetCredits, parameters: ["id": apiId], successBlock: { (result) -> Void in
                 if let results = result["result"] as? NSArray {
@@ -79,7 +79,7 @@ open class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         }
     }
     
-    open func getTalentImages(_ talentId: String, successBlock: @escaping (_ talentImages: [TalentImage]?) -> Void) {
+    public func getTalentImages(_ talentId: String, successBlock: @escaping (_ talentImages: [TalentImage]?) -> Void) {
         _ = getJSONWithPath(Endpoints.GetTalentImages, parameters: ["id": talentId], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray , results.count > 0 {
                 var talentImages = [TalentImage]()
@@ -106,7 +106,7 @@ open class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         }, errorBlock: nil)
     }
     
-    open func getTalentDetails(_ talentId: String, successBlock: @escaping (_ biography: String?, _ socialAccounts: [TalentSocialAccount]?, _ films: [TalentFilm]) -> Void) {
+    public func getTalentDetails(_ talentId: String, successBlock: @escaping (_ biography: String?, _ socialAccounts: [TalentSocialAccount]?, _ films: [TalentFilm]) -> Void) {
         _ = getJSONWithPath(Endpoints.GetTalentDetails, parameters: ["id": talentId], successBlock: { (result) in
             var socialAccounts = [TalentSocialAccount]()
             if let socialAccountInfoList = result[Keys.SocialAccounts] as? NSArray {

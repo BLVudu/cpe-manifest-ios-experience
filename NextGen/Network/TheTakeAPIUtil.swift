@@ -4,7 +4,7 @@
 
 import Foundation
 import NextGenDataManager
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -15,7 +15,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -25,17 +25,17 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-open class TheTakeAPIUtil: APIUtil {
+public class TheTakeAPIUtil: APIUtil {
     
-    open static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")
+    public static let sharedInstance = TheTakeAPIUtil(apiDomain: "https://thetake.p.mashape.com")
     
-    open var mediaId: String!
+    public var mediaId: String!
     var apiKey: String!
     
-    fileprivate var _frameTimes = [Double: NSDictionary]()
+    private var _frameTimes = [Double: NSDictionary]()
     var productCategories = [TheTakeCategory]()
     
-    override open func requestWithURLPath(_ urlPath: String) -> NSMutableURLRequest {
+    override public func requestWithURLPath(_ urlPath: String) -> NSMutableURLRequest {
         let request = super.requestWithURLPath(urlPath)
         request.addValue(apiKey, forHTTPHeaderField: "X-Mashape-Key")
         request.addValue("application/json", forHTTPHeaderField: "Accept")

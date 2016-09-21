@@ -6,11 +6,11 @@ import Foundation
 
 class NextGenCacheManager {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let CacheParentDirectory = "NextGen"
     }
     
-    fileprivate static var tempDirectoryURL: URL? {
+    private static var tempDirectoryURL: URL? {
         let directoryURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(Constants.CacheParentDirectory, isDirectory: true)
         
         var isDirectory: ObjCBool = false
@@ -30,7 +30,7 @@ class NextGenCacheManager {
         return directoryURL
     }
     
-    fileprivate static var applicationSupportDirectoryURL: URL? {
+    private static var applicationSupportDirectoryURL: URL? {
         let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
         if let path = paths.first {
             if !FileManager.default.fileExists(atPath: path) {
@@ -48,7 +48,7 @@ class NextGenCacheManager {
         return nil
     }
     
-    fileprivate static func fileNameForURL(_ remoteURL: URL) -> String? {
+    private static func fileNameForURL(_ remoteURL: URL) -> String? {
         if let fileName = remoteURL.path.characters.split(separator: "/").last {
             return String(fileName)
         }

@@ -8,7 +8,7 @@ import NextGenDataManager
 
 class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let CollectionViewItemSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 5)
         static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 15)
         static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
@@ -16,31 +16,31 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         static let CollectionViewLabelHeight: CGFloat = (DeviceType.IS_IPAD ? 35 : 30)
     }
     
-    @IBOutlet weak fileprivate var mapView: MultiMapView!
-    @IBOutlet weak fileprivate var breadcrumbsPrimaryButton: UIButton!
-    @IBOutlet weak fileprivate var breadcrumbsSecondaryArrowImageView: UIImageView!
-    @IBOutlet weak fileprivate var breadcrumbsSecondaryLabel: UILabel!
-    @IBOutlet weak fileprivate var collectionView: UICollectionView!
+    @IBOutlet weak private var mapView: MultiMapView!
+    @IBOutlet weak private var breadcrumbsPrimaryButton: UIButton!
+    @IBOutlet weak private var breadcrumbsSecondaryArrowImageView: UIImageView!
+    @IBOutlet weak private var breadcrumbsSecondaryLabel: UILabel!
+    @IBOutlet weak private var collectionView: UICollectionView!
     
-    @IBOutlet weak fileprivate var locationDetailView: UIView!
-    @IBOutlet weak fileprivate var videoContainerView: UIView!
-    fileprivate var videoPlayerViewController: VideoPlayerViewController?
-    fileprivate var videoPlayerDidEndVideoObserver: NSObjectProtocol?
+    @IBOutlet weak private var locationDetailView: UIView!
+    @IBOutlet weak private var videoContainerView: UIView!
+    private var videoPlayerViewController: VideoPlayerViewController?
+    private var videoPlayerDidEndVideoObserver: NSObjectProtocol?
     
-    @IBOutlet weak fileprivate var galleryScrollView: ImageGalleryScrollView!
-    @IBOutlet weak fileprivate var galleryPageControl: UIPageControl!
-    @IBOutlet weak fileprivate var closeButton: UIButton?
-    fileprivate var galleryDidToggleFullScreenObserver: NSObjectProtocol?
-    fileprivate var galleryDidScrollToPageObserver: NSObjectProtocol?
+    @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
+    @IBOutlet weak private var galleryPageControl: UIPageControl!
+    @IBOutlet weak private var closeButton: UIButton?
+    private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
+    private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
     @IBOutlet private var containerTopConstraint: NSLayoutConstraint?
     @IBOutlet private var containerBottomConstraint: NSLayoutConstraint?
     @IBOutlet private var containerAspectRatioConstraint: NSLayoutConstraint?
     @IBOutlet private var containerBottomInnerConstraint: NSLayoutConstraint?
     
-    fileprivate var locationExperiences = [NGDMExperience]()
-    fileprivate var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
-    fileprivate var selectedExperience: NGDMExperience? {
+    private var locationExperiences = [NGDMExperience]()
+    private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
+    private var selectedExperience: NGDMExperience? {
         didSet {
             if let selectedExperience = selectedExperience {
                 if let marker = markers[selectedExperience.id] {
@@ -236,7 +236,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         closeDetailView(animated: true)
     }
     
-    fileprivate func closeDetailView(animated: Bool) {
+    private func closeDetailView(animated: Bool) {
         let hideViews = {
             self.locationDetailView.isHidden = true
             

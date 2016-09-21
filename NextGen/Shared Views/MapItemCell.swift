@@ -9,9 +9,9 @@ class MapItemCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "MapItemCellReuseIdentifier"
     
-    @IBOutlet weak fileprivate var titleLabel: UILabel!
-    @IBOutlet weak fileprivate var imageView: UIImageView!
-    @IBOutlet weak fileprivate var playButton: UIButton!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var playButton: UIButton!
     
     var title: String? {
         set {

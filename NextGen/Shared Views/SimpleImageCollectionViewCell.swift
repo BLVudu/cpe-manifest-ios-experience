@@ -8,10 +8,10 @@ class SimpleImageCollectionViewCell: UICollectionViewCell {
     
     static let BaseReuseIdentifier = "SimpleImageCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak fileprivate var imageView: UIImageView!
-    @IBOutlet weak fileprivate var playButton: UIButton?
+    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var playButton: UIButton?
     
-    fileprivate var setImageSessionDataTask: URLSessionDataTask?
+    private var setImageSessionDataTask: URLSessionDataTask?
     
     var showsSelectedBorder = false
     

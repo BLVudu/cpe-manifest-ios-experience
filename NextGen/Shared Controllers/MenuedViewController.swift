@@ -8,8 +8,8 @@ class MenuedViewController: ExtrasExperienceViewController, UITableViewDelegate,
     
     @IBOutlet weak internal var menuTableView: UITableView!
     internal var menuSections = [MenuSection]()
-    fileprivate var selectedSectionValue: String?
-    fileprivate var selectedItemValue: String?
+    private var selectedSectionValue: String?
+    private var selectedItemValue: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -33,13 +33,13 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         static let ZoomFitAllPadding: CGFloat = (DeviceType.IS_IPAD ? 50 : 20)
     }
     
-    fileprivate var appleMapView: MKMapView?
-    fileprivate var googleMapView: GMSMapView?
-    fileprivate var mapTypeSegmentedControl: UISegmentedControl?
-    fileprivate var zoomInButton: UIButton?
-    fileprivate var zoomOutButton: UIButton?
-    fileprivate var mapIconImage: UIImage?
-    fileprivate var mapMarkers = [MultiMapMarker]()
+    private var appleMapView: MKMapView?
+    private var googleMapView: GMSMapView?
+    private var mapTypeSegmentedControl: UISegmentedControl?
+    private var zoomInButton: UIButton?
+    private var zoomOutButton: UIButton?
+    private var mapIconImage: UIImage?
+    private var mapMarkers = [MultiMapMarker]()
     var delegate: MultiMapViewDelegate?
     var maxZoomLevel: Float = -1 {
         didSet {
@@ -80,7 +80,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         setup()
     }
     
-    fileprivate func setup() {
+    private func setup() {
         if NGDMConfiguration.mapService == .googleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
             googleMapView?.delegate = self

@@ -9,8 +9,8 @@ class MenuSectionCell: UITableViewCell {
     
     static let ReuseIdentifier = "MenuSectionCellReuseIdentifier"
     
-    @IBOutlet weak fileprivate var titleLabel: UILabel!
-    @IBOutlet weak fileprivate var dropDownImageView: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var dropDownImageView: UIImageView!
     
     var menuSection: MenuSection? {
         didSet {

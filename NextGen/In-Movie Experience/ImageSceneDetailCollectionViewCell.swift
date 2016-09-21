@@ -10,11 +10,11 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
     static let ClipShareReuseIdentifier = "ClipShareSceneDetailCollectionViewCellReuseIdentifier"
     
-    @IBOutlet weak fileprivate var imageView: UIImageView!
-    @IBOutlet weak fileprivate var playButton: UIButton!
-    @IBOutlet weak fileprivate var extraDescriptionLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var playButton: UIButton!
+    @IBOutlet weak private var extraDescriptionLabel: UILabel!
     
-    fileprivate var imageURL: URL? {
+    private var imageURL: URL? {
         set {
             if let url = newValue {
                 imageView.sd_setImage(with: url)

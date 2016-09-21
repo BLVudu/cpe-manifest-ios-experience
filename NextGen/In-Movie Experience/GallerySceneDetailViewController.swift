@@ -7,13 +7,13 @@ import NextGenDataManager
 
 class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewDelegate {
     
-    @IBOutlet weak fileprivate var videoContainerView: UIView?
-    @IBOutlet weak fileprivate var galleryScrollView: ImageGalleryScrollView?
-    @IBOutlet weak fileprivate var descriptionLabel: UILabel!
-    @IBOutlet weak fileprivate var pageControl: UIPageControl?
-    @IBOutlet weak fileprivate var shareButton: UIButton?
+    @IBOutlet weak private var videoContainerView: UIView?
+    @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView?
+    @IBOutlet weak private var descriptionLabel: UILabel!
+    @IBOutlet weak private var pageControl: UIPageControl?
+    @IBOutlet weak private var shareButton: UIButton?
     
-    fileprivate var galleryDidScrollToPageObserver: NSObjectProtocol?
+    private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
     // MARK: Initialization
     deinit {

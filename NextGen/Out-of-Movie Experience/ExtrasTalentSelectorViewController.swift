@@ -12,8 +12,8 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     @IBOutlet weak var talentTableView: UITableView!
     @IBOutlet weak var talentDetailView: UIView!
     
-    fileprivate var talentDetailViewController: TalentDetailViewController?
-    fileprivate var selectedIndexPath: IndexPath?
+    private var talentDetailViewController: TalentDetailViewController?
+    private var selectedIndexPath: IndexPath?
     
     // MARK: View Lifecycle
     override func viewDidLoad() {

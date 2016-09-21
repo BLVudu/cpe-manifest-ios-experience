@@ -7,30 +7,30 @@ import NextGenDataManager
 
 class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let HeaderHeight: CGFloat = 35
         static let FooterHeight: CGFloat = 50
     }
     
-    fileprivate struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let ShowTalent = "ShowTalentSegueIdentifier"
     }
     
-    @IBOutlet weak fileprivate var talentTableView: UITableView?
-    @IBOutlet weak fileprivate var backgroundImageView: UIImageView!
-    @IBOutlet weak fileprivate var showLessContainer: UIView!
-    @IBOutlet weak fileprivate var showLessButton: UIButton!
-    @IBOutlet weak fileprivate var showLessGradientView: UIView!
-    fileprivate var showLessGradient = CAGradientLayer()
-    fileprivate var currentTalents: [NGDMTalent]?
-    fileprivate var hiddenTalents: [NGDMTalent]?
-    fileprivate var isShowingMore = false
-    fileprivate var numCurrentTalents: Int {
+    @IBOutlet weak private var talentTableView: UITableView?
+    @IBOutlet weak private var backgroundImageView: UIImageView!
+    @IBOutlet weak private var showLessContainer: UIView!
+    @IBOutlet weak private var showLessButton: UIButton!
+    @IBOutlet weak private var showLessGradientView: UIView!
+    private var showLessGradient = CAGradientLayer()
+    private var currentTalents: [NGDMTalent]?
+    private var hiddenTalents: [NGDMTalent]?
+    private var isShowingMore = false
+    private var numCurrentTalents: Int {
         return currentTalents?.count ?? 0
     }
     
-    fileprivate var currentTime: Double = -1
-    fileprivate var didChangeTimeObserver: NSObjectProtocol?
+    private var currentTime: Double = -1
+    private var didChangeTimeObserver: NSObjectProtocol?
     
     deinit {
         if let observer = didChangeTimeObserver {

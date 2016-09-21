@@ -18,7 +18,7 @@ struct ExperienceCellData {
 
 class SceneDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    fileprivate struct SegueIdentifier {
+    private struct SegueIdentifier {
         static let ShowGallery = "ShowGallerySegueIdentifier"
         static let ShowShopping = "ShowShoppingSegueIdentifier"
         static let ShowMap = "ShowMapSegueIdentifier"
@@ -26,18 +26,18 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ShowLargeText = "ShowLargeTextSegueIdentifier"
     }
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let ItemsPerRow: CGFloat = (DeviceType.IS_IPAD ? 2 : 1)
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10
         static let ItemAspectRatio: CGFloat = 283 / 220
     }
     
-    fileprivate var _didChangeTimeObserver: NSObjectProtocol!
+    private var _didChangeTimeObserver: NSObjectProtocol!
     
-    fileprivate var _currentTime: Double = -1
-    fileprivate var _currentTimedEvents = [NGDMTimedEvent]()
-    fileprivate var _isProcessingTimedEvents = false
+    private var _currentTime: Double = -1
+    private var _currentTimedEvents = [NGDMTimedEvent]()
+    private var _isProcessingTimedEvents = false
     
     deinit {
         let center = NotificationCenter.default

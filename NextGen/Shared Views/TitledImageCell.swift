@@ -9,10 +9,10 @@ class TitledImageCell: UICollectionViewCell {
     
     static let ReuseIdentifier = "TitledImageCellReuseIdentifier"
     
-    @IBOutlet weak fileprivate var titleLabel: UILabel!
-    @IBOutlet weak fileprivate var imageView: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
     
-    fileprivate var setImageSessionDataTask: URLSessionDataTask?
+    private var setImageSessionDataTask: URLSessionDataTask?
     
     var experience: NGDMExperience? {
         didSet {
