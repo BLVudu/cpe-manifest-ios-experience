@@ -21,6 +21,7 @@ class TalentTableViewCell: UITableViewCell {
                 }
             } else {
                 talentImageView.sd_cancelCurrentImageLoad()
+                talentImageView.backgroundColor = UIColor.darkGray
                 talentImageView.image = nil
             }
         }

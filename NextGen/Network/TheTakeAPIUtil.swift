@@ -32,7 +32,16 @@ public class TheTakeAPIUtil: APIUtil {
     public var mediaId: String!
     var apiKey: String!
     
-    private var _frameTimes = [Double: NSDictionary]()
+    private var frameTimes = [Double: NSDictionary]()
+    private var _frameTimeKeys = [Double]()
+    private var frameTimeKeys: [Double] {
+        if _frameTimeKeys.count == 0 {
+            _frameTimeKeys = frameTimes.keys.sorted()
+        }
+        
+        return _frameTimeKeys
+    }
+    
     var productCategories = [TheTakeCategory]()
     
     override public func requestWithURLPath(_ urlPath: String) -> NSMutableURLRequest {
@@ -47,14 +56,14 @@ public class TheTakeAPIUtil: APIUtil {
         var limit = 100000
         if start == 0 {
             limit = 100
-            _frameTimes.removeAll()
+            frameTimes.removeAll()
         }
         
         _ = getJSONWithPath("/frames/listFrames", parameters: ["media": mediaId, "start": String(start), "limit": String(limit)], successBlock: { (result) -> Void in
             if let frames = result["result"] as? [NSDictionary] {
                 for frameInfo in frames {
                     if let frameTime = frameInfo["frameTime"] as? Double {
-                        self._frameTimes[frameTime] = frameInfo
+                        self.frameTimes[frameTime] = frameInfo
                     }
                 }
             }
@@ -68,10 +77,10 @@ public class TheTakeAPIUtil: APIUtil {
     func prefetchProductCategories() {
         productCategories.removeAll()
         
-        _ = getJSONWithPath("/categories/listProductCategories", parameters: ["media": mediaId], successBlock: { (result) in
-            if let categories = result["result"] as? [NSDictionary] {
+        _ = getJSONWithPath("/categories/listProductCategories", parameters: ["media": mediaId], successBlock: { [weak self] (result) in
+            if let strongSelf = self, let categories = result["result"] as? [NSDictionary] {
                 for categoryInfo in categories {
-                    self.productCategories.append(TheTakeCategory(info: categoryInfo))
+                    strongSelf.productCategories.append(TheTakeCategory(info: categoryInfo))
                 }
             }
         }, errorBlock: nil)
@@ -81,11 +90,10 @@ public class TheTakeAPIUtil: APIUtil {
         let timeInMilliseconds = timeInSeconds * 1000
         var closestFrameTime = -1.0
         
-        if _frameTimes.count > 0 && _frameTimes[timeInMilliseconds] == nil {
-            /*let frameTimeKeys = _frameTimes.keys.sorted()
-            if let frameIndex = frameTimeKeys.indexOfFirstObjectPassingTest({ $0 > timeInMilliseconds }) {
+        if frameTimes.count > 0 && frameTimes[timeInMilliseconds] == nil {
+            if let frameIndex = frameTimeKeys.index(where: { $0 > timeInMilliseconds }) {
                 closestFrameTime = frameTimeKeys[max(frameIndex - 1, 0)]
-            }*/
+            }
         } else {
             closestFrameTime = timeInMilliseconds
         }
@@ -94,7 +102,7 @@ public class TheTakeAPIUtil: APIUtil {
     }
     
     func getFrameProducts(_ frameTime: Double, successBlock: @escaping (_ products: [TheTakeProduct]) -> Void) -> URLSessionDataTask? {
-        if frameTime >= 0 && _frameTimes[frameTime] != nil {
+        if frameTime >= 0 && frameTimes[frameTime] != nil {
             return getJSONWithPath("/frameProducts/listFrameProducts", parameters: ["media": mediaId, "time": String(frameTime)], successBlock: { (result) -> Void in
                 if let productList = result["result"] as? NSArray {
                     var products = [TheTakeProduct]()

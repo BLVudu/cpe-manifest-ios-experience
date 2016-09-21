@@ -5,7 +5,12 @@
 import UIKit
 import NextGenDataManager
 
-class TalentImageGalleryViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class TalentImageGalleryViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    private struct Constants {
+        static let CollectionViewItemSpacing: CGFloat = 10
+        static let CollectionViewItemAspectRatio: CGFloat = 8 / 10
+    }
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryCollectionView: UICollectionView!
@@ -84,6 +89,16 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         galleryScrollView.gotoPage((indexPath as NSIndexPath).row, animated: true)
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.height
+        return CGSize(width: height * Constants.CollectionViewItemAspectRatio, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return Constants.CollectionViewItemSpacing
     }
 
 }

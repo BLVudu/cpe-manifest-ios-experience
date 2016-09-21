@@ -133,7 +133,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             }
         })
         
-        updateCommentaryButtonObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kDidSelectCommetaryOption), object: nil, queue: OperationQueue.main, using: { [weak self]
+        /*updateCommentaryButtonObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kDidSelectCommetaryOption), object: nil, queue: OperationQueue.main, using: { [weak self]
             (notification) in
             if let strongSelf = self {
                 if let userInfo = (notification as NSNotification).userInfo, let index = userInfo["option"] as? Int {
@@ -141,7 +141,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
                     strongSelf._commentaryButton.setTitle(index > 0 ? String.localize("label.commentary.on") : String.localize("label.commentary"), for: UIControlState())
                 }
             }
-        })
+        })*/
         
         sceneDetailWillCloseObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: SceneDetailNotification.WillClose), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self , strongSelf.mode == .mainFeature && !strongSelf.manuallyPaused {
@@ -219,20 +219,22 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         countdownProgressView?.removeFromSuperview()
         countdownProgressView = nil
         
-        if _didPlayInterstitial {
-            skipContainerView.isHidden = true
-            
-            if let videoURL = NGDMManifest.sharedInstance.mainExperience?.videoURL {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: VideoPlayerNotification.DidPlayMainExperience), object: nil)
-                self.playVideo(with: videoURL)
-            }
-        } else {
-            skipContainerView.isHidden = !SettingsManager.didWatchInterstitial
-            SettingsManager.didWatchInterstitial = true
-            
+        if !_didPlayInterstitial {
             if let videoURL = NGDMManifest.sharedInstance.mainExperience?.interstitialVideoURL {
                 self.playVideo(with: videoURL)
+                
+                skipContainerView.isHidden = !SettingsManager.didWatchInterstitial
+                SettingsManager.didWatchInterstitial = true
+                return
             }
+            
+            _didPlayInterstitial = true
+        }
+        
+        skipContainerView.isHidden = true
+        if let videoURL = NGDMManifest.sharedInstance.mainExperience?.videoURL {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: VideoPlayerNotification.DidPlayMainExperience), object: nil)
+            self.playVideo(with: videoURL)
         }
     }
     
@@ -348,7 +350,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
     override func done(_ sender: Any?) {
         super.done(sender)
         
-        NextGenHook.delegate?.videoPlayerWillClose(mode, playbackPosition: CMTimeGetSeconds(self.playerItem.currentTime()))
+        NextGenHook.delegate?.videoPlayerWillClose(mode, playbackPosition: self.playerItem != nil ? CMTimeGetSeconds(self.playerItem.currentTime()) : 0)
         self.dismiss(animated: true, completion: nil)
     }
     

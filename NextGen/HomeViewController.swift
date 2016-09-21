@@ -355,7 +355,7 @@ class HomeViewController: UIViewController {
                 
                 playButton.frame = CGRect(x: 0, y: 0, width: buttonOverlayView.frame.width, height: buttonOverlayView.frame.width / (playButtonSize.width / playButtonSize.height))
                 
-                let extrasButtonWidth = playButton.frame.width * 0.6
+                let extrasButtonWidth = playButton.frame.width * 0.7
                 let extrasButtonHeight = extrasButtonWidth / (extrasButtonSize.width / extrasButtonSize.height)
                 extrasButton.frame = CGRect(x: (buttonOverlayView.frame.width - extrasButtonWidth) / 2, y: buttonOverlayHeight - extrasButtonHeight, width: extrasButtonWidth, height: extrasButtonHeight)
                 
