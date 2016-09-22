@@ -195,10 +195,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
     }
     
     // MARK: Video Playback
-    override func playVideo(with url: URL!) {
+    override func playVideo(with url: URL?) {
         cancelCountdown()
         
-        if _didPlayInterstitial {
+        if _didPlayInterstitial, let url = url {
             DispatchQueue.global(qos: .utility).async {
                 SettingsManager.setVideoAsWatched(url)
                 NextGenHook.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url, startTime) in
@@ -252,11 +252,11 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         NotificationCenter.default.post(name: Notification.Name(rawValue: VideoPlayerNotification.DidPlayVideo), object: nil, userInfo: [VideoPlayerNotification.UserInfoVideoURL: self.url])
     }
     
-    /*override func observeValue(forKeyPath path: String!, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath path: String!, of object: Any!, change: [AnyHashable : Any]!, context: UnsafeMutableRawPointer!) {
         super.observeValue(forKeyPath: path, of: object, change: change, context: context)
         
         self.playbackView.setVideoFillMode(_didPlayInterstitial && mode != .basicPlayer ? AVLayerVideoGravityResizeAspect : AVLayerVideoGravityResizeAspectFill)
-    }*/
+    }
     
     override func syncScrubber() {
         super.syncScrubber()
@@ -275,7 +275,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
     }
     
     override func playerItemDidReachEnd(_ notification: Notification!) {
-        if let playerItem = notification.object as? AVPlayerItem , playerItem == self.player.currentItem {
+        if let playerItem = notification.object as? AVPlayerItem, playerItem == self.player.currentItem {
             if !_didPlayInterstitial {
                 _didPlayInterstitial = true
                 playMainExperience()
@@ -306,7 +306,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             
             NotificationCenter.default.post(name: Notification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil)
             
-            super.playerItemDidReachEnd(notification)
+            //super.playerItemDidReachEnd(notification)
             
             if mode == .mainFeature {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {

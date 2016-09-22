@@ -21,10 +21,14 @@ class TheTakeProduct: NSObject {
             static let CropImages = "cropImages"
             static let CropImage = "cropImage"
             static let CropImageThumbnail = "500pxCropLink"
+            static let KeyFrameImage = "keyFrameImage"
+            static let KeyFrameImageThumbnail = "500pxKeyFrameLink"
             static let ExactMatch = "verified"
             static let PurchaseLink = "purchaseLink"
-            static let BullseyeX = "keyCropProductX"
-            static let BullseyeY = "keyCropProductY"
+            static let BullseyeCropX = "keyCropProductX"
+            static let BullseyeCropY = "keyCropProductY"
+            static let BullseyeKeyFrameX = "keyFrameProductX"
+            static let BullseyeKeyFrameY = "keyFrameProductY"
         }
     }
     
@@ -55,8 +59,18 @@ class TheTakeProduct: NSObject {
             productImageURL = URL(string: imageString)
         }
         
-        if let imagesData = (data[Constants.Keys.CropImages] ?? data[Constants.Keys.CropImage]) as? [String: String], let imageString = imagesData[Constants.Keys.CropImageThumbnail] {
+        if let imagesData = data[Constants.Keys.KeyFrameImage] as? [String: String], let imageString = imagesData[Constants.Keys.KeyFrameImageThumbnail] {
             sceneImageURL = URL(string: imageString)
+            
+            if let x = data[Constants.Keys.BullseyeKeyFrameY] as? Double, let y = data[Constants.Keys.BullseyeKeyFrameY] as? Double {
+                bullseyePoint = CGPoint(x: x, y: y)
+            }
+        } else if let imagesData = (data[Constants.Keys.KeyFrameImage] ?? data[Constants.Keys.CropImages] ?? data[Constants.Keys.CropImage]) as? [String: String], let imageString = imagesData[Constants.Keys.CropImageThumbnail] {
+            sceneImageURL = URL(string: imageString)
+            
+            if let x = data[Constants.Keys.BullseyeCropX] as? Double, let y = data[Constants.Keys.BullseyeCropY] as? Double {
+                bullseyePoint = CGPoint(x: x, y: y)
+            }
         }
         
         if let verified = data[Constants.Keys.ExactMatch] as? Bool {
@@ -67,10 +81,6 @@ class TheTakeProduct: NSObject {
             theTakeURL = URL(string: purchaseLink)
         } else {
             theTakeURL = URL(string: Constants.ProductURLPrefix + id)
-        }
-        
-        if let x = data[Constants.Keys.BullseyeX] as? Double, let y = data[Constants.Keys.BullseyeY] as? Double {
-            bullseyePoint = CGPoint(x: x, y: y)
         }
     }
     

@@ -100,7 +100,7 @@ class ExtrasExperienceViewController: UIViewController {
         if let nodeStyle = NGDMManifest.sharedInstance.outOfMovieExperience?.getNodeStyle(UIApplication.shared.statusBarOrientation) {
             self.view.backgroundColor = nodeStyle.backgroundColor
             
-            if let backgroundImageURL = nodeStyle.backgroundImageURL {
+            if let backgroundImageURL = nodeStyle.backgroundImage?.url {
                 let backgroundImageView = UIImageView()
                 backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
                 backgroundImageView.sd_setImage(with: backgroundImageURL)

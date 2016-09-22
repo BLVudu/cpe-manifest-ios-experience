@@ -72,8 +72,9 @@ class TalentTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        self.contentView.layoutIfNeeded()
         self.backgroundColor = UIColor.clear
-        talentImageView.layer.cornerRadius = (talentImageView.frame.width + talentImageView.frame.height) / 4
+        talentImageView.layer.cornerRadius = talentImageView.frame.width / 2
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -100,30 +100,36 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 // Play from start time
 - (void)playVideoWithURL:(NSURL *)theURL startTime:(NSTimeInterval)theStartTime {
 	if (_URL != theURL) {
-        // set URL
-		_URL = [theURL copy];
-        
         // set start time
-        playbackSyncStartTime   = theStartTime;
+        playbackSyncStartTime = theStartTime;
+        hasSeekedToPlaybackSyncStartTime = NO;
         
-        /*
-         Create an asset for inspection of a resource referenced by a given URL.
-         Load the values for the asset key "playable".
-         */
-        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_URL options:nil];
-        
-        // Set AVAssetResourceLoaderDelegate
-        [asset.resourceLoader setDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
-        
-        NSArray *requestedKeys = @[kAVPlayerTracksKVO, kAVPlayerPlayableKVO];
-        
-        /* Tells the asset to load the values of any of the specified keys that are not already loaded. */
-        [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^{
-            dispatch_async( dispatch_get_main_queue(), ^{
-                /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
-                [self prepareToPlayAsset:asset withKeys:requestedKeys];
-            });
-         }];
+        if (theURL) {
+            // set URL
+            _URL = [theURL copy];
+            
+            /*
+             Create an asset for inspection of a resource referenced by a given URL.
+             Load the values for the asset key "playable".
+             */
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_URL options:nil];
+            
+            // Set AVAssetResourceLoaderDelegate
+            [asset.resourceLoader setDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
+            
+            NSArray *requestedKeys = @[kAVPlayerTracksKVO, kAVPlayerPlayableKVO];
+            
+            /* Tells the asset to load the values of any of the specified keys that are not already loaded. */
+            [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^{
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
+                    [self prepareToPlayAsset:asset withKeys:requestedKeys];
+                });
+             }];
+        } else {
+            _URL = nil;
+            [self.player removeAllItems];
+        }
 	}
 }
 
@@ -409,6 +415,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Seeking complete
                 isSeeking = NO;
+                hasSeekedToPlaybackSyncStartTime = YES;
                 
                 // Play
                 [self playVideo];
@@ -613,11 +620,10 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
         case NextGenVideoPlayerStateReadyToPlay:
             // Play from playbackSyncStartTime
             if (playbackSyncStartTime > 1 && !hasSeekedToPlaybackSyncStartTime) {
-                // hasSeekedToStartTime
-                hasSeekedToPlaybackSyncStartTime    = YES;
-                
-                // Seek
-                [self seekPlayerToTime:(CMTimeMakeWithSeconds(playbackSyncStartTime, NSEC_PER_SEC))];
+                if (!isSeeking) {
+                    // Seek
+                    [self seekPlayerToTime:(CMTimeMakeWithSeconds(playbackSyncStartTime, NSEC_PER_SEC))];
+                }
             }
             // Start from either beginning or from wherever left off
             else {
@@ -677,7 +683,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 - (void)playVideo {
     /* If we are at the end of the movie, we must seek to the beginning first
      before starting playback. */
-    if (YES == seekToZeroBeforePlay) {
+    if (seekToZeroBeforePlay) {
         seekToZeroBeforePlay = NO;
         
         // Pause
@@ -909,7 +915,8 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
         /* Get a new AVPlayer initialized to play the specified player item. */
         
         [self setPlayer:[AVQueuePlayer playerWithPlayerItem:self.playerItem]];
-
+        
+        self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
         
         /* Observe the AVPlayer "currentItem" property to find out when any
          AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did 
@@ -993,7 +1000,6 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
                 
                 // Set player state
                 [self setState:NextGenVideoPlayerStateReadyToPlay];
-                [self playVideo];
                 
                 // Notification
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerItemReadyToPlayNotification object:nil];
@@ -1083,7 +1089,7 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
             // Set player state
             //[self setState:NextGenVideoPlayerStateReadyToPlay];
             
-            if (self.playerItem.playbackLikelyToKeepUp && ![self isPlaying]) {
+            if (self.playerItem.playbackLikelyToKeepUp && ![self isPlaying] && !isSeeking) {
                 // NextGenVideoPlayerDelegate - bufferring ended
                 if (self.playerItem.playbackLikelyToKeepUp && self.delegate && [self.delegate respondsToSelector:@selector(videoPlayer:isBuffering:)]) {
                     [self.delegate videoPlayer:self isBuffering:NO];

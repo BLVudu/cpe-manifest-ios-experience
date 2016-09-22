@@ -20,10 +20,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var exitButton: UIButton!
     @IBOutlet weak private var backgroundImageView: UIImageView!
     @IBOutlet weak private var backgroundVideoView: UIView!
-    private var backgroundVideoLayer: AVPlayerLayer?
-    private var backgroundVideoPlayer: AVPlayer?
-    private var backgroundVideoSize = CGSize.zero
-    private var backgroundImageSize = CGSize.zero
+    private var backgroundVideoPlayerViewController: VideoPlayerViewController?
     
     private var mainExperience: NGDMMainExperience!
     private var buttonOverlayView: UIView!
@@ -35,10 +32,10 @@ class HomeViewController: UIViewController {
     private var interfaceCreated = false
     private var currentlyDismissing = false
     
-    private var didFinishPlayingObserver: NSObjectProtocol?
     private var shouldLaunchExtrasObserver: NSObjectProtocol?
     
-    private var backgroundVideoTimeObserver: Any?
+    private var backgroundVideoDidFinishPlayingObserver: NSObjectProtocol?
+    private var backgroundVideoTimeObserver: NSObjectProtocol?
     private var backgroundVideoFadeTime: Double {
         if let loopTimecode = nodeStyle?.backgroundVideoLoopTimecode {
             return max(loopTimecode - Constants.OverlayFadeInDuration, 0)
@@ -51,20 +48,29 @@ class HomeViewController: UIViewController {
         return mainExperience.getNodeStyle(UIApplication.shared.statusBarOrientation)
     }
     
+    private var backgroundImage: NGDMImage? {
+        return nodeStyle?.backgroundImage
+    }
+    
+    private var observedBackgroundImageSize: CGSize?
+    private var backgroundImageSize: CGSize {
+        return backgroundImage?.size ?? observedBackgroundImageSize ?? CGSize(width: 1920, height: 1080)
+    }
+    
+    private var backgroundVideo: NGDMVideo? {
+        return nodeStyle?.backgroundVideo
+    }
+    
+    private var backgroundVideoSize: CGSize {
+        return backgroundVideo?.size ?? CGSize.zero
+    }
+    
     private var playButtonImage: NGDMImage? {
         return nodeStyle?.getButtonImage("Play")
     }
     
     private var extrasButtonImage: NGDMImage? {
         return nodeStyle?.getButtonImage("Extras")
-    }
-    
-    private var playButtonImageURL: URL? {
-        return playButtonImage?.url
-    }
-    
-    private var extrasButtonImageURL: URL? {
-        return extrasButtonImage?.url
     }
     
     private var buttonOverlaySize: CGSize {
@@ -93,11 +99,6 @@ class HomeViewController: UIViewController {
     
     deinit {
         unloadBackground()
-        
-        if let observer = didFinishPlayingObserver {
-            NotificationCenter.default.removeObserver(observer)
-            didFinishPlayingObserver = nil
-        }
         
         if let observer = shouldLaunchExtrasObserver {
             NotificationCenter.default.removeObserver(observer)
@@ -144,7 +145,7 @@ class HomeViewController: UIViewController {
             playButton.layer.shadowOffset = CGSize.zero
             playButton.layer.masksToBounds = false
             
-            if let playButtonImageURL = playButtonImageURL {
+            if let playButtonImageURL = playButtonImage?.url {
                 playButton.sd_setImage(with: playButtonImageURL, for: .normal)
                 playButton.contentHorizontalAlignment = .fill
                 playButton.contentVerticalAlignment = .fill
@@ -167,7 +168,7 @@ class HomeViewController: UIViewController {
             longPressGestureRecognizer.minimumPressDuration = 5
             extrasButton.addGestureRecognizer(longPressGestureRecognizer)
             
-            if let extrasButtonImageURL = extrasButtonImageURL {
+            if let extrasButtonImageURL = extrasButtonImage?.url {
                 extrasButton.sd_setImage(with: extrasButtonImageURL, for: .normal)
                 extrasButton.contentHorizontalAlignment = .fill
                 extrasButton.contentVerticalAlignment = .fill
@@ -281,10 +282,6 @@ class HomeViewController: UIViewController {
                 }
                 
                 backgroundVideoView.frame = CGRect(x: backgroundPoint.x, y: backgroundPoint.y, width: backgroundSize.width, height: backgroundSize.height)
-                
-                if let backgroundVideoLayer = backgroundVideoLayer {
-                    backgroundVideoLayer.frame = backgroundVideoView.frame
-                }
             }
             
             if backgroundImageSize != CGSize.zero {
@@ -398,43 +395,38 @@ class HomeViewController: UIViewController {
     
     // MARK: Video Player
     func loadBackground() {
-        var hasVideoOrImage = false
-        
-        if let nodeStyle = nodeStyle, let backgroundVideoURL = nodeStyle.backgroundVideoURL {
+        if let nodeStyle = nodeStyle, let backgroundVideoURL = backgroundVideo?.url {
             if nodeStyle.backgroundVideoLoops {
-                didFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
-                    if let videoPlayer = self?.backgroundVideoPlayer {
-                        videoPlayer.isMuted = true
-                        videoPlayer.seek(to: CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                        videoPlayer.play()
+                backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+                    if let videoPlayerViewController = self?.backgroundVideoPlayerViewController {
+                        videoPlayerViewController.seekPlayer(to: CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
+                        //videoPlayerViewController.player?.isMuted = true
                     }
                 })
             }
             
-            let playerItem = AVPlayerItem(cacheableURL: backgroundVideoURL)
-            if let videoPlayer = backgroundVideoPlayer {
-                videoPlayer.replaceCurrentItem(with: playerItem)
-                videoPlayer.isMuted = true
-                videoPlayer.seek(to: CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                videoPlayer.play()
+            if let videoPlayerViewController = backgroundVideoPlayerViewController {
+                videoPlayerViewController.playVideo(with: backgroundVideoURL, startTime: nodeStyle.backgroundVideoLoopTimecode)
+                videoPlayerViewController.player?.isMuted = true
+                
                 for view in homeScreenViews {
                     view.isHidden = false
                 }
                 
                 homeScreenViews.removeAll()
-            } else {
-                let videoPlayer = AVPlayer(playerItem: playerItem)
-                backgroundVideoLayer = AVPlayerLayer(player: videoPlayer)
-                backgroundVideoLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-                backgroundVideoLayer!.frame = self.view.bounds
-                backgroundVideoView.frame = self.view.bounds
-                backgroundVideoView.layer.addSublayer(backgroundVideoLayer!)
+            } else if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
+                videoPlayerViewController.mode = .basicPlayer
+                
+                videoPlayerViewController.view.frame = backgroundVideoView.bounds
+                backgroundVideoView.addSubview(videoPlayerViewController.view)
+                self.addChildViewController(videoPlayerViewController)
+                videoPlayerViewController.didMove(toParentViewController: self)
                 
                 if backgroundVideoFadeTime > 0 {
-                    backgroundVideoTimeObserver = videoPlayer.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.55, Int32(NSEC_PER_SEC)), queue: DispatchQueue.main, using: { [weak self] (time) in
-                        if let strongSelf = self , time.seconds > strongSelf.backgroundVideoFadeTime {
+                    backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                        if let strongSelf = self, let time = notification.userInfo?["time"] as? Double, time > strongSelf.backgroundVideoFadeTime {
                             if let observer = strongSelf.backgroundVideoTimeObserver {
-                                videoPlayer.removeTimeObserver(observer)
+                                NotificationCenter.default.removeObserver(observer)
                                 strongSelf.backgroundVideoTimeObserver = nil
                             }
                             
@@ -461,22 +453,14 @@ class HomeViewController: UIViewController {
                 }
                 
                 if interfaceCreated {
-                    videoPlayer.isMuted = true
-                    videoPlayer.seek(to: CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
+                    videoPlayerViewController.player?.isMuted = true
+                    videoPlayerViewController.playVideo(with: backgroundVideoURL, startTime: nodeStyle.backgroundVideoLoopTimecode)
+                } else {
+                    videoPlayerViewController.playVideo(with: backgroundVideoURL)
                 }
                 
-                videoPlayer.play()
-                
-                backgroundVideoPlayer = videoPlayer
+                backgroundVideoPlayerViewController = videoPlayerViewController
             }
-            
-            if let backgroundVideoSize = playerItem.asset.tracks(withMediaType: AVMediaTypeVideo).first?.naturalSize , backgroundVideoSize != CGSize.zero {
-                self.backgroundVideoSize = backgroundVideoSize
-            } else {
-                backgroundVideoSize = self.view.frame.size
-            }
-            
-            hasVideoOrImage = true
         } else {
             for view in homeScreenViews {
                 view.isHidden = false
@@ -484,43 +468,31 @@ class HomeViewController: UIViewController {
             
             homeScreenViews.removeAll()
         }
-
-        var backgroundImageURL = nodeStyle?.backgroundImageURL
-        if backgroundImageURL == nil && !hasVideoOrImage {
-            backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL // This is how Comcast defines background images
-        }
         
-        if let backgroundImageURL = backgroundImageURL {
+        if let backgroundImageURL = backgroundImage?.url {
+            backgroundImageView.sd_setImage(with: backgroundImageURL)
+        } else if backgroundVideo == nil, let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL {
             backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
                 if let image = image {
-                    self?.backgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
+                    self?.observedBackgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
                 }
             })
-            
-            hasVideoOrImage = true
-        }
-        
-        if !hasVideoOrImage {
-            backgroundImageSize = CGSize(width: 1920, height: 1080)
         }
     }
     
     func unloadBackground() {
         if let observer = backgroundVideoTimeObserver {
-            backgroundVideoPlayer?.removeTimeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
             backgroundVideoTimeObserver = nil
         }
         
-        if let observer = didFinishPlayingObserver {
+        if let observer = backgroundVideoDidFinishPlayingObserver {
             NotificationCenter.default.removeObserver(observer)
-            didFinishPlayingObserver = nil
+            backgroundVideoDidFinishPlayingObserver = nil
         }
         
-        backgroundVideoPlayer?.pause()
-        backgroundVideoPlayer?.replaceCurrentItem(with: nil)
+        backgroundVideoPlayerViewController?.playVideo(with: nil)
         backgroundImageView.image = nil
-        backgroundVideoSize = CGSize.zero
-        backgroundImageSize = CGSize.zero
     }
     
     // MARK: Actions
@@ -534,6 +506,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func onExit() {
         NextGenHook.experienceWillClose()
+        currentlyDismissing = true
         self.dismiss(animated: true, completion: nil)
     }
     
