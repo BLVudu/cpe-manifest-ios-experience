@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
     
     private var observedBackgroundImageSize: CGSize?
     private var backgroundImageSize: CGSize {
-        return backgroundImage?.size ?? observedBackgroundImageSize ?? CGSize(width: 1920, height: 1080)
+        return backgroundImage?.size ?? observedBackgroundImageSize ?? CGSize.zero
     }
     
     private var backgroundVideo: NGDMVideo? {
@@ -229,10 +229,10 @@ class HomeViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        coordinator.animate(alongsideTransition: { (_) in
-            if self.interfaceCreated {
-                self.unloadBackground()
-                self.loadBackground()
+        coordinator.animate(alongsideTransition: { [weak self] (_) in
+            if let strongSelf = self, strongSelf.interfaceCreated {
+                strongSelf.unloadBackground()
+                strongSelf.loadBackground()
             }
         }, completion: nil)
     }
@@ -289,7 +289,7 @@ class HomeViewController: UIViewController {
                 var backgroundSize = CGSize.zero
                 let backgroundImageAspectRatio = backgroundImageSize.width / backgroundImageSize.height
                 
-                if nodeStyle?.backgroundScaleMethod == .Full && backgroundVideoSize == CGSize.zero {
+                if nodeStyle?.backgroundScaleMethod == .Full && backgroundVideo == nil {
                     if (backgroundImageAspectRatio > viewAspectRatio) {
                         backgroundSize.width = viewWidth
                         backgroundSize.height = backgroundSize.width / backgroundImageAspectRatio
@@ -314,7 +314,7 @@ class HomeViewController: UIViewController {
                         backgroundSize.height = backgroundSize.width / backgroundImageAspectRatio
                     }
                     
-                    if nodeStyle?.backgroundPositionMethod == .Centered || backgroundVideoSize != CGSize.zero {
+                    if nodeStyle == nil || backgroundVideo != nil || nodeStyle?.backgroundPositionMethod == .Centered {
                         backgroundPoint.x = (backgroundSize.width - viewWidth) / -2
                         backgroundPoint.y = (backgroundSize.height - viewHeight) / -2
                     }
@@ -400,7 +400,7 @@ class HomeViewController: UIViewController {
                 backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
                     if let videoPlayerViewController = self?.backgroundVideoPlayerViewController {
                         videoPlayerViewController.seekPlayer(to: CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                        //videoPlayerViewController.player?.isMuted = true
+                        videoPlayerViewController.player?.isMuted = true
                     }
                 })
             }
@@ -475,6 +475,7 @@ class HomeViewController: UIViewController {
             backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
                 if let image = image {
                     self?.observedBackgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
+                    self?.view.setNeedsLayout()
                 }
             })
         }

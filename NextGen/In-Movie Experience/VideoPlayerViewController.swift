@@ -256,6 +256,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         super.observeValue(forKeyPath: path, of: object, change: change, context: context)
         
         self.playbackView.setVideoFillMode(_didPlayInterstitial && mode != .basicPlayer ? AVLayerVideoGravityResizeAspect : AVLayerVideoGravityResizeAspectFill)
+        
+        if mode == .basicPlayer {
+            self.player?.actionAtItemEnd = .none
+        }
     }
     
     override func syncScrubber() {

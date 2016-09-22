@@ -369,6 +369,8 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
         
         // Update time labels
         [self updateTimeLabelsWithTime:time];
+        
+        self.activityIndicatorVisible = NO;
 	}
 }
 
@@ -915,8 +917,6 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
         /* Get a new AVPlayer initialized to play the specified player item. */
         
         [self setPlayer:[AVQueuePlayer playerWithPlayerItem:self.playerItem]];
-        
-        self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
         
         /* Observe the AVPlayer "currentItem" property to find out when any
          AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did 

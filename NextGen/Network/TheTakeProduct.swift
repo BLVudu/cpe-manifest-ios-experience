@@ -62,7 +62,7 @@ class TheTakeProduct: NSObject {
         if let imagesData = data[Constants.Keys.KeyFrameImage] as? [String: String], let imageString = imagesData[Constants.Keys.KeyFrameImageThumbnail] {
             sceneImageURL = URL(string: imageString)
             
-            if let x = data[Constants.Keys.BullseyeKeyFrameY] as? Double, let y = data[Constants.Keys.BullseyeKeyFrameY] as? Double {
+            if let x = data[Constants.Keys.BullseyeKeyFrameX] as? Double, let y = data[Constants.Keys.BullseyeKeyFrameY] as? Double {
                 bullseyePoint = CGPoint(x: x, y: y)
             }
         } else if let imagesData = (data[Constants.Keys.KeyFrameImage] ?? data[Constants.Keys.CropImages] ?? data[Constants.Keys.CropImage]) as? [String: String], let imageString = imagesData[Constants.Keys.CropImageThumbnail] {

@@ -63,7 +63,6 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
                 
                 mapView.maxZoomLevel = lowestZoomLevel
                 mapView.zoomToFitAllMarkers()
-                
             }
             
             reloadBreadcrumbs()
@@ -145,7 +144,12 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         
         mapView.addControls()
         mapView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        self.view.layoutIfNeeded()
         selectedExperience = nil
     }
     
