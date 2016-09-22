@@ -629,7 +629,11 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
             }
             // Start from either beginning or from wherever left off
             else {
-               [self playVideo];
+                hasSeekedToPlaybackSyncStartTime = YES;
+                
+                if (![self isPlaying]) {
+                    [self playVideo];
+                }
             }
             
             // Scrubber timer
@@ -683,18 +687,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 }
 
 - (void)playVideo {
-    /* If we are at the end of the movie, we must seek to the beginning first
-     before starting playback. */
-    if (seekToZeroBeforePlay) {
-        seekToZeroBeforePlay = NO;
-        
-        // Pause
-        [self pauseVideo];
-        
-        // Seek
-        [self.player seekToTime:kCMTimeZero];
-    }
-    
     // Play
     [self.player play];
         
@@ -740,9 +732,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 
 /* Called when the player item has played to its end time. */
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
-	/* After the movie has played to its end time, seek back to time zero 
-		to play it again. */
-    seekToZeroBeforePlay = YES;
+    // Override me
 }
 
 /* ---------------------------------------------------------
@@ -910,8 +900,6 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
                                                object:self.player.currentItem];
 	
-    seekToZeroBeforePlay = NO;
-	
     /* Create new player, if we don't already have one. */
     if (!self.player){
         /* Get a new AVPlayer initialized to play the specified player item. */
@@ -1019,15 +1007,14 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 	}
     // AVPlayer "duration" property value observer
     else if (context == VideoPlayerDurationObservationContext) {
-        NSNumber *duration = [NSNumber numberWithDouble:CMTimeGetSeconds(self.playerItem.duration)];
-        if ([duration floatValue] > 1) {
+        NSNumber *duration = @(CMTimeGetSeconds(self.playerItem.duration));
+        if (duration.intValue > 1) {
             if (_durationLabel) {
                 _durationLabel.text = [self timeStringFromSecondsValue:duration.intValue];
             }
             
-            NSDictionary *durationInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          duration, kAVPlayerItemDurationKVO,
-                                          nil];
+            NSDictionary *durationInfo = @{ kAVPlayerItemDurationKVO: duration };
+            
             // Post notification
             [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerItemDurationDidLoadNotification object:self userInfo:durationInfo];
         }
@@ -1035,13 +1022,14 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 	/* AVPlayer "rate" property value observer. */
 	else if (context == VideoPlayerRateObservationContext) {
         // Set player state
-        if ([self isPlaying]) {
+        NSNumber *newRate = change[NSKeyValueChangeNewKey];
+        if (newRate.boolValue) {
             [self setState:NextGenVideoPlayerStateVideoPlaying];
         } else {
             [self setState:NextGenVideoPlayerStateVideoPaused];
         }
 	}
-	/* AVPlayer "currentItem" property observer. 
+	/* AVPlayer "currentItem" property observer.
         Called when the AVPlayer replaceCurrentItemWithPlayerItem: 
         replacement will/did occur. */
 	else if (context == VideoPlayerCurrentItemObservationContext) {
@@ -1085,20 +1073,17 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
     else if (context == VideoPlayerPlaybackLikelyToKeepUpObservationContext) {
         //DDLogInfo(@"playbackLikelyToKeepUp: %@", self.playerItem.playbackLikelyToKeepUp ? @"yes" : @"no");
         
-        if (self.state != NextGenVideoPlayerStateVideoPaused) {
-            // Set player state
-            //[self setState:NextGenVideoPlayerStateReadyToPlay];
+        if (self.state != NextGenVideoPlayerStateVideoPaused && self.playerItem.playbackLikelyToKeepUp && ![self isPlaying]) {
+            // NextGenVideoPlayerDelegate - bufferring ended
+            if (self.playerItem.playbackLikelyToKeepUp && self.delegate && [self.delegate respondsToSelector:@selector(videoPlayer:isBuffering:)]) {
+                [self.delegate videoPlayer:self isBuffering:NO];
+            }
             
-            if (self.playerItem.playbackLikelyToKeepUp && ![self isPlaying] && !isSeeking) {
-                // NextGenVideoPlayerDelegate - bufferring ended
-                if (self.playerItem.playbackLikelyToKeepUp && self.delegate && [self.delegate respondsToSelector:@selector(videoPlayer:isBuffering:)]) {
-                    [self.delegate videoPlayer:self isBuffering:NO];
-                }
-                
-                // Dispatch notification
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification object:nil];
-                
-                // Play
+            // Dispatch notification
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification object:nil];
+            
+            // Play
+            if (!isSeeking && hasSeekedToPlaybackSyncStartTime) {
                 [self playVideo];
             }
         }
@@ -1109,4 +1094,3 @@ shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loading
 }
 
 @end
-

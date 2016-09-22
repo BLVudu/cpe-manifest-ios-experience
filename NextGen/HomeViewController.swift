@@ -229,18 +229,20 @@ class HomeViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        coordinator.animate(alongsideTransition: { [weak self] (_) in
-            if let strongSelf = self, strongSelf.interfaceCreated {
-                strongSelf.unloadBackground()
-                strongSelf.loadBackground()
-            }
-        }, completion: nil)
+        if self.view.window != nil {
+            coordinator.animate(alongsideTransition: { [weak self] (_) in
+                if let strongSelf = self, strongSelf.interfaceCreated {
+                    strongSelf.unloadBackground()
+                    strongSelf.loadBackground()
+                }
+            }, completion: nil)
+        }
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        if interfaceCreated && !currentlyDismissing {
+        if interfaceCreated && !currentlyDismissing && (backgroundVideoSize != CGSize.zero || backgroundImageSize != CGSize.zero) {
             let viewWidth = self.view.frame.width
             let viewHeight = self.view.frame.height
             let viewAspectRatio = viewWidth / viewHeight
@@ -393,9 +395,35 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: Helpers
+    private func showHomeScreenViews(animated: Bool) {
+        if animated {
+            homeScreenViews.forEach {
+                $0.alpha = 0
+                $0.isHidden = false
+            }
+            
+            UIView.animate(withDuration: Constants.OverlayFadeInDuration, animations: {
+                self.homeScreenViews.forEach { $0.alpha = 1 }
+            }, completion: { (_) in
+                self.homeScreenViews.removeAll()
+            })
+        } else {
+            homeScreenViews.forEach { $0.isHidden = false }
+            homeScreenViews.removeAll()
+        }
+    }
+    
     // MARK: Video Player
     func loadBackground() {
-        if let nodeStyle = nodeStyle, let backgroundVideoURL = backgroundVideo?.url {
+        if let nodeStyle = nodeStyle, let backgroundVideoURL = backgroundVideo?.url, let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
+            videoPlayerViewController.mode = .basicPlayer
+            
+            videoPlayerViewController.view.frame = backgroundVideoView.bounds
+            backgroundVideoView.addSubview(videoPlayerViewController.view)
+            self.addChildViewController(videoPlayerViewController)
+            videoPlayerViewController.didMove(toParentViewController: self)
+            
             if nodeStyle.backgroundVideoLoops {
                 backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
                     if let videoPlayerViewController = self?.backgroundVideoPlayerViewController {
@@ -405,68 +433,26 @@ class HomeViewController: UIViewController {
                 })
             }
             
-            if let videoPlayerViewController = backgroundVideoPlayerViewController {
-                videoPlayerViewController.playVideo(with: backgroundVideoURL, startTime: nodeStyle.backgroundVideoLoopTimecode)
-                videoPlayerViewController.player?.isMuted = true
-                
-                for view in homeScreenViews {
-                    view.isHidden = false
-                }
-                
-                homeScreenViews.removeAll()
-            } else if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
-                videoPlayerViewController.mode = .basicPlayer
-                
-                videoPlayerViewController.view.frame = backgroundVideoView.bounds
-                backgroundVideoView.addSubview(videoPlayerViewController.view)
-                self.addChildViewController(videoPlayerViewController)
-                videoPlayerViewController.didMove(toParentViewController: self)
-                
-                if backgroundVideoFadeTime > 0 {
-                    backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-                        if let strongSelf = self, let time = notification.userInfo?["time"] as? Double, time > strongSelf.backgroundVideoFadeTime {
-                            if let observer = strongSelf.backgroundVideoTimeObserver {
-                                NotificationCenter.default.removeObserver(observer)
-                                strongSelf.backgroundVideoTimeObserver = nil
-                            }
-                            
-                            for view in strongSelf.homeScreenViews {
-                                view.alpha = 0
-                                view.isHidden = false
-                            }
-                            
-                            UIView.animate(withDuration: Constants.OverlayFadeInDuration, animations: {
-                                for view in strongSelf.homeScreenViews {
-                                    view.alpha = 1
-                                }
-                            })
-                            
-                            strongSelf.homeScreenViews.removeAll()
+            if backgroundVideoFadeTime > 0 && homeScreenViews.count > 0 {
+                backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                    if let strongSelf = self, let time = notification.userInfo?["time"] as? Double, time > strongSelf.backgroundVideoFadeTime {
+                        if let observer = strongSelf.backgroundVideoTimeObserver {
+                            NotificationCenter.default.removeObserver(observer)
+                            strongSelf.backgroundVideoTimeObserver = nil
                         }
-                    })
-                } else {
-                    for view in homeScreenViews {
-                        view.isHidden = false
+                        
+                        strongSelf.showHomeScreenViews(animated: true)
                     }
-                    
-                    homeScreenViews.removeAll()
-                }
-                
-                if interfaceCreated {
-                    videoPlayerViewController.player?.isMuted = true
-                    videoPlayerViewController.playVideo(with: backgroundVideoURL, startTime: nodeStyle.backgroundVideoLoopTimecode)
-                } else {
-                    videoPlayerViewController.playVideo(with: backgroundVideoURL)
-                }
-                
-                backgroundVideoPlayerViewController = videoPlayerViewController
-            }
-        } else {
-            for view in homeScreenViews {
-                view.isHidden = false
+                })
+            } else {
+                showHomeScreenViews(animated: false)
             }
             
-            homeScreenViews.removeAll()
+            videoPlayerViewController.shouldMute = interfaceCreated
+            videoPlayerViewController.playVideo(with: backgroundVideoURL, startTime: (interfaceCreated ? nodeStyle.backgroundVideoLoopTimecode : 0))
+            backgroundVideoPlayerViewController = videoPlayerViewController
+        } else {
+            showHomeScreenViews(animated: false)
         }
         
         if let backgroundImageURL = backgroundImage?.url {
@@ -492,7 +478,10 @@ class HomeViewController: UIViewController {
             backgroundVideoDidFinishPlayingObserver = nil
         }
         
-        backgroundVideoPlayerViewController?.playVideo(with: nil)
+        backgroundVideoPlayerViewController?.willMove(toParentViewController: nil)
+        backgroundVideoPlayerViewController?.view.removeFromSuperview()
+        backgroundVideoPlayerViewController?.removeFromParentViewController()
+        backgroundVideoPlayerViewController = nil
         backgroundImageView.image = nil
     }
     
@@ -519,4 +508,3 @@ class HomeViewController: UIViewController {
     }
     
 }
-

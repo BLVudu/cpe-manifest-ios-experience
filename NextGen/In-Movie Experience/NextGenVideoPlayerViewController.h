@@ -50,7 +50,6 @@ static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification   
 @interface NextGenVideoPlayerViewController : UIViewController <AVAssetResourceLoaderDelegate> {
 @protected
 	float                                    mRestoreAfterScrubbingRate;
-	BOOL                                     seekToZeroBeforePlay;
 	id                                       mTimeObserver;
 	BOOL                                     isSeeking;
     NSTimeInterval                           playbackSyncStartTime;

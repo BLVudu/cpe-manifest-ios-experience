@@ -36,6 +36,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
     }
     
     var mode = VideoPlayerMode.supplemental
+    var shouldMute = false
     
     private var _didPlayInterstitial = false
     private var _lastNotifiedTime = -1.0
@@ -275,6 +276,8 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
                 _lastNotifiedTime = currentTime
                 NotificationCenter.default.post(name: Notification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, userInfo: ["time": Double(currentTime)])
             }
+            
+            self.player.isMuted = shouldMute
         }
     }
     
