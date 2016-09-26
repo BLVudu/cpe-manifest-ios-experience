@@ -112,7 +112,7 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
              Create an asset for inspection of a resource referenced by a given URL.
              Load the values for the asset key "playable".
              */
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_URL options:nil];
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_URL options: @{ AVURLAssetReferenceRestrictionsKey: @(AVAssetReferenceRestrictionForbidNone) }];
             
             // Set AVAssetResourceLoaderDelegate
             [asset.resourceLoader setDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];

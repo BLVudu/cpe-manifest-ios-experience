@@ -37,6 +37,9 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
     
     var mode = VideoPlayerMode.supplemental
     var shouldMute = false
+    var shouldTrackOutput = false
+    
+    private var playerItemVideoOutput: AVPlayerItemVideoOutput?
     
     private var _didPlayInterstitial = false
     private var _lastNotifiedTime = -1.0
@@ -278,6 +281,9 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             }
             
             self.player.isMuted = shouldMute
+            if shouldTrackOutput && self.playerItem.outputs.count == 0 {
+                self.playerItem.add(AVPlayerItemVideoOutput())
+            }
         }
     }
     
@@ -351,6 +357,16 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         countdownLabel.isHidden = true
         countdownProgressView?.removeFromSuperview()
         countdownProgressView = nil
+    }
+    
+    func getScreenGrab() -> UIImage? {
+        if let playerItemVideoOutput = self.playerItem?.outputs.first as? AVPlayerItemVideoOutput {
+            if let cvPixelBuffer = playerItemVideoOutput.copyPixelBuffer(forItemTime: self.playerItem.currentTime(), itemTimeForDisplay: nil) {
+                return UIImage(ciImage: CIImage(cvPixelBuffer: cvPixelBuffer))
+            }
+        }
+        
+        return nil
     }
     
     // MARK: Actions
