@@ -236,6 +236,10 @@ class HomeViewController: UIViewController {
             backgroundVideoPreviewImageView!.image = image
             self.view.addSubview(backgroundVideoPreviewImageView!)
             self.view.bringSubview(toFront: exitButton)
+            self.view.bringSubview(toFront: buttonOverlayView)
+            if let titleOverlayView = titleOverlayView {
+                self.view.bringSubview(toFront: titleOverlayView)
+            }
         }
     
         unloadBackground()
@@ -484,13 +488,17 @@ class HomeViewController: UIViewController {
         
         if let backgroundImageURL = backgroundImage?.url {
             backgroundImageView.sd_setImage(with: backgroundImageURL)
-        } else if backgroundVideo == nil, let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL {
-            backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
-                if let image = image {
-                    self?.observedBackgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
-                    self?.view.setNeedsLayout()
-                }
-            })
+        } else if backgroundVideo == nil {
+            if let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL {
+                backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
+                    if let image = image {
+                        self?.observedBackgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
+                        self?.view.setNeedsLayout()
+                    }
+                })
+            } else {
+                observedBackgroundImageSize = CGSize(width: 1280, height: 720)
+            }
         }
     }
     
