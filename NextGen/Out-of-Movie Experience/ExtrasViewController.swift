@@ -66,6 +66,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if talentDetailView != nil && !talentDetailView!.isHidden {
             hideTalentDetailView()
         } else {
+            NextGenHook.log(event: .extrasAction, action: .exit)
             super.close()
         }
     }
@@ -97,6 +98,8 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                         self.talentDetailViewController = talentDetailViewController
                     }
                 }
+                
+                NextGenHook.log(event: .extrasAction, action: .selectTalent, itemId: talent.id)
             }
         }
     }
@@ -198,14 +201,23 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if let experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[childExperienceIndex] {
             if experience.isType(.shopping) {
                 self.performSegue(withIdentifier: SegueIdentifier.ShowShopping, sender: experience)
+                NextGenHook.log(event: .extrasAction, action: .selectShopping)
             } else if experience.isType(.location) {
                 self.performSegue(withIdentifier: SegueIdentifier.ShowMap, sender: experience)
+                NextGenHook.log(event: .extrasAction, action: .selectSceneLocations)
             } else if experience.isType(.app) {
                 if let app = experience.app, let url = app.url {
                     let webViewController = WebViewController(title: app.title, url: url)
                     self.present(webViewController, animated: true, completion: nil)
+                    NextGenHook.log(event: .extrasAction, action: .selectApp, itemId: app.id)
                 }
-            } else {
+            } else if experience.isType(.audioVisual) || experience.isType(.gallery) {
+                if experience.isType(.audioVisual) {
+                    NextGenHook.log(event: .extrasAction, action: .selectVideoGallery, itemId: experience.id)
+                } else {
+                    NextGenHook.log(event: .extrasAction, action: .selectImageGallery, itemId: experience.id)
+                }
+                
                 self.performSegue(withIdentifier: SegueIdentifier.ShowGallery, sender: experience)
             }
         }

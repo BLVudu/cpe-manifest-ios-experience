@@ -270,7 +270,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         breadcrumbsSecondaryArrowImageView.isHidden = true
         breadcrumbsSecondaryLabel.isHidden = true
         
-        if let selectedExperience = selectedExperience {
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
             breadcrumbsSecondaryLabel.text = selectedExperience.title.uppercased()
             breadcrumbsSecondaryLabel.sizeToFit()
             breadcrumbsSecondaryLabel.frame.size.height = breadcrumbsPrimaryButton.frame.height
@@ -313,7 +313,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     
     // MARK: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let selectedExperience = selectedExperience {
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
             return selectedExperience.appDataMediaCount 
         }
         
@@ -324,7 +324,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MapItemCell.ReuseIdentifier, for: indexPath) as! MapItemCell
         cell.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
-        if let selectedExperience = selectedExperience {
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
             if let experience = selectedExperience.appDataMediaAtIndex(indexPath.row) {
                 cell.playButtonVisible = experience.isType(.audioVisual)
                 cell.imageURL = experience.imageURL
@@ -341,7 +341,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let selectedExperience = selectedExperience {
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
             if let experience = selectedExperience.appDataMediaAtIndex(indexPath.row) {
                 if let videoURL = experience.videoURL {
                     playVideo(videoURL)

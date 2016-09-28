@@ -12,6 +12,7 @@ class ExtrasExperienceViewController: UIViewController {
         static let HeaderButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 250 : 100)
         static let HeaderIconPadding: CGFloat = (DeviceType.IS_IPAD ? 30 : 15)
         static let TitleImageAspectRatio: CGFloat = 300 / 90
+        static let TitleImageTopPadding: CGFloat = 10
         static let TitleImageHeight: CGFloat = (DeviceType.IS_IPAD ? 90 : 50)
         static let TitleLabelXOffset: CGFloat = -30
         static let TitleLabelYOffset: CGFloat = 5
@@ -81,17 +82,16 @@ class ExtrasExperienceViewController: UIViewController {
             self.view.addSubview(titleTreatmentImageView)
             self.view.sendSubview(toBack: titleTreatmentImageView)
             
-            let imageHeight = Constants.TitleImageHeight * (DeviceType.IS_IPAD ? 0.6 : 1)
             if #available(iOS 9.0, *) {
                 titleTreatmentImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4).isActive = true
-                titleTreatmentImageView.heightAnchor.constraint(equalToConstant: imageHeight).isActive = true
-                titleTreatmentImageView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: (Constants.TitleImageHeight - imageHeight) / 2).isActive = true
+                titleTreatmentImageView.heightAnchor.constraint(equalToConstant: Constants.TitleImageHeight - (Constants.TitleImageTopPadding * 2)).isActive = true
+                titleTreatmentImageView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: Constants.TitleImageTopPadding).isActive = true
                 titleTreatmentImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             } else {
                 self.view.addConstraints([
                     NSLayoutConstraint(item: titleTreatmentImageView, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 0.4, constant: 0),
-                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: imageHeight),
-                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: (Constants.TitleImageHeight - imageHeight) / 2),
+                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Constants.TitleImageHeight - (Constants.TitleImageTopPadding * 2)),
+                    NSLayoutConstraint(item: titleTreatmentImageView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: Constants.TitleImageTopPadding),
                     NSLayoutConstraint(item: titleTreatmentImageView, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
                 ])
             }
