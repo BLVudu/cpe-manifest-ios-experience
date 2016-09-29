@@ -40,7 +40,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
                     originalFrame = self.frame
                     
                     // FIXME: I have no idea why this hack works
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.01 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                         self.frame = UIScreen.main.bounds
                         self.layoutPages()
                     }
@@ -68,22 +68,25 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     private var scrollViewPageWidth: CGFloat = 0
     var currentPage = 0 {
         didSet {
-            if gallery != nil && !gallery!.isTurntable {
+            if let gallery = gallery, !gallery.isTurntable {
                 loadGalleryImageForPage(currentPage)
                 loadGalleryImageForPage(currentPage + 1)
                 NotificationCenter.default.post(name: Notification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, userInfo: ["page": currentPage])
                 
                 if let toolbarItems = toolbar?.items, let captionLabel = toolbarItems.first?.customView as? UILabel {
-                    if let caption = gallery?.getPictureForPage(currentPage)?.caption {
-                        toolbar?.isHidden = false
-                        captionLabel.text = caption
-                    } else {
-                        captionLabel.text = nil
-                        
-                        if !allowsFullScreen {
-                            toolbar?.isHidden = true
-                        }
+                    var captionText: String? = nil
+                    if gallery.totalCount >= 20 {
+                        captionText = String(currentPage + 1) + "/" + String(gallery.totalCount)
                     }
+                    
+                    if let caption = gallery.getPictureForPage(currentPage)?.caption {
+                        toolbar?.isHidden = false
+                        captionText = (captionText != nil ? captionText! + " • " + caption : caption)
+                    } else if !allowsFullScreen && captionText == nil {
+                        toolbar?.isHidden = true
+                    }
+                    
+                    captionLabel.text = captionText
                 }
             }
         }
@@ -298,11 +301,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     private func imageViewForPage(_ page: Int) -> UIImageView? {
-        if let pageView = self.viewWithTag(page + 1) as? UIScrollView {
-            return pageView.subviews.first as? UIImageView
-        }
-        
-        return nil
+        return (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView
     }
     
     func cleanInvisibleImages() {

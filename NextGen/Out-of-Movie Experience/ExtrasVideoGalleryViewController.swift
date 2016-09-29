@@ -89,8 +89,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
         })
         
         galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let page = (notification as NSNotification).userInfo?["page"] as? Int {
-                self?.galleryPageControl.currentPage = page
+            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
+                strongSelf.galleryPageControl.currentPage = page
             }
         })
         
@@ -185,8 +185,10 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 if !gallery.isTurntable {
                     shareButton.isHidden = false
                     shareButton.setTitle(String.localize("gallery.share_button").uppercased(), for: UIControlState())
-                    galleryPageControl.isHidden = false
-                    galleryPageControl.numberOfPages = gallery.totalCount
+                    if gallery.totalCount < 20 {
+                        galleryPageControl.isHidden = false
+                        galleryPageControl.numberOfPages = gallery.totalCount
+                    }
                 }
             } else if thisExperience.isType(.audioVisual) {
                 mediaTitleLabel.text = thisExperience.metadata?.title

@@ -211,11 +211,13 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                     self.present(webViewController, animated: true, completion: nil)
                     NextGenHook.log(event: .extrasAction, action: .selectApp, itemId: app.id)
                 }
-            } else if experience.isType(.audioVisual) || experience.isType(.gallery) {
-                if experience.isType(.audioVisual) {
-                    NextGenHook.log(event: .extrasAction, action: .selectVideoGallery, itemId: experience.id)
-                } else {
-                    NextGenHook.log(event: .extrasAction, action: .selectImageGallery, itemId: experience.id)
+            } else {
+                if let firstChildExperience = experience.childExperiences?.first {
+                    if firstChildExperience.isType(.audioVisual) {
+                        NextGenHook.log(event: .extrasAction, action: .selectVideoGallery, itemId: experience.id)
+                    } else if firstChildExperience.isType(.gallery) {
+                        NextGenHook.log(event: .extrasAction, action: .selectImageGallery, itemId: experience.id)
+                    }
                 }
                 
                 self.performSegue(withIdentifier: SegueIdentifier.ShowGallery, sender: experience)
