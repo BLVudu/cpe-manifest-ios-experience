@@ -331,7 +331,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYN-Hg-IFa">
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="BPh-Uk-LZH"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="a8q-GC-2yu"/>
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="14"/>
@@ -377,7 +377,7 @@
                                             <constraint firstItem="AnL-HH-Bw6" firstAttribute="leading" secondItem="RCv-yA-FCU" secondAttribute="leading" id="5J9-so-8SO"/>
                                             <constraint firstItem="D7o-G3-t6w" firstAttribute="leading" secondItem="RCv-yA-FCU" secondAttribute="leading" id="Aan-vA-sYd"/>
                                             <constraint firstAttribute="trailing" secondItem="AnL-HH-Bw6" secondAttribute="trailing" id="MdR-Wg-GUb"/>
-                                            <constraint firstAttribute="height" constant="120" id="WlY-Fs-h2O"/>
+                                            <constraint firstAttribute="height" constant="110" id="WlY-Fs-h2O"/>
                                             <constraint firstItem="AnL-HH-Bw6" firstAttribute="top" secondItem="D7o-G3-t6w" secondAttribute="bottom" id="Y02-5r-chu"/>
                                             <constraint firstAttribute="bottom" secondItem="AnL-HH-Bw6" secondAttribute="bottom" id="Zd8-sc-HYH"/>
                                             <constraint firstItem="D7o-G3-t6w" firstAttribute="top" secondItem="RCv-yA-FCU" secondAttribute="top" id="ewb-Hm-UZl"/>
@@ -403,7 +403,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SimpleImageCollectionViewCellReuseIdentifier" id="5H1-5x-Bj6" customClass="SimpleImageCollectionViewCell" customModule="NextGen" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="11" width="98" height="145"/>
+                                                        <rect key="frame" x="0.0" y="11.5" width="98" height="145"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="98" height="145"/>
@@ -430,11 +430,11 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="nQS-Yi-wlx" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="0Z6-1o-Oea"/>
-                                    <constraint firstAttribute="trailing" secondItem="lgk-ie-Wpy" secondAttribute="trailing" constant="8" id="2d9-wd-Fsh"/>
                                     <constraint firstItem="Rja-JM-bvB" firstAttribute="height" secondItem="6e7-Wm-GG8" secondAttribute="height" multiplier="0.325" id="32f-3a-s6y"/>
                                     <constraint firstItem="lgk-ie-Wpy" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="4Qa-be-Udz"/>
                                     <constraint firstAttribute="trailing" secondItem="RCv-yA-FCU" secondAttribute="trailing" id="8iS-sU-cfl"/>
                                     <constraint firstAttribute="trailing" secondItem="nQS-Yi-wlx" secondAttribute="trailing" id="CX7-vJ-Ndm"/>
+                                    <constraint firstAttribute="trailing" secondItem="lgk-ie-Wpy" secondAttribute="trailing" id="K1m-Tq-cPQ"/>
                                     <constraint firstItem="Rja-JM-bvB" firstAttribute="top" secondItem="nQS-Yi-wlx" secondAttribute="bottom" priority="750" constant="15" id="Kxn-l3-xu1"/>
                                     <constraint firstItem="Rja-JM-bvB" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="RQw-dw-jf4"/>
                                     <constraint firstItem="RCv-yA-FCU" firstAttribute="top" secondItem="lgk-ie-Wpy" secondAttribute="bottom" constant="10" id="izo-ES-3Gz"/>
@@ -630,7 +630,7 @@
         <scene sceneID="yxO-XU-hV1">
             <objects>
                 <navigationController navigationBarHidden="YES" id="V1o-YD-Ref" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1SL-uW-4xc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1SL-uW-4xc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1020,10 +1020,10 @@
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentary" rowHeight="80" id="ImP-jw-Q6i" customClass="CommentaryViewCell" customModule="NextGen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="408" height="80"/>
+                                        <rect key="frame" x="0.0" y="28" width="1008" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <frame key="frameInset" width="408" height="79"/>
+                                            <frame key="frameInset" width="1008" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">
@@ -1401,8 +1401,8 @@
         <scene sceneID="2S6-zB-kic">
             <objects>
                 <collectionViewController storyboardIdentifier="sceneDetail" id="VTD-yi-sj7" customClass="SceneDetailCollectionViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DCa-cj-7R6">
-                        <rect key="frame" x="0.0" y="0.0" width="257.5" height="451"/>
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DCa-cj-7R6">
+                        <rect key="frame" x="0.0" y="0.0" width="695" height="995"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sqt-Hf-9Ea">
                             <size key="itemSize" width="0.0" height="0.0"/>
@@ -1932,7 +1932,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="icW-Mi-fmQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eYH-MY-0gu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eYH-MY-0gu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
