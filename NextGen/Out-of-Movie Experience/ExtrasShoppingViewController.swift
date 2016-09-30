@@ -38,18 +38,18 @@ class ExtrasShoppingViewController: MenuedViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if !_didAutoSelectCategory {
-            let selectedPath = NSIndexPath(forRow: 0, inSection: 0)
-            self.menuTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-            self.tableView(self.menuTableView, didSelectRowAtIndexPath: selectedPath)
+            let selectedPath = IndexPath(row: 0, section: 0)
+            self.menuTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+            self.tableView(self.menuTableView, didSelectRowAt: selectedPath)
             if let menuSection = menuSections.first {
                 if menuSection.expandable {
-                    let selectedPath = NSIndexPath(forRow: 1, inSection: 0)
-                    self.menuTableView.selectRowAtIndexPath(selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-                    self.tableView(self.menuTableView, didSelectRowAtIndexPath: selectedPath)
+                    let selectedPath = IndexPath(row: 1, section: 0)
+                    self.menuTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+                    self.tableView(self.menuTableView, didSelectRowAt: selectedPath)
                 }
             }
             
@@ -58,19 +58,19 @@ class ExtrasShoppingViewController: MenuedViewController {
     }
     
     // MARK: UITableViewDelegate
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
         
         var categoryId: String?
-        if let menuSection = (tableView.cellForRowAtIndexPath(indexPath) as? MenuSectionCell)?.menuSection where !menuSection.expandable {
+        if let menuSection = (tableView.cellForRow(at: indexPath) as? MenuSectionCell)?.menuSection , !menuSection.expandable {
             categoryId = menuSection.value
         } else {
-            categoryId = (tableView.cellForRowAtIndexPath(indexPath) as? MenuItemCell)?.menuItem?.value
+            categoryId = (tableView.cellForRow(at: indexPath) as? MenuItemCell)?.menuItem?.value
         }
         
         if categoryId != nil {
-            NSNotificationCenter.defaultCenter().postNotificationName(ShoppingMenuNotification.ShouldCloseDetails, object: nil, userInfo: nil)
-            NSNotificationCenter.defaultCenter().postNotificationName(ShoppingMenuNotification.DidSelectCategory, object: nil, userInfo: ["categoryId": categoryId!])
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ShoppingMenuNotification.ShouldCloseDetails), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ShoppingMenuNotification.DidSelectCategory), object: nil, userInfo: ["categoryId": categoryId!])
         }
     }
 

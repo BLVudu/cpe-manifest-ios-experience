@@ -15,38 +15,39 @@ enum TalentDetailMode: String {
     case Extras = "TalentDetailModeExtras"
 }
 
-class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class TalentDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private struct SegueIdentifier {
         static let TalentImageGallery = "TalentImageGallerySegueIdentifier"
     }
     
-    @IBOutlet private var _containerViewTopConstraint: NSLayoutConstraint!
+    private struct Constants {
+        static let GalleryCollectionViewItemSpacing: CGFloat = 10
+        static let GalleryCollectionViewItemAspectRatio: CGFloat = 8 / 10
+        static let FilmographyCollectionViewItemSpacing: CGFloat = 10
+        static let FilmographyCollectionViewItemAspectRatio: CGFloat = 27 / 41
+    }
     
-    @IBOutlet weak private var _talentImageView: UIImageView!
-    @IBOutlet weak private var _talentGalleryButton: UIButton?
-    @IBOutlet weak private var _talentNameLabel: UILabel!
-    @IBOutlet weak private var _talentBiographyHeaderLabel: UILabel!
-    @IBOutlet weak private var _talentBiographyLabel: UITextView!
+    @IBOutlet private var containerViewTopConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak private var _galleryContainerView: UIView?
-    @IBOutlet weak private var _galleryHeaderLabel: UILabel?
-    @IBOutlet weak private var _galleryCollectionView: UICollectionView?
-    @IBOutlet private var _biographyToFilmographyConstraint: NSLayoutConstraint?
-    @IBOutlet private var _biographyToGalleryConstraint: NSLayoutConstraint?
+    @IBOutlet weak private var talentImageView: UIImageView?
+    @IBOutlet weak private var talentGalleryButton: UIButton?
+    @IBOutlet weak private var talentNameLabel: UILabel!
+    @IBOutlet weak private var talentBiographyContainerView: UIView?
+    @IBOutlet weak private var talentBiographyHeaderLabel: UILabel?
+    @IBOutlet weak private var talentBiographyLabel: UITextView?
     
-    @IBOutlet weak private var _filmographyContainerView: UIView!
-    @IBOutlet weak private var _filmographyHeaderLabel: UILabel!
-    @IBOutlet weak private var _filmographyCollectionView: UICollectionView!
+    @IBOutlet weak private var galleryContainerView: UIView?
+    @IBOutlet weak private var galleryHeaderLabel: UILabel?
+    @IBOutlet weak private var galleryCollectionView: UICollectionView?
     
-    @IBOutlet weak private var _twitterButton: SocialButton!
-    @IBOutlet weak private var _facebookButton: SocialButton!
-    @IBOutlet weak private var _instagramButton: SocialButton!
-    @IBOutlet private var _facebookMainConstraint: NSLayoutConstraint?
-    @IBOutlet private var _twitterMainConstraint: NSLayoutConstraint?
-    @IBOutlet private var _facebookNoInstagramConstraint: NSLayoutConstraint?
-    @IBOutlet private var _twitterNoFacebookConstraint: NSLayoutConstraint?
-    @IBOutlet private var _twitterNoFacebookNoInstagramConstraint: NSLayoutConstraint?
+    @IBOutlet weak private var filmographyContainerView: UIView?
+    @IBOutlet weak private var filmographyHeaderLabel: UILabel!
+    @IBOutlet weak private var filmographyCollectionView: UICollectionView!
+    
+    @IBOutlet weak private var twitterButton: SocialButton?
+    @IBOutlet weak private var facebookButton: SocialButton?
+    @IBOutlet weak private var instagramButton: SocialButton?
     
     var images = [String]()
     var talent: NGDMTalent!
@@ -57,92 +58,78 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         super.viewDidLoad()
         
         // Localizations
-        _talentBiographyHeaderLabel.text = String.localize("talentdetail.biography").uppercaseString
-        _galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercaseString
-        _filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercaseString
+        talentBiographyHeaderLabel?.text = String.localize("talentdetail.biography").uppercased()
+        galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercased()
+        filmographyHeaderLabel.text = String.localize("talentdetail.filmography").uppercased()
         
+        // Mode Layout
+        let talentHasGallery = talent.images != nil && talent.images!.count > 1
         if mode == .Extras {
             titleLabel.removeFromSuperview()
             closeButton.removeFromSuperview()
-            _containerViewTopConstraint.constant = 20
-            
-            _talentGalleryButton?.removeFromSuperview()
-            _galleryCollectionView?.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
+            containerViewTopConstraint.constant = (DeviceType.IS_IPAD ? 20 : 10)
+            talentGalleryButton?.removeFromSuperview()
+            galleryCollectionView?.register(UINib(nibName: "SimpleImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
+            if !talentHasGallery {
+                galleryContainerView?.removeFromSuperview()
+            }
         } else {
-            _biographyToFilmographyConstraint?.active = true
-            _biographyToGalleryConstraint?.active = false
-            _biographyToGalleryConstraint = nil
-            _galleryHeaderLabel?.removeFromSuperview()
-            _galleryCollectionView?.removeFromSuperview()
-            _galleryContainerView?.removeFromSuperview()
+            galleryHeaderLabel?.removeFromSuperview()
+            galleryCollectionView?.removeFromSuperview()
+            galleryContainerView?.removeFromSuperview()
+            if talentHasGallery {
+                talentGalleryButton?.isHidden = false
+            }
         }
         
-        let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
-        launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
-        _talentImageView.addGestureRecognizer(launchGalleryTapGestureRecognizer)
+        if talentHasGallery {
+            let launchGalleryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onLaunchGallery))
+            launchGalleryTapGestureRecognizer.numberOfTapsRequired = 1
+            talentImageView?.addGestureRecognizer(launchGalleryTapGestureRecognizer)
+            talentImageView?.isUserInteractionEnabled = true
+        }
         
-        _filmographyCollectionView.registerNib(UINib(nibName: String(SimpleImageCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
-        
-        loadTalent(talent)
-    }
-    
-    func loadTalent(talent: NGDMTalent) {
-        self.talent = talent
-        
-        _talentNameLabel.text = talent.name?.uppercaseString
+        // Fill data
+        talentNameLabel.text = talent.name?.uppercased()
         if let imageURL = talent.fullImageURL {
-            _talentImageView.af_setImageWithURL(imageURL)
+            talentImageView?.sd_setImage(with: imageURL)
         } else {
-            _talentImageView.af_cancelImageRequest()
-            _talentImageView.image = nil
+            talentImageView?.removeFromSuperview()
         }
         
-        _twitterButton.hidden = true
-        _facebookButton.hidden = true
-        _instagramButton.hidden = true
-        
-        
-        let talentHasGallery = talent.images != nil && talent.images!.count > 1
-        _talentImageView.userInteractionEnabled = talentHasGallery
-        if mode == .Extras {
-            _galleryContainerView?.hidden = !talentHasGallery
-            _biographyToFilmographyConstraint?.active = !talentHasGallery
-            _biographyToGalleryConstraint?.active = talentHasGallery
-        } else {
-            _talentGalleryButton?.hidden = !talentHasGallery
-        }
-        
-        _talentBiographyLabel.text = nil
-        
-        _filmographyCollectionView.backgroundColor = UIColor.clearColor()
-        _filmographyContainerView.hidden = true
+        filmographyCollectionView.register(UINib(nibName: "SimpleImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier)
         
         if !talent.detailsLoaded {
-            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
         }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            talent.getTalentDetails({ (biography, socialAccounts, films) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self._talentBiographyLabel.text = biography
-                    self._talentBiographyLabel.scrollRangeToVisible(NSMakeRange(0, 0))
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.talent.getTalentDetails({ (biography, socialAccounts, films) in
+                DispatchQueue.main.async(execute: {
+                    if let biography = biography {
+                        self.talentBiographyContainerView?.isHidden = false
+                        self.talentBiographyLabel?.text = biography
+                        self.talentBiographyLabel?.scrollRectToVisible(CGRect.zero, animated: false)
+                    } else {
+                        self.talentBiographyContainerView?.removeFromSuperview()
+                    }
                     
                     if let socialAccounts = socialAccounts {
                         for socialAccount in socialAccounts {
                             switch (socialAccount.type) {
-                            case .Facebook:
-                                self._facebookButton.hidden = false
-                                self._facebookButton.socialAccount = socialAccount
+                            case .facebook:
+                                self.facebookButton?.isHidden = false
+                                self.facebookButton?.socialAccount = socialAccount
                                 break
                                 
-                            case .Twitter:
-                                self._twitterButton.hidden = false
-                                self._twitterButton.socialAccount = socialAccount
+                            case .twitter:
+                                self.twitterButton?.isHidden = false
+                                self.twitterButton?.socialAccount = socialAccount
                                 break
                                 
-                            case .Instagram:
-                                self._instagramButton.hidden = false
-                                self._instagramButton.socialAccount = socialAccount
+                            case .instagram:
+                                self.instagramButton?.isHidden = false
+                                self.instagramButton?.socialAccount = socialAccount
                                 break
                                 
                             default:
@@ -151,58 +138,65 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                         }
                     }
                     
-                    if self._twitterNoFacebookNoInstagramConstraint != nil {
-                        self._twitterNoFacebookNoInstagramConstraint!.active = self._facebookButton.hidden && self._instagramButton.hidden
-                        self._twitterNoFacebookConstraint!.active = self._facebookButton.hidden && !self._instagramButton.hidden
-                        self._twitterMainConstraint!.active = !self._twitterNoFacebookNoInstagramConstraint!.active && !self._twitterNoFacebookConstraint!.active
-                        self._facebookNoInstagramConstraint!.active = self._instagramButton.hidden
-                        self._facebookMainConstraint!.active = !self._facebookNoInstagramConstraint!.active
+                    if let button = self.facebookButton, button.isHidden {
+                        button.removeFromSuperview()
+                    }
+                    
+                    if let button = self.twitterButton, button.isHidden {
+                        button.removeFromSuperview()
+                    }
+                    
+                    if let button = self.instagramButton, button.isHidden {
+                        button.removeFromSuperview()
                     }
                     
                     let hasFilms = films != nil && films!.count > 0
-                    self._filmographyContainerView.hidden = !hasFilms
                     if hasFilms {
-                        self._filmographyCollectionView.reloadData()
-                        self._filmographyCollectionView.setContentOffset(CGPointMake(0, 0), animated: false)
+                        self.filmographyContainerView?.isHidden = false
+                        self.filmographyCollectionView.reloadData()
+                        self.filmographyCollectionView.setContentOffset(CGPoint(), animated: false)
+                    } else {
+                        self.filmographyContainerView?.removeFromSuperview()
                     }
                     
-                    MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                 })
             })
         }
         
-        _galleryCollectionView?.reloadData()
+        galleryCollectionView?.reloadData()
     }
     
     // MARK: Actions
     override func close() {
-        if self.parentViewController is TalentDetailViewPresenter {
-            (self.parentViewController as! TalentDetailViewPresenter).talentDetailViewShouldClose()
+        if self.parent is TalentDetailViewPresenter {
+            (self.parent as! TalentDetailViewPresenter).talentDetailViewShouldClose()
         } else {
             super.close()
         }
     }
     
-    @IBAction func openSocialURL(sender: SocialButton) {
+    @IBAction func openSocialURL(_ sender: SocialButton) {
         sender.openURL()
+        NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .selectSocial, itemId: talent.id, itemName: sender.socialAccount.type.rawValue)
     }
     
     @IBAction func onLaunchGallery() {
-        self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: nil)
+        self.performSegue(withIdentifier: SegueIdentifier.TalentImageGallery, sender: nil)
     }
     
     // MARK: UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == _filmographyCollectionView {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == filmographyCollectionView {
             return talent?.films?.count ?? 0
         }
         
         return talent?.additionalImages?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SimpleImageCollectionViewCell.BaseReuseIdentifier, forIndexPath: indexPath) as! SimpleImageCollectionViewCell
-        if collectionView == _filmographyCollectionView {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimpleImageCollectionViewCell.BaseReuseIdentifier, for: indexPath) as! SimpleImageCollectionViewCell
+        if collectionView == filmographyCollectionView {
             cell.imageURL = talent?.films?[indexPath.row].imageURL
         } else {
             cell.imageURL = talent?.additionalImages?[indexPath.row].thumbnailImageURL
@@ -212,28 +206,52 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     }
     
     // MARK: UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if collectionView == _galleryCollectionView {
-            self.performSegueWithIdentifier(SegueIdentifier.TalentImageGallery, sender: indexPath.row + 1)
-        } else if collectionView == _filmographyCollectionView {
-            if let film = talent?.films?[indexPath.row], delegate = NextGenHook.delegate {
-                MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == galleryCollectionView {
+            self.performSegue(withIdentifier: SegueIdentifier.TalentImageGallery, sender: (indexPath as NSIndexPath).row + 1)
+        } else if collectionView == filmographyCollectionView {
+            if let film = talent?.films?[indexPath.row], let delegate = NextGenHook.delegate {
+                MBProgressHUD.showAdded(to: self.view, animated: true)
                 delegate.getUrlForContent(film.title, completion: { [weak self] (url) in
                     if let strongSelf = self {
-                        MBProgressHUD.hideAllHUDsForView(strongSelf.view, animated: true)
+                        MBProgressHUD.hideAllHUDs(for: strongSelf.view, animated: true)
                     }
                     
                     url?.promptLaunchBrowser()
                 })
+                
+                NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .selectFilm, itemId: talent.id, itemName: film.title)
             }
         }
     }
     
+    // MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.height
+        var width: CGFloat
+        if collectionView == filmographyCollectionView {
+            width = height * Constants.FilmographyCollectionViewItemAspectRatio
+        } else {
+            width = height * Constants.GalleryCollectionViewItemAspectRatio
+        }
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == filmographyCollectionView {
+            return Constants.FilmographyCollectionViewItemSpacing
+        }
+        
+        return Constants.GalleryCollectionViewItemSpacing
+    }
+    
     // MARK: Storyboard Methods
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == SegueIdentifier.TalentImageGallery, let talentImageGalleryViewController = segue.destinationViewController as? TalentImageGalleryViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifier.TalentImageGallery, let talentImageGalleryViewController = segue.destination as? TalentImageGalleryViewController {
             talentImageGalleryViewController.talent = talent
             talentImageGalleryViewController.initialPage = (sender as? Int) ?? 0
+            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .selectGallery, itemId: talent.id)
         }
     }
 

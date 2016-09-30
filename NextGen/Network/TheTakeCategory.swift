@@ -19,7 +19,7 @@ class TheTakeCategory: NSObject {
     convenience init(info: NSDictionary) {
         self.init()
         
-        id = (info[Keys.CategoryID] as! NSNumber).integerValue
+        id = (info[Keys.CategoryID] as! NSNumber).intValue
         name = info[Keys.CategoryName] as! String
         
         if let childCategories = info[Keys.ChildCategories] as? [NSDictionary] {

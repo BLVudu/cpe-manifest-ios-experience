@@ -15,7 +15,7 @@ class MenuSectionCell: UITableViewCell {
     var menuSection: MenuSection? {
         didSet {
             titleLabel.text = menuSection?.title
-            dropDownImageView.hidden = (menuSection == nil || !menuSection!.expandable)
+            dropDownImageView.isHidden = (menuSection == nil || !menuSection!.expandable)
         }
     }
     
@@ -36,12 +36,12 @@ class MenuSectionCell: UITableViewCell {
         super.layoutSubviews()
         
         if let section = menuSection {
-            dropDownImageView.transform = CGAffineTransformMakeRotation(section.expanded ? CGFloat(-M_PI) : 0.0)
+            dropDownImageView.transform = CGAffineTransform(rotationAngle: section.expanded ? CGFloat(-M_PI) : 0.0)
         }
     }
     
     func updateCellStyle() {
-        titleLabel.textColor = self.active ? UIColor.themePrimaryColor() : UIColor.whiteColor()
+        titleLabel.textColor = self.active ? UIColor.themePrimary : UIColor.white
     }
     
     func toggleDropDownIcon() {
@@ -52,7 +52,7 @@ class MenuSectionCell: UITableViewCell {
             rotate.duration = 0.25
             rotate.autoreverses = true
             rotate.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            dropDownImageView.layer.addAnimation(rotate, forKey: nil)
+            dropDownImageView.layer.add(rotate, forKey: nil)
         }
     }
     

@@ -23,13 +23,14 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mq6-xI-JSp">
                         <rect key="frame" x="0.0" y="45" width="318" height="179"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="mq6-xI-JSp" secondAttribute="height" multiplier="16:9" id="Ab2-Qt-c5w"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extras Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="1ZW-m2-1Lx">
                         <rect key="frame" x="0.0" y="0.0" width="318" height="40"/>
-                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="19"/>
+                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -56,7 +57,7 @@
                 <outlet property="imageView" destination="mq6-xI-JSp" id="bUo-QK-bOQ"/>
                 <outlet property="titleLabel" destination="1ZW-m2-1Lx" id="Dlo-to-29E"/>
             </connections>
-            <point key="canvasLocation" x="585" y="489"/>
+            <point key="canvasLocation" x="1244" y="517"/>
         </collectionViewCell>
     </objects>
 </document>

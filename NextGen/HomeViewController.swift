@@ -18,11 +18,9 @@ class HomeViewController: UIViewController {
     }
     
     @IBOutlet weak private var exitButton: UIButton!
-    @IBOutlet weak private var backgroundImageView: UIImageView?
-    @IBOutlet weak private var backgroundVideoView: UIView?
-    private var backgroundVideoLayer: AVPlayerLayer?
-    private var backgroundVideoPlayer: AVPlayer?
-    private var backgroundBaseSize = CGSizeZero
+    @IBOutlet weak private var backgroundImageView: UIImageView!
+    @IBOutlet weak private var backgroundVideoView: UIView!
+    private var backgroundVideoPlayerViewController: VideoPlayerViewController?
     
     private var mainExperience: NGDMMainExperience!
     private var buttonOverlayView: UIView!
@@ -32,11 +30,16 @@ class HomeViewController: UIViewController {
     private var titleImageView: UIImageView?
     private var homeScreenViews = [UIView]()
     private var interfaceCreated = false
+    private var currentlyDismissing = false
     
-    private var didFinishPlayingObserver: NSObjectProtocol?
     private var shouldLaunchExtrasObserver: NSObjectProtocol?
     
-    private var backgroundVideoTimeObserver: AnyObject?
+    private var backgroundAudioPlayer: AVPlayer?
+    
+    private var backgroundVideoLastTimecode = 0.0
+    private var backgroundVideoPreviewImageView: UIImageView?
+    private var backgroundVideoDidFinishPlayingObserver: NSObjectProtocol?
+    private var backgroundVideoTimeObserver: NSObjectProtocol?
     private var backgroundVideoFadeTime: Double {
         if let loopTimecode = nodeStyle?.backgroundVideoLoopTimecode {
             return max(loopTimecode - Constants.OverlayFadeInDuration, 0)
@@ -46,7 +49,24 @@ class HomeViewController: UIViewController {
     }
     
     private var nodeStyle: NGDMNodeStyle? {
-        return mainExperience.getNodeStyle(UIApplication.sharedApplication().statusBarOrientation)
+        return mainExperience.getNodeStyle(UIApplication.shared.statusBarOrientation)
+    }
+    
+    private var backgroundImage: NGDMImage? {
+        return nodeStyle?.backgroundImage
+    }
+    
+    private var observedBackgroundImageSize: CGSize?
+    private var backgroundImageSize: CGSize {
+        return backgroundImage?.size ?? observedBackgroundImageSize ?? CGSize.zero
+    }
+    
+    private var backgroundVideo: NGDMVideo? {
+        return nodeStyle?.backgroundVideo
+    }
+    
+    private var backgroundVideoSize: CGSize {
+        return backgroundVideo?.size ?? CGSize.zero
     }
     
     private var playButtonImage: NGDMImage? {
@@ -57,48 +77,35 @@ class HomeViewController: UIViewController {
         return nodeStyle?.getButtonImage("Extras")
     }
     
-    private var playButtonImageURL: NSURL? {
-        return playButtonImage?.url
-    }
-    
-    private var extrasButtonImageURL: NSURL? {
-        return extrasButtonImage?.url
-    }
-    
     private var buttonOverlaySize: CGSize {
-        return nodeStyle?.buttonOverlaySize ?? CGSizeMake(300, 100)
+        return nodeStyle?.buttonOverlaySize ?? CGSize(width: 300, height: 100)
     }
     
     private var buttonOverlayBottomLeft: CGPoint {
-        return nodeStyle?.buttonOverlayBottomLeft ?? CGPointMake(490, 25)
+        return nodeStyle?.buttonOverlayBottomLeft ?? CGPoint(x: 490, y: 25)
     }
     
     private var playButtonSize: CGSize {
-        return playButtonImage?.size ?? CGSizeMake(300, 55)
+        return playButtonImage?.size ?? CGSize(width: 300, height: 55)
     }
     
     private var extrasButtonSize: CGSize {
-        return extrasButtonImage?.size ?? CGSizeMake(300, 60)
+        return extrasButtonImage?.size ?? CGSize(width: 300, height: 60)
     }
     
     private var titleOverlaySize: CGSize {
-        return CGSizeMake(300, 100)
+        return CGSize(width: 400, height: 133)
     }
     
     private var titleOverlayBottomLeft: CGPoint {
-        return CGPointMake(490, backgroundBaseSize.height - (titleOverlaySize.height + 15))
+        return CGPoint(x: 440, y: backgroundImageSize.height - (titleOverlaySize.height + 15))
     }
     
     deinit {
         unloadBackground()
         
-        if let observer = didFinishPlayingObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
-            didFinishPlayingObserver = nil
-        }
-        
         if let observer = shouldLaunchExtrasObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
             shouldLaunchExtrasObserver = nil
         }
     }
@@ -109,71 +116,71 @@ class HomeViewController: UIViewController {
         
         mainExperience = NGDMManifest.sharedInstance.mainExperience!
         
-        shouldLaunchExtrasObserver = NSNotificationCenter.defaultCenter().addObserverForName(Notifications.ShouldLaunchExtras, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
+        shouldLaunchExtrasObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Notifications.ShouldLaunchExtras), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
             self?.onExtras()
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if !interfaceCreated {
             homeScreenViews.removeAll()
             
-            exitButton.setTitle(String.localize("label.exit"), forState: .Normal)
-            exitButton.titleLabel?.layer.shadowColor = UIColor.blackColor().CGColor
+            exitButton.setTitle(String.localize("label.exit"), for: UIControlState())
+            exitButton.titleLabel?.layer.shadowColor = UIColor.black.cgColor
             exitButton.titleLabel?.layer.shadowOpacity = 0.75
             exitButton.titleLabel?.layer.shadowRadius = 2
-            exitButton.titleLabel?.layer.shadowOffset = CGSizeMake(0, 1)
+            exitButton.titleLabel?.layer.shadowOffset = CGSize(width: 0, height: 1)
             exitButton.titleLabel?.layer.masksToBounds = false
             exitButton.titleLabel?.layer.shouldRasterize = true
             homeScreenViews.append(exitButton)
             
             buttonOverlayView = UIView()
-            buttonOverlayView.hidden = true
-            buttonOverlayView.userInteractionEnabled = true
+            buttonOverlayView.isHidden = true
+            buttonOverlayView.isUserInteractionEnabled = true
             homeScreenViews.append(buttonOverlayView)
             
             // Play button
             playButton = UIButton()
-            playButton.addTarget(self, action: #selector(self.onPlay), forControlEvents: UIControlEvents.TouchUpInside)
+            playButton.addTarget(self, action: #selector(self.onPlay), for: UIControlEvents.touchUpInside)
             playButton.layer.shadowRadius = 5
-            playButton.layer.shadowColor = UIColor.blackColor().CGColor
-            playButton.layer.shadowOffset = CGSizeZero
-            //playButton.layer.shadowOpacity = 0.5
+            playButton.layer.shadowColor = UIColor.black.cgColor
+            playButton.layer.shadowOffset = CGSize.zero
             playButton.layer.masksToBounds = false
             
-            if let playButtonImageURL = playButtonImageURL {
-                playButton.af_setImageForState(.Normal, URL: playButtonImageURL)
-                playButton.contentHorizontalAlignment = .Fill
-                playButton.contentVerticalAlignment = .Fill
-                playButton.imageView?.contentMode = .ScaleAspectFit
+            if let playButtonImageURL = playButtonImage?.url {
+                playButton.sd_setImage(with: playButtonImageURL, for: .normal)
+                playButton.contentHorizontalAlignment = .fill
+                playButton.contentVerticalAlignment = .fill
+                playButton.imageView?.contentMode = .scaleAspectFit
             } else {
-                playButton.setTitle(String.localize("label.play_movie"), forState: .Normal)
-                playButton.backgroundColor = UIColor.redColor()
+                playButton.setTitle(String.localize("label.play_movie"), for: UIControlState())
+                playButton.titleLabel?.font = UIFont.themeCondensedBoldFont(15)
+                playButton.backgroundColor = UIColor.red
             }
             
             // Extras button
             extrasButton = UIButton()
-            extrasButton.addTarget(self, action: #selector(self.onExtras), forControlEvents: UIControlEvents.TouchUpInside)
+            extrasButton.addTarget(self, action: #selector(self.onExtras), for: UIControlEvents.touchUpInside)
             extrasButton.layer.shadowRadius = 5
-            extrasButton.layer.shadowColor = UIColor.blackColor().CGColor
-            extrasButton.layer.shadowOffset = CGSizeZero
-            //extrasButton.layer.shadowOpacity = 0.5
+            extrasButton.layer.shadowColor = UIColor.black.cgColor
+            extrasButton.layer.shadowOffset = CGSize.zero
             extrasButton.layer.masksToBounds = false
             
             let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didLongPressExtrasButton(_:)))
             longPressGestureRecognizer.minimumPressDuration = 5
             extrasButton.addGestureRecognizer(longPressGestureRecognizer)
             
-            if let extrasButtonImageURL = extrasButtonImageURL {
-                extrasButton.af_setBackgroundImageForState(.Normal, URL: extrasButtonImageURL)
-                extrasButton.contentHorizontalAlignment = .Fill
-                extrasButton.contentVerticalAlignment = .Fill
-                extrasButton.imageView?.contentMode = .ScaleAspectFit
+            if let extrasButtonImageURL = extrasButtonImage?.url {
+                extrasButton.sd_setImage(with: extrasButtonImageURL, for: .normal)
+                extrasButton.contentHorizontalAlignment = .fill
+                extrasButton.contentVerticalAlignment = .fill
+                extrasButton.imageView?.contentMode = .scaleAspectFit
             } else {
-                extrasButton.setTitle(String.localize("label.extras"), forState: .Normal)
-                extrasButton.backgroundColor = UIColor.grayColor()
+                extrasButton.setTitle(String.localize("label.extras"), for: UIControlState())
+                extrasButton.titleLabel?.font = UIFont.themeCondensedBoldFont(15)
+                extrasButton.backgroundColor = UIColor.gray
             }
             
             buttonOverlayView.addSubview(playButton)
@@ -181,15 +188,15 @@ class HomeViewController: UIViewController {
             self.view.addSubview(buttonOverlayView)
             
             // Title treatment
-            if let imageURL = NGDMManifest.sharedInstance.inMovieExperience?.imageURL {
+            if nodeStyle == nil, let imageURL = NGDMManifest.sharedInstance.inMovieExperience?.imageURL {
                 titleOverlayView = UIView()
-                titleOverlayView!.hidden = true
-                titleOverlayView!.userInteractionEnabled = false
+                titleOverlayView!.isHidden = true
+                titleOverlayView!.isUserInteractionEnabled = false
                 homeScreenViews.append(titleOverlayView!)
                 
                 titleImageView = UIImageView()
-                titleImageView!.contentMode = .ScaleAspectFit
-                titleImageView!.af_setImageWithURL(imageURL)
+                titleImageView!.contentMode = .scaleAspectFit
+                titleImageView!.sd_setImage(with: imageURL)
                 titleOverlayView!.addSubview(titleImageView!)
                 
                 self.view.addSubview(titleOverlayView!)
@@ -201,232 +208,351 @@ class HomeViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        currentlyDismissing = false
         
         if interfaceCreated {
             loadBackground()
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        currentlyDismissing = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
+        backgroundVideoPreviewImageView?.removeFromSuperview()
+        backgroundVideoPreviewImageView = nil
+        backgroundVideoLastTimecode = 0
+        
+        if let image = backgroundVideoPlayerViewController?.getScreenGrab() {
+            backgroundVideoLastTimecode = backgroundVideoPlayerViewController!.playerItem.currentTime().seconds
+            backgroundVideoPreviewImageView = UIImageView(frame: backgroundVideoView.frame)
+            backgroundVideoPreviewImageView!.contentMode = .scaleAspectFill
+            backgroundVideoPreviewImageView!.image = image
+            self.view.addSubview(backgroundVideoPreviewImageView!)
+            self.view.bringSubview(toFront: exitButton)
+            self.view.bringSubview(toFront: buttonOverlayView)
+            if let titleOverlayView = titleOverlayView {
+                self.view.bringSubview(toFront: titleOverlayView)
+            }
+        }
+    
         unloadBackground()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if self.view.window != nil && !currentlyDismissing {
+            coordinator.animate(alongsideTransition: { [weak self] (_) in
+                if let strongSelf = self, strongSelf.interfaceCreated {
+                    if let currentUrl = strongSelf.backgroundVideoPlayerViewController?.url, let newUrl = strongSelf.backgroundVideo?.url, currentUrl != newUrl {
+                        strongSelf.unloadBackground()
+                        strongSelf.loadBackground()
+                    } else {
+                        strongSelf.seekBackgroundVideoToLoopTimecode()
+                    }
+                }
+            }, completion: nil)
+        }
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        if interfaceCreated && backgroundBaseSize != CGSizeZero {
-            let backgroundBaseAspectRatio = backgroundBaseSize.width / backgroundBaseSize.height
-            var backgroundNewSize = CGSizeZero
-
-            if (backgroundBaseAspectRatio > (CGRectGetWidth(self.view.frame) / CGRectGetHeight(self.view.frame))) {
-                backgroundNewSize.height = CGRectGetHeight(self.view.frame)
-                backgroundNewSize.width = backgroundNewSize.height * backgroundBaseAspectRatio
-            } else {
-                backgroundNewSize.width = CGRectGetWidth(self.view.frame)
-                backgroundNewSize.height = backgroundNewSize.width / backgroundBaseAspectRatio
+        if interfaceCreated && !currentlyDismissing && (backgroundVideoSize != CGSize.zero || backgroundImageSize != CGSize.zero) {
+            let viewWidth = self.view.frame.width
+            let viewHeight = self.view.frame.height
+            let viewAspectRatio = viewWidth / viewHeight
+            
+            if backgroundVideoSize != CGSize.zero {
+                var backgroundPoint = CGPoint.zero
+                var backgroundSize = CGSize.zero
+                let backgroundVideoAspectRatio = backgroundVideoSize.width / backgroundVideoSize.height
+                
+                if nodeStyle?.backgroundScaleMethod == .Full {
+                    if (backgroundVideoAspectRatio > viewAspectRatio) {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundVideoAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.y = (viewHeight - backgroundSize.height) / 2
+                        }
+                    } else {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundVideoAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.x = (viewWidth - backgroundSize.width) / 2
+                        }
+                    }
+                } else {
+                    if (backgroundVideoAspectRatio > viewAspectRatio) {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundVideoAspectRatio
+                    } else {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundVideoAspectRatio
+                    }
+                    
+                    if nodeStyle?.backgroundPositionMethod == .Centered {
+                        backgroundPoint.x = (backgroundSize.width - viewWidth) / -2
+                        backgroundPoint.y = (backgroundSize.height - viewHeight) / -2
+                    }
+                }
+                
+                backgroundVideoView.frame = CGRect(x: backgroundPoint.x, y: backgroundPoint.y, width: backgroundSize.width, height: backgroundSize.height)
             }
             
-            let backgroundNewScale = (backgroundNewSize.height / backgroundBaseSize.height)
-            let buttonOverlayWidth = min(buttonOverlaySize.width * backgroundNewScale, CGRectGetWidth(self.view.frame) - 20)
-            let buttonOverlayHeight = buttonOverlayWidth / (buttonOverlaySize.width / buttonOverlaySize.height)
-            let buttonOverlayX = (buttonOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - CGRectGetWidth(self.view.frame)) / 2)
-            
-            buttonOverlayView.frame = CGRectMake(
-                buttonOverlayX < 0 || (buttonOverlayX + buttonOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : buttonOverlayX,
-                CGRectGetHeight(self.view.frame) - buttonOverlayBottomLeft.y * backgroundNewScale - buttonOverlayHeight,
-                buttonOverlayWidth,
-                buttonOverlayHeight
-            )
-            
-            playButton.frame = CGRectMake(0, 0, CGRectGetWidth(buttonOverlayView.frame), CGRectGetWidth(buttonOverlayView.frame) / (playButtonSize.width / playButtonSize.height))
-            
-            let extrasButtonWidth = CGRectGetWidth(playButton.frame) * 0.6
-            let extrasButtonHeight = extrasButtonWidth / (extrasButtonSize.width / extrasButtonSize.height)
-            extrasButton.frame = CGRectMake((CGRectGetWidth(buttonOverlayView.frame) - extrasButtonWidth) / 2, buttonOverlayHeight - extrasButtonHeight, extrasButtonWidth, extrasButtonHeight)
-            
-            if let titleOverlayView = titleOverlayView {
-                let titleOverlayWidth = min(titleOverlaySize.width * backgroundNewScale, CGRectGetWidth(self.view.frame) - 20)
-                let titleOverlayHeight = titleOverlayWidth / (titleOverlaySize.width / titleOverlaySize.height)
-                let titleOverlayX = (titleOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - CGRectGetWidth(self.view.frame)) / 2)
+            if backgroundImageSize != CGSize.zero {
+                var backgroundPoint = CGPoint.zero
+                var backgroundSize = CGSize.zero
+                let backgroundImageAspectRatio = backgroundImageSize.width / backgroundImageSize.height
                 
-                titleOverlayView.frame = CGRectMake(
-                    titleOverlayX < 0 || (titleOverlayX + titleOverlayWidth > CGRectGetWidth(self.view.frame)) ? 10 : titleOverlayX,
-                    CGRectGetHeight(self.view.frame) - titleOverlayBottomLeft.y * backgroundNewScale - titleOverlayHeight,
-                    titleOverlayWidth,
-                    titleOverlayHeight
+                if nodeStyle?.backgroundScaleMethod == .Full && backgroundVideo == nil {
+                    if (backgroundImageAspectRatio > viewAspectRatio) {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundImageAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.y = (viewHeight - backgroundSize.height) / 2
+                        }
+                    } else {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundImageAspectRatio
+                        
+                        if nodeStyle?.backgroundPositionMethod == .Centered {
+                            backgroundPoint.x = (viewWidth - backgroundSize.width) / 2
+                        }
+                    }
+                } else {
+                    if (backgroundImageAspectRatio > viewAspectRatio) {
+                        backgroundSize.height = viewHeight
+                        backgroundSize.width = backgroundSize.height * backgroundImageAspectRatio
+                    } else {
+                        backgroundSize.width = viewWidth
+                        backgroundSize.height = backgroundSize.width / backgroundImageAspectRatio
+                    }
+                    
+                    if nodeStyle == nil || backgroundVideo != nil || nodeStyle?.backgroundPositionMethod == .Centered {
+                        backgroundPoint.x = (backgroundSize.width - viewWidth) / -2
+                        backgroundPoint.y = (backgroundSize.height - viewHeight) / -2
+                    }
+                }
+                
+                backgroundImageView.frame = CGRect(x: backgroundPoint.x, y: backgroundPoint.y, width: backgroundSize.width, height: backgroundSize.height)
+            }
+            
+            var backgroundBaseSize = CGSize.zero
+            var backgroundNewSize = CGSize.zero
+            var backgroundPoint = CGPoint.zero
+            
+            if backgroundImageSize != CGSize.zero {
+                backgroundBaseSize = backgroundImageSize
+                backgroundNewSize = backgroundImageView.frame.size
+                backgroundPoint = backgroundImageView.frame.origin
+            } else if backgroundVideoSize != CGSize.zero {
+                backgroundBaseSize = backgroundVideoSize
+                backgroundNewSize = backgroundVideoView.frame.size
+                backgroundPoint = backgroundVideoView.frame.origin
+            }
+            
+            if backgroundBaseSize != CGSize.zero {
+                let backgroundNewScale = (backgroundNewSize.height / backgroundBaseSize.height)
+                let buttonOverlayWidth = min(buttonOverlaySize.width * backgroundNewScale, viewWidth - 20)
+                let buttonOverlayHeight = buttonOverlayWidth / (buttonOverlaySize.width / buttonOverlaySize.height)
+                let buttonOverlayX = (buttonOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - viewWidth) / 2)
+                
+                buttonOverlayView.frame = CGRect(
+                    x: buttonOverlayX < 0 || (buttonOverlayX + buttonOverlayWidth > viewWidth) ? 10 : buttonOverlayX,
+                    y: backgroundNewSize.height - (buttonOverlayBottomLeft.y * backgroundNewScale) - buttonOverlayHeight + backgroundPoint.y,
+                    width: buttonOverlayWidth,
+                    height: buttonOverlayHeight
                 )
                 
-                titleImageView?.frame = titleOverlayView.bounds
+                playButton.frame = CGRect(x: 0, y: 0, width: buttonOverlayView.frame.width, height: buttonOverlayView.frame.width / (playButtonSize.width / playButtonSize.height))
+                
+                let extrasButtonWidth = playButton.frame.width * 0.675
+                let extrasButtonHeight = extrasButtonWidth / (extrasButtonSize.width / extrasButtonSize.height)
+                extrasButton.frame = CGRect(x: (buttonOverlayView.frame.width - extrasButtonWidth) / 2, y: buttonOverlayHeight - extrasButtonHeight, width: extrasButtonWidth, height: extrasButtonHeight)
+                
+                if let titleOverlayView = titleOverlayView {
+                    let titleOverlayWidth = min(titleOverlaySize.width * backgroundNewScale, viewWidth * 0.9)
+                    let titleOverlayHeight = titleOverlayWidth / (titleOverlaySize.width / titleOverlaySize.height)
+                    let titleOverlayX = (titleOverlayBottomLeft.x * backgroundNewScale) - ((backgroundNewSize.width - viewWidth) / 2)
+                    
+                    titleOverlayView.frame = CGRect(
+                        x: titleOverlayX < 0 || (titleOverlayX + titleOverlaySize.width > viewWidth) ? (viewWidth - titleOverlayWidth) / 2 : titleOverlayX,
+                        y: viewHeight - titleOverlayBottomLeft.y * backgroundNewScale - titleOverlayHeight,
+                        width: titleOverlayWidth,
+                        height: titleOverlayHeight
+                    )
+                    
+                    titleImageView?.frame = titleOverlayView.bounds
+                }
             }
-        }
-        
-        if let backgroundVideoView = backgroundVideoView {
-            backgroundVideoView.frame = self.view.bounds
-            
-            if let backgroundVideoLayer = backgroundVideoLayer {
-                backgroundVideoLayer.frame = backgroundVideoView.bounds
-            }
-        }
-        
-        if let backgroundImageView = backgroundImageView {
-            backgroundImageView.frame = self.view.bounds
         }
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (DeviceType.IS_IPAD ? .Landscape : .All)
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return (DeviceType.IS_IPAD ? .landscape : .all)
     }
     
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
         if DeviceType.IS_IPAD {
-            let interfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
-            return UIInterfaceOrientationIsLandscape(interfaceOrientation) ? interfaceOrientation : .LandscapeLeft
+            let interfaceOrientation = UIApplication.shared.statusBarOrientation
+            return UIInterfaceOrientationIsLandscape(interfaceOrientation) ? interfaceOrientation : .landscapeLeft
         }
         
-        return super.preferredInterfaceOrientationForPresentation()
+        return super.preferredInterfaceOrientationForPresentation
     }
     
-    func didLongPressExtrasButton(sender: UILongPressGestureRecognizer) {
-        if sender.state == .Began {
+    func didLongPressExtrasButton(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
             NextGenHook.delegate?.nextGenExperienceWillEnterDebugMode()
+        }
+    }
+    
+    // MARK: Helpers
+    private func showHomeScreenViews(animated: Bool) {
+        if animated {
+            homeScreenViews.forEach {
+                $0.alpha = 0
+                $0.isHidden = false
+            }
+            
+            UIView.animate(withDuration: Constants.OverlayFadeInDuration, animations: {
+                self.homeScreenViews.forEach { $0.alpha = 1 }
+            }, completion: { (_) in
+                self.homeScreenViews.removeAll()
+            })
+        } else {
+            homeScreenViews.forEach { $0.isHidden = false }
+            homeScreenViews.removeAll()
+        }
+    }
+    
+    private func seekBackgroundVideoToLoopTimecode() {
+        if let nodeStyle = nodeStyle, nodeStyle.backgroundVideoLoops, let videoPlayerViewController = backgroundVideoPlayerViewController {
+            videoPlayerViewController.seekPlayer(to: CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
+            videoPlayerViewController.player?.isMuted = true
         }
     }
     
     // MARK: Video Player
     func loadBackground() {
-        if let nodeStyle = nodeStyle, backgroundVideoURL = nodeStyle.backgroundVideoURL {
-            if nodeStyle.backgroundVideoLoops {
-                didFinishPlayingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVPlayerItemDidPlayToEndTimeNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (_) in
-                    if let videoPlayer = self?.backgroundVideoPlayer {
-                        videoPlayer.muted = true
-                        videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                        videoPlayer.play()
-                    }
-                })
-            }
+        if let nodeStyle = nodeStyle, let backgroundVideoURL = backgroundVideo?.url, let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
+            videoPlayerViewController.mode = .basicPlayer
             
-            let playerItem = AVPlayerItem(cacheableURL: backgroundVideoURL)
-            if let videoPlayer = backgroundVideoPlayer {
-                videoPlayer.replaceCurrentItemWithPlayerItem(playerItem)
-                videoPlayer.muted = true
-                videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                videoPlayer.play()
-            } else {
-                let videoPlayer = AVPlayer(playerItem: playerItem)
-                backgroundVideoLayer = AVPlayerLayer(player: videoPlayer)
-                backgroundVideoLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-                backgroundVideoLayer!.frame = self.view.bounds
-                backgroundVideoView?.frame = self.view.bounds
-                backgroundVideoView?.layer.addSublayer(backgroundVideoLayer!)
-                
-                if backgroundVideoFadeTime > 0 {
-                    backgroundVideoTimeObserver = videoPlayer.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(0.55, Int32(NSEC_PER_SEC)), queue: dispatch_get_main_queue(), usingBlock: { [weak self] (time) in
-                        if let strongSelf = self where time.seconds > strongSelf.backgroundVideoFadeTime {
-                            if let observer = strongSelf.backgroundVideoTimeObserver {
-                                videoPlayer.removeTimeObserver(observer)
-                                strongSelf.backgroundVideoTimeObserver = nil
-                            }
-                            
-                            for view in strongSelf.homeScreenViews {
-                                view.alpha = 0
-                                view.hidden = false
-                            }
-                            
-                            UIView.animateWithDuration(Constants.OverlayFadeInDuration, animations: {
-                                for view in strongSelf.homeScreenViews {
-                                    view.alpha = 1
-                                }
-                            })
-                            
-                            strongSelf.homeScreenViews.removeAll()
-                        }
-                    })
-                } else {
-                    for view in homeScreenViews {
-                        view.hidden = false
+            videoPlayerViewController.view.frame = backgroundVideoView.bounds
+            backgroundVideoView.addSubview(videoPlayerViewController.view)
+            self.addChildViewController(videoPlayerViewController)
+            videoPlayerViewController.didMove(toParentViewController: self)
+            
+            backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                if let strongSelf = self, let time = notification.userInfo?["time"] as? Double {
+                    if time > strongSelf.backgroundVideoLastTimecode {
+                        strongSelf.backgroundVideoPreviewImageView?.removeFromSuperview()
+                        strongSelf.backgroundVideoPreviewImageView = nil
+                        strongSelf.backgroundVideoLastTimecode = 0
                     }
                     
-                    homeScreenViews.removeAll()
+                    if strongSelf.backgroundVideoFadeTime > 0 {
+                        if strongSelf.homeScreenViews.count > 0 && time > strongSelf.backgroundVideoFadeTime {
+                            strongSelf.showHomeScreenViews(animated: true)
+                        }
+                    } else {
+                        strongSelf.showHomeScreenViews(animated: false)
+                    }
                 }
-                
-                if interfaceCreated {
-                    videoPlayer.muted = true
-                    videoPlayer.seekToTime(CMTimeMakeWithSeconds(nodeStyle.backgroundVideoLoopTimecode, Int32(NSEC_PER_SEC)))
-                }
-                
-                videoPlayer.play()
-                
-                backgroundVideoPlayer = videoPlayer
-                backgroundImageView?.removeFromSuperview()
-                
-                if let backgroundVideoSize = playerItem.asset.tracksWithMediaType(AVMediaTypeVideo).first?.naturalSize where backgroundVideoSize != CGSizeZero {
-                    backgroundBaseSize = backgroundVideoSize
-                } else {
-                    backgroundBaseSize = self.view.frame.size
-                }
-                
-                self.view.setNeedsLayout()
-                self.view.layoutIfNeeded()
+            })
+            
+            if nodeStyle.backgroundVideoLoops {
+                backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+                    self?.seekBackgroundVideoToLoopTimecode()
+                })
             }
+            
+            videoPlayerViewController.shouldMute = interfaceCreated
+            videoPlayerViewController.shouldTrackOutput = true
+            videoPlayerViewController.playVideo(with: backgroundVideoURL, startTime: backgroundVideoLastTimecode)
+            backgroundVideoPlayerViewController = videoPlayerViewController
         } else {
-            if let backgroundImageURL = nodeStyle?.backgroundImageURL ?? NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL { // FIXME: This appears to be the way Comcast defines background images
-                backgroundImageView?.af_setImageWithURL(backgroundImageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
-                    if let strongSelf = self, image = response.result.value {
-                        strongSelf.backgroundBaseSize = CGSizeMake(image.size.width * image.scale, image.size.height * image.scale)
+            showHomeScreenViews(animated: false)
+        }
+        
+        if let backgroundImageURL = backgroundImage?.url {
+            backgroundImageView.sd_setImage(with: backgroundImageURL)
+        } else if backgroundVideo == nil {
+            if let backgroundImageURL = NGDMManifest.sharedInstance.outOfMovieExperience?.imageURL {
+                backgroundImageView.sd_setImage(with: backgroundImageURL, completed: { [weak self] (image, _, _, _) in
+                    if let image = image {
+                        self?.observedBackgroundImageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
+                        self?.view.setNeedsLayout()
                     }
                 })
-                
-                backgroundVideoView?.removeFromSuperview()
+            } else {
+                observedBackgroundImageSize = CGSize(width: 1280, height: 720)
             }
-            
-            for view in homeScreenViews {
-                view.hidden = false
-            }
-            
-            homeScreenViews.removeAll()
+        }
+        
+        if !interfaceCreated, let backgroundAudioUrl = nodeStyle?.backgroundAudio?.url {
+            let audioPlayerItem = AVPlayerItem(asset: AVAsset(url: backgroundAudioUrl))
+            backgroundAudioPlayer = AVPlayer(playerItem: audioPlayerItem)
+            backgroundAudioPlayer?.play()
         }
     }
     
     func unloadBackground() {
         if let observer = backgroundVideoTimeObserver {
-            backgroundVideoPlayer?.removeTimeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
             backgroundVideoTimeObserver = nil
         }
         
-        if let observer = didFinishPlayingObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
-            didFinishPlayingObserver = nil
+        if let observer = backgroundVideoDidFinishPlayingObserver {
+            NotificationCenter.default.removeObserver(observer)
+            backgroundVideoDidFinishPlayingObserver = nil
         }
         
-        backgroundVideoPlayer?.pause()
-        backgroundVideoPlayer?.replaceCurrentItemWithPlayerItem(nil)
-        backgroundImageView?.image = nil
+        backgroundVideoPlayerViewController?.willMove(toParentViewController: nil)
+        backgroundVideoPlayerViewController?.view.removeFromSuperview()
+        backgroundVideoPlayerViewController?.removeFromParentViewController()
+        backgroundVideoPlayerViewController = nil
+        backgroundImageView.image = nil
+        backgroundAudioPlayer = nil
     }
     
     // MARK: Actions
     func onPlay() {
-        self.performSegueWithIdentifier(SegueIdentifier.ShowInMovieExperience, sender: nil)
+        self.performSegue(withIdentifier: SegueIdentifier.ShowInMovieExperience, sender: nil)
+        NextGenHook.logAnalyticsEvent(.homeAction, action: .launchInMovie)
     }
     
     func onExtras() {
-        self.performSegueWithIdentifier(SegueIdentifier.ShowOutOfMovieExperience, sender: NGDMManifest.sharedInstance.outOfMovieExperience)
+        self.performSegue(withIdentifier: SegueIdentifier.ShowOutOfMovieExperience, sender: NGDMManifest.sharedInstance.outOfMovieExperience)
+        NextGenHook.logAnalyticsEvent(.homeAction, action: .launchExtras)
     }
     
     @IBAction func onExit() {
         NextGenHook.experienceWillClose()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        NextGenHook.logAnalyticsEvent(.homeAction, action: .exit)
+        
+        currentlyDismissing = true
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: Storyboard
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let viewController = segue.destinationViewController as? ExtrasExperienceViewController, experience = sender as? NGDMExperience {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ExtrasExperienceViewController, let experience = sender as? NGDMExperience {
             viewController.experience = experience
         }
     }
     
 }
-

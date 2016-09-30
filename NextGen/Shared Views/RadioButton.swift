@@ -13,7 +13,7 @@ class RadioButton: UIButton{
     
     
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
             toggleButon()
         }
@@ -36,17 +36,17 @@ class RadioButton: UIButton{
     
     func initialize(){
         
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.clipsToBounds = true
         self.layer.borderWidth = 3
         self.layer.cornerRadius = 0.5*35
-        self.layer.borderColor = UIColor.grayColor().CGColor
-        self.layer.backgroundColor = UIColor.blackColor().CGColor
+        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.backgroundColor = UIColor.black.cgColor
         
-        selection.frame = CGRectMake(5, 5, 25, 25)
+        selection.frame = CGRect(x: 5, y: 5, width: 25, height: 25)
         selection.borderWidth = 3
         selection.cornerRadius = 0.5*25
-        selection.borderColor = UIColor.clearColor().CGColor
+        selection.borderColor = UIColor.clear.cgColor
         self.layer.addSublayer(selection)
     }
     
@@ -54,7 +54,7 @@ class RadioButton: UIButton{
 
     
     func toggleButon() {
-        if self.selected {
+        if self.isSelected {
             highlight()
  
         } else{
@@ -66,8 +66,8 @@ class RadioButton: UIButton{
     func highlight(){
         //self.selected = !self.selected
 
-        selection.backgroundColor = UIColor.init(red: 255/255, green: 205/255, blue: 77/255, alpha: 1).CGColor
-        self.layer.borderColor = UIColor.whiteColor().CGColor
+        selection.backgroundColor = UIColor.init(red: 255/255, green: 205/255, blue: 77/255, alpha: 1).cgColor
+        self.layer.borderColor = UIColor.white.cgColor
         
         
     }
@@ -75,8 +75,8 @@ class RadioButton: UIButton{
     func removeHighlight(){
         //self.selected = !self.selected
  
-        selection.backgroundColor = UIColor.clearColor().CGColor
-        self.layer.borderColor = UIColor.grayColor().CGColor
+        selection.backgroundColor = UIColor.clear.cgColor
+        self.layer.borderColor = UIColor.gray.cgColor
         
     }
     

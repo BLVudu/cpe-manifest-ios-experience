@@ -10,13 +10,13 @@ import PromiseKit
 
 @objc class NextGenDataLoader: NSObject, NextGenHookDelegate {
     
-    private enum DataLoaderError: ErrorType {
+    private enum DataLoaderError: Error {
         case TitleNotFound
         case FileMissing
     }
     
     private struct Constants {
-        static let XMLBaseURI = "https://your-domain.com"
+        static let XMLBaseURI = "https://cpe-manifest.s3.amazonaws.com/xml"
         
         struct ConfigKey {
             static let TheTakeAPI = "thetake_api_key"
@@ -67,10 +67,10 @@ import PromiseKit
     
     func loadConfig() {
         // Load configuration file
-        if let configDataPath = NSBundle.mainBundle().pathForResource("Data/config", ofType: "json") {
+        if let configDataPath = Bundle.main.path(forResource: "Data/config", ofType: "json") {
             do {
-                let configData = try NSData(contentsOfURL: NSURL(fileURLWithPath: configDataPath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
-                if let configJSON = try NSJSONSerialization.JSONObjectWithData(configData, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
+                let configData = try NSData(contentsOf: URL(fileURLWithPath: configDataPath), options: NSData.ReadingOptions.mappedIfSafe)
+                if let configJSON = try JSONSerialization.jsonObject(with: configData as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
                     if let key = configJSON[Constants.ConfigKey.TheTakeAPI] as? String {
                         TheTakeAPIUtil.sharedInstance.apiKey = key
                     }
@@ -81,7 +81,7 @@ import PromiseKit
                     
                     if let key = configJSON[Constants.ConfigKey.GoogleMapsAPI] as? String {
                         GMSServices.provideAPIKey(key)
-                        NGDMConfiguration.mapService = .GoogleMaps
+                        NGDMConfiguration.mapService = .googleMaps
                     }
                 }
             } catch let error as NSError {
@@ -92,19 +92,19 @@ import PromiseKit
         }
     }
     
-    func loadTitle(cid: String, completionHandler: (success: Bool) -> Void) throws {
+    func loadTitle(cid: String, completionHandler: @escaping (_ success: Bool) -> Void) throws {
         guard let titleData = NextGenDataLoader.ManifestData[cid] else { throw DataLoaderError.TitleNotFound }
         
-        guard let manifestFileName = titleData["manifest"] else { throw NGDMError.ManifestMissing }
-        loadXMLFile(manifestFileName).then { localFilePath -> Void in
+        guard let manifestFileName = titleData["manifest"] else { throw NGDMError.manifestMissing }
+        loadXMLFile(fileName: manifestFileName).then { localFilePath -> Void in
             do {
                 NGDMManifest.createInstance()
                 
                 try NGDMManifest.sharedInstance.loadManifestXMLFile(localFilePath)
-                NGDMManifest.sharedInstance.mainExperience?.appearance = NGDMAppearance(type: .Main)
+                NGDMManifest.sharedInstance.mainExperience?.appearance = NGDMAppearance(type: .main)
                 
-                NGDMManifest.sharedInstance.inMovieExperience?.appearance = NGDMAppearance(type: .InMovie)
-                NGDMManifest.sharedInstance.outOfMovieExperience?.appearance = NGDMAppearance(type: .OutOfMovie)
+                NGDMManifest.sharedInstance.inMovieExperience?.appearance = NGDMAppearance(type: .inMovie)
+                NGDMManifest.sharedInstance.outOfMovieExperience?.appearance = NGDMAppearance(type: .outOfMovie)
                 
                 if TheTakeAPIUtil.sharedInstance.apiKey != nil, let mediaId = NGDMManifest.sharedInstance.mainExperience?.customIdentifier(Namespaces.TheTake) {
                     TheTakeAPIUtil.sharedInstance.mediaId = mediaId
@@ -117,13 +117,13 @@ import PromiseKit
                 }
                 
                 NGDMManifest.sharedInstance.mainExperience?.loadTalent()
-            } catch NGDMError.MainExperienceMissing {
+            } catch NGDMError.mainExperienceMissing {
                 print("Error loading Manifest file: no main Experience found")
                 abort()
-            } catch NGDMError.InMovieExperienceMissing {
+            } catch NGDMError.inMovieExperienceMissing {
                 print("Error loading Manifest file: no in-movie Experience found")
                 abort()
-            } catch NGDMError.OutOfMovieExperienceMissing {
+            } catch NGDMError.outOfMovieExperienceMissing {
                 print("Error loading Manifest file: no out-of-movie Experience found")
                 abort()
             } catch {
@@ -135,12 +135,12 @@ import PromiseKit
             var hasAppData = false
             
             if let appDataFileName = titleData["appdata"] {
-                promises.append(self.loadXMLFile(appDataFileName))
+                promises.append(self.loadXMLFile(fileName: appDataFileName))
                 hasAppData = true
             }
             
             if let cpeStyleFileName = titleData["cpestyle"] {
-                promises.append(self.loadXMLFile(cpeStyleFileName))
+                promises.append(self.loadXMLFile(fileName: cpeStyleFileName))
             }
             
             if promises.count > 0 {
@@ -166,22 +166,22 @@ import PromiseKit
                     }
                     
                     self.currentCid = cid
-                    completionHandler(success: true)
+                    completionHandler(true)
                 }
             } else {
                 self.currentCid = cid
-                completionHandler(success: true)
+                completionHandler(true)
             }
-            }.error { error -> Void in
-                completionHandler(success: false)
+        }.catch { error in
+            completionHandler(false)
         }
     }
     
     private func loadXMLFile(fileName: String) -> Promise<String> {
         return Promise { fulfill, reject in
-            if let remoteURL = NSURL(string: Constants.XMLBaseURI + "/" + fileName), applicationSupportFileURL = NextGenCacheManager.applicationSupportFileURL(remoteURL) {
-                if NextGenCacheManager.fileExists(applicationSupportFileURL), let filePath = applicationSupportFileURL.path {
-                    fulfill(filePath)
+            if let remoteURL = URL(string: Constants.XMLBaseURI + "/" + fileName), let applicationSupportFileURL = NextGenCacheManager.applicationSupportFileURL(remoteURL) {
+                if NextGenCacheManager.fileExists(applicationSupportFileURL) {
+                    fulfill(applicationSupportFileURL.path)
                     NextGenCacheManager.storeApplicationSupportFile(remoteURL, completionHandler: { (localFileURL) in
                         
                     })
@@ -204,7 +204,7 @@ import PromiseKit
     func nextGenExperienceWillClose() {
         NGDMManifest.destroyInstance()
         
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+        UIApplication.shared.setStatusBarHidden(false, with: .slide)
     }
     
     func nextGenExperienceWillEnterDebugMode() {
@@ -212,20 +212,20 @@ import PromiseKit
         // Debug mode is activated by tapping and holding the "Extras" button on the home screen for five seconds
     }
     
-    func videoPlayerWillClose(mode: VideoPlayerMode) {
+    func videoPlayerWillClose(_ mode: VideoPlayerMode, playbackPosition: Double) {
         // Handle end of playback
     }
     
-    func getProcessedVideoURL(url: NSURL, mode: VideoPlayerMode, completion: (url: NSURL?) -> Void) {
+    func getProcessedVideoURL(_ url: URL, mode: VideoPlayerMode, completion: (_ url: URL?, _ startTime: Double) -> Void) {
         // Handle DRM
-        completion(url: url)
+        completion(url, 0)
     }
     
-    func getUrlForContent(title: String, completion: (url: NSURL?) -> Void) {
-        if let encodedTitleName = title.stringByReplacingOccurrencesOfString(":", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) {
-            completion(url: NSURL(string: "http://www.vudu.com/movies/#search/" + encodedTitleName))
+    func getUrlForContent(_ title: String, completion: (_ url: URL?) -> Void) {
+        if let encodedTitleName = title.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: "-", with: "").addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            completion(URL(string: "http://www.vudu.com/movies/#search/" + encodedTitleName))
         } else {
-            completion(url: nil)
+            completion(nil)
         }
     }
     

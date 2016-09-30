@@ -17,23 +17,21 @@ class ShoppingDetailCell: UICollectionViewCell {
             productBrandLabel.text = product?.brand
             productNameLabel.text = product?.name
             if let imageURL = product?.productImageURL {
-                productImageView.af_setImageWithURL(imageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
-                    if let strongSelf = self {
-                        strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
-                    }
+                productImageView.sd_setImage(with: imageURL, completed: { [weak self] (image, _, _, _) in
+                    self?.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
-                productImageView.af_cancelImageRequest()
+                productImageView.sd_cancelCurrentImageLoad()
                 productImageView.image = nil
-                productImageView.backgroundColor = UIColor.clearColor()
+                productImageView.backgroundColor = UIColor.clear
             }
         }
     }
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
-            self.layer.borderColor = UIColor.whiteColor().CGColor
-            self.layer.borderWidth = (self.selected ? 2 : 0)
+            self.layer.borderColor = UIColor.white.cgColor
+            self.layer.borderWidth = (self.isSelected ? 2 : 0)
         }
     }
     
@@ -41,43 +39,48 @@ class ShoppingDetailCell: UICollectionViewCell {
 
 class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet weak var productMatchIcon: UIView!
-    @IBOutlet weak var productMatchLabel: UILabel!
-    @IBOutlet weak var productImageView: UIImageView!
-    @IBOutlet weak var productBrandLabel: UILabel!
-    @IBOutlet weak var productNameLabel: UILabel!
-    @IBOutlet weak var productPriceLabel: UILabel!
-    @IBOutlet weak var shopButton: UIButton!
-    @IBOutlet weak var emailButton: UIButton!
-    @IBOutlet weak var poweredByLabel: UILabel!
-    @IBOutlet weak var disclaimerLabel: UILabel!
-    
-    @IBOutlet weak var productsCollectionView: UICollectionView!
+    @IBOutlet weak private var productMatchIcon: UIView!
+    @IBOutlet weak private var productMatchLabel: UILabel!
+    @IBOutlet weak private var productImageView: UIImageView!
+    @IBOutlet weak private var productBrandLabel: UILabel!
+    @IBOutlet weak private var productNameLabel: UILabel!
+    @IBOutlet weak private var productPriceLabel: UILabel!
+    @IBOutlet weak private var shopButton: UIButton!
+    @IBOutlet weak private var emailButton: UIButton!
+    @IBOutlet weak private var poweredByLabel: UILabel!
+    @IBOutlet weak private var disclaimerLabel: UILabel!
+    @IBOutlet weak private var productsCollectionView: UICollectionView?
     
     var products: [TheTakeProduct]?
-    private var _closeDetailsViewObserver: NSObjectProtocol!
+    private var closeDetailsViewObserver: NSObjectProtocol?
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(_closeDetailsViewObserver)
+        if let observer = closeDetailsViewObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     var currentProduct: TheTakeProduct? {
         didSet {
-            productMatchIcon.backgroundColor = currentProduct != nil ? (currentProduct!.exactMatch ? UIColor(netHex: 0x2c97de) : UIColor(netHex: 0xf1c115)) : UIColor.clearColor()
-            productMatchLabel.text = currentProduct != nil ? (currentProduct!.exactMatch ? String.localize("shopping.exact_match") : String.localize("shopping.close_match")) : nil
+            if let product = currentProduct {
+                productMatchIcon.backgroundColor = (product.exactMatch ? UIColor(netHex: 0x2c97de) : UIColor(netHex: 0xf1c115))
+                productMatchLabel.text = (product.exactMatch ? String.localize("shopping.exact_match") : String.localize("shopping.close_match"))
+            } else {
+                productMatchIcon.backgroundColor = UIColor.clear
+                productMatchLabel.text = nil
+            }
+            
             productBrandLabel.text = currentProduct?.brand
             productNameLabel.text = currentProduct?.name
             productPriceLabel.text = currentProduct?.price
             if let imageURL = currentProduct?.productImageURL {
-                productImageView.af_setImageWithURL(imageURL, placeholderImage: nil, filter: nil, progress: nil, progressQueue: dispatch_get_main_queue(), imageTransition: .None, runImageTransitionIfCached: false, completion: { [weak self] (response) in
-                    if let strongSelf = self {
-                        strongSelf.productImageView.backgroundColor = response.result.value?.getPixelColor(CGPoint.zero)
-                    }
+                productImageView.sd_setImage(with: imageURL, completed: { [weak self] (image, _, _, _) in
+                    self?.productImageView.backgroundColor = image?.getPixelColor(CGPoint.zero)
                 })
             } else {
-                productImageView.af_cancelImageRequest()
+                productImageView.sd_cancelCurrentImageLoad()
                 productImageView.image = nil
-                productImageView.backgroundColor = UIColor.clearColor()
+                productImageView.backgroundColor = UIColor.clear
             }
         }
     }
@@ -88,65 +91,68 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         super.viewDidLoad()
         
         // Localizations
-        shopButton.setTitle(String.localize("shopping.shop_button").uppercaseString, forState: UIControlState.Normal)
-        emailButton.setTitle(String.localize("shopping.send_button").uppercaseString, forState: UIControlState.Normal)
+        shopButton.setTitle(String.localize("shopping.shop_button").uppercased(), for: UIControlState())
+        emailButton.setTitle(String.localize("shopping.send_button").uppercased(), for: UIControlState())
         poweredByLabel.text = String.localize("shopping.powered_by")
-        disclaimerLabel.text = String.localize("shopping.disclaimer").uppercaseString
+        disclaimerLabel.text = String.localize("shopping.disclaimer").uppercased()
         
-        productMatchIcon.layer.cornerRadius = CGRectGetWidth(productMatchIcon.frame) / 2
-        
-        _closeDetailsViewObserver = NSNotificationCenter.defaultCenter().addObserverForName(ShoppingMenuNotification.ShouldCloseDetails, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        closeDetailsViewObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ShoppingMenuNotification.ShouldCloseDetails), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self {
-                strongSelf.close(nil)
+                strongSelf.close()
             }
         })
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        productsCollectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.Top)
-        collectionView(productsCollectionView, didSelectItemAtIndexPath: indexPath)
+        if products != nil && products!.count > 1, let productsCollectionView = productsCollectionView {
+            let indexPath = IndexPath(row: 0, section: 0)
+            productsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.top)
+            collectionView(productsCollectionView, didSelectItemAt: indexPath)
+        } else {
+            productsCollectionView?.removeFromSuperview()
+            currentProduct = products?.first
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        productMatchIcon.layer.cornerRadius = productMatchIcon.frame.width / 2
     }
     
     
     // MARK: Actions
-    @IBAction func close(sender: AnyObject?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onShop(_ sender: AnyObject) {
+        currentProduct?.theTakeURL?.promptLaunchBrowser()
     }
     
-    @IBAction func onShop(sender: AnyObject) {
-        if let product = currentProduct {
-            product.theTakeURL.promptLaunchBrowser()
-        }
-    }
-    
-    @IBAction func onSendLink(sender: AnyObject) {
-        if let button = sender as? UIButton, product = currentProduct {
+    @IBAction func onSendLink(_ sender: AnyObject) {
+        if let button = sender as? UIButton, let product = currentProduct {
             let activityViewController = UIActivityViewController(activityItems: [product.shareText], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = button
-            self.presentViewController(activityViewController, animated: true, completion: nil)
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
     
     
     // MARK: UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ShoppingDetailCell.ReuseIdentifier, forIndexPath: indexPath) as! ShoppingDetailCell
-        cell.product = products?[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShoppingDetailCell.ReuseIdentifier, for: indexPath) as! ShoppingDetailCell
+        cell.product = products?[(indexPath as NSIndexPath).row]
         
         return cell
     }
     
     
     // MARK: UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let product = products?[indexPath.row] where product != currentProduct {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let product = products?[(indexPath as NSIndexPath).row] , product != currentProduct {
             currentProduct = product
         }
     }

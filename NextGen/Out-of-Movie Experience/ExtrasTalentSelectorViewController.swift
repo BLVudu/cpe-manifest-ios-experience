@@ -13,94 +13,112 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     @IBOutlet weak var talentDetailView: UIView!
     
     private var talentDetailViewController: TalentDetailViewController?
-    private var selectedIndexPath: NSIndexPath?
+    private var selectedIndexPath: IndexPath?
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        talentTableView.registerNib(UINib(nibName: "TalentTableViewCell-Narrow", bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+        talentTableView.register(UINib(nibName: "TalentTableViewCell-Narrow" + (DeviceType.IS_IPAD ? "" : "_iPhone"), bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
         
         showBackButton()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let path = NSIndexPath(forRow: 0, inSection: 0)
-        self.talentTableView.selectRowAtIndexPath(path, animated: false, scrollPosition: .Top)
-        self.tableView(self.talentTableView, didSelectRowAtIndexPath: path)
+        let path = IndexPath(row: 0, section: 0)
+        self.talentTableView.selectRow(at: path, animated: false, scrollPosition: .top)
+        self.tableView(self.talentTableView, didSelectRowAt: path)
     }
     
     // MARK: Talent Details
     func showTalentDetailView() {
-        if selectedIndexPath != nil {
-            if let cell = talentTableView?.cellForRowAtIndexPath(selectedIndexPath!) as? TalentTableViewCell, talent = cell.talent {
-                if talentDetailViewController != nil {
-                    talentDetailViewController!.loadTalent(talent)
-                } else {
-                    if let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController) as? TalentDetailViewController {
-                        talentDetailViewController.talent = talent
-                        
-                        talentDetailViewController.view.frame = talentDetailView.bounds
-                        talentDetailView.addSubview(talentDetailViewController.view)
-                        self.addChildViewController(talentDetailViewController)
-                        talentDetailViewController.didMoveToParentViewController(self)
-                        
-                        talentDetailView.alpha = 0
-                        talentDetailView.hidden = false
-                        showBackButton()
-                        
-                        UIView.animateWithDuration(0.25, animations: {
-                            self.talentDetailView.alpha = 1
-                        })
-                        
-                        self.talentDetailViewController = talentDetailViewController
-                    }
-                }
+        if selectedIndexPath != nil, let talent = (talentTableView?.cellForRow(at: selectedIndexPath!) as? TalentTableViewCell)?.talent, let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController.self) as? TalentDetailViewController {
+            talentDetailViewController.talent = talent
+            
+            talentDetailViewController.view.frame = talentDetailView.bounds
+            talentDetailView.addSubview(talentDetailViewController.view)
+            self.addChildViewController(talentDetailViewController)
+            talentDetailViewController.didMove(toParentViewController: self)
+            
+            showBackButton()
+            
+            if talentDetailView.isHidden {
+                talentDetailView.alpha = 0
+                talentDetailView.isHidden = false
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.talentDetailView.alpha = 1
+                })
+            } else {
+                talentDetailViewController.view.alpha = 0
+                UIView.animate(withDuration: 0.25, animations: {
+                    talentDetailViewController.view.alpha = 1
+                })
             }
+            
+            self.talentDetailViewController = talentDetailViewController
+            NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectTalent, itemId: talent.id)
         }
     }
     
-    func hideTalentDetailView() {
-        if selectedIndexPath != nil {
-            talentTableView?.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
-            selectedIndexPath = nil
+    func hideTalentDetailView(completed: (() -> Void)? = nil) {
+        if talentDetailViewController != nil {
+            if selectedIndexPath != nil {
+                talentTableView?.deselectRow(at: selectedIndexPath!, animated: true)
+                selectedIndexPath = nil
+            }
+            
+            if completed == nil {
+                showHomeButton()
+            }
+            
+            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .exit, itemId: talentDetailViewController?.talent.id)
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                if completed != nil {
+                    self.talentDetailViewController?.view.alpha = 0
+                } else {
+                    self.talentDetailView?.alpha = 0
+                }
+            }, completion: { (Bool) -> Void in
+                if completed == nil {
+                    self.talentDetailView?.isHidden = true
+                }
+                
+                self.talentDetailViewController?.willMove(toParentViewController: nil)
+                self.talentDetailViewController?.view.removeFromSuperview()
+                self.talentDetailViewController?.removeFromParentViewController()
+                self.talentDetailViewController = nil
+                completed?()
+            })
+        } else {
+            completed?()
         }
-        
-        showHomeButton()
-        
-        UIView.animateWithDuration(0.25, animations: {
-            self.talentDetailView.alpha = 0
-        }, completion: { (Bool) -> Void in
-            self.talentDetailView.hidden = true
-            self.talentDetailViewController?.willMoveToParentViewController(nil)
-            self.talentDetailViewController?.view.removeFromSuperview()
-            self.talentDetailViewController?.removeFromParentViewController()
-            self.talentDetailViewController = nil
-        })
     }
     
     // MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return NGDMManifest.sharedInstance.mainExperience?.orderedActors?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TalentTableViewCell.ReuseIdentifier) as! TalentTableViewCell
         cell.talent = NGDMManifest.sharedInstance.mainExperience?.orderedActors?[indexPath.row]
         
         return cell
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return (indexPath != selectedIndexPath ? indexPath : nil)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndexPath = indexPath
-        showTalentDetailView()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        hideTalentDetailView { [weak self] in
+            self?.selectedIndexPath = indexPath
+            self?.showTalentDetailView()
+        }
     }
     
     // MARK: TalentDetailViewPresenter

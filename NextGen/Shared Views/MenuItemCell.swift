@@ -29,11 +29,11 @@ class MenuItemCell: UITableViewCell {
         
         menuItem = nil
         active = false
-        titleLabelLargePaddingConstraint.active = true
+        titleLabelLargePaddingConstraint.isActive = true
     }
     
     func updateCellStyle() {
-        titleLabel.textColor = (self.active ? UIColor.themePrimaryColor() : UIColor.whiteColor())
+        titleLabel.textColor = (self.active ? UIColor.themePrimary : UIColor.white)
     }
 
 }

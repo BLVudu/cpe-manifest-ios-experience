@@ -24,66 +24,66 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nextButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+        nextButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
         
         reloadClipViews()
         
         // Localizations
-        clipShareTitleLabel.text = String.localize("clipshare.select_clip_title").uppercaseString
-        shareButton.setTitle(String.localize("clipshare.share_button").uppercaseString, forState: UIControlState.Normal)
+        clipShareTitleLabel.text = String.localize("clipshare.select_clip_title").uppercased()
+        shareButton.setTitle(String.localize("clipshare.share_button").uppercased(), for: UIControlState())
     }
     
     private func reloadClipViews() {
-        videoPlayerViewController?.willMoveToParentViewController(nil)
+        videoPlayerViewController?.willMove(toParentViewController: nil)
         videoPlayerViewController?.view.removeFromSuperview()
         videoPlayerViewController?.removeFromParentViewController()
         videoPlayerViewController = nil
-        videoContainerView.hidden = true
-        previewImageView.hidden = false
-        previewPlayButton.hidden = false
+        videoContainerView.isHidden = true
+        previewImageView.isHidden = false
+        previewPlayButton.isHidden = false
         
         if let imageURL = timedEvent?.imageURL {
-            previewImageView.af_setImageWithURL(imageURL)
+            previewImageView.sd_setImage(with: imageURL)
         } else {
-            previewImageView.af_cancelImageRequest()
+            previewImageView.sd_cancelCurrentImageLoad()
             previewImageView.image = nil
         }
         
-        videoContainerView.hidden = true
+        videoContainerView.isHidden = true
         clipNameLabel.text = timedEvent?.descriptionText
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            self.previousTimedEvent = self.timedEvent?.previousTimedEventOfType(.ClipShare)
-            self.nextTimedEvent = self.timedEvent?.nextTimedEventOfType(.ClipShare)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.previousTimedEvent = self.timedEvent?.previousTimedEventOfType(.clipShare)
+            self.nextTimedEvent = self.timedEvent?.nextTimedEventOfType(.clipShare)
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self.previousButton.hidden = self.previousTimedEvent == nil
-                self.nextButton.hidden = self.nextTimedEvent == nil
+            DispatchQueue.main.async {
+                self.previousButton.isHidden = self.previousTimedEvent == nil
+                self.nextButton.isHidden = self.nextTimedEvent == nil
             }
         }
     }
     
     // MARK: Actions
     @IBAction private func onPlay() {
-        previewImageView.hidden = true
-        previewPlayButton.hidden = true
+        previewImageView.isHidden = true
+        previewPlayButton.isHidden = true
         
-        if let videoURL = timedEvent?.videoURL, videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController  {
+        if let videoURL = timedEvent?.videoURL, let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController  {
             if let player = videoPlayerViewController.player {
                 player.removeAllItems()
             }
             
             videoPlayerViewController.queueTotalCount = 1
             videoPlayerViewController.queueCurrentIndex = 0
-            videoPlayerViewController.mode = .SupplementalInMovie
+            videoPlayerViewController.mode = .supplementalInMovie
             videoPlayerViewController.view.frame = videoContainerView.bounds
             
-            videoContainerView.hidden = false
+            videoContainerView.isHidden = false
             videoContainerView.addSubview(videoPlayerViewController.view)
             self.addChildViewController(videoPlayerViewController)
-            videoPlayerViewController.didMoveToParentViewController(self)
+            videoPlayerViewController.didMove(toParentViewController: self)
             
-            videoPlayerViewController.playVideoWithURL(videoURL)
+            videoPlayerViewController.playVideo(with: videoURL)
             self.videoPlayerViewController = videoPlayerViewController
         }
     }
@@ -102,11 +102,11 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         }
     }
     
-    @IBAction private func onShare(sender: UIButton) {
-        if let url = timedEvent?.videoURL, title = NGDMManifest.sharedInstance.mainExperience?.title {
+    @IBAction private func onShare(_ sender: UIButton) {
+        if let url = timedEvent?.videoURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
             let activityViewController = UIActivityViewController(activityItems: [String.localize("clipshare.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender
-            self.presentViewController(activityViewController, animated: true, completion: nil)
+            self.present(activityViewController, animated: true, completion: nil)
         }
     }
     

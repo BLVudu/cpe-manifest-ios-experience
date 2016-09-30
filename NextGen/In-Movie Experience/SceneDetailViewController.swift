@@ -26,42 +26,42 @@ class SceneDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         
         titleLabel = UILabel()
         titleLabel.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 25 : 18)
-        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.textColor = UIColor.white
         self.view.addSubview(titleLabel)
         
-        closeButton = UIButton(type: UIButtonType.Custom)
+        closeButton = UIButton(type: UIButtonType.custom)
         closeButton.titleLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 17 : 15)
-        closeButton.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
-        closeButton.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
+        closeButton.setTitle(String.localize("label.close"), for: UIControlState())
+        closeButton.setImage(UIImage(named: "Close"), for: UIControlState())
         closeButton.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
         closeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
         closeButton.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.CloseButtonWidth, 0, 0)
-        closeButton.addTarget(self, action: #selector(SceneDetailViewController.close), forControlEvents: UIControlEvents.TouchUpInside)
+        closeButton.addTarget(self, action: #selector(SceneDetailViewController.close), for: UIControlEvents.touchUpInside)
         self.view.addSubview(closeButton)
         
         if let title = self.title {
-            titleLabel.text = title.uppercaseString
+            titleLabel.text = title.uppercased()
         } else if let title = experience?.metadata?.title {
-            titleLabel.text = title.uppercaseString
+            titleLabel.text = title.uppercased()
         }
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        let viewWidth = CGRectGetWidth(self.view.frame)
-        titleLabel.frame = CGRectMake(Constants.ViewMargin, 0, viewWidth - (2 * Constants.ViewMargin), Constants.TitleLabelHeight)
-        closeButton.frame = CGRectMake(viewWidth - Constants.CloseButtonWidth - Constants.ViewMargin, 0, Constants.CloseButtonWidth, Constants.TitleLabelHeight)
+        let viewWidth = self.view.frame.width
+        titleLabel.frame = CGRect(x: Constants.ViewMargin, y: 0, width: viewWidth - (2 * Constants.ViewMargin), height: Constants.TitleLabelHeight)
+        closeButton.frame = CGRect(x: viewWidth - Constants.CloseButtonWidth - Constants.ViewMargin, y: 0, width: Constants.CloseButtonWidth, height: Constants.TitleLabelHeight)
     }
     
     // MARK: Actions
-    func close() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        NSNotificationCenter.defaultCenter().postNotificationName(SceneDetailNotification.WillClose, object: nil)
+    internal func close() {
+        self.dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: SceneDetailNotification.WillClose), object: nil)
     }
 
 }

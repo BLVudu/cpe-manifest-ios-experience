@@ -10,13 +10,13 @@ extension UIAlertController {
         show(true)
     }
     
-    func show(animated: Bool) {
-        var topViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+    func show(_ animated: Bool) {
+        var topViewController = UIApplication.shared.keyWindow?.rootViewController
         while topViewController!.presentedViewController != nil {
             topViewController = topViewController!.presentedViewController
         }
         
-        topViewController?.presentViewController(self, animated: animated, completion: nil)
+        topViewController?.present(self, animated: animated, completion: nil)
     }
     
 }

@@ -8,7 +8,7 @@ import GoogleMaps
 import NextGenDataManager
 
 protocol MultiMapViewDelegate {
-    func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker)
+    func mapView(_ mapView: MultiMapView, didTapMarker marker: MultiMapMarker)
 }
 
 class MultiMapMarker: NSObject {
@@ -19,8 +19,8 @@ class MultiMapMarker: NSObject {
 }
     
 enum MultiMapType: Int {
-    case Map = 0
-    case Satellite = 1
+    case map = 0
+    case satellite = 1
 }
 
 class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
@@ -53,19 +53,19 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         didSet {
             if let mapView = googleMapView {
                 mapView.selectedMarker = selectedMarker?.googleMapMarker
-            } else if let mapView = appleMapView, marker = selectedMarker?.appleMapAnnotation {
+            } else if let mapView = appleMapView, let marker = selectedMarker?.appleMapAnnotation {
                 mapView.selectAnnotation(marker, animated: true)
             }
         }
     }
     
-    var mapType: MultiMapType = .Map {
+    var mapType: MultiMapType = .map {
         didSet {
             if let mapView = googleMapView {
-                mapView.mapType = (mapType == .Satellite ? kGMSTypeSatellite : kGMSTypeNormal)
+                mapView.mapType = (mapType == .satellite ? kGMSTypeSatellite : kGMSTypeNormal)
                 self.addSubview(googleMapView!)
             } else if let mapView = appleMapView {
-                mapView.mapType = (mapType == .Satellite ? MKMapType.Satellite : MKMapType.Standard)
+                mapView.mapType = (mapType == .satellite ? MKMapType.satellite : MKMapType.standard)
             }
         }
     }
@@ -81,7 +81,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     }
     
     private func setup() {
-        if NGDMConfiguration.mapService == .GoogleMaps && googleMapView == nil {
+        if NGDMConfiguration.mapService == .googleMaps && googleMapView == nil {
             googleMapView = GMSMapView(frame: self.bounds)
             googleMapView?.delegate = self
             self.addSubview(googleMapView!)
@@ -91,30 +91,29 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             self.addSubview(appleMapView!)
         }
         
-        mapType = .Map
+        mapType = .map
     }
     
     func addControls() {
         let segmentedControl = UISegmentedControl(items: [String.localize("locations.map.type_standard"), String.localize("locations.map.type_satellite")])
-        let textAttributes = NSDictionary(object: UIFont.themeCondensedFont(16), forKey: NSFontAttributeName)
-        segmentedControl.setTitleTextAttributes(textAttributes as [NSObject : AnyObject], forState: UIControlState.Normal)
-        segmentedControl.backgroundColor = UIColor.whiteColor()
+        segmentedControl.setTitleTextAttributes([NSFontAttributeName: UIFont.themeCondensedFont(16)], for: UIControlState())
+        segmentedControl.backgroundColor = UIColor.white
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.layer.cornerRadius = 5
-        segmentedControl.addTarget(self, action: #selector(self.onMapTypeChanged), forControlEvents: UIControlEvents.ValueChanged)
-        segmentedControl.frame = CGRectMake(Constants.ControlsPadding, Constants.ControlsPadding, Constants.SegmentedControlWidth, CGRectGetHeight(segmentedControl.frame))
+        segmentedControl.addTarget(self, action: #selector(self.onMapTypeChanged), for: UIControlEvents.valueChanged)
+        segmentedControl.frame = CGRect(x: Constants.ControlsPadding, y: Constants.ControlsPadding, width: Constants.SegmentedControlWidth, height: segmentedControl.frame.height)
         self.addSubview(segmentedControl)
         mapTypeSegmentedControl = segmentedControl
         
-        let zoomInButton = UIButton(frame: CGRectMake(Constants.ControlsPadding, CGRectGetMaxY(segmentedControl.frame) + Constants.ControlsPadding, Constants.ZoomButtonWidth, Constants.ZoomButtonWidth))
-        zoomInButton.setImage(UIImage(named: "MapZoomIn"), forState: .Normal)
-        zoomInButton.addTarget(self, action: #selector(self.zoomIn), forControlEvents: .TouchUpInside)
+        let zoomInButton = UIButton(frame: CGRect(x: Constants.ControlsPadding, y: segmentedControl.frame.maxY + Constants.ControlsPadding, width: Constants.ZoomButtonWidth, height: Constants.ZoomButtonWidth))
+        zoomInButton.setImage(UIImage(named: "MapZoomIn"), for: UIControlState())
+        zoomInButton.addTarget(self, action: #selector(self.zoomIn), for: .touchUpInside)
         self.addSubview(zoomInButton)
         self.zoomInButton = zoomInButton
         
-        let zoomOutButton = UIButton(frame: CGRectMake(Constants.ControlsPadding, CGRectGetMaxY(zoomInButton.frame), Constants.ZoomButtonWidth, Constants.ZoomButtonWidth))
-        zoomOutButton.setImage(UIImage(named: "MapZoomOut"), forState: .Normal)
-        zoomOutButton.addTarget(self, action: #selector(self.zoomOut), forControlEvents: .TouchUpInside)
+        let zoomOutButton = UIButton(frame: CGRect(x: Constants.ControlsPadding, y: zoomInButton.frame.maxY, width: Constants.ZoomButtonWidth, height: Constants.ZoomButtonWidth))
+        zoomOutButton.setImage(UIImage(named: "MapZoomOut"), for: UIControlState())
+        zoomOutButton.addTarget(self, action: #selector(self.zoomOut), for: .touchUpInside)
         self.addSubview(zoomOutButton)
         self.zoomOutButton = zoomOutButton
     }
@@ -126,15 +125,15 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         appleMapView?.frame = self.bounds
         
         if let mapTypeSegmentedControl = mapTypeSegmentedControl {
-            self.bringSubviewToFront(mapTypeSegmentedControl)
+            self.bringSubview(toFront: mapTypeSegmentedControl)
         }
         
         if let button = zoomInButton {
-            self.bringSubviewToFront(button)
+            self.bringSubview(toFront: button)
         }
         
         if let button = zoomOutButton {
-            self.bringSubviewToFront(button)
+            self.bringSubview(toFront: button)
         }
     }
     
@@ -152,24 +151,24 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         }
     }
 
-    func setLocation(location: CLLocationCoordinate2D, zoomLevel: Float, animated: Bool) {
+    func setLocation(_ location: CLLocationCoordinate2D, zoomLevel: Float, animated: Bool) {
         if let mapView = googleMapView {
             if animated {
-                mapView.animateWithCameraUpdate(GMSCameraUpdate.setTarget(location, zoom: zoomLevel))
+                mapView.animate(with: GMSCameraUpdate.setTarget(location, zoom: zoomLevel))
             } else {
                 mapView.camera = GMSCameraPosition(target: location, zoom: zoomLevel, bearing: mapView.camera.bearing, viewingAngle: mapView.camera.viewingAngle)
             }
         } else if let mapView = appleMapView {
-            let span = MKCoordinateSpanMake(0, 360 / pow(2.0, Double(zoomLevel)) * Double(CGRectGetWidth(mapView.frame)) / 256);
+            let span = MKCoordinateSpanMake(0, 360 / pow(2.0, Double(zoomLevel)) * Double(mapView.frame.width) / 256);
             mapView.setRegion(MKCoordinateRegionMake(location, span), animated: animated)
         }
     }
     
-    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?) -> MultiMapMarker {
+    func addMarker(_ location: CLLocationCoordinate2D, title: String?, subtitle: String?) -> MultiMapMarker {
         return addMarker(location, title: title, subtitle: subtitle, icon: nil, autoSelect: false)
     }
     
-    func addMarker(location: CLLocationCoordinate2D, title: String?, subtitle: String?, icon: UIImage?, autoSelect: Bool) -> MultiMapMarker {
+    func addMarker(_ location: CLLocationCoordinate2D, title: String?, subtitle: String?, icon: UIImage?, autoSelect: Bool) -> MultiMapMarker {
         let multiMapMarker = MultiMapMarker()
         multiMapMarker.location = location
         
@@ -206,7 +205,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         zoomToFitMarkers(mapMarkers)
     }
     
-    func zoomToFitMarkers(markers: [MultiMapMarker]) {
+    func zoomToFitMarkers(_ markers: [MultiMapMarker]) {
         if let mapView = googleMapView {
             var bounds = GMSCoordinateBounds()
             for marker in markers {
@@ -217,12 +216,12 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             
             var edgeInsets: UIEdgeInsets
             if let segmentedControl = mapTypeSegmentedControl {
-                edgeInsets = UIEdgeInsetsMake(Constants.ControlsPadding + CGRectGetHeight(segmentedControl.frame), Constants.ControlsPadding + Constants.SegmentedControlWidth, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
+                edgeInsets = UIEdgeInsetsMake((Constants.ControlsPadding * 2) + segmentedControl.frame.height + Constants.ZoomFitAllPadding, (Constants.ControlsPadding * 2) + Constants.ZoomButtonWidth, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
             } else {
                 edgeInsets = UIEdgeInsetsMake(Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding, Constants.ZoomFitAllPadding)
             }
             
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withEdgeInsets: edgeInsets))
+            mapView.animate(with: GMSCameraUpdate.fit(bounds, with: edgeInsets))
         } else if let mapView = appleMapView {
             var annotations = [MKAnnotation]()
             for marker in markers {
@@ -237,27 +236,27 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
     func zoomIn() {
         if let mapView = googleMapView {
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.zoomIn())
+            mapView.animate(with: GMSCameraUpdate.zoomIn())
         }
     }
     
     func zoomOut() {
         if let mapView = googleMapView {
-            mapView.animateWithCameraUpdate(GMSCameraUpdate.zoomOut())
+            mapView.animate(with: GMSCameraUpdate.zoomOut())
         }
     }
     
     // MARK: Actions
     func onMapTypeChanged() {
-        if let mapTypeSegmentedControl = mapTypeSegmentedControl, type = MultiMapType(rawValue: mapTypeSegmentedControl.selectedSegmentIndex) {
+        if let mapTypeSegmentedControl = mapTypeSegmentedControl, let type = MultiMapType(rawValue: mapTypeSegmentedControl.selectedSegmentIndex) {
             mapType = type
         }
     }
     
     
     // MARK: MKMapViewDelegate
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MarkerAnnotationViewReuseIdentifier)
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: Constants.MarkerAnnotationViewReuseIdentifier)
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Constants.MarkerAnnotationViewReuseIdentifier)
             annotationView?.image = mapIconImage
@@ -269,7 +268,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     }
     
     // MARK: GMSMapViewDelegate
-    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let delegate = delegate {
             var selectedMarker: MultiMapMarker?
             for mapMarker in mapMarkers {

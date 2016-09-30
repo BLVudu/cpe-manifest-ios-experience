@@ -6,11 +6,11 @@ import UIKit
 
 extension UIColor {
     
-    static func themePrimaryColor() -> UIColor {
+    static var themePrimary: UIColor {
         return UIColor(netHex: 0xffcd14)
     }
     
-    static func themeLightGreyColor() -> UIColor {
+    static var themeLightGray: UIColor {
         return UIColor(netHex: 0x999999)
     }
     
