@@ -306,7 +306,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
                 progressView.borderWidth = 0
                 progressView.lineWidth = 2
                 progressView.fillOnTouch = false
-                progressView.tintColor = UIColor.themePrimaryColor()
+                progressView.tintColor = UIColor.themePrimary
                 progressView.animationDuration = Double(Constants.CountdownTimeInterval)
                 self.view.addSubview(progressView)
                 countdownProgressView = progressView
@@ -384,7 +384,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         
         if !_commentaryView.isHidden {
             
-            sender.tintColor = UIColor.themePrimaryColor()
+            sender.tintColor = UIColor.themePrimary
             
             if let timer = self.playerControlsAutoHideTimer {
                 timer.invalidate()

@@ -4,18 +4,10 @@
 
 import Foundation
 
-public struct NextGenAnalytics {
-    struct Param {
-        static let Action = "action"
-        static let TitleId = "title_id"
-        static let ItemId = "item_id"
-        static let ItemName = "item_name"
-    }
-}
-
 public enum NextGenAnalyticsEvent: String {
     case homeAction = "home_action"
     case extrasAction = "extras_action"
+    case extrasTalentAction = "extras_talent_action"
 }
 
 public enum NextGenAnalyticsAction: String {
@@ -34,6 +26,11 @@ public enum NextGenAnalyticsAction: String {
     case selectApp = "select_app"
     case selectShopping = "select_shopping"
     
+    // Talent
+    case selectGallery = "select_gallery"
+    case selectSocial = "select_social"
+    case selectFilm = "select_film"
+    
     // TODO: SHOPPING
     // TODO: FULL IME
 }
@@ -51,7 +48,7 @@ public protocol NextGenHookDelegate {
     func getUrlForContent(_ title: String, completion: @escaping (_ url: URL?) -> Void)
     
     // Analytics
-    func log(event: String, parameters: [String: String]?)
+    func logAnalyticsEvent(_ event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, itemId: String?, itemName: String?)
 }
 
 class NextGenHook {
@@ -63,20 +60,8 @@ class NextGenHook {
         NextGenCacheManager.clearTempDirectory()
     }
     
-    static func log(event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, itemId: String) {
-        log(event: event, action: action, parameters: [NextGenAnalytics.Param.ItemId: itemId])
-    }
-    
-    static func log(event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, parameters: [String: String]? = nil) {
-        var allParameters = parameters ?? [String: String]()
-        allParameters[NextGenAnalytics.Param.Action] = action.rawValue
-        log(event: event.rawValue, parameters: allParameters)
-    }
-    
-    static func log(event: String, parameters: [String: String]? = nil) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            delegate?.log(event: event, parameters: parameters)
-        }
+    static func logAnalyticsEvent(_ event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, itemId: String? = nil, itemName: String? = nil) {
+        delegate?.logAnalyticsEvent(event, action: action, itemId: itemId, itemName: itemName)
     }
     
 }

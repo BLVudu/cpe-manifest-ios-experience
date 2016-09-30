@@ -97,7 +97,7 @@ class VideoCell: UITableViewCell {
     func updateCellStyle() {
         thumbnailContainerView.layer.borderColor = UIColor.white.cgColor
         thumbnailContainerView.layer.borderWidth = (self.isSelected ? 2 : 0)
-        captionLabel.textColor = (self.isSelected ? UIColor.themePrimaryColor() : UIColor.white)
+        captionLabel.textColor = (self.isSelected ? UIColor.themePrimary : UIColor.white)
         playIconImageView.isHidden = (experience == nil || experience!.isType(.gallery)) || self.isSelected
     }
     

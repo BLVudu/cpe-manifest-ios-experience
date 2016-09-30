@@ -34,51 +34,67 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     
     // MARK: Talent Details
     func showTalentDetailView() {
-        if selectedIndexPath != nil {
-            if let cell = talentTableView?.cellForRow(at: selectedIndexPath!) as? TalentTableViewCell, let talent = cell.talent {
-                if talentDetailViewController != nil {
-                    talentDetailViewController!.loadTalent(talent)
-                } else {
-                    if let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController.self) as? TalentDetailViewController {
-                        talentDetailViewController.talent = talent
-                        
-                        talentDetailViewController.view.frame = talentDetailView.bounds
-                        talentDetailView.addSubview(talentDetailViewController.view)
-                        self.addChildViewController(talentDetailViewController)
-                        talentDetailViewController.didMove(toParentViewController: self)
-                        
-                        talentDetailView.alpha = 0
-                        talentDetailView.isHidden = false
-                        showBackButton()
-                        
-                        UIView.animate(withDuration: 0.25, animations: {
-                            self.talentDetailView.alpha = 1
-                        })
-                        
-                        self.talentDetailViewController = talentDetailViewController
-                    }
-                }
+        if selectedIndexPath != nil, let talent = (talentTableView?.cellForRow(at: selectedIndexPath!) as? TalentTableViewCell)?.talent, let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController.self) as? TalentDetailViewController {
+            talentDetailViewController.talent = talent
+            
+            talentDetailViewController.view.frame = talentDetailView.bounds
+            talentDetailView.addSubview(talentDetailViewController.view)
+            self.addChildViewController(talentDetailViewController)
+            talentDetailViewController.didMove(toParentViewController: self)
+            
+            showBackButton()
+            
+            if talentDetailView.isHidden {
+                talentDetailView.alpha = 0
+                talentDetailView.isHidden = false
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.talentDetailView.alpha = 1
+                })
+            } else {
+                talentDetailViewController.view.alpha = 0
+                UIView.animate(withDuration: 0.25, animations: {
+                    talentDetailViewController.view.alpha = 1
+                })
             }
+            
+            self.talentDetailViewController = talentDetailViewController
+            NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectTalent, itemId: talent.id)
         }
     }
     
-    func hideTalentDetailView() {
-        if selectedIndexPath != nil {
-            talentTableView?.deselectRow(at: selectedIndexPath!, animated: true)
-            selectedIndexPath = nil
+    func hideTalentDetailView(completed: (() -> Void)? = nil) {
+        if talentDetailViewController != nil {
+            if selectedIndexPath != nil {
+                talentTableView?.deselectRow(at: selectedIndexPath!, animated: true)
+                selectedIndexPath = nil
+            }
+            
+            if completed == nil {
+                showHomeButton()
+            }
+            
+            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .exit, itemId: talentDetailViewController?.talent.id)
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                if completed != nil {
+                    self.talentDetailViewController?.view.alpha = 0
+                } else {
+                    self.talentDetailView?.alpha = 0
+                }
+            }, completion: { (Bool) -> Void in
+                if completed == nil {
+                    self.talentDetailView?.isHidden = true
+                }
+                
+                self.talentDetailViewController?.willMove(toParentViewController: nil)
+                self.talentDetailViewController?.view.removeFromSuperview()
+                self.talentDetailViewController?.removeFromParentViewController()
+                self.talentDetailViewController = nil
+                completed?()
+            })
+        } else {
+            completed?()
         }
-        
-        showHomeButton()
-        
-        UIView.animate(withDuration: 0.25, animations: {
-            self.talentDetailView.alpha = 0
-        }, completion: { (Bool) -> Void in
-            self.talentDetailView.isHidden = true
-            self.talentDetailViewController?.willMove(toParentViewController: nil)
-            self.talentDetailViewController?.view.removeFromSuperview()
-            self.talentDetailViewController?.removeFromParentViewController()
-            self.talentDetailViewController = nil
-        })
     }
     
     // MARK: UITableViewDataSource
@@ -99,8 +115,10 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndexPath = indexPath
-        showTalentDetailView()
+        hideTalentDetailView { [weak self] in
+            self?.selectedIndexPath = indexPath
+            self?.showTalentDetailView()
+        }
     }
     
     // MARK: TalentDetailViewPresenter

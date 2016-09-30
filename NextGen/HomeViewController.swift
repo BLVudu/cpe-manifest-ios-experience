@@ -377,7 +377,7 @@ class HomeViewController: UIViewController {
                 
                 playButton.frame = CGRect(x: 0, y: 0, width: buttonOverlayView.frame.width, height: buttonOverlayView.frame.width / (playButtonSize.width / playButtonSize.height))
                 
-                let extrasButtonWidth = playButton.frame.width * 0.7
+                let extrasButtonWidth = playButton.frame.width * 0.675
                 let extrasButtonHeight = extrasButtonWidth / (extrasButtonSize.width / extrasButtonSize.height)
                 extrasButton.frame = CGRect(x: (buttonOverlayView.frame.width - extrasButtonWidth) / 2, y: buttonOverlayHeight - extrasButtonHeight, width: extrasButtonWidth, height: extrasButtonHeight)
                 
@@ -523,17 +523,17 @@ class HomeViewController: UIViewController {
     // MARK: Actions
     func onPlay() {
         self.performSegue(withIdentifier: SegueIdentifier.ShowInMovieExperience, sender: nil)
-        NextGenHook.log(event: .homeAction, action: .launchInMovie)
+        NextGenHook.logAnalyticsEvent(.homeAction, action: .launchInMovie)
     }
     
     func onExtras() {
         self.performSegue(withIdentifier: SegueIdentifier.ShowOutOfMovieExperience, sender: NGDMManifest.sharedInstance.outOfMovieExperience)
-        NextGenHook.log(event: .homeAction, action: .launchExtras)
+        NextGenHook.logAnalyticsEvent(.homeAction, action: .launchExtras)
     }
     
     @IBAction func onExit() {
         NextGenHook.experienceWillClose()
-        NextGenHook.log(event: .homeAction, action: .exit)
+        NextGenHook.logAnalyticsEvent(.homeAction, action: .exit)
         
         currentlyDismissing = true
         self.dismiss(animated: true, completion: nil)

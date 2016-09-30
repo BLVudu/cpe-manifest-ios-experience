@@ -66,7 +66,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if talentDetailView != nil && !talentDetailView!.isHidden {
             hideTalentDetailView()
         } else {
-            NextGenHook.log(event: .extrasAction, action: .exit)
+            NextGenHook.logAnalyticsEvent(.extrasAction, action: .exit)
             super.close()
         }
     }
@@ -74,53 +74,68 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     
     // MARK: Talent Details
     func showTalentDetailView() {
-        if selectedIndexPath != nil {
-            if let cell = talentTableView?.cellForRow(at: selectedIndexPath!) as? TalentTableViewCell, let talent = cell.talent {
-                if talentDetailViewController != nil {
-                    talentDetailViewController!.loadTalent(talent)
-                } else {
-                    if let talentDetailView = talentDetailView, let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController.self) as? TalentDetailViewController {
-                        talentDetailViewController.talent = talent
-                        
-                        talentDetailViewController.view.frame = talentDetailView.bounds
-                        talentDetailView.addSubview(talentDetailViewController.view)
-                        self.addChildViewController(talentDetailViewController)
-                        talentDetailViewController.didMove(toParentViewController: self)
-                        
-                        talentDetailView.alpha = 0
-                        talentDetailView.isHidden = false
-                        showBackButton()
-                        
-                        UIView.animate(withDuration: 0.25, animations: {
-                            talentDetailView.alpha = 1
-                        })
-                        
-                        self.talentDetailViewController = talentDetailViewController
-                    }
-                }
+        if selectedIndexPath != nil, let talent = (talentTableView?.cellForRow(at: selectedIndexPath!) as? TalentTableViewCell)?.talent, let talentDetailView = talentDetailView, let talentDetailViewController = UIStoryboard.getNextGenViewController(TalentDetailViewController.self) as? TalentDetailViewController {
+            talentDetailViewController.talent = talent
+            
+            talentDetailViewController.view.frame = talentDetailView.bounds
+            talentDetailView.addSubview(talentDetailViewController.view)
+            self.addChildViewController(talentDetailViewController)
+            talentDetailViewController.didMove(toParentViewController: self)
+            
+            showBackButton()
+            
+            if talentDetailView.isHidden {
+                talentDetailView.alpha = 0
+                talentDetailView.isHidden = false
                 
-                NextGenHook.log(event: .extrasAction, action: .selectTalent, itemId: talent.id)
+                UIView.animate(withDuration: 0.25, animations: {
+                    talentDetailView.alpha = 1
+                })
+            } else {
+                talentDetailViewController.view.alpha = 0
+                UIView.animate(withDuration: 0.25, animations: {
+                    talentDetailViewController.view.alpha = 1
+                })
             }
+            
+            self.talentDetailViewController = talentDetailViewController
+            NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectTalent, itemId: talent.id)
         }
     }
     
-    func hideTalentDetailView() {
-        if selectedIndexPath != nil {
-            talentTableView?.deselectRow(at: selectedIndexPath!, animated: true)
-            selectedIndexPath = nil
+    func hideTalentDetailView(completed: (() -> Void)? = nil) {
+        if talentDetailViewController != nil {
+            if selectedIndexPath != nil {
+                talentTableView?.deselectRow(at: selectedIndexPath!, animated: true)
+                selectedIndexPath = nil
+            }
+            
+            if completed == nil {
+                showHomeButton()
+            }
+            
+            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .exit, itemId: talentDetailViewController?.talent.id)
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                if completed != nil {
+                    self.talentDetailViewController?.view.alpha = 0
+                } else {
+                    self.talentDetailView?.alpha = 0
+                }
+            }, completion: { (Bool) -> Void in
+                if completed == nil {
+                    self.talentDetailView?.isHidden = true
+                }
+                
+                self.talentDetailViewController?.willMove(toParentViewController: nil)
+                self.talentDetailViewController?.view.removeFromSuperview()
+                self.talentDetailViewController?.removeFromParentViewController()
+                self.talentDetailViewController = nil
+                completed?()
+            })
+        } else {
+            completed?()
         }
-        
-        showHomeButton()
-        
-        UIView.animate(withDuration: 0.25, animations: {
-            self.talentDetailView?.alpha = 0
-        }, completion: { (Bool) -> Void in
-            self.talentDetailView?.isHidden = true
-            self.talentDetailViewController?.willMove(toParentViewController: nil)
-            self.talentDetailViewController?.view.removeFromSuperview()
-            self.talentDetailViewController?.removeFromParentViewController()
-            self.talentDetailViewController = nil
-        })
     }
     
     // MARK: UITableViewDataSource
@@ -146,8 +161,10 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndexPath = indexPath
-        showTalentDetailView()
+        hideTalentDetailView { [weak self] in
+            self?.selectedIndexPath = indexPath
+            self?.showTalentDetailView()
+        }
     }
     
     // MARK: TalentDetailViewPresenter
@@ -201,22 +218,22 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if let experience = NGDMManifest.sharedInstance.outOfMovieExperience?.childExperiences?[childExperienceIndex] {
             if experience.isType(.shopping) {
                 self.performSegue(withIdentifier: SegueIdentifier.ShowShopping, sender: experience)
-                NextGenHook.log(event: .extrasAction, action: .selectShopping)
+                NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectShopping)
             } else if experience.isType(.location) {
                 self.performSegue(withIdentifier: SegueIdentifier.ShowMap, sender: experience)
-                NextGenHook.log(event: .extrasAction, action: .selectSceneLocations)
+                NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectSceneLocations)
             } else if experience.isType(.app) {
                 if let app = experience.app, let url = app.url {
                     let webViewController = WebViewController(title: app.title, url: url)
                     self.present(webViewController, animated: true, completion: nil)
-                    NextGenHook.log(event: .extrasAction, action: .selectApp, itemId: app.id)
+                    NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectApp, itemId: app.id)
                 }
             } else {
                 if let firstChildExperience = experience.childExperiences?.first {
                     if firstChildExperience.isType(.audioVisual) {
-                        NextGenHook.log(event: .extrasAction, action: .selectVideoGallery, itemId: experience.id)
+                        NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectVideoGallery, itemId: experience.id)
                     } else if firstChildExperience.isType(.gallery) {
-                        NextGenHook.log(event: .extrasAction, action: .selectImageGallery, itemId: experience.id)
+                        NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectImageGallery, itemId: experience.id)
                     }
                 }
                 

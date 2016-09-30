@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Roboto-Light.ttf">
+            <string>Roboto-Light</string>
+        </array>
         <array key="RobotoCondensed-Italic.ttf">
             <string>RobotoCondensed-Italic</string>
         </array>
@@ -25,6 +28,16 @@
                 <frame key="frameInset" width="250" height="149"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-D7-49Z">
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="4FG-D7-49Z" secondAttribute="height" multiplier="1:1" id="seQ-yn-e8p"/>
+                        </constraints>
+                    </imageView>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXk-yQ-b8D">
+                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="42"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Role" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veR-JQ-nkI">
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="0Ne-1b-SMu"/>
@@ -41,21 +54,20 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-D7-49Z">
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="4FG-D7-49Z" secondAttribute="height" multiplier="1:1" id="seQ-yn-e8p"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="4FG-D7-49Z" firstAttribute="centerX" secondItem="Rb8-s1-zKI" secondAttribute="centerX" id="5Q4-zo-7u6"/>
                     <constraint firstItem="hrx-Y5-lp0" firstAttribute="leading" secondItem="Rb8-s1-zKI" secondAttribute="leadingMargin" id="5Zi-rQ-xmI"/>
+                    <constraint firstItem="bXk-yQ-b8D" firstAttribute="top" secondItem="4FG-D7-49Z" secondAttribute="top" id="AKD-Nj-HcF"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="leading" secondItem="Rb8-s1-zKI" secondAttribute="leadingMargin" id="F7d-bF-nQp"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="trailing" secondItem="Rb8-s1-zKI" secondAttribute="trailingMargin" id="J3I-mL-UHb"/>
                     <constraint firstItem="hrx-Y5-lp0" firstAttribute="top" secondItem="4FG-D7-49Z" secondAttribute="bottom" constant="3" id="Jlg-em-w98"/>
+                    <constraint firstItem="bXk-yQ-b8D" firstAttribute="leading" secondItem="4FG-D7-49Z" secondAttribute="leading" id="Mul-wt-pBh"/>
                     <constraint firstItem="4FG-D7-49Z" firstAttribute="height" secondItem="Rb8-s1-zKI" secondAttribute="height" multiplier="0.55" id="PnU-q2-mE7"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="top" secondItem="hrx-Y5-lp0" secondAttribute="bottom" id="V7V-oI-mbe"/>
+                    <constraint firstItem="bXk-yQ-b8D" firstAttribute="trailing" secondItem="4FG-D7-49Z" secondAttribute="trailing" id="bOA-A6-gSS"/>
+                    <constraint firstItem="bXk-yQ-b8D" firstAttribute="bottom" secondItem="4FG-D7-49Z" secondAttribute="bottom" id="dZx-tA-cFn"/>
                     <constraint firstItem="4FG-D7-49Z" firstAttribute="top" secondItem="Rb8-s1-zKI" secondAttribute="top" constant="5" id="k7h-j0-zNK"/>
                     <constraint firstItem="hrx-Y5-lp0" firstAttribute="trailing" secondItem="Rb8-s1-zKI" secondAttribute="trailingMargin" id="qUu-24-PqN"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="veR-JQ-nkI" secondAttribute="bottom" constant="5" id="tBD-xa-CSD"/>
@@ -65,6 +77,7 @@
                 <outlet property="nameLabel" destination="hrx-Y5-lp0" id="TFx-gO-R4U"/>
                 <outlet property="roleLabel" destination="veR-JQ-nkI" id="qDb-BO-jxM"/>
                 <outlet property="talentImageView" destination="4FG-D7-49Z" id="Afk-En-y2S"/>
+                <outlet property="talentInitialLabel" destination="bXk-yQ-b8D" id="EYK-VL-vU2"/>
             </connections>
             <point key="canvasLocation" x="53" y="427"/>
         </tableViewCell>

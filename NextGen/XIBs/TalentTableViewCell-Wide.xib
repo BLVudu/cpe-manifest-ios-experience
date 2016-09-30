@@ -7,6 +7,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Roboto-Light.ttf">
+            <string>Roboto-Light</string>
+        </array>
         <array key="RobotoCondensed-Italic.ttf">
             <string>RobotoCondensed-Italic</string>
         </array>
@@ -20,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="91"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZFg-U0-fjg" id="Rb8-s1-zKI">
-                <frame key="frameInset" width="300" height="90.5"/>
+                <frame key="frameInset" width="300" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4FG-D7-49Z">
@@ -30,6 +33,11 @@
                             <constraint firstAttribute="width" secondItem="4FG-D7-49Z" secondAttribute="height" multiplier="1:1" id="nEj-gG-Txc"/>
                         </constraints>
                     </imageView>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsu-zb-gMn">
+                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="42"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Role" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="veR-JQ-nkI">
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="PXo-6C-qJm"/>
@@ -48,9 +56,13 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Jsu-zb-gMn" firstAttribute="leading" secondItem="4FG-D7-49Z" secondAttribute="leading" id="1XT-3p-kmO"/>
                     <constraint firstItem="hrx-Y5-lp0" firstAttribute="centerY" secondItem="4FG-D7-49Z" secondAttribute="centerY" constant="-10" id="Cgk-sg-M8J"/>
+                    <constraint firstItem="Jsu-zb-gMn" firstAttribute="trailing" secondItem="4FG-D7-49Z" secondAttribute="trailing" id="Cnk-DV-r3O"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="top" secondItem="hrx-Y5-lp0" secondAttribute="bottom" id="FqX-fq-Q1k"/>
+                    <constraint firstItem="Jsu-zb-gMn" firstAttribute="top" secondItem="4FG-D7-49Z" secondAttribute="top" id="M4i-ZK-BzH"/>
                     <constraint firstItem="4FG-D7-49Z" firstAttribute="leading" secondItem="Rb8-s1-zKI" secondAttribute="leading" constant="30" id="OFr-eO-Ai5"/>
+                    <constraint firstItem="Jsu-zb-gMn" firstAttribute="bottom" secondItem="4FG-D7-49Z" secondAttribute="bottom" id="PvT-ZU-q5V"/>
                     <constraint firstItem="4FG-D7-49Z" firstAttribute="top" secondItem="Rb8-s1-zKI" secondAttribute="top" id="a5N-Tp-oAU"/>
                     <constraint firstItem="veR-JQ-nkI" firstAttribute="trailing" secondItem="hrx-Y5-lp0" secondAttribute="trailing" id="asm-ie-Ofe"/>
                     <constraint firstAttribute="trailing" secondItem="hrx-Y5-lp0" secondAttribute="trailing" constant="15" id="bGm-qU-Sbd"/>
@@ -62,6 +74,7 @@
                 <outlet property="nameLabel" destination="hrx-Y5-lp0" id="TFx-gO-R4U"/>
                 <outlet property="roleLabel" destination="veR-JQ-nkI" id="qDb-BO-jxM"/>
                 <outlet property="talentImageView" destination="4FG-D7-49Z" id="DXf-VX-Mb1"/>
+                <outlet property="talentInitialLabel" destination="Jsu-zb-gMn" id="8Ml-he-HaT"/>
             </connections>
             <point key="canvasLocation" x="426" y="420.5"/>
         </tableViewCell>

@@ -33,7 +33,7 @@ class MenuItemCell: UITableViewCell {
     }
     
     func updateCellStyle() {
-        titleLabel.textColor = (self.active ? UIColor.themePrimaryColor() : UIColor.white)
+        titleLabel.textColor = (self.active ? UIColor.themePrimary : UIColor.white)
     }
 
 }
