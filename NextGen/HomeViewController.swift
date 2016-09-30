@@ -34,6 +34,8 @@ class HomeViewController: UIViewController {
     
     private var shouldLaunchExtrasObserver: NSObjectProtocol?
     
+    private var backgroundAudioPlayer: AVPlayer?
+    
     private var backgroundVideoLastTimecode = 0.0
     private var backgroundVideoPreviewImageView: UIImageView?
     private var backgroundVideoDidFinishPlayingObserver: NSObjectProtocol?
@@ -500,6 +502,12 @@ class HomeViewController: UIViewController {
                 observedBackgroundImageSize = CGSize(width: 1280, height: 720)
             }
         }
+        
+        if !interfaceCreated, let backgroundAudioUrl = nodeStyle?.backgroundAudio?.url {
+            let audioPlayerItem = AVPlayerItem(asset: AVAsset(url: backgroundAudioUrl))
+            backgroundAudioPlayer = AVPlayer(playerItem: audioPlayerItem)
+            backgroundAudioPlayer?.play()
+        }
     }
     
     func unloadBackground() {
@@ -518,6 +526,7 @@ class HomeViewController: UIViewController {
         backgroundVideoPlayerViewController?.removeFromParentViewController()
         backgroundVideoPlayerViewController = nil
         backgroundImageView.image = nil
+        backgroundAudioPlayer = nil
     }
     
     // MARK: Actions
