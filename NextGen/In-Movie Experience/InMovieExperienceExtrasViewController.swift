@@ -64,8 +64,8 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         
         showLessButton.setTitle(String.localize("talent.show_less"), for: UIControlState())
         
-        didChangeTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: nil) { [weak self] (notification) -> Void in
-            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let time = userInfo["time"] as? Double , time != strongSelf.currentTime {
+        didChangeTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
+            if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double, time != strongSelf.currentTime {
                 strongSelf.processTimedEvents(time)
             }
         }

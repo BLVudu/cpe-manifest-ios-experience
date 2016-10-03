@@ -19,7 +19,7 @@ class MultiMapMarker: NSObject {
 }
     
 enum MultiMapType: Int {
-    case map = 0
+    case road = 0
     case satellite = 1
 }
 
@@ -59,7 +59,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         }
     }
     
-    var mapType: MultiMapType = .map {
+    var mapType: MultiMapType = .road {
         didSet {
             if let mapView = googleMapView {
                 mapView.mapType = (mapType == .satellite ? kGMSTypeSatellite : kGMSTypeNormal)
@@ -91,7 +91,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
             self.addSubview(appleMapView!)
         }
         
-        mapType = .map
+        mapType = .road
     }
     
     func addControls() {
@@ -250,6 +250,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     func onMapTypeChanged() {
         if let mapTypeSegmentedControl = mapTypeSegmentedControl, let type = MultiMapType(rawValue: mapTypeSegmentedControl.selectedSegmentIndex) {
             mapType = type
+            NotificationCenter.default.post(name: .locationsMapTypeDidChange, object: nil, userInfo: [NotificationConstants.mapType: type])
         }
     }
     

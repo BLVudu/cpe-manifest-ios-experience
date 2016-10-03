@@ -96,7 +96,7 @@ class ShoppingDetailViewController: SceneDetailViewController, UICollectionViewD
         poweredByLabel.text = String.localize("shopping.powered_by")
         disclaimerLabel.text = String.localize("shopping.disclaimer").uppercased()
         
-        closeDetailsViewObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ShoppingMenuNotification.ShouldCloseDetails), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+        closeDetailsViewObserver = NotificationCenter.default.addObserver(forName: .shoppingShouldCloseDetails, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self {
                 strongSelf.close()
             }

@@ -34,8 +34,8 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
         galleryScrollView.currentPage = initialPage
         galleryScrollView.removeToolbar()
         
-        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
+        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let strongSelf = self, let page = notification.userInfo?[NotificationConstants.time] as? Int {
                 let pageIndexPath = IndexPath(item: page, section: 0)
                 strongSelf.galleryCollectionView.selectItem(at: pageIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
                 
@@ -73,6 +73,13 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
         galleryScrollView.gotoPage(initialPage, animated: false)
     }
     
+    // MARK: Actions
+    override func close() {
+        NextGenHook.logAnalyticsEvent(.extrasTalentGalleryAction, action: .exit, itemId: talent.id)
+        
+        super.close()
+    }
+    
     // MARK: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return talent.images?.count ?? 0
@@ -89,6 +96,7 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         galleryScrollView.gotoPage((indexPath as NSIndexPath).row, animated: true)
+        NextGenHook.logAnalyticsEvent(.extrasTalentGalleryAction, action: .selectImage, itemId: talent.id)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout

@@ -56,8 +56,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionView?.register(UINib(nibName: "MapSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.register(UINib(nibName: "ShoppingSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        _didChangeTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: nil) { [weak self] (notification) -> Void in
-            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let time = userInfo["time"] as? Double {
+        _didChangeTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
+            if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double {
                 if time != strongSelf._currentTime && !strongSelf._isProcessingTimedEvents {
                     strongSelf._isProcessingTimedEvents = true
                     strongSelf.processTimedEvents(time)

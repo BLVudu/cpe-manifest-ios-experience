@@ -77,8 +77,8 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
                     galleryScrollView?.removeToolbar()
                     pageControl?.numberOfPages = gallery.totalCount
                     if pageControl != nil && pageControl!.numberOfPages > 0 {
-                        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-                            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
+                        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                            if let strongSelf = self, let page = notification.userInfo?[NotificationConstants.page] as? Int {
                                 strongSelf.pageControl?.currentPage = page
                             }
                         })

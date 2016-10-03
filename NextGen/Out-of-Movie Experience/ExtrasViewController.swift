@@ -233,7 +233,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                     if firstChildExperience.isType(.audioVisual) {
                         NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectVideoGallery, itemId: experience.id)
                     } else if firstChildExperience.isType(.gallery) {
-                        NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectImageGallery, itemId: experience.id)
+                        NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectImageGalleries, itemId: experience.id)
                     }
                 }
                 

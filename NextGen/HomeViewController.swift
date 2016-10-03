@@ -116,7 +116,7 @@ class HomeViewController: UIViewController {
         
         mainExperience = NGDMManifest.sharedInstance.mainExperience!
         
-        shouldLaunchExtrasObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Notifications.ShouldLaunchExtras), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+        shouldLaunchExtrasObserver = NotificationCenter.default.addObserver(forName: .outOfMovieExperienceShouldLaunch, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
             self?.onExtras()
         })
     }
@@ -456,8 +456,8 @@ class HomeViewController: UIViewController {
             self.addChildViewController(videoPlayerViewController)
             videoPlayerViewController.didMove(toParentViewController: self)
             
-            backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-                if let strongSelf = self, let time = notification.userInfo?["time"] as? Double {
+            backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double {
                     if time > strongSelf.backgroundVideoLastTimecode {
                         strongSelf.backgroundVideoPreviewImageView?.removeFromSuperview()
                         strongSelf.backgroundVideoPreviewImageView = nil
@@ -475,7 +475,7 @@ class HomeViewController: UIViewController {
             })
             
             if nodeStyle.backgroundVideoLoops {
-                backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+                backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidEndVideo, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
                     self?.seekBackgroundVideoToLoopTimecode()
                 })
             }

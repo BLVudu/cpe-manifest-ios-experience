@@ -6,11 +6,6 @@ import UIKit
 import NextGenDataManager
 import QuartzCore
 
-struct ImageGalleryNotification {
-    static let DidScrollToPage = "kImageGalleryNotificationDidScrollToPage"
-    static let DidToggleFullScreen = "kImageGalleryNotificationDidToggleFullScreen"
-}
-
 class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     
     private struct Constants {
@@ -58,7 +53,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
                     layoutPages()
                 }
                 
-                NotificationCenter.default.post(name: Notification.Name(rawValue: ImageGalleryNotification.DidToggleFullScreen), object: nil, userInfo: ["isFullScreen": isFullScreen])
+                NotificationCenter.default.post(name: .imageGalleryDidToggleFullScreen, object: nil, userInfo: [NotificationConstants.isFullScreen: isFullScreen])
             } else {
                 layoutPages()
             }
@@ -71,7 +66,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             if let gallery = gallery, !gallery.isTurntable {
                 loadGalleryImageForPage(currentPage)
                 loadGalleryImageForPage(currentPage + 1)
-                NotificationCenter.default.post(name: Notification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, userInfo: ["page": currentPage])
+                NotificationCenter.default.post(name: .imageGalleryDidScrollToPage, object: nil, userInfo: [NotificationConstants.page: currentPage])
                 
                 if let toolbarItems = toolbar?.items, let captionLabel = toolbarItems.first?.customView as? UILabel {
                     var captionText: String? = nil
