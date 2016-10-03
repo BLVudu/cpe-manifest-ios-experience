@@ -9,8 +9,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     private struct Constants {
         static let GalleryTableViewImageAspectRatio: CGFloat = 16 / 9
-        static let GalleryTableViewLabelHeight: CGFloat = 40
-        static let GalleryTableViewPadding: CGFloat = 15
+        static let GalleryTableViewLabelHeight: CGFloat = 10
+        static let GalleryTableViewPadding: CGFloat = 50
         static let GalleryTableViewMobileAspectRatio: CGFloat = 600 / 195
     }
     
