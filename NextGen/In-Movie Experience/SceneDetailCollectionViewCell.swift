@@ -16,7 +16,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     
     private var title: String? {
         set {
-            titleLabel?.text = newValue?.uppercaseString
+            titleLabel?.text = newValue?.uppercased()
         }
         
         get {
@@ -62,7 +62,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     internal func timedEventDidChange() {
         title = timedEvent?.experience?.title
         
-        if timedEvent != nil && timedEvent!.isType(.ClipShare) {
+        if timedEvent != nil && timedEvent!.isType(.clipShare) {
             descriptionText = String.localize("clipshare.description")
         } else {
             descriptionText = timedEvent?.descriptionText

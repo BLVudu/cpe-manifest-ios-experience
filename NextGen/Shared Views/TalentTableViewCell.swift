@@ -9,33 +9,39 @@ class TalentTableViewCell: UITableViewCell {
     
     static let ReuseIdentifier = "TalentTableViewCell"
     
-    @IBOutlet weak private var talentImageView: RoundImageView!
+    @IBOutlet weak private var talentImageView: UIImageView!
+    @IBOutlet weak private var talentInitialLabel: UILabel!
     @IBOutlet weak private var nameLabel: UILabel?
     @IBOutlet weak private var roleLabel: UILabel?
     
-    private var setImageSessionDataTask: NSURLSessionDataTask?
-    
-    private var imageURL: NSURL? {
+    private var imageURL: URL? {
         didSet {
-            if let task = setImageSessionDataTask {
-                task.cancel()
-                setImageSessionDataTask = nil
-            }
+            talentImageView.alpha = 1
+            talentImageView.backgroundColor = UIColor.clear
+            talentInitialLabel.isHidden = true
             
             if let url = imageURL {
+                
                 if url != oldValue {
-                    talentImageView.af_setImageWithURL(url)
+                    talentImageView.sd_setImage(with: url)
                 }
             } else {
-                talentImageView.af_cancelImageRequest()
+                talentImageView.sd_cancelCurrentImageLoad()
                 talentImageView.image = nil
+                
+                if let name = name {
+                    talentImageView.alpha = 0.9
+                    talentImageView.backgroundColor = UIColor.themePrimary
+                    talentInitialLabel.isHidden = false
+                    talentInitialLabel.text = name[0]
+                }
             }
         }
     }
     
     private var name: String? {
         set {
-            nameLabel?.text = newValue?.uppercaseString
+            nameLabel?.text = newValue?.uppercased()
         }
         
         get {
@@ -78,21 +84,23 @@ class TalentTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor.clearColor()
+        self.contentView.layoutIfNeeded()
+        self.backgroundColor = UIColor.clear
+        talentImageView.layer.cornerRadius = talentImageView.frame.width / 2
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         if selected {
             talentImageView.layer.borderWidth = 2
-            talentImageView.layer.borderColor = UIColor.whiteColor().CGColor
-            nameLabel?.textColor = UIColor.themePrimaryColor()
-            roleLabel?.textColor = UIColor.themePrimaryColor()
+            talentImageView.layer.borderColor = UIColor.white.cgColor
+            nameLabel?.textColor = UIColor.themePrimary
+            roleLabel?.textColor = UIColor.themePrimary
         } else {
             talentImageView.layer.borderWidth = 0
-            nameLabel?.textColor = UIColor.whiteColor()
-            roleLabel?.textColor = UIColor.themeLightGreyColor()
+            nameLabel?.textColor = UIColor.white
+            roleLabel?.textColor = UIColor.themeLightGray
         }
     }
 

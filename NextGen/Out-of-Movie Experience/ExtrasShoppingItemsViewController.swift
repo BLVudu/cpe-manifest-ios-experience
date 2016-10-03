@@ -17,39 +17,39 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
     @IBOutlet weak private var productsCollectionView: UICollectionView!
     
     private var products: [TheTakeProduct]?
-    private var productListSessionDataTask: NSURLSessionDataTask?
+    private var productListSessionDataTask: URLSessionDataTask?
     private var didSelectCategoryObserver: NSObjectProtocol?
     
     deinit {
         if let observer = didSelectCategoryObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
         }
     }
  
     override func viewDidLoad() {
-        productsCollectionView.registerNib(UINib(nibName: String(ShoppingSceneDetailCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
+        productsCollectionView.register(UINib(nibName: "ShoppingSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        didSelectCategoryObserver = NSNotificationCenter.defaultCenter().addObserverForName(ShoppingMenuNotification.DidSelectCategory, object: nil, queue: nil, usingBlock: { [weak self] (notification) in
-            if let strongSelf = self, userInfo = notification.userInfo, categoryId = userInfo["categoryId"] as? String {
-                dispatch_async(dispatch_get_main_queue(), {
-                    strongSelf.productsCollectionView.userInteractionEnabled = false
-                    MBProgressHUD.showHUDAddedTo(strongSelf.productsCollectionView, animated: true)
+        didSelectCategoryObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ShoppingMenuNotification.DidSelectCategory), object: nil, queue: nil, using: { [weak self] (notification) in
+            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let categoryId = userInfo["categoryId"] as? String {
+                DispatchQueue.main.async(execute: {
+                    strongSelf.productsCollectionView.isUserInteractionEnabled = false
+                    MBProgressHUD.showAdded(to: strongSelf.productsCollectionView, animated: true)
                 })
                 
                 if let currentTask = strongSelf.productListSessionDataTask {
                     currentTask.cancel()
                 }
                 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                DispatchQueue.global(qos: .userInitiated).async {
                     strongSelf.productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
                         strongSelf.productListSessionDataTask = nil
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             strongSelf.products = products
                             strongSelf.productsCollectionView.reloadData()
-                            let newIndex = NSIndexPath(forItem: 0, inSection: 0)
-                            strongSelf.productsCollectionView.scrollToItemAtIndexPath(newIndex, atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
-                            strongSelf.productsCollectionView.userInteractionEnabled = true
-                            MBProgressHUD.hideAllHUDsForView(strongSelf.productsCollectionView, animated: true)
+                            let newIndex = IndexPath(item: 0, section: 0)
+                            strongSelf.productsCollectionView.scrollToItem(at: newIndex, at: .top, animated: false)
+                            strongSelf.productsCollectionView.isUserInteractionEnabled = true
+                            MBProgressHUD.hideAllHUDs(for: strongSelf.productsCollectionView, animated: true)
                         }
                     })
                 }
@@ -57,27 +57,27 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         productsCollectionView.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: UICollectionViewDataSource
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ShoppingSceneDetailCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! ShoppingSceneDetailCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier, for: indexPath) as! ShoppingSceneDetailCollectionViewCell
         cell.titleLabel?.removeFromSuperview()
-        cell.productImageType = ShoppingSceneDetailCollectionViewCell.ProductImageType.Scene
+        cell.productImageType = .scene
         
-        if let product = products?[indexPath.row] {
+        if let product = products?[(indexPath as NSIndexPath).row] {
             cell.theTakeProducts = [product]
         }
         
@@ -85,31 +85,37 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
     }
     
     // MARK: UICollectionViewDelegate
-     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let shoppingDetailViewController = UIStoryboard.getNextGenViewController(ShoppingDetailViewController) as? ShoppingDetailViewController, cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShoppingSceneDetailCollectionViewCell {
+     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let shoppingDetailViewController = UIStoryboard.getNextGenViewController(ShoppingDetailViewController.self) as? ShoppingDetailViewController, let cell = collectionView.cellForItem(at: indexPath) as? ShoppingSceneDetailCollectionViewCell {
             shoppingDetailViewController.experience = experience
             shoppingDetailViewController.products = cell.theTakeProducts
-            shoppingDetailViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-            shoppingDetailViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            self.presentViewController(shoppingDetailViewController, animated: true, completion: nil)
+            shoppingDetailViewController.modalPresentationStyle = (DeviceType.IS_IPAD ? .overCurrentContext : .overFullScreen)
+            shoppingDetailViewController.modalTransitionStyle = .crossDissolve
+            self.present(shoppingDetailViewController, animated: true, completion: nil)
         }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / 2) - (Constants.ItemSpacing * 2)
-        return CGSizeMake(itemWidth, itemWidth / Constants.ItemAspectRatio)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var itemWidth: CGFloat
+        if DeviceType.IS_IPAD {
+            itemWidth = (collectionView.frame.width / 2) - (Constants.ItemSpacing * 2)
+        } else {
+            itemWidth = collectionView.frame.width
+        }
+        
+        return CGSize(width: itemWidth, height: itemWidth / Constants.ItemAspectRatio)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.LineSpacing
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.ItemSpacing
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(Constants.Padding, Constants.Padding, Constants.Padding, Constants.Padding)
     }
     

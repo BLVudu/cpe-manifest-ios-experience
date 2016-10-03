@@ -14,14 +14,14 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     @IBOutlet weak private var playButton: UIButton!
     @IBOutlet weak private var extraDescriptionLabel: UILabel!
     
-    private var imageURL: NSURL? {
+    private var imageURL: URL? {
         set {
             if let url = newValue {
-                imageView.af_setImageWithURL(url)
+                imageView.sd_setImage(with: url)
             } else {
-                imageView.af_cancelImageRequest()
+                imageView.sd_cancelCurrentImageLoad()
                 imageView.image = nil
-                imageView.backgroundColor = UIColor.clearColor()
+                imageView.backgroundColor = UIColor.clear
             }
         }
         
@@ -34,20 +34,20 @@ class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         super.timedEventDidChange()
         
         imageURL = timedEvent?.imageURL
-        playButton.hidden = timedEvent == nil || (!timedEvent!.isType(.AudioVisual) && !timedEvent!.isType(.ClipShare))
+        playButton.isHidden = timedEvent == nil || (!timedEvent!.isType(.audioVisual) && !timedEvent!.isType(.clipShare))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         imageURL = nil
-        playButton.hidden = true
+        playButton.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
     }
     
 }

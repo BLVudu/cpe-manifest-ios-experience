@@ -13,29 +13,29 @@ class SettingsManager {
     
     static var didWatchInterstitial: Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey(UserDefaults.DidWatchInterstitial)
+            return Foundation.UserDefaults.standard.bool(forKey: UserDefaults.DidWatchInterstitial)
         }
         
         set {
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: UserDefaults.DidWatchInterstitial)
+            Foundation.UserDefaults.standard.set(newValue, forKey: UserDefaults.DidWatchInterstitial)
         }
     }
     
-    static func didWatchVideo(videoURL: NSURL) -> Bool {
-        if let allVideos = NSUserDefaults.standardUserDefaults().arrayForKey(UserDefaults.DidWatchVideo) as? [String] {
+    static func didWatchVideo(_ videoURL: URL) -> Bool {
+        if let allVideos = Foundation.UserDefaults.standard.array(forKey: UserDefaults.DidWatchVideo) as? [String] {
             return allVideos.contains(videoURL.absoluteString)
         }
         
         return false
     }
     
-    static func setVideoAsWatched(videoURL: NSURL) {
-        var allVideos = (NSUserDefaults.standardUserDefaults().arrayForKey(UserDefaults.DidWatchVideo) as? [String]) ?? [String]()
+    static func setVideoAsWatched(_ videoURL: URL) {
+        var allVideos = (Foundation.UserDefaults.standard.array(forKey: UserDefaults.DidWatchVideo) as? [String]) ?? [String]()
         if !allVideos.contains(videoURL.absoluteString) {
             allVideos.append(videoURL.absoluteString)
         }
         
-        NSUserDefaults.standardUserDefaults().setObject(allVideos, forKey: UserDefaults.DidWatchVideo)
+        Foundation.UserDefaults.standard.set(allVideos, forKey: UserDefaults.DidWatchVideo)
     }
     
 }

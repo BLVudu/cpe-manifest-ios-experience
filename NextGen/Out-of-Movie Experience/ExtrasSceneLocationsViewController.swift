@@ -33,6 +33,11 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
     private var galleryDidScrollToPageObserver: NSObjectProtocol?
     
+    @IBOutlet private var containerTopConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerBottomConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerAspectRatioConstraint: NSLayoutConstraint?
+    @IBOutlet private var containerBottomInnerConstraint: NSLayoutConstraint?
+    
     private var locationExperiences = [NGDMExperience]()
     private var markers = [String: MultiMapMarker]() // ExperienceID: MultiMapMarker
     private var selectedExperience: NGDMExperience? {
@@ -51,24 +56,23 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
                 
                 var lowestZoomLevel = MAXFLOAT
                 for locationExperience in locationExperiences {
-                    if let appData = locationExperience.appData where appData.zoomLevel < lowestZoomLevel {
+                    if let appData = locationExperience.appData , appData.zoomLevel < lowestZoomLevel {
                         lowestZoomLevel = appData.zoomLevel
                     }
                 }
                 
                 mapView.maxZoomLevel = lowestZoomLevel
                 mapView.zoomToFitAllMarkers()
-                
             }
             
             reloadBreadcrumbs()
             collectionView.reloadData()
-            collectionView.contentOffset = CGPointZero
+            collectionView.contentOffset = CGPoint.zero
         }
     }
     
     deinit {
-        let center = NSNotificationCenter.defaultCenter()
+        let center = NotificationCenter.default
         
         if let observer = videoPlayerDidEndVideoObserver {
             center.removeObserver(observer)
@@ -99,35 +103,37 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
             locationExperiences = childExperiences
         }
         
-        breadcrumbsPrimaryButton.setTitle(experience.title.uppercaseString, forState: .Normal)
-        collectionView.registerNib(UINib(nibName: String(MapItemCell), bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
+        breadcrumbsPrimaryButton.setTitle(experience.title.uppercased(), for: .normal)
+        collectionView.register(UINib(nibName: "MapItemCell", bundle: nil), forCellWithReuseIdentifier: MapItemCell.ReuseIdentifier)
         closeButton?.titleLabel?.font = UIFont.themeCondensedFont(17)
-        closeButton?.setTitle(String.localize("label.close"), forState: UIControlState.Normal)
-        closeButton?.setImage(UIImage(named: "Close"), forState: UIControlState.Normal)
+        closeButton?.setTitle(String.localize("label.close"), for: UIControlState())
+        closeButton?.setImage(UIImage(named: "Close"), for: UIControlState())
         closeButton?.contentEdgeInsets = UIEdgeInsetsMake(0, -35, 0, 0)
         closeButton?.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25)
         closeButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 110, 0, 0)
         
-        breadcrumbsSecondaryArrowImageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+        breadcrumbsSecondaryArrowImageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
         
-        videoPlayerDidEndVideoObserver = NSNotificationCenter.defaultCenter().addObserverForName(VideoPlayerNotification.DidEndVideo, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
+        videoPlayerDidEndVideoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self {
                 strongSelf.closeDetailView(animated: true)
             }
         })
         
-        galleryDidToggleFullScreenObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidToggleFullScreen, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self, isFullScreen = notification.userInfo?["isFullScreen"] as? Bool {
-                strongSelf.closeButton?.hidden = isFullScreen
-                strongSelf.galleryPageControl.hidden = isFullScreen
+        galleryDidToggleFullScreenObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidToggleFullScreen), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let strongSelf = self, let isFullScreen = (notification as NSNotification).userInfo?["isFullScreen"] as? Bool {
+                strongSelf.closeButton?.isHidden = isFullScreen
+                strongSelf.galleryPageControl.isHidden = isFullScreen
             }
         })
         
-        galleryDidScrollToPageObserver = NSNotificationCenter.defaultCenter().addObserverForName(ImageGalleryNotification.DidScrollToPage, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { [weak self] (notification) in
-            if let strongSelf = self, page = notification.userInfo?["page"] as? Int {
+        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
                 strongSelf.galleryPageControl.currentPage = page
             }
         })
+        
+        galleryScrollView.allowsFullScreen = false
         
         // Set up map markers
         for locationExperience in locationExperiences {
@@ -138,68 +144,91 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         
         mapView.addControls()
         mapView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        self.view.layoutIfNeeded()
         selectedExperience = nil
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if DeviceType.IS_IPAD || (galleryScrollView.hidden && videoPlayerViewController == nil) {
-            return super.supportedInterfaceOrientations()
-        }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
-        return .All
+        let toLandscape = (size.width > size.height)
+        containerAspectRatioConstraint?.isActive = !toLandscape
+        containerTopConstraint?.constant = (toLandscape ? 0 : ExtrasExperienceViewController.Constants.TitleImageHeight)
+        containerBottomConstraint?.isActive = !toLandscape
+        containerBottomInnerConstraint?.isActive = !toLandscape
+        
+        coordinator.animate(alongsideTransition: nil, completion: { (_) in
+            self.galleryScrollView.layoutPages()
+        })
     }
     
-    func playVideo(videoURL: NSURL) {
-        let shouldAnimateOpen = locationDetailView.hidden
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        if DeviceType.IS_IPAD || (galleryScrollView.isHidden && videoPlayerViewController == nil) {
+            return super.supportedInterfaceOrientations
+        }
+        
+        return .all
+    }
+    
+    func playVideo(_ videoURL: URL) {
+        let shouldAnimateOpen = locationDetailView.isHidden
         closeDetailView(animated: false)
         
-        if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController) as? VideoPlayerViewController {
-            videoPlayerViewController.mode = VideoPlayerMode.Supplemental
+        if let videoPlayerViewController = UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
+            videoPlayerViewController.mode = VideoPlayerMode.supplemental
             
             videoPlayerViewController.view.frame = videoContainerView.bounds
             videoContainerView.addSubview(videoPlayerViewController.view)
             self.addChildViewController(videoPlayerViewController)
-            videoPlayerViewController.didMoveToParentViewController(self)
+            videoPlayerViewController.didMove(toParentViewController: self)
+            
+            if !DeviceType.IS_IPAD && videoPlayerViewController.fullScreenButton != nil {
+                videoPlayerViewController.fullScreenButton.removeFromSuperview()
+            }
             
             self.videoPlayerViewController = videoPlayerViewController
             
             locationDetailView.alpha = 0
-            locationDetailView.hidden = false
+            locationDetailView.isHidden = false
             
             if shouldAnimateOpen {
-                UIView.animateWithDuration(0.25, animations: {
+                UIView.animate(withDuration: 0.25, animations: {
                     self.locationDetailView.alpha = 1
                 }, completion: { (_) in
-                    self.videoPlayerViewController?.playVideoWithURL(videoURL)
+                    self.videoPlayerViewController?.playVideo(with: videoURL)
                 })
             } else {
                 locationDetailView.alpha = 1
-                self.videoPlayerViewController?.playVideoWithURL(videoURL)
+                self.videoPlayerViewController?.playVideo(with: videoURL)
             }
         }
     }
     
-    func showGallery(gallery: NGDMGallery) {
-        let shouldAnimateOpen = locationDetailView.hidden
+    func showGallery(_ gallery: NGDMGallery) {
+        let shouldAnimateOpen = locationDetailView.isHidden
         closeDetailView(animated: false)
         
         galleryScrollView.loadGallery(gallery)
-        galleryScrollView.hidden = false
+        galleryScrollView.isHidden = false
         
         if gallery.isTurntable {
-            galleryPageControl.hidden = true
+            galleryPageControl.isHidden = true
         } else {
-            galleryPageControl.hidden = false
+            galleryPageControl.isHidden = false
             galleryPageControl.numberOfPages = gallery.totalCount
             galleryPageControl.currentPage = 0
         }
         
         locationDetailView.alpha = 0
-        locationDetailView.hidden = false
+        locationDetailView.isHidden = false
         
         if shouldAnimateOpen {
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.locationDetailView.alpha = 1
             })
         } else {
@@ -211,22 +240,22 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         closeDetailView(animated: true)
     }
     
-    private func closeDetailView(animated animated: Bool) {
+    private func closeDetailView(animated: Bool) {
         let hideViews = {
-            self.locationDetailView.hidden = true
+            self.locationDetailView.isHidden = true
             
             self.galleryScrollView.destroyGallery()
-            self.galleryScrollView.hidden = true
-            self.galleryPageControl.hidden = true
+            self.galleryScrollView.isHidden = true
+            self.galleryPageControl.isHidden = true
             
-            self.videoPlayerViewController?.willMoveToParentViewController(nil)
+            self.videoPlayerViewController?.willMove(toParentViewController: nil)
             self.videoPlayerViewController?.view.removeFromSuperview()
             self.videoPlayerViewController?.removeFromParentViewController()
             self.videoPlayerViewController = nil
         }
         
         if animated {
-            UIView.animateWithDuration(0.2, animations: { 
+            UIView.animate(withDuration: 0.2, animations: { 
                 self.locationDetailView.alpha = 0
             }, completion: { (_) in
                 hideViews()
@@ -237,23 +266,23 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     func reloadBreadcrumbs() {
-        breadcrumbsPrimaryButton.userInteractionEnabled = false
-        breadcrumbsSecondaryArrowImageView.hidden = true
-        breadcrumbsSecondaryLabel.hidden = true
+        breadcrumbsPrimaryButton.isUserInteractionEnabled = false
+        breadcrumbsSecondaryArrowImageView.isHidden = true
+        breadcrumbsSecondaryLabel.isHidden = true
         
-        if let selectedExperience = selectedExperience {
-            breadcrumbsSecondaryLabel.text = selectedExperience.title.uppercaseString
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
+            breadcrumbsSecondaryLabel.text = selectedExperience.title.uppercased()
             breadcrumbsSecondaryLabel.sizeToFit()
-            breadcrumbsSecondaryLabel.frame.size.height = CGRectGetHeight(breadcrumbsPrimaryButton.frame)
-            breadcrumbsSecondaryArrowImageView.hidden = false
-            breadcrumbsSecondaryLabel.hidden = false
-            breadcrumbsPrimaryButton.userInteractionEnabled = true
+            breadcrumbsSecondaryLabel.frame.size.height = breadcrumbsPrimaryButton.frame.height
+            breadcrumbsSecondaryArrowImageView.isHidden = false
+            breadcrumbsSecondaryLabel.isHidden = false
+            breadcrumbsPrimaryButton.isUserInteractionEnabled = true
         }
     }
     
     // MARK: Actions
     override func close() {
-        if !locationDetailView.hidden && !DeviceType.IS_IPAD {
+        if !locationDetailView.isHidden && !DeviceType.IS_IPAD {
             closeDetailView()
         } else {
             mapView.destroy()
@@ -263,7 +292,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         }
     }
     
-    @IBAction func onTapBreadcrumb(sender: UIButton) {
+    @IBAction func onTapBreadcrumb(_ sender: UIButton) {
         closeDetailView(animated: false)
         selectedExperience = nil
     }
@@ -273,7 +302,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     // MARK: MultiMapViewDelegate
-    func mapView(mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
+    func mapView(_ mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
         for (experienceId, locationMarker) in markers {
             if marker == locationMarker {
                 selectedExperience = NGDMExperience.getById(experienceId)
@@ -283,21 +312,21 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     // MARK: UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let selectedExperience = selectedExperience {
-            return selectedExperience.appDataMediaCount ?? 0
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
+            return selectedExperience.appDataMediaCount 
         }
         
         return locationExperiences.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MapItemCell.ReuseIdentifier, forIndexPath: indexPath) as! MapItemCell
-        cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MapItemCell.ReuseIdentifier, for: indexPath) as! MapItemCell
+        cell.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
-        if let selectedExperience = selectedExperience {
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
             if let experience = selectedExperience.appDataMediaAtIndex(indexPath.row) {
-                cell.playButtonVisible = experience.isType(.AudioVisual)
+                cell.playButtonVisible = experience.isType(.audioVisual)
                 cell.imageURL = experience.imageURL
                 cell.title = experience.title
             }
@@ -311,8 +340,8 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let selectedExperience = selectedExperience {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
             if let experience = selectedExperience.appDataMediaAtIndex(indexPath.row) {
                 if let videoURL = experience.videoURL {
                     playVideo(videoURL)
@@ -326,25 +355,25 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if DeviceType.IS_IPAD {
-            let itemHeight = CGRectGetHeight(collectionView.frame)
-            return CGSizeMake((itemHeight - Constants.CollectionViewLabelHeight) * Constants.CollectionViewImageAspectRatio, itemHeight)
+            let itemHeight = collectionView.frame.height
+            return CGSize(width: (itemHeight - Constants.CollectionViewLabelHeight) * Constants.CollectionViewImageAspectRatio, height: itemHeight)
         }
         
-        let itemWidth = (CGRectGetWidth(collectionView.frame) - (Constants.CollectionViewPadding * 2) - Constants.CollectionViewItemSpacing) / 2
-        return CGSizeMake(itemWidth, (itemWidth / Constants.CollectionViewImageAspectRatio) + Constants.CollectionViewLabelHeight)
+        let itemWidth = (collectionView.frame.width - (Constants.CollectionViewPadding * 2) - Constants.CollectionViewItemSpacing) / 2
+        return CGSize(width: itemWidth, height: (itemWidth / Constants.CollectionViewImageAspectRatio) + Constants.CollectionViewLabelHeight)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.CollectionViewLineSpacing
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.CollectionViewItemSpacing
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding)
     }
     

@@ -4,11 +4,11 @@
 
 import Foundation
 
-extension NSTimeInterval {
+extension TimeInterval {
     
     func formattedTime() -> String {
-        let seconds = Int(self % 60)
-        let minutes = Int((self / 60) % 60)
+        let seconds = Int(self.truncatingRemainder(dividingBy: 60))
+        let minutes = Int((self / 60).truncatingRemainder(dividingBy: 60))
         let hours = Int(self / 3600)
         
         if hours > 0 {
@@ -23,8 +23,8 @@ extension NSTimeInterval {
     }
     
     func timeString() -> String {
-        let seconds = Int(self % 60)
-        let minutes = Int((self / 60) % 60)
+        let seconds = Int(self.truncatingRemainder(dividingBy: 60))
+        let minutes = Int((self / 60).truncatingRemainder(dividingBy: 60))
         let hours = Int(self / 3600)
         
         var timeStrings = [String]()
@@ -40,7 +40,7 @@ extension NSTimeInterval {
             timeStrings.append(String.localize("label.time.seconds", variables: ["count": String(seconds)]))
         }
         
-        return timeStrings.joinWithSeparator(" ")
+        return timeStrings.joined(separator: " ")
     }
     
 }

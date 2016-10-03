@@ -30,30 +30,30 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         static let CollectionViewItemAspectRatio: CGFloat = 135 / 240
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscape
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.registerNib(UINib(nibName: String(EnhancedTitlesCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: EnhancedTitlesCollectionViewCell.ReuseIdentifier)
+        collectionView?.register(UINib(nibName: "EnhancedTitlesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: EnhancedTitlesCollectionViewCell.ReuseIdentifier)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        MBProgressHUD.hideAllHUDsForView(self.view, animated: false)
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Landscape
+        MBProgressHUD.hideAllHUDs(for: self.view, animated: false)
     }
     
     // MARK: UICollectionViewDataSource
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return NextGenDataLoader.ManifestData.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(EnhancedTitlesCollectionViewCell.ReuseIdentifier, forIndexPath: indexPath) as! EnhancedTitlesCollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EnhancedTitlesCollectionViewCell.ReuseIdentifier, for: indexPath as IndexPath) as! EnhancedTitlesCollectionViewCell
         
         let cid = Array(NextGenDataLoader.ManifestData.keys)[indexPath.row]
         if let data = NextGenDataLoader.ManifestData[cid] {
@@ -67,16 +67,16 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
     }
     
     // MARK: UICollectionViewDelegate
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+        DispatchQueue.global(qos: .userInitiated).async {
             do {
-                try NextGenDataLoader.sharedInstance.loadTitle(Array(NextGenDataLoader.ManifestData.keys)[indexPath.row], completionHandler: { [weak self] (success) in
+                try NextGenDataLoader.sharedInstance.loadTitle(cid: Array(NextGenDataLoader.ManifestData.keys)[indexPath.row], completionHandler: { [weak self] (success) in
                     if success {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .None)
-                            self?.presentViewController(UIStoryboard.getNextGenViewController(HomeViewController), animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            UIApplication.shared.setStatusBarHidden(true, with: .none)
+                            self?.present(UIStoryboard.getNextGenViewController(HomeViewController.self), animated: true, completion: nil)
                         }
                     }
                 })
@@ -87,20 +87,20 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
     }
     
     // MARK: UICollectionViewFlowLayoutDelegate
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let itemWidth: CGFloat = (CGRectGetWidth(collectionView.frame) / 4) - (Constants.CollectionViewItemSpacing * 2)
-        return CGSizeMake(itemWidth, itemWidth / Constants.CollectionViewItemAspectRatio)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemWidth: CGFloat = (collectionView.frame.width / 4) - (Constants.CollectionViewItemSpacing * 2)
+        return CGSize(width: itemWidth, height: itemWidth / Constants.CollectionViewItemAspectRatio)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.CollectionViewLineSpacing
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.CollectionViewItemSpacing
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding, Constants.CollectionViewPadding)
     }
     
