@@ -40,4 +40,8 @@
     [CATransaction commit];
 }
 
+- (NSString *)videoFillMode {
+    return ((AVPlayerLayer *)self.layer).videoGravity;
+}
+
 @end
