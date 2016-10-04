@@ -154,6 +154,18 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     func setLocation(_ location: CLLocationCoordinate2D, zoomLevel: Float, animated: Bool) {
         if let mapView = googleMapView {
             if animated {
+                var location = location
+                if !DeviceType.IS_IPAD {
+                    let currentCamera = mapView.camera
+                    mapView.camera = GMSCameraPosition(target: currentCamera.target, zoom: zoomLevel, bearing: currentCamera.bearing, viewingAngle: currentCamera.viewingAngle)
+                    
+                    var mapPoint = mapView.projection.point(for: location)
+                    mapPoint.y -= 70
+                    location = mapView.projection.coordinate(for: mapPoint)
+                    
+                    mapView.camera = currentCamera
+                }
+                
                 mapView.animate(with: GMSCameraUpdate.setTarget(location, zoom: zoomLevel))
             } else {
                 mapView.camera = GMSCameraPosition(target: location, zoom: zoomLevel, bearing: mapView.camera.bearing, viewingAngle: mapView.camera.viewingAngle)
