@@ -15,6 +15,22 @@ class InMovieExperienceViewController: UIViewController {
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
+    var playerCurrentTime: Double? {
+        var videoPlayerViewController: VideoPlayerViewController?
+        for viewController in self.childViewControllers {
+            if let viewController = viewController as? VideoPlayerViewController {
+                videoPlayerViewController = viewController
+                break
+            }
+        }
+        
+        if let currentTime = videoPlayerViewController?.player.currentTime() {
+            return currentTime.seconds
+        }
+        
+        return nil
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -36,11 +52,17 @@ class InMovieExperienceViewController: UIViewController {
         
         extrasContainerView.isHidden = size.width > size.height
         updatePlayerConstraints()
+        
+        var videoPlayerTime: String?
+        if let currentTime = playerCurrentTime {
+            videoPlayerTime = String(Int(currentTime))
+        }
+        
+        NextGenHook.logAnalyticsEvent(.imeAction, action: (extrasContainerView.isHidden ? .rotateHideExtras : .rotateShowExtras), itemName: videoPlayerTime)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentifier.PlayerViewController {
-            let playerViewController = segue.destination as! VideoPlayerViewController
+        if segue.identifier == SegueIdentifier.PlayerViewController, let playerViewController = segue.destination as? VideoPlayerViewController {
             playerViewController.mode = VideoPlayerMode.mainFeature
         }
     }

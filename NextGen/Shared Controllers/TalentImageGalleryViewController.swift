@@ -73,13 +73,6 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
         galleryScrollView.gotoPage(initialPage, animated: false)
     }
     
-    // MARK: Actions
-    override func close() {
-        NextGenHook.logAnalyticsEvent(.extrasTalentGalleryAction, action: .exit, itemId: talent.id)
-        
-        super.close()
-    }
-    
     // MARK: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return talent.images?.count ?? 0

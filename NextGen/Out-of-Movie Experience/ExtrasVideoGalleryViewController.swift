@@ -270,12 +270,6 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     }
     
     // MARK: Actions
-    override func close() {
-        NextGenHook.logAnalyticsEvent((currentGallery != nil ? .extrasImageGalleryAction : .extrasVideoGalleryAction), action: .exit, itemId: experience.id)
-        
-        super.close()
-    }
-    
     @IBAction func onPlay() {
         didPlayFirstItem = true
         playSelectedExperience()

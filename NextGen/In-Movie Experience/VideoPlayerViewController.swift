@@ -256,6 +256,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         self.player?.removeAllItems()
         self._didPlayInterstitial = true
         self.playMainExperience()
+        NextGenHook.logAnalyticsEvent(.imeAction, action: .skipInterstitial)
     }
     
     override func playVideo() {

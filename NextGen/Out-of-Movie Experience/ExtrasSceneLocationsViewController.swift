@@ -325,9 +325,6 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         } else {
             mapView.destroy()
             mapView = nil
-            
-            NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .exit)
-            
             super.close()
         }
     }

@@ -166,6 +166,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? TalentTableViewCell, let talent = cell.talent {
             self.performSegue(withIdentifier: SegueIdentifier.ShowTalent, sender: talent)
+            NextGenHook.logAnalyticsEvent(.imeTalentAction, action: .selectTalent, itemId: talent.id)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -186,8 +187,10 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         
         if isShowingMore {
             currentTalents = NGDMManifest.sharedInstance.mainExperience?.orderedActors ?? [NGDMTalent]()
+            NextGenHook.logAnalyticsEvent(.imeTalentAction, action: .showMore)
         } else {
             currentTalents = hiddenTalents
+            NextGenHook.logAnalyticsEvent(.imeTalentAction, action: .showLess)
         }
         
         talentTableView?.contentOffset = CGPoint.zero

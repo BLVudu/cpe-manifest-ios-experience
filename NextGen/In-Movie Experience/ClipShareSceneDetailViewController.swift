@@ -85,6 +85,8 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
             
             videoPlayerViewController.playVideo(with: videoURL)
             self.videoPlayerViewController = videoPlayerViewController
+            
+            NextGenHook.logAnalyticsEvent(.imeClipShareAction, action: .selectVideo, itemId: timedEvent?.id)
         }
     }
     
@@ -92,6 +94,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         if let timedEvent = previousTimedEvent {
             self.timedEvent = timedEvent
             reloadClipViews()
+            NextGenHook.logAnalyticsEvent(.imeClipShareAction, action: .selectPrevious, itemId: timedEvent.id)
         }
     }
     
@@ -99,6 +102,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         if let timedEvent = nextTimedEvent {
             self.timedEvent = timedEvent
             reloadClipViews()
+            NextGenHook.logAnalyticsEvent(.imeClipShareAction, action: .selectNext, itemId: timedEvent.id)
         }
     }
     
@@ -107,6 +111,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
             let activityViewController = UIActivityViewController(activityItems: [String.localize("clipshare.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = sender
             self.present(activityViewController, animated: true, completion: nil)
+            NextGenHook.logAnalyticsEvent(.imeClipShareAction, action: .shareVideo, itemId: timedEvent?.id)
         }
     }
     

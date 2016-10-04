@@ -73,8 +73,6 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
                 showHomeButton()
             }
             
-            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .exit, itemId: talentDetailViewController?.talent.id)
-            
             UIView.animate(withDuration: 0.25, animations: {
                 if completed != nil {
                     self.talentDetailViewController?.view.alpha = 0

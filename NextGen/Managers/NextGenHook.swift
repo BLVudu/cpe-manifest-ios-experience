@@ -12,6 +12,12 @@ public enum NextGenAnalyticsEvent: String {
     case extrasVideoGalleryAction = "extras_video_gallery_action"
     case extrasImageGalleryAction = "extras_image_gallery_action"
     case extrasSceneLocationsAction = "extras_scene_locations_action"
+    case imeAction = "ime_action"
+    case imeExtrasAction = "ime_extras_action"
+    case imeLocationAction = "ime_location_action"
+    case imeClipShareAction = "ime_clipshare_action"
+    case imeTalentAction = "ime_talent_action"
+    case imeImageGalleryAction = "ime_image_gallery_action"
 }
 
 public enum NextGenAnalyticsAction: String {
@@ -48,9 +54,22 @@ public enum NextGenAnalyticsAction: String {
     case setMapType = "set_map_type"
     case selectLocationMarker = "select_location_marker"
     case selectLocationThumbnail = "select_location_thumbnail"
+    case selectMap = "select_map"
     
     // TODO: SHOPPING
-    // TODO: FULL IME
+    
+    // IME
+    case skipInterstitial = "skip_interstitial"
+    case rotateShowExtras = "rotate_show_extras"
+    case rotateHideExtras = "rotate_hide_extras"
+    case showMore = "show_more"
+    case showLess = "show_less"
+    case selectClipShare = "select_clipshare"
+    case selectLocation = "select_location"
+    case selectTrivia = "select_trivia"
+    case selectPrevious = "select_previous"
+    case selectNext = "select_next"
+    case shareVideo = "share_video"
 }
 
 struct NextGenAnalyticsLabel {

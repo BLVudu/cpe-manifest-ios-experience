@@ -186,19 +186,28 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
                     let navigationController = LandscapeNavigationController(rootViewController: webViewController)
                     self.present(navigationController, animated: true, completion: nil)
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectApp, itemId: experienceApp.id)
                 }
             } else {
                 var segueIdentifier: String?
-                if timedEvent.isType(.audioVisual) || timedEvent.isType(.gallery) {
+                if timedEvent.isType(.audioVisual) {
                     segueIdentifier = SegueIdentifier.ShowGallery
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectVideo, itemId: timedEvent.id)
+                } else if timedEvent.isType(.gallery) {
+                    segueIdentifier = SegueIdentifier.ShowGallery
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectImageGallery, itemId: timedEvent.id)
                 } else if timedEvent.isType(.clipShare) {
                     segueIdentifier = SegueIdentifier.ShowClipShare
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectClipShare, itemId: timedEvent.id)
                 } else if timedEvent.isType(.location) {
                     segueIdentifier = SegueIdentifier.ShowMap
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectLocation, itemId: timedEvent.id)
                 } else if timedEvent.isType(.product) {
                     segueIdentifier = SegueIdentifier.ShowShopping
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectShopping, itemId: timedEvent.id)
                 } else if timedEvent.isType(.textItem) {
                     segueIdentifier = SegueIdentifier.ShowLargeText
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectTrivia, itemId: timedEvent.id)
                 }
                 
                 if let identifier = segueIdentifier {

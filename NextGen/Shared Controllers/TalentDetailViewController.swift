@@ -53,6 +53,10 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     var talent: NGDMTalent!
     var mode = TalentDetailMode.Extras
     
+    var currentAnalyticsEvent: NextGenAnalyticsEvent {
+        return (mode == .Synced ? .imeTalentAction : .extrasTalentAction)
+    }
+    
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,7 +182,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
     
     @IBAction func openSocialURL(_ sender: SocialButton) {
         sender.openURL()
-        NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .selectSocial, itemId: talent.id, itemName: sender.socialAccount.type.rawValue)
+        NextGenHook.logAnalyticsEvent(currentAnalyticsEvent, action: .selectSocial, itemId: talent.id, itemName: sender.socialAccount.type.rawValue)
     }
     
     @IBAction func onLaunchGallery() {
@@ -220,7 +224,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
                     url?.promptLaunchBrowser()
                 })
                 
-                NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .selectFilm, itemId: talent.id, itemName: film.title)
+                NextGenHook.logAnalyticsEvent(currentAnalyticsEvent, action: .selectFilm, itemId: talent.id, itemName: film.title)
             }
         }
     }
@@ -251,7 +255,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         if segue.identifier == SegueIdentifier.TalentImageGallery, let talentImageGalleryViewController = segue.destination as? TalentImageGalleryViewController {
             talentImageGalleryViewController.talent = talent
             talentImageGalleryViewController.initialPage = (sender as? Int) ?? 0
-            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .selectGallery, itemId: talent.id)
+            NextGenHook.logAnalyticsEvent(currentAnalyticsEvent, action: .selectGallery, itemId: talent.id)
         }
     }
 

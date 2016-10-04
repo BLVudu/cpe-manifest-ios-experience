@@ -80,6 +80,7 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
                         galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
                             if let strongSelf = self, let page = notification.userInfo?[NotificationConstants.page] as? Int {
                                 strongSelf.pageControl?.currentPage = page
+                                NextGenHook.logAnalyticsEvent(.imeImageGalleryAction, action: .scrollImageGallery, itemId: gallery.id)
                             }
                         })
                     }

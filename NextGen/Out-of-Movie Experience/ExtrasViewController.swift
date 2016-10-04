@@ -66,7 +66,6 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if talentDetailView != nil && !talentDetailView!.isHidden {
             hideTalentDetailView()
         } else {
-            NextGenHook.logAnalyticsEvent(.extrasAction, action: .exit)
             super.close()
         }
     }
@@ -113,8 +112,6 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
             if completed == nil {
                 showHomeButton()
             }
-            
-            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .exit, itemId: talentDetailViewController?.talent.id)
             
             UIView.animate(withDuration: 0.25, animations: {
                 if completed != nil {

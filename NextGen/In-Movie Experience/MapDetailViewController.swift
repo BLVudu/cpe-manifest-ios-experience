@@ -19,6 +19,8 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     
     @IBOutlet weak var galleryScrollView: ImageGalleryScrollView!
     
+    private var mapTypeDidChangeObserver: NSObjectProtocol?
+    
     private var appData: NGDMAppData!
     private var location: NGDMLocation!
     private var marker: MultiMapMarker!
@@ -27,6 +29,15 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         super.didReceiveMemoryWarning()
         
         galleryScrollView.cleanInvisibleImages()
+    }
+    
+    deinit {
+        let center = NotificationCenter.default
+        
+        if let observer = mapTypeDidChangeObserver {
+            center.removeObserver(observer)
+            mapTypeDidChangeObserver = nil
+        }
     }
     
     // MARK: View Lifecycle
@@ -50,6 +61,12 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         } else {
             descriptionLabel?.removeFromSuperview()
         }
+        
+        mapTypeDidChangeObserver = NotificationCenter.default.addObserver(forName: .locationsMapTypeDidChange, object: nil, queue: OperationQueue.main, using: { (notification) in
+            if let mapType = notification.userInfo?[NotificationConstants.mapType] as? MultiMapType {
+                NextGenHook.logAnalyticsEvent(.imeLocationAction, action: .setMapType, itemName: (mapType == .satellite ? NextGenAnalyticsLabel.satellite : NextGenAnalyticsLabel.road))
+            }
+        })
         
         galleryScrollView.allowsFullScreen = false
         galleryScrollView.removeToolbar()
@@ -141,11 +158,14 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         if (indexPath as NSIndexPath).row == 0 {
             closeDetailView()
             animateToCenter()
+            NextGenHook.logAnalyticsEvent(.imeLocationAction, action: .selectMap, itemId: appData.id)
         } else if let experience = appData.mediaAtIndex(indexPath.row - 1) {
-            if let videoURL = experience.videoURL {
-                playVideo(videoURL)
+            if let video = experience.video, let url = experience.videoURL {
+                playVideo(url)
+                NextGenHook.logAnalyticsEvent(.imeLocationAction, action: .selectVideo, itemId: video.id)
             } else if let gallery = experience.gallery {
                 showGallery(gallery)
+                NextGenHook.logAnalyticsEvent(.imeLocationAction, action: .selectImageGallery, itemId: gallery.id)
             }
         }
     }
