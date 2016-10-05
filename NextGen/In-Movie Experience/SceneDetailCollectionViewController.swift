@@ -30,7 +30,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ItemsPerRow: CGFloat = (DeviceType.IS_IPAD ? 2 : 1)
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10
-        static let ItemAspectRatio: CGFloat = 283 / 220
+        static let ItemImageAspectRatio: CGFloat = 16 / 9
+        static let ItemTitleHeight: CGFloat = 35
+        static let ItemCaptionHeight: CGFloat = 30
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
@@ -163,7 +165,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth: CGFloat = (collectionView.frame.width / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow)
-        return CGSize(width: itemWidth, height: itemWidth / Constants.ItemAspectRatio)
+        let itemHeight = (itemWidth / Constants.ItemImageAspectRatio) + Constants.ItemTitleHeight + Constants.ItemCaptionHeight
+        return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

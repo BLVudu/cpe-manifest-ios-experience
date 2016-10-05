@@ -54,7 +54,7 @@ class InMovieExperienceViewController: UIViewController {
         updatePlayerConstraints()
         
         var videoPlayerTime: String?
-        if let currentTime = playerCurrentTime {
+        if let currentTime = playerCurrentTime, !currentTime.isNaN {
             videoPlayerTime = String(Int(currentTime))
         }
         
