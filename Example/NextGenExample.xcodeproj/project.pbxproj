@@ -73,7 +73,6 @@
 		70C093501D0F60DF00BFC1E4 /* MenuSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F01D0F60DF00BFC1E4 /* MenuSectionCell.swift */; };
 		70C093511D0F60DF00BFC1E4 /* MultiMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F11D0F60DF00BFC1E4 /* MultiMapView.swift */; };
 		70C093521D0F60DF00BFC1E4 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F21D0F60DF00BFC1E4 /* RadioButton.swift */; };
-		70C093531D0F60DF00BFC1E4 /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F31D0F60DF00BFC1E4 /* RoundImageView.swift */; };
 		70C093541D0F60DF00BFC1E4 /* SimpleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F41D0F60DF00BFC1E4 /* SimpleImageCollectionViewCell.swift */; };
 		70C093551D0F60DF00BFC1E4 /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F51D0F60DF00BFC1E4 /* SocialButton.swift */; };
 		70C093561D0F60DF00BFC1E4 /* TalentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C092F61D0F60DF00BFC1E4 /* TalentTableViewCell.swift */; };
@@ -190,7 +189,6 @@
 		70C092F01D0F60DF00BFC1E4 /* MenuSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSectionCell.swift; sourceTree = "<group>"; };
 		70C092F11D0F60DF00BFC1E4 /* MultiMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiMapView.swift; sourceTree = "<group>"; };
 		70C092F21D0F60DF00BFC1E4 /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
-		70C092F31D0F60DF00BFC1E4 /* RoundImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		70C092F41D0F60DF00BFC1E4 /* SimpleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		70C092F51D0F60DF00BFC1E4 /* SocialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		70C092F61D0F60DF00BFC1E4 /* TalentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalentTableViewCell.swift; sourceTree = "<group>"; };
@@ -424,7 +422,6 @@
 				70C092F01D0F60DF00BFC1E4 /* MenuSectionCell.swift */,
 				70C092F11D0F60DF00BFC1E4 /* MultiMapView.swift */,
 				70C092F21D0F60DF00BFC1E4 /* RadioButton.swift */,
-				70C092F31D0F60DF00BFC1E4 /* RoundImageView.swift */,
 				70C092F41D0F60DF00BFC1E4 /* SimpleImageCollectionViewCell.swift */,
 				70B101A31D2D7BAB003D0424 /* SimpleMapCollectionViewCell.swift */,
 				70C092F51D0F60DF00BFC1E4 /* SocialButton.swift */,
@@ -685,7 +682,6 @@
 				70C0931B1D0F60DF00BFC1E4 /* CommentaryView.swift in Sources */,
 				70C9EA6C1D08A2D7002299B3 /* EnhancedTitlesCollectionViewController.swift in Sources */,
 				70C093381D0F60DF00BFC1E4 /* ExtrasSceneLocationsViewController.swift in Sources */,
-				70C093531D0F60DF00BFC1E4 /* RoundImageView.swift in Sources */,
 				708488DC1D0F7EC900670B45 /* NextGenDataLoader.swift in Sources */,
 				70C0931D1D0F60DF00BFC1E4 /* GallerySceneDetailViewController.swift in Sources */,
 				7006F1531D346A2700C8DD25 /* NextGenVideoPlayerViewController.m in Sources */,

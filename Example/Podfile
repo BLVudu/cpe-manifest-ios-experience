@@ -12,11 +12,11 @@ target 'NextGenExample' do
     pod 'MBProgressHUD',            '~> 0.9.2'
     
     # NextGen
+    pod 'NextGenDataManager',       :path => '../../cpe-manifest-ios-data'
     pod 'GoogleMaps'
+    pod 'SDWebImage',               '~> 3.0'
     pod 'UAProgressView'
     pod 'PromiseKit',               '~> 4.0'
-    pod 'AlamofireImage',           '~> 3.0'
-    pod 'NextGenDataManager',       :path => '../../cpe-manifest-ios-data'
 
 end
 
