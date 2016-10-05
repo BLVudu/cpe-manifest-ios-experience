@@ -403,7 +403,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SimpleImageCollectionViewCellReuseIdentifier" id="5H1-5x-Bj6" customClass="SimpleImageCollectionViewCell" customModule="NextGen" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="11.5" width="98" height="145"/>
+                                                        <rect key="frame" x="0.0" y="11" width="98" height="145"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="98" height="145"/>
@@ -1023,7 +1023,7 @@
                                         <rect key="frame" x="0.0" y="28" width="408" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImP-jw-Q6i" id="RnV-wW-H5E">
-                                            <frame key="frameInset" width="408" height="79.5"/>
+                                            <frame key="frameInset" width="408" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QED-1k-62J">
@@ -1417,7 +1417,7 @@
         <scene sceneID="2S6-zB-kic">
             <objects>
                 <collectionViewController storyboardIdentifier="sceneDetail" id="VTD-yi-sj7" customClass="SceneDetailCollectionViewController" customModule="NextGen" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DCa-cj-7R6">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="DCa-cj-7R6">
                         <rect key="frame" x="0.0" y="0.0" width="257.5" height="451"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sqt-Hf-9Ea">
@@ -1520,7 +1520,7 @@
                                     <constraint firstAttribute="trailing" secondItem="23q-UA-LRw" secondAttribute="trailing" id="SCp-qH-GqA"/>
                                     <constraint firstItem="KlV-QQ-HMj" firstAttribute="leading" secondItem="3OO-t3-aoL" secondAttribute="leading" id="SQQ-i9-KdK"/>
                                     <constraint firstItem="3OO-t3-aoL" firstAttribute="top" secondItem="sJI-K1-lN5" secondAttribute="bottom" id="SuD-wA-QSS"/>
-                                    <constraint firstItem="5YR-SC-dCP" firstAttribute="width" secondItem="3OO-t3-aoL" secondAttribute="width" multiplier="0.5" id="X9u-wh-eww"/>
+                                    <constraint firstItem="5YR-SC-dCP" firstAttribute="width" secondItem="3OO-t3-aoL" secondAttribute="width" id="X9u-wh-eww"/>
                                     <constraint firstItem="5YR-SC-dCP" firstAttribute="leading" secondItem="3OO-t3-aoL" secondAttribute="leading" id="YP8-Te-d53"/>
                                     <constraint firstItem="ldl-V3-bDk" firstAttribute="centerX" secondItem="KlV-QQ-HMj" secondAttribute="centerX" id="YSO-Ls-djo"/>
                                     <constraint firstItem="BcB-sN-qbY" firstAttribute="centerY" secondItem="3OO-t3-aoL" secondAttribute="centerY" id="ctu-2d-dai"/>
@@ -1948,7 +1948,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="icW-Mi-fmQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eYH-MY-0gu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eYH-MY-0gu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
