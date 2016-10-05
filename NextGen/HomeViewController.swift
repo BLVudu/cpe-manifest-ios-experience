@@ -219,9 +219,9 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
         currentlyDismissing = true
+        
+        super.viewWillDisappear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -416,7 +416,7 @@ class HomeViewController: UIViewController {
     
     func didLongPressExtrasButton(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            NextGenHook.delegate?.nextGenExperienceWillEnterDebugMode()
+            NextGenHook.delegate?.experienceWillEnterDebugMode()
         }
     }
     
@@ -541,11 +541,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func onExit() {
-        NextGenHook.experienceWillClose()
         NextGenHook.logAnalyticsEvent(.homeAction, action: .exit)
-        
-        currentlyDismissing = true
-        self.dismiss(animated: true, completion: nil)
+        NextGenLauncher.sharedInstance?.closeExperience()
     }
     
     // MARK: Storyboard

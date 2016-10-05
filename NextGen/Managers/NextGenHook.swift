@@ -78,10 +78,19 @@ struct NextGenAnalyticsLabel {
     static let satellite = "satellite"
 }
 
+public enum NextGenConnectionStatus {
+    case onWiFi
+    case onCellular
+    case off
+}
+
 public protocol NextGenHookDelegate {
+    // Connection status
+    func connectionStatusChanged(status: NextGenConnectionStatus)
+    
     // NextGen Experience status
-    func nextGenExperienceWillClose()
-    func nextGenExperienceWillEnterDebugMode()
+    func experienceWillClose()
+    func experienceWillEnterDebugMode()
     
     // Video Player callbacks
     func videoPlayerWillClose(_ mode: VideoPlayerMode, playbackPosition: Double)
@@ -99,7 +108,7 @@ class NextGenHook {
     static var delegate: NextGenHookDelegate?
     
     static func experienceWillClose() {
-        delegate?.nextGenExperienceWillClose()
+        delegate?.experienceWillClose()
         NextGenCacheManager.clearTempDirectory()
     }
     
