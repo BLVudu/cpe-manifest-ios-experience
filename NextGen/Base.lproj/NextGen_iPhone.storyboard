@@ -238,9 +238,8 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lwb-KU-cen">
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="170" id="SE8-xt-qc1"/>
                                                     <constraint firstAttribute="width" secondItem="Lwb-KU-cen" secondAttribute="height" multiplier="8:10" id="TAQ-Z4-F9r"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="wu8-ax-xJI"/>
+                                                    <constraint firstAttribute="height" constant="95" id="te9-jL-jh1"/>
                                                 </constraints>
                                             </imageView>
                                             <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjk-No-7sv">
@@ -330,9 +329,6 @@
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYN-Hg-IFa">
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="a8q-GC-2yu"/>
-                                                </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -345,6 +341,7 @@
                                             <constraint firstAttribute="trailing" secondItem="B4Z-td-umT" secondAttribute="trailing" id="Sbh-en-Qxl"/>
                                             <constraint firstItem="B4Z-td-umT" firstAttribute="top" secondItem="lgk-ie-Wpy" secondAttribute="top" id="ZQP-kS-oaa"/>
                                             <constraint firstItem="rYN-Hg-IFa" firstAttribute="top" secondItem="B4Z-td-umT" secondAttribute="bottom" id="giZ-R3-gai"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="105" id="tdJ-XV-ITs"/>
                                             <constraint firstItem="B4Z-td-umT" firstAttribute="leading" secondItem="lgk-ie-Wpy" secondAttribute="leading" id="vp4-c8-hAy"/>
                                         </constraints>
                                     </view>
@@ -403,7 +400,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SimpleImageCollectionViewCellReuseIdentifier" id="5H1-5x-Bj6" customClass="SimpleImageCollectionViewCell" customModule="NextGen" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="11" width="98" height="145"/>
+                                                        <rect key="frame" x="0.0" y="19" width="98" height="145"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="98" height="145"/>
@@ -430,12 +427,13 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="nQS-Yi-wlx" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="0Z6-1o-Oea"/>
-                                    <constraint firstItem="Rja-JM-bvB" firstAttribute="height" secondItem="6e7-Wm-GG8" secondAttribute="height" multiplier="0.325" id="32f-3a-s6y"/>
                                     <constraint firstItem="lgk-ie-Wpy" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="4Qa-be-Udz"/>
                                     <constraint firstAttribute="trailing" secondItem="RCv-yA-FCU" secondAttribute="trailing" id="8iS-sU-cfl"/>
                                     <constraint firstAttribute="trailing" secondItem="nQS-Yi-wlx" secondAttribute="trailing" id="CX7-vJ-Ndm"/>
                                     <constraint firstAttribute="trailing" secondItem="lgk-ie-Wpy" secondAttribute="trailing" id="K1m-Tq-cPQ"/>
-                                    <constraint firstItem="Rja-JM-bvB" firstAttribute="top" secondItem="nQS-Yi-wlx" secondAttribute="bottom" priority="750" constant="15" id="Kxn-l3-xu1"/>
+                                    <constraint firstItem="Rja-JM-bvB" firstAttribute="top" secondItem="nQS-Yi-wlx" secondAttribute="bottom" priority="250" constant="15" id="Kxn-l3-xu1"/>
+                                    <constraint firstItem="Rja-JM-bvB" firstAttribute="top" secondItem="lgk-ie-Wpy" secondAttribute="bottom" priority="750" constant="15" id="Ob4-h1-NYE"/>
+                                    <constraint firstItem="Rja-JM-bvB" firstAttribute="height" secondItem="6e7-Wm-GG8" secondAttribute="height" multiplier="0.35" id="R1Y-VE-YvA"/>
                                     <constraint firstItem="Rja-JM-bvB" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="RQw-dw-jf4"/>
                                     <constraint firstItem="RCv-yA-FCU" firstAttribute="top" secondItem="lgk-ie-Wpy" secondAttribute="bottom" constant="10" id="izo-ES-3Gz"/>
                                     <constraint firstAttribute="trailing" secondItem="Rja-JM-bvB" secondAttribute="trailing" id="lG5-Yj-xc4"/>
@@ -443,8 +441,7 @@
                                     <constraint firstItem="nQS-Yi-wlx" firstAttribute="top" secondItem="6e7-Wm-GG8" secondAttribute="top" id="s8X-hM-lqM"/>
                                     <constraint firstItem="lgk-ie-Wpy" firstAttribute="top" secondItem="nQS-Yi-wlx" secondAttribute="bottom" constant="10" id="sCr-CI-Daf"/>
                                     <constraint firstItem="RCv-yA-FCU" firstAttribute="leading" secondItem="6e7-Wm-GG8" secondAttribute="leading" id="tBH-w8-RjY"/>
-                                    <constraint firstItem="Rja-JM-bvB" firstAttribute="top" secondItem="lgk-ie-Wpy" secondAttribute="bottom" priority="750" constant="15" id="tKK-nP-CVs"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Rja-JM-bvB" secondAttribute="bottom" id="zG7-JC-c9t"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rja-JM-bvB" secondAttribute="bottom" id="zG7-JC-c9t"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -630,7 +627,7 @@
         <scene sceneID="yxO-XU-hV1">
             <objects>
                 <navigationController navigationBarHidden="YES" id="V1o-YD-Ref" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1SL-uW-4xc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1SL-uW-4xc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1948,7 +1945,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="icW-Mi-fmQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eYH-MY-0gu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eYH-MY-0gu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
