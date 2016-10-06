@@ -35,7 +35,7 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
         galleryScrollView.removeToolbar()
         
         galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self, let page = notification.userInfo?[NotificationConstants.time] as? Int {
+            if let strongSelf = self, let page = notification.userInfo?[NotificationConstants.page] as? Int {
                 let pageIndexPath = IndexPath(item: page, section: 0)
                 strongSelf.galleryCollectionView.selectItem(at: pageIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
                 
