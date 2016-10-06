@@ -189,6 +189,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                 cell.experience = nil
                 cell.title = String.localize("label.actors")
                 cell.imageURL = NGDMManifest.sharedInstance.mainExperience?.orderedActors?.first?.images?.first?.thumbnailImageURL
+                cell.imageView.contentMode = .scaleAspectFit
                 return cell
             }
             

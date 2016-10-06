@@ -48,12 +48,6 @@ static void *VideoPlayerPlaybackLikelyToKeepUpObservationContext = &VideoPlayerP
 @property (weak, nonatomic)             id                               applicationResignationObserver;
 
 /**
- * Show/hide activity indicator.
- */
-@property (assign, nonatomic)           BOOL                             activityIndicatorVisible;
-@property (weak, nonatomic)   IBOutlet  UIActivityIndicatorView         *activityIndicator;
-
-/**
  * Track the status of full screen video
  */
 @property (strong, nonatomic)           UIView                          *originalContainerView;

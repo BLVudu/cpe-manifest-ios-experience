@@ -17,6 +17,8 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
+        customTitle = String.localize("label.actors")
+        
         super.viewDidLoad()
         
         talentTableView.register(UINib(nibName: "TalentTableViewCell-Narrow" + (DeviceType.IS_IPAD ? "" : "_iPhone"), bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)

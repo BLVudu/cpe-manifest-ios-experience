@@ -148,6 +148,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
                 strongSelf.playVideo()
             }
         })
+        
+        if !DeviceType.IS_IPAD {
+            self.cropToActivePictureButton?.removeFromSuperview()
+        }
 
         if mode == .mainFeature {
             self.fullScreenButton.removeFromSuperview()
@@ -156,10 +160,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             _didPlayInterstitial = true
             self.playerControlsVisible = false
             self.topToolbar.removeFromSuperview()
+            self.cropToActivePictureButton?.removeFromSuperview()
             
             if mode == .supplementalInMovie {
                 self.fullScreenButton.removeFromSuperview()
-                self.cropToActivePictureButton?.removeFromSuperview()
             } else if mode == .basicPlayer {
                 self.playbackToolbar.removeFromSuperview()
             }
@@ -269,6 +273,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             if _lastNotifiedTime != currentTime {
                 _lastNotifiedTime = currentTime
                 NotificationCenter.default.post(name: .videoPlayerDidChangeTime, object: nil, userInfo: [NotificationConstants.time: Double(currentTime)])
+            }
+            
+            if currentTime >= 1 && mode == .basicPlayer {
+                self.activityIndicator?.removeFromSuperview()
             }
             
             self.player.isMuted = shouldMute
