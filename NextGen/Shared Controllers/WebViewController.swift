@@ -26,8 +26,22 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKScriptMessage
     convenience init(title: String?, url: URL) {
         self.init()
         
+        var webViewUrl = url
+        if var components = URLComponents(url: url, resolvingAgainstBaseURL: true), let deviceIdentifier = DeviceType.identifier {
+            let deviceModelParam = "iphoneModel=" + deviceIdentifier
+            if let query = components.query {
+                components.query = query + "&" + deviceModelParam
+            } else {
+                components.query = deviceModelParam
+            }
+            
+            if let newUrl = components.url {
+                webViewUrl = newUrl
+            }
+        }
+        
         _title = title
-        _url = url
+        _url = webViewUrl
     }
 
     // MARK: View Lifecycle
@@ -73,27 +87,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKScriptMessage
         _webView.navigationDelegate = self
         _webView.load(URLRequest(url: _url))
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let button = UIButton(type: .custom)
-        button.frame = CGRect(x: self.view.frame.width - Constants.HeaderButtonWidth, y: 0, width: Constants.HeaderButtonWidth, height: Constants.HeaderButtonHeight)
-        button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding + 10, 0, 0)
-        button.imageEdgeInsets = UIEdgeInsetsMake(0, Constants.HeaderIconPadding, 0, 0)
-        button.titleLabel?.font = UIFont.themeFont(DeviceType.IS_IPAD ? 18 : 14)
-        button.setTitle(String.localize("label.exit"), for: UIControlState())
-        button.setImage(UIImage(named: "Delete"), for: UIControlState())
-        button.titleLabel?.layer.shadowColor = UIColor.black.cgColor
-        button.titleLabel?.layer.shadowOpacity = 0.75
-        button.titleLabel?.layer.shadowRadius = 2
-        button.titleLabel?.layer.shadowOffset = CGSize(width: 0, height: 1)
-        button.titleLabel?.layer.masksToBounds = false
-        button.titleLabel?.layer.shouldRasterize = true
-        button.addTarget(self, action: #selector(self.close), for: UIControlEvents.touchUpInside)
-        self.view.addSubview(button)
-    }
 
     // MARK: Actions
     func close() {
@@ -107,13 +100,11 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKScriptMessage
     
     // MARK: WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == Constants.ScriptMessageHandlerName {
-            if let messageBody = message.body as? String {
-                if messageBody == Constants.ScriptMessageAppVisible {
-                    
-                } else if messageBody == Constants.ScriptMessageAppShutdown {
-                    close()
-                }
+        if message.name == Constants.ScriptMessageHandlerName, let messageBody = message.body as? String {
+            if messageBody == Constants.ScriptMessageAppVisible {
+                
+            } else if messageBody == Constants.ScriptMessageAppShutdown {
+                close()
             }
         }
     }
