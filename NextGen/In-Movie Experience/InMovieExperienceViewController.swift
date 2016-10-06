@@ -15,30 +15,36 @@ class InMovieExperienceViewController: UIViewController {
     @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
     @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
     
-    var playerCurrentTime: Double? {
-        var videoPlayerViewController: VideoPlayerViewController?
+    private var playerCurrentTime: Double? {
         for viewController in self.childViewControllers {
             if let viewController = viewController as? VideoPlayerViewController {
-                videoPlayerViewController = viewController
-                break
+                return viewController.player.currentTime().seconds
             }
-        }
-        
-        if let currentTime = videoPlayerViewController?.player.currentTime() {
-            return currentTime.seconds
         }
         
         return nil
     }
     
+    private var extrasContainerViewHidden: Bool = false {
+        didSet {
+            extrasContainerView.isHidden = extrasContainerViewHidden
+            for viewController in self.childViewControllers {
+                if let viewController = (viewController as? UINavigationController)?.viewControllers.first as? InMovieExperienceExtrasViewController {
+                    viewController.view.isHidden = extrasContainerView.isHidden
+                    return
+                }
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        extrasContainerView.isHidden = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
+        extrasContainerViewHidden = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
         updatePlayerConstraints()
     }
     
-    func updatePlayerConstraints() {
+    private func updatePlayerConstraints() {
         playerToExtrasConstarint.isActive = !extrasContainerView.isHidden
         playerToSuperviewConstraint.isActive = !playerToExtrasConstarint.isActive
     }
@@ -50,12 +56,16 @@ class InMovieExperienceViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        extrasContainerView.isHidden = size.width > size.height
+        extrasContainerViewHidden = size.width > size.height
         updatePlayerConstraints()
         
         var videoPlayerTime: String?
         if let currentTime = playerCurrentTime, !currentTime.isNaN {
             videoPlayerTime = String(Int(currentTime))
+        }
+        
+        if !extrasContainerView.isHidden, let videoPlayerTime = videoPlayerTime {
+            NotificationCenter.default.post(name: .videoPlayerDidChangeTime, object: nil, userInfo: [NotificationConstants.time: Double(videoPlayerTime)])
         }
         
         NextGenHook.logAnalyticsEvent(.imeAction, action: (extrasContainerView.isHidden ? .rotateHideExtras : .rotateShowExtras), itemName: videoPlayerTime)

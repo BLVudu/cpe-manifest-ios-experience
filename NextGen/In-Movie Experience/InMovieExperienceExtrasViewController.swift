@@ -82,30 +82,32 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     }
     
     func processTimedEvents(_ time: Double) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.currentTime = time
-            
-            let newTalents = NGDMTimedEvent.findByTimecode(time, type: .talent).sorted(by: { (timedEvent1, timedEvent2) -> Bool in
-                return timedEvent1.talent!.billingBlockOrder < timedEvent2.talent!.billingBlockOrder
-            }).map({ $0.talent! })
-            
-            if self.isShowingMore {
-                self.hiddenTalents = newTalents
-            } else {
-                var hasNewData = newTalents.count != self.numCurrentTalents
-                if !hasNewData {
-                    for talent in newTalents {
-                        if self.currentTalents == nil || !self.currentTalents!.contains(talent) {
-                            hasNewData = true
-                            break
+        if !self.view.isHidden {
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.currentTime = time
+                
+                let newTalents = NGDMTimedEvent.findByTimecode(time, type: .talent).sorted(by: { (timedEvent1, timedEvent2) -> Bool in
+                    return timedEvent1.talent!.billingBlockOrder < timedEvent2.talent!.billingBlockOrder
+                }).map({ $0.talent! })
+                
+                if self.isShowingMore {
+                    self.hiddenTalents = newTalents
+                } else {
+                    var hasNewData = newTalents.count != self.numCurrentTalents
+                    if !hasNewData {
+                        for talent in newTalents {
+                            if self.currentTalents == nil || !self.currentTalents!.contains(talent) {
+                                hasNewData = true
+                                break
+                            }
                         }
                     }
-                }
-                    
-                if hasNewData {
-                    DispatchQueue.main.async {
-                        self.currentTalents = newTalents
-                        self.talentTableView?.reloadData()
+                        
+                    if hasNewData {
+                        DispatchQueue.main.async {
+                            self.currentTalents = newTalents
+                            self.talentTableView?.reloadData()
+                        }
                     }
                 }
             }

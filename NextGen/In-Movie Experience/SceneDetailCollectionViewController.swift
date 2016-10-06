@@ -32,7 +32,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let LineSpacing: CGFloat = 10
         static let ItemImageAspectRatio: CGFloat = 16 / 9
         static let ItemTitleHeight: CGFloat = 35
-        static let ItemCaptionHeight: CGFloat = 30
+        static let ItemCaptionHeight: CGFloat = (DeviceType.IS_IPAD ? 25 : 30)
     }
     
     private var _didChangeTimeObserver: NSObjectProtocol!
