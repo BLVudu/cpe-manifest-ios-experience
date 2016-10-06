@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -689,7 +688,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bpJ-PD-v9w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7HM-QQ-ArT">
-                        <rect key="frame" x="0.0" y="0.0" width="727" height="658"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="L9k-2E-qG5">
@@ -1013,7 +1012,7 @@
                         <viewControllerLayoutGuide type="bottom" id="QhV-AA-M03"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SZE-tB-7e4">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="260"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C8g-2A-dbe">
@@ -1215,32 +1214,32 @@
                                             <action selector="toggleFullScreen:" destination="FsK-dw-pgC" eventType="touchUpInside" id="BFB-aF-Brb"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Si-46-ANZ">
-                                        <frame key="frameInset" minX="954" minY="25" width="79" height="25"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tw5-Q3-5PC">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="46" id="NCo-X5-42O"/>
+                                            <constraint firstAttribute="height" constant="50" id="I6t-o7-P15"/>
+                                            <constraint firstAttribute="width" constant="60" id="Rb6-gU-bny"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <state key="normal" image="Maximize">
-                                            <color key="titleColor" red="1" green="0.085336501780000004" blue="0.1303381599" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <state key="normal" image="CropActive"/>
+                                        <state key="highlighted" image="CropActive-Highlighted"/>
                                         <connections>
-                                            <action selector="cropImageAction:" destination="FsK-dw-pgC" eventType="touchUpInside" id="IlZ-46-B2T"/>
+                                            <action selector="onCropToActivePicture" destination="FsK-dw-pgC" eventType="touchUpInside" id="rNm-8H-5M9"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="tw5-Q3-5PC" firstAttribute="leading" secondItem="c6W-KZ-1CO" secondAttribute="trailing" id="2Vp-Ii-kpg"/>
                                     <constraint firstAttribute="bottom" secondItem="uap-nw-qBj" secondAttribute="bottom" id="3l3-qA-aPy"/>
                                     <constraint firstItem="Fre-sx-P7e" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="702-LB-pdn"/>
-                                    <constraint firstAttribute="trailing" secondItem="hQ6-y2-KsL" secondAttribute="trailing" constant="40" id="Cuk-Qy-gR3"/>
+                                    <constraint firstAttribute="trailing" secondItem="hQ6-y2-KsL" secondAttribute="trailing" id="Cuk-Qy-gR3"/>
                                     <constraint firstItem="Fre-sx-P7e" firstAttribute="leading" secondItem="tdq-om-9xU" secondAttribute="leading" id="DjV-sH-Tcg"/>
                                     <constraint firstItem="uap-nw-qBj" firstAttribute="leading" secondItem="r3j-NO-iAX" secondAttribute="trailing" id="Krx-8J-5eP"/>
-                                    <constraint firstAttribute="bottom" secondItem="5Si-46-ANZ" secondAttribute="bottom" constant="22" id="Kym-cd-kDK"/>
-                                    <constraint firstAttribute="trailing" secondItem="5Si-46-ANZ" secondAttribute="trailing" constant="8" id="ZQq-mF-HUm"/>
+                                    <constraint firstItem="tw5-Q3-5PC" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="SNs-ez-PBd"/>
+                                    <constraint firstAttribute="trailing" secondItem="tw5-Q3-5PC" secondAttribute="trailing" priority="750" id="XQP-e4-AzI"/>
                                     <constraint firstItem="hQ6-y2-KsL" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="cOV-sB-2ta"/>
                                     <constraint firstItem="c6W-KZ-1CO" firstAttribute="top" secondItem="tdq-om-9xU" secondAttribute="top" id="cV8-Et-hSQ"/>
+                                    <constraint firstItem="hQ6-y2-KsL" firstAttribute="leading" secondItem="tw5-Q3-5PC" secondAttribute="trailing" id="dvU-2c-ho4"/>
                                     <constraint firstItem="r3j-NO-iAX" firstAttribute="centerY" secondItem="tdq-om-9xU" secondAttribute="centerY" id="fcz-BG-Cbh"/>
                                     <constraint firstItem="uap-nw-qBj" firstAttribute="top" secondItem="tdq-om-9xU" secondAttribute="top" id="fjX-EC-SFE"/>
                                     <constraint firstItem="c6W-KZ-1CO" firstAttribute="leading" secondItem="yBz-nT-qfC" secondAttribute="trailing" id="jdR-oD-S8U"/>
@@ -1344,7 +1343,7 @@
                         <outlet property="_homeButton" destination="aLt-Qu-Yg8" id="neb-30-wLZ"/>
                         <outlet property="activityIndicator" destination="cbz-fT-NUV" id="2GD-nb-I0M"/>
                         <outlet property="countdownLabel" destination="IcY-NN-IUH" id="bdY-t4-wu6"/>
-                        <outlet property="cropImageButton" destination="5Si-46-ANZ" id="wWq-YY-vqh"/>
+                        <outlet property="cropToActivePictureButton" destination="tw5-Q3-5PC" id="uDN-X2-J6h"/>
                         <outlet property="durationLabel" destination="c6W-KZ-1CO" id="agC-Tl-gJZ"/>
                         <outlet property="fullScreenButton" destination="hQ6-y2-KsL" id="QEK-g6-Bkd"/>
                         <outlet property="pauseButton" destination="Fre-sx-P7e" id="xPZ-ZP-9To"/>
@@ -2081,6 +2080,8 @@
         <image name="Back Nav" width="18" height="18"/>
         <image name="BlackPlayButton" width="65" height="65"/>
         <image name="Commentary" width="17" height="17"/>
+        <image name="CropActive" width="18" height="18"/>
+        <image name="CropActive-Highlighted" width="18" height="18"/>
         <image name="Delete" width="18" height="18"/>
         <image name="Facebook Icon" width="75" height="75"/>
         <image name="Gallery" width="24" height="24"/>

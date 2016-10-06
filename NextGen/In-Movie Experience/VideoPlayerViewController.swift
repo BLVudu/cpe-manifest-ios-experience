@@ -35,10 +35,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
     private var _lastNotifiedTime = -1.0
     private var _controlsAreLocked = false
     private var manuallyPaused = false
-    private var buttonTapped = true
     @IBOutlet weak private var _commentaryView: UIView!
     @IBOutlet weak private var _commentaryButton: UIButton!
     @IBOutlet weak private var _homeButton: UIButton!
+    @IBOutlet weak private var cropToActivePictureButton: UIButton?
     var commentaryIndex = 0
     
     override var isFullScreen: Bool {
@@ -46,26 +46,6 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             NotificationCenter.default.post(name: .videoPlayerDidToggleFullScreen, object: nil, userInfo: [NotificationConstants.isFullScreen: isFullScreen])
         }
     }
-    
-    @IBOutlet weak var cropImageButton: UIButton!
-    
-    
-    @IBAction func cropImageAction(sender: AnyObject) {
-        
-        if (buttonTapped == false) {
-            buttonTapped = true
-            self.playbackView.setVideoFillMode(AVLayerVideoGravityResizeAspectFill)
-            
-        } else if (buttonTapped == true) {
-            buttonTapped = false
-            self.playbackView.setVideoFillMode(AVLayerVideoGravityResizeAspect)
-        }
-        
-        
-        
-        
-    }
-    
     
     // Countdown/Queue
     var queueTotalCount = 0
@@ -179,6 +159,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             
             if mode == .supplementalInMovie {
                 self.fullScreenButton.removeFromSuperview()
+                self.cropToActivePictureButton?.removeFromSuperview()
             } else if mode == .basicPlayer {
                 self.playbackToolbar.removeFromSuperview()
             }
@@ -391,6 +372,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         
         NextGenHook.delegate?.videoPlayerWillClose(mode, playbackPosition: self.playerItem != nil ? CMTimeGetSeconds(self.playerItem.currentTime()) : 0)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onCropToActivePicture() {
+        self.playbackView.setVideoFillMode(self.playbackView.videoFillMode() == AVLayerVideoGravityResizeAspectFill ? AVLayerVideoGravityResizeAspect : AVLayerVideoGravityResizeAspectFill)
     }
     
     @IBAction func commentary(_ sender: UIButton) {
