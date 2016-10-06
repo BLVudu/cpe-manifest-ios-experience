@@ -91,10 +91,23 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     
     // MARK: Actions
     @IBAction func onShare(_ sender: UIButton?) {
-        if let galleryScrollView = galleryScrollView, let url = galleryScrollView.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
-            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = sender
-            self.present(activityViewController, animated: true, completion: nil)
+        if let url = galleryScrollView?.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
+            let showShareDialog = { [weak self] (url: URL) in
+                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = sender
+                self?.present(activityViewController, animated: true, completion: nil)
+                
+                NextGenHook.logAnalyticsEvent(.imeImageGalleryAction, action: .shareImage, itemId: self?.timedEvent?.gallery?.id)
+                NotificationCenter.default.post(name: .videoPlayerShouldPause, object: nil)
+            }
+            
+            if let delegate = NextGenHook.delegate {
+                delegate.urlForSharedContent(url, completion: { (newUrl) in
+                    showShareDialog(newUrl ?? url)
+                })
+            } else {
+                showShareDialog(url)
+            }
         }
     }
     

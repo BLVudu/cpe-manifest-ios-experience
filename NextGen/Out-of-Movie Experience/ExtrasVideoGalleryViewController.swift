@@ -276,11 +276,21 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     }
     
     @IBAction func onShare(_ sender: UIButton?) {
-        if let gallery = currentGallery, !galleryScrollView.isHidden, let url = galleryScrollView.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
-            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = sender
-            self.present(activityViewController, animated: true, completion: nil)
-            NextGenHook.logAnalyticsEvent(.extrasImageGalleryAction, action: .shareImage, itemId: gallery.id)
+        if !galleryScrollView.isHidden, let url = galleryScrollView.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
+            let showShareDialog = { [weak self] (url: URL) in
+                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = sender
+                self?.present(activityViewController, animated: true, completion: nil)
+                NextGenHook.logAnalyticsEvent(.extrasImageGalleryAction, action: .shareImage, itemId: self?.currentGallery?.id)
+            }
+            
+            if let delegate = NextGenHook.delegate {
+                delegate.urlForSharedContent(url, completion: { (newUrl) in
+                    showShareDialog(newUrl ?? url)
+                })
+            } else {
+                showShareDialog(url)
+            }
         }
     }
     

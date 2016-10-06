@@ -216,7 +216,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         } else if collectionView == filmographyCollectionView {
             if let film = talent?.films?[indexPath.row], let delegate = NextGenHook.delegate {
                 MBProgressHUD.showAdded(to: self.view, animated: true)
-                delegate.getUrlForContent(film.title, completion: { [weak self] (url) in
+                delegate.urlForTitle(film.title, completion: { [weak self] (url) in
                     if let strongSelf = self {
                         MBProgressHUD.hideAllHUDs(for: strongSelf.view, animated: true)
                     }

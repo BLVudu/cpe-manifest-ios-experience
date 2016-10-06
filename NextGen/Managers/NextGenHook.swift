@@ -94,10 +94,13 @@ public protocol NextGenHookDelegate {
     
     // Video Player callbacks
     func videoPlayerWillClose(_ mode: VideoPlayerMode, playbackPosition: Double)
-    func getProcessedVideoURL(_ url: URL, mode: VideoPlayerMode, completion: @escaping (_ url: URL?, _ startTime: Double) -> Void)
+    func urlForProcessedVideo(_ url: URL, mode: VideoPlayerMode, completion: @escaping (_ url: URL?, _ startTime: Double) -> Void)
+    
+    // Sharing callbacks
+    func urlForSharedContent(_ contentUrl: URL, completion: @escaping (_ url: URL?) -> Void)
     
     // Talent callbacks
-    func getUrlForContent(_ title: String, completion: @escaping (_ url: URL?) -> Void)
+    func urlForTitle(_ title: String, completion: @escaping (_ url: URL?) -> Void)
     
     // Analytics
     func logAnalyticsEvent(_ event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, itemId: String?, itemName: String?)

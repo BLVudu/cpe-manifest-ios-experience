@@ -19,6 +19,7 @@ extension Notification.Name {
     static let videoPlayerDidPlayVideo = Notification.Name("nextgen.notifications.videoPlayerDidPlayVideo")
     static let videoPlayerDidEndVideo = Notification.Name("nextgen.notifications.videoPlayerDidEndVideo")
     static let videoPlayerDidEndLastVideo = Notification.Name("nextgen.notifications.videoPlayerDidEndLastVideo")
+    static let videoPlayerShouldPause = Notification.Name("nextgen.notifications.videoPlayerShouldPause")
     
     // Image Gallery
     static let imageGalleryDidScrollToPage = Notification.Name("nextgen.notifications.imageGalleryDidScrollToPage")

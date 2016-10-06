@@ -69,9 +69,10 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
     
     // Notifications
     private var playerItemDurationDidLoadObserver: NSObjectProtocol?
-    private var shouldPauseAllOtherObserver: NSObjectProtocol?
+    private var videoPlayerDidPlayVideoObserver: NSObjectProtocol?
     private var updateCommentaryButtonObserver: NSObjectProtocol?
     private var sceneDetailWillCloseObserver: NSObjectProtocol?
+    private var videoPlayerShouldPauseObserver: NSObjectProtocol?
     
     deinit {
         let center = NotificationCenter.default
@@ -81,9 +82,9 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             playerItemDurationDidLoadObserver = nil
         }
         
-        if let observer = shouldPauseAllOtherObserver {
+        if let observer = videoPlayerDidPlayVideoObserver {
             center.removeObserver(observer)
-            shouldPauseAllOtherObserver = nil
+            videoPlayerDidPlayVideoObserver = nil
         }
         
         if let observer = updateCommentaryButtonObserver {
@@ -94,6 +95,11 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         if let observer = sceneDetailWillCloseObserver {
             center.removeObserver(observer)
             sceneDetailWillCloseObserver = nil
+        }
+        
+        if let observer = videoPlayerShouldPauseObserver {
+            center.removeObserver(observer)
+            videoPlayerShouldPauseObserver = nil
         }
         
         cancelCountdown()
@@ -125,12 +131,16 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             }
         })
         
-        shouldPauseAllOtherObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidPlayVideo, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self , strongSelf._didPlayInterstitial {
-                if let videoURL = notification.userInfo?[NotificationConstants.videoUrl] as? URL , videoURL != strongSelf.url {
+        videoPlayerDidPlayVideoObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidPlayVideo, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let strongSelf = self, strongSelf._didPlayInterstitial {
+                if let videoURL = notification.userInfo?[NotificationConstants.videoUrl] as? URL, videoURL != strongSelf.url {
                     strongSelf.pauseVideo()
                 }
             }
+        })
+        
+        videoPlayerShouldPauseObserver = NotificationCenter.default.addObserver(forName: .videoPlayerShouldPause, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+            self?.pauseVideo()
         })
         
         /*updateCommentaryButtonObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kDidSelectCommetaryOption), object: nil, queue: OperationQueue.main, using: { [weak self]
@@ -199,7 +209,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         if _didPlayInterstitial, let url = url {
             DispatchQueue.global(qos: .utility).async {
                 SettingsManager.setVideoAsWatched(url)
-                NextGenHook.delegate?.getProcessedVideoURL(url, mode: self.mode, completion: { (url, startTime) in
+                NextGenHook.delegate?.urlForProcessedVideo(url, mode: self.mode, completion: { (url, startTime) in
                     if let url = url {
                         DispatchQueue.main.async {
                             super.playVideo(with: url, startTime: startTime)
