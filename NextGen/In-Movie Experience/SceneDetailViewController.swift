@@ -5,10 +5,6 @@
 import UIKit
 import NextGenDataManager
 
-struct SceneDetailNotification {
-    static let WillClose = "kSceneDetailNotificationWillClose"
-}
-
 class SceneDetailViewController: UIViewController {
     
     private struct Constants {
@@ -22,6 +18,15 @@ class SceneDetailViewController: UIViewController {
     
     var titleLabel: UILabel!
     var closeButton: UIButton!
+    
+    private var shouldCloseDetailsObserver: NSObjectProtocol?
+    
+    deinit {
+        if let observer = shouldCloseDetailsObserver {
+            NotificationCenter.default.removeObserver(observer)
+            shouldCloseDetailsObserver = nil
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,10 @@ class SceneDetailViewController: UIViewController {
         } else if let title = experience?.metadata?.title {
             titleLabel.text = title.uppercased()
         }
+        
+        shouldCloseDetailsObserver = NotificationCenter.default.addObserver(forName: .inMovieExperienceShouldCloseDetails, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+            self?.close()
+        })
     }
     
     override func viewWillLayoutSubviews() {
@@ -61,7 +70,7 @@ class SceneDetailViewController: UIViewController {
     // MARK: Actions
     internal func close() {
         self.dismiss(animated: true, completion: nil)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: SceneDetailNotification.WillClose), object: nil)
+        NotificationCenter.default.post(name: .inMovieExperienceWillCloseDetails, object: nil)
     }
 
 }

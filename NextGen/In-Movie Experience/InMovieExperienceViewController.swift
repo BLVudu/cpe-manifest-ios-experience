@@ -64,7 +64,9 @@ class InMovieExperienceViewController: UIViewController {
             videoPlayerTime = String(Int(currentTime))
         }
         
-        if !extrasContainerView.isHidden, let videoPlayerTime = videoPlayerTime {
+        if extrasContainerView.isHidden {
+            NotificationCenter.default.post(name: .inMovieExperienceShouldCloseDetails, object: nil)
+        } else if let videoPlayerTime = videoPlayerTime {
             NotificationCenter.default.post(name: .videoPlayerDidChangeTime, object: nil, userInfo: [NotificationConstants.time: Double(videoPlayerTime)])
         }
         

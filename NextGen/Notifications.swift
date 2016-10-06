@@ -9,6 +9,7 @@ extension Notification.Name {
     static let outOfMovieExperienceShouldLaunch = Notification.Name("nextgen.notifications.outOfMovieExperienceShouldLaunch")
     
     // In-Movie Experience
+    static let inMovieExperienceShouldCloseDetails = Notification.Name("nextgen.notifications.inMovieExperienceShouldCloseDetails")
     static let inMovieExperienceWillCloseDetails = Notification.Name("nextgen.notifications.inMovieExperienceWillCloseDetails")
     
     // Video Player

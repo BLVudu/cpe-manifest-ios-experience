@@ -153,7 +153,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
             }
         })*/
         
-        sceneDetailWillCloseObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: SceneDetailNotification.WillClose), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+        sceneDetailWillCloseObserver = NotificationCenter.default.addObserver(forName: .inMovieExperienceWillCloseDetails, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self , strongSelf.mode == .mainFeature && !strongSelf.manuallyPaused {
                 strongSelf.playVideo()
             }
