@@ -23,6 +23,7 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
     deinit {
         if let observer = didSelectCategoryObserver {
             NotificationCenter.default.removeObserver(observer)
+            didSelectCategoryObserver = nil
         }
     }
  
@@ -40,7 +41,7 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
                     currentTask.cancel()
                 }
                 
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.global(qos: .userInteractive).async {
                     strongSelf.productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
                         strongSelf.productListSessionDataTask = nil
                         DispatchQueue.main.async {

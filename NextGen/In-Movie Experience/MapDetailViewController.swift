@@ -110,7 +110,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     private func showGallery(_ gallery: NGDMGallery) {
         closeDetailView()
         
-        galleryScrollView.loadGallery(gallery)
+        galleryScrollView.gallery = gallery
         galleryScrollView.isHidden = false
         
         locationDetailView.isHidden = false

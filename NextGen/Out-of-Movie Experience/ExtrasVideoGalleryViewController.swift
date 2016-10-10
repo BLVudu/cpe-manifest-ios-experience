@@ -209,7 +209,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 previewImageView.isHidden = true
                 previewPlayButton.isHidden = true
                 
-                galleryScrollView.loadGallery(gallery)
+                galleryScrollView.gallery = gallery
                 if !gallery.isTurntable {
                     shareButton.isHidden = false
                     shareButton.setTitle(String.localize("gallery.share_button").uppercased(), for: UIControlState())

@@ -207,7 +207,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         cancelCountdown()
         
         if _didPlayInterstitial, let url = url {
-            DispatchQueue.global(qos: .utility).async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 SettingsManager.setVideoAsWatched(url)
                 NextGenHook.delegate?.urlForProcessedVideo(url, mode: self.mode, completion: { (url, startTime) in
                     if let url = url {

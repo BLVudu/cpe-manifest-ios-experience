@@ -52,7 +52,7 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
         videoContainerView.isHidden = true
         clipNameLabel.text = timedEvent?.descriptionText
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             self.previousTimedEvent = self.timedEvent?.previousTimedEventOfType(.clipShare)
             self.nextTimedEvent = self.timedEvent?.nextTimedEventOfType(.clipShare)
             

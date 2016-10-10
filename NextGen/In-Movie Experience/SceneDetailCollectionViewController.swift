@@ -35,7 +35,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ItemCaptionHeight: CGFloat = (DeviceType.IS_IPAD ? 25 : 30)
     }
     
-    private var _didChangeTimeObserver: NSObjectProtocol!
+    private var didChangeTimeObserver: NSObjectProtocol!
     
     private var _currentTime: Double = -1
     private var _currentTimedEvents = [NGDMTimedEvent]()
@@ -43,7 +43,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     deinit {
         let center = NotificationCenter.default
-        center.removeObserver(_didChangeTimeObserver)
+        center.removeObserver(didChangeTimeObserver)
+        didChangeTimeObserver = nil
     }
     
     // MARK: View Lifecycle
@@ -58,7 +59,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionView?.register(UINib(nibName: "MapSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.register(UINib(nibName: "ShoppingSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        _didChangeTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
+        didChangeTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
             if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double {
                 if time != strongSelf._currentTime && !strongSelf._isProcessingTimedEvents {
                     strongSelf._isProcessingTimedEvents = true
@@ -80,7 +81,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     func processTimedEvents(_ time: Double) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             self._currentTime = time
             
             var deleteIndexPaths = [IndexPath]()

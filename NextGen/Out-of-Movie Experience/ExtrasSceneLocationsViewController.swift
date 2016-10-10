@@ -251,7 +251,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         let shouldAnimateOpen = locationDetailView.isHidden
         closeDetailView(animated: false)
         
-        galleryScrollView.loadGallery(gallery)
+        galleryScrollView.gallery = gallery
         galleryScrollView.isHidden = false
         
         if gallery.isTurntable {

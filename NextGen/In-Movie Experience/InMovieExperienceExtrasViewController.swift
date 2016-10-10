@@ -83,7 +83,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     
     func processTimedEvents(_ time: Double) {
         if !self.view.isHidden {
-            DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 self.currentTime = time
                 
                 let newTalents = NGDMTimedEvent.findByTimecode(time, type: .talent).sorted(by: { (timedEvent1, timedEvent2) -> Bool in

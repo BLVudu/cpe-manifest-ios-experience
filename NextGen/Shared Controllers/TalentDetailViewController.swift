@@ -107,7 +107,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
             MBProgressHUD.showAdded(to: self.view, animated: true)
         }
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             self.talent.getTalentDetails({ (biography, socialAccounts, films) in
                 DispatchQueue.main.async(execute: {
                     if let biography = biography {

@@ -68,8 +68,7 @@ class TalentImageGalleryViewController: SceneDetailViewController, UICollectionV
             }
         }
         
-        let gallery = NGDMGallery(pictures: pictures)
-        galleryScrollView.loadGallery(gallery)
+        galleryScrollView.gallery = NGDMGallery(pictures: pictures)
         galleryScrollView.gotoPage(initialPage, animated: false)
     }
     
