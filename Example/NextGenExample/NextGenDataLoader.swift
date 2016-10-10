@@ -16,7 +16,7 @@ import PromiseKit
     }
     
     private struct Constants {
-        static let XMLBaseURI = "https://cpe-manifest.s3.amazonaws.com/xml"
+        static let XMLBaseURI = "https://your-domain.com"
         
         struct ConfigKey {
             static let TheTakeAPI = "thetake_api_key"
@@ -29,26 +29,16 @@ import PromiseKit
         "urn:dece:cid:eidr-s:DAFF-8AB8-3AF0-FD3A-29EF-Q": [
             "title": "Man of Steel",
             "image": "MOS-Onesheet",
-            "manifest": "mos_hls_manifest_r60-v2.0.xml",
-            "appdata": "mos_appdata_locations_r60-v2.0.xml",
-            "cpestyle": "mos_cpestyle-v0.1.xml"
+            "manifest": "urn:dece:cid:eidr-s:DAFF-8AB8-3AF0-FD3A-29EF-Q/mos_manifest-2.2.xml",
+            "appdata": "urn:dece:cid:eidr-s:DAFF-8AB8-3AF0-FD3A-29EF-Q/mos_appdata_locations-2.2.xml",
+            "cpestyle": "urn:dece:cid:eidr-s:DAFF-8AB8-3AF0-FD3A-29EF-Q/mos_cpestyle-2.2.xml"
         ],
         "urn:dece:cid:eidr-s:B257-8696-871C-A12B-B8C1-S": [
             "title": "Batman v Superman",
             "image": "BvS-Onesheet",
-            "manifest": "bvs_manifest_r60-v2.0.xml",
-            "appdata": "bvs_appdata_locations_r60-v2.0.xml",
-            "cpestyle": "bvs_cpestyle-v0.1.xml"
-        ],
-        "urn:dece:cid:eidr-s:D2E8-4520-9446-BFAD-B106-4": [
-            "title": "Sisters (Unrated)",
-            "image": "SistersUnrated-Onesheet",
-            "manifest": "sisters_extended_hls_manifest_v3-generated-spec1.5.xml"
-        ],
-        "urn:dece:cid:eidr-s:F1F8-3CDA-0844-0D78-E520-Q": [
-            "title": "Minions",
-            "image": "Minions-Onesheet",
-            "manifest": "minions_hls_manifest_v6-R60-generated-spec1.5.xml"
+            "manifest": "urn:dece:cid:eidr-s:B257-8696-871C-A12B-B8C1-S/bvs_manifest-2.2.xml",
+            "appdata": "urn:dece:cid:eidr-s:B257-8696-871C-A12B-B8C1-S/bvs_appdata_locations-2.2.xml",
+            "cpestyle": "urn:dece:cid:eidr-s:B257-8696-871C-A12B-B8C1-S/bvs_cpestyle-2.2.xml"
         ]
     ]
     
@@ -101,10 +91,6 @@ import PromiseKit
                 NGDMManifest.createInstance()
                 
                 try NGDMManifest.sharedInstance.loadManifestXMLFile(localFilePath)
-                NGDMManifest.sharedInstance.mainExperience?.appearance = NGDMAppearance(type: .main)
-                
-                NGDMManifest.sharedInstance.inMovieExperience?.appearance = NGDMAppearance(type: .inMovie)
-                NGDMManifest.sharedInstance.outOfMovieExperience?.appearance = NGDMAppearance(type: .outOfMovie)
                 
                 if TheTakeAPIUtil.sharedInstance.apiKey != nil, let mediaId = NGDMManifest.sharedInstance.mainExperience?.customIdentifier(Namespaces.TheTake) {
                     TheTakeAPIUtil.sharedInstance.mediaId = mediaId
@@ -144,20 +130,27 @@ import PromiseKit
             }
             
             if promises.count > 0 {
-                join(promises).then { results -> Void in
-                    if var localFilePath = results.first {
-                        if hasAppData {
-                            do {
-                                NGDMManifest.sharedInstance.appData = try NGDMManifest.sharedInstance.loadAppDataXMLFile(localFilePath)
-                            } catch {
-                                print("Error loading AppData file")
-                            }
-                            
-                            if results.count > 1 {
-                                localFilePath = results.last!
-                            }
+                _ = when(fulfilled: promises).then(on: DispatchQueue.global(qos: .userInitiated), execute: { results -> Void in
+                    var appDataFilePath: String?
+                    var cpeStyleFilePath: String?
+                    if hasAppData {
+                        appDataFilePath = results.first
+                        if results.count > 1 {
+                            cpeStyleFilePath = results.last
                         }
-                        
+                    } else {
+                        cpeStyleFilePath = results.first
+                    }
+                    
+                    if let localFilePath = appDataFilePath {
+                        do {
+                            NGDMManifest.sharedInstance.appData = try NGDMManifest.sharedInstance.loadAppDataXMLFile(localFilePath)
+                        } catch {
+                            print("Error loading AppData file")
+                        }
+                    }
+                    
+                    if let localFilePath = cpeStyleFilePath {
                         do {
                             try NGDMManifest.sharedInstance.loadCPEStyleXMLFile(localFilePath)
                         } catch {
@@ -167,7 +160,7 @@ import PromiseKit
                     
                     self.currentCid = cid
                     completionHandler(true)
-                }
+                })
             } else {
                 self.currentCid = cid
                 completionHandler(true)
@@ -216,17 +209,21 @@ import PromiseKit
         // Handle end of playback
     }
     
-    func getProcessedVideoURL(_ url: URL, mode: VideoPlayerMode, completion: (_ url: URL?, _ startTime: Double) -> Void) {
+    func getProcessedVideoURL(_ url: URL, mode: VideoPlayerMode, completion: @escaping (URL?, Double) -> Void) {
         // Handle DRM
         completion(url, 0)
     }
     
-    func getUrlForContent(_ title: String, completion: (_ url: URL?) -> Void) {
+    func getUrlForContent(_ title: String, completion: @escaping (_ url: URL?) -> Void) {
         if let encodedTitleName = title.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: "-", with: "").addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
             completion(URL(string: "http://www.vudu.com/movies/#search/" + encodedTitleName))
         } else {
             completion(nil)
         }
+    }
+    
+    func logAnalyticsEvent(_ event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, itemId: String?, itemName: String?) {
+        // Adjust values as needed for your analytics implementation
     }
     
 }
