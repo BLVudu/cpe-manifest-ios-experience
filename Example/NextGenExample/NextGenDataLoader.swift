@@ -8,7 +8,7 @@ import GoogleMaps
 import NextGenDataManager
 import PromiseKit
 
-@objc class NextGenDataLoader: NSObject, NextGenHookDelegate {
+@objc class NextGenDataLoader: NSObject {
     
     private enum DataLoaderError: Error {
         case TitleNotFound
@@ -193,14 +193,27 @@ import PromiseKit
         }
     }
     
-    // MARK: NextGenHookDelegate
-    func nextGenExperienceWillClose() {
-        NGDMManifest.destroyInstance()
-        
-        UIApplication.shared.setStatusBarHidden(false, with: .slide)
+}
+
+extension NextGenDataLoader: NextGenHookDelegate {
+    
+    func connectionStatusChanged(status: NextGenConnectionStatus) {
+        // Respond to any changes in the user's connection status (e.g. display prompt about cellular data usage)
     }
     
-    func nextGenExperienceWillEnterDebugMode() {
+    func logAnalyticsEvent(_ event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, itemId: String?, itemName: String?) {
+        // Adjust values as needed for your analytics implementation
+    }
+    
+    func experienceWillOpen() {
+        // Any start-up tasks
+    }
+    
+    func experienceWillClose() {
+        // Any shutdown tasks
+    }
+    
+    func experienceWillEnterDebugMode() {
         // Perform any debug tasks or unlock any debug sections of the app
         // Debug mode is activated by tapping and holding the "Extras" button on the home screen for five seconds
     }
@@ -209,12 +222,12 @@ import PromiseKit
         // Handle end of playback
     }
     
-    func getProcessedVideoURL(_ url: URL, mode: VideoPlayerMode, completion: @escaping (URL?, Double) -> Void) {
+    func urlForProcessedVideo(_ url: URL, mode: VideoPlayerMode, completion: @escaping (URL?, Double) -> Void) {
         // Handle DRM
         completion(url, 0)
     }
     
-    func getUrlForContent(_ title: String, completion: @escaping (_ url: URL?) -> Void) {
+    func urlForTitle(_ title: String, completion: @escaping (URL?) -> Void) {
         if let encodedTitleName = title.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: "-", with: "").addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
             completion(URL(string: "http://www.vudu.com/movies/#search/" + encodedTitleName))
         } else {
@@ -222,8 +235,8 @@ import PromiseKit
         }
     }
     
-    func logAnalyticsEvent(_ event: NextGenAnalyticsEvent, action: NextGenAnalyticsAction, itemId: String?, itemName: String?) {
-        // Adjust values as needed for your analytics implementation
+    func urlForSharedContent(_ contentUrl: URL, completion: @escaping (URL?) -> Void) {
+        completion(contentUrl)
     }
     
 }

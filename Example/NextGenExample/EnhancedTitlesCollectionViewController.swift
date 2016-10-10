@@ -24,6 +24,7 @@ class EnhancedTitlesCollectionViewCell: UICollectionViewCell {
 class EnhancedTitlesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private struct Constants {
+        static let CollectionViewItemsPerRow: CGFloat = (DeviceType.IS_IPAD ? 4 : 2)
         static let CollectionViewItemSpacing: CGFloat = 12
         static let CollectionViewLineSpacing: CGFloat = 12
         static let CollectionViewPadding: CGFloat = 15
@@ -31,7 +32,11 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.landscape
+        if DeviceType.IS_IPAD {
+            return .landscape
+        }
+        
+        return .all
     }
     
     // MARK: View Lifecycle
@@ -73,10 +78,9 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try NextGenDataLoader.sharedInstance.loadTitle(cid: Array(NextGenDataLoader.ManifestData.keys)[indexPath.row], completionHandler: { [weak self] (success) in
-                    if success {
+                    if success, let strongSelf = self {
                         DispatchQueue.main.async {
-                            UIApplication.shared.setStatusBarHidden(true, with: .none)
-                            self?.present(UIStoryboard.getNextGenViewController(HomeViewController.self), animated: true, completion: nil)
+                            NextGenLauncher.sharedInstance?.launchExperience(fromViewController: strongSelf)
                         }
                     }
                 })
@@ -85,10 +89,10 @@ class EnhancedTitlesCollectionViewController: UICollectionViewController, UIColl
             }
         }
     }
-    
+
     // MARK: UICollectionViewFlowLayoutDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth: CGFloat = (collectionView.frame.width / 4) - (Constants.CollectionViewItemSpacing * 2)
+        let itemWidth: CGFloat = (collectionView.frame.width / Constants.CollectionViewItemsPerRow) - (Constants.CollectionViewItemSpacing * 2)
         return CGSize(width: itemWidth, height: itemWidth / Constants.CollectionViewItemAspectRatio)
     }
     

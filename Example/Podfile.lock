@@ -5,7 +5,7 @@ PODS:
   - GoogleMaps/Maps (2.0.1):
     - GoogleMaps/Base (= 2.0.1)
   - MBProgressHUD (0.9.2)
-  - NextGenDataManager (2.0.0)
+  - NextGenDataManager (2.1.0)
   - PromiseKit (4.0.1):
     - PromiseKit/Foundation (= 4.0.1)
     - PromiseKit/QuartzCore (= 4.0.1)
@@ -17,6 +17,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (4.0.1):
     - PromiseKit/CorePromise
+  - ReachabilitySwift (3)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9.2)
   - NextGenDataManager (from `../../cpe-manifest-ios-data`)
   - PromiseKit (~> 4.0)
+  - ReachabilitySwift
   - SDWebImage (~> 3.0)
   - UAProgressView
 
@@ -37,11 +39,12 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   GoogleMaps: f09da64fc987c1aa29394567c3cab5a3df83c402
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
-  NextGenDataManager: 867bc2d95139b4d919fe73383a13ef7c61c30c7e
+  NextGenDataManager: 1e0c55f78a5427b11ea044381c89e0e36a1e87da
   PromiseKit: ae9e7f97ee758e23f7b9c5e80380a2e78d6338c5
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   UAProgressView: ce49aee47c14df6dc372f6fd57852f570ca97e6b
 
-PODFILE CHECKSUM: 68c59ce23a3797b152b114dad0ba97f68da68124
+PODFILE CHECKSUM: f7ba1db052e224ef440e9b7cc68391d7fa06e775
 
 COCOAPODS: 1.0.1

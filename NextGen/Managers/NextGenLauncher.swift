@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import NextGenDataManager
 import ReachabilitySwift
 
 @objc class NextGenLauncher: NSObject {
@@ -30,6 +31,8 @@ import ReachabilitySwift
     }
     
     func launchExperience(fromViewController: UIViewController) {
+        NextGenHook.delegate?.experienceWillOpen()
+        
         homeViewController = UIStoryboard.getNextGenViewController(HomeViewController.self) as? HomeViewController
         fromViewController.present(homeViewController!, animated: true, completion: nil)
         
@@ -57,7 +60,9 @@ import ReachabilitySwift
     func closeExperience() {
         removeObservers()
         NextGenHook.experienceWillClose()
-        homeViewController?.dismiss(animated: true, completion: nil)
+        homeViewController?.dismiss(animated: true, completion: { 
+            NGDMManifest.destroyInstance()
+        })
     }
 
 }

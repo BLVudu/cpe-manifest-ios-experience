@@ -22,7 +22,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var backgroundVideoView: UIView!
     private var backgroundVideoPlayerViewController: VideoPlayerViewController?
     
-    private var mainExperience: NGDMMainExperience!
     private var buttonOverlayView: UIView!
     private var playButton: UIButton!
     private var extrasButton: UIButton!
@@ -49,7 +48,7 @@ class HomeViewController: UIViewController {
     }
     
     private var nodeStyle: NGDMNodeStyle? {
-        return mainExperience.getNodeStyle(UIApplication.shared.statusBarOrientation)
+        return NGDMManifest.sharedInstance.mainExperience?.getNodeStyle(UIApplication.shared.statusBarOrientation)
     }
     
     private var backgroundImage: NGDMImage? {
@@ -113,8 +112,6 @@ class HomeViewController: UIViewController {
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mainExperience = NGDMManifest.sharedInstance.mainExperience!
         
         shouldLaunchExtrasObserver = NotificationCenter.default.addObserver(forName: .outOfMovieExperienceShouldLaunch, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
             self?.onExtras()

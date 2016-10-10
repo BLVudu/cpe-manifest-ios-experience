@@ -89,6 +89,7 @@ public protocol NextGenHookDelegate {
     func connectionStatusChanged(status: NextGenConnectionStatus)
     
     // NextGen Experience status
+    func experienceWillOpen()
     func experienceWillClose()
     func experienceWillEnterDebugMode()
     

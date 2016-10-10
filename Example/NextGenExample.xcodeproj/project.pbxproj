@@ -12,6 +12,7 @@
 		7006F1521D346A2700C8DD25 /* NextGenVideoPlayerPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7006F14F1D346A2700C8DD25 /* NextGenVideoPlayerPlaybackView.m */; };
 		7006F1531D346A2700C8DD25 /* NextGenVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7006F1511D346A2700C8DD25 /* NextGenVideoPlayerViewController.m */; };
 		7021D3691D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */; };
+		703876431DAC1C1000544D5B /* NextGenLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703876421DAC1C1000544D5B /* NextGenLauncher.swift */; };
 		708488DC1D0F7EC900670B45 /* NextGenDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */; };
 		708D535F1D525944009CED95 /* NextGenHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D535E1D525944009CED95 /* NextGenHook.swift */; };
 		70977FEF1DA57FFA00627547 /* ExtrasTalentSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70977FEE1DA57FFA00627547 /* ExtrasTalentSelectorViewController.swift */; };
@@ -126,6 +127,7 @@
 		7006F1501D346A2700C8DD25 /* NextGenVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextGenVideoPlayerViewController.h; sourceTree = "<group>"; };
 		7006F1511D346A2700C8DD25 /* NextGenVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextGenVideoPlayerViewController.m; sourceTree = "<group>"; };
 		7021D3681D23148F00EE6DB6 /* ClipShareSceneDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClipShareSceneDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		703876421DAC1C1000544D5B /* NextGenLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenLauncher.swift; sourceTree = "<group>"; };
 		7071C54B1C6BCC11006F4275 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		708488DB1D0F7EC900670B45 /* NextGenDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGenDataLoader.swift; sourceTree = "<group>"; };
 		7084E1E41D0F18EE00B1B5B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
@@ -347,6 +349,7 @@
 			children = (
 				70A5FBB61D628A3A00EE7847 /* NextGenCacheManager.swift */,
 				708D535E1D525944009CED95 /* NextGenHook.swift */,
+				703876421DAC1C1000544D5B /* NextGenLauncher.swift */,
 				70C092C61D0F60DF00BFC1E4 /* SettingsManager.swift */,
 			);
 			path = Managers;
@@ -548,7 +551,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Warner Bros. Entertainment, Inc.";
 				TargetAttributes = {
 					4921D9721C3EFD0B00ED2AA6 = {
@@ -679,6 +682,7 @@
 				70C093521D0F60DF00BFC1E4 /* RadioButton.swift in Sources */,
 				70C093391D0F60DF00BFC1E4 /* ExtrasShoppingItemsViewController.swift in Sources */,
 				708D535F1D525944009CED95 /* NextGenHook.swift in Sources */,
+				703876431DAC1C1000544D5B /* NextGenLauncher.swift in Sources */,
 				70C9EA6B1D08A2D7002299B3 /* AppDelegate.swift in Sources */,
 				70C0934E1D0F60DF00BFC1E4 /* MapItemCell.swift in Sources */,
 				70C093571D0F60DF00BFC1E4 /* TitledImageCell.swift in Sources */,
@@ -785,8 +789,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -832,8 +838,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -854,6 +862,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -863,6 +872,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8C0E3512E4E5C0412D7D1AA /* Pods-NextGenExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -892,6 +902,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 29EBFFD493A43292101F1452 /* Pods-NextGenExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
