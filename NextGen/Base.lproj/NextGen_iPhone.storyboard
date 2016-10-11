@@ -1314,7 +1314,7 @@
                             <constraint firstAttribute="bottom" secondItem="HZD-oz-ZXg" secondAttribute="bottom" id="DzX-Ic-rcn"/>
                             <constraint firstItem="IcY-NN-IUH" firstAttribute="top" secondItem="fH4-Gq-ae8" secondAttribute="bottom" constant="20" id="FPo-NG-1xk"/>
                             <constraint firstAttribute="centerY" secondItem="HZD-oz-ZXg" secondAttribute="centerY" id="NGJ-V2-Xef"/>
-                            <constraint firstItem="IcY-NN-IUH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" constant="45" id="Oow-Dj-Poe"/>
+                            <constraint firstItem="IcY-NN-IUH" firstAttribute="leading" secondItem="r83-OM-ywG" secondAttribute="leading" constant="30" id="Oow-Dj-Poe"/>
                             <constraint firstAttribute="trailing" secondItem="VY7-Vu-ikZ" secondAttribute="trailing" id="TVX-rr-5DP"/>
                             <constraint firstItem="HZD-oz-ZXg" firstAttribute="top" secondItem="r83-OM-ywG" secondAttribute="top" id="WFQ-gw-au5"/>
                             <constraint firstAttribute="centerX" secondItem="cbz-fT-NUV" secondAttribute="centerX" constant="-0.5" id="ZgH-nX-eyv"/>
@@ -1499,7 +1499,7 @@
                                             <action selector="onPlay" destination="rnf-6M-6TQ" eventType="touchUpInside" id="sQ3-kL-bbJ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clip Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YR-SC-dCP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clip Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="5YR-SC-dCP">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="uWK-3K-wT4"/>
                                         </constraints>
@@ -1945,7 +1945,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="icW-Mi-fmQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eYH-MY-0gu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eYH-MY-0gu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1974,7 +1974,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQh-dT-wvJ" customClass="MultiMapView" customModule="NextGen" customModuleProvider="target">
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="vcF-BK-1VP">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vcF-BK-1VP">
                                         <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sem ipsum, luctus a neque a, imperdiet gravida felis. Mauris cursus sodales lobortis.</string>
                                         <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="22"/>
                                         <color key="textColor" red="1" green="0.80392156859999997" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1989,7 +1989,7 @@
                                     <constraint firstItem="vcF-BK-1VP" firstAttribute="leading" secondItem="aDy-I9-27I" secondAttribute="leading" id="KYl-MO-kgd"/>
                                     <constraint firstAttribute="trailing" secondItem="SQh-dT-wvJ" secondAttribute="trailing" id="Lfq-mQ-Dd9"/>
                                     <constraint firstItem="SQh-dT-wvJ" firstAttribute="top" secondItem="aDy-I9-27I" secondAttribute="top" id="M4K-cl-krV"/>
-                                    <constraint firstItem="vcF-BK-1VP" firstAttribute="height" secondItem="aDy-I9-27I" secondAttribute="height" multiplier="0.2" id="S89-Qc-7fC"/>
+                                    <constraint firstItem="vcF-BK-1VP" firstAttribute="height" secondItem="aDy-I9-27I" secondAttribute="height" multiplier="0.175" id="S89-Qc-7fC"/>
                                     <constraint firstAttribute="width" secondItem="aDy-I9-27I" secondAttribute="height" multiplier="16:9" id="ZOa-pH-97L"/>
                                     <constraint firstItem="SQh-dT-wvJ" firstAttribute="leading" secondItem="aDy-I9-27I" secondAttribute="leading" id="ame-S9-9Sw"/>
                                     <constraint firstAttribute="bottom" secondItem="SQh-dT-wvJ" secondAttribute="bottom" priority="750" id="zTI-Dl-UJq"/>
@@ -2016,6 +2016,9 @@
                                 </constraints>
                             </view>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jcl-w9-ZUh">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="115" id="izf-qB-QOB"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UNW-G6-9gQ">
                                     <size key="itemSize" width="127" height="127"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2037,7 +2040,6 @@
                             <constraint firstItem="UhN-Nq-9j0" firstAttribute="trailing" secondItem="aDy-I9-27I" secondAttribute="trailing" id="KEE-Pu-8VB"/>
                             <constraint firstItem="L4E-EE-ijj" firstAttribute="top" secondItem="aDy-I9-27I" secondAttribute="bottom" priority="750" constant="10" id="SXc-co-KMU"/>
                             <constraint firstItem="jcl-w9-ZUh" firstAttribute="leading" secondItem="aDy-I9-27I" secondAttribute="leading" id="TlI-7P-U7V"/>
-                            <constraint firstItem="L4E-EE-ijj" firstAttribute="top" secondItem="jcl-w9-ZUh" secondAttribute="bottom" constant="10" id="a3d-SL-sI6"/>
                             <constraint firstItem="UhN-Nq-9j0" firstAttribute="bottom" secondItem="aDy-I9-27I" secondAttribute="bottom" id="aLJ-o9-FVc"/>
                             <constraint firstItem="aDy-I9-27I" firstAttribute="top" secondItem="Kwb-lP-0n3" secondAttribute="bottom" constant="50" id="hOT-7L-aIt"/>
                             <constraint firstItem="jcl-w9-ZUh" firstAttribute="trailing" secondItem="aDy-I9-27I" secondAttribute="trailing" id="iV4-Xu-zYC"/>
@@ -2067,8 +2069,8 @@
         <image name="Back Nav" width="18" height="18"/>
         <image name="BlackPlayButton" width="65" height="65"/>
         <image name="Commentary" width="17" height="17"/>
-        <image name="CropActive" width="18" height="18"/>
-        <image name="CropActive-Highlighted" width="18" height="18"/>
+        <image name="CropActive" width="25" height="18"/>
+        <image name="CropActive-Highlighted" width="25" height="18"/>
         <image name="Delete" width="18" height="18"/>
         <image name="Facebook Icon" width="75" height="75"/>
         <image name="Gallery" width="24" height="24"/>

@@ -172,7 +172,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width / 4), height: collectionView.frame.height)
+        return CGSize(width: (collectionView.frame.width / (DeviceType.IS_IPAD ? 4 : 2.5)), height: collectionView.frame.height)
     }
     
 }

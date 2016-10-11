@@ -309,6 +309,7 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
                 self.pauseVideo()
                 
                 countdownLabel.isHidden = false
+                countdownLabel.frame.origin = CGPoint(x: 30, y: 20)
                 
                 let progressView = UAProgressView(frame: countdownLabel.frame)
                 progressView.centralView = countdownLabel

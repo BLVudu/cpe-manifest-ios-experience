@@ -15,7 +15,7 @@ class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
         
         if let appData = timedEvent?.appData, let location = appData.location {
             let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-            mapView.setLocation(center, zoomLevel: appData.zoomLevel - 4, animated: false)
+            mapView.setLocation(center, zoomLevel: appData.zoomLevel - 4, animated: false, adjustView: false)
             _ = mapView.addMarker(center, title: location.name, subtitle: location.address, icon: location.iconImage, autoSelect: false)
         }
         

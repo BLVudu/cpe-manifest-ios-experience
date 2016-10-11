@@ -237,6 +237,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 previewImageView.sd_setImage(with: imageURL)
             }
             
+            let videoPlayerExists = videoPlayerViewController != nil
             if didPlayFirstItem, let video = selectedExperience.video, let videoURL = video.url, let videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
                 previewImageView.isHidden = true
                 previewPlayButton.isHidden = true
@@ -245,12 +246,15 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 videoPlayerViewController.mode = VideoPlayerMode.supplemental
                 videoPlayerViewController.queueTotalCount = experience.childExperiences?.count ?? 0
                 videoPlayerViewController.queueCurrentIndex = (selectedIndexPath as NSIndexPath).row
-                videoPlayerViewController.view.frame = videoContainerView.bounds
-                videoContainerView.addSubview(videoPlayerViewController.view)
-                self.addChildViewController(videoPlayerViewController)
-                videoPlayerViewController.didMove(toParentViewController: self)
-                videoPlayerViewController.playVideo(with: videoURL)
                 
+                if !videoPlayerExists {
+                    videoPlayerViewController.view.frame = videoContainerView.bounds
+                    videoContainerView.addSubview(videoPlayerViewController.view)
+                    self.addChildViewController(videoPlayerViewController)
+                    videoPlayerViewController.didMove(toParentViewController: self)
+                }
+                
+                videoPlayerViewController.playVideo(with: videoURL)
                 if !DeviceType.IS_IPAD && videoPlayerViewController.fullScreenButton != nil {
                     videoPlayerViewController.fullScreenButton.removeFromSuperview()
                 }

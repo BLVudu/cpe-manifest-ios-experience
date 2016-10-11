@@ -25,10 +25,11 @@ enum MultiMapType: Int {
 
 class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
-    struct Constants {
+    private struct Constants {
         static let MarkerAnnotationViewReuseIdentifier = "kMarkerAnnotationViewReuseIdentifier"
         static let ControlsPadding: CGFloat = (DeviceType.IS_IPAD ? 18 : 8)
         static let SegmentedControlWidth: CGFloat = (DeviceType.IS_IPAD ? 185 : 135)
+        static let SegmentedControlHeight: CGFloat = (DeviceType.IS_IPAD ? 30 : 25)
         static let ZoomButtonWidth: CGFloat = (DeviceType.IS_IPAD ? 30 : 25)
         static let ZoomFitAllPadding: CGFloat = (DeviceType.IS_IPAD ? 50 : 20)
     }
@@ -101,7 +102,7 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.layer.cornerRadius = 5
         segmentedControl.addTarget(self, action: #selector(self.onMapTypeChanged), for: UIControlEvents.valueChanged)
-        segmentedControl.frame = CGRect(x: Constants.ControlsPadding, y: Constants.ControlsPadding, width: Constants.SegmentedControlWidth, height: segmentedControl.frame.height)
+        segmentedControl.frame = CGRect(x: Constants.ControlsPadding, y: Constants.ControlsPadding, width: Constants.SegmentedControlWidth, height: Constants.SegmentedControlHeight)
         self.addSubview(segmentedControl)
         mapTypeSegmentedControl = segmentedControl
         
@@ -151,21 +152,21 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
         }
     }
 
-    func setLocation(_ location: CLLocationCoordinate2D, zoomLevel: Float, animated: Bool) {
+    func setLocation(_ location: CLLocationCoordinate2D, zoomLevel: Float, animated: Bool, adjustView: Bool = !DeviceType.IS_IPAD) {
         if let mapView = googleMapView {
-            if animated {
-                var location = location
-                if !DeviceType.IS_IPAD {
-                    let currentCamera = mapView.camera
-                    mapView.camera = GMSCameraPosition(target: currentCamera.target, zoom: zoomLevel, bearing: currentCamera.bearing, viewingAngle: currentCamera.viewingAngle)
-                    
-                    var mapPoint = mapView.projection.point(for: location)
-                    mapPoint.y -= 70
-                    location = mapView.projection.coordinate(for: mapPoint)
-                    
-                    mapView.camera = currentCamera
-                }
+            var location = location
+            if adjustView {
+                let currentCamera = mapView.camera
+                mapView.camera = GMSCameraPosition(target: currentCamera.target, zoom: zoomLevel, bearing: currentCamera.bearing, viewingAngle: currentCamera.viewingAngle)
                 
+                var mapPoint = mapView.projection.point(for: location)
+                mapPoint.y -= 70
+                location = mapView.projection.coordinate(for: mapPoint)
+                
+                mapView.camera = currentCamera
+            }
+            
+            if animated {
                 mapView.animate(with: GMSCameraUpdate.setTarget(location, zoom: zoomLevel))
             } else {
                 mapView.camera = GMSCameraPosition(target: location, zoom: zoomLevel, bearing: mapView.camera.bearing, viewingAngle: mapView.camera.viewingAngle)
