@@ -64,8 +64,8 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         
         showLessButton.setTitle(String.localize("talent.show_less"), for: UIControlState())
         
-        didChangeTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: nil) { [weak self] (notification) -> Void in
-            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let time = userInfo["time"] as? Double , time != strongSelf.currentTime {
+        didChangeTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
+            if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double, time != strongSelf.currentTime {
                 strongSelf.processTimedEvents(time)
             }
         }
@@ -82,30 +82,32 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     }
     
     func processTimedEvents(_ time: Double) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.currentTime = time
-            
-            let newTalents = NGDMTimedEvent.findByTimecode(time, type: .talent).sorted(by: { (timedEvent1, timedEvent2) -> Bool in
-                return timedEvent1.talent!.billingBlockOrder < timedEvent2.talent!.billingBlockOrder
-            }).map({ $0.talent! })
-            
-            if self.isShowingMore {
-                self.hiddenTalents = newTalents
-            } else {
-                var hasNewData = newTalents.count != self.numCurrentTalents
-                if !hasNewData {
-                    for talent in newTalents {
-                        if self.currentTalents == nil || !self.currentTalents!.contains(talent) {
-                            hasNewData = true
-                            break
+        if !self.view.isHidden {
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.currentTime = time
+                
+                let newTalents = NGDMTimedEvent.findByTimecode(time, type: .talent).sorted(by: { (timedEvent1, timedEvent2) -> Bool in
+                    return timedEvent1.talent!.billingBlockOrder < timedEvent2.talent!.billingBlockOrder
+                }).map({ $0.talent! })
+                
+                if self.isShowingMore {
+                    self.hiddenTalents = newTalents
+                } else {
+                    var hasNewData = newTalents.count != self.numCurrentTalents
+                    if !hasNewData {
+                        for talent in newTalents {
+                            if self.currentTalents == nil || !self.currentTalents!.contains(talent) {
+                                hasNewData = true
+                                break
+                            }
                         }
                     }
-                }
-                    
-                if hasNewData {
-                    DispatchQueue.main.async {
-                        self.currentTalents = newTalents
-                        self.talentTableView?.reloadData()
+                        
+                    if hasNewData {
+                        DispatchQueue.main.async {
+                            self.currentTalents = newTalents
+                            self.talentTableView?.reloadData()
+                        }
                     }
                 }
             }
@@ -166,6 +168,7 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? TalentTableViewCell, let talent = cell.talent {
             self.performSegue(withIdentifier: SegueIdentifier.ShowTalent, sender: talent)
+            NextGenHook.logAnalyticsEvent(.imeTalentAction, action: .selectTalent, itemId: talent.id)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -186,8 +189,10 @@ class InMovieExperienceExtrasViewController: UIViewController, UITableViewDataSo
         
         if isShowingMore {
             currentTalents = NGDMManifest.sharedInstance.mainExperience?.orderedActors ?? [NGDMTalent]()
+            NextGenHook.logAnalyticsEvent(.imeTalentAction, action: .showMore)
         } else {
             currentTalents = hiddenTalents
+            NextGenHook.logAnalyticsEvent(.imeTalentAction, action: .showLess)
         }
         
         talentTableView?.contentOffset = CGPoint.zero

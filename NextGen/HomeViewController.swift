@@ -22,7 +22,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var backgroundVideoView: UIView!
     private var backgroundVideoPlayerViewController: VideoPlayerViewController?
     
-    private var mainExperience: NGDMMainExperience!
     private var buttonOverlayView: UIView!
     private var playButton: UIButton!
     private var extrasButton: UIButton!
@@ -49,7 +48,7 @@ class HomeViewController: UIViewController {
     }
     
     private var nodeStyle: NGDMNodeStyle? {
-        return mainExperience.getNodeStyle(UIApplication.shared.statusBarOrientation)
+        return NGDMManifest.sharedInstance.mainExperience?.getNodeStyle(UIApplication.shared.statusBarOrientation)
     }
     
     private var backgroundImage: NGDMImage? {
@@ -114,9 +113,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainExperience = NGDMManifest.sharedInstance.mainExperience!
-        
-        shouldLaunchExtrasObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: Notifications.ShouldLaunchExtras), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+        shouldLaunchExtrasObserver = NotificationCenter.default.addObserver(forName: .outOfMovieExperienceShouldLaunch, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
             self?.onExtras()
         })
     }
@@ -219,9 +216,9 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
         currentlyDismissing = true
+        
+        super.viewWillDisappear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -416,7 +413,7 @@ class HomeViewController: UIViewController {
     
     func didLongPressExtrasButton(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            NextGenHook.delegate?.nextGenExperienceWillEnterDebugMode()
+            NextGenHook.delegate?.experienceWillEnterDebugMode()
         }
     }
     
@@ -456,8 +453,8 @@ class HomeViewController: UIViewController {
             self.addChildViewController(videoPlayerViewController)
             videoPlayerViewController.didMove(toParentViewController: self)
             
-            backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-                if let strongSelf = self, let time = notification.userInfo?["time"] as? Double {
+            backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double {
                     if time > strongSelf.backgroundVideoLastTimecode {
                         strongSelf.backgroundVideoPreviewImageView?.removeFromSuperview()
                         strongSelf.backgroundVideoPreviewImageView = nil
@@ -475,7 +472,7 @@ class HomeViewController: UIViewController {
             })
             
             if nodeStyle.backgroundVideoLoops {
-                backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+                backgroundVideoDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidEndVideo, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
                     self?.seekBackgroundVideoToLoopTimecode()
                 })
             }
@@ -541,11 +538,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func onExit() {
-        NextGenHook.experienceWillClose()
         NextGenHook.logAnalyticsEvent(.homeAction, action: .exit)
-        
-        currentlyDismissing = true
-        self.dismiss(animated: true, completion: nil)
+        NextGenLauncher.sharedInstance?.closeExperience()
     }
     
     // MARK: Storyboard

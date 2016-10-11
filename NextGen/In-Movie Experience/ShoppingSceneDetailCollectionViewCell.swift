@@ -72,7 +72,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
     }
     
     override func currentTimeDidChange() {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             if self.timedEvent != nil && self.timedEvent!.isType(.product) {
                 let newFrameTime = TheTakeAPIUtil.sharedInstance.closestFrameTime(self.currentTime)
                 if newFrameTime != self.currentProductFrameTime {

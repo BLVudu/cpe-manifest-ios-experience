@@ -30,10 +30,12 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         static let ItemsPerRow: CGFloat = (DeviceType.IS_IPAD ? 2 : 1)
         static let ItemSpacing: CGFloat = 10
         static let LineSpacing: CGFloat = 10
-        static let ItemAspectRatio: CGFloat = 283 / 220
+        static let ItemImageAspectRatio: CGFloat = 16 / 9
+        static let ItemTitleHeight: CGFloat = 35
+        static let ItemCaptionHeight: CGFloat = (DeviceType.IS_IPAD ? 25 : 30)
     }
     
-    private var _didChangeTimeObserver: NSObjectProtocol!
+    private var didChangeTimeObserver: NSObjectProtocol!
     
     private var _currentTime: Double = -1
     private var _currentTimedEvents = [NGDMTimedEvent]()
@@ -41,7 +43,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     
     deinit {
         let center = NotificationCenter.default
-        center.removeObserver(_didChangeTimeObserver)
+        center.removeObserver(didChangeTimeObserver)
+        didChangeTimeObserver = nil
     }
     
     // MARK: View Lifecycle
@@ -56,8 +59,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionView?.register(UINib(nibName: "MapSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MapSceneDetailCollectionViewCell.ReuseIdentifier)
         self.collectionView?.register(UINib(nibName: "ShoppingSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        _didChangeTimeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidChangeTime), object: nil, queue: nil) { [weak self] (notification) -> Void in
-            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let time = userInfo["time"] as? Double {
+        didChangeTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
+            if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double {
                 if time != strongSelf._currentTime && !strongSelf._isProcessingTimedEvents {
                     strongSelf._isProcessingTimedEvents = true
                     strongSelf.processTimedEvents(time)
@@ -78,7 +81,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     }
     
     func processTimedEvents(_ time: Double) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             self._currentTime = time
             
             var deleteIndexPaths = [IndexPath]()
@@ -163,7 +166,8 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth: CGFloat = (collectionView.frame.width / Constants.ItemsPerRow) - (Constants.ItemSpacing / Constants.ItemsPerRow)
-        return CGSize(width: itemWidth, height: itemWidth / Constants.ItemAspectRatio)
+        let itemHeight = (itemWidth / Constants.ItemImageAspectRatio) + Constants.ItemTitleHeight + Constants.ItemCaptionHeight
+        return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -186,19 +190,28 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     let webViewController = WebViewController(title: experienceApp.title, url: url)
                     let navigationController = LandscapeNavigationController(rootViewController: webViewController)
                     self.present(navigationController, animated: true, completion: nil)
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectApp, itemId: experienceApp.id)
                 }
             } else {
                 var segueIdentifier: String?
-                if timedEvent.isType(.audioVisual) || timedEvent.isType(.gallery) {
+                if timedEvent.isType(.audioVisual) {
                     segueIdentifier = SegueIdentifier.ShowGallery
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectVideo, itemId: timedEvent.id)
+                } else if timedEvent.isType(.gallery) {
+                    segueIdentifier = SegueIdentifier.ShowGallery
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectImageGallery, itemId: timedEvent.id)
                 } else if timedEvent.isType(.clipShare) {
                     segueIdentifier = SegueIdentifier.ShowClipShare
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectClipShare, itemId: timedEvent.id)
                 } else if timedEvent.isType(.location) {
                     segueIdentifier = SegueIdentifier.ShowMap
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectLocation, itemId: timedEvent.id)
                 } else if timedEvent.isType(.product) {
                     segueIdentifier = SegueIdentifier.ShowShopping
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectShopping, itemId: timedEvent.id)
                 } else if timedEvent.isType(.textItem) {
                     segueIdentifier = SegueIdentifier.ShowLargeText
+                    NextGenHook.logAnalyticsEvent(.imeExtrasAction, action: .selectTrivia, itemId: timedEvent.id)
                 }
                 
                 if let identifier = segueIdentifier {

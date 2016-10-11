@@ -66,7 +66,6 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
         if talentDetailView != nil && !talentDetailView!.isHidden {
             hideTalentDetailView()
         } else {
-            NextGenHook.logAnalyticsEvent(.extrasAction, action: .exit)
             super.close()
         }
     }
@@ -113,8 +112,6 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
             if completed == nil {
                 showHomeButton()
             }
-            
-            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .exit, itemId: talentDetailViewController?.talent.id)
             
             UIView.animate(withDuration: 0.25, animations: {
                 if completed != nil {
@@ -192,6 +189,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                 cell.experience = nil
                 cell.title = String.localize("label.actors")
                 cell.imageURL = NGDMManifest.sharedInstance.mainExperience?.orderedActors?.first?.images?.first?.thumbnailImageURL
+                cell.imageView.contentMode = .scaleAspectFit
                 return cell
             }
             
@@ -233,7 +231,7 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
                     if firstChildExperience.isType(.audioVisual) {
                         NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectVideoGallery, itemId: experience.id)
                     } else if firstChildExperience.isType(.gallery) {
-                        NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectImageGallery, itemId: experience.id)
+                        NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectImageGalleries, itemId: experience.id)
                     }
                 }
                 

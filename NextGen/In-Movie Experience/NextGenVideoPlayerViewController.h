@@ -71,6 +71,12 @@ static NSString * const kNextGenVideoPlayerPlaybackLikelyToKeepUpNotification   
 @property (nonatomic, assign)           BOOL                            isFullScreen;
 
 /**
+ * Show/hide activity indicator.
+ */
+@property (assign, nonatomic)           BOOL                             activityIndicatorVisible;
+@property (weak, nonatomic)   IBOutlet  UIActivityIndicatorView         *activityIndicator;
+
+/**
  * Toggles all player controls visibility.
  * NOTE: There is a difference between enabling/disableing and showing/hiding
  * player controls.

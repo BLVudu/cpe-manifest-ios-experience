@@ -17,6 +17,8 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
+        customTitle = String.localize("label.actors")
+        
         super.viewDidLoad()
         
         talentTableView.register(UINib(nibName: "TalentTableViewCell-Narrow" + (DeviceType.IS_IPAD ? "" : "_iPhone"), bundle: nil), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
@@ -72,8 +74,6 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController, UITabl
             if completed == nil {
                 showHomeButton()
             }
-            
-            NextGenHook.logAnalyticsEvent(.extrasTalentAction, action: .exit, itemId: talentDetailViewController?.talent.id)
             
             UIView.animate(withDuration: 0.25, animations: {
                 if completed != nil {

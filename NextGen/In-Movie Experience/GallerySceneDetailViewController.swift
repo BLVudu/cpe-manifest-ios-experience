@@ -66,7 +66,7 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
                 videoContainerView?.removeFromSuperview()
                 videoContainerView = nil
                 
-                galleryScrollView?.loadGallery(gallery)
+                galleryScrollView?.gallery = gallery
                 descriptionLabel.text = gallery.description
                 
                 if gallery.isTurntable {
@@ -77,9 +77,10 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
                     galleryScrollView?.removeToolbar()
                     pageControl?.numberOfPages = gallery.totalCount
                     if pageControl != nil && pageControl!.numberOfPages > 0 {
-                        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-                            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
+                        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                            if let strongSelf = self, let page = notification.userInfo?[NotificationConstants.page] as? Int {
                                 strongSelf.pageControl?.currentPage = page
+                                NextGenHook.logAnalyticsEvent(.imeImageGalleryAction, action: .scrollImageGallery, itemId: gallery.id)
                             }
                         })
                     }
@@ -90,10 +91,23 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
     
     // MARK: Actions
     @IBAction func onShare(_ sender: UIButton?) {
-        if let galleryScrollView = galleryScrollView, let url = galleryScrollView.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
-            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = sender
-            self.present(activityViewController, animated: true, completion: nil)
+        if let url = galleryScrollView?.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
+            let showShareDialog = { [weak self] (url: URL) in
+                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = sender
+                self?.present(activityViewController, animated: true, completion: nil)
+                
+                NextGenHook.logAnalyticsEvent(.imeImageGalleryAction, action: .shareImage, itemId: self?.timedEvent?.gallery?.id)
+                NotificationCenter.default.post(name: .videoPlayerShouldPause, object: nil)
+            }
+            
+            if let delegate = NextGenHook.delegate {
+                delegate.urlForSharedContent(url, completion: { (newUrl) in
+                    showShareDialog(newUrl ?? url)
+                })
+            } else {
+                showShareDialog(url)
+            }
         }
     }
     

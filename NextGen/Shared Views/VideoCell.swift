@@ -34,8 +34,8 @@ class VideoCell: UITableViewCell {
                     runtimeLabel.isHidden = true
                 }
                 
-                didPlayVideoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidPlayVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-                    if let strongSelf = self, let playingVideoURL = (notification as NSNotification).userInfo?[VideoPlayerNotification.UserInfoVideoURL] as? URL , playingVideoURL == videoURL {
+                didPlayVideoObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidPlayVideo, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+                    if let strongSelf = self, let playingVideoURL = notification.userInfo?[NotificationConstants.videoUrl] as? URL , playingVideoURL == videoURL {
                         strongSelf.runtimeLabel.text = String.localize("label.playing")
                     }
                 })

@@ -21,10 +21,12 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     @IBOutlet weak private var breadcrumbsSecondaryArrowImageView: UIImageView!
     @IBOutlet weak private var breadcrumbsSecondaryLabel: UILabel!
     @IBOutlet weak private var collectionView: UICollectionView!
+    private var mapTypeDidChangeObserver: NSObjectProtocol?
     
     @IBOutlet weak private var locationDetailView: UIView!
     @IBOutlet weak private var videoContainerView: UIView!
     private var videoPlayerViewController: VideoPlayerViewController?
+    private var videoPlayerDidToggleFullScreenObserver: NSObjectProtocol?
     private var videoPlayerDidEndVideoObserver: NSObjectProtocol?
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
@@ -71,8 +73,21 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         }
     }
     
+    private var currentGallery: NGDMGallery?
+    private var currentVideo: NGDMVideo?
+    
     deinit {
         let center = NotificationCenter.default
+        
+        if let observer = mapTypeDidChangeObserver {
+            center.removeObserver(observer)
+            mapTypeDidChangeObserver = nil
+        }
+        
+        if let observer = videoPlayerDidToggleFullScreenObserver {
+            center.removeObserver(observer)
+            videoPlayerDidToggleFullScreenObserver = nil
+        }
         
         if let observer = videoPlayerDidEndVideoObserver {
             center.removeObserver(observer)
@@ -114,26 +129,41 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         
         breadcrumbsSecondaryArrowImageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
         
-        videoPlayerDidEndVideoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self {
-                strongSelf.closeDetailView(animated: true)
+        mapTypeDidChangeObserver = NotificationCenter.default.addObserver(forName: .locationsMapTypeDidChange, object: nil, queue: OperationQueue.main, using: { (notification) in
+            if let mapType = notification.userInfo?[NotificationConstants.mapType] as? MultiMapType {
+                NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .setMapType, itemName: (mapType == .satellite ? NextGenAnalyticsLabel.satellite : NextGenAnalyticsLabel.road))
             }
         })
         
-        galleryDidToggleFullScreenObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidToggleFullScreen), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self, let isFullScreen = (notification as NSNotification).userInfo?["isFullScreen"] as? Bool {
-                strongSelf.closeButton?.isHidden = isFullScreen
-                strongSelf.galleryPageControl.isHidden = isFullScreen
+        videoPlayerDidToggleFullScreenObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidToggleFullScreen, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let isFullScreen = notification.userInfo?[NotificationConstants.isFullScreen] as? Bool, isFullScreen {
+                NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .setVideoFullScreen, itemId: self?.currentVideo?.id)
             }
         })
         
-        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
-                strongSelf.galleryPageControl.currentPage = page
+        videoPlayerDidEndVideoObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidEndVideo, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+            self?.closeDetailView(animated: true)
+        })
+        
+        galleryDidToggleFullScreenObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidToggleFullScreen, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let isFullScreen = notification.userInfo?[NotificationConstants.isFullScreen] as? Bool {
+                self?.closeButton?.isHidden = isFullScreen
+                self?.galleryPageControl.isHidden = isFullScreen
+                
+                if isFullScreen {
+                    NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .setImageGalleryFullScreen, itemId: self?.currentGallery?.id)
+                }
             }
         })
         
-        galleryScrollView.allowsFullScreen = false
+        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let page = notification.userInfo?[NotificationConstants.page] as? Int {
+                self?.galleryPageControl.currentPage = page
+                NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .selectImage, itemId: self?.currentGallery?.id)
+            }
+        })
+        
+        galleryScrollView.allowsFullScreen = DeviceType.IS_IPAD
         
         // Set up map markers
         for locationExperience in locationExperiences {
@@ -165,10 +195,18 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         coordinator.animate(alongsideTransition: nil, completion: { (_) in
             self.galleryScrollView.layoutPages()
         })
+        
+        if toLandscape {
+            if let gallery = currentGallery {
+                NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .selectImage, itemId: gallery.id)
+            } else if let video = currentVideo {
+                NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .setVideoFullScreen, itemId: video.id)
+            }
+        }
     }
     
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        if DeviceType.IS_IPAD || (galleryScrollView.isHidden && videoPlayerViewController == nil) {
+        if DeviceType.IS_IPAD || (currentGallery == nil && currentVideo == nil) {
             return super.supportedInterfaceOrientations
         }
         
@@ -213,7 +251,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         let shouldAnimateOpen = locationDetailView.isHidden
         closeDetailView(animated: false)
         
-        galleryScrollView.loadGallery(gallery)
+        galleryScrollView.gallery = gallery
         galleryScrollView.isHidden = false
         
         if gallery.isTurntable {
@@ -287,7 +325,6 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         } else {
             mapView.destroy()
             mapView = nil
-            
             super.close()
         }
     }
@@ -295,6 +332,8 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     @IBAction func onTapBreadcrumb(_ sender: UIButton) {
         closeDetailView(animated: false)
         selectedExperience = nil
+        currentVideo = nil
+        currentGallery = nil
     }
     
     @IBAction func onPageControlValueChanged() {
@@ -306,6 +345,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
         for (experienceId, locationMarker) in markers {
             if marker == locationMarker {
                 selectedExperience = NGDMExperience.getById(experienceId)
+                NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .selectLocationMarker, itemId: experienceId)
                 return
             }
         }
@@ -341,16 +381,24 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, MultiM
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        currentVideo = nil
+        currentGallery = nil
+        
         if let selectedExperience = selectedExperience, selectedExperience.appDataMediaCount > 0 {
             if let experience = selectedExperience.appDataMediaAtIndex(indexPath.row) {
-                if let videoURL = experience.videoURL {
+                if let video = experience.video, let videoURL = video.url {
                     playVideo(videoURL)
+                    currentVideo = video
+                    NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .selectVideo, itemId: video.id)
                 } else if let gallery = experience.gallery {
                     showGallery(gallery)
+                    currentGallery = gallery
+                    NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .selectImageGallery, itemId: gallery.id)
                 }
             }
         } else {
             selectedExperience = locationExperiences[indexPath.row]
+            NextGenHook.logAnalyticsEvent(.extrasSceneLocationsAction, action: .selectLocationThumbnail, itemId: selectedExperience?.id)
         }
     }
     

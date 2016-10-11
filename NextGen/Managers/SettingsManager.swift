@@ -6,23 +6,23 @@ import Foundation
 
 class SettingsManager {
     
-    private struct UserDefaults {
+    private struct NextGenUserDefaults {
         static let DidWatchVideo = "kUserDefaultsDidWatchVideo"
         static let DidWatchInterstitial = "kUserDefaultsDidWatchInterstitial"
     }
     
     static var didWatchInterstitial: Bool {
         get {
-            return Foundation.UserDefaults.standard.bool(forKey: UserDefaults.DidWatchInterstitial)
+            return UserDefaults.standard.bool(forKey: NextGenUserDefaults.DidWatchInterstitial)
         }
         
         set {
-            Foundation.UserDefaults.standard.set(newValue, forKey: UserDefaults.DidWatchInterstitial)
+            UserDefaults.standard.set(newValue, forKey: NextGenUserDefaults.DidWatchInterstitial)
         }
     }
     
     static func didWatchVideo(_ videoURL: URL) -> Bool {
-        if let allVideos = Foundation.UserDefaults.standard.array(forKey: UserDefaults.DidWatchVideo) as? [String] {
+        if let allVideos = UserDefaults.standard.array(forKey: NextGenUserDefaults.DidWatchVideo) as? [String] {
             return allVideos.contains(videoURL.absoluteString)
         }
         
@@ -30,12 +30,12 @@ class SettingsManager {
     }
     
     static func setVideoAsWatched(_ videoURL: URL) {
-        var allVideos = (Foundation.UserDefaults.standard.array(forKey: UserDefaults.DidWatchVideo) as? [String]) ?? [String]()
+        var allVideos = (UserDefaults.standard.array(forKey: NextGenUserDefaults.DidWatchVideo) as? [String]) ?? [String]()
         if !allVideos.contains(videoURL.absoluteString) {
             allVideos.append(videoURL.absoluteString)
         }
         
-        Foundation.UserDefaults.standard.set(allVideos, forKey: UserDefaults.DidWatchVideo)
+        UserDefaults.standard.set(allVideos, forKey: NextGenUserDefaults.DidWatchVideo)
     }
     
 }

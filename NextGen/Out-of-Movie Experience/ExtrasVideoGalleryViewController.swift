@@ -9,8 +9,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     private struct Constants {
         static let GalleryTableViewImageAspectRatio: CGFloat = 16 / 9
-        static let GalleryTableViewLabelHeight: CGFloat = 40
-        static let GalleryTableViewPadding: CGFloat = 15
+        static let GalleryTableViewLabelHeight: CGFloat = 10
+        static let GalleryTableViewPadding: CGFloat = 50
         static let GalleryTableViewMobileAspectRatio: CGFloat = 600 / 195
     }
     
@@ -22,10 +22,12 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     @IBOutlet weak private var mediaTitleLabel: UILabel!
     @IBOutlet weak private var mediaDescriptionLabel: UILabel!
     private var videoPlayerViewController: VideoPlayerViewController?
+    private var videoPlayerDidToggleFullScreenObserver: NSObjectProtocol?
     
     @IBOutlet weak private var galleryScrollView: ImageGalleryScrollView!
     @IBOutlet weak private var galleryPageControl: UIPageControl!
     private var galleryDidScrollToPageObserver: NSObjectProtocol?
+    private var galleryDidToggleFullScreenObserver: NSObjectProtocol?
     
     @IBOutlet private var containerTopConstraint: NSLayoutConstraint?
     @IBOutlet private var containerBottomConstraint: NSLayoutConstraint?
@@ -39,9 +41,17 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     private var willPlayNextItemObserver: NSObjectProtocol?
     private var didEndLastVideoObserver: NSObjectProtocol?
     
+    private var currentGallery: NGDMGallery?
+    private var currentVideo: NGDMVideo?
+    
     // MARK: Initialization
     deinit {
         let center = NotificationCenter.default
+        
+        if let observer = videoPlayerDidToggleFullScreenObserver {
+            center.removeObserver(observer)
+            videoPlayerDidToggleFullScreenObserver = nil
+        }
         
         if let observer = willPlayNextItemObserver {
             center.removeObserver(observer)
@@ -57,6 +67,11 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             center.removeObserver(observer)
             galleryDidScrollToPageObserver = nil
         }
+        
+        if let observer = galleryDidToggleFullScreenObserver {
+            center.removeObserver(observer)
+            galleryDidToggleFullScreenObserver = nil
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,16 +84,22 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        videoPlayerDidToggleFullScreenObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidToggleFullScreen, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let video = self?.currentVideo, let isFullScreen = notification.userInfo?[NotificationConstants.isFullScreen] as? Bool, isFullScreen {
+                NextGenHook.logAnalyticsEvent(.extrasVideoGalleryAction, action: .setVideoFullScreen, itemId: video.id)
+            }
+        })
 
-        willPlayNextItemObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.WillPlayNextItem), object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
-            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let index = userInfo["index"] as? Int , index < (strongSelf.experience.childExperiences?.count ?? 0) {
+        willPlayNextItemObserver = NotificationCenter.default.addObserver(forName: .videoPlayerWillPlayNextItem, object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
+            if let strongSelf = self, let index = notification.userInfo?[NotificationConstants.index] as? Int , index < (strongSelf.experience.childExperiences?.count ?? 0) {
                 let indexPath = IndexPath(row: index, section: 0)
                 strongSelf.galleryTableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
                 strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAt: indexPath)
             }
         }
         
-        didEndLastVideoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: VideoPlayerNotification.DidEndLastVideo), object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
+        didEndLastVideoObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidEndLastVideo, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
             self?.previewImageView.isHidden = false
             self?.previewPlayButton.isHidden = false
             self?.destroyVideoPlayer()
@@ -88,9 +109,16 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
             }
         })
         
-        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ImageGalleryNotification.DidScrollToPage), object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
-            if let strongSelf = self, let page = (notification as NSNotification).userInfo?["page"] as? Int {
-                strongSelf.galleryPageControl.currentPage = page
+        galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let gallery = self?.currentGallery, let page = notification.userInfo?[NotificationConstants.page] as? Int {
+                self?.galleryPageControl.currentPage = page
+                NextGenHook.logAnalyticsEvent(.extrasImageGalleryAction, action: .scrollImageGallery, itemId: gallery.id)
+            }
+        })
+        
+        galleryDidToggleFullScreenObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidToggleFullScreen, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            if let gallery = self?.currentGallery, let isFullScreen = notification.userInfo?[NotificationConstants.isFullScreen] as? Bool, isFullScreen {
+                NextGenHook.logAnalyticsEvent(.extrasImageGalleryAction, action: .setImageGalleryFullScreen, itemId: gallery.id)
             }
         })
         
@@ -181,7 +209,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 previewImageView.isHidden = true
                 previewPlayButton.isHidden = true
                 
-                galleryScrollView.loadGallery(gallery)
+                galleryScrollView.gallery = gallery
                 if !gallery.isTurntable {
                     shareButton.isHidden = false
                     shareButton.setTitle(String.localize("gallery.share_button").uppercased(), for: UIControlState())
@@ -190,6 +218,9 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                         galleryPageControl.numberOfPages = gallery.totalCount
                     }
                 }
+                
+                currentGallery = gallery
+                NextGenHook.logAnalyticsEvent(.extrasImageGalleryAction, action: .selectImageGallery, itemId: gallery.id)
             } else if thisExperience.isType(.audioVisual) {
                 mediaTitleLabel.text = thisExperience.metadata?.title
                 mediaDescriptionLabel.text = thisExperience.metadata?.description
@@ -206,7 +237,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 previewImageView.sd_setImage(with: imageURL)
             }
             
-            if didPlayFirstItem, let videoURL = selectedExperience.videoURL, let videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
+            let videoPlayerExists = videoPlayerViewController != nil
+            if didPlayFirstItem, let video = selectedExperience.video, let videoURL = video.url, let videoPlayerViewController = videoPlayerViewController ?? UIStoryboard.getNextGenViewController(VideoPlayerViewController.self) as? VideoPlayerViewController {
                 previewImageView.isHidden = true
                 previewPlayButton.isHidden = true
                 
@@ -214,17 +246,22 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
                 videoPlayerViewController.mode = VideoPlayerMode.supplemental
                 videoPlayerViewController.queueTotalCount = experience.childExperiences?.count ?? 0
                 videoPlayerViewController.queueCurrentIndex = (selectedIndexPath as NSIndexPath).row
-                videoPlayerViewController.view.frame = videoContainerView.bounds
-                videoContainerView.addSubview(videoPlayerViewController.view)
-                self.addChildViewController(videoPlayerViewController)
-                videoPlayerViewController.didMove(toParentViewController: self)
-                videoPlayerViewController.playVideo(with: videoURL)
                 
+                if !videoPlayerExists {
+                    videoPlayerViewController.view.frame = videoContainerView.bounds
+                    videoContainerView.addSubview(videoPlayerViewController.view)
+                    self.addChildViewController(videoPlayerViewController)
+                    videoPlayerViewController.didMove(toParentViewController: self)
+                }
+                
+                videoPlayerViewController.playVideo(with: videoURL)
                 if !DeviceType.IS_IPAD && videoPlayerViewController.fullScreenButton != nil {
                     videoPlayerViewController.fullScreenButton.removeFromSuperview()
                 }
                 
                 self.videoPlayerViewController = videoPlayerViewController
+                self.currentVideo = video
+                NextGenHook.logAnalyticsEvent(.extrasVideoGalleryAction, action: .selectVideo, itemId: video.id)
             }
         }
     }
@@ -244,9 +281,20 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController, UITableV
     
     @IBAction func onShare(_ sender: UIButton?) {
         if !galleryScrollView.isHidden, let url = galleryScrollView.currentImageURL, let title = NGDMManifest.sharedInstance.mainExperience?.title {
-            let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = sender
-            self.present(activityViewController, animated: true, completion: nil)
+            let showShareDialog = { [weak self] (url: URL) in
+                let activityViewController = UIActivityViewController(activityItems: [String.localize("gallery.share_message", variables: ["movie_name": title, "url": url.absoluteString])], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = sender
+                self?.present(activityViewController, animated: true, completion: nil)
+                NextGenHook.logAnalyticsEvent(.extrasImageGalleryAction, action: .shareImage, itemId: self?.currentGallery?.id)
+            }
+            
+            if let delegate = NextGenHook.delegate {
+                delegate.urlForSharedContent(url, completion: { (newUrl) in
+                    showShareDialog(newUrl ?? url)
+                })
+            } else {
+                showShareDialog(url)
+            }
         }
     }
     

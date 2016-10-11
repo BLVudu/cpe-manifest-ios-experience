@@ -10,7 +10,7 @@ class TitledImageCell: UICollectionViewCell {
     static let ReuseIdentifier = "TitledImageCellReuseIdentifier"
     
     @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     
     private var setImageSessionDataTask: URLSessionDataTask?
     

@@ -23,14 +23,15 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
     deinit {
         if let observer = didSelectCategoryObserver {
             NotificationCenter.default.removeObserver(observer)
+            didSelectCategoryObserver = nil
         }
     }
  
     override func viewDidLoad() {
         productsCollectionView.register(UINib(nibName: "ShoppingSceneDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ShoppingSceneDetailCollectionViewCell.ReuseIdentifier)
         
-        didSelectCategoryObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ShoppingMenuNotification.DidSelectCategory), object: nil, queue: nil, using: { [weak self] (notification) in
-            if let strongSelf = self, let userInfo = (notification as NSNotification).userInfo, let categoryId = userInfo["categoryId"] as? String {
+        didSelectCategoryObserver = NotificationCenter.default.addObserver(forName: .shoppingDidSelectCategory, object: nil, queue: nil, using: { [weak self] (notification) in
+            if let strongSelf = self, let categoryId = notification.userInfo?[NotificationConstants.categoryId] as? String {
                 DispatchQueue.main.async(execute: {
                     strongSelf.productsCollectionView.isUserInteractionEnabled = false
                     MBProgressHUD.showAdded(to: strongSelf.productsCollectionView, animated: true)
@@ -40,7 +41,7 @@ class ExtrasShoppingItemsViewController: ExtrasExperienceViewController, UIColle
                     currentTask.cancel()
                 }
                 
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.global(qos: .userInteractive).async {
                     strongSelf.productListSessionDataTask = TheTakeAPIUtil.sharedInstance.getCategoryProducts(categoryId, successBlock: { (products) in
                         strongSelf.productListSessionDataTask = nil
                         DispatchQueue.main.async {
