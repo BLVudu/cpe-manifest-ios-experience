@@ -90,6 +90,8 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKScriptMessage
 
     // MARK: Actions
     func close() {
+        _webView.configuration.userContentController.removeScriptMessageHandler(forName: Constants.ScriptMessageHandlerName)
+        _webView.navigationDelegate = nil
         self.dismiss(animated: true, completion: nil)
     }
     
