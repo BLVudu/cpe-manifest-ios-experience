@@ -25,7 +25,7 @@ class TalentDetailViewController: SceneDetailViewController, UICollectionViewDat
         static let GalleryCollectionViewItemSpacing: CGFloat = 10
         static let GalleryCollectionViewItemAspectRatio: CGFloat = 8 / 10
         static let FilmographyCollectionViewItemSpacing: CGFloat = 10
-        static let FilmographyCollectionViewItemAspectRatio: CGFloat = 27 / 41
+        static let FilmographyCollectionViewItemAspectRatio: CGFloat = 27 / 40
     }
     
     @IBOutlet private var containerViewTopConstraint: NSLayoutConstraint!
