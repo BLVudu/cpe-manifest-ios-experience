@@ -48,7 +48,7 @@ class HomeViewController: UIViewController {
     }
     
     private var nodeStyle: NGDMNodeStyle? {
-        return NGDMManifest.sharedInstance.mainExperience?.getNodeStyle(UIApplication.shared.statusBarOrientation)
+        return NGDMManifest.sharedInstance?.mainExperience?.getNodeStyle(UIApplication.shared.statusBarOrientation)
     }
     
     private var backgroundImage: NGDMImage? {
@@ -538,6 +538,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func onExit() {
+        currentlyDismissing = true
         NextGenHook.logAnalyticsEvent(.homeAction, action: .exit)
         NextGenLauncher.sharedInstance?.closeExperience()
     }

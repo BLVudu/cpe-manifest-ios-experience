@@ -56,7 +56,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKScriptMessage
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = WKUserContentController()
         configuration.userContentController.add(self, name: Constants.ScriptMessageHandlerName)
-        
+        configuration.allowsInlineMediaPlayback = true
         if #available(iOS 9.0, *) {
             configuration.requiresUserActionForMediaPlayback = false
         } else {
