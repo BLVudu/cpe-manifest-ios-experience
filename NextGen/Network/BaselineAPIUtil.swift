@@ -48,7 +48,7 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
         self.customHeaders["x-api-key"] = apiKey
     }
     
-    public func prefetchCredits(_ successBlock: @escaping (_ talents: [String: NGDMTalent]?) -> Void) {
+    public func prefetchCredits(_ completion: @escaping (_ talents: [String: NGDMTalent]?) -> Void) {
         if let apiId = apiId {
             _ = getJSONWithPath(Endpoints.GetCredits, parameters: ["id": apiId], successBlock: { (result) -> Void in
                 if let results = result["result"] as? NSArray {
@@ -71,15 +71,18 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
                         i += 1
                     }
                     
-                    successBlock(talents)
+                    completion(talents)
                 }
-            }, errorBlock: nil)
+            }) { (error) in
+                print("Error fetching credits for id \(apiId): \(error)")
+                completion(nil)
+            }
         } else {
-            successBlock(nil)
+            completion(nil)
         }
     }
     
-    public func getTalentImages(_ talentId: String, successBlock: @escaping (_ talentImages: [TalentImage]?) -> Void) {
+    public func getTalentImages(_ talentId: String, completion: @escaping (_ talentImages: [TalentImage]?) -> Void) {
         _ = getJSONWithPath(Endpoints.GetTalentImages, parameters: ["id": talentId], successBlock: { (result) -> Void in
             if let results = result["result"] as? NSArray , results.count > 0 {
                 var talentImages = [TalentImage]()
@@ -99,14 +102,17 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
                     }
                 }
                 
-                successBlock(talentImages)
+                completion(talentImages)
             } else {
-                successBlock(nil)
+                completion(nil)
             }
-        }, errorBlock: nil)
+        }) { (error) in
+            print("Error fetching talent images for id \(talentId): \(error)")
+            completion(nil)
+        }
     }
     
-    public func getTalentDetails(_ talentId: String, successBlock: @escaping (_ biography: String?, _ socialAccounts: [TalentSocialAccount]?, _ films: [TalentFilm]) -> Void) {
+    public func getTalentDetails(_ talentId: String, completion: @escaping (_ biography: String?, _ socialAccounts: [TalentSocialAccount]?, _ films: [TalentFilm]) -> Void) {
         _ = getJSONWithPath(Endpoints.GetTalentDetails, parameters: ["id": talentId], successBlock: { (result) in
             var socialAccounts = [TalentSocialAccount]()
             if let socialAccountInfoList = result[Keys.SocialAccounts] as? NSArray {
@@ -136,8 +142,11 @@ public class BaselineAPIUtil: APIUtil, TalentAPIUtil {
                 }
             }
             
-            successBlock(result[Keys.ShortBio] as? String, socialAccounts, films)
-        }, errorBlock: nil)
+            completion(result[Keys.ShortBio] as? String, socialAccounts, films)
+        }) { (error) in
+            print("Error fetching talent details for id \(talentId): \(error)")
+            completion(nil, nil, [])
+        }
     }
     
 }
