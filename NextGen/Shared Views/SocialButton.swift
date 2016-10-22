@@ -22,11 +22,16 @@ class SocialButton: UIButton {
     }
     
     
-    func initialize() {
+    private func initialize() {
         self.isUserInteractionEnabled = true
         self.clipsToBounds = true
         self.layer.borderWidth = 0
-        self.layer.cornerRadius = 0.5*40
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.layer.cornerRadius = self.frame.size.width / 2
     }
     
     func openURL() {
