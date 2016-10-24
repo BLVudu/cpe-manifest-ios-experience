@@ -38,6 +38,8 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
             center.removeObserver(observer)
             mapTypeDidChangeObserver = nil
         }
+        
+        mapView.destroy()
     }
     
     // MARK: View Lifecycle
@@ -62,6 +64,8 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
             descriptionLabel?.removeFromSuperview()
         }
         
+        mapView.delegate = self
+        
         mapTypeDidChangeObserver = NotificationCenter.default.addObserver(forName: .locationsMapTypeDidChange, object: nil, queue: OperationQueue.main, using: { (notification) in
             if let mapType = notification.userInfo?[NotificationConstants.mapType] as? MultiMapType {
                 NextGenHook.logAnalyticsEvent(.imeLocationAction, action: .setMapType, itemName: (mapType == .satellite ? NextGenAnalyticsLabel.satellite : NextGenAnalyticsLabel.road))
@@ -82,7 +86,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         mapView.maxZoomLevel = appData.zoomLevel
     }
     
-    private func animateToCenter() {
+    fileprivate func animateToCenter() {
         let center = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         mapView.setLocation(center, zoomLevel: appData.zoomLevel, animated: true)
         mapView.selectedMarker = marker
@@ -173,6 +177,14 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.frame.width / (DeviceType.IS_IPAD ? 4 : 2.5)), height: collectionView.frame.height)
+    }
+    
+}
+
+extension MapDetailViewController: MultiMapViewDelegate {
+    
+    func mapView(_ mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
+        animateToCenter()
     }
     
 }
