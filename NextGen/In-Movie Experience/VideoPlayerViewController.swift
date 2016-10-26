@@ -140,7 +140,9 @@ class VideoPlayerViewController: NextGenVideoPlayerViewController {
         })
         
         videoPlayerShouldPauseObserver = NotificationCenter.default.addObserver(forName: .videoPlayerShouldPause, object: nil, queue: OperationQueue.main, using: { [weak self] (_) in
-            self?.pauseVideo()
+            if let strongSelf = self, strongSelf.mode == .mainFeature {
+                strongSelf.pauseVideo()
+            }
         })
         
         /*updateCommentaryButtonObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kDidSelectCommetaryOption), object: nil, queue: OperationQueue.main, using: { [weak self]

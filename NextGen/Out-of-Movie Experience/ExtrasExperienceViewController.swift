@@ -153,7 +153,7 @@ class ExtrasExperienceViewController: UIViewController {
     }
     
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        if let presentedViewController = self.presentedViewController , presentedViewController.classForCoder != UIAlertController.self {
+        if let presentedViewController = self.presentedViewController, presentedViewController.classForCoder != UIAlertController.self, !presentedViewController.isBeingDismissed {
             return presentedViewController.supportedInterfaceOrientations
         }
         

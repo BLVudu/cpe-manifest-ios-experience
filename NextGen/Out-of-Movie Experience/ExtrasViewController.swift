@@ -223,7 +223,9 @@ class ExtrasViewController: ExtrasExperienceViewController, UICollectionViewDele
             } else if experience.isType(.app) {
                 if let app = experience.app, let url = app.url {
                     let webViewController = WebViewController(title: app.title, url: url)
-                    self.present(webViewController, animated: true, completion: nil)
+                    webViewController.shouldDisplayFullScreen = true
+                    let navigationController = LandscapeNavigationController(rootViewController: webViewController)
+                    self.present(navigationController, animated: true, completion: nil)
                     NextGenHook.logAnalyticsEvent(.extrasAction, action: .selectApp, itemId: app.id)
                 }
             } else {

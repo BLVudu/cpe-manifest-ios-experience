@@ -41,7 +41,9 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     private var zoomOutButton: UIButton?
     private var mapIconImage: UIImage?
     private var mapMarkers = [MultiMapMarker]()
+    
     var delegate: MultiMapViewDelegate?
+    
     var maxZoomLevel: Float = -1 {
         didSet {
             if let mapView = googleMapView {
@@ -283,17 +285,11 @@ class MultiMapView: UIView, MKMapViewDelegate, GMSMapViewDelegate {
     
     // MARK: GMSMapViewDelegate
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        if let delegate = delegate {
-            var selectedMarker: MultiMapMarker?
-            for mapMarker in mapMarkers {
-                if mapMarker.googleMapMarker == marker {
-                    selectedMarker = mapMarker
-                    break
-                }
-            }
-            
-            if let marker = selectedMarker {
+        if let marker = mapMarkers.first(where: { $0.googleMapMarker == marker }) {
+            if let delegate = delegate {
                 delegate.mapView(self, didTapMarker: marker)
+            } else {
+                selectedMarker = marker
             }
         }
         
